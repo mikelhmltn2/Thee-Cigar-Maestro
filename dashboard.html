@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Lounge and retail dashboard for pairing menus, staff education, and inventory guidance.">
+  <title>Dashboard | Thee Cigar Maestro</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Thee Cigar Maestro</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="get-started.html">Get Started</a></li>
+        <li><a href="specs.html">Specs</a></li>
+        <li><a href="pairing.html">Pairing</a></li>
+        <li><a href="education.html">Education</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section>
+      <h2>Lounge & Retail Dashboard</h2>
+      <p>This simulated dashboard helps you manage pairing menus, staff progress, and inventory logic using GPT assistance.</p>
+    </section>
+
+    <section>
+      <h3>📋 Dynamic Pairing Menu Generator</h3>
+      <input id="menuQuery" placeholder="e.g. Saturday night cocktails" />
+      <button onclick="generateMenu()">Generate Pairing Menu</button>
+      <pre id="menuOutput">Your pairing menu will appear here...</pre>
+    </section>
+
+    <section>
+      <h3>👨‍🏫 Staff Learning Tracker</h3>
+      <p>Enter a staff name to check GPT-coached training progress:</p>
+      <input id="staffInput" placeholder="e.g. Marcus" />
+      <button onclick="checkStaff()">Check Progress</button>
+      <pre id="staffOutput">Learning results will appear here...</pre>
+    </section>
+
+    <section>
+      <h3>📦 Inventory Logic Assistant</h3>
+      <p>Describe your current shelf and we’ll help suggest reorder logic and pairings.</p>
+      <input id="invInput" placeholder="e.g. Low on Connecticut shade and milds" />
+      <button onclick="checkInventory()">Inventory Help</button>
+      <pre id="invOutput">GPT suggestions will appear here...</pre>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Thee Cigar Maestro. Designed for lounges. Powered by intelligence.</p>
+  </footer>
+
+  <script>
+    async function generateMenu() {
+      const query = document.getElementById('menuQuery').value;
+      const res = await fetch('/api/dashboard/menu', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ query })
+      });
+      const data = await res.json();
+      document.getElementById('menuOutput').innerText = data.result || data.error;
+    }
+
+    async function checkStaff() {
+      const query = document.getElementById('staffInput').value;
+      const res = await fetch('/api/dashboard/staff', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ query })
+      });
+      const data = await res.json();
+      document.getElementById('staffOutput').innerText = data.result || data.error;
+    }
+
+    async function checkInventory() {
+      const query = document.getElementById('invInput').value;
+      const res = await fetch('/api/dashboard/inventory', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ query })
+      });
+      const data = await res.json();
+      document.getElementById('invOutput').innerText = data.result || data.error;
+    }
+  </script>
+</body>
+</html>
