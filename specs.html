@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Search official cigar specifications using Thee Cigar Maestro's GPT-powered Spec Engine.">
+  <title>Cigar Specs | Thee Cigar Maestro</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Thee Cigar Maestro</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="get-started.html">Get Started</a></li>
+        <li><a href="pairing.html">Pairing</a></li>
+        <li><a href="education.html">Education</a></li>
+        <li><a href="dashboard.html">Dashboard</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section>
+      <h2>Official Cigar Spec Engine</h2>
+      <p>Enter the name of a cigar to retrieve verified specifications from official manufacturers.</p>
+      <input type="text" id="cigarInput" placeholder="e.g. Padron 1964 Anniversary Maduro" />
+      <button onclick="getSpec()">Get Spec</button>
+      <pre id="specOutput">Specs will appear here...</pre>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Thee Cigar Maestro. Specs sourced from manufacturers. No guessing. No reviews.</p>
+  </footer>
+
+  <script>
+    async function getSpec() {
+      const query = document.getElementById('cigarInput').value;
+      const res = await fetch('/api/specs', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ query })
+      });
+      const data = await res.json();
+      document.getElementById('specOutput').innerText = data.result || data.error || 'No response.';
+    }
+  </script>
+</body>
+</html>
