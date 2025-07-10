@@ -29,35 +29,12 @@ Visual mapping of cigar flavor trends by country and wrapper origin.
 ### ✅ Blockchain & Legacy Tools  
 Earn verified ritual badges and preserve your cigar milestones on-chain.
 
----
-
-## 🌐 Getting Started
-
-This site is a static HTML experience. To run it locally:
-
-1. Clone the repository  
-   `git clone https://github.com/your-username/thee-cigar-maestro.git`
-
-2. Open `index.html` in your browser  
-   Or deploy with GitHub Pages, Vercel, or Netlify.
-
----
-
-## 📁 Project Structure
-
-```
-thee-cigar-maestro/
-├── index.html       # Main landing page
-├── style.css        # Optional CSS styling
-├── README.md        # You're reading it!
-└── /assets/         # (optional) logos, icons, etc.
-```
 
 ---
 
 ## 📲 Social & Community
 
-- [Instagram](https://www.instagram.com/theecigarmaestro)
+- [Instagram](https://www.instagram.com/thee_cigar_maestro)
 - [Facebook](https://www.facebook.com/theecigarmaestro)
 
 ---
