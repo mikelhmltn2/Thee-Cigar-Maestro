@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Start your cigar education journey with CEU-certified learning paths, GPT coaching, and historical mastery.">
+  <title>Education | Thee Cigar Maestro</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Thee Cigar Maestro</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="get-started.html">Get Started</a></li>
+        <li><a href="specs.html">Specs</a></li>
+        <li><a href="pairing.html">Pairing</a></li>
+        <li><a href="dashboard.html">Dashboard</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section>
+      <h2>CEU-Certified Cigar Education</h2>
+      <p>Thee Cigar Maestro offers structured, gamified education modules to elevate your cigar knowledge. Built for tobacconists, lounge staff, and lifelong learners.</p>
+    </section>
+
+    <section>
+      <h3>📘 Learning Tracks</h3>
+      <ul>
+        <li>Foundations of Cigar Anatomy</li>
+        <li>Wrapper Origins & Flavor Maps</li>
+        <li>Legacy of the Master Blenders</li>
+        <li>Sensory Pairing Techniques</li>
+        <li>Retail Operations & Lounge Training</li>
+        <li>Blockchain & Preservation Systems</li>
+      </ul>
+    </section>
+
+    <section>
+      <h3>🤖 GPT Coaching Assistant</h3>
+      <p>Use our AI-powered tutor to quiz, guide, and deepen your understanding of each module. Just type a concept or question below:</p>
+      <input type="text" id="eduInput" placeholder="e.g. What’s the difference between sun-grown and shade-grown?" />
+      <button onclick="askEdu()">Ask</button>
+      <pre id="eduOutput">Your GPT education assistant will reply here...</pre>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Thee Cigar Maestro. Education is the ritual that builds legacy.</p>
+  </footer>
+
+  <script>
+    async function askEdu() {
+      const query = document.getElementById('eduInput').value;
+      const res = await fetch('/api/education', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ query })
+      });
+      const data = await res.json();
+      document.getElementById('eduOutput').innerText = data.result || data.error || 'No response.';
+    }
+  </script>
+</body>
+</html>
