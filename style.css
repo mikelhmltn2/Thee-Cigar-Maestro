@@ -1,3 +1,6 @@
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Cinzel:wght@700&display=swap');
+
 /* Global Reset */
 * {
   margin: 0;
@@ -21,6 +24,7 @@ header {
 }
 
 header h1 {
+  font-family: 'Cinzel', serif;
   font-size: 2.5rem;
   margin-bottom: 0.2rem;
   color: #d4af7f;
@@ -29,24 +33,29 @@ header h1 {
 header .tagline {
   font-style: italic;
   color: #ccc;
+  font-size: 1rem;
 }
 
 nav {
   margin-top: 15px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
 }
 
 nav a {
   color: #d4af7f;
   text-decoration: none;
-  margin: 0 10px;
   font-weight: bold;
+  padding: 5px 10px;
 }
 
 nav a:hover {
   text-decoration: underline;
 }
 
-/* Main Content Styling */
+/* Main Content */
 main {
   max-width: 800px;
   margin: 0 auto;
@@ -81,7 +90,7 @@ input, textarea {
   border-radius: 5px;
 }
 
-/* Button Styling */
+/* Buttons */
 button, .cta-button, .return-home-button {
   background: linear-gradient(to right, #8b5e3c, #a56b42);
   color: #fff;
@@ -99,7 +108,7 @@ button:hover, .cta-button:hover, .return-home-button:hover {
   background: linear-gradient(to right, #a56b42, #8b5e3c);
 }
 
-/* Placeholder and results areas */
+/* Placeholders */
 .placeholder-text {
   font-style: italic;
   color: #aaa;
@@ -119,4 +128,33 @@ footer {
 footer a {
   color: #ccc;
   text-decoration: none;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  body {
+    padding: 15px;
+  }
+
+  main {
+    padding: 20px;
+  }
+
+  header h1 {
+    font-size: 2rem;
+  }
+
+  header .tagline {
+    font-size: 0.9rem;
+  }
+
+  nav {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  button, .cta-button {
+    width: 100%;
+    text-align: center;
+  }
 }
