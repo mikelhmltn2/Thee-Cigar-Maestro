@@ -1,6 +1,4 @@
-// api/gpt.js
-import fs from 'fs';
-import path from 'path';
+import cigars from './cigarmaestro.json';
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -12,12 +10,6 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: 'Prompt is required' });
   }
 
-  // Load local JSON data
-  const filePath = path.join(process.cwd(), 'data', 'cigarmaestro.json');
-  const fileContents = fs.readFileSync(filePath, 'utf8');
-  const cigars = JSON.parse(fileContents);
-
-  // Try to match prompt with a cigar name
   const query = prompt.toLowerCase();
   const matchedKey = Object.keys(cigars).find(name => query.includes(name.toLowerCase()));
 
@@ -41,7 +33,7 @@ Tasting Notes: ${cigar.tastingNotes}
     return res.status(200).json({ result });
   }
 
-  // Fallback to GPT if no match found
+  // fallback GPT
   try {
     const openaiResponse = await fetch('https://api.openai.com/v1/chat/completions', {
       method: 'POST',
