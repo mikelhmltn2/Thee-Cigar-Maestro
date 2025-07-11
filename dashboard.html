@@ -1,95 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Lounge and retail dashboard for pairing menus, staff education, and inventory guidance.">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Dashboard | Thee Cigar Maestro</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+  <style>
+    body {
+      background-color: #f5f1e8;
+      background-image: url('https://www.transparenttextures.com/patterns/wood-pattern.png');
+      background-repeat: repeat;
+      font-family: 'Lato', sans-serif;
+    }
+  </style>
 </head>
 <body>
-  <header>
-    <h1>Thee Cigar Maestro</h1>
+
+<header>
+  <div class="container">
     <nav>
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="get-started.html">Get Started</a></li>
-        <li><a href="specs.html">Specs</a></li>
-        <li><a href="pairing.html">Pairing</a></li>
-        <li><a href="education.html">Education</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
+      <h1>Thee Cigar Maestro</h1>
+      <div>
+        <a href="index.html">Home</a>
+        <a href="specs.html">Specs</a>
+        <a href="pairing.html">Pairing</a>
+        <a href="education.html">Education</a>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="contact.html">Contact</a>
+      </div>
     </nav>
-  </header>
+  </div>
+</header>
 
-  <main>
-    <section>
-      <h2>Lounge & Retail Dashboard</h2>
-      <p>This simulated dashboard helps you manage pairing menus, staff progress, and inventory logic using GPT assistance.</p>
-    </section>
+<section class="container">
+  <h2>Lounge Dashboard</h2>
+  <p>This is your command center — built for cigar lounges, retailers, and connoisseurs who demand intuitive tools and deep insights.</p>
 
-    <section>
-      <h3>📋 Dynamic Pairing Menu Generator</h3>
-      <input id="menuQuery" placeholder="e.g. Saturday night cocktails" />
-      <button onclick="generateMenu()">Generate Pairing Menu</button>
-      <pre id="menuOutput">Your pairing menu will appear here...</pre>
-    </section>
+  <div style="background-color:#fffefb; padding: 24px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); margin-top: 30px;">
+    <h3>Available Tools</h3>
+    <ul style="list-style: square; padding-left: 20px;">
+      <li><strong>Quick Spec Search</strong> – Access 300+ verified cigars</li>
+      <li><strong>Pairing Generator</strong> – Mood + beverage based</li>
+      <li><strong>Customer Flavor Tracker</strong> – Save client taste profiles</li>
+      <li><strong>CEU Progress Dashboard</strong> – Education and certification view</li>
+      <li><strong>Legacy & Ritual Builder</strong> – Store meaningful cigar moments</li>
+    </ul>
+    <a href="get-started.html" class="btn" style="margin-top: 20px;">Launch Tools</a>
+  </div>
+</section>
 
-    <section>
-      <h3>👨‍🏫 Staff Learning Tracker</h3>
-      <p>Enter a staff name to check GPT-coached training progress:</p>
-      <input id="staffInput" placeholder="e.g. Marcus" />
-      <button onclick="checkStaff()">Check Progress</button>
-      <pre id="staffOutput">Learning results will appear here...</pre>
-    </section>
+<footer>
+  <div class="container">
+    <p>&copy; 2025 Thee Cigar Maestro. All rights reserved.</p>
+  </div>
+</footer>
 
-    <section>
-      <h3>📦 Inventory Logic Assistant</h3>
-      <p>Describe your current shelf and we’ll help suggest reorder logic and pairings.</p>
-      <input id="invInput" placeholder="e.g. Low on Connecticut shade and milds" />
-      <button onclick="checkInventory()">Inventory Help</button>
-      <pre id="invOutput">GPT suggestions will appear here...</pre>
-    </section>
-  </main>
-
-  <footer>
-    <p>&copy; 2025 Thee Cigar Maestro. Designed for lounges. Powered by intelligence.</p>
-  </footer>
-
-  <script>
-    async function generateMenu() {
-      const query = document.getElementById('menuQuery').value;
-      const res = await fetch('/api/dashboard/menu', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ query })
-      });
-      const data = await res.json();
-      document.getElementById('menuOutput').innerText = data.result || data.error;
-    }
-
-    async function checkStaff() {
-      const query = document.getElementById('staffInput').value;
-      const res = await fetch('/api/dashboard/staff', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ query })
-      });
-      const data = await res.json();
-      document.getElementById('staffOutput').innerText = data.result || data.error;
-    }
-
-    async function checkInventory() {
-      const query = document.getElementById('invInput').value;
-      const res = await fetch('/api/dashboard/inventory', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ query })
-      });
-      const data = await res.json();
-      document.getElementById('invOutput').innerText = data.result || data.error;
-    }
-  </script>
 </body>
 </html>
