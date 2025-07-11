@@ -21,32 +21,39 @@
   </header>
 
   <main class="pairing-engine">
-    <section>
-      <h2>Pairing Engine v3.0</h2>
-      <p>Match cigars with drinks, moods, meals, or memories. Try something like:</p>
-      <ul>
-        <li>“What pairs well with an espresso and a full-bodied Nicaraguan?”</li>
-        <li>“Give me a pairing for a rainy night and a smooth Connecticut.”</li>
-      </ul>
-
-      <form id="pairingForm">
-        <textarea 
-          placeholder="Describe your pairing mood, drink, or moment..." 
-          rows="5" 
-          required
-        ></textarea>
-        <button type="submit">Find Pairing</button>
-      </form>
-
-      <div id="pairingResults">
-        <p class="placeholder-text">Your pairing suggestions will appear here.</p>
-      </div>
-    </section>
+    <h2>Pairing Engine v3.0</h2>
+    <form id="pairingForm">
+      <textarea id="pairingInput" placeholder="Describe your pairing mood..." rows="5" required></textarea>
+      <button type="submit">Find Pairing</button>
+    </form>
+    <div id="pairingResults">
+      <p class="placeholder-text">Your pairing suggestions will appear here.</p>
+    </div>
   </main>
 
   <footer>
     <p>&copy; 2025 Thee Cigar Maestro. All rights reserved.</p>
     <p><a href="mailto:info@theecigarmaestro.com">info@theecigarmaestro.com</a></p>
   </footer>
+
+  <script>
+    const pairingForm = document.getElementById('pairingForm');
+    const pairingResults = document.getElementById('pairingResults');
+
+    pairingForm.addEventListener('submit', async function (e) {
+      e.preventDefault();
+      const prompt = document.getElementById('pairingInput').value;
+      pairingResults.innerHTML = '<p>Finding the perfect pairing...</p>';
+
+      const response = await fetch('/api/gpt', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ prompt: `Suggest a cigar pairing for: ${prompt}` })
+      });
+
+      const data = await response.json();
+      pairingResults.innerHTML = `<pre>${data.result}</pre>`;
+    });
+  </script>
 </body>
 </html>
