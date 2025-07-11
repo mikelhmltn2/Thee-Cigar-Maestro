@@ -1,53 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Find cigar pairings based on mood, drink, occasion, or memory using GPT-powered pairing logic.">
-  <title>Cigar Pairing | Thee Cigar Maestro</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cigar Pairings | Thee Cigar Maestro</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <header>
-    <h1>Thee Cigar Maestro</h1>
+
+<header>
+  <div class="container">
     <nav>
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="get-started.html">Get Started</a></li>
-        <li><a href="specs.html">Specs</a></li>
-        <li><a href="education.html">Education</a></li>
-        <li><a href="dashboard.html">Dashboard</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
+      <h1>Thee Cigar Maestro</h1>
+      <div>
+        <a href="index.html">Home</a>
+        <a href="specs.html">Specs</a>
+        <a href="pairing.html">Pairing</a>
+        <a href="education.html">Education</a>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="contact.html">Contact</a>
+      </div>
     </nav>
-  </header>
+  </div>
+</header>
 
-  <main>
-    <section>
-      <h2>Emotional & Sensory Pairing Engine</h2>
-      <p>Describe a mood, drink, event, or setting — and let our GPT engine suggest the perfect cigar to match.</p>
-      <input type="text" id="pairingInput" placeholder="e.g. After steak dinner with red wine" />
-      <button onclick="getPairing()">Find Pairing</button>
-      <pre id="pairingOutput">Your pairing will appear here...</pre>
-    </section>
-  </main>
+<section class="container">
+  <h2>Pair This Cigar</h2>
 
-  <footer>
-    <p>&copy; 2025 Thee Cigar Maestro. Discover rituals through emotional pairing.</p>
-  </footer>
+  <div class="pairing-card" style="background-color:#f4eee3; padding: 24px; border-radius: 10px; margin-bottom: 32px; box-shadow: 0 2px 12px rgba(0,0,0,0.05);">
+    <h3>Padron 1964 Anniversary Maduro Exclusivo</h3>
+    <p><strong>Flavor Profile:</strong> Cocoa, espresso, earth, pepper</p>
+    <hr style="border-color: #e0d6c3; margin: 16px 0;">
 
-  <script>
-    async function getPairing() {
-      const query = document.getElementById('pairingInput').value;
-      const res = await fetch('/api/pairing', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ query })
-      });
-      const data = await res.json();
-      document.getElementById('pairingOutput').innerText = data.result || data.error || 'No response.';
-    }
-  </script>
+    <p><strong>Suggested Pairings:</strong></p>
+    <ul style="list-style-type: square; padding-left: 20px;">
+      <li><strong>Spirit:</strong> Diplomatico Reserva Exclusiva Rum – molasses and raisin echoes</li>
+      <li><strong>Coffee:</strong> Single-origin Ethiopian espresso – citrus brightness balances boldness</li>
+      <li><strong>Tea:</strong> Lapsang Souchong – smoky with a leathery draw</li>
+      <li><strong>Soft Drink:</strong> Mexican Coca-Cola – natural sugar pop against peppery finish</li>
+    </ul>
+  </div>
+
+  <a href="get-started.html" class="btn">Create Custom Pairing</a>
+</section>
+
+<footer>
+  <div class="container">
+    <p>&copy; 2025 Thee Cigar Maestro. All rights reserved.</p>
+  </div>
+</footer>
+
 </body>
 </html>
