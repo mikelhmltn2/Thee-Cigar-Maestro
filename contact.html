@@ -2,134 +2,42 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Contact | Thee Cigar Maestro</title>
   <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="icon" href="favicon.ico" type="image/x-icon" />
-  <style>
-    body {
-      background-color: #f5f1e8;
-      background-image: url('https://www.transparenttextures.com/patterns/leather.png');
-      background-repeat: repeat;
-      font-family: 'Lato', sans-serif;
-    }
-
-    .form-container {
-      background-color: #fffaf3;
-      padding: 32px;
-      border-radius: 10px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-      max-width: 700px;
-      margin: 40px auto;
-    }
-
-    .form-container h3 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.8rem;
-      margin-bottom: 16px;
-      color: #5e3a1c;
-    }
-
-    .form-container input,
-    .form-container textarea {
-      width: 100%;
-      padding: 12px;
-      margin-bottom: 18px;
-      border: 1px solid #d6c5b0;
-      border-radius: 5px;
-      background-color: #fffdf8;
-      font-family: 'Lato', sans-serif;
-    }
-
-    .form-container input[type="submit"] {
-      background-color: #c8a96a;
-      color: #2c2115;
-      font-weight: bold;
-      text-transform: uppercase;
-      cursor: pointer;
-      transition: background 0.3s ease;
-    }
-
-    .form-container input[type="submit"]:hover {
-      background-color: #a88a53;
-      color: #fff;
-    }
-
-    .concierge {
-      background-color: rgba(255,255,255,0.2);
-      border: 1px solid #e0d6c3;
-      padding: 24px;
-      border-radius: 8px;
-      margin: 0 auto 40px auto;
-      max-width: 720px;
-      backdrop-filter: blur(4px);
-    }
-
-    .concierge h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: 2rem;
-      margin-bottom: 12px;
-      color: #c8a96a;
-    }
-
-    .concierge p {
-      font-size: 1.1rem;
-      color: #3a2b1b;
-      margin-bottom: 8px;
-    }
-  </style>
 </head>
 <body>
+  <header>
+    <h1>Thee Cigar Maestro</h1>
+    <p class="tagline">The Art. The Ritual. The Maestro.</p>
+  </header>
 
-<header>
-  <div class="container">
-    <nav>
-      <h1>Thee Cigar Maestro</h1>
-      <div>
-        <a href="index.html">Home</a>
-        <a href="specs.html">Specs</a>
-        <a href="pairing.html">Pairing</a>
-        <a href="education.html">Education</a>
-        <a href="dashboard.html">Dashboard</a>
-        <a href="contact.html">Contact</a>
-      </div>
-    </nav>
-  </div>
-</header>
+  <main class="contact-container">
+    <section class="contact-intro">
+      <h2>Contact the Maestro</h2>
+      <p>
+        Whether you’re a cigar enthusiast, lounge owner, or curious aficionado —
+        we’d love to hear from you. Use the form below or email us directly at 
+        <a href="mailto:info@theecigarmaestro.com">info@theecigarmaestro.com</a>.
+      </p>
+    </section>
 
-<section class="concierge">
-  <h2>Your Cigar Concierge</h2>
-  <p>Whether you're a lounge owner, aficionado, new enthusiast, or CEU partner — Thee Cigar Maestro is ready to serve you.</p>
-  <p>Reach out for:</p>
-  <ul style="list-style-type: square; padding-left: 20px;">
-    <li>Custom cigar specs & recommendations</li>
-    <li>Pairing guidance by mood, ritual, or occasion</li>
-    <li>Lounges, retail partnerships, or CEU licensing</li>
-    <li>Technical questions about our GPT system</li>
-  </ul>
-</section>
+    <form action="https://formspree.io/f/your-form-id" method="POST" class="contact-form">
+      <label for="name">Your Name</label>
+      <input type="text" id="name" name="name" required />
 
-<section class="form-container">
-  <h3>Send Us a Message</h3>
-  <form action="https://formspree.io/f/your-form-id" method="POST">
-    <input type="text" name="name" placeholder="Your Name" required />
-    <input type="email" name="email" placeholder="Your Email" required />
-    <textarea name="message" rows="6" placeholder="Tell us how we can help..." required></textarea>
-    <input type="submit" value="Submit Inquiry" />
-  </form>
-</section>
+      <label for="email">Your Email</label>
+      <input type="email" id="email" name="email" required />
 
-<footer>
-  <div class="container">
-    <p>&copy; 2025 Thee Cigar Maestro. All rights reserved. | Created by Mike Hamilton II</p>
-    <p>
-      <a href="https://instagram.com" target="_blank"><img src="instagram.svg" alt="Instagram" width="24"></a>
-      &nbsp;
-      <a href="https://facebook.com" target="_blank"><img src="facebook.svg" alt="Facebook" width="24"></a>
-    </p>
-  </div>
-</footer>
+      <label for="message">Your Message</label>
+      <textarea id="message" name="message" rows="5" required></textarea>
 
+      <button type="submit" class="submit-button">Send Message</button>
+    </form>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Thee Cigar Maestro. All rights reserved.</p>
+  </footer>
 </body>
 </html>
