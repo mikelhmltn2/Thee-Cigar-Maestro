@@ -9,6 +9,7 @@
 <body>
   <header>
     <h1>Thee Cigar Maestro</h1>
+    <p class="tagline">The Art. The Ritual. The Maestro.</p>
     <nav>
       <a href="index.html">Home</a>
       <a href="specs.html">Specs</a>
@@ -19,26 +20,40 @@
     </nav>
   </header>
 
-  <!-- 🔽 INSERT HERE -->
-  <main>
-    <section class="specs-engine">
-      <h2>Search Verified Cigar Specs</h2>
-      <p>Enter a cigar name to get official specs — length, ring gauge, strength, wrapper, binder, filler, tasting notes, and more.</p>
-      <form id="specSearchForm">
-        <input type="text" placeholder="e.g., Padron 1964 Anniversary Maduro" required />
-        <button type="submit">Search</button>
-      </form>
-      <div id="specResults">
-        <!-- Results will load here -->
-        <p class="placeholder-text">Search a cigar to see its official profile.</p>
-      </div>
-    </section>
+  <main class="specs-engine">
+    <h2>Search Verified Cigar Specs</h2>
+    <form id="specSearchForm">
+      <input type="text" id="cigarQuery" placeholder="e.g., Padron 1964 Anniversary Maduro" required />
+      <button type="submit">Search</button>
+    </form>
+    <div id="specResults">
+      <p class="placeholder-text">Search a cigar to see its official profile.</p>
+    </div>
   </main>
-  <!-- 🔼 END MAIN SECTION -->
 
   <footer>
     <p>&copy; 2025 Thee Cigar Maestro. All rights reserved.</p>
     <p><a href="mailto:info@theecigarmaestro.com">info@theecigarmaestro.com</a></p>
   </footer>
+
+  <script>
+    const form = document.getElementById('specSearchForm');
+    const results = document.getElementById('specResults');
+
+    form.addEventListener('submit', async function (e) {
+      e.preventDefault();
+      const query = document.getElementById('cigarQuery').value;
+      results.innerHTML = '<p>Loading specs...</p>';
+
+      const response = await fetch('/api/gpt', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ prompt: `Give official cigar specs for: ${query}` })
+      });
+
+      const data = await response.json();
+      results.innerHTML = `<pre>${data.result}</pre>`;
+    });
+  </script>
 </body>
 </html>
