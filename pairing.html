@@ -5,55 +5,71 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Pairing Engine | Thee Cigar Maestro</title>
   <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Roboto&display=swap" rel="stylesheet">
 </head>
 <body>
+
   <header>
     <h1>Thee Cigar Maestro</h1>
-    <p class="tagline">The Art. The Ritual. The Maestro.</p>
+    <p class="subtitle">The Art. The Ritual. The Maestro.</p>
     <nav>
       <a href="index.html">Home</a>
       <a href="specs.html">Specs</a>
-      <a href="pairing.html">Pairing</a>
+      <a href="pairing.html" class="active">Pairing</a>
       <a href="education.html">Education</a>
       <a href="dashboard.html">Dashboard</a>
       <a href="contact.html">Contact</a>
     </nav>
   </header>
 
-  <main class="pairing-engine">
-    <h2>Pairing Engine v3.0</h2>
-    <form id="pairingForm">
-      <textarea id="pairingInput" placeholder="Describe your pairing mood..." rows="5" required></textarea>
-      <button type="submit">Find Pairing</button>
-    </form>
-    <div id="pairingResults">
-      <p class="placeholder-text">Your pairing suggestions will appear here.</p>
-    </div>
+  <main class="container">
+    <section class="pairing-engine">
+      <h2>Pairing Engine v3.0</h2>
+      <p>Describe your mood, drink, event, or food — and we’ll recommend the perfect cigar.</p>
+
+      <form id="pairingForm">
+        <textarea id="pairingInput" placeholder="e.g., A spicy Maduro to pair with bourbon on a rainy night..." rows="5" required></textarea>
+        <button type="submit">Find Pairing</button>
+      </form>
+
+      <div id="pairingResults" class="results-box">
+        <p class="placeholder-text">Your pairing suggestions will appear here.</p>
+      </div>
+    </section>
   </main>
 
   <footer>
-    <p>&copy; 2025 Thee Cigar Maestro. All rights reserved.</p>
-    <p><a href="mailto:info@theecigarmaestro.com">info@theecigarmaestro.com</a></p>
+    <p>© 2025 Thee Cigar Maestro. All rights reserved.<br>
+    <a href="mailto:info@theecigarmaestro.com">info@theecigarmaestro.com</a></p>
   </footer>
 
   <script>
-    const pairingForm = document.getElementById('pairingForm');
-    const pairingResults = document.getElementById('pairingResults');
-
-    pairingForm.addEventListener('submit', async function (e) {
+    document.getElementById('pairingForm').addEventListener('submit', async function (e) {
       e.preventDefault();
-      const prompt = document.getElementById('pairingInput').value;
-      pairingResults.innerHTML = '<p>Finding the perfect pairing...</p>';
+      const prompt = document.getElementById('pairingInput').value.trim();
+      const resultBox = document.getElementById('pairingResults');
+      resultBox.innerHTML = `<p>Finding your perfect pairing...</p>`;
 
-      const response = await fetch('/api/gpt', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ prompt: `Suggest a cigar pairing for: ${prompt}` })
-      });
+      try {
+        const response = await fetch('/api/gpt', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ prompt })
+        });
 
-      const data = await response.json();
-      pairingResults.innerHTML = `<pre>${data.result}</pre>`;
+        const data = await response.json();
+
+        if (data.result) {
+          resultBox.innerHTML = `<pre>${data.result}</pre>`;
+        } else {
+          resultBox.innerHTML = `<p>No pairing found.</p>`;
+        }
+      } catch (err) {
+        resultBox.innerHTML = `<p style="color:red;">Failed to fetch pairing. Please try again later.</p>`;
+        console.error(err);
+      }
     });
   </script>
+
 </body>
 </html>
