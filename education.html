@@ -1,70 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Start your cigar education journey with CEU-certified learning paths, GPT coaching, and historical mastery.">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Education | Thee Cigar Maestro</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+  <style>
+    body {
+      background-color: #f5f1e8;
+      background-image: url('https://www.transparenttextures.com/patterns/leather.png');
+      background-repeat: repeat;
+      font-family: 'Lato', sans-serif;
+    }
+  </style>
 </head>
 <body>
-  <header>
-    <h1>Thee Cigar Maestro</h1>
+
+<header>
+  <div class="container">
     <nav>
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="get-started.html">Get Started</a></li>
-        <li><a href="specs.html">Specs</a></li>
-        <li><a href="pairing.html">Pairing</a></li>
-        <li><a href="dashboard.html">Dashboard</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
+      <h1>Thee Cigar Maestro</h1>
+      <div>
+        <a href="index.html">Home</a>
+        <a href="specs.html">Specs</a>
+        <a href="pairing.html">Pairing</a>
+        <a href="education.html">Education</a>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="contact.html">Contact</a>
+      </div>
     </nav>
-  </header>
+  </div>
+</header>
 
-  <main>
-    <section>
-      <h2>CEU-Certified Cigar Education</h2>
-      <p>Thee Cigar Maestro offers structured, gamified education modules to elevate your cigar knowledge. Built for tobacconists, lounge staff, and lifelong learners.</p>
-    </section>
+<section class="container">
+  <h2>Cigar Education Hub</h2>
+  <p>Welcome to your educational journey. Thee Cigar Maestro brings official specs and cultural depth together in one immersive curriculum — from wrapper origins to CEU certification.</p>
 
-    <section>
-      <h3>📘 Learning Tracks</h3>
-      <ul>
-        <li>Foundations of Cigar Anatomy</li>
-        <li>Wrapper Origins & Flavor Maps</li>
-        <li>Legacy of the Master Blenders</li>
-        <li>Sensory Pairing Techniques</li>
-        <li>Retail Operations & Lounge Training</li>
-        <li>Blockchain & Preservation Systems</li>
-      </ul>
-    </section>
+  <div style="background-color:#fffaf3; padding: 24px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.06); margin-top: 30px;">
+    <h3>Available Lessons</h3>
+    <ul style="list-style: square; padding-left: 20px;">
+      <li>Wrapper Varietals & Country Terroir</li>
+      <li>Strength vs Body – A Masterclass</li>
+      <li>Cigar Construction & Rolling Styles</li>
+      <li>Pairing Logic & Sensory Alignment</li>
+      <li>Legacy, Ritual, and Emotional Memory</li>
+    </ul>
+    <a href="get-started.html" class="btn" style="margin-top: 20px; display: inline-block;">Start Learning</a>
+  </div>
+</section>
 
-    <section>
-      <h3>🤖 GPT Coaching Assistant</h3>
-      <p>Use our AI-powered tutor to quiz, guide, and deepen your understanding of each module. Just type a concept or question below:</p>
-      <input type="text" id="eduInput" placeholder="e.g. What’s the difference between sun-grown and shade-grown?" />
-      <button onclick="askEdu()">Ask</button>
-      <pre id="eduOutput">Your GPT education assistant will reply here...</pre>
-    </section>
-  </main>
+<footer>
+  <div class="container">
+    <p>&copy; 2025 Thee Cigar Maestro. All rights reserved.</p>
+  </div>
+</footer>
 
-  <footer>
-    <p>&copy; 2025 Thee Cigar Maestro. Education is the ritual that builds legacy.</p>
-  </footer>
-
-  <script>
-    async function askEdu() {
-      const query = document.getElementById('eduInput').value;
-      const res = await fetch('/api/education', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ query })
-      });
-      const data = await res.json();
-      document.getElementById('eduOutput').innerText = data.result || data.error || 'No response.';
-    }
-  </script>
 </body>
 </html>
