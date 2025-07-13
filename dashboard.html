@@ -1,50 +1,236 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Thee Cigar Maestro dashboard for cigar lounges and tobacconists. Manage inventory, track customer preferences, and access intelligent tools for luxury cigar retail.">
+  <meta name="keywords" content="cigar dashboard, lounge management, inventory tracking, customer profiles, cigar retail software">
+  <meta name="author" content="Thee Cigar Maestro">
+  
+  <!-- Security Headers -->
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="X-Frame-Options" content="DENY">
+  <meta http-equiv="X-XSS-Protection" content="1; mode=block">
+  
+  <!-- Open Graph Tags -->
+  <meta property="og:title" content="Dashboard | Thee Cigar Maestro">
+  <meta property="og:description" content="Manage your cigar lounge with intelligent tools and luxury retail solutions">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://theecigarmaestro.com/dashboard.html">
+  <meta property="og:site_name" content="Thee Cigar Maestro">
+  
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Dashboard | Thee Cigar Maestro">
+  <meta name="twitter:description" content="Manage your cigar lounge with intelligent tools and luxury retail solutions">
+  
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://theecigarmaestro.com/dashboard.html">
+  
+  <!-- Preload Critical Resources -->
+  <link rel="preload" href="style.css" as="style">
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+  
   <title>Dashboard | Thee Cigar Maestro</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css">
+  
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Thee Cigar Maestro Dashboard",
+    "description": "Professional dashboard for cigar lounge and retail management",
+    "url": "https://theecigarmaestro.com/dashboard.html",
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "Web Browser",
+    "offers": {
+      "@type": "Offer",
+      "category": "Business Software"
+    },
+    "provider": {
+      "@type": "Organization",
+      "name": "Thee Cigar Maestro",
+      "email": "info@theecigarmaestro.com"
+    }
+  }
+  </script>
 </head>
 <body>
-  <header>
+  <!-- Skip Navigation for Accessibility -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  
+  <header role="banner">
     <h1>Thee Cigar Maestro</h1>
     <p class="tagline">The Art. The Ritual. The Maestro.</p>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="specs.html">Specs</a>
-      <a href="pairing.html">Pairing</a>
-      <a href="education.html">Education</a>
-      <a href="dashboard.html">Dashboard</a>
-      <a href="contact.html">Contact</a>
+    
+    <!-- Breadcrumb Navigation -->
+    <nav aria-label="Breadcrumb" class="breadcrumb">
+      <ol>
+        <li><a href="index.html">Home</a></li>
+        <li aria-current="page">Dashboard</li>
+      </ol>
+    </nav>
+    
+    <!-- Main Navigation -->
+    <nav role="navigation" aria-label="Main navigation">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="specs.html">Specs</a></li>
+        <li><a href="pairing.html">Pairing</a></li>
+        <li><a href="education.html">Education</a></li>
+        <li><a href="dashboard.html" aria-current="page" class="current">Dashboard</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
     </nav>
   </header>
 
-  <main class="dashboard-preview">
-    <section>
-      <h2>Lounge & Retail Dashboard</h2>
+  <main class="dashboard-preview" id="main-content" role="main">
+    <section aria-labelledby="dashboard-title">
+      <h2 id="dashboard-title">Lounge & Retail Dashboard</h2>
       <p>
-        Welcome to your command center. The Maestro’s dashboard will let you manage inventory, track customer pairings, visualize performance, and access intelligent tools — all tailored for cigar lounges and tobacconists.
+        Welcome to your command center. The Maestro's dashboard will let you manage inventory, track customer pairings, visualize performance, and access intelligent tools — all tailored for cigar lounges and tobacconists.
       </p>
 
-      <div class="coming-soon-box">
-        <h3>Coming Soon:</h3>
-        <ul>
-          <li>Real-time Inventory Management</li>
-          <li>Customer Flavor Profiles & History</li>
-          <li>Sales Analytics & GPT Forecasts</li>
-          <li>Staff Training Progress & CEU Tracking</li>
-          <li>Custom Cigar Builder + House Blend Tracker</li>
+      <!-- Enhanced Coming Soon Section -->
+      <div class="coming-soon-box" role="region" aria-labelledby="coming-soon-title">
+        <h3 id="coming-soon-title">
+          <span aria-hidden="true">🚀</span>
+          Coming Soon:
+        </h3>
+        <ul role="list">
+          <li>
+            <strong>Real-time Inventory Management</strong>
+            <span class="feature-description">Track stock levels, set reorder points, and manage supplier relationships</span>
+          </li>
+          <li>
+            <strong>Customer Flavor Profiles & History</strong>
+            <span class="feature-description">Build detailed customer preferences and purchase history</span>
+          </li>
+          <li>
+            <strong>Sales Analytics & GPT Forecasts</strong>
+            <span class="feature-description">AI-powered insights and predictive analytics for better business decisions</span>
+          </li>
+          <li>
+            <strong>Staff Training Progress & CEU Tracking</strong>
+            <span class="feature-description">Monitor employee development and certification requirements</span>
+          </li>
+          <li>
+            <strong>Custom Cigar Builder + House Blend Tracker</strong>
+            <span class="feature-description">Design and track custom blends for your establishment</span>
+          </li>
         </ul>
+        
+        <!-- Status Indicator -->
+        <div class="status-indicator" role="status" aria-live="polite">
+          <span class="status-badge">In Development</span>
+          <p class="status-text">Expected launch: Q3 2025</p>
+        </div>
       </div>
 
-      <p>All powered by Thee Cigar Maestro system — with luxury, logic, and legacy built-in.</p>
+      <!-- Additional Preview Section -->
+      <div class="preview-features" role="region" aria-labelledby="preview-title">
+        <h3 id="preview-title">What to Expect</h3>
+        <div class="feature-grid">
+          <div class="feature-card">
+            <h4>Intelligent Automation</h4>
+            <p>Automated reordering, smart recommendations, and predictive analytics powered by advanced AI.</p>
+          </div>
+          <div class="feature-card">
+            <h4>Customer Experience</h4>
+            <p>Personalized recommendations, loyalty tracking, and seamless point-of-sale integration.</p>
+          </div>
+          <div class="feature-card">
+            <h4>Business Intelligence</h4>
+            <p>Comprehensive reporting, trend analysis, and performance metrics for informed decision-making.</p>
+          </div>
+        </div>
+      </div>
+
+      <p class="closing-statement">
+        All powered by Thee Cigar Maestro system — with luxury, logic, and legacy built-in.
+      </p>
+      
+      <!-- Call to Action -->
+      <div class="cta-section">
+        <h3>Get Early Access</h3>
+        <p>Be among the first to experience the future of cigar retail management.</p>
+        <a href="contact.html" class="cta-button" role="button">Request Beta Access</a>
+      </div>
     </section>
   </main>
 
-  <footer>
-    <p>&copy; 2025 Thee Cigar Maestro. All rights reserved.</p>
-    <p><a href="mailto:info@theecigarmaestro.com">info@theecigarmaestro.com</a></p>
+  <footer role="contentinfo">
+    <div class="footer-content">
+      <p>&copy; <span id="current-year">2025</span> Thee Cigar Maestro. All rights reserved.</p>
+      <p>
+        <a href="mailto:info@theecigarmaestro.com" 
+           itemscope 
+           itemtype="https://schema.org/EmailAddress"
+           aria-label="Contact us via email">
+          <span itemprop="email">info@theecigarmaestro.com</span>
+        </a>
+      </p>
+      
+      <!-- Additional Footer Links -->
+      <nav aria-label="Footer navigation">
+        <ul>
+          <li><a href="privacy.html">Privacy Policy</a></li>
+          <li><a href="terms.html">Terms of Service</a></li>
+          <li><a href="accessibility.html">Accessibility</a></li>
+        </ul>
+      </nav>
+    </div>
   </footer>
+
+  <!-- Progressive Enhancement Script -->
+  <script>
+    // Update copyright year dynamically
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+    
+    // Add loading states for future functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      // Add focus management for skip link
+      const skipLink = document.querySelector('.skip-link');
+      const mainContent = document.getElementById('main-content');
+      
+      skipLink.addEventListener('click', function(e) {
+        e.preventDefault();
+        mainContent.focus();
+        mainContent.scrollIntoView();
+      });
+      
+      // Add keyboard navigation enhancement
+      document.addEventListener('keydown', function(e) {
+        // Alt + M to go to main content
+        if (e.altKey && e.key === 'm') {
+          e.preventDefault();
+          mainContent.focus();
+        }
+      });
+      
+      // Add status updates for screen readers
+      const statusIndicator = document.querySelector('.status-indicator [role="status"]');
+      if (statusIndicator) {
+        // Announce status changes
+        setTimeout(() => {
+          statusIndicator.setAttribute('aria-live', 'polite');
+        }, 1000);
+      }
+    });
+    
+    // Error handling for CSS loading
+    window.addEventListener('error', function(e) {
+      if (e.target.tagName === 'LINK' && e.target.rel === 'stylesheet') {
+        // Fallback styles if CSS fails to load
+        document.body.style.fontFamily = 'Arial, sans-serif';
+        document.body.style.margin = '20px';
+        document.body.style.lineHeight = '1.6';
+      }
+    });
+  </script>
+  
+  <!-- Accessibility Enhancement -->
+  <div id="announcements" aria-live="polite" aria-atomic="true" class="sr-only"></div>
 </body>
 </html>
