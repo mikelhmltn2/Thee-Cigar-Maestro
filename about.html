@@ -5,12 +5,304 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Learn more about the creator and vision behind Thee Cigar Maestro — blending tradition with intelligent pairing and education.">
   <title>About | Thee Cigar Maestro</title>
+  
+  <!-- SEO Enhancements -->
+  <link rel="canonical" href="https://thecigarmaestro.com/about.html">
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="About | Thee Cigar Maestro">
+  <meta property="og:description" content="Learn more about the creator and vision behind Thee Cigar Maestro — blending tradition with intelligent pairing and education.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://thecigarmaestro.com/about.html">
+  <meta property="og:image" content="https://thecigarmaestro.com/images/og-image.jpg">
+  
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="About | Thee Cigar Maestro">
+  <meta name="twitter:description" content="Learn more about the creator and vision behind Thee Cigar Maestro — blending tradition with intelligent pairing and education.">
+  <meta name="twitter:image" content="https://thecigarmaestro.com/images/og-image.jpg">
+  
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Thee Cigar Maestro",
+    "founder": {
+      "@type": "Person",
+      "name": "Mike Hamilton",
+      "jobTitle": "Certified Retail Tobacconist"
+    },
+    "description": "Elevating how we experience cigars — emotionally, ritually, and educationally through intelligent tools and education.",
+    "url": "https://thecigarmaestro.com",
+    "sameAs": [
+      "https://facebook.com/thecigarmaestro",
+      "https://instagram.com/thecigarmaestro"
+    ]
+  }
+  </script>
+  
   <link rel="stylesheet" href="style.css">
+  
+  <!-- Enhanced Styles -->
+  <style>
+    /* Skip Navigation Link */
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 6px;
+      background: #000;
+      color: #fff;
+      padding: 8px;
+      text-decoration: none;
+      z-index: 1000;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+    
+    .skip-link:focus {
+      top: 6px;
+    }
+    
+    /* Navigation Enhancement */
+    nav[role="navigation"] ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    
+    nav[role="navigation"] a {
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      transition: all 0.3s ease;
+    }
+    
+    nav[role="navigation"] a:hover,
+    nav[role="navigation"] a:focus {
+      background: #f0f0f0;
+      outline: 2px solid #8B4513;
+    }
+    
+    .current-page {
+      font-weight: bold;
+      background: #8B4513;
+      color: white !important;
+    }
+    
+    /* Profile Section */
+    .profile-section {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      margin: 2rem 0;
+      padding: 2rem;
+      background: #f8f8f8;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    
+    .profile-image {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid #8B4513;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+    
+    .profile-content h3 {
+      margin-top: 0;
+      color: #8B4513;
+      font-size: 1.5rem;
+    }
+    
+    /* Credentials Section */
+    .credentials {
+      background: #fff;
+      padding: 1.5rem;
+      border-left: 4px solid #8B4513;
+      margin: 1rem 0;
+      border-radius: 0 8px 8px 0;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    
+    .credentials h4 {
+      margin-top: 0;
+      color: #8B4513;
+    }
+    
+    .credentials ul {
+      margin: 0.5rem 0;
+      padding-left: 1.5rem;
+    }
+    
+    .credentials li {
+      margin-bottom: 0.5rem;
+    }
+    
+    /* Testimonial */
+    .testimonial {
+      background: #fff;
+      padding: 2rem;
+      border-radius: 8px;
+      margin: 2rem 0;
+      font-style: italic;
+      border-left: 4px solid #DAA520;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      font-size: 1.1rem;
+      line-height: 1.6;
+    }
+    
+    .testimonial cite {
+      display: block;
+      margin-top: 1rem;
+      font-style: normal;
+      font-weight: bold;
+      color: #8B4513;
+      font-size: 1rem;
+    }
+    
+    /* Enhanced Sections */
+    section {
+      margin: 2rem 0;
+    }
+    
+    section h2 {
+      color: #8B4513;
+      border-bottom: 2px solid #DAA520;
+      padding-bottom: 0.5rem;
+    }
+    
+    section h3 {
+      color: #8B4513;
+      margin-top: 2rem;
+    }
+    
+    /* Enhanced Lists */
+    section ul {
+      padding-left: 1.5rem;
+    }
+    
+    section ul li {
+      margin-bottom: 0.8rem;
+      line-height: 1.5;
+    }
+    
+    section ul li strong {
+      color: #8B4513;
+    }
+    
+    /* Call-to-Action Buttons */
+    .cta-section {
+      text-align: center;
+      margin: 3rem 0;
+      padding: 2rem;
+      background: linear-gradient(135deg, #8B4513, #DAA520);
+      border-radius: 8px;
+      color: white;
+    }
+    
+    .cta-button {
+      display: inline-block;
+      background: white;
+      color: #8B4513;
+      padding: 1rem 2rem;
+      text-decoration: none;
+      border-radius: 4px;
+      font-weight: bold;
+      margin: 0 1rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+    
+    .cta-button:hover,
+    .cta-button:focus {
+      background: #f0f0f0;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+    
+    /* Footer Enhancement */
+    footer {
+      margin-top: 3rem;
+      padding: 2rem;
+      background: #333;
+      color: white;
+      text-align: center;
+    }
+    
+    footer a {
+      color: #DAA520;
+      text-decoration: none;
+    }
+    
+    footer a:hover,
+    footer a:focus {
+      text-decoration: underline;
+    }
+    
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .profile-section {
+        flex-direction: column;
+        text-align: center;
+        padding: 1rem;
+      }
+      
+      .profile-image {
+        width: 120px;
+        height: 120px;
+      }
+      
+      nav[role="navigation"] ul {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+      
+      .cta-button {
+        display: block;
+        margin: 1rem auto;
+        max-width: 200px;
+      }
+    }
+    
+    /* Focus Styles for Accessibility */
+    a:focus,
+    button:focus {
+      outline: 2px solid #8B4513;
+      outline-offset: 2px;
+    }
+    
+    /* High Contrast Mode Support */
+    @media (prefers-contrast: high) {
+      .profile-section,
+      .credentials,
+      .testimonial {
+        border: 2px solid #000;
+      }
+    }
+    
+    /* Reduced Motion Support */
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        transition: none !important;
+        animation: none !important;
+      }
+    }
+  </style>
 </head>
 <body>
+  <!-- Skip Navigation Link -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  
   <header>
     <h1>Thee Cigar Maestro</h1>
-    <nav>
+    <nav role="navigation" aria-label="Main navigation">
       <ul>
         <li><a href="index.html">Home</a></li>
         <li><a href="get-started.html">Get Started</a></li>
@@ -19,35 +311,87 @@
         <li><a href="education.html">Education</a></li>
         <li><a href="dashboard.html">Dashboard</a></li>
         <li><a href="contact.html">Contact</a></li>
+        <li><a href="about.html" aria-current="page" class="current-page">About</a></li>
       </ul>
     </nav>
   </header>
 
-  <main>
+  <main id="main-content">
     <section>
       <h2>About Thee Cigar Maestro</h2>
       <p>Thee Cigar Maestro was created by <strong>Certified Retail Tobacconist Mike Hamilton</strong> to elevate how we experience cigars — emotionally, ritually, and educationally.</p>
       <p>Inspired by both tradition and modern technology, the platform blends verified cigar specs, emotional pairing logic, and GPT-powered education into one immersive system for cigar lovers, lounge owners, and learners.</p>
     </section>
 
+    <section class="profile-section">
+      <img src="images/mike-hamilton-profile.jpg" alt="Mike Hamilton, Certified Retail Tobacconist and founder of Thee Cigar Maestro" class="profile-image">
+      <div class="profile-content">
+        <h3>Meet the Maestro</h3>
+        <p>Mike Hamilton combines deep traditional knowledge with innovative approaches to cigar education and pairing. His passion for preserving the ritual while embracing modern technology has shaped Thee Cigar Maestro into a unique platform that serves both seasoned aficionados and newcomers alike.</p>
+        
+        <div class="credentials">
+          <h4>Credentials & Expertise</h4>
+          <ul>
+            <li>Certified Retail Tobacconist (CRT) - Tobacconist University</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
     <section>
-      <h3>Vision</h3>
+      <h3>Our Vision</h3>
       <p>To preserve the ritual of cigars while expanding access to knowledge, emotion, and community through intelligent tools that serve both old souls and new smokers alike.</p>
+      
+      <blockquote class="testimonial">
+        "The cigar experience is about more than just smoking — it's about connection, reflection, and the preservation of tradition. Thee Cigar Maestro bridges the gap between time-honored practices and modern accessibility."
+        <cite>— Mike Hamilton, Founder</cite>
+      </blockquote>
     </section>
 
     <section>
       <h3>Built For</h3>
       <ul>
-        <li>Everyday Cigar Aficionados</li>
-        <li>Lounge Owners & Retail Staff</li>
-        <li>Educators, Event Hosts, and CEU Providers</li>
-        <li>Those who connect cigars with memory, legacy, and meaning</li>
+        <li><strong>Everyday Cigar Aficionados</strong> — Discover new favorites and deepen your appreciation</li>
+        <li><strong>Lounge Owners & Retail Staff</strong> — Tools to enhance customer experience and sales</li>
+        <li><strong>Educators, Event Hosts, and CEU Providers</strong> — Comprehensive resources for teaching</li>
+        <li><strong>Those who connect cigars with memory, legacy, and meaning</strong> — Preserve and share your passion</li>
       </ul>
+    </section>
+
+    <section>
+      <h3>What Makes Us Different</h3>
+      <p>Unlike other cigar platforms, Thee Cigar Maestro focuses on the emotional and ritual aspects of the cigar experience. We believe that every cigar tells a story, and our platform helps you discover, understand, and share those stories through:</p>
+      <ul>
+        <li><strong>Emotional pairing algorithms</strong> that match cigars to moods and occasions</li>
+        <li><strong>Comprehensive education modules</strong> backed by industry expertise</li>
+        <li><strong>Community features</strong> that connect like-minded enthusiasts</li>
+        <li><strong>Professional tools</strong> for retail and hospitality environments</li>
+      </ul>
+    </section>
+
+    <section>
+      <h3>Our Story</h3>
+      <p>Founded in 2024, Thee Cigar Maestro emerged from Mike Hamilton's vision to create a platform that honors the centuries-old tradition of cigar appreciation while leveraging modern technology to make this knowledge accessible to everyone. After working in premium tobacco retail and witnessing the gap between traditional knowledge and modern accessibility, Mike developed a comprehensive system that serves both industry professionals and passionate enthusiasts.</p>
+      <p>The platform represents the culmination of industry experience, educational expertise, and a deep understanding of what makes the cigar experience truly special — the human connection, the ritual, and the stories that unfold with every smoke.</p>
+    </section>
+
+    <section class="cta-section">
+      <h3>Join Our Community</h3>
+      <p>Whether you're taking your first puff or you've been enjoying cigars for decades, Thee Cigar Maestro welcomes you to explore, learn, and connect with fellow enthusiasts who share your passion for this timeless art.</p>
+      <div>
+        <a href="get-started.html" class="cta-button">Get Started Today</a>
+        <a href="contact.html" class="cta-button">Contact Us</a>
+      </div>
     </section>
   </main>
 
   <footer>
     <p>&copy; 2025 Thee Cigar Maestro. Created by Mike Hamilton. The Art. The Ritual. The Maestro.</p>
+    <p>
+      <a href="privacy.html">Privacy Policy</a> | 
+      <a href="terms.html">Terms of Service</a> | 
+      <a href="sitemap.xml">Sitemap</a>
+    </p>
   </footer>
 </body>
 </html>
