@@ -1,37 +1,44 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
+
   <!-- SEO Meta Tags -->
+
   <title>Contact | Thee Cigar Maestro - Premium Cigar Consulting Services</title>
   <meta name="description" content="Contact Thee Cigar Maestro for premium cigar consulting and education services. Reach out for inquiries about cigar expertise, lounge consulting, or educational programs." />
   <meta name="keywords" content="cigar consulting, cigar education, premium cigars, cigar expert, lounge consulting" />
   <link rel="canonical" href="https://theecigarmaestro.com/contact" />
-  
+
   <!-- Open Graph Tags -->
+
   <meta property="og:title" content="Contact | Thee Cigar Maestro" />
   <meta property="og:description" content="Get in touch with premium cigar experts for consulting and education services." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://theecigarmaestro.com/contact" />
   <meta property="og:image" content="https://theecigarmaestro.com/images/og-image.jpg" />
-  
+
   <!-- Twitter Card Tags -->
+
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Contact | Thee Cigar Maestro" />
   <meta name="twitter:description" content="Get in touch with premium cigar experts for consulting and education services." />
   <meta name="twitter:image" content="https://theecigarmaestro.com/images/twitter-image.jpg" />
-  
+
   <!-- Favicon -->
+
   <link rel="icon" href="/favicon.ico" type="image/x-icon" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-  
+
   <!-- Preload Critical Resources -->
+
   <link rel="preload" href="style.css" as="style" />
   <link rel="stylesheet" href="style.css" />
-  
+
   <!-- Structured Data -->
+
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -47,12 +54,19 @@
     "description": "Premium cigar consulting and education services"
   }
   </script>
+
 </head>
 <body>
   <!-- Skip Link for Accessibility -->
   <a href="#main-content" class="skip-link">Skip to main content</a>
-  
+
   <header role="banner">
+    <nav class="header-nav" aria-label="Main navigation">
+      <a href="/" class="home-button" aria-label="Go to homepage">
+        <span class="home-icon" aria-hidden="true">🏠</span>
+        <span class="home-text">Home</span>
+      </a>
+    </nav>
     <h1>Thee Cigar Maestro</h1>
     <p class="tagline">The Art. The Ritual. The Maestro.</p>
   </header>
@@ -69,87 +83,90 @@
       </div>
     </section>
 
-    <!-- Success Message -->
-    <div id="success-message" class="message success-message" role="alert" aria-live="polite" style="display: none;">
-      <strong>Thank you!</strong> Your message has been sent successfully. We'll get back to you soon.
+```
+<!-- Success Message -->
+<div id="success-message" class="message success-message" role="alert" aria-live="polite" style="display: none;">
+  <strong>Thank you!</strong> Your message has been sent successfully. We'll get back to you soon.
+</div>
+
+<!-- Error Message -->
+<div id="error-message" class="message error-message" role="alert" aria-live="polite" style="display: none;">
+  <strong>Error:</strong> There was a problem sending your message. Please try again.
+</div>
+
+<form action="https://formspree.io/f/movwgpel" method="POST" class="contact-form" novalidate>
+  <fieldset>
+    <legend class="sr-only">Contact Information</legend>
+    
+    <div class="form-group">
+      <label for="name">Your Name *</label>
+      <input 
+        type="text" 
+        id="name" 
+        name="name" 
+        required 
+        maxlength="100"
+        autocomplete="name"
+        aria-describedby="name-error name-help"
+        aria-invalid="false"
+      />
+      <div id="name-help" class="form-help">Please enter your full name</div>
+      <div id="name-error" class="error-text" role="alert" aria-live="polite"></div>
     </div>
 
-    <!-- Error Message -->
-    <div id="error-message" class="message error-message" role="alert" aria-live="polite" style="display: none;">
-      <strong>Error:</strong> There was a problem sending your message. Please try again.
+    <div class="form-group">
+      <label for="email">Your Email *</label>
+      <input 
+        type="email" 
+        id="email" 
+        name="email" 
+        required 
+        maxlength="254"
+        autocomplete="email"
+        aria-describedby="email-error email-help"
+        aria-invalid="false"
+      />
+      <div id="email-help" class="form-help">We'll use this to respond to your inquiry</div>
+      <div id="email-error" class="error-text" role="alert" aria-live="polite"></div>
     </div>
 
-    <form action="https://formspree.io/f/movwgpel" method="POST" class="contact-form" novalidate>
-      <fieldset>
-        <legend class="sr-only">Contact Information</legend>
-        
-        <div class="form-group">
-          <label for="name">Your Name *</label>
-          <input 
-            type="text" 
-            id="name" 
-            name="name" 
-            required 
-            maxlength="100"
-            autocomplete="name"
-            aria-describedby="name-error name-help"
-            aria-invalid="false"
-          />
-          <div id="name-help" class="form-help">Please enter your full name</div>
-          <div id="name-error" class="error-text" role="alert" aria-live="polite"></div>
-        </div>
+    <div class="form-group">
+      <label for="subject">Subject</label>
+      <input 
+        type="text" 
+        id="subject" 
+        name="subject" 
+        maxlength="200"
+        autocomplete="off"
+        aria-describedby="subject-help"
+      />
+      <div id="subject-help" class="form-help">Brief description of your inquiry</div>
+    </div>
 
-        <div class="form-group">
-          <label for="email">Your Email *</label>
-          <input 
-            type="email" 
-            id="email" 
-            name="email" 
-            required 
-            maxlength="254"
-            autocomplete="email"
-            aria-describedby="email-error email-help"
-            aria-invalid="false"
-          />
-          <div id="email-help" class="form-help">We'll use this to respond to your inquiry</div>
-          <div id="email-error" class="error-text" role="alert" aria-live="polite"></div>
-        </div>
+    <div class="form-group">
+      <label for="message">Your Message *</label>
+      <textarea 
+        id="message" 
+        name="message" 
+        rows="5" 
+        required 
+        maxlength="2000"
+        aria-describedby="message-error message-help"
+        aria-invalid="false"
+      ></textarea>
+      <div id="message-help" class="form-help">Tell us about your cigar needs or questions</div>
+      <div id="message-error" class="error-text" role="alert" aria-live="polite"></div>
+    </div>
 
-        <div class="form-group">
-          <label for="subject">Subject</label>
-          <input 
-            type="text" 
-            id="subject" 
-            name="subject" 
-            maxlength="200"
-            autocomplete="off"
-            aria-describedby="subject-help"
-          />
-          <div id="subject-help" class="form-help">Brief description of your inquiry</div>
-        </div>
+    <button type="submit" class="submit-button" aria-describedby="submit-help">
+      <span class="button-text">Send Message</span>
+      <span class="loading-spinner" aria-hidden="true" style="display: none;">Sending...</span>
+    </button>
+    <div id="submit-help" class="form-help">All fields marked with * are required</div>
+  </fieldset>
+</form>
+```
 
-        <div class="form-group">
-          <label for="message">Your Message *</label>
-          <textarea 
-            id="message" 
-            name="message" 
-            rows="5" 
-            required 
-            maxlength="2000"
-            aria-describedby="message-error message-help"
-            aria-invalid="false"
-          ></textarea>
-          <div id="message-help" class="form-help">Tell us about your cigar needs or questions</div>
-          <div id="message-error" class="error-text" role="alert" aria-live="polite"></div>
-        </div>
-
-        <button type="submit" class="submit-button" aria-describedby="submit-help">
-          <span class="button-text">Send Message</span>
-          <span class="loading-spinner" aria-hidden="true" style="display: none;">Sending...</span>
-        </button>
-        <div id="submit-help" class="form-help">All fields marked with * are required</div>
-      </fieldset>
-    </form>
   </main>
 
   <footer role="contentinfo">
@@ -157,6 +174,46 @@
   </footer>
 
   <style>
+    /* Header and Navigation */
+    .header-nav {
+      margin-bottom: 1rem;
+    }
+    
+    .home-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      background: linear-gradient(135deg, #8B4513, #A0522D);
+      color: white;
+      text-decoration: none;
+      border-radius: 25px;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      border: 2px solid transparent;
+      font-size: 0.9rem;
+    }
+    
+    .home-button:hover {
+      background: linear-gradient(135deg, #A0522D, #CD853F);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(139, 69, 19, 0.3);
+    }
+    
+    .home-button:focus {
+      outline: 2px solid #1976d2;
+      outline-offset: 2px;
+    }
+    
+    .home-icon {
+      font-size: 1.1rem;
+    }
+    
+    .home-text {
+      font-size: 0.9rem;
+      letter-spacing: 0.5px;
+    }
+    
     /* Additional styles for accessibility and UX improvements */
     .skip-link {
       position: absolute;
@@ -391,5 +448,6 @@
       });
     });
   </script>
+
 </body>
 </html>
