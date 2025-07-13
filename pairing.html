@@ -1,11 +1,180 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Pairing Engine | Thee Cigar Maestro</title>
+
+  <!-- Content Security Policy -->
+
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; font-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; script-src 'self'; connect-src 'self';">
+
   <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Roboto&display=swap" rel="stylesheet">
+
+  <!-- Preload critical fonts -->
+
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Roboto&display=swap" as="style">
+
+  <style>
+    /* Enhanced accessibility and UX styles */
+    .form-group {
+      margin-bottom: 1.5rem;
+      position: relative;
+    }
+    
+    .form-label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+      color: #333;
+    }
+    
+    .help-text {
+      font-size: 0.9rem;
+      color: #666;
+      margin-top: 0.25rem;
+      display: block;
+    }
+    
+    .char-counter {
+      position: absolute;
+      bottom: 0.5rem;
+      right: 0.75rem;
+      font-size: 0.8rem;
+      color: #666;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 0.2rem 0.4rem;
+      border-radius: 3px;
+    }
+    
+    .char-counter.warning {
+      color: #ff6b35;
+    }
+    
+    .char-counter.error {
+      color: #d32f2f;
+    }
+    
+    .submit-btn {
+      position: relative;
+      min-width: 140px;
+      transition: all 0.3s ease;
+    }
+    
+    .submit-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+    
+    .loading-spinner {
+      display: none;
+      width: 16px;
+      height: 16px;
+      border: 2px solid #fff;
+      border-top: 2px solid transparent;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin-right: 8px;
+    }
+    
+    .submit-btn.loading .loading-spinner {
+      display: inline-block;
+    }
+    
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    
+    .error-message {
+      color: #d32f2f;
+      background: #ffebee;
+      border: 1px solid #ffcdd2;
+      border-radius: 4px;
+      padding: 1rem;
+      margin-top: 1rem;
+      display: none;
+    }
+    
+    .error-message.show {
+      display: block;
+    }
+    
+    .retry-btn {
+      background: #ff6b35;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-top: 0.5rem;
+      transition: background 0.3s ease;
+    }
+    
+    .retry-btn:hover {
+      background: #e55a2b;
+    }
+    
+    .results-box {
+      position: relative;
+      min-height: 100px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      padding: 1rem;
+      background: #f9f9f9;
+      margin-top: 1rem;
+    }
+    
+    .results-content {
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      line-height: 1.6;
+    }
+    
+    .placeholder-text {
+      color: #666;
+      font-style: italic;
+    }
+    
+    .success-message {
+      color: #2e7d32;
+      font-weight: 500;
+      margin-bottom: 1rem;
+    }
+    
+    /* Focus styles for accessibility */
+    .form-input:focus,
+    .submit-btn:focus,
+    .retry-btn:focus {
+      outline: 2px solid #4CAF50;
+      outline-offset: 2px;
+    }
+    
+    /* High contrast mode support */
+    @media (prefers-contrast: high) {
+      .results-box {
+        border: 2px solid #000;
+      }
+      
+      .help-text {
+        color: #000;
+      }
+    }
+    
+    /* Reduced motion support */
+    @media (prefers-reduced-motion: reduce) {
+      .loading-spinner {
+        animation: none;
+      }
+      
+      .submit-btn {
+        transition: none;
+      }
+    }
+  </style>
+
 </head>
 <body>
 
@@ -15,7 +184,7 @@
     <nav>
       <a href="index.html">Home</a>
       <a href="specs.html">Specs</a>
-      <a href="pairing.html" class="active">Pairing</a>
+      <a href="pairing.html" class="active" aria-current="page">Pairing</a>
       <a href="education.html">Education</a>
       <a href="dashboard.html">Dashboard</a>
       <a href="contact.html">Contact</a>
@@ -25,17 +194,54 @@
   <main class="container">
     <section class="pairing-engine">
       <h2>Pairing Engine v3.0</h2>
-      <p>Describe your mood, drink, event, or food — and we’ll recommend the perfect cigar.</p>
+      <p>Describe your mood, drink, event, or food — and we'll recommend the perfect cigar.</p>
 
-      <form id="pairingForm">
-        <textarea id="pairingInput" placeholder="e.g., A spicy Maduro to pair with bourbon on a rainy night..." rows="5" required></textarea>
-        <button type="submit">Find Pairing</button>
-      </form>
-
-      <div id="pairingResults" class="results-box">
-        <p class="placeholder-text">Your pairing suggestions will appear here.</p>
+```
+  <form id="pairingForm" novalidate>
+    <fieldset>
+      <legend class="visually-hidden">Cigar Pairing Request</legend>
+      
+      <div class="form-group">
+        <label for="pairingInput" class="form-label">
+          Describe your pairing preferences:
+        </label>
+        <textarea 
+          id="pairingInput" 
+          class="form-input"
+          placeholder="e.g., A spicy Maduro to pair with bourbon on a rainy night..."
+          rows="5" 
+          required
+          maxlength="500"
+          aria-describedby="pairing-help pairing-counter"
+          aria-invalid="false"
+        ></textarea>
+        <small id="pairing-help" class="help-text">
+          Describe your mood, drink, event, or food preferences. Be specific for better recommendations.
+        </small>
+        <span id="pairing-counter" class="char-counter" aria-live="polite">0/500</span>
       </div>
-    </section>
+      
+      <button type="submit" class="submit-btn" id="submitBtn" aria-describedby="submit-help">
+        <span class="loading-spinner" aria-hidden="true"></span>
+        <span class="btn-text">Find Pairing</span>
+      </button>
+      <small id="submit-help" class="help-text">
+        Click to get personalized cigar recommendations
+      </small>
+    </fieldset>
+  </form>
+
+  <div class="error-message" id="errorMessage" role="alert" aria-live="assertive">
+    <strong>Error:</strong> <span id="errorText"></span>
+    <button type="button" class="retry-btn" id="retryBtn">Try Again</button>
+  </div>
+
+  <div id="pairingResults" class="results-box" role="status" aria-live="polite" aria-label="Pairing recommendations">
+    <p class="placeholder-text">Your pairing suggestions will appear here.</p>
+  </div>
+</section>
+```
+
   </main>
 
   <footer>
@@ -44,29 +250,320 @@
   </footer>
 
   <script>
-    document.getElementById('pairingForm').addEventListener('submit', async function (e) {
-      e.preventDefault();
-      const prompt = document.getElementById('pairingInput').value.trim();
-      const resultBox = document.getElementById('pairingResults');
-      resultBox.innerHTML = `<p>Finding your perfect pairing...</p>`;
+    // Configuration
+    const CONFIG = {
+      API_ENDPOINT: '/api/gpt',
+      MAX_RETRIES: 3,
+      RETRY_DELAY: 1000,
+      DEBOUNCE_DELAY: 300,
+      CACHE_SIZE: 10,
+      CACHE_DURATION: 5 * 60 * 1000 // 5 minutes
+    };
+
+    // State management
+    let requestTimeout;
+    let currentRequest = null;
+    let retryCount = 0;
+    let cache = new Map();
+
+    // DOM elements
+    const form = document.getElementById('pairingForm');
+    const input = document.getElementById('pairingInput');
+    const submitBtn = document.getElementById('submitBtn');
+    const btnText = submitBtn.querySelector('.btn-text');
+    const spinner = submitBtn.querySelector('.loading-spinner');
+    const resultBox = document.getElementById('pairingResults');
+    const errorMessage = document.getElementById('errorMessage');
+    const errorText = document.getElementById('errorText');
+    const retryBtn = document.getElementById('retryBtn');
+    const charCounter = document.getElementById('pairing-counter');
+
+    // Utility functions
+    function sanitizeInput(input) {
+      return input.trim().replace(/[<>]/g, '');
+    }
+
+    function validateInput(input) {
+      const sanitized = sanitizeInput(input);
+      const errors = [];
+
+      if (!sanitized) {
+        errors.push('Please describe your pairing preferences');
+      }
+
+      if (sanitized.length < 10) {
+        errors.push('Please provide more details (at least 10 characters)');
+      }
+
+      if (sanitized.length > 500) {
+        errors.push('Please keep your description under 500 characters');
+      }
+
+      return { isValid: errors.length === 0, errors, sanitized };
+    }
+
+    function createCacheKey(input) {
+      return btoa(input.toLowerCase().trim());
+    }
+
+    function getCachedResult(input) {
+      const key = createCacheKey(input);
+      const cached = cache.get(key);
+      
+      if (cached && Date.now() - cached.timestamp < CONFIG.CACHE_DURATION) {
+        return cached.result;
+      }
+      
+      return null;
+    }
+
+    function setCachedResult(input, result) {
+      const key = createCacheKey(input);
+      cache.set(key, { result, timestamp: Date.now() });
+      
+      // Keep cache size manageable
+      if (cache.size > CONFIG.CACHE_SIZE) {
+        const firstKey = cache.keys().next().value;
+        cache.delete(firstKey);
+      }
+    }
+
+    function setLoadingState(isLoading) {
+      submitBtn.disabled = isLoading;
+      submitBtn.classList.toggle('loading', isLoading);
+      btnText.textContent = isLoading ? 'Finding Pairing...' : 'Find Pairing';
+      
+      if (isLoading) {
+        submitBtn.setAttribute('aria-busy', 'true');
+      } else {
+        submitBtn.removeAttribute('aria-busy');
+      }
+    }
+
+    function showError(message, showRetry = true) {
+      errorText.textContent = message;
+      errorMessage.classList.add('show');
+      retryBtn.style.display = showRetry ? 'inline-block' : 'none';
+      
+      // Focus management for accessibility
+      errorMessage.focus();
+    }
+
+    function hideError() {
+      errorMessage.classList.remove('show');
+    }
+
+    function updateCharCounter() {
+      const length = input.value.length;
+      const max = input.getAttribute('maxlength');
+      charCounter.textContent = `${length}/${max}`;
+      
+      charCounter.classList.remove('warning', 'error');
+      if (length > max * 0.8) {
+        charCounter.classList.add('warning');
+      }
+      if (length >= max) {
+        charCounter.classList.add('error');
+      }
+    }
+
+    function displayResult(result) {
+      // Clear previous content
+      resultBox.innerHTML = '';
+      
+      // Create success message
+      const successMsg = document.createElement('div');
+      successMsg.className = 'success-message';
+      successMsg.textContent = 'Here are your personalized cigar recommendations:';
+      resultBox.appendChild(successMsg);
+      
+      // Create result content with safe text insertion
+      const resultContent = document.createElement('div');
+      resultContent.className = 'results-content';
+      resultContent.textContent = result; // Safe text insertion
+      resultBox.appendChild(resultContent);
+      
+      // Announce to screen readers
+      resultBox.setAttribute('aria-label', 'Pairing recommendations loaded successfully');
+    }
+
+    function displayNoResult() {
+      resultBox.innerHTML = '';
+      const noResultMsg = document.createElement('p');
+      noResultMsg.textContent = 'No pairing recommendations found. Please try a different description.';
+      noResultMsg.style.color = '#666';
+      resultBox.appendChild(noResultMsg);
+    }
+
+    function displayLoadingState() {
+      resultBox.innerHTML = '';
+      const loadingMsg = document.createElement('p');
+      loadingMsg.innerHTML = '🔍 Finding your perfect pairing...';
+      loadingMsg.setAttribute('aria-live', 'polite');
+      resultBox.appendChild(loadingMsg);
+    }
+
+    async function makeAPIRequest(prompt) {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 30000); // 30 second timeout
 
       try {
-        const response = await fetch('/api/gpt', {
+        const response = await fetch(CONFIG.API_ENDPOINT, {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ prompt })
+          headers: { 
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify({ prompt }),
+          signal: controller.signal
         });
 
-        const data = await response.json();
+        clearTimeout(timeoutId);
 
-        if (data.result) {
-          resultBox.innerHTML = `<pre>${data.result}</pre>`;
-        } else {
-          resultBox.innerHTML = `<p>No pairing found.</p>`;
+        if (!response.ok) {
+          if (response.status === 429) {
+            throw new Error('Too many requests. Please wait a moment and try again.');
+          } else if (response.status === 500) {
+            throw new Error('Server error. Please try again later.');
+          } else if (response.status === 404) {
+            throw new Error('Pairing service is temporarily unavailable.');
+          } else {
+            throw new Error(`Request failed with status ${response.status}`);
+          }
         }
-      } catch (err) {
-        resultBox.innerHTML = `<p style="color:red;">Failed to fetch pairing. Please try again later.</p>`;
-        console.error(err);
+
+        const data = await response.json();
+        return data;
+
+      } catch (error) {
+        clearTimeout(timeoutId);
+        
+        if (error.name === 'AbortError') {
+          throw new Error('Request timed out. Please try again.');
+        }
+        
+        if (!navigator.onLine) {
+          throw new Error('No internet connection. Please check your connection and try again.');
+        }
+        
+        throw error;
+      }
+    }
+
+    async function handlePairingRequest(isRetry = false) {
+      const prompt = input.value.trim();
+      
+      // Validation
+      const validation = validateInput(prompt);
+      if (!validation.isValid) {
+        showError(validation.errors[0], false);
+        input.focus();
+        return;
+      }
+
+      // Clear previous errors
+      hideError();
+
+      // Check cache first
+      if (!isRetry) {
+        const cachedResult = getCachedResult(validation.sanitized);
+        if (cachedResult) {
+          displayResult(cachedResult);
+          return;
+        }
+      }
+
+      // Set loading state
+      setLoadingState(true);
+      displayLoadingState();
+
+      try {
+        const data = await makeAPIRequest(validation.sanitized);
+
+        if (data.result && data.result.trim()) {
+          displayResult(data.result);
+          setCachedResult(validation.sanitized, data.result);
+          retryCount = 0; // Reset retry count on success
+        } else {
+          displayNoResult();
+        }
+
+      } catch (error) {
+        console.error('Pairing request failed:', error);
+        
+        if (retryCount < CONFIG.MAX_RETRIES) {
+          showError(`${error.message} (Attempt ${retryCount + 1}/${CONFIG.MAX_RETRIES})`, true);
+        } else {
+          showError(`${error.message} Please try again later.`, false);
+        }
+      } finally {
+        setLoadingState(false);
+      }
+    }
+
+    // Event listeners
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      // Cancel any pending request
+      if (requestTimeout) {
+        clearTimeout(requestTimeout);
+      }
+      
+      // Debounce the request
+      requestTimeout = setTimeout(() => {
+        handlePairingRequest();
+      }, CONFIG.DEBOUNCE_DELAY);
+    });
+
+    retryBtn.addEventListener('click', function() {
+      retryCount++;
+      handlePairingRequest(true);
+    });
+
+    input.addEventListener('input', function() {
+      updateCharCounter();
+      
+      // Clear validation errors on input
+      if (errorMessage.classList.contains('show')) {
+        hideError();
+      }
+      
+      // Update aria-invalid
+      const validation = validateInput(input.value);
+      input.setAttribute('aria-invalid', validation.isValid ? 'false' : 'true');
+    });
+
+    // Keyboard shortcuts
+    document.addEventListener('keydown', function(e) {
+      // Ctrl/Cmd + Enter to submit
+      if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+        e.preventDefault();
+        if (!submitBtn.disabled) {
+          form.dispatchEvent(new Event('submit'));
+        }
+      }
+      
+      // Escape to cancel loading
+      if (e.key === 'Escape' && submitBtn.disabled) {
+        if (currentRequest) {
+          currentRequest.abort();
+        }
+        setLoadingState(false);
+        hideError();
+      }
+    });
+
+    // Initialize
+    updateCharCounter();
+    
+    // Focus management
+    input.focus();
+    
+    // Cleanup on page unload
+    window.addEventListener('beforeunload', function() {
+      if (currentRequest) {
+        currentRequest.abort();
       }
     });
   </script>
