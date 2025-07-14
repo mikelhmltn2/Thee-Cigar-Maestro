@@ -1,31 +1,24 @@
 /* ==========================================================================
-REFACTORED STYLE.CSS — LEATHER & CIGAR TEXTURE + FIXES
+STYLE.CSS — WITH DARK PARCHMENT TEXT + HIGH CONTRAST LINKS + TEXTURES
 ========================================================================== */
 
-/* Google Fonts with preload optimization */
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Cinzel:wght@700&display=swap');
 
-/* ==========================================================================
-CSS CUSTOM PROPERTIES (DESIGN TOKENS)
-========================================================================== */
-
 :root {
-  /* Color Palette */
   --color-primary-gold: #d4af7f;
   --color-secondary-gold: #f5deb3;
   --color-dark-bg: #1a1a1a;
   --color-card-bg: rgba(34, 34, 34, 0.9);
-  --color-text-light: #f5f5f5;
-  --color-text-muted: #ccc;
-  --color-text-placeholder: #aaa;
-  --color-text-footer: #888;
+  --color-text-light: #e0d2b5; /* Dark parchment tone */
+  --color-text-muted: #c0b28f;
+  --color-text-placeholder: #a28f6e;
+  --color-text-footer: #998d75;
   --color-shadow: #000;
-  --color-focus: #d4af7f;
+  --color-focus: #f8e7c1;
   --color-error: #e74c3c;
   --color-success: #27ae60;
   --color-warning: #f39c12;
 
-  /* Spacing Scale */
   --spacing-xs: 0.25rem;
   --spacing-sm: 0.5rem;
   --spacing-md: 1rem;
@@ -34,7 +27,6 @@ CSS CUSTOM PROPERTIES (DESIGN TOKENS)
   --spacing-2xl: 2.5rem;
   --spacing-3xl: 3rem;
 
-  /* Typography Scale */
   --font-size-xs: 0.75rem;
   --font-size-sm: 0.875rem;
   --font-size-base: 1rem;
@@ -45,49 +37,32 @@ CSS CUSTOM PROPERTIES (DESIGN TOKENS)
   --font-size-4xl: 2.25rem;
   --font-size-5xl: 3rem;
 
-  /* Line Heights */
   --line-height-tight: 1.25;
   --line-height-normal: 1.5;
   --line-height-relaxed: 1.75;
 
-  /* Border Radius */
   --radius-sm: 0.25rem;
   --radius-md: 0.5rem;
   --radius-lg: 0.75rem;
 
-  /* Shadows */
-  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
   --shadow-dark: 0 0 10px var(--color-shadow);
 
-  /* Transitions */
   --transition-fast: 0.15s ease;
   --transition-normal: 0.3s ease;
   --transition-slow: 0.5s ease;
 
-  /* Breakpoints */
-  --breakpoint-sm: 640px;
-  --breakpoint-md: 768px;
-  --breakpoint-lg: 1024px;
-  --breakpoint-xl: 1280px;
-  --breakpoint-2xl: 1536px;
-
-  /* Container Widths */
   --container-sm: 640px;
   --container-md: 768px;
   --container-lg: 1024px;
   --container-xl: 1280px;
 
-  /* Font Families */
   --font-primary: 'Playfair Display', serif;
   --font-display: 'Cinzel', serif;
   --font-system: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
-
-/* ==========================================================================
-GLOBAL RESET & BASE STYLES
-========================================================================== */
 
 *,
 *::before,
@@ -120,10 +95,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* ==========================================================================
-TEXTURE ENHANCEMENT FOR MAIN CONTAINER
-========================================================================== */
-
 main {
   max-width: var(--container-lg);
   margin: 0 auto;
@@ -137,9 +108,47 @@ main {
   -webkit-backdrop-filter: blur(10px);
 }
 
-/* ==========================================================================
-RESPONSIVE TEXTURE BACKGROUND OVERRIDE FOR MODERN BROWSERS
-========================================================================== */
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--spacing-lg);
+  margin-top: var(--spacing-lg);
+}
+
+nav a {
+  color: #f8e7c1;
+  text-decoration: none;
+  font-weight: 700;
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-normal);
+  position: relative;
+}
+
+nav a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background-color: #f8e7c1;
+  transition: all var(--transition-normal);
+  transform: translateX(-50%);
+}
+
+nav a:hover::after,
+nav a:focus::after {
+  width: 100%;
+}
+
+nav a:hover,
+nav a:focus {
+  color: #fff6e0;
+  background-color: rgba(248, 231, 193, 0.1);
+  transform: translateY(-2px);
+}
 
 @supports (background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'/>")) {
   body {
@@ -150,7 +159,3 @@ RESPONSIVE TEXTURE BACKGROUND OVERRIDE FOR MODERN BROWSERS
       radial-gradient(circle at 75% 75%, rgba(255, 255, 255, 0.02) 0%, transparent 50%);
   }
 }
-
-/* ==========================================================================
-[...All other styles like header, nav, footer, buttons, etc. remain unchanged]
-========================================================================== */
