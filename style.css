@@ -1,161 +1,785 @@
-/* ==========================================================================
-STYLE.CSS — WITH DARK PARCHMENT TEXT + HIGH CONTRAST LINKS + TEXTURES
-========================================================================== */
+<!DOCTYPE html>
 
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Cinzel:wght@700&display=swap');
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thee Cigar Maestro - Premium Cigar Platform & Education</title>
+  <meta name="description" content="Explore premium cigars with our AI-powered platform. Certified education, expert pairing, manufacturer specs, and business tools by CRT Mike Hamilton.">
+  <meta name="keywords" content="cigars, cigar pairing, tobacco education, cigar specs, premium cigars, certified retail tobacconist">
+  <meta name="author" content="Mike Hamilton, CRT">
+  <meta property="og:title" content="Thee Cigar Maestro - Premium Cigar Platform">
+  <meta property="og:description" content="The ultimate cigar platform with AI-powered pairing, certified education, and business tools.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://theecigarmaestro.com">
+  <link rel="canonical" href="https://theecigarmaestro.com">
 
-:root {
-  --color-primary-gold: #d4af7f;
-  --color-secondary-gold: #f5deb3;
-  --color-dark-bg: #1a1a1a;
-  --color-card-bg: rgba(34, 34, 34, 0.9);
-  --color-text-light: #e0d2b5; /* Dark parchment tone */
-  --color-text-muted: #c0b28f;
-  --color-text-placeholder: #a28f6e;
-  --color-text-footer: #998d75;
-  --color-shadow: #000;
-  --color-focus: #f8e7c1;
-  --color-error: #e74c3c;
-  --color-success: #27ae60;
-  --color-warning: #f39c12;
+  <!-- Favicon -->
 
-  --spacing-xs: 0.25rem;
-  --spacing-sm: 0.5rem;
-  --spacing-md: 1rem;
-  --spacing-lg: 1.5rem;
-  --spacing-xl: 2rem;
-  --spacing-2xl: 2.5rem;
-  --spacing-3xl: 3rem;
+  <link rel="icon" href="favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
 
-  --font-size-xs: 0.75rem;
-  --font-size-sm: 0.875rem;
-  --font-size-base: 1rem;
-  --font-size-lg: 1.125rem;
-  --font-size-xl: 1.25rem;
-  --font-size-2xl: 1.5rem;
-  --font-size-3xl: 1.875rem;
-  --font-size-4xl: 2.25rem;
-  --font-size-5xl: 3rem;
+  <!-- Fonts with display swap -->
 
-  --line-height-tight: 1.25;
-  --line-height-normal: 1.5;
-  --line-height-relaxed: 1.75;
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-  --radius-sm: 0.25rem;
-  --radius-md: 0.5rem;
-  --radius-lg: 0.75rem;
+  <!-- Schema.org structured data -->
 
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
-  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
-  --shadow-dark: 0 0 10px var(--color-shadow);
-
-  --transition-fast: 0.15s ease;
-  --transition-normal: 0.3s ease;
-  --transition-slow: 0.5s ease;
-
-  --container-sm: 640px;
-  --container-md: 768px;
-  --container-lg: 1024px;
-  --container-xl: 1280px;
-
-  --font-primary: 'Playfair Display', serif;
-  --font-display: 'Cinzel', serif;
-  --font-system: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-}
-
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-html {
-  font-size: 16px;
-  scroll-behavior: smooth;
-}
-
-body {
-  font-family: var(--font-primary);
-  background-color: var(--color-dark-bg);
-  background-image:
-    url('https://www.transparenttextures.com/patterns/dark-leather.png'),
-    url('https://www.transparenttextures.com/patterns/asfalt-dark.png'),
-    radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.02) 0%, transparent 50%),
-    radial-gradient(circle at 75% 75%, rgba(255, 255, 255, 0.02) 0%, transparent 50%);
-  background-repeat: repeat;
-  background-size: auto, auto, 100px 100px, 100px 100px;
-  color: var(--color-text-light);
-  line-height: var(--line-height-normal);
-  padding: var(--spacing-lg);
-  min-height: 100vh;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-main {
-  max-width: var(--container-lg);
-  margin: 0 auto;
-  background-color: var(--color-card-bg);
-  background-image: url('https://www.transparenttextures.com/patterns/brushed-alum-dark.png');
-  background-blend-mode: overlay;
-  padding: var(--spacing-2xl);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-dark);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-}
-
-nav {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: var(--spacing-lg);
-  margin-top: var(--spacing-lg);
-}
-
-nav a {
-  color: #f8e7c1;
-  text-decoration: none;
-  font-weight: 700;
-  padding: var(--spacing-sm) var(--spacing-md);
-  border-radius: var(--radius-sm);
-  transition: all var(--transition-normal);
-  position: relative;
-}
-
-nav a::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  width: 0;
-  height: 2px;
-  background-color: #f8e7c1;
-  transition: all var(--transition-normal);
-  transform: translateX(-50%);
-}
-
-nav a:hover::after,
-nav a:focus::after {
-  width: 100%;
-}
-
-nav a:hover,
-nav a:focus {
-  color: #fff6e0;
-  background-color: rgba(248, 231, 193, 0.1);
-  transform: translateY(-2px);
-}
-
-@supports (background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'/>")) {
-  body {
-    background-image:
-      url('https://www.transparenttextures.com/patterns/dark-leather.png'),
-      url('https://www.transparenttextures.com/patterns/asfalt-dark.png'),
-      radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.02) 0%, transparent 50%),
-      radial-gradient(circle at 75% 75%, rgba(255, 255, 255, 0.02) 0%, transparent 50%);
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Thee Cigar Maestro",
+    "description": "Premium cigar platform with AI-powered pairing and certified education",
+    "url": "https://theecigarmaestro.com",
+    "email": "info@theecigarmaestro.com",
+    "founder": {
+      "@type": "Person",
+      "name": "Mike Hamilton",
+      "jobTitle": "Certified Retail Tobacconist"
+    },
+    "serviceType": "Cigar Education and Consulting"
   }
-}
+  </script>
+
+  <style>
+    /* ==========================================================================
+       THEE CIGAR MAESTRO - PRODUCTION CSS
+       Complete, optimized, and accessible styling
+       ========================================================================== */
+
+    /* CSS Custom Properties (Design Tokens) */
+    :root {
+      /* Core Colors */
+      --color-primary-gold: #d4af7f;
+      --color-secondary-gold: #f5deb3;
+      --color-dark-gold: #b8941f;
+      --color-light-gold: #f0e68c;
+      --color-deep-brown: #2c1810;
+      --color-warm-brown: #4a3b2a;
+      --color-rich-brown: #1a1a1a;
+      
+      /* Background Colors */
+      --color-dark-bg: #1a1a1a;
+      --color-card-bg: rgba(34, 34, 34, 0.95);
+      --color-overlay-bg: rgba(0, 0, 0, 0.8);
+      --color-cream: #f5f3f0;
+      --color-white: #ffffff;
+      
+      /* Text Colors */
+      --color-text-primary: #e0d2b5;
+      --color-text-secondary: #c0b28f;
+      --color-text-muted: #a28f6e;
+      --color-text-placeholder: #998d75;
+      --color-text-dark: #2c1810;
+      --color-text-light: #666666;
+      
+      /* Semantic Colors */
+      --color-success: #27ae60;
+      --color-warning: #f39c12;
+      --color-error: #e74c3c;
+      --color-info: #3498db;
+      --color-focus: #f8e7c1;
+      
+      /* Spacing Scale */
+      --spacing-xs: 0.25rem;
+      --spacing-sm: 0.5rem;
+      --spacing-md: 1rem;
+      --spacing-lg: 1.5rem;
+      --spacing-xl: 2rem;
+      --spacing-2xl: 2.5rem;
+      --spacing-3xl: 3rem;
+      --spacing-4xl: 4rem;
+      --spacing-5xl: 6rem;
+      
+      /* Typography Scale */
+      --font-size-xs: 0.75rem;
+      --font-size-sm: 0.875rem;
+      --font-size-base: 1rem;
+      --font-size-lg: 1.125rem;
+      --font-size-xl: 1.25rem;
+      --font-size-2xl: 1.5rem;
+      --font-size-3xl: 1.875rem;
+      --font-size-4xl: 2.25rem;
+      --font-size-5xl: 3rem;
+      --font-size-6xl: 3.75rem;
+      
+      /* Line Heights */
+      --line-height-tight: 1.25;
+      --line-height-snug: 1.375;
+      --line-height-normal: 1.5;
+      --line-height-relaxed: 1.625;
+      --line-height-loose: 2;
+      
+      /* Font Weights */
+      --font-weight-light: 300;
+      --font-weight-normal: 400;
+      --font-weight-medium: 500;
+      --font-weight-semibold: 600;
+      --font-weight-bold: 700;
+      
+      /* Border Radius */
+      --radius-sm: 0.25rem;
+      --radius-md: 0.5rem;
+      --radius-lg: 0.75rem;
+      --radius-xl: 1rem;
+      --radius-2xl: 1.5rem;
+      --radius-full: 9999px;
+      
+      /* Shadows */
+      --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+      --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+      --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.1);
+      --shadow-2xl: 0 25px 50px rgba(0, 0, 0, 0.25);
+      --shadow-inner: inset 0 2px 4px rgba(0, 0, 0, 0.06);
+      --shadow-dark: 0 0 20px rgba(0, 0, 0, 0.5);
+      --shadow-glow: 0 0 20px rgba(212, 175, 127, 0.3);
+      
+      /* Transitions */
+      --transition-fast: 0.15s ease;
+      --transition-normal: 0.3s ease;
+      --transition-slow: 0.5s ease;
+      --transition-bounce: 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      
+      /* Breakpoints */
+      --breakpoint-sm: 640px;
+      --breakpoint-md: 768px;
+      --breakpoint-lg: 1024px;
+      --breakpoint-xl: 1280px;
+      --breakpoint-2xl: 1536px;
+      
+      /* Container Widths */
+      --container-sm: 640px;
+      --container-md: 768px;
+      --container-lg: 1024px;
+      --container-xl: 1280px;
+      --container-2xl: 1536px;
+      
+      /* Font Families */
+      --font-display: 'Playfair Display', Georgia, serif;
+      --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --font-mono: 'Fira Code', Consolas, 'Liberation Mono', Menlo, monospace;
+      
+      /* Z-Index Scale */
+      --z-dropdown: 1000;
+      --z-sticky: 1020;
+      --z-fixed: 1030;
+      --z-modal-backdrop: 1040;
+      --z-modal: 1050;
+      --z-popover: 1060;
+      --z-tooltip: 1070;
+      --z-toast: 1080;
+    }
+
+    /* Reset and Base Styles */
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      font-size: 16px;
+      scroll-behavior: smooth;
+      scroll-padding-top: 4rem;
+    }
+
+    body {
+      font-family: var(--font-body);
+      font-size: var(--font-size-base);
+      line-height: var(--line-height-normal);
+      color: var(--color-text-primary);
+      background-color: var(--color-dark-bg);
+      background-image: 
+        radial-gradient(circle at 25% 25%, rgba(212, 175, 127, 0.03) 0%, transparent 50%),
+        radial-gradient(circle at 75% 75%, rgba(212, 175, 127, 0.03) 0%, transparent 50%),
+        linear-gradient(180deg, rgba(26, 26, 26, 0.9) 0%, rgba(44, 24, 16, 0.9) 100%);
+      background-attachment: fixed;
+      background-size: 200px 200px, 200px 200px, 100% 100%;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+    }
+
+    /* Utility Classes */
+    .container {
+      max-width: var(--container-xl);
+      margin: 0 auto;
+      padding: 0 var(--spacing-lg);
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    .visually-hidden {
+      position: absolute !important;
+      width: 1px !important;
+      height: 1px !important;
+      padding: 0 !important;
+      margin: -1px !important;
+      overflow: hidden !important;
+      clip: rect(0, 0, 0, 0) !important;
+      white-space: nowrap !important;
+      border: 0 !important;
+    }
+
+    /* Focus Management */
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 6px;
+      background: var(--color-primary-gold);
+      color: var(--color-deep-brown);
+      padding: 8px;
+      text-decoration: none;
+      border-radius: var(--radius-sm);
+      z-index: var(--z-tooltip);
+      transition: top var(--transition-fast);
+    }
+
+    .skip-link:focus {
+      top: 6px;
+    }
+
+    /* Header */
+    header {
+      background: linear-gradient(135deg, var(--color-deep-brown) 0%, var(--color-warm-brown) 100%);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      position: sticky;
+      top: 0;
+      z-index: var(--z-sticky);
+      box-shadow: var(--shadow-lg);
+      border-bottom: 1px solid rgba(212, 175, 127, 0.1);
+    }
+
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: var(--spacing-md) 0;
+      gap: var(--spacing-lg);
+    }
+
+    .logo {
+      font-family: var(--font-display);
+      font-size: var(--font-size-3xl);
+      font-weight: var(--font-weight-bold);
+      color: var(--color-primary-gold);
+      text-decoration: none;
+      transition: all var(--transition-normal);
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+      letter-spacing: -0.02em;
+    }
+
+    .logo:hover,
+    .logo:focus {
+      color: var(--color-light-gold);
+      text-shadow: 0 0 10px rgba(212, 175, 127, 0.5);
+      transform: scale(1.05);
+    }
+
+    .tagline {
+      font-size: var(--font-size-sm);
+      color: var(--color-secondary-gold);
+      font-style: italic;
+      margin-top: var(--spacing-xs);
+      opacity: 0.9;
+    }
+
+    /* Navigation */
+    nav {
+      display: flex;
+      align-items: center;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: var(--spacing-xl);
+      align-items: center;
+    }
+
+    nav a {
+      color: var(--color-text-primary);
+      text-decoration: none;
+      font-weight: var(--font-weight-medium);
+      padding: var(--spacing-sm) var(--spacing-md);
+      border-radius: var(--radius-md);
+      transition: all var(--transition-normal);
+      position: relative;
+      letter-spacing: 0.02em;
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 0;
+      height: 2px;
+      background: var(--color-primary-gold);
+      transition: all var(--transition-normal);
+      transform: translateX(-50%);
+    }
+
+    nav a:hover::after,
+    nav a:focus::after {
+      width: 80%;
+    }
+
+    nav a:hover,
+    nav a:focus {
+      color: var(--color-focus);
+      background-color: rgba(212, 175, 127, 0.1);
+      transform: translateY(-2px);
+    }
+
+    .mobile-menu {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--color-text-primary);
+      font-size: var(--font-size-2xl);
+      cursor: pointer;
+      padding: var(--spacing-sm);
+      border-radius: var(--radius-md);
+      transition: all var(--transition-normal);
+    }
+
+    .mobile-menu:hover,
+    .mobile-menu:focus {
+      color: var(--color-primary-gold);
+      background-color: rgba(212, 175, 127, 0.1);
+    }
+
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(135deg, var(--color-warm-brown) 0%, var(--color-deep-brown) 100%);
+      color: var(--color-text-primary);
+      padding: var(--spacing-5xl) 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="smoke" patternUnits="userSpaceOnUse" width="100" height="100"><path d="M0,50 Q25,25 50,50 T100,50" stroke="rgba(212,175,127,0.05)" fill="none" stroke-width="1"/><path d="M0,30 Q25,5 50,30 T100,30" stroke="rgba(212,175,127,0.03)" fill="none" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23smoke)"/></svg>');
+      animation: float 30s ease-in-out infinite;
+      opacity: 0.3;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      33% { transform: translateY(-10px) rotate(1deg); }
+      66% { transform: translateY(-5px) rotate(-1deg); }
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero h1 {
+      font-family: var(--font-display);
+      font-size: var(--font-size-5xl);
+      font-weight: var(--font-weight-bold);
+      margin-bottom: var(--spacing-lg);
+      color: var(--color-primary-gold);
+      text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      line-height: var(--line-height-tight);
+      letter-spacing: -0.02em;
+    }
+
+    .hero p {
+      font-size: var(--font-size-xl);
+      margin-bottom: var(--spacing-3xl);
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: var(--line-height-relaxed);
+      opacity: 0.95;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: var(--spacing-lg);
+      justify-content: center;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    /* Button Components */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--spacing-sm);
+      padding: var(--spacing-lg) var(--spacing-2xl);
+      border: none;
+      border-radius: var(--radius-full);
+      font-weight: var(--font-weight-semibold);
+      font-size: var(--font-size-base);
+      text-decoration: none;
+      cursor: pointer;
+      transition: all var(--transition-normal);
+      position: relative;
+      overflow: hidden;
+      letter-spacing: 0
+</head>
+<body>
+  <header role="banner">
+    <div class="container">
+      <div class="header-content">
+        <div>
+          <a href="#home" class="logo" aria-label="Thee Cigar Maestro Home">Thee Cigar Maestro</a>
+          <p class="tagline">The Art. The Ritual. The Maestro.</p>
+        </div>
+        <nav role="navigation" aria-label="Main navigation">
+          <button class="mobile-menu" aria-label="Toggle mobile menu" aria-expanded="false">☰</button>
+          <ul id="nav-menu">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li><a href="#dashboard" class="btn btn-secondary">Dashboard</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section id="home" class="hero">
+      <div class="container">
+        <div class="hero-content loading">
+          <h1>Welcome to Excellence</h1>
+          <p>
+            Explore a one-of-a-kind cigar platform built by Certified Retail Tobacconist Mike Hamilton. 
+            From emotional memory pairing to CEU-accredited education, Thee Cigar Maestro offers 
+            unmatched depth, flavor, and insight — all powered by advanced AI.
+          </p>
+          <div class="cta-buttons">
+            <a href="#features" class="btn btn-primary">Explore Features</a>
+            <a href="#contact" class="btn btn-secondary">Start Free Trial</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="features" class="features">
+      <div class="container">
+        <h2 class="section-title">Premium Features</h2>
+        <div class="features-grid">
+          <div class="feature-card loading">
+            <div class="feature-icon">🔍</div>
+            <h3>Cigar Spec Engine</h3>
+            <p>Search from hundreds of manufacturer-verified cigars. Get full details including wrapper, filler, body, tasting notes, and similar cigars — all from official sources only.</p>
+          </div>
+          
+          <div class="feature-card loading">
+            <div class="feature-icon">🥃</div>
+            <h3>Pairing Engine v3.0</h3>
+            <p>Experience multisensory and emotional pairing logic. Discover cigars that match your mood, memory, drink, meal, or moment — from classic pairings to modern ones.</p>
+          </div>
+          
+          <div class="feature-card loading">
+            <div class="feature-icon">🎓</div>
+            <h3>Certified Education</h3>
+            <p>Learn through CEU-ready modules designed for cigar lovers, lounge staff, and tobacconists. Gamified mastery paths and AI-coached lessons included.</p>
+          </div>
+          
+          <div class="feature-card loading">
+            <div class="feature-icon">⚗️</div>
+            <h3>Blending & Innovation</h3>
+            <p>Explore global wrapper clusters, historical master blenders, and build your own blend with feedback, sensory maps, and preservation features.</p>
+          </div>
+          
+          <div class="feature-card loading">
+            <div class="feature-icon">📊</div>
+            <h3>Business Dashboard</h3>
+            <p>Manage inventory, pricing, events, staffing, and customer behavior through an AI-supported dashboard designed for retail excellence.</p>
+          </div>
+          
+          <div class="feature-card loading">
+            <div class="feature-icon">🤖</div>
+            <h3>AI-Powered Insights</h3>
+            <p>Get personalized recommendations, market trends, and customer insights powered by advanced machine learning and decades of expertise.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="stats">
+      <div class="container">
+        <div class="stats-grid">
+          <div class="stat-item">
+            <h3>500+</h3>
+            <p>Verified Cigars</p>
+          </div>
+          <div class="stat-item">
+            <h3>50+</h3>
+            <p>Education Modules</p>
+          </div>
+          <div class="stat-item">
+            <h3>1000+</h3>
+            <p>Pairing Combinations</p>
+          </div>
+          <div class="stat-item">
+            <h3>24/7</h3>
+            <p>AI Support</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="contact">
+      <div class="container">
+        <h2 class="section-title">Get Started Today</h2>
+        <div class="contact-content">
+          <div class="contact-form">
+            <h3>Contact Us</h3>
+            <form id="contact-form" novalidate>
+              <div class="form-group">
+                <label for="name">Full Name *</label>
+                <input type="text" id="name" name="name" required aria-describedby="name-error">
+                <div id="name-error" class="error-message" role="alert"></div>
+              </div>
+              
+              <div class="form-group">
+                <label for="email">Email Address *</label>
+                <input type="email" id="email" name="email" required aria-describedby="email-error">
+                <div id="email-error" class="error-message" role="alert"></div>
+              </div>
+              
+              <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" name="phone">
+              </div>
+              
+              <div class="form-group">
+                <label for="interest">Interest Area</label>
+                <select id="interest" name="interest">
+                  <option value="">Select an option</option>
+                  <option value="personal">Personal Use</option>
+                  <option value="business">Business/Lounge</option>
+                  <option value="education">Education</option>
+                  <option value="wholesale">Wholesale</option>
+                </select>
+              </div>
+              
+              <div class="form-group">
+                <label for="message">Message *</label>
+                <textarea id="message" name="message" required aria-describedby="message-error"></textarea>
+
+```
+            <div id="message-error" class="error-message" role="alert"></div>
+          </div>
+          
+          <button type="submit" class="btn btn-primary">Send Message</button>
+        </form>
+      </div>
+      
+      <div class="contact-info">
+        <h3>Contact Information</h3>
+        <div class="contact-details">
+          <div class="contact-item">
+            <div class="contact-item-icon">📧</div>
+            <div>
+              <strong>Email</strong><br>
+              <a href="mailto:info@theecigarmaestro.com">info@theecigarmaestro.com</a>
+            </div>
+          </div>
+          
+          <div class="contact-item">
+            <div class="contact-item-icon">📱</div>
+            <div>
+              <strong>Phone</strong><br>
+              <a href="tel:+1-555-CIGARS">+1 (555) CIGARS</a>
+            </div>
+          </div>
+          
+          <div class="contact-item">
+            <div class="contact-item-icon">🕒</div>
+            <div>
+              <strong>Support Hours</strong><br>
+              Mon-Fri: 9AM-6PM EST<br>
+              Sat: 10AM-4PM EST
+            </div>
+          </div>
+          
+          <div class="contact-item">
+            <div class="contact-item-icon">🎯</div>
+            <div>
+              <strong>Response Time</strong><br>
+              Typically within 2-4 hours<br>
+              24/7 AI support available
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+```
+
+  </main>
+
+  <footer role="contentinfo">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h4>Platform</h4>
+          <p><a href="#specs">Cigar Specs</a></p>
+          <p><a href="#pairing">Pairing Engine</a></p>
+          <p><a href="#education">Education</a></p>
+          <p><a href="#dashboard">Dashboard</a></p>
+        </div>
+
+```
+    <div class="footer-section">
+      <h4>Company</h4>
+      <p><a href="#about">About Mike Hamilton</a></p>
+      <p><a href="#careers">Careers</a></p>
+      <p><a href="#press">Press</a></p>
+      <p><a href="#partners">Partners</a></p>
+    </div>
+    
+    <div class="footer-section">
+      <h4>Support</h4>
+      <p><a href="#help">Help Center</a></p>
+      <p><a href="#api">API Documentation</a></p>
+      <p><a href="#contact">Contact</a></p>
+      <p><a href="#status">System Status</a></p>
+    </div>
+    
+    <div class="footer-section">
+      <h4>Legal</h4>
+      <p><a href="#privacy">Privacy Policy</a></p>
+      <p><a href="#terms">Terms of Service</a></p>
+      <p><a href="#cookies">Cookie Policy</a></p>
+      <p><a href="#compliance">Compliance</a></p>
+    </div>
+  </div>
+  
+  <div class="social-links">
+    <a href="#" aria-label="Facebook">📘</a>
+    <a href="#" aria-label="Twitter">🐦</a>
+    <a href="#" aria-label="LinkedIn">💼</a>
+    <a href="#" aria-label="Instagram">📸</a>
+    <a href="#" aria-label="YouTube">📺</a>
+  </div>
+  
+  <div class="footer-bottom">
+    <p>&copy; 2025 Thee Cigar Maestro. All rights reserved.</p>
+    <p>Built by <strong>Mike Hamilton, CRT</strong> | Certified Retail Tobacconist</p>
+  </div>
+</div>
+```
+
+  </footer>
+
+  <script>
+    // Mobile menu toggle
+    const mobileMenuBtn = document.querySelector('.mobile-menu');
+    const navMenu = document.getElementById('nav-menu');
+    
+    mobileMenuBtn.addEventListener('click', () => {
+      navMenu.classList.toggle('active');
+      const isExpanded = navMenu.classList.contains('active');
+      mobileMenuBtn.setAttribute('aria-expanded', isExpanded);
+    });
+
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+
+    // Form validation and submission
+    const contactForm = document.getElementById('contact-form');
+    const formFields = {
+      name: document.getElementById('name'),
+      email: document.getElementById('email'),
+      message: document.getElementById('message')
+    };
+
+    function validateField(field, errorElementId, validationFn) {
+      const errorElement = document.getElementById(errorElementId);
+      const isValid = validationFn(field.value);
+      
+      if (!isValid) {
+        field.classList.add('error');
+        errorElement.textContent = getErrorMessage(field.name, field.value);
+        errorElement.style.display = 'block';
+        return false;
+      } else {
+        field.classList.remove('error');
+        errorElement.style.display = 'none';
+        return true;
+      }
+    }
+
+    function getErrorMessage(fieldName, value) {
+      if (!value.trim()) {
+        return `${fieldName.charAt(0).toUpperCase() + fieldName.slice(1)} is required`;
+      }
+      if (fieldName === 'email' && !isValidEmail(value)) {
+        return 'Please enter a valid email address';
+      }
+      return '';
+    }
+
+    function isValidEmail(email) {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return emailRegex.test(email);
+    }
+
+    // Real-time validation
+    Object.entries(formFields).forEach(([name, field]) => {
+      if (field) {
+        field.addEventListener('blur', () => {
+          if (name === 'email') {
+            validateField(field, `${name}-error`, (value) => value.trim() && isValidEmail(value));
+          } else {
+            validateField(field, `${name}-error`, (value) => value.trim());
+          }
+        });
+      }
+    });
+
+    contactForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      let isForm
