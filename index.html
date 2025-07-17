@@ -1,905 +1,105 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Thee Cigar Maestro - Premium Cigar Platform & Education</title>
-  <meta name="description" content="Explore premium cigars with our AI-powered platform. Certified education, expert pairing, manufacturer specs, and business tools by CRT Mike Hamilton.">
-  <meta name="keywords" content="cigars, cigar pairing, tobacco education, cigar specs, premium cigars, certified retail tobacconist">
-  <meta name="author" content="Mike Hamilton, CRT">
-  <meta property="og:title" content="Thee Cigar Maestro - Premium Cigar Platform">
-  <meta property="og:description" content="The ultimate cigar platform with AI-powered pairing, certified education, and business tools.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://theecigarmaestro.com">
-  <link rel="canonical" href="https://theecigarmaestro.com">
-
-  <!-- Favicon -->
-
-  <link rel="icon" href="favicon.ico">
-  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-
-  <!-- Fonts with display swap -->
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-
-  <!-- Schema.org structured data -->
-
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    "name": "Thee Cigar Maestro",
-    "description": "Premium cigar platform with AI-powered pairing and certified education",
-    "url": "https://theecigarmaestro.com",
-    "email": "info@theecigarmaestro.com",
-    "founder": {
-      "@type": "Person",
-      "name": "Mike Hamilton",
-      "jobTitle": "Certified Retail Tobacconist"
-    },
-    "serviceType": "Cigar Education and Consulting"
-  }
-  </script>
-
-  <style>
-    :root {
-      --primary-gold: #D4AF37;
-      --deep-brown: #2C1810;
-      --warm-brown: #4A3B2A;
-      --cream: #F5F3F0;
-      --dark-gold: #B8941F;
-      --light-gold: #F0E68C;
-      --text-dark: #1A1A1A;
-      --text-light: #666;
-      --shadow: 0 4px 20px rgba(0,0,0,0.1);
-      --shadow-hover: 0 8px 30px rgba(0,0,0,0.15);
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      line-height: 1.6;
-      color: var(--text-dark);
-      background: var(--cream);
-    }
-
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 20px;
-    }
-
-    /* Header */
-    header {
-      background: linear-gradient(135deg, var(--deep-brown) 0%, var(--warm-brown) 100%);
-      color: white;
-      padding: 1rem 0;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      box-shadow: var(--shadow);
-    }
-
-    .header-content {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-    }
-
-    .logo {
-      font-family: 'Playfair Display', serif;
-      font-size: 2rem;
-      font-weight: 700;
-      color: var(--primary-gold);
-      text-decoration: none;
-      transition: color 0.3s ease;
-    }
-
-    .logo:hover {
-      color: var(--light-gold);
-    }
-
-    .tagline {
-      font-size: 0.9rem;
-      color: var(--light-gold);
-      font-style: italic;
-      margin-top: 0.25rem;
-    }
-
-    nav ul {
-      display: flex;
-      list-style: none;
-      gap: 2rem;
-      align-items: center;
-    }
-
-    nav a {
-      color: white;
-      text-decoration: none;
-      font-weight: 500;
-      transition: color 0.3s ease;
-      position: relative;
-    }
-
-    nav a:hover {
-      color: var(--primary-gold);
-    }
-
-    nav a::after {
-      content: '';
-      position: absolute;
-      bottom: -5px;
-      left: 0;
-      width: 0;
-      height: 2px;
-      background: var(--primary-gold);
-      transition: width 0.3s ease;
-    }
-
-    nav a:hover::after {
-      width: 100%;
-    }
-
-    .mobile-menu {
-      display: none;
-      background: none;
-      border: none;
-      color: white;
-      font-size: 1.5rem;
-      cursor: pointer;
-    }
-
-    /* Hero Section */
-    .hero {
-      background: linear-gradient(135deg, var(--warm-brown) 0%, var(--deep-brown) 100%);
-      color: white;
-      padding: 4rem 0;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="smoke" patternUnits="userSpaceOnUse" width="100" height="100"><path d="M0,50 Q25,25 50,50 T100,50" stroke="rgba(212,175,55,0.1)" fill="none" stroke-width="2"/></pattern></defs><rect width="100%" height="100%" fill="url(%23smoke)"/></svg>');
-      animation: float 20s ease-in-out infinite;
-    }
-
-    @keyframes float {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-20px); }
-    }
-
-    .hero-content {
-      position: relative;
-      z-index: 2;
-    }
-
-    .hero h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: 3.5rem;
-      margin-bottom: 1rem;
-      color: var(--primary-gold);
-      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-    }
-
-    .hero p {
-      font-size: 1.2rem;
-      margin-bottom: 2rem;
-      max-width: 600px;
-      margin-left: auto;
-      margin-right: auto;
-      line-height: 1.7;
-    }
-
-    .cta-buttons {
-      display: flex;
-      gap: 1rem;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-
-    .btn {
-      padding: 1rem 2rem;
-      border: none;
-      border-radius: 50px;
-      font-weight: 600;
-      text-decoration: none;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      display: inline-block;
-      font-size: 1rem;
-    }
-
-    .btn-primary {
-      background: var(--primary-gold);
-      color: var(--deep-brown);
-    }
-
-    .btn-primary:hover {
-      background: var(--light-gold);
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-hover);
-    }
-
-    .btn-secondary {
-      background: transparent;
-      color: white;
-      border: 2px solid var(--primary-gold);
-    }
-
-    .btn-secondary:hover {
-      background: var(--primary-gold);
-      color: var(--deep-brown);
-    }
-
-    /* Features Section */
-    .features {
-      padding: 4rem 0;
-      background: white;
-    }
-
-    .section-title {
-      text-align: center;
-      font-family: 'Playfair Display', serif;
-      font-size: 2.5rem;
-      color: var(--deep-brown);
-      margin-bottom: 3rem;
-    }
-
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-      gap: 2rem;
-    }
-
-    .feature-card {
-      background: white;
-      padding: 2rem;
-      border-radius: 15px;
-      box-shadow: var(--shadow);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      border: 1px solid #f0f0f0;
-    }
-
-    .feature-card:hover {
-      transform: translateY(-5px);
-      box-shadow: var(--shadow-hover);
-    }
-
-    .feature-icon {
-      width: 60px;
-      height: 60px;
-      background: var(--primary-gold);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 1rem;
-      font-size: 1.5rem;
-    }
-
-    .feature-card h3 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.5rem;
-      color: var(--deep-brown);
-      margin-bottom: 1rem;
-    }
-
-    .feature-card p {
-      color: var(--text-light);
-      line-height: 1.7;
-    }
-
-    /* Stats Section */
-    .stats {
-      background: linear-gradient(135deg, var(--deep-brown) 0%, var(--warm-brown) 100%);
-      color: white;
-      padding: 3rem 0;
-    }
-
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 2rem;
-      text-align: center;
-    }
-
-    .stat-item h3 {
-      font-size: 2.5rem;
-      color: var(--primary-gold);
-      margin-bottom: 0.5rem;
-    }
-
-    .stat-item p {
-      font-size: 1.1rem;
-      opacity: 0.9;
-    }
-
-    /* Contact Section */
-    .contact {
-      padding: 4rem 0;
-      background: var(--cream);
-    }
-
-    .contact-content {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 3rem;
-      align-items: start;
-    }
-
-    .contact-form {
-      background: white;
-      padding: 2rem;
-      border-radius: 15px;
-      box-shadow: var(--shadow);
-    }
-
-    .form-group {
-      margin-bottom: 1.5rem;
-    }
-
-    .form-group label {
-      display: block;
-      margin-bottom: 0.5rem;
-      font-weight: 500;
-      color: var(--deep-brown);
-    }
-
-    .form-group input,
-    .form-group textarea {
-      width: 100%;
-      padding: 1rem;
-      border: 2px solid #e0e0e0;
-      border-radius: 8px;
-      font-size: 1rem;
-      transition: border-color 0.3s ease;
-    }
-
-    .form-group input:focus,
-    .form-group textarea:focus {
-      outline: none;
-      border-color: var(--primary-gold);
-    }
-
-    .form-group textarea {
-      resize: vertical;
-      min-height: 120px;
-    }
-
-    .contact-info h3 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.8rem;
-      color: var(--deep-brown);
-      margin-bottom: 1rem;
-    }
-
-    .contact-details {
-      background: white;
-      padding: 2rem;
-      border-radius: 15px;
-      box-shadow: var(--shadow);
-    }
-
-    .contact-item {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      margin-bottom: 1.5rem;
-    }
-
-    .contact-item-icon {
-      width: 40px;
-      height: 40px;
-      background: var(--primary-gold);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--deep-brown);
-    }
-
-    /* Footer */
-    footer {
-      background: var(--deep-brown);
-      color: white;
-      padding: 2rem 0;
-      text-align: center;
-    }
-
-    .footer-content {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 2rem;
-      margin-bottom: 2rem;
-    }
-
-    .footer-section h4 {
-      font-family: 'Playfair Display', serif;
-      color: var(--primary-gold);
-      margin-bottom: 1rem;
-    }
-
-    .footer-section a {
-      color: white;
-      text-decoration: none;
-      transition: color 0.3s ease;
-    }
-
-    .footer-section a:hover {
-      color: var(--primary-gold);
-    }
-
-    .social-links {
-      display: flex;
-      gap: 1rem;
-      justify-content: center;
-    }
-
-    .social-links a {
-      display: inline-block;
-      width: 40px;
-      height: 40px;
-      background: var(--primary-gold);
-      color: var(--deep-brown);
-      border-radius: 50%;
-      text-align: center;
-      line-height: 40px;
-      transition: transform 0.3s ease;
-    }
-
-    .social-links a:hover {
-      transform: scale(1.1);
-    }
-
-    .footer-bottom {
-      border-top: 1px solid var(--warm-brown);
-      padding-top: 1rem;
-      margin-top: 2rem;
-    }
-
-    /* Responsive Design */
-    @media (max-width: 768px) {
-      .header-content {
-        flex-direction: column;
-        gap: 1rem;
-      }
-
-      nav ul {
-        display: none;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        right: 0;
-        background: var(--deep-brown);
-        flex-direction: column;
-        padding: 1rem;
-        box-shadow: var(--shadow);
-      }
-
-      nav ul.active {
-        display: flex;
-      }
-
-      .mobile-menu {
-        display: block;
-      }
-
-      .hero h1 {
-        font-size: 2.5rem;
-      }
-
-      .cta-buttons {
-        flex-direction: column;
-        align-items: center;
-      }
-
-      .features-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .contact-content {
-        grid-template-columns: 1fr;
-      }
-
-      .stats-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    @media (max-width: 480px) {
-      .hero h1 {
-        font-size: 2rem;
-      }
-
-      .hero p {
-        font-size: 1rem;
-      }
-
-      .stats-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    /* Loading Animation */
-    .loading {
-      opacity: 0;
-      animation: fadeIn 0.5s ease-in-out forwards;
-    }
-
-    @keyframes fadeIn {
-      to { opacity: 1; }
-    }
-
-    /* Accessibility */
-    .sr-only {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      padding: 0;
-      margin: -1px;
-      overflow: hidden;
-      clip: rect(0, 0, 0, 0);
-      white-space: nowrap;
-      border: 0;
-    }
-
-    /* Focus styles */
-    .btn:focus,
-    input:focus,
-    textarea:focus {
-      outline: 2px solid var(--primary-gold);
-      outline-offset: 2px;
-    }
-  </style>
-
+  <meta name="description" content="Search comprehensive cigar specifications including length, ring gauge, strength, wrapper, and tasting notes.">
+  <!-- SEO: Open Graph and Twitter Card Tags -->
+  <meta property="og:title" content="Specs | Thee Cigar Maestro">
+  <meta property="og:description" content="Search verified cigar specifications with Thee Cigar Maestro.">
+  <meta property="og:image" content="https://theecigarmaestro.com/images/og-image.jpg">
+  <meta property="og:url" content="https://theecigarmaestro.com/specs.html">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Specs | Thee Cigar Maestro">
+  <meta name="twitter:description" content="Search verified cigar specifications with Thee Cigar Maestro.">
+  <meta name="twitter:image" content="https://theecigarmaestro.com/images/og-image.jpg">
+  <!-- SEO: Canonical URL -->
+  <link rel="canonical" href="https://theecigarmaestro.com/specs.html">
+  <title>Specs | Thee Cigar Maestro</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Roboto&display=swap" rel="stylesheet">
+  <!-- Browser Compatibility: Polyfills -->
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=fetch,Promise"></script>
 </head>
 <body>
-  <header role="banner">
-    <div class="container">
-      <div class="header-content">
-        <div>
-          <a href="#home" class="logo" aria-label="Thee Cigar Maestro Home">Thee Cigar Maestro</a>
-          <p class="tagline">The Art. The Ritual. The Maestro.</p>
-        </div>
-        <nav role="navigation" aria-label="Main navigation">
-          <button class="mobile-menu" aria-label="Toggle mobile menu" aria-expanded="false">☰</button>
-          <ul id="nav-menu">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#features">Features</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
-            <li><a href="#dashboard" class="btn btn-secondary">Dashboard</a></li>
-          </ul>
-        </nav>
-      </div>
-    </div>
+  <header>
+    <h1>Thee Cigar Maestro</h1>
+    <p class="subtitle">The Art. The Ritual. The Maestro.</p>
+    <nav role="navigation" aria-label="Main navigation">
+      <a href="index.html">Home</a>
+      <a href="specs.html" class="active" aria-current="page">Specs</a>
+      <a href="pairing.html">Pairing</a>
+      <a href="education.html">Education</a>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="contact.html">Contact</a>
+    </nav>
   </header>
 
-  <main>
-    <section id="home" class="hero">
-      <div class="container">
-        <div class="hero-content loading">
-          <h1>Welcome to Excellence</h1>
-          <p>
-            Explore a one-of-a-kind cigar platform built by Certified Retail Tobacconist Mike Hamilton. 
-            From emotional memory pairing to CEU-accredited education, Thee Cigar Maestro offers 
-            unmatched depth, flavor, and insight — all powered by advanced AI.
-          </p>
-          <div class="cta-buttons">
-            <a href="#features" class="btn btn-primary">Explore Features</a>
-            <a href="#contact" class="btn btn-secondary">Start Free Trial</a>
+  <main class="container">
+    <section class="specs-engine">
+      <h2>Search Verified Cigar Specs</h2>
+      <p>Enter a cigar name to get official specs — length, ring gauge, strength, wrapper, binder, filler, tasting notes, and more.</p>
+      <div class="search-container">
+        <form id="spec-search-form" role="search" aria-label="Cigar specifications search">
+          <div class="search-input-wrapper">
+            <!-- Accessibility: Visible Label -->
+            <label for="cigar-search">Search for a cigar</label>
+            <div style="position: relative; flex: 1;">
+              <input 
+                type="text" 
+                id="cigar-search"
+                class="search-input"
+                placeholder="e.g., Padron 1964 Anniversary Maduro" 
+                aria-describedby="search-help search-status"
+                autocomplete="off"
+                maxlength="100"
+                required 
+              />
+              <div id="autocomplete-dropdown" class="autocomplete-dropdown" role="listbox" aria-label="Cigar suggestions"></div>
+            </div>
+            <button type="submit" class="search-button" aria-label="Search for cigar specifications">
+              <span class="loading-spinner" aria-hidden="true"></span>
+              <span class="button-text">Search</span>
+            </button>
           </div>
+          <div id="search-help" class="sr-only">Enter a cigar name to search for its specifications including length, ring gauge, strength, and tasting notes</div>
+        </form>
+        
+        <div id="search-status" class="sr-only" aria-live="polite"></div>
+        
+        <!-- Functionality: Progress Bar -->
+        <div id="progress-bar" class="progress-bar" style="display: none;">
+          <div class="progress-bar-fill"></div>
+        </div>
+        
+        <div id="spec-results" class="results-box" role="region" aria-label="Search results" aria-live="polite">
+          <!-- Performance: Skeleton Loader -->
+          <div class="skeleton-loader" style="display: none;">
+            <div class="skeleton-item"></div>
+            <div class="skeleton-item"></div>
+            <div class="skeleton-item"></div>
+          </div>
+          <p class="placeholder-text">Search a cigar to see its official profile.</p>
+        </div>
+        
+        <div id="search-history" class="search-history" style="display: none;">
+          <h3>Recent Searches</h3>
+          <div id="history-items"></div>
+          <!-- Functionality: Clear History Button -->
+          <button id="clear-history" class="clear-history-button">Clear History</button>
         </div>
       </div>
     </section>
-
-```
-<section id="features" class="features">
-  <div class="container">
-    <h2 class="section-title">Premium Features</h2>
-    <div class="features-grid">
-      <div class="feature-card loading">
-        <div class="feature-icon">🔍</div>
-        <h3>Cigar Spec Engine</h3>
-        <p>Search from hundreds of manufacturer-verified cigars. Get full details including wrapper, filler, body, tasting notes, and similar cigars — all from official sources only.</p>
-      </div>
-      
-      <div class="feature-card loading">
-        <div class="feature-icon">🥃</div>
-        <h3>Pairing Engine v3.0</h3>
-        <p>Experience multisensory and emotional pairing logic. Discover cigars that match your mood, memory, drink, meal, or moment — from classic pairings to modern ones.</p>
-      </div>
-      
-      <div class="feature-card loading">
-        <div class="feature-icon">🎓</div>
-        <h3>Certified Education</h3>
-        <p>Learn through CEU-ready modules designed for cigar lovers, lounge staff, and tobacconists. Gamified mastery paths and AI-coached lessons included.</p>
-      </div>
-      
-      <div class="feature-card loading">
-        <div class="feature-icon">⚗️</div>
-        <h3>Blending & Innovation</h3>
-        <p>Explore global wrapper clusters, historical master blenders, and build your own blend with feedback, sensory maps, and preservation features.</p>
-      </div>
-      
-      <div class="feature-card loading">
-        <div class="feature-icon">📊</div>
-        <h3>Business Dashboard</h3>
-        <p>Manage inventory, pricing, events, staffing, and customer behavior through an AI-supported dashboard designed for retail excellence.</p>
-      </div>
-      
-      <div class="feature-card loading">
-        <div class="feature-icon">🤖</div>
-        <h3>AI-Powered Insights</h3>
-        <p>Get personalized recommendations, market trends, and customer insights powered by advanced machine learning and decades of expertise.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="stats">
-  <div class="container">
-    <div class="stats-grid">
-      <div class="stat-item">
-        <h3>500+</h3>
-        <p>Verified Cigars</p>
-      </div>
-      <div class="stat-item">
-        <h3>50+</h3>
-        <p>Education Modules</p>
-      </div>
-      <div class="stat-item">
-        <h3>1000+</h3>
-        <p>Pairing Combinations</p>
-      </div>
-      <div class="stat-item">
-        <h3>24/7</h3>
-        <p>AI Support</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="contact" class="contact">
-  <div class="container">
-    <h2 class="section-title">Get Started Today</h2>
-    <div class="contact-content">
-      <div class="contact-form">
-        <h3>Contact Us</h3>
-        <form id="contact-form" novalidate>
-          <div class="form-group">
-            <label for="name">Full Name *</label>
-            <input type="text" id="name" name="name" required aria-describedby="name-error">
-            <div id="name-error" class="error-message" role="alert"></div>
-          </div>
-          
-          <div class="form-group">
-            <label for="email">Email Address *</label>
-            <input type="email" id="email" name="email" required aria-describedby="email-error">
-            <div id="email-error" class="error-message" role="alert"></div>
-          </div>
-          
-          <div class="form-group">
-            <label for="phone">Phone Number</label>
-            <input type="tel" id="phone" name="phone">
-          </div>
-          
-          <div class="form-group">
-            <label for="interest">Interest Area</label>
-            <select id="interest" name="interest">
-              <option value="">Select an option</option>
-              <option value="personal">Personal Use</option>
-              <option value="business">Business/Lounge</option>
-              <option value="education">Education</option>
-              <option value="wholesale">Wholesale</option>
-            </select>
-          </div>
-          
-          <div class="form-group">
-            <label for="message">Message *</label>
-            <textarea id="message" name="message" required aria-describedby="message-error"></textarea>
-            <div id="message-error" class="error-message" role="alert"></div>
-          </div>
-          
-          <button type="submit" class="btn btn-primary">Send Message</button>
-        </form>
-      </div>
-      
-      <div class="contact-info">
-        <h3>Contact Information</h3>
-        <div class="contact-details">
-          <div class="contact-item">
-            <div class="contact-item-icon">📧</div>
-            <div>
-              <strong>Email</strong><br>
-              <a href="mailto:info@theecigarmaestro.com">info@theecigarmaestro.com</a>
-            </div>
-          </div>
-          
-          <div class="contact-item">
-            <div class="contact-item-icon">📱</div>
-            <div>
-              <strong>Phone</strong><br>
-              <a href="tel:+1-555-CIGARS">+1 (555) CIGARS</a>
-            </div>
-          </div>
-          
-          <div class="contact-item">
-            <div class="contact-item-icon">🕒</div>
-            <div>
-              <strong>Support Hours</strong><br>
-              Mon-Fri: 9AM-6PM EST<br>
-              Sat: 10AM-4PM EST
-            </div>
-          </div>
-          
-          <div class="contact-item">
-            <div class="contact-item-icon">🎯</div>
-            <div>
-              <strong>Response Time</strong><br>
-              Typically within 2-4 hours<br>
-              24/7 AI support available
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-```
-
   </main>
 
-  <footer role="contentinfo">
-    <div class="container">
-      <div class="footer-content">
-        <div class="footer-section">
-          <h4>Platform</h4>
-          <p><a href="#specs">Cigar Specs</a></p>
-          <p><a href="#pairing">Pairing Engine</a></p>
-          <p><a href="#education">Education</a></p>
-          <p><a href="#dashboard">Dashboard</a></p>
-        </div>
-
-```
-    <div class="footer-section">
-      <h4>Company</h4>
-      <p><a href="#about">About Mike Hamilton</a></p>
-      <p><a href="#careers">Careers</a></p>
-      <p><a href="#press">Press</a></p>
-      <p><a href="#partners">Partners</a></p>
-    </div>
-    
-    <div class="footer-section">
-      <h4>Support</h4>
-      <p><a href="#help">Help Center</a></p>
-      <p><a href="#api">API Documentation</a></p>
-      <p><a href="#contact">Contact</a></p>
-      <p><a href="#status">System Status</a></p>
-    </div>
-    
-    <div class="footer-section">
-      <h4>Legal</h4>
-      <p><a href="#privacy">Privacy Policy</a></p>
-      <p><a href="#terms">Terms of Service</a></p>
-      <p><a href="#cookies">Cookie Policy</a></p>
-      <p><a href="#compliance">Compliance</a></p>
-    </div>
-  </div>
-  
-  <div class="social-links">
-    <a href="#" aria-label="Facebook">📘</a>
-    <a href="#" aria-label="Twitter">🐦</a>
-    <a href="#" aria-label="LinkedIn">💼</a>
-    <a href="#" aria-label="Instagram">📸</a>
-    <a href="#" aria-label="YouTube">📺</a>
-  </div>
-  
-  <div class="footer-bottom">
-    <p>&copy; 2025 Thee Cigar Maestro. All rights reserved.</p>
-    <p>Built by <strong>Mike Hamilton, CRT</strong> | Certified Retail Tobacconist</p>
-  </div>
-</div>
-```
-
+  <footer>
+    <p>© 2025 Thee Cigar Maestro. All rights reserved.<br>
+    <a href="mailto:info@theecigarmaestro.com">info@theecigarmaestro.com</a></p>
   </footer>
 
-  <script>
-    // Mobile menu toggle
-    const mobileMenuBtn = document.querySelector('.mobile-menu');
-    const navMenu = document.getElementById('nav-menu');
-    
-    mobileMenuBtn.addEventListener('click', () => {
-      navMenu.classList.toggle('active');
-      const isExpanded = navMenu.classList.contains('active');
-      mobileMenuBtn.setAttribute('aria-expanded', isExpanded);
-    });
-
-    // Smooth scrolling for navigation links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-          target.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
-          });
-        }
-      });
-    });
-
-    // Form validation and submission
-    const contactForm = document.getElementById('contact-form');
-    const formFields = {
-      name: document.getElementById('name'),
-      email: document.getElementById('email'),
-      message: document.getElementById('message')
-    };
-
-    function validateField(field, errorElementId, validationFn) {
-      const errorElement = document.getElementById(errorElementId);
-      const isValid = validationFn(field.value);
-      
-      if (!isValid) {
-        field.classList.add('error');
-        errorElement.textContent = getErrorMessage(field.name, field.value);
-        errorElement.style.display = 'block';
-        return false;
-      } else {
-        field.classList.remove('error');
-        errorElement.style.display = 'none';
-        return true;
-      }
-    }
-
-    function getErrorMessage(fieldName, value) {
-      if (!value.trim()) {
-        return `${fieldName.charAt(0).toUpperCase() + fieldName.slice(1)} is required`;
-      }
-      if (fieldName === 'email' && !isValidEmail(value)) {
-        return 'Please enter a valid email address';
-      }
-      return '';
-    }
-
-    function isValidEmail(email) {
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      return emailRegex.test(email);
-    }
-
-    // Real-time validation
-    Object.entries(formFields).forEach(([name, field]) => {
-      if (field) {
-        field.addEventListener('blur', () => {
-          if (name === 'email') {
-            validateField(field, `${name}-error`, (value) => value.trim() && isValidEmail(value));
-          } else {
-            validateField(field, `${name}-error`, (value) => value.trim());
-          }
-        });
-      }
-    });
-
-    contactForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      
-      let isForm
+  <script src="config.js"></script>
+  <script src="search-api.js"></script>
+  <script src="search-history.js"></script>
+  <script src="search-ui.js"></script>
+</body>
+</html>
