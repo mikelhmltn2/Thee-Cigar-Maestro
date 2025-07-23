@@ -1,0 +1,829 @@
+{
+  "features": {
+    "privacyCompliant": true,
+    "AIAssistantLoungeEvent": {
+      "privacyCompliant": true,
+      "category": "AI/Automation",
+      "status": "Implemented"
+    },
+    "AISpecReviewer": {
+      "privacyCompliant": true,
+      "category": "AI/Automation",
+      "status": "Implemented"
+    },
+    "CigarConstructionContent": {
+      "privacyCompliant": true,
+      "category": "Content Depth",
+      "status": "Implemented"
+    },
+    "ClientStaffTastingLogs": {
+      "privacyCompliant": true,
+      "category": "Retail or Lounge Integration",
+      "status": "Implemented"
+    },
+    "DynamicUserRoleThemes": {
+      "privacyCompliant": true,
+      "category": "UX/UI Design",
+      "status": "Implemented"
+    },
+    "FlavorLeaderboardSystem": {
+      "privacyCompliant": true,
+      "category": "Community Features",
+      "status": "Implemented"
+    },
+    "HerfCircleInvites": {
+      "privacyCompliant": true,
+      "category": "Community Features",
+      "status": "Implemented"
+    },
+    "LoungeLockerSystem": {
+      "privacyCompliant": true,
+      "category": "Retail or Lounge Integration",
+      "status": "Implemented"
+    },
+    "MasterclassAudioNarration": {
+      "privacyCompliant": true,
+      "category": "Education & Certification",
+      "status": "Implemented"
+    },
+    "MembershipComparisonGrid": {
+      "privacyCompliant": true,
+      "category": "Monetization & Membership",
+      "status": "Implemented"
+    },
+    "MembershipUpsellFlow": {
+      "privacyCompliant": true,
+      "category": "Monetization & Membership",
+      "status": "Implemented"
+    },
+    "NFTDropAuction": {
+      "privacyCompliant": true,
+      "category": "Monetization & Membership",
+      "status": "Implemented"
+    },
+    "SensorIntegrationAPI": {
+      "privacyCompliant": true,
+      "category": "Retail or Lounge Integration",
+      "status": "Implemented"
+    },
+    "SwipeCardDeckUX": {
+      "privacyCompliant": true,
+      "category": "UX/UI Design",
+      "status": "Implemented"
+    },
+    "UXExperienceToggle": {
+      "privacyCompliant": true,
+      "category": "UX/UI Design",
+      "status": "Implemented"
+    },
+    "bottleFirstPairingSearch": {
+      "privacyCompliant": true,
+      "category": "Pairing Intelligence",
+      "status": "Implemented"
+    },
+    "ceuRubricModule": {
+      "privacyCompliant": true,
+      "category": "Education & Certification",
+      "status": "Implemented"
+    },
+    "cocktailPairingAI": {
+      "privacyCompliant": true,
+      "category": "Pairing Intelligence",
+      "status": "Implemented"
+    },
+    "flavorOnboardingTrack": {
+      "privacyCompliant": true,
+      "category": "Education & Certification",
+      "status": "Implemented"
+    },
+    "instructorLiveDashboard": {
+      "privacyCompliant": true,
+      "category": "Education & Certification",
+      "status": "Implemented"
+    },
+    "pairingPriceSentimentFilter": {
+      "privacyCompliant": true,
+      "category": "Pairing Intelligence",
+      "status": "Implemented"
+    },
+    "pipeHookahMetadata": {
+      "privacyCompliant": true,
+      "category": "Content Depth",
+      "status": "Implemented"
+    },
+    "ugcFlavorSentimentFeed": {
+      "privacyCompliant": true,
+      "category": "Community Features",
+      "status": "Implemented"
+    },
+    "voiceNarrationMultilingual": {
+      "privacyCompliant": true,
+      "category": "Content Depth",
+      "status": "Implemented"
+    },
+    "MultiverseAnchor": {
+      "privacyCompliant": true,
+      "category": "Memory Multiverse",
+      "status": "Implemented"
+    },
+    "CuratedMemoryThreads": {
+      "privacyCompliant": true,
+      "category": "Legacy Preservation",
+      "status": "Implemented"
+    },
+    "SensoryAfterlife": {
+      "privacyCompliant": true,
+      "category": "Legacy Reflection",
+      "status": "Implemented"
+    },
+    "MemorySovereigntyLedger": {
+      "privacyCompliant": true,
+      "category": "Emotional Archiving",
+      "status": "Implemented"
+    },
+    "AIConciergeEngine": {
+      "privacyCompliant": true,
+      "category": "Sales & Personalization",
+      "status": "Implemented"
+    },
+    "BrandPersonaSim": {
+      "privacyCompliant": true,
+      "category": "Brand Identity",
+      "status": "Implemented"
+    },
+    "TobacconistSkillTree": {
+      "privacyCompliant": true,
+      "category": "Professional Simulation",
+      "status": "Implemented"
+    },
+    "AmbassadorReplicaMode": {
+      "privacyCompliant": true,
+      "category": "Voice Replication",
+      "status": "Implemented"
+    },
+    "GlobalRitualSync": {
+      "privacyCompliant": true,
+      "category": "Cultural Stewardship",
+      "status": "Implemented"
+    },
+    "CulturalPreservationTreaty": {
+      "privacyCompliant": true,
+      "category": "Global Governance",
+      "status": "Implemented"
+    },
+    "MultilingualRitualPlayback": {
+      "privacyCompliant": true,
+      "category": "Multilingual Experience",
+      "status": "Implemented"
+    },
+    "SacredPairingEngine": {
+      "privacyCompliant": true,
+      "category": "Spiritual Integration",
+      "status": "Implemented"
+    },
+    "FaithLinkedRituals": {
+      "privacyCompliant": true,
+      "category": "Ritual Mapping",
+      "status": "Implemented"
+    },
+    "MeditativeBlendMode": {
+      "privacyCompliant": true,
+      "category": "Mindful Experience",
+      "status": "Implemented"
+    },
+    "EternalStorylineRegistry": {
+      "privacyCompliant": true,
+      "category": "Legacy Serialization",
+      "status": "Implemented"
+    },
+    "CelestialPairingMap": {
+      "privacyCompliant": true,
+      "category": "Cosmic Mapping",
+      "status": "Implemented"
+    },
+    "AstroFlavorSync": {
+      "privacyCompliant": true,
+      "category": "Astrology Integration",
+      "status": "Implemented"
+    },
+    "FlavorMultiverseCore": {
+      "privacyCompliant": true,
+      "category": "Dimensional Preservation",
+      "status": "Implemented"
+    },
+    "RecitationEngine": {
+      "privacyCompliant": true,
+      "category": "Narrative Playback",
+      "status": "Implemented"
+    },
+    "AncestralFlavorSync": {
+      "privacyCompliant": true,
+      "category": "Legacy Integration",
+      "status": "Implemented"
+    }
+  },
+  "featureActivationMatrix": {
+    "description": "Full list of system capabilities, triggers, and improvement roadmap grouped by functionality.",
+    "privacyCompliant": true,
+    "aLaCarteAddOns": true,
+    "categories": [
+      {
+        "privacyCompliant": true,
+        "improvements": [
+          "Add voice tone-based filtering"
+        ],
+        "name": "Cigar Spec Lookup",
+        "uiActivations": [
+          "Cigar search bar",
+          "Cigar detail card tap"
+        ],
+        "voiceCommands": [
+          "Cigar spec",
+          "Get specs",
+          "Show profile"
+        ]
+      },
+      {
+        "privacyCompliant": true,
+        "improvements": [
+          "Add visual bottle scanner",
+          "Cocktail mood match layer",
+          "Food terroir integration"
+        ],
+        "name": "Pairing Engine",
+        "uiActivations": [
+          "Pair Now button",
+          "Smart pairing filter"
+        ],
+        "voiceCommands": [
+          "Pair with whiskey",
+          "What matches this cigar?"
+        ]
+      },
+      {
+        "privacyCompliant": true,
+        "improvements": [
+          "Gamified badges",
+          "Multilingual real-time feedback"
+        ],
+        "name": "Education + CEU Learning",
+        "uiActivations": [
+          "Education tab",
+          "Course tiers"
+        ],
+        "voiceCommands": [
+          "Start my cigar education",
+          "Teach me about wrappers"
+        ]
+      },
+      {
+        "privacyCompliant": true,
+        "improvements": [
+          "Timeline view",
+          "CEU lesson linking"
+        ],
+        "name": "Emotional Pairing Engine",
+        "uiActivations": [
+          "Mood selector UI"
+        ],
+        "voiceCommands": [
+          "I\u2019m feeling nostalgic",
+          "Give me a comfort smoke"
+        ]
+      },
+      {
+        "privacyCompliant": true,
+        "improvements": [
+          "NFC tag logging",
+          "Auto-aging predictor"
+        ],
+        "name": "Smart Humidor",
+        "uiActivations": [
+          "Humidor dashboard",
+          "QR scan of boxes"
+        ]
+      },
+      {
+        "privacyCompliant": true,
+        "improvements": [
+          "Interactive museum mode",
+          "Anniversary alerts"
+        ],
+        "name": "Cigar History",
+        "uiActivations": [
+          "Legacy Map",
+          "Story Timeline",
+          "Founder Bios"
+        ]
+      },
+      {
+        "privacyCompliant": true,
+        "improvements": [
+          "Suggest Similar by AI"
+        ],
+        "name": "Spec Comparison Engine",
+        "uiActivations": [
+          "Dual card comparison"
+        ],
+        "voiceCommands": [
+          "Compare Padron and Oliva"
+        ]
+      },
+      {
+        "privacyCompliant": true,
+        "improvements": [
+          "Leaderboard filters",
+          "Surprise box animation"
+        ],
+        "name": "Gamification & Journey",
+        "uiActivations": [
+          "Flavor Journey Tracker",
+          "Challenge Decks"
+        ]
+      },
+      {
+        "privacyCompliant": true,
+        "improvements": [
+          "Video micro-lessons",
+          "Scenario simulations"
+        ],
+        "name": "Hospitality Mode",
+        "uiActivations": [
+          "Lounge tab",
+          "Staff login"
+        ],
+        "voiceCommands": [
+          "First smoke tutorial",
+          "Train staff"
+        ]
+      },
+      {
+        "privacyCompliant": true,
+        "improvements": [
+          "Live RSVP heatmap",
+          "POS reorder prediction",
+          "White-labeled pairing sheets"
+        ],
+        "name": "Retail & Lounge Tools",
+        "uiActivations": [
+          "Lounge Hub",
+          "Event Toolkit"
+        ]
+      },
+      {
+        "privacyCompliant": true,
+        "improvements": [
+          "Conversational memory awareness"
+        ],
+        "name": "AI Assistant",
+        "uiActivations": [
+          "Floating GPT panel"
+        ],
+        "voiceCommands": [
+          "Ask the Maestro",
+          "Suggest a pairing for tonight"
+        ]
+      },
+      {
+        "privacyCompliant": true,
+        "improvements": [
+          "Trust score display",
+          "Scan-to-Pair-to-Save"
+        ],
+        "name": "Scan & Authenticate",
+        "uiActivations": [
+          "Scan Band",
+          "Enter Code"
+        ]
+      },
+      {
+        "privacyCompliant": true,
+        "improvements": [
+          "Sauce index",
+          "Chef overlays"
+        ],
+        "name": "Culinary Pairing",
+        "uiActivations": [
+          "Pairing Decks",
+          "Regional Flavor Maps"
+        ]
+      },
+      {
+        "privacyCompliant": true,
+        "improvements": [
+          "Locker behavior analytics",
+          "Real-time staff feedback"
+        ],
+        "name": "Lounge Analytics",
+        "uiActivations": [
+          "Lounge dashboard"
+        ]
+      },
+      {
+        "privacyCompliant": true,
+        "improvements": [
+          "Proactive nudging by journey stage"
+        ],
+        "name": "GPT Intent Switching",
+        "voiceCommands": [
+          "Switch to learning mode",
+          "What\u2019s my last favorite?"
+        ]
+      }
+    ],
+    "deduplication": true,
+    "ecoDevNote": "This module is optimized for economic reuse and minimal cost overhead.",
+    "edgeDeploymentReady": true,
+    "greenHostingCompatible": true,
+    "lazyLoad": true,
+    "modularization": "DRY_compliant",
+    "scalingProfile": "costOptimized",
+    "translationStatus": "complete_per_module",
+    "version": "v55.1"
+  },
+  "featureCommandMatrix": {
+    "privacyCompliant": true,
+    "aLaCarteAddOns": true,
+    "commands": {
+      "privacyCompliant": true,
+      "AI Assistant": [
+        {
+          "privacyCompliant": true,
+          "feature": "Conversational pairing",
+          "ui": "Home \u2192 Ask Maestro",
+          "voice": "What do you recommend for my mood?"
+        },
+        {
+          "privacyCompliant": true,
+          "feature": "Memory-infused AI",
+          "ui": "Journal \u2192 GPT Companion",
+          "voice": "What was my last Nicaraguan?"
+        },
+        {
+          "privacyCompliant": true,
+          "feature": "Taste-Time Travel",
+          "ui": "AI \u2192 Time Mode",
+          "voice": "Take me to 1990s Havana."
+        },
+        {
+          "privacyCompliant": true,
+          "feature": "Persona selector",
+          "ui": "AI Settings \u2192 Avatar",
+          "voice": "Speak as the blender, not the historian."
+        }
+      ],
+      "Accessibility & Compliance": [
+        {
+          "privacyCompliant": true,
+          "feature": "Screenreader narration",
+          "ui": "Settings \u2192 Accessibility",
+          "voice": "Read this cigar spec aloud."
+        },
+        {
+          "privacyCompliant": true,
+          "feature": "Vibe-based flavor alerts",
+          "ui": "Settings \u2192 Haptics",
+          "voice": "Enable taste-vibe alerts."
+        },
+        {
+          "privacyCompliant": true,
+          "feature": "Language translation",
+          "ui": "Settings \u2192 Language Mode",
+          "voice": "Translate to Spanish."
+        },
+        {
+          "privacyCompliant": true,
+          "feature": "Mood-based UI simplifier",
+          "ui": "Settings \u2192 Mood Mode",
+          "voice": "Simplify interface\u2014I\u2019m overwhelmed."
+        }
+      ],
+      "Education": [
+        {
+          "privacyCompliant": true,
+          "feature": "Start CEU-accredited lesson",
+          "ui": "Home \u2192 Learn \u2192 CEU Path",
+          "voice": "Start a Connecticut wrapper course."
+        },
+        {
+          "privacyCompliant": true,
+          "feature": "Adaptive quiz logic",
+          "ui": "Lesson \u2192 Quiz \u2192 Adaptive Mode",
+          "voice": "Quiz me on Maduro tasting notes."
+        },
+        {
+          "privacyCompliant": true,
+          "feature": "Emotional tasting journal",
+          "ui": "Journal \u2192 Reflections \u2192 Auto AI",
+          "voice": "Summarize my cedar-forward journey."
+        },
+        {
+          "privacyCompliant": true,
+          "feature": "Scenario-based decisions",
+          "ui": "Learn \u2192 Simulation Mode",
+          "voice": "What if I\u2019m pairing with steak?"
+        },
+        {
+          "privacyCompliant": true,
+          "feature": "Instructor matchmaking",
+          "ui": "Learn \u2192 Meet Instructors",
+          "voice": "Find a local cigar expert near me."
+        }
+      ],
+      "Gamification & Progress": [
+        {
+          "privacyCompliant": true,
+          "feature": "XP quests and flavor rivalries",
+          "ui": "Gamify \u2192 Flavor Quests",
+          "voice": "What\u2019s my next Maduro quest?"
+        },
+        {
+          "privacyCompliant": true,
+          "feature": "Regional leaderboards",
+          "ui": "Gamify \u2192 Leaderboard",
+          "voice": "Who\u2019s top in Texas?"
+        },
+        {
+          "privacyCompliant": true,
+          "feature": "Flavor lore unlocks",
+          "ui": "Journal \u2192 Lore Unlocks",
+          "voice": "What\u2019s the story of Cameroon wrapper?"
+        },
+        {
+          "privacyCompliant": true,
+          "feature": "Secret pairing hunts",
+          "ui": "Gamify \u2192 Hidden Paths",
+          "voice": "Any rare pairings to try today?"
+        }
+      ],
+      "Lounge Tools": [
+        {
+          "privacyCompliant": true,
+          "feature": "Launch lounge kiosk",
+          "ui": "Admin \u2192 Lounge Mode",
+          "voice": "Enter kiosk mode for guests."
+        },
+        {
+          "privacyCompliant": true,
+          "feature": "Smart pairing QR menu",
+          "ui": "Admin \u2192 Table QR Builder",
+          "voice": "Print pairing menus for Maduro flights."
+        },
+        {
+          "privacyCompliant": true,
+          "feature": "Flight builder",
+          "ui": "Events \u2192 Build Flight",
+          "voice": "Create a 3-spirit pairing flight."
+        },
+        {
+          "privacyCompliant": true,
+          "feature": "Guest flavor memory",
+          "ui": "Admin \u2192 Guest Insights",
+          "voice": "What\u2019s John\u2019s favorite wrapper?"
+        },
+        {
+          "privacyCompliant": true,
+          "feature": "POS + Inventory sync",
+          "ui": "Admin \u2192 POS Dashboard",
+          "voice": "How many Cameroon sticks left?"
+        }
+      ],
+      "Membership & Personalization": [
+        {
+          "privacyCompliant": true,
+          "feature": "Flavor journey graph",
+          "ui": "Profile \u2192 Flavor Map",
+          "voice": "Show me my flavor evolution."
+        },
+        {
+          "privacyCompliant": true,
+          "feature": "Avatar & crest designer",
+          "ui": "Profile \u2192 Customization",
+          "voice": "Design my cigar identity."
+        },
+        {
+          "privacyCompliant": true,
+          "feature": "Emotional pairing engine",
+          "ui": "Pairing \u2192 Emotion Entry",
+          "voice": "Pair me something for nostalgia."
+        },
+        {
+          "privacyCompliant": true,
+          "feature": "Digital pairing passport",
+          "ui": "Profile \u2192 Passport",
+          "voice": "Show me what I\u2019ve smoked in Mexico."
+        }
+      ],
+      "NFT & Web3": [
+        {
+          "privacyCompliant": true,
+          "feature": "Mint flavor memory NFT",
+          "ui": "Journal \u2192 Mint Entry",
+          "voice": "Mint this pairing to my ledger."
+        },
+        {
+          "privacyCompliant": true,
+          "feature": "Digital lounge access",
+          "ui": "NFT \u2192 Lounge Pass",
+          "voice": "Enter Web3 lounge."
+        },
+        {
+          "privacyCompliant": true,
+          "feature": "Flavor gifting chain",
+          "ui": "NFT \u2192 Chain History",
+          "voice": "Track who gave me this cigar."
+        },
+        {
+          "privacyCompliant": true,
+          "feature": "Legacy journal minting",
+          "ui": "Journal \u2192 Create Heirloom",
+          "voice": "Mint my full tasting history."
+        }
+      ],
+      "Pairing Engine": [
+        {
+          "privacyCompliant": true,
+          "feature": "Classic pairing suggestion",
+          "ui": "Pairing \u2192 Cigar or Drink",
+          "voice": "Pair this with Glenfiddich."
+        },
+        {
+          "privacyCompliant": true,
+          "feature": "Mood-based pairing",
+          "ui": "Pairing \u2192 Mood Selector",
+          "voice": "Find me a relaxing pairing."
+        },
+        {
+          "privacyCompliant": true,
+          "feature": "Geo-Taste pairing",
+          "ui": "Pairing \u2192 Region Explorer",
+          "voice": "What pairs well in Cuba?"
+        },
+        {
+          "privacyCompliant": true,
+          "feature": "Flavor precision filter",
+          "ui": "Pairing \u2192 Advanced Filters",
+          "voice": "Show cigars with cedar and chocolate."
+        },
+        {
+          "privacyCompliant": true,
+          "feature": "Weather-aware pairing",
+          "ui": "Pairing \u2192 Weather Mode",
+          "voice": "Suggest a rainy day pairing."
+        }
+      ],
+      "Scan & Identification": [
+        {
+          "privacyCompliant": true,
+          "feature": "Visual scan recognition",
+          "ui": "Home \u2192 Scan",
+          "voice": "Scan this label."
+        },
+        {
+          "privacyCompliant": true,
+          "feature": "Instant flavor specs",
+          "ui": "Scan Result Overlay",
+          "voice": "What\u2019s this cigar\u2019s strength and wrapper?"
+        },
+        {
+          "privacyCompliant": true,
+          "feature": "Historical taste logs",
+          "ui": "Scan Result \u2192 Journal Link",
+          "voice": "Did I like this last time?"
+        },
+        {
+          "privacyCompliant": true,
+          "feature": "Guess Challenge mode",
+          "ui": "Scan \u2192 Blind Test",
+          "voice": "Let me guess before you reveal it."
+        }
+      ],
+      "Smart Humidor & Inventory": [
+        {
+          "privacyCompliant": true,
+          "feature": "Log cigar manually or by scan",
+          "ui": "Humidor \u2192 Add",
+          "voice": "Log this cigar to my box."
+        },
+        {
+          "privacyCompliant": true,
+          "feature": "Aging countdown",
+          "ui": "Humidor \u2192 Timeline",
+          "voice": "What\u2019s aging near its prime?"
+        },
+        {
+          "privacyCompliant": true,
+          "feature": "Batch scan box",
+          "ui": "Humidor \u2192 Batch Add",
+          "voice": "Scan whole box of Olivas."
+        },
+        {
+          "privacyCompliant": true,
+          "feature": "Ready-to-smoke alerts",
+          "ui": "Dashboard \u2192 Notifications",
+          "voice": "Which cigars are ready today?"
+        }
+      ],
+      "aLaCarteAddOns": true,
+      "deduplication": true,
+      "ecoDevNote": "This module is optimized for economic reuse and minimal cost overhead.",
+      "edgeDeploymentReady": true,
+      "greenHostingCompatible": true,
+      "lazyLoad": true,
+      "modularization": "DRY_compliant",
+      "scalingProfile": "costOptimized",
+      "translationStatus": "complete_per_module"
+    },
+    "date": "2025-06-17",
+    "deduplication": true,
+    "ecoDevNote": "This module is optimized for economic reuse and minimal cost overhead.",
+    "edgeDeploymentReady": true,
+    "greenHostingCompatible": true,
+    "improvementSuggestions": {
+      "privacyCompliant": true,
+      "aLaCarteAddOns": true,
+      "date": "2025-06-17",
+      "deduplication": true,
+      "ecoDevNote": "This module is optimized for economic reuse and minimal cost overhead.",
+      "edgeDeploymentReady": true,
+      "greenHostingCompatible": true,
+      "lazyLoad": true,
+      "modularization": "DRY_compliant",
+      "recommendations": {
+        "privacyCompliant": true,
+        "AI Assistant": [
+          "Enable whisper mode for lounge settings.",
+          "Let users type and train their own GPT persona over time.",
+          "Offer daily flavor meditation led by their AI persona."
+        ],
+        "Accessibility & Compliance": [
+          "Add voice UI mode that reads flavor notes while scrolling.",
+          "Introduce low-vision contrast templates for spec cards.",
+          "Auto-adapt interface tone/speed based on user stress or fatigue patterns."
+        ],
+        "Education": [
+          "Introduce voice-guided walkthroughs for each CEU module.",
+          "Add real-time quiz hint system based on prior errors.",
+          "Use GPT to personalize lesson pacing and feedback dynamically."
+        ],
+        "Gamification & Progress": [
+          "Allow club challenges between lounges (battle of flavor XP).",
+          "Introduce flavor mentor levels: guide new members in pairing journeys.",
+          "Enable AI-generated trivia from past smokes: \u2018What did you pair this with?\u2019"
+        ],
+        "Lounge Tools": [
+          "Let lounges preview guest pairings on tablets before QR handoff.",
+          "Enable time-sensitive pairing menus (e.g., morning cigars only from 9\u201312).",
+          "Push pairing prompts to staff based on POS sales data."
+        ],
+        "Membership & Personalization": [
+          "Reward members for discovering rare wrapper + spirit combos.",
+          "Create emotion-matching flavor boards (e.g., nostalgia = cedar + vanilla).",
+          "Trigger \u2018weekly palate journey\u2019 insights as push or voice summary."
+        ],
+        "NFT & Web3": [
+          "Let users mint special event smokes (e.g., wedding cigar).",
+          "Create collectible wrapper series tied to terroir or vintage.",
+          "Add generative badge fusion: blend two badges into a custom legacy NFT."
+        ],
+        "Pairing Engine": [
+          "Enable flavor stack comparison: user palate vs. recommended pairing.",
+          "Integrate Spotify or ambient sounds to reinforce pairing moods.",
+          "Use crowd-pairing AI to highlight trending unusual combos in real-time."
+        ],
+        "Scan & Identification": [
+          "Offer community comparison: \u2018Most users rated this cigar peppery.\u2019",
+          "Let users \u2018scan + guess\u2019 flavor notes with point gamification.",
+          "Provide post-scan timeline: when you\u2019ve smoked similar cigars."
+        ],
+        "Smart Humidor & Inventory": [
+          "Add virtual humidor audit by AI (what\u2019s overaged, underused).",
+          "Enable NFC-tag support for boxes with auto-log updates.",
+          "Suggest cigars to gift based on aging or neglected use."
+        ],
+        "aLaCarteAddOns": true,
+        "deduplication": true,
+        "ecoDevNote": "This module is optimized for economic reuse and minimal cost overhead.",
+        "edgeDeploymentReady": true,
+        "greenHostingCompatible": true,
+        "lazyLoad": true,
+        "modularization": "DRY_compliant",
+        "scalingProfile": "costOptimized",
+        "translationStatus": "complete_per_module"
+      },
+      "scalingProfile": "costOptimized",
+      "summary": "Per-category enhancements for command-based features",
+      "translationStatus": "complete_per_module"
+    },
+    "lazyLoad": true,
+    "modularization": "DRY_compliant",
+    "scalingProfile": "costOptimized",
+    "summary": "Full feature-to-command matrix including UI and voice activation pathways",
+    "translationStatus": "complete_per_module"
+  },
+  "exportMetadata": {
+    "source": "Cigar Maestro",
+    "exported": true,
+    "verifiedOnly": true
+  }
+}
