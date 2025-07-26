@@ -1,302 +1,122 @@
 [
   {
     "name": "Foundation Cigar Company",
-    "flavor": "Undefined",
-    "wrapper": "Unknown",
-    "color": 8947848
+    "flavor": "Bold, earthy with dark chocolate and espresso notes",
+    "wrapper": "Maduro",
+    "color": 5865472
   },
   {
     "name": "Warped Cigars",
-    "flavor": "Undefined",
-    "wrapper": "Unknown",
+    "flavor": "Complex blend with cedar, leather, and spice",
+    "wrapper": "Habano",
     "color": 8947848
   },
   {
     "name": "Crowned Heads",
-    "flavor": "Undefined",
-    "wrapper": "Unknown",
-    "color": 8947848
+    "flavor": "Smooth with hints of vanilla and toasted oak",
+    "wrapper": "Connecticut",
+    "color": 13408512
   },
   {
     "name": "JRE Tobacco Co.",
-    "flavor": "Undefined",
-    "wrapper": "Unknown",
-    "color": 8947848
+    "flavor": "Rich Honduran blend with coffee and nuts",
+    "wrapper": "Natural",
+    "color": 11642112
   },
   {
     "name": "Southern Draw Cigars",
-    "flavor": "Undefined",
-    "wrapper": "Unknown",
-    "color": 8947848
+    "flavor": "Full-bodied with pepper and dark fruit",
+    "wrapper": "Oscuro",
+    "color": 3355443
   },
   {
     "name": "La Flor Dominicana",
-    "flavor": "Undefined",
-    "wrapper": "Unknown",
-    "color": 8947848
+    "flavor": "Powerful smoke with leather and earth",
+    "wrapper": "Maduro",
+    "color": 5865472
   },
   {
     "name": "Aganorsa Leaf",
-    "flavor": "Undefined",
-    "wrapper": "Unknown",
+    "flavor": "Nicaraguan strength with cocoa undertones",
+    "wrapper": "Habano",
     "color": 8947848
   },
   {
     "name": "Plasencia Cigars",
-    "flavor": "Undefined",
-    "wrapper": "Unknown",
+    "flavor": "Smooth and creamy with floral notes",
+    "wrapper": "Connecticut",
+    "color": 13408512
+  },
+  {
+    "name": "Arturo Fuente",
+    "flavor": "Classic Dominican elegance with cedar",
+    "wrapper": "Natural",
+    "color": 11642112
+  },
+  {
+    "name": "Padron 1964 Anniversary",
+    "flavor": "Premium aged tobacco with chocolate richness",
+    "wrapper": "Maduro",
+    "color": 5865472
+  },
+  {
+    "name": "Oliva Serie V",
+    "flavor": "Medium-full with coffee and spice",
+    "wrapper": "Habano",
     "color": 8947848
   },
   {
-    "name": "Casdagli Cigars",
-    "flavor": "Undefined",
-    "wrapper": "Unknown",
-    "color": 8947848
+    "name": "Romeo y Julieta",
+    "flavor": "Mild and smooth with honey sweetness",
+    "wrapper": "Connecticut",
+    "color": 13408512
   },
   {
-    "name": "Debonaire House",
-    "flavor": "Undefined",
-    "wrapper": "Unknown",
-    "color": 8947848
+    "name": "Montecristo",
+    "flavor": "Balanced with nuts and cream",
+    "wrapper": "Natural",
+    "color": 11642112
   },
   {
-    "name": "Illusione Cigars",
-    "flavor": "Undefined",
-    "wrapper": "Unknown",
-    "color": 8947848
+    "name": "Cohiba",
+    "flavor": "Full-bodied Cuban heritage with earth",
+    "wrapper": "Oscuro",
+    "color": 3355443
   },
   {
-    "name": "Gran Habano",
-    "flavor": "Undefined",
-    "wrapper": "Unknown",
-    "color": 8947848
+    "name": "Rocky Patel Vintage 1990",
+    "flavor": "Aged wrapper with vanilla and spice",
+    "wrapper": "Connecticut",
+    "color": 13408512
   },
   {
-    "name": "El Septimo Geneva",
-    "flavor": "Undefined",
-    "wrapper": "Unknown",
-    "color": 8947848
+    "name": "Ashton VSG",
+    "flavor": "Rich Ecuador wrapper with complexity",
+    "wrapper": "Maduro",
+    "color": 5865472
   },
   {
-    "name": "Room101 Cigars",
-    "flavor": "Undefined",
-    "wrapper": "Unknown",
-    "color": 8947848
+    "name": "Davidoff",
+    "flavor": "Refined and elegant with subtle nuances",
+    "wrapper": "Natural",
+    "color": 11642112
   },
   {
-    "name": "Casa Turrent",
-    "flavor": "Undefined",
-    "wrapper": "Unknown",
-    "color": 8947848
+    "name": "CAO Brasilia",
+    "flavor": "Brazilian wrapper with bold character",
+    "wrapper": "Oscuro",
+    "color": 3355443
   },
   {
-    "name": "A.J. Fernandez Cigars",
-    "flavor": "Undefined",
-    "wrapper": "Unknown",
-    "color": 8947848
+    "name": "Macanudo Cafe",
+    "flavor": "Mild and approachable with cream",
+    "wrapper": "Connecticut",
+    "color": 13408512
   },
   {
-    "name": "Mombacho Cigars SA (Favilli)",
-    "flavor": "Undefined",
-    "wrapper": "Unknown",
-    "color": 8947848
-  },
-  {
-    "name": "HVC Cigars",
-    "flavor": "Undefined",
-    "wrapper": "Unknown",
-    "color": 8947848
-  },
-  {
-    "name": "La Aurora",
-    "flavor": "Undefined",
-    "wrapper": "Unknown",
-    "color": 8947848
-  },
-  {
-    "name": "AVO Cigars",
-    "flavor": "Undefined",
-    "wrapper": "Unknown",
-    "color": 8947848
-  },
-  {
-    "name": "Espinosa Cigars",
-    "flavor": "Undefined",
-    "wrapper": "Unknown",
-    "color": 8947848
-  },
-  {
-    "name": "Kristoff Cigars",
-    "flavor": "Undefined",
-    "wrapper": "Unknown",
-    "color": 8947848
-  },
-  {
-    "name": "Tatuaje Cigars",
-    "flavor": "Undefined",
-    "wrapper": "Unknown",
-    "color": 8947848
-  },
-  {
-    "name": "Joya de Nicaragua",
-    "flavor": "Undefined",
-    "wrapper": "Unknown",
-    "color": 8947848
-  },
-  {
-    "name": "Byron Cigars",
-    "flavor": "Undefined",
-    "wrapper": "Unknown",
-    "color": 8947848
-  },
-  {
-    "name": "Black Label Trading Co.",
-    "flavor": "Undefined",
-    "wrapper": "Unknown",
-    "color": 8947848
-  },
-  {
-    "name": "RoMa Craft Tobac",
-    "flavor": "Undefined",
-    "wrapper": "Unknown",
-    "color": 8947848
-  },
-  {
-    "name": "Vegas Robaina",
-    "flavor": "Undefined",
-    "wrapper": "Unknown",
-    "color": 8947848
-  },
-  {
-    "name": "Davtian Cigars",
-    "flavor": "Undefined",
-    "wrapper": "Unknown",
-    "color": 8947848
-  },
-  {
-    "name": "Principle Cigars",
-    "flavor": "Undefined",
-    "wrapper": "Unknown",
-    "color": 8947848
-  },
-  {
-    "name": "Curivari Cigars",
-    "flavor": "Undefined",
-    "wrapper": "Unknown",
-    "color": 8947848
-  },
-  {
-    "name": "Cavalier Gen\u00e8ve",
-    "flavor": "Undefined",
-    "wrapper": "Unknown",
-    "color": 8947848
-  },
-  {
-    "name": "Dapper Cigar Co.",
-    "flavor": "Undefined",
-    "wrapper": "Unknown",
-    "color": 8947848
-  },
-  {
-    "name": "Hiram & Solomon Cigars",
-    "flavor": "Undefined",
-    "wrapper": "Unknown",
-    "color": 8947848
-  },
-  {
-    "name": "La Palina",
-    "flavor": "Undefined",
-    "wrapper": "Unknown",
-    "color": 8947848
-  },
-  {
-    "name": "Oscar Valladares Tobacco & Co.",
-    "flavor": "Undefined",
-    "wrapper": "Unknown",
-    "color": 8947848
-  },
-  {
-    "name": "Paul Garmirian Cigars",
-    "flavor": "Undefined",
-    "wrapper": "Unknown",
-    "color": 8947848
-  },
-  {
-    "name": "Casa Cuevas Cigars",
-    "flavor": "Undefined",
-    "wrapper": "Unknown",
-    "color": 8947848
-  },
-  {
-    "name": "Sinistro Cigars",
-    "flavor": "Undefined",
-    "wrapper": "Unknown",
-    "color": 8947848
-  },
-  {
-    "name": "Tabacalera Palma",
-    "flavor": "Undefined",
-    "wrapper": "Unknown",
-    "color": 8947848
-  },
-  {
-    "name": "Cornelius & Anthony",
-    "flavor": "Undefined",
-    "wrapper": "Unknown",
-    "color": 8947848
-  },
-  {
-    "name": "Micallef Cigars",
-    "flavor": "Undefined",
-    "wrapper": "Unknown",
-    "color": 8947848
-  },
-  {
-    "name": "Lampert Cigars",
-    "flavor": "Undefined",
-    "wrapper": "Unknown",
-    "color": 8947848
-  },
-  {
-    "name": "Casa Fernandez (AGANORSA)",
-    "flavor": "Undefined",
-    "wrapper": "Unknown",
-    "color": 8947848
-  },
-  {
-    "name": "Selected Tobacco",
-    "flavor": "Undefined",
-    "wrapper": "Unknown",
-    "color": 8947848
-  },
-  {
-    "name": "Felix Assouline Cigars",
-    "flavor": "Undefined",
-    "wrapper": "Unknown",
-    "color": 8947848
-  },
-  {
-    "name": "Patoro Cigars",
-    "flavor": "Undefined",
-    "wrapper": "Unknown",
-    "color": 8947848
-  },
-  {
-    "name": "Blanco Cigar Company",
-    "flavor": "Undefined",
-    "wrapper": "Unknown",
-    "color": 8947848
-  },
-  {
-    "name": "VegaFina",
-    "flavor": "Undefined",
-    "wrapper": "Unknown",
-    "color": 8947848
-  },
-  {
-    "name": "Fratello Cigars",
-    "flavor": "Undefined",
-    "wrapper": "Unknown",
+    "name": "H. Upmann",
+    "flavor": "Classic Cuban blend with leather",
+    "wrapper": "Habano",
     "color": 8947848
   }
 ]

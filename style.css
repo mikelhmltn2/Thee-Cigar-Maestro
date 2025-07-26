@@ -1,102 +1,320 @@
+/* Thee Cigar Maestro - Optimized Styles */
+
+/* CSS Custom Properties for consistent theming */
+:root {
+  --primary-bg: #121212;
+  --secondary-bg: #1c1c1c;
+  --accent-bg: #2c2c2c;
+  --primary-text: #f0e6d2;
+  --accent-text: #c69c6d;
+  --secondary-text: #a67856;
+  --link-text: #dab785;
+  --border-color: #444;
+  --error-color: #dc143c;
+  --success-color: #228b22;
+  --font-family: 'Georgia', serif;
+  --border-radius: 6px;
+  --transition: all 0.3s ease;
+}
+
+/* Base styles */
+* {
+  box-sizing: border-box;
+}
 
 body {
-  font-family: 'Georgia', serif;
-  background-color: #121212;
-  color: #f0e6d2;
+  font-family: var(--font-family);
+  background-color: var(--primary-bg);
+  color: var(--primary-text);
   margin: 0;
   padding: 2rem;
-}
-header, footer {
-  background: #1c1c1c;
-  padding: 1rem 2rem;
-}
-h1 {
-  color: #c69c6d;
-  margin: 0;
-}
-h2 {
-  color: #a67856;
-}
-nav a {
-  color: #dab785;
-  margin-right: 15px;
-  text-decoration: none;
-}
-nav a:hover {
-  text-decoration: underline;
-}
-section {
-  margin-top: 2rem;
+  line-height: 1.6;
+  /* Optimized background pattern using CSS gradient instead of external image */
+  background-image: 
+    radial-gradient(circle at 1px 1px, rgba(255,255,255,0.05) 1px, transparent 0);
+  background-size: 20px 20px;
 }
 
-body {
-  background-image: url('https://www.transparenttextures.com/patterns/dark-leather.png');
-  background-repeat: repeat;
+/* Header and footer */
+header, footer {
+  background: var(--secondary-bg);
+  padding: 1rem 2rem;
+  border-radius: var(--border-radius);
+  margin-bottom: 1rem;
 }
+
 footer {
   text-align: center;
-  padding: 1rem;
   font-size: 0.9rem;
   color: #aaa;
   margin-top: 3rem;
-  border-top: 1px solid #444;
-}
-.smoke-footer {
-  background: url('https://svgshare.com/i/uEY.svg') no-repeat center bottom;
-  height: 80px;
+  border-top: 1px solid var(--border-color);
+  /* Removed external SVG dependency */
+  position: relative;
 }
 
+footer::after {
+  content: "🚬";
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 2rem;
+  opacity: 0.3;
+}
+
+/* Typography */
+h1 {
+  color: var(--accent-text);
+  margin: 0;
+  font-weight: bold;
+}
+
+h2 {
+  color: var(--secondary-text);
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+h3, h4, h5, h6 {
+  color: var(--accent-text);
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Navigation */
+nav {
+  margin-top: 1rem;
+}
+
+nav a {
+  color: var(--link-text);
+  margin-right: 15px;
+  text-decoration: none;
+  transition: var(--transition);
+  padding: 0.5rem;
+  border-radius: var(--border-radius);
+}
+
+nav a:hover, nav a:focus {
+  text-decoration: underline;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Sections */
+section {
+  margin-top: 2rem;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: var(--border-radius);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* GPT Chat Integration */
 #gpt-maestro-btn {
   position: fixed;
   bottom: 20px;
   right: 20px;
-  background: #5c4033;
-  color: #f0e6d2;
+  background: var(--secondary-text);
+  color: var(--primary-text);
   border: none;
   padding: 12px 20px;
-  font-family: Georgia, serif;
+  font-family: var(--font-family);
   font-size: 16px;
-  border-radius: 6px;
+  border-radius: var(--border-radius);
   cursor: pointer;
   z-index: 1000;
+  transition: var(--transition);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
+
+#gpt-maestro-btn:hover {
+  background: var(--accent-text);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+}
+
 #gpt-chat-box {
   display: none;
   position: fixed;
   bottom: 80px;
   right: 20px;
-  width: 300px;
-  background: #1e1e1e;
-  color: #f0e6d2;
-  border: 1px solid #444;
-  border-radius: 8px;
+  width: 320px;
+  max-width: 90vw;
+  background: var(--secondary-bg);
+  color: var(--primary-text);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
   padding: 1rem;
   z-index: 999;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+  transition: var(--transition);
 }
+
 #gpt-chat-box.open {
   display: block;
+  animation: slideUp 0.3s ease-out;
 }
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 #gpt-chat-header {
   font-weight: bold;
   margin-bottom: 8px;
+  color: var(--accent-text);
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 8px;
 }
+
 #gpt-input {
   width: 100%;
-  height: 60px;
+  height: 80px;
   margin-bottom: 8px;
-  background: #2c2c2c;
-  border: 1px solid #666;
-  color: #fff;
+  background: var(--accent-bg);
+  border: 1px solid var(--border-color);
+  color: var(--primary-text);
+  padding: 8px;
+  border-radius: var(--border-radius);
+  font-family: var(--font-family);
+  resize: vertical;
+  transition: var(--transition);
 }
+
+#gpt-input:focus {
+  outline: none;
+  border-color: var(--accent-text);
+  box-shadow: 0 0 0 2px rgba(198, 156, 109, 0.2);
+}
+
 #gpt-send {
   width: 100%;
-  padding: 8px;
-  background: #c69c6d;
+  padding: 10px;
+  background: var(--accent-text);
   border: none;
   cursor: pointer;
   font-weight: bold;
+  color: var(--primary-bg);
+  border-radius: var(--border-radius);
+  transition: var(--transition);
+  margin-bottom: 8px;
 }
+
+#gpt-send:hover:not(:disabled) {
+  background: var(--secondary-text);
+  transform: translateY(-1px);
+}
+
+#gpt-send:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
 #gpt-response {
   margin-top: 10px;
   font-style: italic;
+  padding: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: var(--border-radius);
+  min-height: 60px;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+/* Form elements */
+input, textarea, select, button {
+  font-family: var(--font-family);
+  transition: var(--transition);
+}
+
+input[type="checkbox"] {
+  margin-right: 8px;
+  accent-color: var(--accent-text);
+}
+
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+}
+
+label:hover {
+  color: var(--accent-text);
+}
+
+/* Accessibility improvements */
+button:focus, input:focus, textarea:focus {
+  outline: 2px solid var(--accent-text);
+  outline-offset: 2px;
+}
+
+/* Error handling */
+.error-message {
+  background: var(--error-color);
+  color: white;
+  padding: 12px;
+  border-radius: var(--border-radius);
+  margin: 8px 0;
+  font-weight: bold;
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  body {
+    padding: 1rem;
+  }
+  
+  #gpt-chat-box {
+    width: calc(100vw - 40px);
+    right: 20px;
+    left: 20px;
+  }
+  
+  header, footer {
+    padding: 1rem;
+  }
+  
+  nav a {
+    display: block;
+    margin-bottom: 0.5rem;
+    margin-right: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    padding: 0.5rem;
+  }
+  
+  #gpt-maestro-btn {
+    bottom: 10px;
+    right: 10px;
+    padding: 10px 16px;
+  }
+}
+
+/* Print styles */
+@media print {
+  #gpt-maestro-btn, #gpt-chat-box {
+    display: none !important;
+  }
+  
+  body {
+    background: white;
+    color: black;
+  }
 }
