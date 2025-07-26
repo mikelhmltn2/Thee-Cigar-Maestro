@@ -1,39 +1,959 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Your Dashboard</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://theecigarmaestro.vercel.app;">
+  <title>Flavorverse Analytics Dashboard | Thee Cigar Maestro</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Georgia, serif;
+      background: linear-gradient(135deg, #121212 0%, #1c1c1c 50%, #2c2c2c 100%);
+      color: #f0e6d2;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .header {
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(10px);
+      padding: 1rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 2px solid #c69c6d;
+    }
+
+    .header h1 {
+      color: #c69c6d;
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .header p {
+      color: #a67856;
+      font-style: italic;
+    }
+
+    .dashboard-container {
+      padding: 2rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .search-section {
+      grid-column: 1 / -1;
+      background: rgba(92, 64, 51, 0.2);
+      border-radius: 12px;
+      padding: 2rem;
+      border: 1px solid #c69c6d;
+    }
+
+    .search-container {
+      display: grid;
+      grid-template-columns: 1fr auto auto;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .search-input {
+      background: rgba(0, 0, 0, 0.4);
+      border: 2px solid #666;
+      border-radius: 8px;
+      padding: 1rem;
+      color: #f0e6d2;
+      font-size: 1rem;
+      transition: border-color 0.3s;
+    }
+
+    .search-input:focus {
+      outline: none;
+      border-color: #c69c6d;
+    }
+
+    .search-filters {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 1rem;
+    }
+
+    .filter-group {
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 8px;
+      padding: 0.8rem;
+      border: 1px solid #666;
+    }
+
+    .filter-group label {
+      display: block;
+      margin-bottom: 0.3rem;
+      font-weight: bold;
+      color: #dab785;
+    }
+
+    .filter-group select {
+      background: rgba(0, 0, 0, 0.6);
+      border: 1px solid #666;
+      border-radius: 4px;
+      padding: 0.4rem;
+      color: #f0e6d2;
+      width: 100%;
+    }
+
+    .action-button {
+      background: linear-gradient(45deg, #c69c6d, #dab785);
+      border: none;
+      border-radius: 8px;
+      padding: 1rem 1.5rem;
+      color: #121212;
+      font-weight: bold;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.3s;
+    }
+
+    .action-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(198, 156, 109, 0.4);
+    }
+
+    .dashboard-card {
+      background: rgba(0, 0, 0, 0.6);
+      border-radius: 12px;
+      padding: 1.5rem;
+      border: 1px solid #444;
+      backdrop-filter: blur(5px);
+      transition: transform 0.3s, border-color 0.3s;
+    }
+
+    .dashboard-card:hover {
+      transform: translateY(-4px);
+      border-color: #c69c6d;
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+      padding-bottom: 0.8rem;
+      border-bottom: 1px solid #666;
+    }
+
+    .card-title {
+      font-size: 1.3rem;
+      color: #c69c6d;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .card-icon {
+      font-size: 1.5rem;
+    }
+
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .stat-item {
+      text-align: center;
+      background: rgba(92, 64, 51, 0.3);
+      border-radius: 8px;
+      padding: 1rem;
+      border: 1px solid #5c4033;
+    }
+
+    .stat-value {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: #c69c6d;
+      display: block;
+    }
+
+    .stat-label {
+      font-size: 0.9rem;
+      color: #a67856;
+      margin-top: 0.3rem;
+    }
+
+    .chart-container {
+      height: 200px;
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid #666;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .chart-bar {
+      background: linear-gradient(0deg, #c69c6d, #dab785);
+      margin: 0 2px;
+      border-radius: 4px 4px 0 0;
+      transition: height 0.5s ease;
+      min-width: 20px;
+      position: relative;
+    }
+
+    .chart-label {
+      position: absolute;
+      bottom: -25px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.7rem;
+      color: #a67856;
+      text-align: center;
+      width: 60px;
+    }
+
+    .list-container {
+      max-height: 250px;
+      overflow-y: auto;
+      border: 1px solid #666;
+      border-radius: 8px;
+      background: rgba(0, 0, 0, 0.3);
+    }
+
+    .list-item {
+      padding: 0.8rem;
+      border-bottom: 1px solid #333;
+      transition: background-color 0.2s;
+      cursor: pointer;
+    }
+
+    .list-item:hover {
+      background: rgba(92, 64, 51, 0.3);
+    }
+
+    .list-item:last-child {
+      border-bottom: none;
+    }
+
+    .item-title {
+      font-weight: bold;
+      color: #dab785;
+      margin-bottom: 0.3rem;
+    }
+
+    .item-details {
+      font-size: 0.9rem;
+      color: #a67856;
+    }
+
+    .integration-status {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+
+    .status-indicator {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #00ff00;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    .search-results {
+      grid-column: 1 / -1;
+      background: rgba(0, 0, 0, 0.4);
+      border-radius: 12px;
+      border: 1px solid #666;
+      max-height: 400px;
+      overflow-y: auto;
+      display: none;
+    }
+
+    .result-item {
+      padding: 1rem;
+      border-bottom: 1px solid #333;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    .result-item:hover {
+      background: rgba(92, 64, 51, 0.3);
+    }
+
+    .result-type {
+      background: #c69c6d;
+      color: #121212;
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      font-weight: bold;
+      margin-right: 0.5rem;
+    }
+
+    .loading {
+      text-align: center;
+      padding: 2rem;
+      color: #a67856;
+      font-style: italic;
+    }
+
+    .error-message {
+      background: rgba(220, 20, 60, 0.8);
+      color: white;
+      padding: 1rem;
+      border-radius: 8px;
+      margin: 1rem 0;
+      text-align: center;
+    }
+
+    .success-message {
+      background: rgba(0, 128, 0, 0.8);
+      color: white;
+      padding: 1rem;
+      border-radius: 8px;
+      margin: 1rem 0;
+      text-align: center;
+    }
+
+    @media (max-width: 768px) {
+      .dashboard-container {
+        grid-template-columns: 1fr;
+        padding: 1rem;
+      }
+      
+      .search-container {
+        grid-template-columns: 1fr;
+      }
+      
+      .search-filters {
+        justify-content: center;
+      }
+    }
+  </style>
 </head>
 <body>
-  <header>
-    <h1>Flavor Journey Dashboard</h1>
-    
-<nav>
-  <a href="index.html">Home</a>
-  <a href="specs.html">Specs</a>
-  <a href="pairing.html">Pairing</a>
-  <a href="education.html">Education</a>
-  <a href="legacy.html">Legacy</a>
-  <a href="flavorverse.html">Flavorverse</a>
-  <a href="dashboard.html">Dashboard</a>
-  <a href="kiosk.html">Kiosk</a>
-  <a href="nft.html">NFT Vault</a>
-  <a href="contact.html">Contact</a>
-</nav>
+  <div class="header">
+    <h1>🌀 Flavorverse Analytics Dashboard</h1>
+    <p>Comprehensive insights across all integrated data sources</p>
+  </div>
 
-  </header>
-  <section>
-    <h2>Track Your Rituals, Stats, and Memories</h2>
-    <p>Visualize your emotional pairings, favorite wrappers, and historical rituals across seasons, moods, and years.</p>
-  </section>
-  
-<footer>
-  Thee Cigar Maestro &copy; 2025 — The Art. The Ritual. The Maestro.
-  <div class="smoke-footer"></div>
-</footer>
+  <div class="dashboard-container">
+    <!-- Advanced Search Section -->
+    <div class="search-section">
+      <h2 style="color: #c69c6d; margin-bottom: 1rem;">🔍 Advanced Search & Analytics</h2>
+      
+      <div class="search-container">
+        <input type="text" class="search-input" id="globalSearch" placeholder="Search across cigars, pairings, education, features...">
+        <button class="action-button" id="searchBtn">Search</button>
+        <button class="action-button" id="analyzeBtn">Analyze Data</button>
+      </div>
 
-<script src="gpt.js"></script>
+      <div class="search-filters">
+        <div class="filter-group">
+          <label>Data Source</label>
+          <select id="sourceFilter">
+            <option value="">All Sources</option>
+            <option value="cigars">Cigars</option>
+            <option value="pairings">Pairings</option>
+            <option value="education">Education</option>
+            <option value="features">Features</option>
+            <option value="emotional">Rituals</option>
+            <option value="lounge">Lounge</option>
+          </select>
+        </div>
+        
+        <div class="filter-group">
+          <label>Wrapper Type</label>
+          <select id="wrapperFilter">
+            <option value="">All Wrappers</option>
+            <option value="Maduro">Maduro</option>
+            <option value="Connecticut">Connecticut</option>
+            <option value="Habano">Habano</option>
+            <option value="Natural">Natural</option>
+            <option value="Oscuro">Oscuro</option>
+          </select>
+        </div>
+        
+        <div class="filter-group">
+          <label>Content Type</label>
+          <select id="contentFilter">
+            <option value="">All Content</option>
+            <option value="implemented">Implemented Features</option>
+            <option value="lessons">Educational Lessons</option>
+            <option value="pairings">Pairing Recommendations</option>
+            <option value="rituals">Ritual Flows</option>
+          </select>
+        </div>
+      </div>
+
+      <div id="searchResults" class="search-results">
+        <div class="loading" id="searchLoading">Ready to search across the Flavorverse...</div>
+      </div>
+    </div>
+
+    <!-- Data Overview Statistics -->
+    <div class="dashboard-card">
+      <div class="card-header">
+        <h3 class="card-title">
+          <span class="card-icon">📊</span>
+          Data Overview
+        </h3>
+      </div>
+      
+      <div class="stat-grid" id="dataStats">
+        <div class="stat-item">
+          <span class="stat-value" id="cigarCount">-</span>
+          <div class="stat-label">Cigars</div>
+        </div>
+        <div class="stat-item">
+          <span class="stat-value" id="pairingCount">-</span>
+          <div class="stat-label">Pairings</div>
+        </div>
+        <div class="stat-item">
+          <span class="stat-value" id="featureCount">-</span>
+          <div class="stat-label">Features</div>
+        </div>
+        <div class="stat-item">
+          <span class="stat-value" id="lessonCount">-</span>
+          <div class="stat-label">Lessons</div>
+        </div>
+      </div>
+
+      <div class="integration-status">
+        <div class="status-indicator"></div>
+        <span id="integrationStatus">Loading integration status...</span>
+      </div>
+    </div>
+
+    <!-- Wrapper Distribution Chart -->
+    <div class="dashboard-card">
+      <div class="card-header">
+        <h3 class="card-title">
+          <span class="card-icon">📈</span>
+          Wrapper Distribution
+        </h3>
+      </div>
+      
+      <div class="chart-container" id="wrapperChart">
+        <div class="loading">Loading wrapper analysis...</div>
+      </div>
+    </div>
+
+    <!-- Top Pairings -->
+    <div class="dashboard-card">
+      <div class="card-header">
+        <h3 class="card-title">
+          <span class="card-icon">🍷</span>
+          Popular Pairings
+        </h3>
+      </div>
+      
+      <div class="list-container" id="pairingsList">
+        <div class="loading">Loading pairing data...</div>
+      </div>
+    </div>
+
+    <!-- Educational Progress -->
+    <div class="dashboard-card">
+      <div class="card-header">
+        <h3 class="card-title">
+          <span class="card-icon">📚</span>
+          Educational Content
+        </h3>
+      </div>
+      
+      <div class="list-container" id="educationList">
+        <div class="loading">Loading educational content...</div>
+      </div>
+    </div>
+
+    <!-- Feature Status -->
+    <div class="dashboard-card">
+      <div class="card-header">
+        <h3 class="card-title">
+          <span class="card-icon">⚙️</span>
+          Feature Status
+        </h3>
+      </div>
+      
+      <div class="list-container" id="featuresList">
+        <div class="loading">Loading feature data...</div>
+      </div>
+    </div>
+
+    <!-- Ritual & Emotional Analytics -->
+    <div class="dashboard-card">
+      <div class="card-header">
+        <h3 class="card-title">
+          <span class="card-icon">🎭</span>
+          Ritual Analytics
+        </h3>
+      </div>
+      
+      <div class="list-container" id="ritualsList">
+        <div class="loading">Loading ritual data...</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Enhanced Dashboard Data Manager
+    class DashboardAnalytics {
+      constructor() {
+        this.data = {};
+        this.analytics = {};
+        this.isLoaded = false;
+      }
+
+      async loadAllData() {
+        const dataFiles = [
+          { key: 'cigars', file: 'flavorverse_nodes.json' },
+          { key: 'pairings', file: 'pairings.json' },
+          { key: 'education', file: 'education.json' },
+          { key: 'features', file: 'features.json' },
+          { key: 'emotional', file: 'emotional.json' },
+          { key: 'lounge', file: 'lounge.json' },
+          { key: 'specs', file: 'cigar-specs.json' },
+          { key: 'interface', file: 'interface.json' },
+          { key: 'meta', file: 'meta.json' },
+          { key: 'flavorAtlas', file: 'flavor-atlas.json' }
+        ];
+
+        try {
+          const loadPromises = dataFiles.map(async ({ key, file }) => {
+            try {
+              const response = await fetch(file);
+              if (response.ok) {
+                this.data[key] = await response.json();
+                console.log(`✓ Loaded ${file}`);
+              }
+            } catch (error) {
+              console.warn(`Could not load ${file}:`, error.message);
+            }
+          });
+
+          await Promise.all(loadPromises);
+          this.generateAnalytics();
+          this.isLoaded = true;
+          return true;
+        } catch (error) {
+          console.error('Error loading dashboard data:', error);
+          return false;
+        }
+      }
+
+      generateAnalytics() {
+        // Cigar analytics
+        if (this.data.cigars) {
+          this.analytics.cigars = {
+            total: this.data.cigars.length,
+            wrapperDistribution: this.getWrapperDistribution(),
+            flavorKeywords: this.getFlavorKeywords()
+          };
+        }
+
+        // Pairing analytics
+        if (this.data.pairings?.pairingEngineV3?.ceuLessons) {
+          this.analytics.pairings = {
+            total: this.data.pairings.pairingEngineV3.ceuLessons.length,
+            lessons: this.data.pairings.pairingEngineV3.ceuLessons
+          };
+        }
+
+        // Education analytics
+        if (this.data.education?.educationTracks) {
+          this.analytics.education = {
+            tracks: this.data.education.educationTracks.tracks?.length || 0,
+            microcredentials: this.data.education.educationTracks.microcredentials?.length || 0
+          };
+        }
+
+        // Feature analytics
+        if (this.data.features?.features) {
+          const features = this.data.features.features;
+          const implemented = Object.values(features).filter(f => f.status === 'Implemented').length;
+          this.analytics.features = {
+            total: Object.keys(features).length,
+            implemented: implemented,
+            percentage: Math.round((implemented / Object.keys(features).length) * 100)
+          };
+        }
+
+        // Ritual analytics
+        if (this.data.emotional?.ritualFlows) {
+          this.analytics.rituals = {
+            flows: Object.keys(this.data.emotional.ritualFlows).length,
+            triggers: this.data.emotional.emotionalMemorySystem?.emotionalFlavorTriggers?.length || 0
+          };
+        }
+      }
+
+      getWrapperDistribution() {
+        const distribution = {};
+        if (this.data.cigars) {
+          this.data.cigars.forEach(cigar => {
+            distribution[cigar.wrapper] = (distribution[cigar.wrapper] || 0) + 1;
+          });
+        }
+        return distribution;
+      }
+
+      getFlavorKeywords() {
+        const keywords = {};
+        const commonKeywords = ['chocolate', 'spice', 'cedar', 'coffee', 'vanilla', 'pepper', 'cream', 'earth', 'leather'];
+        
+        if (this.data.cigars) {
+          this.data.cigars.forEach(cigar => {
+            if (cigar.flavor) {
+              const flavor = cigar.flavor.toLowerCase();
+              commonKeywords.forEach(keyword => {
+                if (flavor.includes(keyword)) {
+                  keywords[keyword] = (keywords[keyword] || 0) + 1;
+                }
+              });
+            }
+          });
+        }
+        return keywords;
+      }
+
+      searchGlobal(query, filters = {}) {
+        const results = [];
+        const searchTerm = query.toLowerCase();
+
+        // Search cigars
+        if ((!filters.source || filters.source === 'cigars') && this.data.cigars) {
+          this.data.cigars.forEach(cigar => {
+            if (this.matchesSearch(cigar, searchTerm, filters)) {
+              results.push({
+                type: 'Cigar',
+                title: cigar.name,
+                details: `${cigar.wrapper} wrapper - ${cigar.flavor}`,
+                source: 'cigars',
+                data: cigar
+              });
+            }
+          });
+        }
+
+        // Search pairings
+        if ((!filters.source || filters.source === 'pairings') && this.data.pairings?.pairingEngineV3?.ceuLessons) {
+          this.data.pairings.pairingEngineV3.ceuLessons.forEach(lesson => {
+            if (lesson.lessonTitle?.toLowerCase().includes(searchTerm) ||
+                lesson.focus?.toLowerCase().includes(searchTerm)) {
+              results.push({
+                type: 'Pairing',
+                title: lesson.lessonTitle,
+                details: lesson.focus + ' - ' + lesson.learningObjective,
+                source: 'pairings',
+                data: lesson
+              });
+            }
+          });
+        }
+
+        // Search education
+        if ((!filters.source || filters.source === 'education') && this.data.education?.educationTracks?.tracks) {
+          this.data.education.educationTracks.tracks.forEach(track => {
+            if (track.title?.toLowerCase().includes(searchTerm)) {
+              results.push({
+                type: 'Education',
+                title: track.title,
+                details: track.objectives?.join(', ') || 'Educational track',
+                source: 'education',
+                data: track
+              });
+            }
+          });
+        }
+
+        // Search features
+        if ((!filters.source || filters.source === 'features') && this.data.features?.features) {
+          Object.entries(this.data.features.features).forEach(([key, feature]) => {
+            if (key.toLowerCase().includes(searchTerm) && feature.status === 'Implemented') {
+              results.push({
+                type: 'Feature',
+                title: key.replace(/([A-Z])/g, ' $1').trim(),
+                details: `${feature.category} - ${feature.status}`,
+                source: 'features',
+                data: feature
+              });
+            }
+          });
+        }
+
+        // Search rituals
+        if ((!filters.source || filters.source === 'emotional') && this.data.emotional?.ritualFlows) {
+          Object.entries(this.data.emotional.ritualFlows).forEach(([key, ritual]) => {
+            if (key.toLowerCase().includes(searchTerm) || 
+                ritual.mood?.toLowerCase().includes(searchTerm)) {
+              results.push({
+                type: 'Ritual',
+                title: key.replace(/([A-Z])/g, ' $1').trim(),
+                details: `${ritual.mood} mood - ${ritual.music} music`,
+                source: 'emotional',
+                data: ritual
+              });
+            }
+          });
+        }
+
+        return results.slice(0, 20); // Limit results
+      }
+
+      matchesSearch(cigar, searchTerm, filters) {
+        const nameMatch = cigar.name.toLowerCase().includes(searchTerm);
+        const flavorMatch = cigar.flavor?.toLowerCase().includes(searchTerm);
+        const wrapperMatch = !filters.wrapper || cigar.wrapper === filters.wrapper;
+        
+        return (nameMatch || flavorMatch) && wrapperMatch;
+      }
+    }
+
+    // Initialize dashboard
+    const dashboard = new DashboardAnalytics();
+    let searchTimeout;
+
+    // UI Elements
+    const elements = {
+      globalSearch: document.getElementById('globalSearch'),
+      searchBtn: document.getElementById('searchBtn'),
+      analyzeBtn: document.getElementById('analyzeBtn'),
+      sourceFilter: document.getElementById('sourceFilter'),
+      wrapperFilter: document.getElementById('wrapperFilter'),
+      contentFilter: document.getElementById('contentFilter'),
+      searchResults: document.getElementById('searchResults'),
+      searchLoading: document.getElementById('searchLoading'),
+      integrationStatus: document.getElementById('integrationStatus'),
+      cigarCount: document.getElementById('cigarCount'),
+      pairingCount: document.getElementById('pairingCount'),
+      featureCount: document.getElementById('featureCount'),
+      lessonCount: document.getElementById('lessonCount'),
+      wrapperChart: document.getElementById('wrapperChart'),
+      pairingsList: document.getElementById('pairingsList'),
+      educationList: document.getElementById('educationList'),
+      featuresList: document.getElementById('featuresList'),
+      ritualsList: document.getElementById('ritualsList')
+    };
+
+    function showMessage(message, type = 'info') {
+      const messageDiv = document.createElement('div');
+      messageDiv.className = type === 'error' ? 'error-message' : 'success-message';
+      messageDiv.textContent = message;
+      document.body.appendChild(messageDiv);
+      setTimeout(() => messageDiv.remove(), 3000);
+    }
+
+    function updateDataStats() {
+      if (!dashboard.isLoaded) return;
+
+      elements.cigarCount.textContent = dashboard.analytics.cigars?.total || 0;
+      elements.pairingCount.textContent = dashboard.analytics.pairings?.total || 0;
+      elements.featureCount.textContent = dashboard.analytics.features?.implemented || 0;
+      elements.lessonCount.textContent = dashboard.analytics.education?.tracks || 0;
+      
+      elements.integrationStatus.textContent = 'All data sources integrated and synchronized';
+    }
+
+    function createWrapperChart() {
+      if (!dashboard.analytics.cigars?.wrapperDistribution) return;
+
+      const distribution = dashboard.analytics.cigars.wrapperDistribution;
+      const maxCount = Math.max(...Object.values(distribution));
+      
+      elements.wrapperChart.innerHTML = '';
+      
+      Object.entries(distribution).forEach(([wrapper, count]) => {
+        const bar = document.createElement('div');
+        bar.className = 'chart-bar';
+        bar.style.height = `${(count / maxCount) * 150}px`;
+        
+        const label = document.createElement('div');
+        label.className = 'chart-label';
+        label.textContent = `${wrapper}\n(${count})`;
+        
+        bar.appendChild(label);
+        elements.wrapperChart.appendChild(bar);
+      });
+    }
+
+    function populatePairingsList() {
+      if (!dashboard.analytics.pairings?.lessons) return;
+
+      elements.pairingsList.innerHTML = '';
+      
+      dashboard.analytics.pairings.lessons.slice(0, 5).forEach(lesson => {
+        const item = document.createElement('div');
+        item.className = 'list-item';
+        item.innerHTML = `
+          <div class="item-title">${lesson.lessonTitle}</div>
+          <div class="item-details">${lesson.focus} - ${lesson.learningObjective}</div>
+        `;
+        elements.pairingsList.appendChild(item);
+      });
+    }
+
+    function populateEducationList() {
+      if (!dashboard.data.education?.educationTracks?.tracks) return;
+
+      elements.educationList.innerHTML = '';
+      
+      dashboard.data.education.educationTracks.tracks.forEach(track => {
+        const item = document.createElement('div');
+        item.className = 'list-item';
+        item.innerHTML = `
+          <div class="item-title">${track.title}</div>
+          <div class="item-details">${track.objectives?.join(', ') || 'Educational track'}</div>
+        `;
+        elements.educationList.appendChild(item);
+      });
+    }
+
+    function populateFeaturesList() {
+      if (!dashboard.data.features?.features) return;
+
+      elements.featuresList.innerHTML = '';
+      
+      const features = Object.entries(dashboard.data.features.features)
+        .filter(([_, feature]) => feature.status === 'Implemented')
+        .slice(0, 8);
+      
+      features.forEach(([key, feature]) => {
+        const item = document.createElement('div');
+        item.className = 'list-item';
+        item.innerHTML = `
+          <div class="item-title">${key.replace(/([A-Z])/g, ' $1').trim()}</div>
+          <div class="item-details">${feature.category} - Active</div>
+        `;
+        elements.featuresList.appendChild(item);
+      });
+    }
+
+    function populateRitualsList() {
+      if (!dashboard.data.emotional?.ritualFlows) return;
+
+      elements.ritualsList.innerHTML = '';
+      
+      Object.entries(dashboard.data.emotional.ritualFlows).forEach(([key, ritual]) => {
+        const item = document.createElement('div');
+        item.className = 'list-item';
+        item.innerHTML = `
+          <div class="item-title">${key.replace(/([A-Z])/g, ' $1').trim()}</div>
+          <div class="item-details">${ritual.mood} mood - ${ritual.music} music</div>
+        `;
+        elements.ritualsList.appendChild(item);
+      });
+    }
+
+    function performSearch() {
+      const query = elements.globalSearch.value.trim();
+      if (!query) {
+        elements.searchResults.style.display = 'none';
+        return;
+      }
+
+      const filters = {
+        source: elements.sourceFilter.value,
+        wrapper: elements.wrapperFilter.value,
+        content: elements.contentFilter.value
+      };
+
+      const results = dashboard.searchGlobal(query, filters);
+      displaySearchResults(results);
+    }
+
+    function displaySearchResults(results) {
+      elements.searchResults.innerHTML = '';
+      elements.searchResults.style.display = 'block';
+
+      if (results.length === 0) {
+        elements.searchResults.innerHTML = '<div class="loading">No results found</div>';
+        return;
+      }
+
+      results.forEach(result => {
+        const item = document.createElement('div');
+        item.className = 'result-item';
+        item.innerHTML = `
+          <span class="result-type">${result.type}</span>
+          <strong>${result.title}</strong><br>
+          <small>${result.details}</small>
+        `;
+        
+        item.onclick = () => {
+          showMessage(`Selected: ${result.title} (${result.type})`);
+          // Here you could navigate to the specific item or show more details
+        };
+        
+        elements.searchResults.appendChild(item);
+      });
+    }
+
+    function analyzeData() {
+      if (!dashboard.isLoaded) {
+        showMessage('Data not loaded yet', 'error');
+        return;
+      }
+
+      const analysis = {
+        totalCigars: dashboard.analytics.cigars?.total || 0,
+        wrapperTypes: Object.keys(dashboard.analytics.cigars?.wrapperDistribution || {}).length,
+        implementedFeatures: dashboard.analytics.features?.implemented || 0,
+        featurePercentage: dashboard.analytics.features?.percentage || 0,
+        educationalTracks: dashboard.analytics.education?.tracks || 0,
+        ritualFlows: dashboard.analytics.rituals?.flows || 0
+      };
+
+      showMessage(`Analysis Complete: ${analysis.totalCigars} cigars, ${analysis.wrapperTypes} wrapper types, ${analysis.implementedFeatures} features (${analysis.featurePercentage}% complete), ${analysis.educationalTracks} education tracks, ${analysis.ritualFlows} ritual flows`);
+    }
+
+    // Event Listeners
+    elements.searchBtn.onclick = performSearch;
+    elements.analyzeBtn.onclick = analyzeData;
+
+    elements.globalSearch.addEventListener('input', () => {
+      clearTimeout(searchTimeout);
+      searchTimeout = setTimeout(performSearch, 300);
+    });
+
+    // Initialize dashboard
+    async function initializeDashboard() {
+      showMessage('Loading Flavorverse analytics...');
+      
+      const success = await dashboard.loadAllData();
+      
+      if (success) {
+        updateDataStats();
+        createWrapperChart();
+        populatePairingsList();
+        populateEducationList();
+        populateFeaturesList();
+        populateRitualsList();
+        
+        showMessage('Dashboard loaded successfully! All data sources integrated.');
+      } else {
+        showMessage('Some data sources could not be loaded', 'error');
+      }
+    }
+
+    // Start the dashboard
+    initializeDashboard();
+  </script>
 </body>
 </html>

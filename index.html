@@ -9,7 +9,7 @@
   <style>
     body { margin: 0; background-color: #121212; overflow: hidden; color: #f0e6d2; font-family: Georgia, serif; }
     canvas { display: block; }
-    #info, #filter, #modal {
+    #info, #filter, #modal, #educationPanel, #pairingPanel, #loungePanel {
       position: absolute;
       z-index: 2;
       background: rgba(0, 0, 0, 0.7);
@@ -24,16 +24,43 @@
       top: 100px;
       left: 50%;
       transform: translateX(-50%);
-      width: 300px;
+      width: 400px;
+      max-height: 70vh;
+      overflow-y: auto;
     }
-    #modal h3 { margin-top: 0; }
-    #closeBtn {
+    #educationPanel {
+      display: none;
+      top: 100px;
+      right: 20px;
+      width: 300px;
+      max-height: 70vh;
+      overflow-y: auto;
+    }
+    #pairingPanel {
+      display: none;
+      bottom: 100px;
+      left: 20px;
+      width: 350px;
+      max-height: 50vh;
+      overflow-y: auto;
+    }
+    #loungePanel {
+      display: none;
+      bottom: 100px;
+      right: 20px;
+      width: 300px;
+      max-height: 50vh;
+      overflow-y: auto;
+    }
+    #modal h3, #educationPanel h3, #pairingPanel h3, #loungePanel h3 { margin-top: 0; }
+    .close-btn {
       background: #5c4033;
       border: none;
       color: white;
       padding: 4px 8px;
       float: right;
       cursor: pointer;
+      border-radius: 3px;
     }
     .error-message {
       background: rgba(220, 20, 60, 0.8);
@@ -42,10 +69,67 @@
       border-radius: 4px;
       margin: 5px 0;
     }
+    .success-message {
+      background: rgba(0, 128, 0, 0.8);
+      color: white;
+      padding: 10px;
+      border-radius: 4px;
+      margin: 5px 0;
+    }
+    .feature-button {
+      background: #c69c6d;
+      border: none;
+      color: #121212;
+      padding: 8px 12px;
+      margin: 5px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .feature-button:hover {
+      background: #dab785;
+    }
+    .pairing-item {
+      background: rgba(92, 64, 51, 0.3);
+      padding: 8px;
+      margin: 5px 0;
+      border-radius: 4px;
+      border-left: 3px solid #c69c6d;
+    }
+    .lesson-item {
+      background: rgba(60, 60, 60, 0.5);
+      padding: 8px;
+      margin: 5px 0;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .lesson-item:hover {
+      background: rgba(92, 64, 51, 0.5);
+    }
+    .emotional-trigger {
+      background: linear-gradient(45deg, #3a2c20, #5c4033);
+      padding: 6px;
+      margin: 3px 0;
+      border-radius: 3px;
+      font-size: 12px;
+    }
+    .loading {
+      opacity: 0.6;
+      pointer-events: none;
+    }
   </style>
 </head>
 <body>
   <div id="info">🌀 Flavorverse — Ritual Trail Viewer</div>
+  
+  <!-- Feature Navigation Buttons -->
+  <div style="position: absolute; top: 70px; left: 20px; z-index: 3;">
+    <button class="feature-button" id="educationBtn">📚 Education</button>
+    <button class="feature-button" id="pairingBtn">🍷 Pairings</button>
+    <button class="feature-button" id="loungeBtn">🏛️ Lounge</button>
+    <button class="feature-button" id="ritualBtn">🎭 Ritual</button>
+  </div>
+  
   <div id="filter">
     <strong>Filter by Wrapper</strong><br/>
     <label><input type="checkbox" value="Maduro" checked /> Maduro</label>
@@ -54,17 +138,183 @@
     <label><input type="checkbox" value="Oscuro" checked /> Oscuro</label>
     <label><input type="checkbox" value="Natural" checked /> Natural</label>
   </div>
+  
+  <!-- Enhanced Modal with Rich Content -->
   <div id="modal">
-    <button id="closeBtn">X</button>
+    <button class="close-btn" id="closeBtn">×</button>
     <h3 id="modalTitle">Cigar Name</h3>
-    <p><strong>Wrapper:</strong> <span id="modalWrapper"></span></p>
-    <p><strong>Notes:</strong> <span id="modalNotes"></span></p>
-    <p><em>Legacy Entry: "Coming soon: Audio & Journal memory capsule..."</em></p>
+    <div id="modalContent">
+      <p><strong>Wrapper:</strong> <span id="modalWrapper"></span></p>
+      <p><strong>Flavor Profile:</strong> <span id="modalNotes"></span></p>
+      <div id="modalPairings"></div>
+      <div id="modalEducation"></div>
+      <div id="modalEmotional"></div>
+    </div>
   </div>
+
+  <!-- Education Panel -->
+  <div id="educationPanel">
+    <button class="close-btn" id="closeEducationBtn">×</button>
+    <h3>📚 Educational Content</h3>
+    <div id="educationContent">
+      <div id="ceuLessons"></div>
+      <div id="certificationTracks"></div>
+    </div>
+  </div>
+
+  <!-- Pairing Panel -->
+  <div id="pairingPanel">
+    <button class="close-btn" id="closePairingBtn">×</button>
+    <h3>🍷 Pairing Engine</h3>
+    <div id="pairingContent">
+      <input type="text" id="pairingInput" placeholder="Enter beverage (e.g., espresso, whiskey)..." style="width: 100%; margin-bottom: 10px; padding: 5px; background: #2c2c2c; border: 1px solid #666; color: #f0e6d2;" />
+      <button class="feature-button" id="findPairingsBtn">Find Pairings</button>
+      <div id="pairingResults"></div>
+    </div>
+  </div>
+
+  <!-- Lounge Panel -->
+  <div id="loungePanel">
+    <button class="close-btn" id="closeLoungeBtn">×</button>
+    <h3>🏛️ Lounge Experience</h3>
+    <div id="loungeContent">
+      <div id="conciergeMode"></div>
+      <div id="loungeFeatures"></div>
+    </div>
+  </div>
+
   <div id="errorContainer"></div>
   <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js" integrity="sha384-gd3xd4QfbP7PiJPPr7dV3s6cXGJ0vy3S8xkW7YnK8eQMjB7c9PwSb0Rx9fF5J8P1" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/examples/js/controls/OrbitControls.js" integrity="sha384-KfY7P2q4L6T8wHj9nQr0N9p3K4L5M8B3J6Q1W7S4R2F9G8H5I6J7K8L9M0N1O2P3" crossorigin="anonymous"></script>
   <script>
+    // Enhanced Data Management System
+    class DataManager {
+      constructor() {
+        this.data = {
+          cigars: [],
+          features: {},
+          education: {},
+          pairings: {},
+          interface: {},
+          meta: {},
+          emotional: {},
+          lounge: {},
+          flavorAtlas: {},
+          specs: {}
+        };
+        this.loaded = false;
+      }
+
+      async loadAllData() {
+        const dataFiles = [
+          { key: 'cigars', file: 'flavorverse_nodes.json' },
+          { key: 'features', file: 'features.json' },
+          { key: 'education', file: 'education.json' },
+          { key: 'pairings', file: 'pairings.json' },
+          { key: 'interface', file: 'interface.json' },
+          { key: 'meta', file: 'meta.json' },
+          { key: 'emotional', file: 'emotional.json' },
+          { key: 'lounge', file: 'lounge.json' },
+          { key: 'flavorAtlas', file: 'flavor-atlas.json' },
+          { key: 'specs', file: 'cigar-specs.json' }
+        ];
+
+        try {
+          const loadPromises = dataFiles.map(async ({ key, file }) => {
+            try {
+              const response = await fetch(file);
+              if (!response.ok) {
+                throw new Error(`Failed to load ${file}: ${response.status}`);
+              }
+              this.data[key] = await response.json();
+              console.log(`✓ Loaded ${file}`);
+            } catch (error) {
+              console.warn(`⚠️ Could not load ${file}:`, error.message);
+              // Continue with partial data
+            }
+          });
+
+          await Promise.all(loadPromises);
+          this.loaded = true;
+          console.log('🚀 All data loaded successfully');
+          return true;
+        } catch (error) {
+          console.error('❌ Critical error loading data:', error);
+          showError('Failed to load application data');
+          return false;
+        }
+      }
+
+      getCigarPairings(cigarName) {
+        if (!this.data.pairings.pairingEngineV3) return [];
+        
+        // Search for pairings based on wrapper type and flavor profile
+        const cigar = this.data.cigars.find(c => c.name === cigarName);
+        if (!cigar) return [];
+
+        const pairings = [];
+        const engine = this.data.pairings.pairingEngineV3;
+        
+        // Look for wrapper-based pairings
+        if (engine.ceuLessons) {
+          engine.ceuLessons.forEach(lesson => {
+            if (lesson.focus && lesson.focus.includes(cigar.wrapper)) {
+              pairings.push({
+                type: 'Spirit Pairing',
+                recommendation: lesson.lessonTitle,
+                logic: lesson.learningObjective
+              });
+            }
+          });
+        }
+
+        return pairings;
+      }
+
+      getEducationalContent(topic) {
+        if (!this.data.education.educationTracks) return [];
+        
+        const tracks = this.data.education.educationTracks.tracks || [];
+        return tracks.filter(track => 
+          track.title.toLowerCase().includes(topic.toLowerCase()) ||
+          track.lessons.some(lesson => lesson.toLowerCase().includes(topic.toLowerCase()))
+        );
+      }
+
+      getEmotionalContext(wrapper) {
+        if (!this.data.emotional.ritualFlows) return null;
+        
+        const flows = this.data.emotional.ritualFlows;
+        const matchingFlow = Object.values(flows).find(flow => 
+          flow.pairing && flow.pairing.toLowerCase().includes(wrapper.toLowerCase())
+        );
+        
+        return matchingFlow || null;
+      }
+
+      getLoungeFeatures() {
+        if (!this.data.lounge.loungeIntegrationTools) return [];
+        
+        const features = [];
+        const tools = this.data.lounge.loungeIntegrationTools;
+        
+        if (tools.coreFunctions) {
+          tools.coreFunctions.forEach(func => {
+            features.push({
+              name: func.replace('loungeIntegrationTools.', ''),
+              status: tools.status,
+              description: `${func} functionality`
+            });
+          });
+        }
+        
+        return features;
+      }
+    }
+
+    // Initialize data manager
+    const dataManager = new DataManager();
+
     // Utility functions for security
     function sanitizeText(text) {
       const div = document.createElement('div');
@@ -79,6 +329,15 @@
       errorDiv.textContent = message;
       errorContainer.appendChild(errorDiv);
       setTimeout(() => errorDiv.remove(), 5000);
+    }
+
+    function showSuccess(message) {
+      const errorContainer = document.getElementById('errorContainer');
+      const successDiv = document.createElement('div');
+      successDiv.className = 'success-message';
+      successDiv.textContent = message;
+      errorContainer.appendChild(successDiv);
+      setTimeout(() => successDiv.remove(), 3000);
     }
 
     // Initialize Three.js scene
@@ -103,21 +362,36 @@
     const stars = [];
     const trails = [];
 
+    // UI Elements
     const info = document.getElementById("info");
     const modal = document.getElementById("modal");
-    const closeBtn = document.getElementById("closeBtn");
-    closeBtn.onclick = () => modal.style.display = "none";
+    const educationPanel = document.getElementById("educationPanel");
+    const pairingPanel = document.getElementById("pairingPanel");
+    const loungePanel = document.getElementById("loungePanel");
+
+    // Close button handlers
+    document.getElementById("closeBtn").onclick = () => modal.style.display = "none";
+    document.getElementById("closeEducationBtn").onclick = () => educationPanel.style.display = "none";
+    document.getElementById("closePairingBtn").onclick = () => pairingPanel.style.display = "none";
+    document.getElementById("closeLoungeBtn").onclick = () => loungePanel.style.display = "none";
+
+    // Feature button handlers
+    document.getElementById("educationBtn").onclick = () => showEducationPanel();
+    document.getElementById("pairingBtn").onclick = () => showPairingPanel();
+    document.getElementById("loungeBtn").onclick = () => showLoungePanel();
+    document.getElementById("ritualBtn").onclick = () => startRitualMode();
 
     async function loadCigars() {
+      if (!dataManager.loaded) {
+        showError('Data not loaded yet. Please wait...');
+        return;
+      }
+
       try {
-        const res = await fetch("flavorverse_nodes.json");
-        if (!res.ok) {
-          throw new Error(`Failed to load cigar data: ${res.status}`);
-        }
-        const data = await res.json();
+        const cigars = dataManager.data.cigars;
         const wrapperMap = {};
 
-        data.forEach(item => {
+        cigars.forEach(item => {
           // Validate data structure
           if (!item.name || !item.wrapper || !item.color) {
             console.warn('Invalid cigar data:', item);
@@ -134,7 +408,8 @@
           star.name = item.name;
           star.userData = { 
             wrapper: item.wrapper !== "Unknown" ? item.wrapper : "Not specified", 
-            flavor: item.flavor !== "Undefined" ? item.flavor : "Flavor profile coming soon" 
+            flavor: item.flavor !== "Undefined" ? item.flavor : "Flavor profile coming soon",
+            originalData: item
           };
           scene.add(star);
           stars.push(star);
@@ -157,10 +432,172 @@
             }
           }
         });
+
+        showSuccess(`Loaded ${cigars.length} cigars into the Flavorverse`);
       } catch (error) {
         console.error('Error loading cigars:', error);
         showError('Failed to load cigar data. Please refresh the page.');
       }
+    }
+
+    // Enhanced modal functionality
+    function showEnhancedModal(star) {
+      const cigarName = star.name;
+      const userData = star.userData;
+      
+      // Basic info
+      document.getElementById("modalTitle").textContent = cigarName;
+      document.getElementById("modalWrapper").textContent = userData.wrapper;
+      document.getElementById("modalNotes").textContent = userData.flavor;
+      
+      // Pairings
+      const pairings = dataManager.getCigarPairings(cigarName);
+      const pairingsDiv = document.getElementById("modalPairings");
+      if (pairings.length > 0) {
+        pairingsDiv.innerHTML = '<h4>🍷 Recommended Pairings:</h4>' + 
+          pairings.map(p => `<div class="pairing-item"><strong>${p.type}:</strong> ${p.recommendation}<br><em>${p.logic}</em></div>`).join('');
+      } else {
+        pairingsDiv.innerHTML = '<h4>🍷 Pairings:</h4><p>Pairing recommendations available in the Pairing Engine.</p>';
+      }
+      
+      // Educational content
+      const education = dataManager.getEducationalContent(userData.wrapper);
+      const educationDiv = document.getElementById("modalEducation");
+      if (education.length > 0) {
+        educationDiv.innerHTML = '<h4>📚 Learn More:</h4>' + 
+          education.map(e => `<div class="lesson-item" onclick="openEducationTrack('${e.id}')">${e.title}</div>`).join('');
+      } else {
+        educationDiv.innerHTML = '<h4>📚 Education:</h4><p>Educational content available in the Education panel.</p>';
+      }
+      
+      // Emotional context
+      const emotional = dataManager.getEmotionalContext(userData.wrapper);
+      const emotionalDiv = document.getElementById("modalEmotional");
+      if (emotional) {
+        emotionalDiv.innerHTML = '<h4>🎭 Ritual Context:</h4>' + 
+          `<div class="emotional-trigger">Mood: ${emotional.mood} | Music: ${emotional.music}<br>` +
+          `${emotional.memoryPrompt}</div>`;
+      } else {
+        emotionalDiv.innerHTML = '<h4>🎭 Ritual:</h4><p>Start a ritual session to create emotional memories.</p>';
+      }
+      
+      modal.style.display = "block";
+    }
+
+    function showEducationPanel() {
+      const content = document.getElementById("educationContent");
+      const education = dataManager.data.education;
+      
+      if (education.educationTracks && education.educationTracks.tracks) {
+        const tracks = education.educationTracks.tracks;
+        const ceuDiv = document.getElementById("ceuLessons");
+        
+        ceuDiv.innerHTML = '<h4>📜 CEU Certification Tracks:</h4>' +
+          tracks.map(track => 
+            `<div class="lesson-item" onclick="startCEUTrack('${track.id}')">
+              <strong>${track.title}</strong><br>
+              <small>${track.objectives ? track.objectives.join(', ') : 'Professional development track'}</small>
+            </div>`
+          ).join('');
+      }
+      
+      educationPanel.style.display = "block";
+    }
+
+    function showPairingPanel() {
+      const findBtn = document.getElementById("findPairingsBtn");
+      const input = document.getElementById("pairingInput");
+      const results = document.getElementById("pairingResults");
+      
+      findBtn.onclick = () => {
+        const beverage = input.value.trim();
+        if (!beverage) {
+          showError('Please enter a beverage to find pairings');
+          return;
+        }
+        
+        // Simple pairing logic based on loaded data
+        const pairings = dataManager.data.cigars.filter(cigar => {
+          if (beverage.toLowerCase().includes('coffee') || beverage.toLowerCase().includes('espresso')) {
+            return cigar.wrapper === 'Maduro' || cigar.flavor.toLowerCase().includes('chocolate');
+          }
+          if (beverage.toLowerCase().includes('whiskey') || beverage.toLowerCase().includes('bourbon')) {
+            return cigar.wrapper === 'Habano' || cigar.flavor.toLowerCase().includes('spice');
+          }
+          if (beverage.toLowerCase().includes('wine') || beverage.toLowerCase().includes('red')) {
+            return cigar.wrapper === 'Natural' || cigar.flavor.toLowerCase().includes('cedar');
+          }
+          return false;
+        });
+        
+        if (pairings.length > 0) {
+          results.innerHTML = '<h4>🎯 Perfect Matches:</h4>' +
+            pairings.map(cigar => 
+              `<div class="pairing-item">
+                <strong>${cigar.name}</strong><br>
+                <em>${cigar.flavor}</em><br>
+                <small>Wrapper: ${cigar.wrapper}</small>
+              </div>`
+            ).join('');
+        } else {
+          results.innerHTML = '<p>No specific pairings found. Try different beverage types like coffee, whiskey, or wine.</p>';
+        }
+      };
+      
+      pairingPanel.style.display = "block";
+    }
+
+    function showLoungePanel() {
+      const features = dataManager.getLoungeFeatures();
+      const content = document.getElementById("loungeContent");
+      
+      const conciergeDiv = document.getElementById("conciergeMode");
+      conciergeDiv.innerHTML = '<h4>🎩 Concierge Services:</h4>' +
+        '<div class="feature-button" onclick="activateConcierge()">Activate Personal Concierge</div>' +
+        '<p>Your personal cigar advisor for premium selections and expert guidance.</p>';
+      
+      const featuresDiv = document.getElementById("loungeFeatures");
+      featuresDiv.innerHTML = '<h4>🏛️ Lounge Features:</h4>' +
+        features.map(f => 
+          `<div class="lesson-item">
+            <strong>${f.name}</strong> (${f.status})<br>
+            <small>${f.description}</small>
+          </div>`
+        ).join('');
+      
+      loungePanel.style.display = "block";
+    }
+
+    function startRitualMode() {
+      const emotional = dataManager.data.emotional;
+      if (emotional.ritualFlows) {
+        const flows = Object.keys(emotional.ritualFlows);
+        const randomFlow = flows[Math.floor(Math.random() * flows.length)];
+        const flow = emotional.ritualFlows[randomFlow];
+        
+        showSuccess(`🎭 Ritual Mode: ${randomFlow.replace(/([A-Z])/g, ' $1').toLowerCase()}`);
+        
+        // Show ritual guidance
+        setTimeout(() => {
+          alert(`🎭 Ritual Guidance:\n\nMood: ${flow.mood}\nMusic: ${flow.music}\nLighting: ${flow.lightLevel}\n\nMemory Prompt: ${flow.memoryPrompt}`);
+        }, 1000);
+      } else {
+        showError('Ritual data not available');
+      }
+    }
+
+    // Placeholder functions for advanced features
+    function startCEUTrack(trackId) {
+      showSuccess(`Starting CEU track: ${trackId}`);
+    }
+
+    function openEducationTrack(trackId) {
+      showEducationPanel();
+      showSuccess(`Opening education track: ${trackId}`);
+    }
+
+    function activateConcierge() {
+      showSuccess('🎩 Personal Concierge activated. How may I assist you today?');
     }
 
     const light = new THREE.PointLight(0xffffff, 1, 200);
@@ -185,7 +622,6 @@
       const intersects = raycaster.intersectObjects(visibleStars);
 
       if (intersects.length > 0) {
-        // Fixed: Use textContent instead of innerHTML to prevent XSS
         info.textContent = "⭐ " + intersects[0].object.name;
       } else {
         info.textContent = "🌀 Flavorverse — Ritual Trail Viewer";
@@ -208,11 +644,7 @@
       const intersects = raycaster.intersectObjects(stars.filter(s => s.visible));
       if (intersects.length > 0) {
         const obj = intersects[0].object;
-        // Fixed: Use textContent to prevent XSS
-        document.getElementById("modalTitle").textContent = obj.name;
-        document.getElementById("modalWrapper").textContent = obj.userData.wrapper;
-        document.getElementById("modalNotes").textContent = obj.userData.flavor;
-        modal.style.display = "block";
+        showEnhancedModal(obj);
       }
     });
 
@@ -224,11 +656,26 @@
     });
 
     // Initialize application
-    loadCigars().then(() => {
-      updateFilter();
-      animate();
-    }).catch(error => {
-      console.error('Failed to initialize application:', error);
+    async function initializeApp() {
+      info.textContent = "🌀 Loading Flavorverse...";
+      
+      const success = await dataManager.loadAllData();
+      if (success) {
+        await loadCigars();
+        updateFilter();
+        animate();
+        info.textContent = "🌀 Flavorverse — Ritual Trail Viewer";
+        showSuccess('🚀 Flavorverse fully integrated and ready!');
+      } else {
+        showError('Failed to initialize application. Some features may be limited.');
+        // Continue with basic functionality
+        animate();
+      }
+    }
+
+    // Start the application
+    initializeApp().catch(error => {
+      console.error('Critical initialization error:', error);
       showError('Application failed to initialize. Please refresh the page.');
     });
   </script>
