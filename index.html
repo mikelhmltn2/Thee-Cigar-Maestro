@@ -6,6 +6,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; media-src 'self' blob:; connect-src 'self' https://theecigarmaestro.vercel.app;" />
   <title>Flavorverse — Ritual Trail Interface</title>
+  
+  <!-- Progressive Web App Meta Tags -->
+  <meta name="theme-color" content="#121212">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="manifest" href="/manifest.json">
   <style>
     body { margin: 0; background-color: #121212; overflow: hidden; color: #f0e6d2; font-family: Georgia, serif; }
     canvas { display: block; }
@@ -807,6 +813,50 @@
         voicePanel.style.display = "block";
       }
     });
+  </script>
+  
+  <!-- Enhanced Feature Scripts -->
+  <script src="local-storage-manager.js"></script>
+  <script src="advanced-search.js"></script>
+  
+  <!-- Service Worker Registration -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', async () => {
+        try {
+          const registration = await navigator.serviceWorker.register('/service-worker.js');
+          console.log('✅ Service Worker registered successfully:', registration.scope);
+          
+          // Listen for service worker messages
+          navigator.serviceWorker.addEventListener('message', (event) => {
+            const { type, action } = event.data;
+            
+            if (type === 'SYNC_REQUEST') {
+              if (action === 'user-data' && window.storageManager) {
+                // Sync user data when requested
+                window.storageManager.saveData();
+                console.log('📤 User data synced');
+              }
+              
+              if (action === 'analytics' && window.storageManager) {
+                // Sync analytics when requested
+                const analytics = window.storageManager.exportData().analytics;
+                console.log('📊 Analytics synced:', analytics);
+              }
+            }
+          });
+          
+          // Register for background sync
+          if ('sync' in window.ServiceWorkerRegistration.prototype) {
+            registration.sync.register('sync-user-data');
+            registration.sync.register('sync-analytics');
+          }
+          
+        } catch (error) {
+          console.error('❌ Service Worker registration failed:', error);
+        }
+      });
+    }
   </script>
 </body>
 </html>
