@@ -466,7 +466,11 @@ class AnalyticsManager {
    * Generate unique session ID
    */
   generateSessionId() {
-    return `session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+    // Use cryptographically secure random values for session ID
+    const array = new Uint32Array(3);
+    window.crypto.getRandomValues(array);
+    const randomPart = Array.from(array).map(num => num.toString(36)).join('');
+    return `session_${Date.now()}_${randomPart}`;
   }
 
   /**
