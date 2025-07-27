@@ -1,7 +1,10 @@
 // Analytics Integration System - globals handled by ESLint config
 
+// Import Vercel Analytics
+import { inject } from '@vercel/analytics';
+
 // Analytics Integration System
-// Handles Google Analytics, custom events, and performance monitoring
+// Handles Google Analytics, custom events, performance monitoring, and Vercel Analytics
 
 class AnalyticsManager {
   constructor() {
@@ -22,6 +25,7 @@ class AnalyticsManager {
   async init() {
     try {
       await this.initializeGA4();
+      this.initializeVercelAnalytics();
       this.initializeCoreWebVitals();
       this.initializeErrorTracking();
       this.initializePerformanceMonitoring();
@@ -40,6 +44,19 @@ class AnalyticsManager {
     } catch (_error) {
       console.error('❌ Analytics initialization failed:', error);
       this.trackError('analytics_init_failed', error);
+    }
+  }
+
+  /**
+   * Initialize Vercel Analytics
+   */
+  initializeVercelAnalytics() {
+    try {
+      // Initialize Vercel Analytics
+      inject();
+      console.log('✅ Vercel Analytics initialized');
+    } catch (error) {
+      console.error('❌ Vercel Analytics initialization failed:', error);
     }
   }
 
