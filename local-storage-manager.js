@@ -126,7 +126,7 @@ class LocalStorageManager {
    * Save data to localStorage
    */
   saveData() {
-    if (this.syncInProgress) return;
+    if (this.syncInProgress) {return;}
     
     try {
       this.syncInProgress = true;

@@ -93,7 +93,7 @@ class SearchEngine {
     this.facetIndex.clear();
 
     Object.entries(data).forEach(([category, items]) => {
-      if (!Array.isArray(items)) return;
+      if (!Array.isArray(items)) {return;}
 
       items.forEach((item, index) => {
         const docId = `${category}_${index}`;
@@ -252,7 +252,7 @@ class SearchEngine {
   getDocumentsByFacets(facets) {
     const facetSets = Object.entries(facets).map(([facet, values]) => {
       const facetMap = this.facetIndex.get(facet);
-      if (!facetMap) return new Set();
+      if (!facetMap) {return new Set();}
 
       const valueArray = Array.isArray(values) ? values : [values];
       const matchingDocs = new Set();
@@ -262,7 +262,7 @@ class SearchEngine {
         if (docs) {
           docs.forEach(docId => {
             const doc = this.searchIndex.get(docId);
-            if (doc) matchingDocs.add(doc);
+            if (doc) {matchingDocs.add(doc);}
           });
         }
       });
@@ -271,7 +271,7 @@ class SearchEngine {
     });
 
     // Intersection of all facet matches
-    if (facetSets.length === 0) return new Set();
+    if (facetSets.length === 0) {return new Set();}
     
     return facetSets.reduce((intersection, set) => {
       return new Set([...intersection].filter(doc => set.has(doc)));
@@ -363,9 +363,9 @@ class SearchEngine {
 
   getFieldWeight(field, category) {
     const fields = this.searchableFields[category];
-    if (fields.primary.includes(field)) return 1.0;
-    if (fields.secondary.includes(field)) return 0.7;
-    if (fields.metadata.includes(field)) return 0.4;
+    if (fields.primary.includes(field)) {return 1.0;}
+    if (fields.secondary.includes(field)) {return 0.7;}
+    if (fields.metadata.includes(field)) {return 0.4;}
     return 0.3;
   }
 
@@ -396,8 +396,8 @@ class SearchEngine {
   levenshteinSimilarity(a, b) {
     const matrix = Array(a.length + 1).fill().map(() => Array(b.length + 1).fill(0));
     
-    for (let i = 0; i <= a.length; i++) matrix[i][0] = i;
-    for (let j = 0; j <= b.length; j++) matrix[0][j] = j;
+    for (let i = 0; i <= a.length; i++) {matrix[i][0] = i;}
+    for (let j = 0; j <= b.length; j++) {matrix[0][j] = j;}
     
     for (let i = 1; i <= a.length; i++) {
       for (let j = 1; j <= b.length; j++) {
@@ -441,7 +441,7 @@ class SearchEngine {
 
   // Filtering and sorting
   applyFilters(documents, filters) {
-    if (Object.keys(filters).length === 0) return documents;
+    if (Object.keys(filters).length === 0) {return documents;}
 
     return documents.filter(doc => {
       return Object.entries(filters).every(([field, condition]) => {
@@ -527,8 +527,8 @@ class SearchEngine {
             const end = Math.min(fieldValue.length, index + term.length + 50);
             let snippet = fieldValue.substring(start, end);
 
-            if (start > 0) snippet = '...' + snippet;
-            if (end < fieldValue.length) snippet = snippet + '...';
+            if (start > 0) {snippet = `...${snippet}`;}
+            if (end < fieldValue.length) {snippet = `${snippet}...`;}
 
             // Highlight the term
             const regex = new RegExp(`(${term})`, 'gi');
@@ -613,7 +613,7 @@ class SearchEngine {
   }
 
   addToSearchHistory(query, filters, facets) {
-    if (!query.trim()) return;
+    if (!query.trim()) {return;}
 
     const searchEntry = {
       query,
@@ -649,7 +649,7 @@ class SearchEngine {
     const suggestions = new Set();
     const normalizedQuery = query.toLowerCase().trim();
 
-    if (normalizedQuery.length < 2) return [];
+    if (normalizedQuery.length < 2) {return [];}
 
     // Add from search history
     this.searchHistory.forEach(entry => {

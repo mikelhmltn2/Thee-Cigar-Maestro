@@ -115,7 +115,7 @@ class AssetOptimizer {
           type: 'css',
           file: 'style.css',
           currentSize: sizeKB,
-          minifiedSize: minifiedSize,
+          minifiedSize,
           potentialSavings: savings
         });
       }

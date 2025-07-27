@@ -1,7 +1,7 @@
-/**
- * Service Worker for Thee Cigar Maestro
- * Provides offline functionality, caching, and performance improvements
- */
+/* global clients, self, caches */
+
+// Service Worker for Thee Cigar Maestro
+// Handles caching, offline functionality, and background sync
 
 const CACHE_NAME = 'thee-cigar-maestro-v1.2';
 const STATIC_CACHE_NAME = 'static-v1.2';
@@ -153,7 +153,7 @@ async function handleApiRequest(request) {
       const cachedResponse = new Response(responseClone.body, {
         status: responseClone.status,
         statusText: responseClone.statusText,
-        headers: headers
+        headers
       });
       
       cache.put(request, cachedResponse);
@@ -350,7 +350,7 @@ async function syncAnalytics() {
  * Push notification handler (for future features)
  */
 self.addEventListener('push', (event) => {
-  if (!event.data) return;
+  if (!event.data) {return;}
   
   const data = event.data.json();
   

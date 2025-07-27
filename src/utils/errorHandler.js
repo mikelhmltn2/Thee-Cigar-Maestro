@@ -158,7 +158,7 @@ class ErrorHandler {
   }
 
   getPerformanceInfo() {
-    if (!window.performance) return null;
+    if (!window.performance) {return null;}
     
     const navigation = performance.getEntriesByType('navigation')[0];
     return {
