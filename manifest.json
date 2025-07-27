@@ -12,26 +12,32 @@
   "lang": "en",
   "icons": [
     {
-      "src": "/logo.png",
+      "src": "assets/logos/logo-512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "/logo.png",
+      "src": "assets/logos/logo-192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "/logo.png",
+      "src": "assets/logos/logo-144.png",
       "sizes": "144x144",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "/logo.png",
+      "src": "assets/logos/logo-96.png",
       "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/Logo.png",
+      "sizes": "91x91",
       "type": "image/png",
       "purpose": "any"
     }
