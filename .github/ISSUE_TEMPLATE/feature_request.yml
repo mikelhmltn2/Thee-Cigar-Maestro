@@ -1,0 +1,166 @@
+name: ✨ Feature Request
+description: Suggest a new feature or enhancement
+title: "[FEATURE]: "
+labels: ["✨ feature"]
+assignees: []
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## ✨ Feature Request for Thee Cigar Maestro
+        
+        Thank you for suggesting a new feature! Your ideas help make our application better for everyone.
+        
+        Please provide detailed information about your feature request to help us understand and evaluate it.
+
+  - type: textarea
+    id: feature-summary
+    attributes:
+      label: 🎯 Feature Summary
+      description: Provide a clear and concise summary of the feature you'd like to see.
+      placeholder: "Briefly describe the feature you'd like..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem-statement
+    attributes:
+      label: 🤔 Problem Statement
+      description: What problem does this feature solve? What user need does it address?
+      placeholder: "Describe the problem or need this feature would address..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposed-solution
+    attributes:
+      label: 💡 Proposed Solution
+      description: Describe your ideal solution in detail.
+      placeholder: "Describe how you envision this feature working..."
+    validations:
+      required: true
+
+  - type: dropdown
+    id: feature-category
+    attributes:
+      label: 📂 Feature Category
+      description: Which area of the application would this feature belong to?
+      options:
+        - 3D Flavorverse & Visualization
+        - AI & Machine Learning
+        - User Authentication & Profiles
+        - Search & Discovery
+        - Recommendations Engine
+        - Analytics & Insights
+        - Mobile Experience
+        - Social Features
+        - Performance & Optimization
+        - Security & Privacy
+        - Accessibility
+        - Developer Experience
+        - Other
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: 📊 Priority Level
+      description: How important is this feature to you?
+      options:
+        - Low - Nice to have
+        - Medium - Would be helpful
+        - High - Important for my use case
+        - Critical - Essential functionality
+
+  - type: dropdown
+    id: user-type
+    attributes:
+      label: 👤 User Type
+      description: What type of user would benefit most from this feature?
+      multiple: true
+      options:
+        - Casual cigar enthusiasts
+        - Experienced connoisseurs
+        - First-time users
+        - Mobile users
+        - Desktop users
+        - Social users
+        - Privacy-focused users
+        - Business/commercial users
+        - Developers/integrators
+        - All users
+
+  - type: textarea
+    id: use-cases
+    attributes:
+      label: 🎬 Use Cases & User Stories
+      description: Provide specific examples of how this feature would be used.
+      placeholder: |
+        Example:
+        - As a [user type], I want to [action] so that [benefit]
+        - When [scenario], users should be able to [action]
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: 🔄 Alternative Solutions
+      description: Have you considered any alternative approaches or workarounds?
+      placeholder: "Describe any alternative solutions you've considered..."
+
+  - type: textarea
+    id: mockups
+    attributes:
+      label: 🎨 Mockups or Examples
+      description: Do you have any mockups, wireframes, or examples from other applications?
+      placeholder: "You can attach images or provide links to examples..."
+
+  - type: checkboxes
+    id: implementation-considerations
+    attributes:
+      label: 🔧 Implementation Considerations
+      description: Check any technical considerations that might be relevant
+      options:
+        - label: This feature should work offline (PWA)
+        - label: This feature needs mobile optimization
+        - label: This feature involves user data/privacy
+        - label: This feature should integrate with existing analytics
+        - label: This feature needs accessibility considerations
+        - label: This feature might affect performance
+        - label: This feature involves AI/ML capabilities
+        - label: This feature needs internationalization
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: 📋 Additional Context
+      description: Add any other context, research, or information about the feature request.
+      placeholder: "Any additional information that might be helpful..."
+
+  - type: checkboxes
+    id: contribution
+    attributes:
+      label: 🤝 Contribution
+      description: Would you be interested in contributing to this feature?
+      options:
+        - label: I'd be willing to help design this feature
+        - label: I'd be willing to help implement this feature
+        - label: I'd be willing to help test this feature
+        - label: I'd be willing to help document this feature
+
+  - type: markdown
+    attributes:
+      value: |
+        ---
+        
+        ### 🔄 What happens next?
+        1. Our team will review your feature request
+        2. We may ask for additional clarification or details
+        3. If approved, the feature will be added to our development roadmap
+        4. We'll update this issue with progress and timeline information
+        
+        ### 🙏 Thank you!
+        We appreciate you taking the time to suggest improvements to Thee Cigar Maestro!
+        
+        Your feedback helps us build a better experience for all cigar enthusiasts. 🚀
