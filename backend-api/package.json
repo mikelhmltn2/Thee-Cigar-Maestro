@@ -110,10 +110,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/mikelhmltn2/thee-cigar-maestro.git"
+    "url": "https://github.com/yourusername/thee-cigar-maestro.git"
   },
   "bugs": {
-    "url": "https://github.com/mikelhmltn2/thee-cigar-maestro/issues"
+    "url": "https://github.com/yourusername/thee-cigar-maestro/issues"
   },
   "homepage": "https://theecigarmaestro.vercel.app",
   "lint-staged": {

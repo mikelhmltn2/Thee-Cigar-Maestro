@@ -32,8 +32,8 @@ gh repo create thee-cigar-maestro --public --description "Premium cigar experien
 ### 2. 🔗 Connect Local Repository to GitHub
 
 ```bash
-# Add GitHub remote (replace YOUR_USERNAME with your GitHub username)
-git remote add origin https://github.com/YOUR_USERNAME/thee-cigar-maestro.git
+# Add GitHub remote (replace yourusername with your GitHub username)
+git remote add origin https://github.com/yourusername/thee-cigar-maestro.git
 
 # Verify remote
 git remote -v
@@ -250,7 +250,7 @@ Fixes #(issue_number)
 
 ```bash
 # Clone your repository
-git clone https://github.com/YOUR_USERNAME/thee-cigar-maestro.git
+git clone https://github.com/yourusername/thee-cigar-maestro.git
 cd thee-cigar-maestro
 
 # Install dependencies (if any)
@@ -270,7 +270,7 @@ xdg-open dist/index.html # Linux
 ## 🚀 Post-Setup Actions
 
 ### 1. 🌐 Enable GitHub Pages
-- Your site will be available at: `https://YOUR_USERNAME.github.io/thee-cigar-maestro`
+- Your site will be available at: `https://yourusername.github.io/thee-cigar-maestro`
 - Custom domain (optional): `theecigarmaestro.com`
 
 ### 2. 🔄 Enable GitHub Actions
@@ -285,9 +285,9 @@ xdg-open dist/index.html # Linux
 ### 4. 🎉 Share Your Repository
 ```markdown
 ## 🔗 Repository Links
-- **GitHub:** https://github.com/YOUR_USERNAME/thee-cigar-maestro
-- **Live Demo:** https://YOUR_USERNAME.github.io/thee-cigar-maestro
-- **Documentation:** https://github.com/YOUR_USERNAME/thee-cigar-maestro/wiki
+- **GitHub:** https://github.com/yourusername/thee-cigar-maestro
+- **Live Demo:** https://yourusername.github.io/thee-cigar-maestro
+- **Documentation:** https://github.com/yourusername/thee-cigar-maestro/wiki
 ```
 
 ---

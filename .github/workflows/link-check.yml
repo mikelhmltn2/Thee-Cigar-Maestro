@@ -1,0 +1,127 @@
+name: 🏥 Health Check & Link Validation
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+  schedule:
+    # Run daily at 6 AM UTC
+    - cron: '0 6 * * *'
+  workflow_dispatch:
+
+jobs:
+  health-check:
+    name: 🏥 Comprehensive Health Check
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: 📁 Checkout Repository
+        uses: actions/checkout@v4
+        
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+          
+      - name: 📦 Install Dependencies
+        run: npm ci
+        
+      - name: 🏥 Run Health Check
+        run: npm run health:check
+        continue-on-error: true
+        id: health-check
+        
+              - name: 📊 Upload Health Report
+          uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: link-check-report
+          path: link-check-report.json
+          retention-days: 30
+          
+      - name: 📝 Comment PR with Results
+        if: github.event_name == 'pull_request' && failure()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            
+            let reportContent = '## 🔗 Link Check Results\n\n';
+            
+            try {
+              const report = JSON.parse(fs.readFileSync('link-check-report.json', 'utf8'));
+              
+              reportContent += `### 📊 Summary\n`;
+              reportContent += `- **Total URLs tested**: ${report.summary.tested}\n`;
+              reportContent += `- **✅ Passed**: ${report.summary.passed}\n`;
+              reportContent += `- **❌ Failed**: ${report.summary.failed}\n`;
+              reportContent += `- **⚠️ Warnings**: ${report.summary.warnings}\n\n`;
+              
+              if (report.errors && report.errors.length > 0) {
+                reportContent += `### 🚨 Failed Links\n\n`;
+                report.errors.forEach((error, index) => {
+                  reportContent += `${index + 1}. **${error.url}**\n`;
+                  reportContent += `   - Context: \`${error.context}\`\n`;
+                  reportContent += `   - Error: ${error.status || error.error}\n`;
+                  reportContent += `   - Type: ${error.type}\n\n`;
+                });
+              }
+              
+              reportContent += `\n*Report generated at: ${report.timestamp}*`;
+              
+            } catch (error) {
+              reportContent += '❌ Could not read link check report.';
+            }
+            
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: reportContent
+            });
+            
+      - name: 🚨 Fail Job if Links Broken
+        if: steps.link-check.outcome == 'failure'
+        run: |
+          echo "❌ Link check failed. Please fix broken links before merging."
+          exit 1
+          
+  security-audit:
+    name: 🛡️ Security Audit
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: 📁 Checkout Repository
+        uses: actions/checkout@v4
+        
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+          
+      - name: 📦 Install Dependencies
+        run: npm ci
+        
+      - name: 🛡️ Run Security Audit
+        run: npm run audit:security
+        
+      - name: 🔍 Run Additional Security Checks
+        run: |
+          echo "🔍 Checking for hardcoded secrets..."
+          if grep -r "api_key\|secret\|password\|token" --include="*.js" --include="*.json" --include="*.html" . | grep -v "node_modules" | grep -v ".git"; then
+            echo "⚠️ Potential hardcoded secrets found!"
+            exit 1
+          else
+            echo "✅ No hardcoded secrets detected"
+          fi
+          
+          echo "🔍 Checking CSP headers..."
+          if grep -r "Content-Security-Policy" --include="*.html" . | grep -v "node_modules"; then
+            echo "✅ CSP headers found"
+          else
+            echo "⚠️ No CSP headers detected"
+            exit 1
+          fi

@@ -18,15 +18,15 @@ If you prefer to push manually or the automated script doesn't work, follow thes
 
 ### Step 2: Push Your Code
 ```bash
-# Replace YOUR_USERNAME with your actual GitHub username
-git remote add origin https://github.com/YOUR_USERNAME/thee-cigar-maestro.git
+# Replace yourusername with your actual GitHub username
+git remote add origin https://github.com/yourusername/thee-cigar-maestro.git
 git branch -M main
 git push -u origin main
 ```
 
 ### Step 3: Configure Repository Settings
 1. **Enable GitHub Pages:**
-   - Go to: `https://github.com/YOUR_USERNAME/thee-cigar-maestro/settings/pages`
+   - Go to: `https://github.com/yourusername/thee-cigar-maestro/settings/pages`
    - **Source:** Deploy from a branch
    - **Branch:** main
    - **Folder:** / (root) or /dist
@@ -72,8 +72,8 @@ If you've already created the repository on GitHub:
 # Check current status
 git status
 
-# Add remote (replace YOUR_USERNAME)
-git remote add origin https://github.com/YOUR_USERNAME/thee-cigar-maestro.git
+# Add remote (replace yourusername with your actual GitHub username)
+git remote add origin https://github.com/yourusername/thee-cigar-maestro.git
 
 # Verify remote
 git remote -v
@@ -90,7 +90,7 @@ git push -u origin main
 ```bash
 # Remove existing remote and add new one
 git remote remove origin
-git remote add origin https://github.com/YOUR_USERNAME/thee-cigar-maestro.git
+git remote add origin https://github.com/yourusername/thee-cigar-maestro.git
 ```
 
 ### Issue: Authentication Required
@@ -118,10 +118,10 @@ git push -u origin main --force
 
 After pushing, verify everything worked:
 
-1. **Check Repository:** Visit `https://github.com/YOUR_USERNAME/thee-cigar-maestro`
+1. **Check Repository:** Visit `https://github.com/yourusername/thee-cigar-maestro`
 2. **Verify Files:** Ensure all files are present (should see 50+ files)
 3. **Check Actions:** Go to Actions tab to see if CI/CD pipeline runs
-4. **Test Pages:** If enabled, visit `https://YOUR_USERNAME.github.io/thee-cigar-maestro`
+4. **Test Pages:** If enabled, visit `https://yourusername.github.io/thee-cigar-maestro`
 
 ---
 
