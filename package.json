@@ -36,7 +36,7 @@
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-html": "^7.1.0",
     "http-server": "^14.1.1",
-    "lighthouse": "^11.4.0",
+    "lighthouse": "^12.8.0",
     "prettier": "^3.1.1",
     "vite": "^5.0.10",
     "vite-bundle-analyzer": "^0.7.0",
