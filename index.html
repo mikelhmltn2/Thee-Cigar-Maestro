@@ -109,15 +109,23 @@
       color: var(--primary-bg);
     }
 
-    /* Mobile Menu Button */
-    .mobile-menu-btn {
-      display: none;
-      background: transparent;
-      border: none;
-      color: var(--primary-text);
-      font-size: 1.5rem;
-      cursor: pointer;
-    }
+         /* Mobile Menu Button */
+     .mobile-menu-btn {
+       display: none;
+       background: transparent;
+       border: none;
+       color: var(--primary-text);
+       font-size: 1.5rem;
+       cursor: pointer;
+       padding: 0.5rem;
+       border-radius: var(--border-radius);
+       transition: var(--transition);
+     }
+
+     .mobile-menu-btn:hover {
+       background: rgba(198, 156, 109, 0.1);
+       color: var(--accent-text);
+     }
 
     /* Side Panel */
     .side-panel {
@@ -719,6 +727,87 @@
        margin-bottom: 0.5rem;
        line-height: 1.5;
      }
+
+     /* Mobile Responsive Improvements */
+     @media (max-width: 768px) {
+       .main-header {
+         padding: 0 1rem;
+       }
+
+       .logo-section h1 {
+         font-size: 1.2rem;
+       }
+
+       .main-nav {
+         display: none;
+       }
+
+       .mobile-menu-btn {
+         display: block;
+       }
+
+       .side-panel {
+         width: 100%;
+         right: -100%;
+         top: var(--header-height);
+       }
+
+       .floating-controls {
+         bottom: 1rem;
+         left: 1rem;
+         right: 1rem;
+       }
+
+       .control-group {
+         padding: 0.75rem;
+       }
+
+       .quick-actions {
+         bottom: 1rem;
+         right: 1rem;
+         flex-direction: row;
+         gap: 0.5rem;
+       }
+
+       .action-button {
+         width: 50px;
+         height: 50px;
+         font-size: 1.2rem;
+       }
+
+       .info-display {
+         left: 1rem;
+         right: 1rem;
+         max-width: none;
+         top: calc(var(--header-height) + 1rem);
+       }
+     }
+
+     @media (max-width: 480px) {
+       .main-header {
+         height: 60px;
+         --header-height: 60px;
+       }
+
+       .logo-section h1 {
+         font-size: 1rem;
+       }
+
+       .canvas-container {
+         top: 60px;
+       }
+
+       .floating-controls {
+         bottom: 0.5rem;
+         left: 0.5rem;
+         right: 0.5rem;
+       }
+
+       .quick-actions {
+         bottom: 0.5rem;
+         right: 0.5rem;
+       }
+     }
    </style>
 </head>
 <body>
@@ -743,6 +832,9 @@
       </button>
       <button class="nav-button" data-section="search">
         🔍 Search
+      </button>
+      <button class="nav-button" onclick="personalDashboard?.show()">
+        📊 Dashboard
       </button>
     </nav>
     
@@ -844,10 +936,16 @@
     // Import enhanced UI components
     import UIManager from './src/components/UIManager.js';
     import OnboardingTour from './src/components/OnboardingTour.js';
+    import AdvancedControlsPanel from './src/components/AdvancedControlsPanel.js';
+    import EnhancedCigarModal from './src/components/EnhancedCigarModal.js';
+    import PersonalDashboard from './src/components/PersonalDashboard.js';
     
     // Initialize global UI manager and tour
     let uiManager;
     let onboardingTour;
+    let advancedControls;
+    let enhancedModal;
+    let personalDashboard;
     
     // Enhanced Data Management System
     class DataManager {
@@ -1531,6 +1629,16 @@
         const dataManager = new DataManager();
         await dataManager.loadAllData();
         window.dataManager = dataManager; // Make globally accessible
+        
+        // Initialize advanced components
+        advancedControls = new AdvancedControlsPanel(uiManager, dataManager);
+        enhancedModal = new EnhancedCigarModal(uiManager, dataManager);
+        personalDashboard = new PersonalDashboard(uiManager, dataManager);
+        
+        // Make components globally accessible
+        window.advancedControls = advancedControls;
+        window.enhancedModal = enhancedModal;
+        window.personalDashboard = personalDashboard;
         
         // Initialize 3D scene
         uiManager.showLoading('Loading 3D visualization...');
