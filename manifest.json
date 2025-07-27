@@ -55,7 +55,7 @@
       "url": "/index.html",
       "icons": [
         {
-          "src": "/logo.png",
+          "src": "assets/logos/logo-96.png",
           "sizes": "96x96"
         }
       ]
@@ -67,7 +67,7 @@
       "url": "/dashboard.html",
       "icons": [
         {
-          "src": "/logo.png",
+          "src": "assets/logos/logo-96.png",
           "sizes": "96x96"
         }
       ]
@@ -79,7 +79,7 @@
       "url": "/education.html",
       "icons": [
         {
-          "src": "/logo.png",
+          "src": "assets/logos/logo-96.png",
           "sizes": "96x96"
         }
       ]
@@ -119,8 +119,12 @@
     {
       "action": "/",
       "accept": {
-        "application/json": [".json"],
-        "text/csv": [".csv"]
+        "application/json": [
+          ".json"
+        ],
+        "text/csv": [
+          ".csv"
+        ]
       }
     }
   ],
@@ -132,5 +136,16 @@
       "text": "text",
       "url": "url"
     }
-  }
+  },
+  "display_override": [
+    "window-controls-overlay",
+    "standalone"
+  ],
+  "handle_links": "preferred",
+  "capture_links": "new-client",
+  "scope_extensions": [
+    {
+      "origin": "https://theecigarmaestro.vercel.app"
+    }
+  ]
 }
