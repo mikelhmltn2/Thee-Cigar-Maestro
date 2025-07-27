@@ -19,7 +19,7 @@
     "lighthouse": "lighthouse http://localhost:8000 --output=html --output-path=./lighthouse-report.html",
     "audit": "node validate-data.js && node integration-test.js",
     "optimize": "node scripts/optimize-logo.js && node optimize-assets.js",
-    "performance": "npm run build && npm run lighthouse"
+    "performance": "npm run build && node scripts/performance-test.js"
   },
   "keywords": [
     "cigar",
