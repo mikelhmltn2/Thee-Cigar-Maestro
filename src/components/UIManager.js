@@ -4,7 +4,6 @@
  */
 
 import loadingSystem from './LoadingSystem.js';
-import errorHandler from '../utils/errorHandler.js';
 
 class UIManager {
   constructor() {
@@ -67,7 +66,7 @@ class UIManager {
     // Navigation buttons
     document.querySelectorAll('.nav-button').forEach(button => {
       button.addEventListener('click', (e) => {
-        const section = e.target.dataset.section;
+        const {section} = e.target.dataset;
         this.navigateToSection(section);
       });
     });

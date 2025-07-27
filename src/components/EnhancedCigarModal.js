@@ -1,3 +1,5 @@
+/* global MediaRecorder, FileReader */
+
 /**
  * Enhanced Cigar Detail Modal for Thee Cigar Maestro
  * Provides comprehensive cigar information, pairings, reviews, and interactive features

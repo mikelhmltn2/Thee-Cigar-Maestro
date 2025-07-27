@@ -34,7 +34,7 @@ class ErrorHandler {
       message: error.message || error.toString(),
       stack: error.stack,
       timestamp: new Date().toISOString(),
-      context: context,
+      context,
       userAgent: navigator.userAgent,
       url: window.location.href
     };
@@ -109,9 +109,9 @@ class ErrorHandler {
   logWarning(message, context = {}) {
     const warning = {
       level: 'warning',
-      message: message,
+      message,
       timestamp: new Date().toISOString(),
-      context: context
+      context
     };
 
     console.warn('⚠️ Warning:', warning);
@@ -126,9 +126,9 @@ class ErrorHandler {
   logInfo(message, context = {}) {
     const info = {
       level: 'info',
-      message: message,
+      message,
       timestamp: new Date().toISOString(),
-      context: context
+      context
     };
 
     console.info('ℹ️ Info:', info);
@@ -143,9 +143,9 @@ class ErrorHandler {
   logSuccess(message, context = {}) {
     const success = {
       level: 'success',
-      message: message,
+      message,
       timestamp: new Date().toISOString(),
-      context: context
+      context
     };
 
     console.log('✅ Success:', success);
@@ -171,7 +171,7 @@ class ErrorHandler {
       if (duration > 1000) {
         this.logWarning(`Slow operation detected: ${name} took ${duration.toFixed(2)}ms`, {
           operation: name,
-          duration: duration
+          duration
         });
       }
       
@@ -182,7 +182,7 @@ class ErrorHandler {
       
       this.handleError(error, {
         operation: name,
-        duration: duration
+        duration
       });
       
       throw error;
@@ -202,7 +202,7 @@ class ErrorHandler {
       if (duration > 2000) {
         this.logWarning(`Slow async operation detected: ${name} took ${duration.toFixed(2)}ms`, {
           operation: name,
-          duration: duration
+          duration
         });
       }
       
@@ -213,7 +213,7 @@ class ErrorHandler {
       
       this.handleError(error, {
         operation: name,
-        duration: duration
+        duration
       });
       
       throw error;
@@ -255,8 +255,8 @@ class ErrorHandler {
     networkError.name = 'NetworkError';
     
     return this.handleError(networkError, {
-      url: url,
-      options: options,
+      url,
+      options,
       originalError: error.message
     });
   }
@@ -292,7 +292,7 @@ class ErrorHandler {
     
     return this.handleError(dataError, {
       ...context,
-      dataSource: dataSource,
+      dataSource,
       type: 'data'
     });
   }

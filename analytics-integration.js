@@ -1,4 +1,4 @@
-/* global console, window, document, fetch, Event, CustomEvent */
+/* global console, window, document, fetch */
 
 // Analytics Integration System
 // Handles Google Analytics, custom events, and performance monitoring
@@ -65,7 +65,7 @@ class AnalyticsManager {
 
       // Initialize gtag
       window.dataLayer = window.dataLayer || [];
-      window.gtag = function gtag(){dataLayer.push(arguments);};
+      window.gtag = function gtag(...args){dataLayer.push(args);};
       
       gtag('js', new Date());
       gtag('config', GA4_MEASUREMENT_ID, {

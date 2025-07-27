@@ -194,10 +194,11 @@ class BackgroundSyncManager {
 // Initialize background sync manager
 const syncManager = new BackgroundSyncManager();
 
-// Export for use in other modules
-if (typeof module !== 'undefined' && module.exports) {
-  module.exports = BackgroundSyncManager;
-} else {
+// Export for ES modules
+export default BackgroundSyncManager;
+
+// Also make available globally for backwards compatibility
+if (typeof window !== 'undefined') {
   window.BackgroundSyncManager = BackgroundSyncManager;
   window.syncManager = syncManager;
 }
