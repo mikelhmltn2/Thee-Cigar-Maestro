@@ -91,7 +91,7 @@ class AssetOptimizer {
     const files = await this.findFiles(this.inputDir, imageExtensions);
     
     for (const file of files) {
-      if (file.includes('logo.png')) continue; // Already processed
+      if (file.includes('logo.png')) {continue;} // Already processed
       
       try {
         const stats = await fs.stat(file);

@@ -174,7 +174,7 @@ class LoadingSystem {
   renderLoadingUI(loadingState) {
     const { element, showSkeleton, skeletonType, showProgress, message } = loadingState;
     
-    if (!element) return;
+    if (!element) {return;}
 
     // Store original content
     if (!element.dataset.originalContent) {
@@ -231,7 +231,7 @@ class LoadingSystem {
   updateLoadingUI(loadingState) {
     const { element, progress, message, showProgress } = loadingState;
     
-    if (!element) return;
+    if (!element) {return;}
 
     const messageEl = element.querySelector('.loading-message');
     if (messageEl) {
@@ -255,7 +255,7 @@ class LoadingSystem {
   showCompletionMessage(loadingState) {
     const { element, success, message } = loadingState;
     
-    if (!element) return;
+    if (!element) {return;}
 
     const completionMessage = message || (success ? 'Loaded successfully!' : 'Loading failed');
     const iconClass = success ? 'success-icon' : 'error-icon';
@@ -273,7 +273,7 @@ class LoadingSystem {
   hideLoadingUI(loadingState) {
     const { element } = loadingState;
     
-    if (!element) return;
+    if (!element) {return;}
 
     // Restore original content
     const originalContent = element.dataset.originalContent;
@@ -296,7 +296,7 @@ class LoadingSystem {
 
   addProgressItem(loadingId, itemId, weight = 1) {
     const tracker = this.progressTrackers.get(loadingId);
-    if (!tracker) return;
+    if (!tracker) {return;}
 
     tracker.items.set(itemId, { weight, completed: false });
     tracker.total += weight;
@@ -304,10 +304,10 @@ class LoadingSystem {
 
   completeProgressItem(loadingId, itemId) {
     const tracker = this.progressTrackers.get(loadingId);
-    if (!tracker) return;
+    if (!tracker) {return;}
 
     const item = tracker.items.get(itemId);
-    if (!item || item.completed) return;
+    if (!item || item.completed) {return;}
 
     item.completed = true;
     tracker.completed += item.weight;
@@ -454,7 +454,7 @@ class LoadingSystem {
   }
 
   ensureSkeletonCSS() {
-    if (document.getElementById('skeleton-styles')) return;
+    if (document.getElementById('skeleton-styles')) {return;}
 
     const style = document.createElement('style');
     style.id = 'skeleton-styles';
@@ -549,7 +549,7 @@ class LoadingSystem {
   }
 
   ensureLoadingCSS() {
-    if (document.getElementById('loading-styles')) return;
+    if (document.getElementById('loading-styles')) {return;}
 
     const style = document.createElement('style');
     style.id = 'loading-styles';

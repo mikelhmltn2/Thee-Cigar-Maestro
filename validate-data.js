@@ -413,9 +413,9 @@ class EnhancedDataValidator {
       console.log(`${statusIcon} ${report.file}`);
       console.log(`   Status: ${report.status}`);
       console.log(`   Integration: ${report.integration}`);
-      if (report.entries) console.log(`   Entries: ${report.entries}`);
-      if (report.lessons) console.log(`   Lessons: ${report.lessons}`);
-      if (report.implemented) console.log(`   Features: ${report.implemented}/${report.total}`);
+      if (report.entries) {console.log(`   Entries: ${report.entries}`);}
+      if (report.lessons) {console.log(`   Lessons: ${report.lessons}`);}
+      if (report.implemented) {console.log(`   Features: ${report.implemented}/${report.total}`);}
       console.log('');
     });
 

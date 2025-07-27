@@ -2,16 +2,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta name="robots" content="index, follow">
-    <meta name="author" content="Thee Cigar Maestro">
-    <meta property="og:title" content="Thee Cigar Maestro - Premium Cigar Experience">
-    <meta property="og:description" content="Discover, explore, and enjoy the finest cigars with our AI-powered recommendations and immersive 3D Flavorverse.">
-    <meta property="og:type" content="website">
-    <meta property="og:image" content="/assets/icon-512.png">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Thee Cigar Maestro">
-    <meta name="twitter:description" content="Premium cigar experience with AI recommendations">
-    <meta name="twitter:image" content="/assets/icon-512.png">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; media-src 'self' blob:; connect-src 'self' https://theecigarmaestro.vercel.app;" />
@@ -21,7 +11,7 @@
   <meta name="theme-color" content="#121212">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <link rel="manifest" href="/manifest.json">
+  <link rel="manifest" href="/assets/manifest-BDxeBXIf.json">
   <style>
     body { margin: 0; background-color: #121212; overflow: hidden; color: #f0e6d2; font-family: Georgia, serif; }
     canvas { display: block; }
@@ -134,7 +124,7 @@
       pointer-events: none;
     }
   </style>
-</head>
+<link rel="manifest" href="/manifest.webmanifest"><script id="vite-plugin-pwa:register-sw" src="/registerSW.js"></script></head>
 <body>
   <div id="info">🌀 Flavorverse — Ritual Trail Viewer</div>
   
@@ -262,11 +252,11 @@
       }
 
       getCigarPairings(cigarName) {
-        if (!this.data.pairings.pairingEngineV3) return [];
+        if (!this.data.pairings.pairingEngineV3) {return [];}
         
         // Search for pairings based on wrapper type and flavor profile
         const cigar = this.data.cigars.find(c => c.name === cigarName);
-        if (!cigar) return [];
+        if (!cigar) {return [];}
 
         const pairings = [];
         const engine = this.data.pairings.pairingEngineV3;
@@ -288,7 +278,7 @@
       }
 
       getEducationalContent(topic) {
-        if (!this.data.education.educationTracks) return [];
+        if (!this.data.education.educationTracks) {return [];}
         
         const tracks = this.data.education.educationTracks.tracks || [];
         return tracks.filter(track => 
@@ -298,7 +288,7 @@
       }
 
       getEmotionalContext(wrapper) {
-        if (!this.data.emotional.ritualFlows) return null;
+        if (!this.data.emotional.ritualFlows) {return null;}
         
         const flows = this.data.emotional.ritualFlows;
         const matchingFlow = Object.values(flows).find(flow => 
@@ -309,7 +299,7 @@
       }
 
       getLoungeFeatures() {
-        if (!this.data.lounge.loungeIntegrationTools) return [];
+        if (!this.data.lounge.loungeIntegrationTools) {return [];}
         
         const features = [];
         const tools = this.data.lounge.loungeIntegrationTools;
@@ -431,7 +421,7 @@
           stars.push(star);
 
           // Cluster similar wrappers for trail drawing
-          if (!wrapperMap[item.wrapper]) wrapperMap[item.wrapper] = [];
+          if (!wrapperMap[item.wrapper]) {wrapperMap[item.wrapper] = [];}
           wrapperMap[item.wrapper].push(star);
         });
 
@@ -470,8 +460,8 @@
       const pairings = dataManager.getCigarPairings(cigarName);
       const pairingsDiv = document.getElementById("modalPairings");
       if (pairings.length > 0) {
-        pairingsDiv.innerHTML = '<h4>🍷 Recommended Pairings:</h4>' + 
-          pairings.map(p => `<div class="pairing-item"><strong>${p.type}:</strong> ${p.recommendation}<br><em>${p.logic}</em></div>`).join('');
+        pairingsDiv.innerHTML = `<h4>🍷 Recommended Pairings:</h4>${  
+      pairings.map(p => `<div class="pairing-item"><strong>${p.type}:</strong> ${p.recommendation}<br><em>${p.logic}</em></div>`).join('')}`;
       } else {
         pairingsDiv.innerHTML = '<h4>🍷 Pairings:</h4><p>Pairing recommendations available in the Pairing Engine.</p>';
       }
@@ -480,8 +470,8 @@
       const education = dataManager.getEducationalContent(userData.wrapper);
       const educationDiv = document.getElementById("modalEducation");
       if (education.length > 0) {
-        educationDiv.innerHTML = '<h4>📚 Learn More:</h4>' + 
-          education.map(e => `<div class="lesson-item" onclick="openEducationTrack('${e.id}')">${e.title}</div>`).join('');
+        educationDiv.innerHTML = `<h4>📚 Learn More:</h4>${  
+      education.map(e => `<div class="lesson-item" onclick="openEducationTrack('${e.id}')">${e.title}</div>`).join('')}`;
       } else {
         educationDiv.innerHTML = '<h4>📚 Education:</h4><p>Educational content available in the Education panel.</p>';
       }
@@ -508,13 +498,13 @@
         const tracks = education.educationTracks.tracks;
         const ceuDiv = document.getElementById("ceuLessons");
         
-        ceuDiv.innerHTML = '<h4>📜 CEU Certification Tracks:</h4>' +
-          tracks.map(track => 
-            `<div class="lesson-item" onclick="startCEUTrack('${track.id}')">
-              <strong>${track.title}</strong><br>
-              <small>${track.objectives ? track.objectives.join(', ') : 'Professional development track'}</small>
-            </div>`
-          ).join('');
+        ceuDiv.innerHTML = `<h4>📜 CEU Certification Tracks:</h4>${ 
+      tracks.map(track => 
+        `<div class="lesson-item" onclick="startCEUTrack('${track.id}')">
+          <strong>${track.title}</strong><br>
+          <small>${track.objectives ? track.objectives.join(', ') : 'Professional development track'}</small>
+        </div>`
+      ).join('')}`;
       }
       
       educationPanel.style.display = "block";
@@ -547,14 +537,14 @@
         });
         
         if (pairings.length > 0) {
-          results.innerHTML = '<h4>🎯 Perfect Matches:</h4>' +
-            pairings.map(cigar => 
-              `<div class="pairing-item">
-                <strong>${cigar.name}</strong><br>
-                <em>${cigar.flavor}</em><br>
-                <small>Wrapper: ${cigar.wrapper}</small>
-              </div>`
-            ).join('');
+          results.innerHTML = `<h4>🎯 Perfect Matches:</h4>${ 
+        pairings.map(cigar => 
+          `<div class="pairing-item">
+            <strong>${cigar.name}</strong><br>
+            <em>${cigar.flavor}</em><br>
+            <small>Wrapper: ${cigar.wrapper}</small>
+          </div>`
+        ).join('')}`;
         } else {
           results.innerHTML = '<p>No specific pairings found. Try different beverage types like coffee, whiskey, or wine.</p>';
         }
@@ -573,13 +563,13 @@
         '<p>Your personal cigar advisor for premium selections and expert guidance.</p>';
       
       const featuresDiv = document.getElementById("loungeFeatures");
-      featuresDiv.innerHTML = '<h4>🏛️ Lounge Features:</h4>' +
-        features.map(f => 
-          `<div class="lesson-item">
-            <strong>${f.name}</strong> (${f.status})<br>
-            <small>${f.description}</small>
-          </div>`
-        ).join('');
+      featuresDiv.innerHTML = `<h4>🏛️ Lounge Features:</h4>${ 
+    features.map(f => 
+      `<div class="lesson-item">
+        <strong>${f.name}</strong> (${f.status})<br>
+        <small>${f.description}</small>
+      </div>`
+    ).join('')}`;
       
       loungePanel.style.display = "block";
     }
@@ -638,7 +628,7 @@
       const intersects = raycaster.intersectObjects(visibleStars);
 
       if (intersects.length > 0) {
-        info.textContent = "⭐ " + intersects[0].object.name;
+        info.textContent = `⭐ ${intersects[0].object.name}`;
       } else {
         info.textContent = "🌀 Flavorverse — Ritual Trail Viewer";
       }
@@ -765,7 +755,7 @@
     document.getElementById("gptBtn").onclick = () => {
       // Removed alert, implementing proper GPT integration
       const gptPanel = document.createElement('div');
-      gptPanel.style.min.cssText = 'position:fixed;bottom:80px;right:20px;width:300px;background:#1e1e1e;color:#f0e6d2;border:1px solid #444;border-radius:8px;padding:1rem;z-index:999;';
+      gptPanel.style.cssText = 'position:fixed;bottom:80px;right:20px;width:300px;background:#1e1e1e;color:#f0e6d2;border:1px solid #444;border-radius:8px;padding:1rem;z-index:999;';
       gptPanel.innerHTML = `
         <div style="font-weight:bold;margin-bottom:8px;">🧠 Ask the Stars</div>
         <textarea id="gptInput" placeholder="Ask about pairings, rituals, cigars..." style="width:100%;height:60px;margin-bottom:8px;background:#2c2c2c;border:1px solid #666;color:#fff;padding:5px;"></textarea>
@@ -778,7 +768,7 @@
       document.getElementById('gptClose').onclick = () => gptPanel.remove();
       document.getElementById('gptSend').onclick = async () => {
         const input = document.getElementById('gptInput').value.trim();
-        if (!input) return;
+        if (!input) {return;}
 
         const responseDiv = document.getElementById('gptResponse');
         responseDiv.textContent = "The Maestro is thinking...";
@@ -804,7 +794,7 @@
 
           const data = await res.json();
           if (data && data.response) {
-            responseDiv.textContent = "🧠 The Maestro says: " + data.response;
+            responseDiv.textContent = `🧠 The Maestro says: ${data.response}`;
           } else {
             throw new Error('Invalid response format');
           }

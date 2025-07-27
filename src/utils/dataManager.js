@@ -570,13 +570,13 @@ class DataManager {
   }
 
   shouldSync() {
-    if (!this.lastSyncTime) return true;
+    if (!this.lastSyncTime) {return true;}
     const timeSinceSync = Date.now() - this.lastSyncTime;
     return timeSinceSync > this.syncInterval;
   }
 
   async syncData() {
-    if (!navigator.onLine) return;
+    if (!navigator.onLine) {return;}
 
     try {
       console.log('🔄 Syncing data...');
@@ -624,10 +624,10 @@ class DataManager {
 
   getCigarPairings(cigarName) {
     const pairings = this.getPairingData();
-    if (!pairings.pairingEngineV3) return [];
+    if (!pairings.pairingEngineV3) {return [];}
     
     const cigar = this.getCigarData().find(c => c.name === cigarName);
-    if (!cigar) return [];
+    if (!cigar) {return [];}
 
     const results = [];
     const engine = pairings.pairingEngineV3;
@@ -649,7 +649,7 @@ class DataManager {
 
   getEducationalContent(topic) {
     const education = this.getEducationData();
-    if (!education.educationTracks || !education.educationTracks.tracks) return [];
+    if (!education.educationTracks || !education.educationTracks.tracks) {return [];}
     
     const tracks = education.educationTracks.tracks;
     return tracks.filter(track => 

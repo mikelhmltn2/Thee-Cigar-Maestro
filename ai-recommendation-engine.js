@@ -200,7 +200,7 @@ class AIRecommendationEngine {
    * Compute TF-IDF for flavor description
    */
   computeFlavorTFIDF(flavorText, vocabulary) {
-    if (!flavorText) return new Array(vocabulary.length).fill(0);
+    if (!flavorText) {return new Array(vocabulary.length).fill(0);}
     
     const text = flavorText.toLowerCase();
     const words = text.replace(/[^\w\s]/g, ' ').split(/\s+/);
@@ -480,7 +480,7 @@ class AIRecommendationEngine {
       if (window.analyticsManager) {
         window.analyticsManager.trackEvent('recommendations_generated', {
           user_id: userId,
-          algorithm: algorithm,
+          algorithm,
           count: recommendations.length,
           filters: Object.keys(filters)
         });
@@ -529,7 +529,7 @@ class AIRecommendationEngine {
       .slice(0, count)
       .map(([cigarName, score]) => ({
         cigar: this.cigarData.find(c => c.name === cigarName),
-        score: score,
+        score,
         algorithm: 'collaborative'
       }));
   }
@@ -557,7 +557,7 @@ class AIRecommendationEngine {
         if (cigarEmbedding) {
           const similarity = this.computeCosineSimilarity(userEmbedding, cigarEmbedding);
           recommendations.push({
-            cigar: cigar,
+            cigar,
             score: similarity,
             algorithm: 'content'
           });
@@ -619,7 +619,7 @@ class AIRecommendationEngine {
    */
   async findSimilarUsers(userId, maxUsers = 50) {
     const userProfile = this.userProfiles.get(userId);
-    if (!userProfile) return [];
+    if (!userProfile) {return [];}
 
     const similarities = [];
     
@@ -641,7 +641,7 @@ class AIRecommendationEngine {
    * Compute similarity between two users
    */
   computeUserSimilarity(profile1, profile2) {
-    if (!profile1.embedding || !profile2.embedding) return 0;
+    if (!profile1.embedding || !profile2.embedding) {return 0;}
     return this.computeCosineSimilarity(profile1.embedding, profile2.embedding);
   }
 
@@ -649,7 +649,7 @@ class AIRecommendationEngine {
    * Compute cosine similarity between two vectors
    */
   computeCosineSimilarity(vec1, vec2) {
-    if (vec1.length !== vec2.length) return 0;
+    if (vec1.length !== vec2.length) {return 0;}
     
     let dotProduct = 0;
     let norm1 = 0;
@@ -683,12 +683,12 @@ class AIRecommendationEngine {
       
       // Wrapper filter
       if (filters.wrappers && filters.wrappers.length > 0) {
-        if (!filters.wrappers.includes(cigar.wrapper)) return false;
+        if (!filters.wrappers.includes(cigar.wrapper)) {return false;}
       }
       
       // Strength filter
       if (filters.strengths && filters.strengths.length > 0) {
-        if (!filters.strengths.includes(cigar.strength)) return false;
+        if (!filters.strengths.includes(cigar.strength)) {return false;}
       }
       
       // Price range filter
@@ -701,7 +701,7 @@ class AIRecommendationEngine {
       
       // Origin filter
       if (filters.origins && filters.origins.length > 0) {
-        if (!filters.origins.includes(cigar.origin)) return false;
+        if (!filters.origins.includes(cigar.origin)) {return false;}
       }
       
       return true;
@@ -755,7 +755,7 @@ class AIRecommendationEngine {
     const timeBonuses = bonuses[timeOfDay] || {};
     let bonus = 0;
     
-    if (timeBonuses[cigar.wrapper]) bonus += timeBonuses[cigar.wrapper];
+    if (timeBonuses[cigar.wrapper]) {bonus += timeBonuses[cigar.wrapper];}
     if (timeBonuses[cigar.strength?.toLowerCase()]) {
       bonus += timeBonuses[cigar.strength.toLowerCase()];
     }
@@ -777,7 +777,7 @@ class AIRecommendationEngine {
     const weatherBonuses = bonuses[weather] || {};
     let bonus = 0;
     
-    if (weatherBonuses[cigar.wrapper]) bonus += weatherBonuses[cigar.wrapper];
+    if (weatherBonuses[cigar.wrapper]) {bonus += weatherBonuses[cigar.wrapper];}
     if (weatherBonuses[cigar.strength?.toLowerCase()]) {
       bonus += weatherBonuses[cigar.strength.toLowerCase()];
     }
@@ -799,13 +799,13 @@ class AIRecommendationEngine {
     const moodBonuses = bonuses[mood] || {};
     let bonus = 0;
     
-    if (moodBonuses[cigar.wrapper]) bonus += moodBonuses[cigar.wrapper];
+    if (moodBonuses[cigar.wrapper]) {bonus += moodBonuses[cigar.wrapper];}
     
     // Check flavor bonuses
     if (cigar.flavor) {
       const flavorText = cigar.flavor.toLowerCase();
       Object.entries(moodBonuses).forEach(([flavor, bonusValue]) => {
-        if (flavorText.includes(flavor)) bonus += bonusValue;
+        if (flavorText.includes(flavor)) {bonus += bonusValue;}
       });
     }
     
@@ -886,7 +886,7 @@ class AIRecommendationEngine {
       .slice(0, count)
       .map(([cigarName, score]) => ({
         cigar: this.cigarData.find(c => c.name === cigarName),
-        score: score,
+        score,
         algorithm: 'popularity'
       }))
       .filter(rec => rec.cigar);
@@ -921,7 +921,7 @@ class AIRecommendationEngine {
     return this.cigarData
       .slice(0, count)
       .map(cigar => ({
-        cigar: cigar,
+        cigar,
         score: 0.5,
         algorithm: 'fallback',
         explanation: 'Featured cigar selection',
@@ -935,10 +935,10 @@ class AIRecommendationEngine {
   trackInteraction(userId, cigarName, interactionType, metadata = {}) {
     const interaction = {
       userId: userId || 'anonymous',
-      cigarName: cigarName,
+      cigarName,
       type: interactionType,
       timestamp: new Date().toISOString(),
-      metadata: metadata
+      metadata
     };
     
     this.userInteractions.push(interaction);
@@ -1014,7 +1014,7 @@ class AIRecommendationEngine {
    * Train machine learning models
    */
   async trainModels() {
-    if (this.isTraining) return;
+    if (this.isTraining) {return;}
     
     try {
       this.isTraining = true;

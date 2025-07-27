@@ -1,7 +1,7 @@
-/**
- * Advanced Analytics Integration for Thee Cigar Maestro
- * Comprehensive tracking, performance monitoring, and user analytics
- */
+/* global gtag, dataLayer */
+
+// Analytics Integration System
+// Handles Google Analytics, custom events, and performance monitoring
 
 class AnalyticsManager {
   constructor() {
@@ -113,7 +113,7 @@ class AnalyticsManager {
    * Load Web Vitals library
    */
   async loadWebVitalsLibrary() {
-    if (window.webVitals) return;
+    if (window.webVitals) {return;}
     
     try {
       const script = document.createElement('script');
@@ -146,9 +146,9 @@ class AnalyticsManager {
     // Store locally for detailed analysis
     this.trackEvent('core_web_vital', {
       metric_name: name,
-      value: value,
-      delta: delta,
-      id: id,
+      value,
+      delta,
+      id,
       timestamp: new Date().toISOString()
     });
     
@@ -266,7 +266,7 @@ class AnalyticsManager {
    */
   trackResourcePerformance(entry) {
     // Only track significant resources
-    if (entry.transferSize < 1000) return; // Skip small resources
+    if (entry.transferSize < 1000) {return;} // Skip small resources
     
     const resourceData = {
       name: entry.name,
@@ -455,11 +455,11 @@ class AnalyticsManager {
    * Get resource type from URL
    */
   getResourceType(url) {
-    if (url.includes('.js')) return 'javascript';
-    if (url.includes('.css')) return 'stylesheet';
-    if (url.includes('.png') || url.includes('.jpg') || url.includes('.jpeg') || url.includes('.gif') || url.includes('.webp')) return 'image';
-    if (url.includes('.json')) return 'data';
-    if (url.includes('.html')) return 'document';
+    if (url.includes('.js')) {return 'javascript';}
+    if (url.includes('.css')) {return 'stylesheet';}
+    if (url.includes('.png') || url.includes('.jpg') || url.includes('.jpeg') || url.includes('.gif') || url.includes('.webp')) {return 'image';}
+    if (url.includes('.json')) {return 'data';}
+    if (url.includes('.html')) {return 'document';}
     return 'other';
   }
 
@@ -467,7 +467,7 @@ class AnalyticsManager {
    * Generate unique session ID
    */
   generateSessionId() {
-    return 'session_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+    return `session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
   }
 
   /**

@@ -300,7 +300,7 @@ class UIEnhancementManager {
    */
   showLoading(elementId, type = 'spinner') {
     const element = document.getElementById(elementId);
-    if (!element) return;
+    if (!element) {return;}
 
     this.loadingStates.set(elementId, true);
     
@@ -347,7 +347,7 @@ class UIEnhancementManager {
    */
   hideLoading(elementId) {
     const element = document.getElementById(elementId);
-    if (!element) return;
+    if (!element) {return;}
 
     this.loadingStates.delete(elementId);
     
@@ -399,7 +399,7 @@ class UIEnhancementManager {
    */
   showError(elementId, error) {
     const element = document.getElementById(elementId);
-    if (!element) return;
+    if (!element) {return;}
 
     this.errorStates.set(elementId, error);
     
@@ -433,7 +433,7 @@ class UIEnhancementManager {
    */
   clearError(elementId) {
     const element = document.getElementById(elementId);
-    if (!element) return;
+    if (!element) {return;}
 
     this.errorStates.delete(elementId);
     element.classList.remove('error-state');
@@ -524,7 +524,7 @@ class UIEnhancementManager {
     if (window.analyticsManager) {
       window.analyticsManager.trackEvent('mobile_gesture', {
         type: 'swipe',
-        direction: direction,
+        direction,
         element: target.tagName
       });
     }
@@ -592,9 +592,9 @@ class UIEnhancementManager {
 
     const rect = target.getBoundingClientRect();
     const size = Math.max(rect.width, rect.height);
-    ripple.style.width = ripple.style.height = size + 'px';
-    ripple.style.left = (rect.left + rect.width / 2 - size / 2) + 'px';
-    ripple.style.top = (rect.top + rect.height / 2 - size / 2) + 'px';
+    ripple.style.width = ripple.style.height = `${size}px`;
+    ripple.style.left = `${rect.left + rect.width / 2 - size / 2}px`;
+    ripple.style.top = `${rect.top + rect.height / 2 - size / 2}px`;
 
     document.body.appendChild(ripple);
 
@@ -714,7 +714,7 @@ class UIEnhancementManager {
     const toast = document.createElement('div');
     toast.className = `toast ${type}`;
     
-    const toastId = 'toast_' + Date.now();
+    const toastId = `toast_${Date.now()}`;
     toast.innerHTML = `
       <div class="toast-header">
         <div class="toast-title">${this.getToastIcon(type)} ${this.getToastTitle(type)}</div>
@@ -814,7 +814,7 @@ class UIEnhancementManager {
     // This would integrate with the 3D scene controls
     if (window.analyticsManager) {
       window.analyticsManager.trackEvent('keyboard_navigation', {
-        key: key
+        key
       });
     }
   }

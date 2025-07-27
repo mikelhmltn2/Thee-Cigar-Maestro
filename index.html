@@ -252,11 +252,11 @@
       }
 
       getCigarPairings(cigarName) {
-        if (!this.data.pairings.pairingEngineV3) return [];
+        if (!this.data.pairings.pairingEngineV3) {return [];}
         
         // Search for pairings based on wrapper type and flavor profile
         const cigar = this.data.cigars.find(c => c.name === cigarName);
-        if (!cigar) return [];
+        if (!cigar) {return [];}
 
         const pairings = [];
         const engine = this.data.pairings.pairingEngineV3;
@@ -278,7 +278,7 @@
       }
 
       getEducationalContent(topic) {
-        if (!this.data.education.educationTracks) return [];
+        if (!this.data.education.educationTracks) {return [];}
         
         const tracks = this.data.education.educationTracks.tracks || [];
         return tracks.filter(track => 
@@ -288,7 +288,7 @@
       }
 
       getEmotionalContext(wrapper) {
-        if (!this.data.emotional.ritualFlows) return null;
+        if (!this.data.emotional.ritualFlows) {return null;}
         
         const flows = this.data.emotional.ritualFlows;
         const matchingFlow = Object.values(flows).find(flow => 
@@ -299,7 +299,7 @@
       }
 
       getLoungeFeatures() {
-        if (!this.data.lounge.loungeIntegrationTools) return [];
+        if (!this.data.lounge.loungeIntegrationTools) {return [];}
         
         const features = [];
         const tools = this.data.lounge.loungeIntegrationTools;
@@ -421,7 +421,7 @@
           stars.push(star);
 
           // Cluster similar wrappers for trail drawing
-          if (!wrapperMap[item.wrapper]) wrapperMap[item.wrapper] = [];
+          if (!wrapperMap[item.wrapper]) {wrapperMap[item.wrapper] = [];}
           wrapperMap[item.wrapper].push(star);
         });
 
@@ -460,8 +460,8 @@
       const pairings = dataManager.getCigarPairings(cigarName);
       const pairingsDiv = document.getElementById("modalPairings");
       if (pairings.length > 0) {
-        pairingsDiv.innerHTML = '<h4>🍷 Recommended Pairings:</h4>' + 
-          pairings.map(p => `<div class="pairing-item"><strong>${p.type}:</strong> ${p.recommendation}<br><em>${p.logic}</em></div>`).join('');
+        pairingsDiv.innerHTML = `<h4>🍷 Recommended Pairings:</h4>${  
+      pairings.map(p => `<div class="pairing-item"><strong>${p.type}:</strong> ${p.recommendation}<br><em>${p.logic}</em></div>`).join('')}`;
       } else {
         pairingsDiv.innerHTML = '<h4>🍷 Pairings:</h4><p>Pairing recommendations available in the Pairing Engine.</p>';
       }
@@ -470,8 +470,8 @@
       const education = dataManager.getEducationalContent(userData.wrapper);
       const educationDiv = document.getElementById("modalEducation");
       if (education.length > 0) {
-        educationDiv.innerHTML = '<h4>📚 Learn More:</h4>' + 
-          education.map(e => `<div class="lesson-item" onclick="openEducationTrack('${e.id}')">${e.title}</div>`).join('');
+        educationDiv.innerHTML = `<h4>📚 Learn More:</h4>${  
+      education.map(e => `<div class="lesson-item" onclick="openEducationTrack('${e.id}')">${e.title}</div>`).join('')}`;
       } else {
         educationDiv.innerHTML = '<h4>📚 Education:</h4><p>Educational content available in the Education panel.</p>';
       }
@@ -498,13 +498,13 @@
         const tracks = education.educationTracks.tracks;
         const ceuDiv = document.getElementById("ceuLessons");
         
-        ceuDiv.innerHTML = '<h4>📜 CEU Certification Tracks:</h4>' +
-          tracks.map(track => 
-            `<div class="lesson-item" onclick="startCEUTrack('${track.id}')">
-              <strong>${track.title}</strong><br>
-              <small>${track.objectives ? track.objectives.join(', ') : 'Professional development track'}</small>
-            </div>`
-          ).join('');
+        ceuDiv.innerHTML = `<h4>📜 CEU Certification Tracks:</h4>${ 
+      tracks.map(track => 
+        `<div class="lesson-item" onclick="startCEUTrack('${track.id}')">
+          <strong>${track.title}</strong><br>
+          <small>${track.objectives ? track.objectives.join(', ') : 'Professional development track'}</small>
+        </div>`
+      ).join('')}`;
       }
       
       educationPanel.style.display = "block";
@@ -537,14 +537,14 @@
         });
         
         if (pairings.length > 0) {
-          results.innerHTML = '<h4>🎯 Perfect Matches:</h4>' +
-            pairings.map(cigar => 
-              `<div class="pairing-item">
-                <strong>${cigar.name}</strong><br>
-                <em>${cigar.flavor}</em><br>
-                <small>Wrapper: ${cigar.wrapper}</small>
-              </div>`
-            ).join('');
+          results.innerHTML = `<h4>🎯 Perfect Matches:</h4>${ 
+        pairings.map(cigar => 
+          `<div class="pairing-item">
+            <strong>${cigar.name}</strong><br>
+            <em>${cigar.flavor}</em><br>
+            <small>Wrapper: ${cigar.wrapper}</small>
+          </div>`
+        ).join('')}`;
         } else {
           results.innerHTML = '<p>No specific pairings found. Try different beverage types like coffee, whiskey, or wine.</p>';
         }
@@ -563,13 +563,13 @@
         '<p>Your personal cigar advisor for premium selections and expert guidance.</p>';
       
       const featuresDiv = document.getElementById("loungeFeatures");
-      featuresDiv.innerHTML = '<h4>🏛️ Lounge Features:</h4>' +
-        features.map(f => 
-          `<div class="lesson-item">
-            <strong>${f.name}</strong> (${f.status})<br>
-            <small>${f.description}</small>
-          </div>`
-        ).join('');
+      featuresDiv.innerHTML = `<h4>🏛️ Lounge Features:</h4>${ 
+    features.map(f => 
+      `<div class="lesson-item">
+        <strong>${f.name}</strong> (${f.status})<br>
+        <small>${f.description}</small>
+      </div>`
+    ).join('')}`;
       
       loungePanel.style.display = "block";
     }
@@ -628,7 +628,7 @@
       const intersects = raycaster.intersectObjects(visibleStars);
 
       if (intersects.length > 0) {
-        info.textContent = "⭐ " + intersects[0].object.name;
+        info.textContent = `⭐ ${intersects[0].object.name}`;
       } else {
         info.textContent = "🌀 Flavorverse — Ritual Trail Viewer";
       }
@@ -768,7 +768,7 @@
       document.getElementById('gptClose').onclick = () => gptPanel.remove();
       document.getElementById('gptSend').onclick = async () => {
         const input = document.getElementById('gptInput').value.trim();
-        if (!input) return;
+        if (!input) {return;}
 
         const responseDiv = document.getElementById('gptResponse');
         responseDiv.textContent = "The Maestro is thinking...";
@@ -794,7 +794,7 @@
 
           const data = await res.json();
           if (data && data.response) {
-            responseDiv.textContent = "🧠 The Maestro says: " + data.response;
+            responseDiv.textContent = `🧠 The Maestro says: ${data.response}`;
           } else {
             throw new Error('Invalid response format');
           }

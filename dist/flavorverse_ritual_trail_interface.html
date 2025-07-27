@@ -43,7 +43,7 @@
       margin: 5px 0;
     }
   </style>
-</head>
+<link rel="manifest" href="/manifest.webmanifest"><script id="vite-plugin-pwa:register-sw" src="/registerSW.js"></script></head>
 <body>
   <div id="info">🌀 Flavorverse — Ritual Trail Viewer</div>
   <div id="filter">
@@ -139,7 +139,7 @@
           stars.push(star);
 
           // Cluster similar wrappers for trail drawing
-          if (!wrapperMap[item.wrapper]) wrapperMap[item.wrapper] = [];
+          if (!wrapperMap[item.wrapper]) {wrapperMap[item.wrapper] = [];}
           wrapperMap[item.wrapper].push(star);
         });
 
@@ -185,7 +185,7 @@
 
       if (intersects.length > 0) {
         // Fixed: Use textContent instead of innerHTML to prevent XSS
-        info.textContent = "⭐ " + intersects[0].object.name;
+        info.textContent = `⭐ ${intersects[0].object.name}`;
       } else {
         info.textContent = "🌀 Flavorverse — Ritual Trail Viewer";
       }

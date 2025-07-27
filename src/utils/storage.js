@@ -97,7 +97,7 @@ class StorageManager {
 
     try {
       const item = localStorage.getItem(key);
-      if (!item) return null;
+      if (!item) {return null;}
 
       const parsed = JSON.parse(item);
       
@@ -162,7 +162,7 @@ class StorageManager {
   async setIndexedDB(storeName, data) {
     try {
       await this.initIndexedDB();
-      if (!this.db) return false;
+      if (!this.db) {return false;}
 
       const transaction = this.db.transaction([storeName], 'readwrite');
       const store = transaction.objectStore(storeName);
@@ -181,7 +181,7 @@ class StorageManager {
   async getIndexedDB(storeName, id) {
     try {
       await this.initIndexedDB();
-      if (!this.db) return null;
+      if (!this.db) {return null;}
 
       const transaction = this.db.transaction([storeName], 'readonly');
       const store = transaction.objectStore(storeName);
@@ -210,7 +210,7 @@ class StorageManager {
 
   getMemory(key) {
     const item = this.memoryStorage.get(key);
-    if (!item) return null;
+    if (!item) {return null;}
 
     if (item.expiration && Date.now() > item.expiration) {
       this.memoryStorage.delete(key);
@@ -249,7 +249,7 @@ class StorageManager {
       cached = this.getLocal(`cache_${url}`);
     }
 
-    if (!cached) return null;
+    if (!cached) {return null;}
 
     // Check expiration
     if (cached.expiration && Date.now() > cached.expiration) {
@@ -268,7 +268,7 @@ class StorageManager {
   }
 
   async getPreference(key, defaultValue = null) {
-    let pref = await this.getIndexedDB('preferences', key);
+    const pref = await this.getIndexedDB('preferences', key);
     if (!pref) {
       const localPref = this.getLocal(`pref_${key}`);
       return localPref !== null ? localPref : defaultValue;

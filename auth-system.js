@@ -690,7 +690,7 @@ class AuthenticationSystem {
       // Focus first input
       setTimeout(() => {
         const firstInput = modal.querySelector('.auth-form.active input');
-        if (firstInput) firstInput.focus();
+        if (firstInput) {firstInput.focus();}
       }, 100);
     }
   }
@@ -1058,7 +1058,7 @@ class AuthenticationSystem {
         // Move to next input if current is filled
         if (value && index < 5) {
           const nextInput = document.querySelector(`.verification-digit[data-index="${index + 1}"]`);
-          if (nextInput) nextInput.focus();
+          if (nextInput) {nextInput.focus();}
         }
       });
 
@@ -1066,7 +1066,7 @@ class AuthenticationSystem {
         // Move to previous input on backspace
         if (e.key === 'Backspace' && !e.target.value && index > 0) {
           const prevInput = document.querySelector(`.verification-digit[data-index="${index - 1}"]`);
-          if (prevInput) prevInput.focus();
+          if (prevInput) {prevInput.focus();}
         }
       });
     });
@@ -1163,8 +1163,8 @@ class AuthenticationSystem {
     try {
       const base64Url = token.split('.')[1];
       const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-      const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
-        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+      const jsonPayload = decodeURIComponent(atob(base64).split('').map((c) => {
+        return `%${(`00${c.charCodeAt(0).toString(16)}`).slice(-2)}`;
       }).join(''));
       
       return JSON.parse(jsonPayload);
@@ -1206,17 +1206,17 @@ class AuthenticationSystem {
 
     if (user) {
       // User is logged in
-      if (loginBtn) loginBtn.style.display = 'none';
-      if (logoutBtn) logoutBtn.style.display = 'block';
+      if (loginBtn) {loginBtn.style.display = 'none';}
+      if (logoutBtn) {logoutBtn.style.display = 'block';}
       if (userProfile) {
         userProfile.style.display = 'block';
         userProfile.textContent = `Welcome, ${user.firstName}`;
       }
     } else {
       // User is logged out
-      if (loginBtn) loginBtn.style.display = 'block';
-      if (logoutBtn) logoutBtn.style.display = 'none';
-      if (userProfile) userProfile.style.display = 'none';
+      if (loginBtn) {loginBtn.style.display = 'block';}
+      if (logoutBtn) {logoutBtn.style.display = 'none';}
+      if (userProfile) {userProfile.style.display = 'none';}
     }
   }
 

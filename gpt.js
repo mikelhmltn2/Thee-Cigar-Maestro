@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Enhanced context builder for more intelligent responses
   function buildEnhancedContext(userInput) {
     const data = getApplicationData();
-    if (!data) return userInput;
+    if (!data) {return userInput;}
 
     let context = userInput;
     const lowerInput = userInput.toLowerCase();
