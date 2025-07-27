@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; media-src 'self' blob:; connect-src 'self' https://theecigarmaestro.vercel.app;" />
-  <title>Flavorverse — Ritual Trail Interface</title>
+  <title>Thee Cigar Maestro — Ritual Trail Interface</title>
   
   <!-- Progressive Web App Meta Tags -->
   <meta name="theme-color" content="#121212">
@@ -127,7 +127,7 @@
   </style>
 </head>
 <body>
-  <div id="info">🌀 Flavorverse — Ritual Trail Viewer</div>
+      <div id="info">🌀 Thee Cigar Maestro — Ritual Trail Viewer</div>
   
   <!-- Feature Navigation Buttons -->
   <div style="position: absolute; top: 70px; left: 20px; z-index: 3;">
@@ -440,7 +440,7 @@
           }
         });
 
-        showSuccess(`Loaded ${cigars.length} cigars into the Flavorverse`);
+        showSuccess(`Loaded ${cigars.length} cigars into Thee Cigar Maestro`);
       } catch (error) {
         console.error('Error loading cigars:', error);
         showError('Failed to load cigar data. Please refresh the page.');
@@ -631,7 +631,7 @@
       if (intersects.length > 0) {
         info.textContent = `⭐ ${intersects[0].object.name}`;
       } else {
-        info.textContent = "🌀 Flavorverse — Ritual Trail Viewer";
+        info.textContent = "🌀 Thee Cigar Maestro — Ritual Trail Viewer";
       }
     }
 
@@ -664,15 +664,15 @@
 
     // Initialize application
     async function initializeApp() {
-      info.textContent = "🌀 Loading Flavorverse...";
+              info.textContent = "🌀 Loading Thee Cigar Maestro...";
       
       const success = await dataManager.loadAllData();
       if (success) {
         await loadCigars();
         updateFilter();
         animate();
-        info.textContent = "🌀 Flavorverse — Ritual Trail Viewer";
-        showSuccess('🚀 Flavorverse fully integrated and ready!');
+        info.textContent = "🌀 Thee Cigar Maestro — Ritual Trail Viewer";
+        showSuccess('🚀 Thee Cigar Maestro fully integrated and ready!');
       } else {
         showError('Failed to initialize application. Some features may be limited.');
         // Continue with basic functionality
