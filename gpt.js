@@ -159,7 +159,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Default responses
     const defaultResponses = [
       'I\'m here to guide your cigar journey. Ask me about pairings, wrappers, or educational content!',
-      'The Flavorverse holds many secrets. What aspect of cigars interests you most?',
+      'Thee Cigar Maestro holds many secrets. What aspect of cigars interests you most?',
       'Whether you\'re a beginner or expert, I can help enhance your cigar experience.',
       'Tell me about your flavor preferences or what you\'d like to learn about cigars.'
     ];
@@ -394,7 +394,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const data = getApplicationData();
     if (data && !conversationHistory.length) {
       setTimeout(() => {
-        addToConversation("Welcome to the Flavorverse! I have access to all cigar data, pairings, educational content, and ritual guidance. What would you like to explore?");
+        addToConversation("Welcome to Thee Cigar Maestro! I have access to all cigar data, pairings, educational content, and ritual guidance. What would you like to explore?");
       }, 2000);
     }
   }
