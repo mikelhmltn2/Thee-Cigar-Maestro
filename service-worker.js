@@ -1,4 +1,4 @@
-/* global clients */
+/* global self, caches, importScripts, Registration */
 
 // Service Worker for Thee Cigar Maestro
 // Handles caching, offline functionality, and background sync

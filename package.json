@@ -17,7 +17,11 @@
     "validate": "npm run lint && npm run test",
     "analyze": "npx vite-bundle-analyzer",
     "lighthouse": "lighthouse http://localhost:8000 --output=html --output-path=./lighthouse-report.html",
-    "audit": "node validate-data.js && node integration-test.js"
+    "audit": "node validate-data.js && node integration-test.js",
+    "optimize": "node scripts/optimize-logo.js && node optimize-assets.js",
+    "performance": "npm run build && node scripts/performance-test.js",
+    "pwa-validate": "npm run build && node scripts/pwa-validator.js",
+    "pwa-enhance": "node scripts/pwa-enhancer.js"
   },
   "keywords": [
     "cigar",
@@ -39,6 +43,7 @@
     "http-server": "^14.1.1",
     "lighthouse": "^12.8.0",
     "prettier": "^3.1.1",
+    "sharp": "^0.34.3",
     "vite": "^7.0.6",
     "vite-bundle-analyzer": "^1.1.0",
     "vite-plugin-pwa": "^1.0.2",

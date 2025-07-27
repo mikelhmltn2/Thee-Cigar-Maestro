@@ -5,9 +5,9 @@
  * Helps optimize images, minify files, and improve performance
  */
 
-const fs = require('fs');
-// Path module temporarily disabled  
-// const path = require('path');
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
 class AssetOptimizer {
   constructor() {
@@ -39,30 +39,38 @@ class AssetOptimizer {
    */
   async checkLogoSize() {
     try {
-      const logoPath = './logo.png';
-      const stats = fs.statSync(logoPath);
-      const sizeKB = Math.round(stats.size / 1024);
+      const logoFiles = ['./Logo.png', './Logo_original.png'];
       
       console.log(`📸 Logo Analysis:`);
-      console.log(`   Current size: ${sizeKB}KB`);
       
-      if (sizeKB > 200) {
-        console.log(`   ⚠️  Warning: Logo exceeds recommended 200KB limit`);
-        console.log(`   💡 Recommendations:`);
-        console.log(`      - Convert to WebP format (typically 25-35% smaller)`);
-        console.log(`      - Use responsive images with multiple sizes`);
-        console.log(`      - Consider SVG format if logo is vector-based`);
-        console.log(`      - Compress PNG with tools like TinyPNG or ImageOptim`);
-        
-        this.optimizations.push({
-          type: 'image',
-          file: 'logo.png',
-          currentSize: sizeKB,
-          recommendedSize: 150,
-          potentialSavings: sizeKB - 150
-        });
-      } else {
-        console.log(`   ✅ Logo size is within recommended limits`);
+      for (const logoPath of logoFiles) {
+        if (fs.existsSync(logoPath)) {
+          const stats = fs.statSync(logoPath);
+          const sizeKB = Math.round(stats.size / 1024);
+          
+          console.log(`   ${path.basename(logoPath)}: ${sizeKB}KB`);
+          
+          if (sizeKB > 200) {
+            console.log(`   ⚠️  Warning: ${path.basename(logoPath)} exceeds recommended 200KB limit`);
+            console.log(`   💡 Recommendations:`);
+            console.log(`      - Convert to WebP format (typically 25-35% smaller)`);
+            console.log(`      - Use responsive images with multiple sizes`);
+            console.log(`      - Consider SVG format if logo is vector-based`);
+            console.log(`      - Compress PNG with tools like TinyPNG or ImageOptim`);
+            
+            this.optimizations.push({
+              type: 'image',
+              file: path.basename(logoPath),
+              currentSize: sizeKB,
+              recommendedSize: 150,
+              potentialSavings: sizeKB - 150
+            });
+          } else {
+            console.log(`   ✅ ${path.basename(logoPath)} size is within recommended limits`);
+          }
+        } else {
+          console.log(`   ${path.basename(logoPath)} not found.`);
+        }
       }
       
       console.log('');
@@ -266,7 +274,8 @@ class AssetOptimizer {
 }
 
 // Run optimization if called directly
-if (require.main === module) {
+const __filename = fileURLToPath(import.meta.url);
+if (process.argv[1] === __filename) {
   const optimizer = new AssetOptimizer();
   
   const args = process.argv.slice(2);
@@ -280,4 +289,4 @@ if (require.main === module) {
   }
 }
 
-module.exports = AssetOptimizer;
+export default AssetOptimizer;

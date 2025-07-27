@@ -1,4 +1,4 @@
-/* global gtag, dataLayer */
+/* global console, window, document, fetch, Event, CustomEvent */
 
 // Analytics Integration System
 // Handles Google Analytics, custom events, and performance monitoring
