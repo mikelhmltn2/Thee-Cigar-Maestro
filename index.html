@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; media-src 'self' blob:; connect-src 'self' https://theecigarmaestro.vercel.app;" />
-  <title>Thee Cigar Maestro — Ritual Trail Interface</title>
+  <title>Thee Cigar Maestro — Your Personal Cigar Journey</title>
   
   <!-- Progressive Web App Meta Tags -->
   <meta name="theme-color" content="#121212">
@@ -13,187 +13,842 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <link rel="apple-touch-icon" href="assets/logos/logo-192.png">
   <link rel="manifest" href="/manifest.json">
+  
+  <!-- Improved Styles for Better UX -->
   <style>
-    body { margin: 0; background-color: #121212; overflow: hidden; color: #f0e6d2; font-family: Georgia, serif; }
-    canvas { display: block; }
-    #info, #filter, #modal, #educationPanel, #pairingPanel, #loungePanel {
-      position: absolute;
-      z-index: 2;
+    :root {
+      --primary-bg: #121212;
+      --secondary-bg: #1c1c1c;
+      --accent-bg: #2c2c2c;
+      --primary-text: #f0e6d2;
+      --accent-text: #c69c6d;
+      --secondary-text: #a67856;
+      --border-color: #444;
+      --success-color: #28a745;
+      --warning-color: #ffc107;
+      --error-color: #dc3545;
+      --header-height: 80px;
+      --sidebar-width: 320px;
+      --border-radius: 8px;
+      --shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body { 
+      margin: 0; 
+      background: linear-gradient(135deg, var(--primary-bg) 0%, var(--secondary-bg) 100%);
+      overflow: hidden; 
+      color: var(--primary-text); 
+      font-family: Georgia, serif;
+      line-height: 1.6;
+    }
+
+    /* Main Header Navigation */
+    .main-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: var(--header-height);
+      background: rgba(28, 28, 28, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 2px solid var(--accent-text);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2rem;
+      box-shadow: var(--shadow);
+    }
+
+    .logo-section {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .logo-section h1 {
+      margin: 0;
+      font-size: 1.5rem;
+      color: var(--accent-text);
+      font-weight: normal;
+    }
+
+    .main-nav {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .nav-button {
+      background: transparent;
+      border: 2px solid transparent;
+      color: var(--primary-text);
+      padding: 0.5rem 1rem;
+      border-radius: var(--border-radius);
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 0.9rem;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .nav-button:hover {
+      border-color: var(--accent-text);
+      background: rgba(198, 156, 109, 0.1);
+    }
+
+    .nav-button.active {
+      background: var(--accent-text);
+      color: var(--primary-bg);
+    }
+
+    /* Mobile Menu Button */
+    .mobile-menu-btn {
+      display: none;
+      background: transparent;
+      border: none;
+      color: var(--primary-text);
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    /* Side Panel */
+    .side-panel {
+      position: fixed;
+      top: var(--header-height);
+      right: -var(--sidebar-width);
+      width: var(--sidebar-width);
+      height: calc(100vh - var(--header-height));
+      background: rgba(28, 28, 28, 0.95);
+      backdrop-filter: blur(10px);
+      border-left: 1px solid var(--border-color);
+      z-index: 999;
+      transition: var(--transition);
+      overflow-y: auto;
+      box-shadow: var(--shadow);
+    }
+
+    .side-panel.open {
+      right: 0;
+    }
+
+    .panel-header {
+      padding: 1.5rem;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .panel-content {
+      padding: 1.5rem;
+    }
+
+    .close-panel {
+      background: transparent;
+      border: none;
+      color: var(--primary-text);
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    /* Main Canvas Area */
+    .canvas-container {
+      position: fixed;
+      top: var(--header-height);
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 1;
+    }
+
+    canvas { 
+      display: block; 
+      width: 100%;
+      height: 100%;
+    }
+
+    /* Floating Controls */
+    .floating-controls {
+      position: fixed;
+      bottom: 2rem;
+      left: 2rem;
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .control-group {
+      background: rgba(28, 28, 28, 0.9);
+      backdrop-filter: blur(10px);
+      border-radius: var(--border-radius);
+      padding: 1rem;
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow);
+    }
+
+    .control-group h3 {
+      margin: 0 0 1rem 0;
+      font-size: 1rem;
+      color: var(--accent-text);
+    }
+
+    /* Filter Controls */
+    .filter-options {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .filter-option {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .filter-option input[type="checkbox"] {
+      accent-color: var(--accent-text);
+    }
+
+    .filter-option label {
+      font-size: 0.9rem;
+      cursor: pointer;
+    }
+
+    /* Info Display */
+    .info-display {
+      position: fixed;
+      top: calc(var(--header-height) + 2rem);
+      left: 2rem;
+      background: rgba(28, 28, 28, 0.9);
+      backdrop-filter: blur(10px);
+      border-radius: var(--border-radius);
+      padding: 1.5rem;
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow);
+      z-index: 100;
+      max-width: 300px;
+    }
+
+    /* Modal Improvements */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
       background: rgba(0, 0, 0, 0.7);
-      border: 1px solid #444;
-      padding: 10px;
-      color: #f0e6d2;
-    }
-    #info { top: 20px; left: 20px; font-size: 16px; }
-    #filter { top: 20px; right: 20px; font-size: 14px; }
-    #modal {
+      backdrop-filter: blur(5px);
+      z-index: 1500;
       display: none;
-      top: 100px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 400px;
-      max-height: 70vh;
-      overflow-y: auto;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
     }
-    #educationPanel {
-      display: none;
-      top: 100px;
-      right: 20px;
-      width: 300px;
-      max-height: 70vh;
+
+    .modal-content {
+      background: var(--secondary-bg);
+      border-radius: var(--border-radius);
+      padding: 2rem;
+      max-width: 500px;
+      width: 100%;
+      max-height: 80vh;
       overflow-y: auto;
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow);
     }
-    #pairingPanel {
-      display: none;
-      bottom: 100px;
-      left: 20px;
-      width: 350px;
-      max-height: 50vh;
-      overflow-y: auto;
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border-color);
     }
-    #loungePanel {
-      display: none;
-      bottom: 100px;
-      right: 20px;
-      width: 300px;
-      max-height: 50vh;
-      overflow-y: auto;
+
+    .modal-header h3 {
+      margin: 0;
+      color: var(--accent-text);
     }
-    #modal h3, #educationPanel h3, #pairingPanel h3, #loungePanel h3 { margin-top: 0; }
-    .close-btn {
-      background: #5c4033;
+
+    /* Quick Action Buttons */
+    .quick-actions {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .action-button {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: var(--accent-text);
+      color: var(--primary-bg);
       border: none;
-      color: white;
-      padding: 4px 8px;
-      float: right;
       cursor: pointer;
-      border-radius: 3px;
+      font-size: 1.5rem;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
-    .error-message {
-      background: rgba(220, 20, 60, 0.8);
-      color: white;
-      padding: 10px;
-      border-radius: 4px;
-      margin: 5px 0;
-    }
-    .success-message {
-      background: rgba(0, 128, 0, 0.8);
-      color: white;
-      padding: 10px;
-      border-radius: 4px;
-      margin: 5px 0;
-    }
-    .feature-button {
-      background: #c69c6d;
-      border: none;
-      color: #121212;
-      padding: 8px 12px;
-      margin: 5px;
-      border-radius: 4px;
-      cursor: pointer;
-      font-weight: bold;
-    }
-    .feature-button:hover {
+
+    .action-button:hover {
+      transform: scale(1.1);
       background: #dab785;
     }
-    .pairing-item {
-      background: rgba(92, 64, 51, 0.3);
-      padding: 8px;
-      margin: 5px 0;
-      border-radius: 4px;
-      border-left: 3px solid #c69c6d;
+
+    /* Loading States */
+    .loading-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(18, 18, 18, 0.8);
+      backdrop-filter: blur(5px);
+      z-index: 2000;
+      display: none;
+      align-items: center;
+      justify-content: center;
     }
-    .lesson-item {
-      background: rgba(60, 60, 60, 0.5);
-      padding: 8px;
-      margin: 5px 0;
-      border-radius: 4px;
-      cursor: pointer;
+
+    .loading-content {
+      text-align: center;
+      color: var(--primary-text);
     }
-    .lesson-item:hover {
-      background: rgba(92, 64, 51, 0.5);
+
+    .loading-spinner {
+      width: 60px;
+      height: 60px;
+      border: 3px solid var(--border-color);
+      border-top: 3px solid var(--accent-text);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 1rem;
     }
-    .emotional-trigger {
-      background: linear-gradient(45deg, #3a2c20, #5c4033);
-      padding: 6px;
-      margin: 3px 0;
-      border-radius: 3px;
-      font-size: 12px;
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
     }
-    .loading {
-      opacity: 0.6;
-      pointer-events: none;
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .main-nav {
+        display: none;
+      }
+
+      .mobile-menu-btn {
+        display: block;
+      }
+
+      .side-panel {
+        width: 100%;
+        right: -100%;
+      }
+
+      .floating-controls {
+        bottom: 1rem;
+        left: 1rem;
+      }
+
+      .info-display {
+        top: calc(var(--header-height) + 1rem);
+        left: 1rem;
+        right: 1rem;
+        max-width: none;
+      }
+
+      .quick-actions {
+        bottom: 1rem;
+        right: 1rem;
+      }
+
+      .action-button {
+        width: 50px;
+        height: 50px;
+        font-size: 1.2rem;
+      }
     }
-  </style>
+
+    /* Accessibility */
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    /* Focus styles for keyboard navigation */
+    button:focus,
+    input:focus,
+    select:focus {
+      outline: 2px solid var(--accent-text);
+      outline-offset: 2px;
+    }
+
+    /* Toast Notifications */
+    .toast-container {
+      position: fixed;
+      top: calc(var(--header-height) + 1rem);
+      right: 1rem;
+      z-index: 1100;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .toast {
+      background: var(--secondary-bg);
+      border-radius: var(--border-radius);
+      padding: 1rem;
+      border-left: 4px solid;
+      box-shadow: var(--shadow);
+      min-width: 300px;
+      transform: translateX(100%);
+      transition: var(--transition);
+    }
+
+    .toast.show {
+      transform: translateX(0);
+    }
+
+         .toast.success { border-left-color: var(--success-color); }
+     .toast.warning { border-left-color: var(--warning-color); }
+     .toast.error { border-left-color: var(--error-color); }
+
+     /* Enhanced Modal Content Styles */
+     .cigar-details {
+       display: flex;
+       flex-direction: column;
+       gap: 1.5rem;
+     }
+
+     .cigar-info h4 {
+       margin: 0 0 0.5rem 0;
+       color: var(--accent-text);
+       font-size: 1.3rem;
+     }
+
+     .cigar-meta {
+       display: flex;
+       gap: 0.5rem;
+       margin-bottom: 1rem;
+     }
+
+     .wrapper-badge,
+     .strength-badge {
+       padding: 0.25rem 0.75rem;
+       border-radius: 20px;
+       font-size: 0.8rem;
+       font-weight: bold;
+       background: var(--accent-text);
+       color: var(--primary-bg);
+     }
+
+     .strength-badge {
+       background: var(--secondary-text);
+     }
+
+     .flavor-profile,
+     .pairing-suggestions {
+       padding: 1rem;
+       background: rgba(44, 44, 44, 0.5);
+       border-radius: var(--border-radius);
+       border-left: 3px solid var(--accent-text);
+     }
+
+     .flavor-profile h5,
+     .pairing-suggestions h5 {
+       margin: 0 0 0.75rem 0;
+       color: var(--accent-text);
+     }
+
+     .pairing-grid {
+       display: grid;
+       grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+       gap: 0.5rem;
+     }
+
+     .pairing-item {
+       padding: 0.5rem;
+       background: rgba(198, 156, 109, 0.1);
+       border-radius: 4px;
+       text-align: center;
+       font-size: 0.9rem;
+     }
+
+     .action-buttons {
+       display: flex;
+       gap: 0.75rem;
+       flex-wrap: wrap;
+       justify-content: center;
+       margin-top: 1rem;
+     }
+
+     .action-btn {
+       padding: 0.75rem 1.5rem;
+       border: 2px solid var(--accent-text);
+       background: transparent;
+       color: var(--accent-text);
+       border-radius: var(--border-radius);
+       cursor: pointer;
+       font-family: inherit;
+       font-size: 0.9rem;
+       transition: var(--transition);
+       display: flex;
+       align-items: center;
+       gap: 0.5rem;
+     }
+
+     .action-btn:hover {
+       background: var(--accent-text);
+       color: var(--primary-bg);
+     }
+
+     .action-btn.primary {
+       background: var(--accent-text);
+       color: var(--primary-bg);
+     }
+
+     .action-btn.primary:hover {
+       background: #dab785;
+     }
+
+     /* Section Content Styles */
+     .section-content {
+       padding: 1rem 0;
+     }
+
+     .section-content h4 {
+       margin: 0 0 1rem 0;
+       color: var(--accent-text);
+       border-bottom: 2px solid var(--accent-text);
+       padding-bottom: 0.5rem;
+     }
+
+     .action-list,
+     .lesson-list,
+     .journal-actions {
+       display: flex;
+       flex-direction: column;
+       gap: 0.75rem;
+       margin-top: 1rem;
+     }
+
+     .action-item,
+     .lesson-item {
+       padding: 1rem;
+       background: rgba(44, 44, 44, 0.5);
+       border-radius: var(--border-radius);
+       border: 1px solid var(--border-color);
+       cursor: pointer;
+       transition: var(--transition);
+       text-align: left;
+       color: var(--primary-text);
+     }
+
+     .action-item:hover,
+     .lesson-item:hover {
+       background: rgba(198, 156, 109, 0.1);
+       border-color: var(--accent-text);
+     }
+
+     .lesson-item h5 {
+       margin: 0 0 0.5rem 0;
+       color: var(--accent-text);
+       font-size: 1rem;
+     }
+
+     .lesson-item p {
+       margin: 0;
+       font-size: 0.9rem;
+       color: var(--secondary-text);
+     }
+
+     /* Search and Input Styles */
+     .search-input,
+     .pairing-search input {
+       width: 100%;
+       padding: 0.75rem;
+       background: var(--accent-bg);
+       border: 2px solid var(--border-color);
+       border-radius: var(--border-radius);
+       color: var(--primary-text);
+       font-family: inherit;
+       font-size: 1rem;
+       transition: var(--transition);
+     }
+
+     .search-input:focus,
+     .pairing-search input:focus {
+       outline: none;
+       border-color: var(--accent-text);
+     }
+
+     .search-btn {
+       margin-top: 0.75rem;
+       padding: 0.75rem 1.5rem;
+       background: var(--accent-text);
+       color: var(--primary-bg);
+       border: none;
+       border-radius: var(--border-radius);
+       cursor: pointer;
+       font-family: inherit;
+       font-weight: bold;
+       transition: var(--transition);
+     }
+
+     .search-btn:hover {
+       background: #dab785;
+     }
+
+     .search-filters select {
+       padding: 0.5rem;
+       background: var(--accent-bg);
+       border: 1px solid var(--border-color);
+       border-radius: var(--border-radius);
+       color: var(--primary-text);
+       font-family: inherit;
+       margin-top: 0.75rem;
+       width: 100%;
+     }
+
+     /* Chat Interface Styles */
+     .ai-chat-interface {
+       display: flex;
+       flex-direction: column;
+       height: 400px;
+     }
+
+     .chat-messages {
+       flex: 1;
+       overflow-y: auto;
+       padding: 1rem;
+       background: rgba(44, 44, 44, 0.3);
+       border-radius: var(--border-radius);
+       margin-bottom: 1rem;
+     }
+
+     .message {
+       margin-bottom: 1rem;
+       padding: 0.75rem;
+       border-radius: var(--border-radius);
+     }
+
+     .message.assistant {
+       background: rgba(198, 156, 109, 0.1);
+       border-left: 3px solid var(--accent-text);
+     }
+
+     .message.user {
+       background: rgba(68, 68, 68, 0.5);
+       border-left: 3px solid var(--secondary-text);
+       margin-left: 2rem;
+     }
+
+     .chat-input {
+       display: flex;
+       gap: 0.75rem;
+     }
+
+     .chat-input input {
+       flex: 1;
+       padding: 0.75rem;
+       background: var(--accent-bg);
+       border: 2px solid var(--border-color);
+       border-radius: var(--border-radius);
+       color: var(--primary-text);
+       font-family: inherit;
+     }
+
+     .chat-input button {
+       padding: 0.75rem 1.5rem;
+       background: var(--accent-text);
+       color: var(--primary-bg);
+       border: none;
+       border-radius: var(--border-radius);
+       cursor: pointer;
+       font-family: inherit;
+       font-weight: bold;
+     }
+
+     /* Help Content Styles */
+     .help-content {
+       max-height: 500px;
+       overflow-y: auto;
+     }
+
+     .help-section {
+       margin-bottom: 1.5rem;
+       padding-bottom: 1rem;
+       border-bottom: 1px solid var(--border-color);
+     }
+
+     .help-section:last-child {
+       border-bottom: none;
+     }
+
+     .help-section h5 {
+       margin: 0 0 0.75rem 0;
+       color: var(--accent-text);
+     }
+
+     .help-section ul {
+       margin: 0.5rem 0;
+       padding-left: 1.5rem;
+     }
+
+     .help-section li {
+       margin-bottom: 0.5rem;
+       line-height: 1.5;
+     }
+   </style>
 </head>
 <body>
-      <div id="info">🌀 Thee Cigar Maestro — Ritual Trail Viewer</div>
-  
-  <!-- Feature Navigation Buttons -->
-  <div style="position: absolute; top: 70px; left: 20px; z-index: 3;">
-    <button class="feature-button" id="educationBtn">📚 Education</button>
-    <button class="feature-button" id="pairingBtn">🍷 Pairings</button>
-    <button class="feature-button" id="loungeBtn">🏛️ Lounge</button>
-    <button class="feature-button" id="ritualBtn">🎭 Ritual</button>
+  <!-- Main Header -->
+  <header class="main-header">
+    <div class="logo-section">
+      <h1>🚬 Thee Cigar Maestro</h1>
+    </div>
+    
+    <nav class="main-nav">
+      <button class="nav-button active" data-section="explore">
+        🌀 Explore
+      </button>
+      <button class="nav-button" data-section="education">
+        📚 Learn
+      </button>
+      <button class="nav-button" data-section="pairings">
+        🍷 Pairings
+      </button>
+      <button class="nav-button" data-section="journal">
+        📝 Journal
+      </button>
+      <button class="nav-button" data-section="search">
+        🔍 Search
+      </button>
+    </nav>
+    
+    <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
+  </header>
+
+  <!-- Side Panel for detailed controls -->
+  <aside class="side-panel" id="sidePanel">
+    <div class="panel-header">
+      <h3 id="panelTitle">Explore Cigars</h3>
+      <button class="close-panel" id="closePanelBtn">×</button>
+    </div>
+    <div class="panel-content" id="panelContent">
+      <!-- Content will be dynamically loaded -->
+    </div>
+  </aside>
+
+  <!-- Main Canvas Container -->
+  <div class="canvas-container" id="canvasContainer">
+    <!-- Three.js canvas will be inserted here -->
   </div>
-  
-  <div id="filter">
-    <strong>Filter by Wrapper</strong><br/>
-    <label><input type="checkbox" value="Maduro" checked /> Maduro</label>
-    <label><input type="checkbox" value="Connecticut" checked /> Connecticut</label>
-    <label><input type="checkbox" value="Habano" checked /> Habano</label>
-    <label><input type="checkbox" value="Oscuro" checked /> Oscuro</label>
-    <label><input type="checkbox" value="Natural" checked /> Natural</label>
-  </div>
-  
-  <!-- Enhanced Modal with Rich Content -->
-  <div id="modal">
-    <button class="close-btn" id="closeBtn">×</button>
-    <h3 id="modalTitle">Cigar Name</h3>
-    <div id="modalContent">
-      <p><strong>Wrapper:</strong> <span id="modalWrapper"></span></p>
-      <p><strong>Flavor Profile:</strong> <span id="modalNotes"></span></p>
-      <div id="modalPairings"></div>
-      <div id="modalEducation"></div>
-      <div id="modalEmotional"></div>
+
+  <!-- Info Display -->
+  <div class="info-display" id="infoDisplay">
+    <h4>🌀 Welcome to Your Cigar Journey</h4>
+    <p>Click on any cigar in the 3D space to learn more about its flavor profile, wrapper, and perfect pairings.</p>
+    <div id="dynamicInfo">
+      <small>Loading cigar data...</small>
     </div>
   </div>
 
-  <!-- Education Panel -->
-  <div id="educationPanel">
-    <button class="close-btn" id="closeEducationBtn">×</button>
-    <h3>📚 Educational Content</h3>
-    <div id="educationContent">
-      <div id="ceuLessons"></div>
-      <div id="certificationTracks"></div>
+  <!-- Floating Controls -->
+  <div class="floating-controls">
+    <div class="control-group">
+      <h3>Filter by Wrapper</h3>
+      <div class="filter-options" id="wrapperFilters">
+        <div class="filter-option">
+          <input type="checkbox" id="maduro" value="Maduro" checked>
+          <label for="maduro">Maduro</label>
+        </div>
+        <div class="filter-option">
+          <input type="checkbox" id="connecticut" value="Connecticut" checked>
+          <label for="connecticut">Connecticut</label>
+        </div>
+        <div class="filter-option">
+          <input type="checkbox" id="habano" value="Habano" checked>
+          <label for="habano">Habano</label>
+        </div>
+        <div class="filter-option">
+          <input type="checkbox" id="oscuro" value="Oscuro" checked>
+          <label for="oscuro">Oscuro</label>
+        </div>
+        <div class="filter-option">
+          <input type="checkbox" id="natural" value="Natural" checked>
+          <label for="natural">Natural</label>
+        </div>
+      </div>
     </div>
   </div>
 
-  <!-- Pairing Panel -->
-  <div id="pairingPanel">
-    <button class="close-btn" id="closePairingBtn">×</button>
-    <h3>🍷 Pairing Engine</h3>
-    <div id="pairingContent">
-      <input type="text" id="pairingInput" placeholder="Enter beverage (e.g., espresso, whiskey)..." style="width: 100%; margin-bottom: 10px; padding: 5px; background: #2c2c2c; border: 1px solid #666; color: #f0e6d2;" />
-      <button class="feature-button" id="findPairingsBtn">Find Pairings</button>
-      <div id="pairingResults"></div>
+  <!-- Quick Action Buttons -->
+  <div class="quick-actions">
+    <button class="action-button" id="aiChatBtn" title="AI Assistant">🤖</button>
+    <button class="action-button" id="recordBtn" title="Record Tasting Notes">🎙️</button>
+    <button class="action-button" id="helpBtn" title="Help & Tour">❓</button>
+  </div>
+
+  <!-- Modal Overlay -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="modalTitle">Cigar Details</h3>
+        <button class="close-panel" id="closeModalBtn">×</button>
+      </div>
+      <div id="modalContent">
+        <!-- Modal content will be dynamically loaded -->
+      </div>
     </div>
   </div>
 
-  <!-- Lounge Panel -->
-  <div id="loungePanel">
-    <button class="close-btn" id="closeLoungeBtn">×</button>
-    <h3>🏛️ Lounge Experience</h3>
-    <div id="loungeContent">
-      <div id="conciergeMode"></div>
-      <div id="loungeFeatures"></div>
+  <!-- Loading Overlay -->
+  <div class="loading-overlay" id="loadingOverlay">
+    <div class="loading-content">
+      <div class="loading-spinner"></div>
+      <p id="loadingMessage">Loading your cigar experience...</p>
     </div>
   </div>
 
+  <!-- Toast Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- Error Container for legacy support -->
   <div id="errorContainer"></div>
+
+  <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js" integrity="sha384-gd3xd4QfbP7PiJPPr7dV3s6cXGJ0vy3S8xkW7YnK8eQMjB7c9PwSb0Rx9fF5J8P1" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/examples/js/controls/OrbitControls.js" integrity="sha384-KfY7P2q4L6T8wHj9nQr0N9p3K4L5M8B3J6Q1W7S4R2F9G8H5I6J7K8L9M0N1O2P3" crossorigin="anonymous"></script>
-  <script>
+  <script type="module">
+    // Import enhanced UI components
+    import UIManager from './src/components/UIManager.js';
+    import OnboardingTour from './src/components/OnboardingTour.js';
+    
+    // Initialize global UI manager and tour
+    let uiManager;
+    let onboardingTour;
+    
     // Enhanced Data Management System
     class DataManager {
       constructor() {
@@ -860,6 +1515,159 @@
         }
       });
     }
+
+    // Initialize the enhanced UI system
+    document.addEventListener('DOMContentLoaded', async () => {
+      try {
+        // Initialize UI Manager
+        uiManager = new UIManager();
+        window.uiManager = uiManager; // Make globally accessible for legacy code
+        
+        // Initialize onboarding tour
+        onboardingTour = new OnboardingTour(uiManager);
+        window.onboardingTour = onboardingTour; // Make globally accessible
+        
+        // Initialize data manager
+        const dataManager = new DataManager();
+        await dataManager.loadAllData();
+        window.dataManager = dataManager; // Make globally accessible
+        
+        // Initialize 3D scene
+        uiManager.showLoading('Loading 3D visualization...');
+        await init3DScene();
+        uiManager.hideLoading();
+        
+        // Load cigars into the scene
+        uiManager.showLoading('Loading cigar data...');
+        await loadCigars();
+        uiManager.hideLoading();
+        
+        // Show welcome message
+        uiManager.showToast('Welcome to Thee Cigar Maestro! 🚬', 'success', 5000);
+        
+        // Start onboarding tour for first-time users
+        if (OnboardingTour.shouldShowTour()) {
+          setTimeout(() => {
+            onboardingTour.start();
+          }, 2000); // Give UI time to settle
+        }
+        
+        // Setup event listeners for UI integration
+        setupUIIntegration();
+        
+        console.log('🎉 Application fully initialized');
+        
+      } catch (error) {
+        console.error('❌ Failed to initialize application:', error);
+        uiManager?.showToast('Failed to load application. Please refresh.', 'error', 10000);
+      }
+    });
+
+    // Setup integration between UI and existing functionality
+    function setupUIIntegration() {
+      // Listen for filter changes from UI
+      document.addEventListener('filterChange', (event) => {
+        const { wrapper, checked } = event.detail;
+        updateCigarVisibility(wrapper, checked);
+      });
+      
+      // Listen for random cigar selection
+      document.addEventListener('randomCigar', () => {
+        selectRandomCigar();
+      });
+      
+      // Setup 3D scene click handling with improved modal
+      window.addEventListener('cigarSelected', (event) => {
+        const { cigar } = event.detail;
+        showEnhancedModalWithUI(cigar);
+      });
+    }
+
+    // Enhanced modal function that uses the new UI system
+    function showEnhancedModalWithUI(star) {
+      const cigarName = star.name;
+      const userData = star.userData;
+      
+      const content = `
+        <div class="cigar-details">
+          <div class="cigar-info">
+            <h4>${cigarName}</h4>
+            <div class="cigar-meta">
+              <span class="wrapper-badge">${userData.wrapper}</span>
+              <span class="strength-badge">Medium</span>
+            </div>
+          </div>
+          
+          <div class="flavor-profile">
+            <h5>🌿 Flavor Profile</h5>
+            <p>${userData.flavor}</p>
+          </div>
+          
+          <div class="pairing-suggestions">
+            <h5>🍷 Perfect Pairings</h5>
+            <div class="pairing-grid">
+              <div class="pairing-item">☕ Dark Roast Coffee</div>
+              <div class="pairing-item">🥃 Single Malt Whisky</div>
+              <div class="pairing-item">🍷 Bold Red Wine</div>
+            </div>
+          </div>
+          
+          <div class="action-buttons">
+            <button onclick="uiManager.navigateToSection('journal')" class="action-btn">
+              📝 Add to Journal
+            </button>
+            <button onclick="uiManager.navigateToSection('pairings')" class="action-btn">
+              🍷 Find Pairings
+            </button>
+            <button onclick="startTastingSession('${cigarName}')" class="action-btn primary">
+              🎭 Start Tasting Session
+            </button>
+          </div>
+        </div>
+      `;
+      
+      uiManager.showModal(`🚬 ${cigarName}`, content);
+    }
+
+    // Utility functions for the new UI
+    function updateCigarVisibility(wrapper, checked) {
+      // Filter cigars in 3D scene based on wrapper type
+      if (window.cigarsInScene) {
+        window.cigarsInScene.forEach(cigar => {
+          if (cigar.userData.wrapper === wrapper) {
+            cigar.visible = checked;
+          }
+        });
+      }
+    }
+
+    function selectRandomCigar() {
+      if (window.cigarsInScene && window.cigarsInScene.length > 0) {
+        const randomIndex = Math.floor(Math.random() * window.cigarsInScene.length);
+        const randomCigar = window.cigarsInScene[randomIndex];
+        
+        // Animate camera to cigar
+        if (window.controls && window.camera) {
+          window.controls.target.copy(randomCigar.position);
+          window.camera.position.set(
+            randomCigar.position.x + 10,
+            randomCigar.position.y + 10,
+            randomCigar.position.z + 10
+          );
+          window.controls.update();
+        }
+        
+        // Show cigar details
+        showEnhancedModalWithUI(randomCigar);
+      }
+    }
+
+    function startTastingSession(cigarName) {
+      uiManager.closeModal();
+      uiManager.navigateToSection('journal');
+      uiManager.showToast(`Starting tasting session for ${cigarName}`, 'success');
+    }
+
   </script>
 </body>
 </html>
