@@ -936,8 +936,8 @@ class AuthenticationSystem {
           method: 'POST'
         });
       }
-    } catch (error) {
-      console.error('Logout error:', error);
+    } catch (_error) {
+      console.error('Logout error:', _error);
     } finally {
       this.authToken = null;
       this.refreshToken = null;
@@ -1028,7 +1028,7 @@ class AuthenticationSystem {
         }
         
         return await retryResponse.json();
-      } catch (refreshError) {
+      } catch (_refreshError) {
         await this.logout();
         throw new Error('Session expired. Please log in again.');
       }
@@ -1048,7 +1048,7 @@ class AuthenticationSystem {
   setupVerificationInputs() {
     document.querySelectorAll('.verification-digit').forEach((input, index) => {
       input.addEventListener('input', (e) => {
-        const value = e.target.value;
+        const {value} = e.target;
         
         // Only allow numbers
         if (!/^\d*$/.test(value)) {

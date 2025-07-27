@@ -63,7 +63,7 @@ class LoadingSystem {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           const element = entry.target;
-          const loadingId = element.dataset.loadingId;
+          const {loadingId} = element.dataset;
           
           if (loadingId) {
             this.triggerLazyLoad(loadingId, element);
@@ -276,7 +276,7 @@ class LoadingSystem {
     if (!element) {return;}
 
     // Restore original content
-    const originalContent = element.dataset.originalContent;
+    const {originalContent} = element.dataset;
     if (originalContent) {
       element.innerHTML = originalContent;
       delete element.dataset.originalContent;

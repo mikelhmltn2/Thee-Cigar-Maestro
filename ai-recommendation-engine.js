@@ -682,7 +682,7 @@ class AIRecommendationEngine {
    */
   applyFilters(recommendations, filters) {
     return recommendations.filter(rec => {
-      const cigar = rec.cigar;
+      const {cigar} = rec;
       
       // Wrapper filter
       if (filters.wrappers && filters.wrappers.length > 0) {
@@ -819,8 +819,8 @@ class AIRecommendationEngine {
    * Generate explanation for recommendation
    */
   generateExplanation(recommendation, _userId) {
-    const cigar = recommendation.cigar;
-    const algorithm = recommendation.algorithm;
+    const {cigar} = recommendation;
+    const {algorithm} = recommendation;
     
     let explanation = '';
     

@@ -10,7 +10,7 @@ export default [
   {
     files: ['**/*.js'],
     languageOptions: {
-      ecmaVersion: 2022,
+      ecmaVersion: 2024,
       sourceType: 'module',
       globals: {
         THREE: 'readonly',
@@ -56,7 +56,7 @@ export default [
       }
     },
     rules: {
-      'no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
+      'no-unused-vars': ['error', { argsIgnorePattern: '^_', varsIgnorePattern: '^_', caughtErrorsIgnorePattern: '^_' }],
       'no-console': ['warn', { allow: ['warn', 'error'] }],
       'prefer-const': 'error',
       'no-var': 'error',
@@ -88,7 +88,17 @@ export default [
       'no-array-constructor': 'error',
       'no-new-object': 'error',
       'no-new-wrappers': 'error',
-      'radix': 'error'
+      'radix': 'error',
+      'no-redeclare': 'error',
+      'no-shadow': 'error',
+      'prefer-destructuring': ['error', { object: true, array: false }],
+      'prefer-rest-params': 'error',
+      'prefer-spread': 'error',
+      'for-direction': 'error',
+      'no-async-promise-executor': 'error',
+      'no-await-in-loop': 'warn',
+      'no-promise-executor-return': 'error',
+      'require-atomic-updates': 'warn'
     }
   },
   {
@@ -104,7 +114,7 @@ export default [
   {
     files: ['service-worker.js', '**/sw.js', '**/workbox-*.js'],
     languageOptions: {
-      ecmaVersion: 2022,
+      ecmaVersion: 2024,
       sourceType: 'module',
       globals: {
         self: 'readonly',
@@ -127,9 +137,27 @@ export default [
     }
   },
   {
+    files: ['**/src/utils/errorHandler.js', 'src/**/*.js'],
+    languageOptions: {
+      ecmaVersion: 2024,
+      sourceType: 'module',
+      globals: {
+        window: 'readonly',
+        document: 'readonly',
+        console: 'readonly',
+        navigator: 'readonly',
+        localStorage: 'readonly',
+        sessionStorage: 'readonly',
+        fetch: 'readonly',
+        process: 'readonly',
+        Buffer: 'readonly'
+      }
+    }
+  },
+  {
     files: ['validate-data.js', 'integration-test.js', 'vite.config.js', 'vitest.config.js', '**/server.js', 'optimize-assets.js', 'scripts/**/*.js', 'backend-api/**/*.js'],
     languageOptions: {
-      ecmaVersion: 2022,
+      ecmaVersion: 2024,
       sourceType: 'module',
       globals: {
         process: 'readonly',
@@ -148,9 +176,33 @@ export default [
     }
   },
   {
+    files: ['**/ai-recommendation-engine.js', '**/analytics-integration.js', '**/auth-system.js', '**/local-storage-manager.js', '**/ui-enhancements.js', '**/advanced-search.js'],
+    languageOptions: {
+      ecmaVersion: 2024,
+      sourceType: 'module',
+      globals: {
+        window: 'readonly',
+        document: 'readonly',
+        console: 'readonly',
+        navigator: 'readonly',
+        localStorage: 'readonly',
+        sessionStorage: 'readonly',
+        fetch: 'readonly',
+        THREE: 'readonly',
+        gtag: 'readonly',
+        dataLayer: 'readonly',
+        module: 'readonly',
+        exports: 'readonly'
+      }
+    },
+    rules: {
+      'no-console': 'off'
+    }
+  },
+  {
     files: ['tests/**/*.js'],
     languageOptions: {
-      ecmaVersion: 2022,
+      ecmaVersion: 2024,
       sourceType: 'module',
       globals: {
         global: 'readonly',

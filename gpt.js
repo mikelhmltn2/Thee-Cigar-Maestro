@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Add educational context
     if (data.education && data.education.educationTracks) {
       if (lowerInput.includes('learn') || lowerInput.includes('education') || lowerInput.includes('course')) {
-        const tracks = data.education.educationTracks.tracks;
+        const {tracks} = data.education.educationTracks;
         if (tracks && tracks.length > 0) {
           context += `\n\nEducational tracks available: ${tracks.map(t => t.title).join(', ')}`;
         }

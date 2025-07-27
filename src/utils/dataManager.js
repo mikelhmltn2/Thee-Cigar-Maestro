@@ -652,7 +652,7 @@ class DataManager {
     const education = this.getEducationData();
     if (!education.educationTracks || !education.educationTracks.tracks) {return [];}
     
-    const tracks = education.educationTracks.tracks;
+    const {tracks} = education.educationTracks;
     return tracks.filter(track => 
       track.title.toLowerCase().includes(topic.toLowerCase()) ||
       track.lessons.some(lesson => lesson.toLowerCase().includes(topic.toLowerCase()))

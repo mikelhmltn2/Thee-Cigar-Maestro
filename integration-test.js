@@ -132,7 +132,7 @@ class IntegrationTestSuite {
 
     // Test educational structure
     if (this.data.education && this.data.education.educationTracks) {
-      const tracks = this.data.education.educationTracks.tracks;
+      const {tracks} = this.data.education.educationTracks;
       if (tracks && tracks.length > 0) {
         this.addResult('PASS', 'Data Structure', `Educational tracks structure valid (${tracks.length} tracks)`);
       }
@@ -233,7 +233,7 @@ class IntegrationTestSuite {
     console.log('📚 Testing Educational System Integration...');
     
     if (this.data.education && this.data.education.educationTracks) {
-      const tracks = this.data.education.educationTracks.tracks;
+      const {tracks} = this.data.education.educationTracks;
       
       if (tracks && tracks.length > 0) {
         this.addResult('PASS', 'Educational System', `${tracks.length} education tracks available`);
@@ -248,7 +248,7 @@ class IntegrationTestSuite {
       }
 
       // Test microcredentials
-      const microcredentials = this.data.education.educationTracks.microcredentials;
+      const {microcredentials} = this.data.education.educationTracks;
       if (microcredentials && microcredentials.length > 0) {
         this.addResult('PASS', 'Educational System', `${microcredentials.length} microcredentials available`);
       }
@@ -285,7 +285,7 @@ class IntegrationTestSuite {
     console.log('⚙️ Testing Feature Flag System...');
     
     if (this.data.features && this.data.features.features) {
-      const features = this.data.features.features;
+      const {features} = this.data.features;
       const totalFeatures = Object.keys(features).length;
       const implementedFeatures = Object.values(features)
         .filter(f => f.status === 'Implemented').length;
