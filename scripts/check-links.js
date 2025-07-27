@@ -8,7 +8,6 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { execSync } from 'child_process';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -76,6 +75,9 @@ async function checkUrl(url, context = '') {
       }
     }
   }
+  
+  // This should never be reached, but return a fallback
+  return { success: false, error: 'Max retries exceeded', url, context };
 }
 
 /**

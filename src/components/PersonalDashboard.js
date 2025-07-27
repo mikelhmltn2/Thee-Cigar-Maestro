@@ -859,7 +859,7 @@ class PersonalDashboard {
 
   getUserRating(cigarName) {
     const saved = localStorage.getItem(`rating_${cigarName}`);
-    return saved ? parseInt(saved) : 0;
+    return saved ? parseInt(saved, 10) : 0;
   }
 
   getActivityIcon(type) {
@@ -890,7 +890,7 @@ class PersonalDashboard {
 
   calculateInsights() {
     const insights = [];
-    const favorites = this.getFavorites();
+    const _favorites = this.getFavorites();
     const distribution = this.userStats.wrapperDistribution;
     
     // Wrapper preference insight
@@ -948,7 +948,7 @@ class PersonalDashboard {
         });
         break;
         
-      case 'exploration':
+      case 'exploration': {
         // Recommend different wrapper types
         const triedWrappers = Object.keys(this.userStats.wrapperDistribution)
           .filter(w => this.userStats.wrapperDistribution[w] > 0);
@@ -966,8 +966,9 @@ class PersonalDashboard {
           }
         });
         break;
+      }
         
-      case 'value':
+      case 'value': {
         // Recommend highly rated, reasonably priced cigars
         cigars.filter(c => c.price && c.price < 15)
           .slice(0, 3)
@@ -979,6 +980,7 @@ class PersonalDashboard {
             });
           });
         break;
+      }
     }
 
     return recommendations.slice(0, 3);
@@ -1135,7 +1137,7 @@ class PersonalDashboard {
       const key = localStorage.key(i);
       if (key.startsWith('rating_')) {
         const cigarName = key.replace('rating_', '');
-        ratings[cigarName] = parseInt(localStorage.getItem(key));
+        ratings[cigarName] = parseInt(localStorage.getItem(key), 10);
       }
     }
     return ratings;

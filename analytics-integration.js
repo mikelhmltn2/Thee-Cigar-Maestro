@@ -1,4 +1,4 @@
-/* global console, window, document, fetch */
+// Analytics Integration System - globals handled by ESLint config
 
 // Analytics Integration System
 // Handles Google Analytics, custom events, and performance monitoring
