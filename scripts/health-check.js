@@ -74,7 +74,7 @@ async function testEndpoint(url, options = {}) {
         attempt
       };
       
-    } catch (_error) {
+    } catch (error) {
       if (attempt <= retries) {
         console.warn(`🔄 Retry ${attempt}/${retries} for ${url}: ${error.message}`);
         await new Promise(resolve => setTimeout(resolve, 1000 * attempt));
@@ -436,7 +436,7 @@ async function runHealthCheck() {
     // Exit with appropriate code
     process.exit(isHealthy ? 0 : 1);
     
-  } catch (_error) {
+  } catch (error) {
     console.error('❌ Health check failed with error:', error);
     process.exit(1);
   }
