@@ -65,8 +65,7 @@ class AnalyticsManager {
 
       // Initialize gtag
       window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      window.gtag = gtag;
+      window.gtag = function gtag(){dataLayer.push(arguments);};
       
       gtag('js', new Date());
       gtag('config', GA4_MEASUREMENT_ID, {

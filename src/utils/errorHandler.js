@@ -395,7 +395,8 @@ class ErrorHandler {
 
   // Error boundary for React-like error handling
   createErrorBoundary(element, fallbackContent) {
-    const originalContent = element.innerHTML;
+    // Store original content for potential rollback
+    // const originalContent = element.innerHTML;
     
     try {
       // Monitor for changes that might cause errors
@@ -405,7 +406,7 @@ class ErrorHandler {
             // Check for script errors in new content
             const scripts = mutation.target.querySelectorAll('script');
             scripts.forEach(script => {
-              script.addEventListener('error', (e) => {
+              script.addEventListener('error', (_e) => {
                 this.handleError({
                   type: 'script',
                   message: `Script error in ${script.src}`,

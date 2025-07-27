@@ -435,10 +435,12 @@ class AIRecommendationEngine {
 
       const {
         algorithm = this.algorithms.HYBRID,
-        count = 10,
+        count: requestedCount = 10,
         filters = {},
         contextualFactors = {}
       } = options;
+      
+      const count = requestedCount;
 
       let recommendations = [];
 
@@ -490,20 +492,21 @@ class AIRecommendationEngine {
       
     } catch (error) {
       console.error('Error generating recommendations:', error);
-      return this.getFallbackRecommendations(count);
+      return this.getFallbackRecommendations(10);
     }
   }
 
   /**
    * Get collaborative filtering recommendations
    */
-  async getCollaborativeRecommendations(userId, count) {
-    if (!userId || !this.userProfiles.has(userId)) {
+  async getCollaborativeRecommendations(_userId, count) {
+    if (!_userId || !this.userProfiles.has(_userId)) {
       return this.getPopularRecommendations(count);
     }
 
-    const userProfile = this.userProfiles.get(userId);
-    const similarUsers = await this.findSimilarUsers(userId);
+    // Get user profile for potential future use
+    // const userProfile = this.userProfiles.get(_userId);
+    const similarUsers = await this.findSimilarUsers(_userId);
     
     const recommendations = new Map();
     
@@ -512,7 +515,7 @@ class AIRecommendationEngine {
       
       similarUserInteractions.forEach(interaction => {
         const cigar = this.cigarData.find(c => c.name === interaction.cigarName);
-        if (cigar && !this.hasUserInteracted(userId, cigar.name)) {
+        if (cigar && !this.hasUserInteracted(_userId, cigar.name)) {
           const score = similarity * this.getInteractionWeight(interaction.type);
           
           if (recommendations.has(cigar.name)) {
@@ -815,7 +818,7 @@ class AIRecommendationEngine {
   /**
    * Generate explanation for recommendation
    */
-  generateExplanation(recommendation, userId) {
+  generateExplanation(recommendation, _userId) {
     const cigar = recommendation.cigar;
     const algorithm = recommendation.algorithm;
     
@@ -855,7 +858,8 @@ class AIRecommendationEngine {
     
     // Adjust based on data availability
     if (userId && this.userProfiles.has(userId)) {
-      const profile = this.userProfiles.get(userId);
+              // Get user profile for potential future use
+        // const profile = this.userProfiles.get(userId);
       const interactionCount = this.userInteractions.filter(i => i.userId === userId).length;
       
       // More interactions = higher confidence

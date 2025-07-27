@@ -1,4 +1,4 @@
-/* global clients, self, caches */
+/* global clients */
 
 // Service Worker for Thee Cigar Maestro
 // Handles caching, offline functionality, and background sync
@@ -37,12 +37,12 @@ const DATA_FILES = [
   '/flavor-atlas.json'
 ];
 
-// Cache strategies
-const CACHE_STRATEGIES = {
-  CACHE_FIRST: 'cache-first',
-  NETWORK_FIRST: 'network-first',
-  STALE_WHILE_REVALIDATE: 'stale-while-revalidate'
-};
+// Cache strategies (disabled for now)
+// const CACHE_STRATEGIES = {
+//   CACHE_FIRST: 'cache-first',
+//   NETWORK_FIRST: 'network-first',
+//   STALE_WHILE_REVALIDATE: 'stale-while-revalidate'
+// };
 
 /**
  * Service Worker Installation
@@ -86,6 +86,7 @@ self.addEventListener('activate', (event) => {
             console.log('🗑️ Deleting old cache:', cacheName);
             return caches.delete(cacheName);
           }
+          return Promise.resolve();
         })
       );
     }).then(() => {
@@ -170,7 +171,7 @@ async function handleApiRequest(request) {
       const now = Date.now();
       const fiveMinutes = 5 * 60 * 1000;
       
-      if (!cacheTimestamp || (now - parseInt(cacheTimestamp)) < fiveMinutes) {
+      if (!cacheTimestamp || (now - parseInt(cacheTimestamp, 10)) < fiveMinutes) {
         return cachedResponse;
       }
     }
@@ -433,6 +434,7 @@ async function handleCacheUpdate(data) {
             if (response.ok) {
               return cache.put(url, response);
             }
+            return Promise.resolve();
           }).catch(() => {})
         )
       );
@@ -516,7 +518,7 @@ async function cleanOldCacheEntries() {
       const cacheTimestamp = response.headers.get('sw-cache-timestamp');
       
       if (cacheTimestamp) {
-        const age = Date.now() - parseInt(cacheTimestamp);
+        const age = Date.now() - parseInt(cacheTimestamp, 10);
         const maxAge = 24 * 60 * 60 * 1000; // 24 hours
         
         if (age > maxAge) {

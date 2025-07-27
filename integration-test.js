@@ -6,7 +6,8 @@
  */
 
 const fs = require('fs');
-const path = require('path');
+// Path module temporarily disabled
+// const path = require('path');
 
 class IntegrationTestSuite {
   constructor() {
@@ -312,7 +313,7 @@ class IntegrationTestSuite {
     const xssPatterns = [/<script/i, /javascript:/i, /on\w+\s*=/i];
     
     let securityIssues = 0;
-    dataValues.forEach((value, index) => {
+    dataValues.forEach((value, _index) => {
       if (typeof value === 'string') {
         xssPatterns.forEach(pattern => {
           if (pattern.test(value)) {

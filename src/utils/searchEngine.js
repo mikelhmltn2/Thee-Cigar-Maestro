@@ -492,15 +492,17 @@ class SearchEngine {
         case 'name':
           comparison = (a.document.fields.name || '').localeCompare(b.document.fields.name || '');
           break;
-        case 'wrapper':
+        case 'wrapper': {
           comparison = (a.document.fields.wrapper || '').localeCompare(b.document.fields.wrapper || '');
           break;
-        case 'strength':
+        }
+        case 'strength': {
           const strengthOrder = ['Mild', 'Mild-Medium', 'Medium', 'Medium-Full', 'Full'];
           const aStrength = strengthOrder.indexOf(a.document.fields.strength) ?? 0;
           const bStrength = strengthOrder.indexOf(b.document.fields.strength) ?? 0;
           comparison = aStrength - bStrength;
           break;
+        }
         default:
           comparison = a.score - b.score;
       }
@@ -514,7 +516,8 @@ class SearchEngine {
 
     return results.map(result => {
       const snippets = [];
-      const maxSnippetLength = 150;
+      // Snippet length configuration
+      // const maxSnippetLength = 150;
 
       Object.entries(result.document.fields).forEach(([field, value]) => {
         const fieldValue = String(value);

@@ -6,7 +6,8 @@
  */
 
 const fs = require('fs');
-const path = require('path');
+// Path module temporarily disabled  
+// const path = require('path');
 
 class AssetOptimizer {
   constructor() {

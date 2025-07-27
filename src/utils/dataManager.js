@@ -217,7 +217,7 @@ class DataManager {
       // Use batch loader for concurrent loading
       const results = await loadingSystem.createBatchLoader(loadingId, loadItems, {
         concurrent,
-        onItemComplete: (item, result, index) => {
+        onItemComplete: (item, result, _index) => {
           if (result) {
             this.data[item.key] = result;
             this.notifySyncCallbacks('dataLoaded', item.key, result);
@@ -457,7 +457,8 @@ class DataManager {
 
       // Validate array items
       if (schema.type === 'array' && schema.items) {
-        const invalidItems = data.filter((item, index) => {
+        // Check for invalid items for potential logging
+        data.filter((item, index) => {
           try {
             return !this.validateItem(item, schema.items, `${key}[${index}]`);
           } catch (error) {

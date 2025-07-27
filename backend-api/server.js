@@ -14,10 +14,12 @@ const session = require('express-session');
 const MongoStore = require('connect-mongo');
 const rateLimit = require('express-rate-limit');
 const slowDown = require('express-slow-down');
-const mongoose = require('mongoose');
-const Redis = require('ioredis');
+// MongoDB and Redis temporarily disabled
+// const mongoose = require('mongoose');
+// const Redis = require('ioredis');
 const passport = require('passport');
-const winston = require('winston');
+// Winston logger temporarily disabled
+// const winston = require('winston');
 const expressWinston = require('express-winston');
 const swaggerJsdoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
@@ -38,7 +40,8 @@ const adminRoutes = require('./routes/admin');
 // Import middleware
 const authMiddleware = require('./middleware/auth');
 const errorHandler = require('./middleware/errorHandler');
-const validation = require('./middleware/validation');
+// Validation middleware temporarily disabled
+// const validation = require('./middleware/validation');
 
 // Import services
 const DatabaseService = require('./services/DatabaseService');
@@ -49,7 +52,8 @@ const AnalyticsService = require('./services/AnalyticsService');
 
 // Import utilities
 const logger = require('./utils/logger');
-const config = require('./config/config');
+// Config temporarily disabled
+// const config = require('./config/config');
 
 class CigarMaestroServer {
   constructor() {
