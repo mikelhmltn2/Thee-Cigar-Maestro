@@ -36,7 +36,7 @@ class AssetOptimizer {
       await this.cleanup();
       
       this.printStats();
-    } catch (error) {
+    } catch (_error) {
       console.error('❌ Optimization failed:', error.message);
       process.exit(1);
     }
@@ -47,7 +47,7 @@ class AssetOptimizer {
       await fs.mkdir(this.outputDir, { recursive: true });
       await fs.mkdir(this.tempDir, { recursive: true });
       console.log('✅ Created output directories');
-    } catch (error) {
+    } catch (_error) {
       console.warn('⚠️  Could not create directories:', error.message);
     }
   }
@@ -81,7 +81,7 @@ class AssetOptimizer {
       
       this.stats.filesProcessed++;
       console.log('✅ Logo optimization complete');
-    } catch (error) {
+    } catch (_error) {
       console.warn('⚠️  Could not optimize logo:', error.message);
     }
   }
@@ -121,7 +121,7 @@ class AssetOptimizer {
         }
         
         this.stats.filesProcessed++;
-      } catch (error) {
+      } catch (_error) {
         console.warn(`⚠️  Could not optimize ${file}:`, error.message);
       }
     }
@@ -131,7 +131,7 @@ class AssetOptimizer {
     try {
       // Use optipng for PNG optimization
       execSync(`optipng -o7 -out "${outputPath}" "${inputPath}"`, { stdio: 'pipe' });
-    } catch (error) {
+    } catch (_error) {
       // Fallback: just copy the file
       await fs.copyFile(inputPath, outputPath);
     }
@@ -144,7 +144,7 @@ class AssetOptimizer {
     try {
       // Use jpegoptim for JPEG optimization
       execSync(`jpegoptim --max=85 --dest="${path.dirname(outputPath)}" "${inputPath}"`, { stdio: 'pipe' });
-    } catch (error) {
+    } catch (_error) {
       // Fallback: just copy the file
       await fs.copyFile(inputPath, outputPath);
     }
@@ -157,7 +157,7 @@ class AssetOptimizer {
     try {
       // Use svgo for SVG optimization
       execSync(`svgo --input "${inputPath}" --output "${outputPath}"`, { stdio: 'pipe' });
-    } catch (error) {
+    } catch (_error) {
       // Fallback: just copy the file
       await fs.copyFile(inputPath, outputPath);
     }
@@ -169,7 +169,7 @@ class AssetOptimizer {
   async generateWebP(inputPath, outputPath) {
     try {
       execSync(`cwebp -q 85 "${inputPath}" -o "${outputPath}"`, { stdio: 'pipe' });
-    } catch (error) {
+    } catch (_error) {
       console.warn(`⚠️  Could not generate WebP for ${inputPath}:`, error.message);
     }
   }
@@ -177,7 +177,7 @@ class AssetOptimizer {
   async resizeImage(inputPath, outputPath, width, height) {
     try {
       execSync(`convert "${inputPath}" -resize ${width}x${height} "${outputPath}"`, { stdio: 'pipe' });
-    } catch (error) {
+    } catch (_error) {
       // Fallback to just copying if ImageMagick is not available
       await fs.copyFile(inputPath, outputPath);
     }
@@ -189,7 +189,7 @@ class AssetOptimizer {
     try {
       execSync(`convert "${logoPath}" -resize 32x32 "${faviconPath}"`, { stdio: 'pipe' });
       console.log('✅ Generated favicon.ico');
-    } catch (error) {
+    } catch (_error) {
       console.warn('⚠️  Could not generate favicon:', error.message);
     }
   }
@@ -216,7 +216,7 @@ class AssetOptimizer {
         this.stats.filesProcessed++;
         
         console.log(`📄 Compressed ${fileName}: ${this.formatFileSize(originalSize)} → ${this.formatFileSize(compressedSize)}`);
-      } catch (error) {
+      } catch (_error) {
         console.warn(`⚠️  Could not compress ${file}:`, error.message);
       }
     }
@@ -255,7 +255,7 @@ class AssetOptimizer {
         this.stats.filesProcessed++;
         
         console.log(`🎨 Minified ${fileName}: ${this.formatFileSize(originalSize)} → ${this.formatFileSize(compressedSize)}`);
-      } catch (error) {
+      } catch (_error) {
         console.warn(`⚠️  Could not optimize ${file}:`, error.message);
       }
     }
@@ -292,7 +292,7 @@ class AssetOptimizer {
       );
       
       console.log('✅ Generated asset manifest');
-    } catch (error) {
+    } catch (_error) {
       console.warn('⚠️  Could not generate manifest:', error.message);
     }
   }
@@ -302,7 +302,7 @@ class AssetOptimizer {
       const crypto = require('crypto');
       const content = await fs.readFile(filePath);
       return crypto.createHash('md5').update(content).digest('hex').substring(0, 8);
-    } catch (error) {
+    } catch (_error) {
       return 'unknown';
     }
   }
@@ -341,7 +341,7 @@ class AssetOptimizer {
           }
         }
       }
-    } catch (error) {
+    } catch (_error) {
       console.warn(`⚠️  Could not read directory ${dir}:`, error.message);
     }
     
@@ -352,7 +352,7 @@ class AssetOptimizer {
     try {
       await fs.rmdir(this.tempDir, { recursive: true });
       console.log('✅ Cleaned up temporary files');
-    } catch (error) {
+    } catch (_error) {
       // Ignore cleanup errors
     }
   }

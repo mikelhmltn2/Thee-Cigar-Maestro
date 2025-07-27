@@ -74,7 +74,7 @@ class AssetOptimizer {
       }
       
       console.log('');
-    } catch (error) {
+    } catch (_error) {
       console.log(`❌ Could not analyze logo: ${error.message}\n`);
     }
   }
@@ -130,7 +130,7 @@ class AssetOptimizer {
       }
       
       console.log('');
-    } catch (error) {
+    } catch (_error) {
       console.log(`❌ Could not analyze CSS: ${error.message}\n`);
     }
   }
@@ -182,7 +182,7 @@ class AssetOptimizer {
           console.log(`     💡 Could save ${savings}KB with minification`);
         }
         
-      } catch (error) {
+      } catch (_error) {
         console.log(`     ❌ Could not analyze ${file}: ${error.message}`);
       }
     }
@@ -251,7 +251,7 @@ class AssetOptimizer {
       
       fs.writeFileSync('./style.min.css', minified);
       console.log('✅ Created style.min.css');
-    } catch (error) {
+    } catch (_error) {
       console.log('❌ Failed to create minified CSS:', error.message);
     }
     
@@ -266,7 +266,7 @@ class AssetOptimizer {
         
         fs.writeFileSync(`./${file.replace('.json', '.min.json')}`, minified);
         console.log(`✅ Created ${file.replace('.json', '.min.json')}`);
-      } catch (error) {
+      } catch (_error) {
         console.log(`❌ Failed to create minified ${file}:`, error.message);
       }
     }

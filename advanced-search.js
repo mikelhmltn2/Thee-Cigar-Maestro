@@ -35,7 +35,7 @@ class AdvancedSearchEngine {
       this.setupEventListeners();
       this.isReady = true;
       console.log('🔍 Advanced Search Engine initialized');
-    } catch (error) {
+    } catch (_error) {
       console.error('Failed to initialize search engine:', error);
     }
   }
@@ -74,7 +74,7 @@ class AdvancedSearchEngine {
       const flavorResponse = await fetch('./flavor-atlas.json');
       this.dataManager.flavors = await flavorResponse.json();
 
-    } catch (error) {
+    } catch (_error) {
       console.error('Error loading search data:', error);
     }
   }

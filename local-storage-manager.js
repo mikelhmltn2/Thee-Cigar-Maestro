@@ -79,7 +79,7 @@ class LocalStorageManager {
         const parsed = JSON.parse(stored);
         return this.mergeWithDefaults(parsed);
       }
-    } catch (error) {
+    } catch (_error) {
       console.error('Error loading stored data:', error);
     }
     
@@ -138,7 +138,7 @@ class LocalStorageManager {
       
       localStorage.setItem(this.storageKey, JSON.stringify(dataToSave));
       this.triggerEvent('dataSaved', dataToSave);
-    } catch (error) {
+    } catch (_error) {
       console.error('Error saving data:', error);
       this.triggerEvent('saveError', error);
     } finally {
@@ -280,7 +280,7 @@ class LocalStorageManager {
       this.saveData();
       this.triggerEvent('dataImported', data);
       return true;
-    } catch (error) {
+    } catch (_error) {
       console.error('Error importing data:', error);
       return false;
     }
@@ -311,7 +311,7 @@ class LocalStorageManager {
       this.eventHandlers.get(event).forEach(handler => {
         try {
           handler(data);
-        } catch (error) {
+        } catch (_error) {
           console.error(`Error in event handler for ${event}:`, error);
         }
       });
@@ -327,7 +327,7 @@ class LocalStorageManager {
         const newData = JSON.parse(event.newValue);
         this.cache = this.mergeWithDefaults(newData);
         this.triggerEvent('externalUpdate', newData);
-      } catch (error) {
+      } catch (_error) {
         console.error('Error handling storage change:', error);
       }
     }

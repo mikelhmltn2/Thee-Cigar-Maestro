@@ -74,7 +74,7 @@ class SearchEngine {
       if (history && Array.isArray(history)) {
         this.searchHistory = history;
       }
-    } catch (e) {
+    } catch (_e) {
       console.warn('Failed to load search history:', e);
     }
   }
@@ -82,7 +82,7 @@ class SearchEngine {
   async saveSearchHistory() {
     try {
       await storageManager.setLocal('searchHistory', this.searchHistory);
-    } catch (e) {
+    } catch (_e) {
       console.warn('Failed to save search history:', e);
     }
   }

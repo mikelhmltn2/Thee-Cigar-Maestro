@@ -681,7 +681,7 @@ class UIManager {
       if (saved) {
         this.userPreferences = { ...this.userPreferences, ...JSON.parse(saved) };
       }
-    } catch (error) {
+    } catch (_error) {
       console.warn('Could not load user preferences:', error);
     }
   }
@@ -692,7 +692,7 @@ class UIManager {
   saveUserPreferences() {
     try {
       localStorage.setItem('cigar-maestro-preferences', JSON.stringify(this.userPreferences));
-    } catch (error) {
+    } catch (_error) {
       console.warn('Could not save user preferences:', error);
     }
   }

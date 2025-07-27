@@ -58,7 +58,7 @@ async function checkUrl(url, context = '') {
         });
         return { success: false, status: response.status, url, context };
       }
-    } catch (error) {
+    } catch (_error) {
       if (attempt === MAX_RETRIES) {
         console.log(`❌ ${url} - ${error.message} ${context ? `(${context})` : ''}`);
         results.failed++;
@@ -243,7 +243,7 @@ async function main() {
       process.exit(1);
     }
     
-  } catch (error) {
+  } catch (_error) {
     console.error('💥 Error during link checking:', error);
     process.exit(1);
   }

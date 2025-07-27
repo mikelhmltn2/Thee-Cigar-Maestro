@@ -104,7 +104,7 @@ class LogoOptimizer {
             type: 'image/png'
           });
         }
-      } catch (error) {
+      } catch (_error) {
         console.error(`❌ Failed to generate ${variant.name}:`, error.message);
       }
     }
@@ -144,7 +144,7 @@ class LogoOptimizer {
           console.log(`✅ Logo now meets the <200KB requirement!`);
         }
       }
-    } catch (error) {
+    } catch (_error) {
       console.error(`❌ Failed to update main logo:`, error.message);
     }
   }

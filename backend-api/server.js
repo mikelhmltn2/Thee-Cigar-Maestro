@@ -95,7 +95,7 @@ class CigarMaestroServer {
       
       this.start();
       
-    } catch (error) {
+    } catch (_error) {
       logger.error('Failed to initialize server:', error);
       process.exit(1);
     }
@@ -108,7 +108,7 @@ class CigarMaestroServer {
     try {
       await this.dbService.connect();
       logger.info('✅ Database connected successfully');
-    } catch (error) {
+    } catch (_error) {
       logger.error('❌ Database connection failed:', error);
       throw error;
     }
@@ -121,7 +121,7 @@ class CigarMaestroServer {
     try {
       await this.cacheService.connect();
       logger.info('✅ Cache service connected successfully');
-    } catch (error) {
+    } catch (_error) {
       logger.error('❌ Cache connection failed:', error);
       throw error;
     }
@@ -348,7 +348,7 @@ class CigarMaestroServer {
             data
           );
           socket.emit('recommendations_update', recommendations);
-        } catch (error) {
+        } catch (_error) {
           socket.emit('error', { message: 'Failed to get recommendations' });
         }
       });
@@ -362,7 +362,7 @@ class CigarMaestroServer {
             socketId: socket.id,
             timestamp: new Date()
           });
-        } catch (error) {
+        } catch (_error) {
           logger.error('Failed to track analytics event:', error);
         }
       });
@@ -378,7 +378,7 @@ class CigarMaestroServer {
           
           // Broadcast to user's other sessions
           socket.to(`user_${socket.userId}`).emit('activity_sync', activityData);
-        } catch (error) {
+        } catch (_error) {
           logger.error('Failed to track user activity:', error);
         }
       });
@@ -400,7 +400,7 @@ class CigarMaestroServer {
       try {
         await this.analyticsService.aggregateDailyStats();
         logger.info('Daily analytics aggregation completed');
-      } catch (error) {
+      } catch (_error) {
         logger.error('Daily analytics aggregation failed:', error);
       }
     });
@@ -410,7 +410,7 @@ class CigarMaestroServer {
       try {
         await this.recommendationEngine.updateModels();
         logger.info('Recommendation models updated');
-      } catch (error) {
+      } catch (_error) {
         logger.error('Recommendation model update failed:', error);
       }
     });
@@ -420,7 +420,7 @@ class CigarMaestroServer {
       try {
         await this.dbService.cleanExpiredSessions();
         logger.info('Expired sessions cleaned');
-      } catch (error) {
+      } catch (_error) {
         logger.error('Session cleanup failed:', error);
       }
     });
@@ -430,7 +430,7 @@ class CigarMaestroServer {
       try {
         await this.cacheService.cleanup();
         logger.info('Cache cleanup completed');
-      } catch (error) {
+      } catch (_error) {
         logger.error('Cache cleanup failed:', error);
       }
     });
@@ -515,7 +515,7 @@ class CigarMaestroServer {
       await this.emailService.initialize();
       logger.info('✅ Email service initialized');
       
-    } catch (error) {
+    } catch (_error) {
       logger.error('Failed to initialize background services:', error);
     }
   }
@@ -546,7 +546,7 @@ class CigarMaestroServer {
       logger.info('Cache connection closed');
       
       process.exit(0);
-    } catch (error) {
+    } catch (_error) {
       logger.error('Error during shutdown:', error);
       process.exit(1);
     }

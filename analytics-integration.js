@@ -37,7 +37,7 @@ class AnalyticsManager {
         timestamp: new Date().toISOString()
       });
       
-    } catch (error) {
+    } catch (_error) {
       console.error('❌ Analytics initialization failed:', error);
       this.trackError('analytics_init_failed', error);
     }
@@ -78,7 +78,7 @@ class AnalyticsManager {
       });
 
       console.log('✅ Google Analytics 4 initialized');
-    } catch (error) {
+    } catch (_error) {
       console.error('❌ GA4 initialization failed:', error);
     }
   }
@@ -103,7 +103,7 @@ class AnalyticsManager {
           console.log('✅ Core Web Vitals monitoring initialized');
         }
       });
-    } catch (error) {
+    } catch (_error) {
       console.error('❌ Core Web Vitals initialization failed:', error);
     }
   }
@@ -121,7 +121,7 @@ class AnalyticsManager {
         console.log('✅ Web Vitals library loaded');
       };
       document.head.appendChild(script);
-    } catch (error) {
+    } catch (_error) {
       console.error('❌ Failed to load Web Vitals library:', error);
     }
   }
@@ -220,7 +220,7 @@ class AnalyticsManager {
             this.trackLongTask(entry);
           });
         }).observe({entryTypes: ['longtask']});
-      } catch (error) {
+      } catch (_error) {
         console.warn('Long task monitoring not supported:', error);
       }
     }

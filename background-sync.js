@@ -50,7 +50,7 @@ class BackgroundSyncManager {
       
       console.log(`Queued ${type} data for sync:`, queueKey);
       
-    } catch (error) {
+    } catch (_error) {
       console.error('Failed to queue data for sync:', error);
     }
   }
@@ -73,7 +73,7 @@ class BackgroundSyncManager {
           // Remove from queue on success
           delete pendingQueue[key];
           
-        } catch (error) {
+        } catch (_error) {
           console.error(`Failed to sync item ${key}:`, error);
           
           // Increment retry count
@@ -90,7 +90,7 @@ class BackgroundSyncManager {
       // Update localStorage
       localStorage.setItem('pendingSync', JSON.stringify(pendingQueue));
       
-    } catch (error) {
+    } catch (_error) {
       console.error('Error processing pending sync:', error);
     }
   }

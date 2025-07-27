@@ -58,7 +58,7 @@ class EnhancedDataValidator {
           this.validateGenericJSON(data);
       }
       
-    } catch (error) {
+    } catch (_error) {
       this.errors.push(`${filePath}: JSON parsing error - ${error.message}`);
     }
   }

@@ -161,7 +161,7 @@ async function handleApiRequest(request) {
     }
     
     return networkResponse;
-  } catch (error) {
+  } catch (_error) {
     console.log('📡 Network failed for API request, trying cache...');
     
     const cachedResponse = await caches.match(request);
@@ -213,7 +213,7 @@ async function handleDataRequest(request) {
   // Wait for network if no cache available
   try {
     return await networkPromise;
-  } catch (error) {
+  } catch (_error) {
     return new Response(JSON.stringify({ error: 'Data unavailable offline' }), {
       status: 503,
       headers: { 'Content-Type': 'application/json' }
@@ -240,7 +240,7 @@ async function handleStaticRequest(request) {
     }
     
     return networkResponse;
-  } catch (error) {
+  } catch (_error) {
     // Return offline page for navigation requests
     if (request.mode === 'navigate') {
       const offlineResponse = await cache.match('/index.html');
@@ -268,7 +268,7 @@ async function handleExternalRequest(request) {
     }
     
     return networkResponse;
-  } catch (error) {
+  } catch (_error) {
     const cachedResponse = await cache.match(request);
     
     if (cachedResponse) {
@@ -322,7 +322,7 @@ async function syncUserData() {
     });
     
     console.log('📤 User data sync initiated');
-  } catch (error) {
+  } catch (_error) {
     console.error('❌ User data sync failed:', error);
   }
 }
@@ -342,7 +342,7 @@ async function syncAnalytics() {
     });
     
     console.log('📊 Analytics sync initiated');
-  } catch (error) {
+  } catch (_error) {
     console.error('❌ Analytics sync failed:', error);
   }
 }
@@ -441,7 +441,7 @@ async function handleCacheUpdate(data) {
     }
     
     console.log('✅ Cache updated successfully');
-  } catch (error) {
+  } catch (_error) {
     console.error('❌ Cache update failed:', error);
   }
 }
@@ -463,7 +463,7 @@ async function handleClearCache(data) {
     }
     
     console.log('🗑️ Cache cleared successfully');
-  } catch (error) {
+  } catch (_error) {
     console.error('❌ Cache clearing failed:', error);
   }
 }
@@ -489,7 +489,7 @@ async function handleGetCacheInfo(event) {
       type: 'CACHE_INFO',
       data: cacheInfo
     });
-  } catch (error) {
+  } catch (_error) {
     event.ports[0].postMessage({
       type: 'CACHE_INFO_ERROR',
       error: error.message
@@ -527,7 +527,7 @@ async function cleanOldCacheEntries() {
         }
       }
     }
-  } catch (error) {
+  } catch (_error) {
     console.error('❌ Cache cleaning failed:', error);
   }
 }

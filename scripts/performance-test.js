@@ -158,7 +158,7 @@ class PerformanceTester {
         console.log(`   📱 App name: ${manifest.name}`);
         console.log(`   🎨 Theme color: ${manifest.theme_color}`);
         console.log(`   📐 Icons: ${manifest.icons ? manifest.icons.length : 0} variants`);
-      } catch (error) {
+      } catch (_error) {
         console.log('   ⚠️  Manifest parsing error:', error.message);
       }
     } else {

@@ -145,7 +145,7 @@ class PWAValidator {
 
       this.checks.manifest = true;
       
-    } catch (error) {
+    } catch (_error) {
       this.issues.push(`❌ Manifest parsing error: ${error.message}`);
     }
 
