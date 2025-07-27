@@ -516,7 +516,7 @@ class OnboardingTour {
       }
       
       localStorage.setItem('cigar-maestro-tour-analytics', JSON.stringify(analytics));
-    } catch (error) {
+    } catch (_error) {
       console.warn('Could not save tour analytics:', error);
     }
   }

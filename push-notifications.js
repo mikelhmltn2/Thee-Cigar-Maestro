@@ -47,7 +47,7 @@ class PushNotificationManager {
       // Send subscription to server
       await this.sendSubscriptionToServer(this.subscription);
       
-    } catch (error) {
+    } catch (_error) {
       console.error('Failed to subscribe user:', error);
     }
   }
@@ -67,7 +67,7 @@ class PushNotificationManager {
       } else {
         console.error('Failed to send subscription to server');
       }
-    } catch (error) {
+    } catch (_error) {
       console.error('Error sending subscription:', error);
     }
   }

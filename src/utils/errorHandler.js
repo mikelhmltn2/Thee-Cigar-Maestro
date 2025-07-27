@@ -88,7 +88,7 @@ class ErrorHandler {
     try {
       const recentErrors = this.errors.slice(0, 10); // Only save recent errors
       localStorage.setItem('cigar_maestro_errors', JSON.stringify(recentErrors));
-    } catch (e) {
+    } catch (_e) {
       console.warn('Could not save errors to localStorage:', e);
     }
   }
@@ -100,7 +100,7 @@ class ErrorHandler {
         const savedErrors = JSON.parse(saved);
         this.errors = savedErrors.concat(this.errors);
       }
-    } catch (e) {
+    } catch (_e) {
       console.warn('Could not load errors from localStorage:', e);
     }
   }
@@ -176,7 +176,7 @@ class ErrorHandler {
       }
       
       return result;
-    } catch (error) {
+    } catch (_error) {
       const end = performance.now();
       const duration = end - start;
       
@@ -207,7 +207,7 @@ class ErrorHandler {
       }
       
       return result;
-    } catch (error) {
+    } catch (_error) {
       const end = performance.now();
       const duration = end - start;
       
@@ -359,7 +359,7 @@ class ErrorHandler {
       localStorage.setItem(test, test);
       localStorage.removeItem(test);
       return true;
-    } catch (e) {
+    } catch (_e) {
       return false;
     }
   }

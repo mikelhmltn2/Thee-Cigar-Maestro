@@ -56,7 +56,7 @@ class AIRecommendationEngine {
       // Start background training
       this.scheduleModelTraining();
       
-    } catch (error) {
+    } catch (_error) {
       console.error('❌ Recommendation engine initialization failed:', error);
     }
   }
@@ -80,7 +80,7 @@ class AIRecommendationEngine {
       }
       
       console.log('✅ Data loaded for recommendation engine');
-    } catch (error) {
+    } catch (_error) {
       console.error('Error loading data:', error);
       throw error;
     }
@@ -96,7 +96,7 @@ class AIRecommendationEngine {
         throw new Error(`HTTP ${response.status}: ${response.statusText}`);
       }
       return await response.json();
-    } catch (error) {
+    } catch (_error) {
       console.error(`Error fetching ${url}:`, error);
       return [];
     }
@@ -128,7 +128,7 @@ class AIRecommendationEngine {
       });
       
       console.log(`✅ Built feature vectors for ${this.cigarData.length} cigars`);
-    } catch (error) {
+    } catch (_error) {
       console.error('Error building feature vectors:', error);
     }
   }
@@ -271,7 +271,7 @@ class AIRecommendationEngine {
       this.models.realtime = new RealtimeModel();
       
       console.log('✅ ML models initialized');
-    } catch (error) {
+    } catch (_error) {
       console.error('Error initializing models:', error);
     }
   }
@@ -296,7 +296,7 @@ class AIRecommendationEngine {
       }
       
       console.log('✅ User profiles loaded');
-    } catch (error) {
+    } catch (_error) {
       console.error('Error loading user profiles:', error);
     }
   }
@@ -490,7 +490,7 @@ class AIRecommendationEngine {
 
       return recommendations.slice(0, count);
       
-    } catch (error) {
+    } catch (_error) {
       console.error('Error generating recommendations:', error);
       return this.getFallbackRecommendations(10);
     }
@@ -1041,7 +1041,7 @@ class AIRecommendationEngine {
       
       console.log('✅ Model training completed');
       
-    } catch (error) {
+    } catch (_error) {
       console.error('❌ Model training failed:', error);
     } finally {
       this.isTraining = false;
@@ -1066,7 +1066,7 @@ class AIRecommendationEngine {
         freshness: Date.now()
       }));
       
-    } catch (error) {
+    } catch (_error) {
       console.error('Error getting real-time recommendations:', error);
       return [];
     }

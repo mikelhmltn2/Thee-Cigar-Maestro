@@ -101,7 +101,7 @@ class PWAEnhancer {
       fs.writeFileSync(this.manifestPath, JSON.stringify(manifest, null, 2));
       console.log('   📱 Manifest enhanced with advanced PWA features\n');
       
-    } catch (error) {
+    } catch (_error) {
       console.error('   ❌ Failed to enhance manifest:', error.message);
     }
   }
@@ -207,7 +207,7 @@ async function doBackgroundSync() {
       tag: 'sync-complete'
     });
     
-  } catch (error) {
+  } catch (_error) {
     console.error('Background sync failed:', error);
     
     // Show error notification
@@ -230,7 +230,7 @@ async function syncAnalytics() {
     }
     
     console.log('Analytics sync completed');
-  } catch (error) {
+  } catch (_error) {
     console.error('Analytics sync failed:', error);
   }
 }
@@ -315,7 +315,7 @@ async function handleApiRequest(request) {
   try {
     const response = await fetch(request);
     return response;
-  } catch (error) {
+  } catch (_error) {
     // If offline, queue for background sync
     if (request.method === 'POST') {
       await queueForBackgroundSync(request);
@@ -424,7 +424,7 @@ class PushNotificationManager {
       // Send subscription to server
       await this.sendSubscriptionToServer(this.subscription);
       
-    } catch (error) {
+    } catch (_error) {
       console.error('Failed to subscribe user:', error);
     }
   }
@@ -444,7 +444,7 @@ class PushNotificationManager {
       } else {
         console.error('Failed to send subscription to server');
       }
-    } catch (error) {
+    } catch (_error) {
       console.error('Error sending subscription:', error);
     }
   }
@@ -585,7 +585,7 @@ class BackgroundSyncManager {
       
       console.log(\`Queued \${type} data for sync:\`, queueKey);
       
-    } catch (error) {
+    } catch (_error) {
       console.error('Failed to queue data for sync:', error);
     }
   }
@@ -608,7 +608,7 @@ class BackgroundSyncManager {
           // Remove from queue on success
           delete pendingQueue[key];
           
-        } catch (error) {
+        } catch (_error) {
           console.error(\`Failed to sync item \${key}:\`, error);
           
           // Increment retry count
@@ -625,7 +625,7 @@ class BackgroundSyncManager {
       // Update localStorage
       localStorage.setItem('pendingSync', JSON.stringify(pendingQueue));
       
-    } catch (error) {
+    } catch (_error) {
       console.error('Error processing pending sync:', error);
     }
   }

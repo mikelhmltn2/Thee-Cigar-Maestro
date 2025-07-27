@@ -340,7 +340,7 @@ document.addEventListener('DOMContentLoaded', () => {
       statusDiv.textContent = "Ready for your next question...";
       inputArea.value = ''; // Clear input on success
 
-    } catch (err) {
+    } catch (_err) {
       console.error('GPT request failed:', err);
       
       let fallbackResponse;

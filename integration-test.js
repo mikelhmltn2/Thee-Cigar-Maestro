@@ -71,7 +71,7 @@ class IntegrationTestSuite {
         } else {
           this.addResult('FAIL', `Data Loading`, `Missing file: ${file}`);
         }
-      } catch (error) {
+      } catch (_error) {
         this.addResult('FAIL', `Data Loading`, `Error loading ${file}: ${error.message}`);
       }
     }

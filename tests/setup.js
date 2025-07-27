@@ -39,19 +39,62 @@ Object.defineProperty(navigator, 'mediaDevices', {
   writable: true
 });
 
-// Mock localStorage
-const localStorageMock = {
-  getItem: vi.fn(),
-  setItem: vi.fn(),
-  removeItem: vi.fn(),
-  clear: vi.fn(),
-  length: 0,
-  key: vi.fn()
+// Mock localStorage with actual storage functionality
+const createStorageMock = () => {
+  const storage = new Map();
+  return {
+    getItem: vi.fn((key) => storage.get(key) || null),
+    setItem: vi.fn((key, value) => {
+      storage.set(key, value);
+    }),
+    removeItem: vi.fn((key) => {
+      storage.delete(key);
+    }),
+    clear: vi.fn(() => {
+      storage.clear();
+    }),
+    get length() {
+      return storage.size;
+    },
+    key: vi.fn((index) => {
+      const keys = Array.from(storage.keys());
+      return keys[index] || null;
+    })
+  };
 };
-global.localStorage = localStorageMock;
 
-// Mock sessionStorage
-global.sessionStorage = localStorageMock;
+// Set up both global and window scopes for compatibility
+const localStorageMock = createStorageMock();
+const sessionStorageMock = createStorageMock();
+
+global.localStorage = localStorageMock;
+global.sessionStorage = sessionStorageMock;
+
+// Also create window object with storage for the test environment
+global.window = {
+  localStorage: localStorageMock,
+  sessionStorage: sessionStorageMock,
+  location: {
+    href: 'http://localhost:3000',
+    protocol: 'http:',
+    hostname: 'localhost',
+    port: '3000',
+    pathname: '/',
+    search: '',
+    hash: ''
+  }
+};
+
+// Mock IndexedDB
+global.indexedDB = {
+  open: vi.fn(() => ({
+    onsuccess: null,
+    onerror: null,
+    onupgradeneeded: null,
+    result: null
+  })),
+  deleteDatabase: vi.fn()
+};
 
 // Mock URL.createObjectURL
 global.URL.createObjectURL = vi.fn(() => 'blob:mock-url');
@@ -71,19 +114,7 @@ global.IntersectionObserver = vi.fn(() => ({
   disconnect: vi.fn()
 }));
 
-// Setup DOM environment
-Object.defineProperty(window, 'location', {
-  value: {
-    href: 'http://localhost:3000',
-    protocol: 'http:',
-    hostname: 'localhost',
-    port: '3000',
-    pathname: '/',
-    search: '',
-    hash: ''
-  },
-  writable: true
-});
+// Setup DOM environment is now handled above with global.window
 
 // Mock performance API
 global.performance = {

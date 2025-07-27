@@ -35,7 +35,7 @@ class AuthenticationSystem {
         await this.validateToken();
       }
       
-    } catch (error) {
+    } catch (_error) {
       console.error('❌ Authentication initialization failed:', error);
     }
   }
@@ -57,7 +57,7 @@ class AuthenticationSystem {
         const userData = localStorage.getItem('current_user');
         this.currentUser = userData ? JSON.parse(userData) : null;
       }
-    } catch (error) {
+    } catch (_error) {
       console.error('Error loading stored auth:', error);
     }
   }
@@ -93,7 +93,7 @@ class AuthenticationSystem {
           localStorage.removeItem('current_user');
         }
       }
-    } catch (error) {
+    } catch (_error) {
       console.error('Error saving auth data:', error);
     }
   }
@@ -673,7 +673,7 @@ class AuthenticationSystem {
           if (expiryTime - now < fiveMinutes) {
             await this.refreshAuthToken();
           }
-        } catch (error) {
+        } catch (_error) {
           console.error('Error checking token expiry:', error);
         }
       }
@@ -760,7 +760,7 @@ class AuthenticationSystem {
         await this.handleAuthSuccess(response);
       }
 
-    } catch (error) {
+    } catch (_error) {
       console.error('Login error:', error);
       window.uiManager?.showToast(error.message || 'Login failed', 'error');
     } finally {
@@ -812,7 +812,7 @@ class AuthenticationSystem {
       window.uiManager?.showToast('Account created successfully! Please check your email to verify your account.', 'success');
       this.switchAuthTab('login');
 
-    } catch (error) {
+    } catch (_error) {
       console.error('Registration error:', error);
       window.uiManager?.showToast(error.message || 'Registration failed', 'error');
     } finally {
@@ -847,7 +847,7 @@ class AuthenticationSystem {
 
       await this.handleAuthSuccess(response);
 
-    } catch (error) {
+    } catch (_error) {
       console.error('2FA error:', error);
       window.uiManager?.showToast(error.message || '2FA verification failed', 'error');
     }
@@ -870,7 +870,7 @@ class AuthenticationSystem {
       window.uiManager?.showToast('Password reset link sent to your email', 'success');
       this.switchAuthTab('login');
 
-    } catch (error) {
+    } catch (_error) {
       console.error('Forgot password error:', error);
       window.uiManager?.showToast(error.message || 'Failed to send reset email', 'error');
     }
@@ -900,7 +900,7 @@ class AuthenticationSystem {
         }
       }, 1000);
 
-    } catch (error) {
+    } catch (_error) {
       console.error('Social login error:', error);
       window.uiManager?.showToast('Social login failed', 'error');
     }
@@ -971,7 +971,7 @@ class AuthenticationSystem {
       this.saveAuthData();
       
       return response.token;
-    } catch (error) {
+    } catch (_error) {
       console.error('Token refresh failed:', error);
       await this.logout();
       throw error;
@@ -987,7 +987,7 @@ class AuthenticationSystem {
       this.currentUser = response.user;
       this.notifyAuthStateChange(this.currentUser);
       return true;
-    } catch (error) {
+    } catch (_error) {
       console.error('Token validation failed:', error);
       await this.logout();
       return false;
@@ -1051,7 +1051,7 @@ class AuthenticationSystem {
 
       return response.json();
       
-    } catch (error) {
+    } catch (_error) {
       console.error('🔐 Auth API request failed:', error);
       
       // Mark as offline and use fallback
@@ -1211,7 +1211,7 @@ class AuthenticationSystem {
       }).join(''));
       
       return JSON.parse(jsonPayload);
-    } catch (error) {
+    } catch (_error) {
       console.error('Error parsing JWT:', error);
       return null;
     }
@@ -1232,7 +1232,7 @@ class AuthenticationSystem {
     this.authListeners.forEach(callback => {
       try {
         callback(user);
-      } catch (error) {
+      } catch (_error) {
         console.error('Error in auth state change callback:', error);
       }
     });
@@ -1325,7 +1325,7 @@ class AuthenticationSystem {
       if (response.success) {
         await this.handleAuthSuccess(response);
       }
-    } catch (error) {
+    } catch (_error) {
       console.error('Social login result check failed:', error);
     }
   }

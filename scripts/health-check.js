@@ -74,7 +74,7 @@ async function testEndpoint(url, options = {}) {
         attempt
       };
       
-    } catch (error) {
+    } catch (_error) {
       if (attempt <= retries) {
         console.warn(`🔄 Retry ${attempt}/${retries} for ${url}: ${error.message}`);
         await new Promise(resolve => setTimeout(resolve, 1000 * attempt));
@@ -284,7 +284,7 @@ async function testJavaScriptSyntax() {
       results.summary.passed++;
       console.log(`✅ ${jsFile}: Syntax OK`);
       
-    } catch (error) {
+    } catch (_error) {
       const testResult = {
         name: `Syntax: ${jsFile}`,
         path: jsFile,
@@ -340,7 +340,7 @@ async function testJSONFiles() {
       results.summary.passed++;
       console.log(`✅ ${jsonFile}: Valid JSON`);
       
-    } catch (error) {
+    } catch (_error) {
       const testResult = {
         name: `JSON: ${jsonFile}`,
         path: jsonFile,
@@ -436,7 +436,7 @@ async function runHealthCheck() {
     // Exit with appropriate code
     process.exit(isHealthy ? 0 : 1);
     
-  } catch (error) {
+  } catch (_error) {
     console.error('❌ Health check failed with error:', error);
     process.exit(1);
   }

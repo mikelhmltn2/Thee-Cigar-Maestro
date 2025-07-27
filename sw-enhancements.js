@@ -95,7 +95,7 @@ async function doBackgroundSync() {
       tag: 'sync-complete'
     });
     
-  } catch (error) {
+  } catch (_error) {
     console.error('Background sync failed:', error);
     
     // Show error notification
@@ -118,7 +118,7 @@ async function syncAnalytics() {
     }
     
     console.log('Analytics sync completed');
-  } catch (error) {
+  } catch (_error) {
     console.error('Analytics sync failed:', error);
   }
 }
@@ -203,7 +203,7 @@ async function handleApiRequest(request) {
   try {
     const response = await fetch(request);
     return response;
-  } catch (error) {
+  } catch (_error) {
     // If offline, queue for background sync
     if (request.method === 'POST') {
       await queueForBackgroundSync(request);

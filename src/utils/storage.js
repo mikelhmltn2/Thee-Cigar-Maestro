@@ -15,22 +15,27 @@ class StorageManager {
 
   checkStorageAvailability(storageType) {
     try {
-      const storage = window[storageType];
+      // Check if we're in a browser environment or test environment with globals
+      const storageObj = typeof window !== 'undefined' ? window[storageType] : (typeof globalThis !== 'undefined' ? globalThis[storageType] : undefined);
+      if (!storageObj) return false;
+      
       const testKey = '__storage_test__';
-      storage.setItem(testKey, 'test');
-      storage.removeItem(testKey);
+      storageObj.setItem(testKey, 'test');
+      storageObj.removeItem(testKey);
       return true;
-    } catch (e) {
+    } catch (_e) {
       return false;
     }
   }
 
   checkIndexedDBAvailability() {
+    // Check if we're in a browser environment or test environment
+    const globalScope = typeof window !== 'undefined' ? window : (typeof globalThis !== 'undefined' ? globalThis : {});
     return !!(
-      window.indexedDB ||
-      window.mozIndexedDB ||
-      window.webkitIndexedDB ||
-      window.msIndexedDB
+      globalScope.indexedDB ||
+      globalScope.mozIndexedDB ||
+      globalScope.webkitIndexedDB ||
+      globalScope.msIndexedDB
     );
   }
 
@@ -340,9 +345,9 @@ class StorageManager {
           request.onsuccess = () => resolve(request.result);
           request.onerror = () => reject(request.error);
         });
-      } catch (e) {
-        console.error('Failed to export IndexedDB data:', e);
-      }
+          } catch (e) {
+      console.error('Failed to export IndexedDB data:', e);
+    }
     }
 
     return data;
