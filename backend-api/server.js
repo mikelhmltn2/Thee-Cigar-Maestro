@@ -10,564 +10,439 @@ const cors = require('cors');
 const helmet = require('helmet');
 const compression = require('compression');
 const morgan = require('morgan');
-const session = require('express-session');
-const MongoStore = require('connect-mongo');
 const rateLimit = require('express-rate-limit');
-const slowDown = require('express-slow-down');
-// MongoDB and Redis temporarily disabled
-// const mongoose = require('mongoose');
-// const Redis = require('ioredis');
-const passport = require('passport');
-// Winston logger temporarily disabled
-// const winston = require('winston');
-const expressWinston = require('express-winston');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const { v4: uuidv4 } = require('uuid');
+const NodeCache = require('node-cache');
 const swaggerJsdoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
-const { createServer } = require('http');
-const { Server } = require('socket.io');
-const cron = require('node-cron');
 
-// Import routes
-const authRoutes = require('./routes/auth');
-const userRoutes = require('./routes/users');
-const cigarRoutes = require('./routes/cigars');
-const searchRoutes = require('./routes/search');
-const analyticsRoutes = require('./routes/analytics');
-const recommendationRoutes = require('./routes/recommendations');
-const socialRoutes = require('./routes/social');
-const adminRoutes = require('./routes/admin');
+const app = express();
+const PORT = process.env.PORT || 3000;
 
-// Import middleware
-const authMiddleware = require('./middleware/auth');
-const errorHandler = require('./middleware/errorHandler');
-// Validation middleware temporarily disabled
-// const validation = require('./middleware/validation');
+// Initialize cache
+const cache = new NodeCache({ stdTTL: 600 }); // 10 minutes default TTL
 
-// Import services
-const DatabaseService = require('./services/DatabaseService');
-const CacheService = require('./services/CacheService');
-const EmailService = require('./services/EmailService');
-const RecommendationEngine = require('./services/RecommendationEngine');
-const AnalyticsService = require('./services/AnalyticsService');
+// Middleware
+app.use(helmet());
+app.use(compression());
+app.use(morgan('combined'));
+app.use(cors({
+  origin: process.env.FRONTEND_URL || ['http://localhost:5173', 'http://localhost:8000'],
+  credentials: true
+}));
 
-// Import utilities
-const logger = require('./utils/logger');
-// Config temporarily disabled
-// const config = require('./config/config');
+// Rate limiting
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100 // limit each IP to 100 requests per windowMs
+});
+app.use(limiter);
 
-class CigarMaestroServer {
-  constructor() {
-    this.app = express();
-    this.server = createServer(this.app);
-    this.io = new Server(this.server, {
-      cors: {
-        origin: process.env.FRONTEND_URL || "http://localhost:8000",
-        methods: ["GET", "POST"]
-      }
-    });
-    
-    this.port = process.env.PORT || 3000;
-    this.isProduction = process.env.NODE_ENV === 'production';
-    
-    // Initialize services
-    this.dbService = new DatabaseService();
-    this.cacheService = new CacheService();
-    this.emailService = new EmailService();
-    this.recommendationEngine = new RecommendationEngine();
-    this.analyticsService = new AnalyticsService();
-    
-    this.init();
-  }
+app.use(express.json({ limit: '10mb' }));
+app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
-  /**
-   * Initialize the server
-   */
-  async init() {
-    try {
-      await this.setupDatabase();
-      await this.setupCache();
-      await this.setupMiddleware();
-      await this.setupPassport();
-      await this.setupRoutes();
-      await this.setupWebSocket();
-      await this.setupCronJobs();
-      await this.setupErrorHandling();
-      
-      this.start();
-      
-    } catch (_error) {
-      logger.error('Failed to initialize server:', error);
-      process.exit(1);
-    }
-  }
-
-  /**
-   * Setup database connection
-   */
-  async setupDatabase() {
-    try {
-      await this.dbService.connect();
-      logger.info('✅ Database connected successfully');
-    } catch (_error) {
-      logger.error('❌ Database connection failed:', error);
-      throw error;
-    }
-  }
-
-  /**
-   * Setup Redis cache
-   */
-  async setupCache() {
-    try {
-      await this.cacheService.connect();
-      logger.info('✅ Cache service connected successfully');
-    } catch (_error) {
-      logger.error('❌ Cache connection failed:', error);
-      throw error;
-    }
-  }
-
-  /**
-   * Setup Express middleware
-   */
-  setupMiddleware() {
-    // Security middleware
-    this.app.use(helmet({
-      contentSecurityPolicy: {
-        directives: {
-          defaultSrc: ["'self'"],
-          styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
-          scriptSrc: ["'self'", "'unsafe-inline'", "https://cdn.jsdelivr.net"],
-          fontSrc: ["'self'", "https://fonts.gstatic.com"],
-          imgSrc: ["'self'", "data:", "https:"],
-          connectSrc: ["'self'", "https://api.theecigarmaestro.com"]
-        }
-      }
-    }));
-
-    // CORS configuration
-    this.app.use(cors({
-      origin: (origin, callback) => {
-        const allowedOrigins = [
-          'http://localhost:8000',
-          'https://theecigarmaestro.vercel.app',
-          'https://api.theecigarmaestro.com'
-        ];
-        
-        if (!origin || allowedOrigins.includes(origin)) {
-          callback(null, true);
-        } else {
-          callback(new Error('Not allowed by CORS'));
-        }
+// Swagger configuration
+const swaggerOptions = {
+  definition: {
+    openapi: '3.0.0',
+    info: {
+      title: 'Thee Cigar Maestro API',
+      version: '1.0.0',
+      description: 'Comprehensive API for cigar enthusiasts',
+    },
+    servers: [
+      {
+        url: process.env.API_URL || `http://localhost:${PORT}`,
+        description: 'Development server',
       },
-      credentials: true,
-      methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-      allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
-    }));
+    ],
+  },
+  apis: ['./server.js'], // paths to files containing OpenAPI definitions
+};
 
-    // Rate limiting
-    const limiter = rateLimit({
-      windowMs: 15 * 60 * 1000, // 15 minutes
-      max: this.isProduction ? 100 : 1000, // requests per window
-      message: {
-        error: 'Too many requests, please try again later',
-        retryAfter: '15 minutes'
-      },
-      standardHeaders: true,
-      legacyHeaders: false,
-      store: new rateLimit.MemoryStore()
-    });
+const specs = swaggerJsdoc(swaggerOptions);
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
 
-    const speedLimiter = slowDown({
-      windowMs: 15 * 60 * 1000,
-      delayAfter: this.isProduction ? 50 : 500,
-      delayMs: 500
-    });
+// In-memory storage (replace with database in production)
+const users = new Map();
+const cigars = new Map();
+const reviews = new Map();
 
-    this.app.use('/api/', limiter);
-    this.app.use('/api/', speedLimiter);
+// JWT secret
+const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key-change-in-production';
 
-    // Body parsing
-    this.app.use(express.json({ limit: '10mb' }));
-    this.app.use(express.urlencoded({ extended: true, limit: '10mb' }));
+// Middleware for authentication
+const authenticateToken = (req, res, next) => {
+  const authHeader = req.headers['authorization'];
+  const token = authHeader && authHeader.split(' ')[1];
 
-    // Compression
-    this.app.use(compression());
+  if (token == null) return res.sendStatus(401);
 
-    // Request logging
-    if (this.isProduction) {
-      this.app.use(morgan('combined'));
-    } else {
-      this.app.use(morgan('dev'));
+  jwt.verify(token, JWT_SECRET, (err, user) => {
+    if (err) return res.sendStatus(403);
+    req.user = user;
+    next();
+  });
+};
+
+/**
+ * @swagger
+ * /api/health:
+ *   get:
+ *     summary: Health check endpoint
+ *     responses:
+ *       200:
+ *         description: API is healthy
+ */
+app.get('/api/health', (req, res) => {
+  res.json({
+    status: 'healthy',
+    timestamp: new Date().toISOString(),
+    version: '1.0.0',
+    endpoints: {
+      auth: '/api/auth',
+      cigars: '/api/cigars',
+      users: '/api/users',
+      analytics: '/api/analytics'
+    }
+  });
+});
+
+/**
+ * @swagger
+ * /api/auth/register:
+ *   post:
+ *     summary: Register a new user
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               email:
+ *                 type: string
+ *               password:
+ *                 type: string
+ *               name:
+ *                 type: string
+ *     responses:
+ *       201:
+ *         description: User registered successfully
+ */
+app.post('/api/auth/register', async (req, res) => {
+  try {
+    const { email, password, name } = req.body;
+
+    // Validation
+    if (!email || !password || !name) {
+      return res.status(400).json({ error: 'Email, password, and name are required' });
     }
 
-    // Winston logging
-    this.app.use(expressWinston.logger({
-      winstonInstance: logger,
-      meta: true,
-      msg: "HTTP {{req.method}} {{req.url}}",
-      expressFormat: true,
-      colorize: false,
-      ignoredRoutes: ['/health', '/metrics']
-    }));
+    // Check if user exists
+    if (users.has(email)) {
+      return res.status(409).json({ error: 'User already exists' });
+    }
 
-    // Session configuration
-    this.app.use(session({
-      secret: process.env.SESSION_SECRET || 'cigar-maestro-secret-key',
-      resave: false,
-      saveUninitialized: false,
-      store: MongoStore.create({
-        mongoUrl: process.env.MONGODB_URI || 'mongodb://localhost:27017/cigar-maestro'
-      }),
-      cookie: {
-        secure: this.isProduction,
-        httpOnly: true,
-        maxAge: 24 * 60 * 60 * 1000 // 24 hours
-      }
-    }));
+    // Hash password
+    const hashedPassword = await bcrypt.hash(password, 10);
 
-    // Passport initialization
-    this.app.use(passport.initialize());
-    this.app.use(passport.session());
-
-    logger.info('✅ Middleware setup complete');
-  }
-
-  /**
-   * Setup Passport authentication strategies
-   */
-  setupPassport() {
-    require('./config/passport')(passport);
-    logger.info('✅ Passport authentication configured');
-  }
-
-  /**
-   * Setup API routes
-   */
-  setupRoutes() {
-    // Health check
-    this.app.get('/health', (req, res) => {
-      res.status(200).json({
-        status: 'healthy',
-        timestamp: new Date().toISOString(),
-        uptime: process.uptime(),
-        environment: process.env.NODE_ENV,
-        version: process.env.npm_package_version || '1.0.0'
-      });
-    });
-
-    // API documentation
-    const swaggerOptions = {
-      definition: {
-        openapi: '3.0.0',
-        info: {
-          title: 'Thee Cigar Maestro API',
-          version: '1.0.0',
-          description: 'Comprehensive API for cigar enthusiasts',
-          contact: {
-            name: 'Mike Hamilton',
-            email: 'support@theecigarmaestro.com'
-          }
-        },
-        servers: [
-          {
-            url: process.env.API_URL || 'http://localhost:3000',
-            description: 'Development server'
-          }
-        ],
-        components: {
-          securitySchemes: {
-            bearerAuth: {
-              type: 'http',
-              scheme: 'bearer',
-              bearerFormat: 'JWT'
-            }
-          }
-        }
-      },
-      apis: ['./routes/*.js']
+    // Create user
+    const userId = uuidv4();
+    const user = {
+      id: userId,
+      email,
+      name,
+      password: hashedPassword,
+      createdAt: new Date().toISOString(),
+      preferences: {},
+      favorites: []
     };
 
-    const specs = swaggerJsdoc(swaggerOptions);
-    this.app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
+    users.set(email, user);
 
-    // API routes
-    this.app.use('/api/auth', authRoutes);
-    this.app.use('/api/users', authMiddleware.authenticate, userRoutes);
-    this.app.use('/api/cigars', cigarRoutes);
-    this.app.use('/api/search', searchRoutes);
-    this.app.use('/api/analytics', authMiddleware.authenticate, analyticsRoutes);
-    this.app.use('/api/recommendations', authMiddleware.authenticate, recommendationRoutes);
-    this.app.use('/api/social', authMiddleware.authenticate, socialRoutes);
-    this.app.use('/api/admin', authMiddleware.authenticate, authMiddleware.requireAdmin, adminRoutes);
+    // Generate token
+    const token = jwt.sign({ userId, email }, JWT_SECRET, { expiresIn: '24h' });
 
-    // Static file serving for uploads
-    this.app.use('/uploads', express.static('uploads'));
-
-    // Root route
-    this.app.get('/', (req, res) => {
-      res.json({
-        message: 'Welcome to Thee Cigar Maestro API',
-        version: '1.0.0',
-        documentation: '/api-docs',
-        health: '/health',
-        status: 'operational'
-      });
+    res.status(201).json({
+      message: 'User registered successfully',
+      token,
+      user: { id: userId, email, name }
     });
-
-    // 404 handler
-    this.app.use('*', (req, res) => {
-      res.status(404).json({
-        error: 'Route not found',
-        message: `The requested endpoint ${req.originalUrl} does not exist`,
-        timestamp: new Date().toISOString()
-      });
-    });
-
-    logger.info('✅ Routes setup complete');
+  } catch (error) {
+    console.error('Registration error:', error);
+    res.status(500).json({ error: 'Internal server error' });
   }
+});
 
-  /**
-   * Setup WebSocket connections
-   */
-  setupWebSocket() {
-    this.io.on('connection', (socket) => {
-      logger.info(`User connected: ${socket.id}`);
+/**
+ * @swagger
+ * /api/auth/login:
+ *   post:
+ *     summary: Login user
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               email:
+ *                 type: string
+ *               password:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Login successful
+ */
+app.post('/api/auth/login', async (req, res) => {
+  try {
+    const { email, password } = req.body;
 
-      // Join user to their personal room
-      socket.on('join', (userId) => {
-        socket.join(`user_${userId}`);
-        socket.userId = userId;
-      });
-
-      // Handle real-time recommendations
-      socket.on('request_recommendations', async (data) => {
-        try {
-          const recommendations = await this.recommendationEngine.getRealtimeRecommendations(
-            socket.userId,
-            data
-          );
-          socket.emit('recommendations_update', recommendations);
-        } catch (_error) {
-          socket.emit('error', { message: 'Failed to get recommendations' });
-        }
-      });
-
-      // Handle analytics events
-      socket.on('analytics_event', async (eventData) => {
-        try {
-          await this.analyticsService.trackEvent({
-            ...eventData,
-            userId: socket.userId,
-            socketId: socket.id,
-            timestamp: new Date()
-          });
-        } catch (_error) {
-          logger.error('Failed to track analytics event:', error);
-        }
-      });
-
-      // Handle user activity
-      socket.on('user_activity', async (activityData) => {
-        try {
-          await this.analyticsService.trackUserActivity({
-            ...activityData,
-            userId: socket.userId,
-            timestamp: new Date()
-          });
-          
-          // Broadcast to user's other sessions
-          socket.to(`user_${socket.userId}`).emit('activity_sync', activityData);
-        } catch (_error) {
-          logger.error('Failed to track user activity:', error);
-        }
-      });
-
-      socket.on('disconnect', () => {
-        logger.info(`User disconnected: ${socket.id}`);
-      });
-    });
-
-    logger.info('✅ WebSocket setup complete');
-  }
-
-  /**
-   * Setup cron jobs for maintenance tasks
-   */
-  setupCronJobs() {
-    // Daily analytics aggregation (runs at 2 AM)
-    cron.schedule('0 2 * * *', async () => {
-      try {
-        await this.analyticsService.aggregateDailyStats();
-        logger.info('Daily analytics aggregation completed');
-      } catch (_error) {
-        logger.error('Daily analytics aggregation failed:', error);
-      }
-    });
-
-    // Update recommendation models (runs every 4 hours)
-    cron.schedule('0 */4 * * *', async () => {
-      try {
-        await this.recommendationEngine.updateModels();
-        logger.info('Recommendation models updated');
-      } catch (_error) {
-        logger.error('Recommendation model update failed:', error);
-      }
-    });
-
-    // Clean expired sessions (runs every hour)
-    cron.schedule('0 * * * *', async () => {
-      try {
-        await this.dbService.cleanExpiredSessions();
-        logger.info('Expired sessions cleaned');
-      } catch (_error) {
-        logger.error('Session cleanup failed:', error);
-      }
-    });
-
-    // Cache cleanup (runs every 30 minutes)
-    cron.schedule('*/30 * * * *', async () => {
-      try {
-        await this.cacheService.cleanup();
-        logger.info('Cache cleanup completed');
-      } catch (_error) {
-        logger.error('Cache cleanup failed:', error);
-      }
-    });
-
-    logger.info('✅ Cron jobs setup complete');
-  }
-
-  /**
-   * Setup error handling
-   */
-  setupErrorHandling() {
-    // Express error handler
-    this.app.use(errorHandler);
-
-    // Winston error logging
-    this.app.use(expressWinston.errorLogger({
-      winstonInstance: logger,
-      dumpExceptions: true,
-      showStack: true
-    }));
-
-    // Uncaught exception handler
-    process.on('uncaughtException', (error) => {
-      logger.error('Uncaught Exception:', error);
-      process.exit(1);
-    });
-
-    // Unhandled promise rejection handler
-    process.on('unhandledRejection', (reason, promise) => {
-      logger.error('Unhandled Rejection at:', promise, 'reason:', reason);
-      process.exit(1);
-    });
-
-    // Graceful shutdown
-    process.on('SIGTERM', () => {
-      logger.info('SIGTERM received, shutting down gracefully');
-      this.shutdown();
-    });
-
-    process.on('SIGINT', () => {
-      logger.info('SIGINT received, shutting down gracefully');
-      this.shutdown();
-    });
-
-    logger.info('✅ Error handling setup complete');
-  }
-
-  /**
-   * Start the server
-   */
-  start() {
-    this.server.listen(this.port, () => {
-      logger.info(`
-🚀 Thee Cigar Maestro API Server Started!
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🌍 Environment: ${process.env.NODE_ENV || 'development'}
-🔗 Server URL: http://localhost:${this.port}
-📚 API Docs: http://localhost:${this.port}/api-docs
-🏥 Health Check: http://localhost:${this.port}/health
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-      `);
-      
-      // Initialize background services
-      this.initializeBackgroundServices();
-    });
-  }
-
-  /**
-   * Initialize background services
-   */
-  async initializeBackgroundServices() {
-    try {
-      // Start recommendation engine training
-      await this.recommendationEngine.initialize();
-      logger.info('✅ Recommendation engine initialized');
-      
-      // Initialize analytics aggregation
-      await this.analyticsService.initialize();
-      logger.info('✅ Analytics service initialized');
-      
-      // Start email service
-      await this.emailService.initialize();
-      logger.info('✅ Email service initialized');
-      
-    } catch (_error) {
-      logger.error('Failed to initialize background services:', error);
+    // Validation
+    if (!email || !password) {
+      return res.status(400).json({ error: 'Email and password are required' });
     }
-  }
 
-  /**
-   * Graceful shutdown
-   */
-  async shutdown() {
-    try {
-      logger.info('Closing server...');
-      
-      // Close server
-      this.server.close(() => {
-        logger.info('HTTP server closed');
-      });
-      
-      // Close WebSocket connections
-      this.io.close(() => {
-        logger.info('WebSocket server closed');
-      });
-      
-      // Close database connection
-      await this.dbService.disconnect();
-      logger.info('Database connection closed');
-      
-      // Close cache connection
-      await this.cacheService.disconnect();
-      logger.info('Cache connection closed');
-      
-      process.exit(0);
-    } catch (_error) {
-      logger.error('Error during shutdown:', error);
-      process.exit(1);
+    // Find user
+    const user = users.get(email);
+    if (!user) {
+      return res.status(401).json({ error: 'Invalid credentials' });
     }
+
+    // Check password
+    const isValid = await bcrypt.compare(password, user.password);
+    if (!isValid) {
+      return res.status(401).json({ error: 'Invalid credentials' });
+    }
+
+    // Generate token
+    const token = jwt.sign({ userId: user.id, email }, JWT_SECRET, { expiresIn: '24h' });
+
+    res.json({
+      message: 'Login successful',
+      token,
+      user: { id: user.id, email: user.email, name: user.name }
+    });
+  } catch (error) {
+    console.error('Login error:', error);
+    res.status(500).json({ error: 'Internal server error' });
   }
+});
 
-  /**
-   * Get server instance
-   */
-  getApp() {
-    return this.app;
+/**
+ * @swagger
+ * /api/cigars:
+ *   get:
+ *     summary: Get all cigars
+ *     parameters:
+ *       - in: query
+ *         name: limit
+ *         schema:
+ *           type: integer
+ *         description: Number of cigars to return
+ *       - in: query
+ *         name: offset
+ *         schema:
+ *           type: integer
+ *         description: Number of cigars to skip
+ *     responses:
+ *       200:
+ *         description: List of cigars
+ */
+app.get('/api/cigars', (req, res) => {
+  try {
+    const { limit = 50, offset = 0 } = req.query;
+    
+    // Check cache first
+    const cacheKey = `cigars:${limit}:${offset}`;
+    const cached = cache.get(cacheKey);
+    if (cached) {
+      return res.json(cached);
+    }
+
+    // In a real app, this would query a database
+    // For now, we'll return sample data
+    const sampleCigars = [
+      {
+        id: uuidv4(),
+        name: "Romeo y Julieta Churchill",
+        brand: "Romeo y Julieta",
+        origin: "Cuba",
+        strength: "Medium",
+        size: "Churchill",
+        length: 178,
+        ringGauge: 47,
+        wrapper: "Natural",
+        notes: ["Cedar", "Leather", "Coffee"]
+      },
+      {
+        id: uuidv4(),
+        name: "Montecristo No. 2",
+        brand: "Montecristo",
+        origin: "Cuba",
+        strength: "Medium to Full",
+        size: "Torpedo",
+        length: 156,
+        ringGauge: 52,
+        wrapper: "Natural",
+        notes: ["Spice", "Wood", "Vanilla"]
+      }
+    ];
+
+    const result = {
+      cigars: sampleCigars.slice(parseInt(offset), parseInt(offset) + parseInt(limit)),
+      total: sampleCigars.length,
+      limit: parseInt(limit),
+      offset: parseInt(offset)
+    };
+
+    // Cache the result
+    cache.set(cacheKey, result);
+
+    res.json(result);
+  } catch (error) {
+    console.error('Cigars fetch error:', error);
+    res.status(500).json({ error: 'Internal server error' });
   }
+});
 
-  /**
-   * Get Socket.IO instance
-   */
-  getIO() {
-    return this.io;
+/**
+ * @swagger
+ * /api/cigars/search:
+ *   post:
+ *     summary: Search cigars
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               query:
+ *                 type: string
+ *               filters:
+ *                 type: object
+ *     responses:
+ *       200:
+ *         description: Search results
+ */
+app.post('/api/cigars/search', (req, res) => {
+  try {
+    const { query, filters = {} } = req.body;
+
+    // Simple search implementation
+    // In production, use elasticsearch or similar
+    const searchResults = [
+      {
+        id: uuidv4(),
+        name: "Cohiba Behike 52",
+        brand: "Cohiba",
+        origin: "Cuba",
+        strength: "Full",
+        relevanceScore: 0.95
+      }
+    ];
+
+    res.json({
+      query,
+      filters,
+      results: searchResults,
+      total: searchResults.length
+    });
+  } catch (error) {
+    console.error('Search error:', error);
+    res.status(500).json({ error: 'Internal server error' });
   }
-}
+});
 
-// Initialize and start server
-const server = new CigarMaestroServer();
+/**
+ * @swagger
+ * /api/user/profile:
+ *   get:
+ *     summary: Get user profile
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: User profile
+ */
+app.get('/api/user/profile', authenticateToken, (req, res) => {
+  try {
+    const user = Array.from(users.values()).find(u => u.email === req.user.email);
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
 
-module.exports = server;
+    res.json({
+      id: user.id,
+      email: user.email,
+      name: user.name,
+      preferences: user.preferences,
+      createdAt: user.createdAt
+    });
+  } catch (error) {
+    console.error('Profile error:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+/**
+ * @swagger
+ * /api/analytics/track:
+ *   post:
+ *     summary: Track analytics event
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               event:
+ *                 type: string
+ *               properties:
+ *                 type: object
+ *     responses:
+ *       200:
+ *         description: Event tracked
+ */
+app.post('/api/analytics/track', (req, res) => {
+  try {
+    const { event, properties = {} } = req.body;
+
+    // In production, send to analytics service
+    console.log('Analytics event:', { event, properties, timestamp: new Date().toISOString() });
+
+    res.json({
+      message: 'Event tracked successfully',
+      event,
+      timestamp: new Date().toISOString()
+    });
+  } catch (error) {
+    console.error('Analytics error:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+// Error handling middleware
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({ error: 'Something went wrong!' });
+});
+
+// 404 handler
+app.use((req, res) => {
+  res.status(404).json({ error: 'Endpoint not found' });
+});
+
+// Start server
+app.listen(PORT, () => {
+  console.log(`🚀 Thee Cigar Maestro API Server running on port ${PORT}`);
+  console.log(`📚 API Documentation available at http://localhost:${PORT}/api-docs`);
+  console.log(`🏥 Health check at http://localhost:${PORT}/api/health`);
+});
+
+module.exports = app;
