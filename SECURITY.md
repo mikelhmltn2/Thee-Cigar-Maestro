@@ -2,20 +2,77 @@
 
 ## Supported Versions
 
-Use this section to tell people about which versions of your project are
-currently being supported with security updates.
+The following versions of Thee Cigar Maestro are currently supported with security updates:
 
-| Version | Supported          |
-| ------- | ------------------ |
-| 5.1.x   | :white_check_mark: |
-| 5.0.x   | :x:                |
-| 4.0.x   | :white_check_mark: |
-| < 4.0   | :x:                |
+| Version | Supported          | Notes                    |
+| ------- | ------------------ | ------------------------ |
+| 1.2.x   | :white_check_mark: | Current stable release   |
+| 1.1.x   | :white_check_mark: | Previous stable release  |
+| 1.0.x   | :warning:          | Limited support          |
+| < 1.0   | :x:                | No longer supported      |
 
 ## Reporting a Vulnerability
 
-Use this section to tell people how to report a vulnerability.
+We take security vulnerabilities seriously. If you discover a security issue, please follow these steps:
 
-Tell them where to go, how often they can expect to get an update on a
-reported vulnerability, what to expect if the vulnerability is accepted or
-declined, etc.
+### 🚨 For Critical Security Issues
+- **DO NOT** open a public GitHub issue
+- Email us directly at: security@theecigarmaestro.com
+- Include "SECURITY VULNERABILITY" in the subject line
+- Provide detailed information about the vulnerability
+
+### 📧 Email Template
+```
+Subject: SECURITY VULNERABILITY - [Brief Description]
+
+Vulnerability Type: [XSS, SQL Injection, etc.]
+Affected Component: [Component/File name]
+Severity: [Critical/High/Medium/Low]
+Description: [Detailed description]
+Steps to Reproduce: [Step-by-step instructions]
+Potential Impact: [Description of potential damage]
+Suggested Fix: [If you have suggestions]
+```
+
+### 🔒 Security Response Process
+
+1. **Acknowledgment**: We will acknowledge receipt within 24 hours
+2. **Assessment**: Initial assessment within 72 hours
+3. **Investigation**: Detailed investigation within 7 days
+4. **Resolution**: Fix deployed within 30 days for critical issues
+5. **Disclosure**: Public disclosure after fix is deployed
+
+### 🛡️ Security Measures in Place
+
+- **Content Security Policy (CSP)** headers implemented
+- **Input validation** and sanitization on all user inputs
+- **XSS prevention** through secure coding practices
+- **HTTPS-only** external resource loading
+- **Error handling** prevents information disclosure
+- **Rate limiting** on API endpoints
+- **Authentication** security best practices
+
+### 🏆 Security Hall of Fame
+
+We recognize security researchers who help us improve:
+- Report will be acknowledged in our security documentation
+- Credit given in release notes (with permission)
+- Invitation to join our security advisory team
+
+### 📋 Security Best Practices for Users
+
+- Keep your browser updated
+- Enable JavaScript only for trusted sites
+- Report suspicious behavior immediately
+- Use strong passwords if authentication features are added
+
+### 🔄 Regular Security Updates
+
+- Dependencies are regularly audited and updated
+- Security patches are released as needed
+- Security documentation is reviewed quarterly
+
+---
+
+**Last Updated**: January 2025  
+**Next Review**: April 2025

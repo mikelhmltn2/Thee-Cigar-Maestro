@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; media-src 'self' blob:; connect-src 'self' https://theecigarmaestro.vercel.app;" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; media-src 'self' blob:; connect-src 'self' https://theecigarmaestro.vercel.app; worker-src 'self' blob:;" />
   <title>Thee Cigar Maestro — Your Personal Cigar Journey</title>
   
   <!-- Progressive Web App Meta Tags -->
@@ -931,7 +931,10 @@
 
   <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js" integrity="sha384-gd3xd4QfbP7PiJPPr7dV3s6cXGJ0vy3S8xkW7YnK8eQMjB7c9PwSb0Rx9fF5J8P1" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/examples/js/controls/OrbitControls.js" integrity="sha384-KfY7P2q4L6T8wHj9nQr0N9p3K4L5M8B3J6Q1W7S4R2F9G8H5I6J7K8L9M0N1O2P3" crossorigin="anonymous"></script>
+  <script type="module">
+    import { OrbitControls } from 'https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/controls/OrbitControls.js';
+    window.OrbitControls = OrbitControls;
+  </script>
   <script type="module">
     // Import enhanced UI components
     import UIManager from './src/components/UIManager.js';

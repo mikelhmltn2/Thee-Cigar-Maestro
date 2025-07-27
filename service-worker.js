@@ -20,7 +20,7 @@ const STATIC_FILES = [
   '/logo.png',
   // External dependencies
   'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js',
-  'https://cdn.jsdelivr.net/npm/three@0.160.0/examples/js/controls/OrbitControls.js'
+  'https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/controls/OrbitControls.js'
 ];
 
 // Data files to cache

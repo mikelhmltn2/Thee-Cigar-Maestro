@@ -1,0 +1,359 @@
+{
+  "timestamp": "2025-07-27T15:14:23.948Z",
+  "summary": {
+    "tested": 856,
+    "passed": 821,
+    "failed": 58,
+    "warnings": 0
+  },
+  "errors": [
+    {
+      "url": "https://github.com/yourusername/thee-cigar-maestro.git",
+      "status": 404,
+      "context": "GITHUB_SETUP.md",
+      "type": "HTTP_ERROR"
+    },
+    {
+      "url": "https://github.com/YOUR_USERNAME/thee-cigar-maestro.git",
+      "status": 404,
+      "context": "GITHUB_SETUP.md",
+      "type": "HTTP_ERROR"
+    },
+    {
+      "url": "https://yourusername.github.io/thee-cigar-maestro`",
+      "status": 404,
+      "context": "GITHUB_SETUP.md",
+      "type": "HTTP_ERROR"
+    },
+    {
+      "url": "https://github.com/yourusername/thee-cigar-maestro",
+      "status": 404,
+      "context": "GITHUB_SETUP.md",
+      "type": "HTTP_ERROR"
+    },
+    {
+      "url": "https://yourusername.github.io/thee-cigar-maestro",
+      "status": 404,
+      "context": "GITHUB_SETUP.md",
+      "type": "HTTP_ERROR"
+    },
+    {
+      "url": "https://github.com/yourusername/thee-cigar-maestro/wiki",
+      "status": 404,
+      "context": "GITHUB_SETUP.md",
+      "type": "HTTP_ERROR"
+    },
+    {
+      "url": "https://github.com/new**",
+      "status": 404,
+      "context": "MANUAL_PUSH_COMMANDS.md",
+      "type": "HTTP_ERROR"
+    },
+    {
+      "url": "https://github.com/yourusername/thee-cigar-maestro.git",
+      "status": 404,
+      "context": "MANUAL_PUSH_COMMANDS.md",
+      "type": "HTTP_ERROR"
+    },
+    {
+      "url": "https://github.com/yourusername/thee-cigar-maestro/settings/pages`",
+      "status": 404,
+      "context": "MANUAL_PUSH_COMMANDS.md",
+      "type": "HTTP_ERROR"
+    },
+    {
+      "url": "https://github.com/YOUR_USERNAME/thee-cigar-maestro.git",
+      "status": 404,
+      "context": "MANUAL_PUSH_COMMANDS.md",
+      "type": "HTTP_ERROR"
+    },
+    {
+      "url": "https://github.com/YOUR_USERNAME/thee-cigar-maestro`",
+      "status": 404,
+      "context": "MANUAL_PUSH_COMMANDS.md",
+      "type": "HTTP_ERROR"
+    },
+    {
+      "url": "https://YOUR_USERNAME.github.io/thee-cigar-maestro`",
+      "status": 404,
+      "context": "MANUAL_PUSH_COMMANDS.md",
+      "type": "HTTP_ERROR"
+    },
+    {
+      "url": "https://github.com/username/thee-cigar-maestro.git",
+      "status": 404,
+      "context": "README.md",
+      "type": "HTTP_ERROR"
+    },
+    {
+      "url": "http://localhost:8000",
+      "error": "fetch failed",
+      "context": "README.md",
+      "type": "NETWORK_ERROR"
+    },
+    {
+      "url": "https://cdn.jsdelivr.net;",
+      "error": "fetch failed",
+      "context": "README.md",
+      "type": "NETWORK_ERROR"
+    },
+    {
+      "url": "https://theecigarmaestro.vercel.app;",
+      "error": "fetch failed",
+      "context": "README.md",
+      "type": "NETWORK_ERROR"
+    },
+    {
+      "url": "https://theecigarmaestro.vercel.app/api/gpt",
+      "status": 404,
+      "context": "README.md",
+      "type": "HTTP_ERROR"
+    },
+    {
+      "url": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/js/controls/OrbitControls.js",
+      "status": 404,
+      "context": "REPOSITORY_AUDIT_REPORT.md",
+      "type": "HTTP_ERROR"
+    },
+    {
+      "url": "https://theecigarmaestro.vercel.app/api/gpt`",
+      "status": 404,
+      "context": "REPOSITORY_AUDIT_REPORT.md",
+      "type": "HTTP_ERROR"
+    },
+    {
+      "url": "https://api.theecigarmaestro.com`",
+      "error": "fetch failed",
+      "context": "REPOSITORY_AUDIT_REPORT.md",
+      "type": "NETWORK_ERROR"
+    },
+    {
+      "url": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js`",
+      "status": 404,
+      "context": "REPOSITORY_AUDIT_REPORT.md",
+      "type": "HTTP_ERROR"
+    },
+    {
+      "url": "https://cdn.jsdelivr.net/npm/three@0.178.0/examples/jsm/controls/OrbitControls.js`",
+      "status": 404,
+      "context": "REPOSITORY_AUDIT_REPORT.md",
+      "type": "HTTP_ERROR"
+    },
+    {
+      "url": "https://get.webgl.org/`",
+      "status": 404,
+      "context": "REPOSITORY_AUDIT_REPORT.md",
+      "type": "HTTP_ERROR"
+    },
+    {
+      "url": "https://eslint.org/docs/user-guide/migrating-to-9.0.0",
+      "status": 404,
+      "context": "ROADMAP_IMPLEMENTATION.md",
+      "type": "HTTP_ERROR"
+    },
+    {
+      "url": "https://api.theecigarmaestro.com",
+      "error": "fetch failed",
+      "context": "auth-system.js",
+      "type": "NETWORK_ERROR"
+    },
+    {
+      "url": "https://github.com/yourusername/thee-cigar-maestro.git",
+      "status": 404,
+      "context": "backend-api/package.json",
+      "type": "HTTP_ERROR"
+    },
+    {
+      "url": "https://github.com/yourusername/thee-cigar-maestro/issues",
+      "status": 404,
+      "context": "backend-api/package.json",
+      "type": "HTTP_ERROR"
+    },
+    {
+      "url": "https://theecigarmaestro.vercel.app",
+      "status": 404,
+      "context": "backend-api/package.json",
+      "type": "HTTP_ERROR"
+    },
+    {
+      "url": "https://api.theecigarmaestro.com",
+      "error": "fetch failed",
+      "context": "backend-api/package.json",
+      "type": "NETWORK_ERROR"
+    },
+    {
+      "url": "http://localhost:8000",
+      "error": "fetch failed",
+      "context": "backend-api/server.js",
+      "type": "NETWORK_ERROR"
+    },
+    {
+      "url": "https://fonts.googleapis.com",
+      "status": 404,
+      "context": "backend-api/server.js",
+      "type": "HTTP_ERROR"
+    },
+    {
+      "url": "https://fonts.gstatic.com",
+      "status": 404,
+      "context": "backend-api/server.js",
+      "type": "HTTP_ERROR"
+    },
+    {
+      "url": "https://api.theecigarmaestro.com",
+      "error": "fetch failed",
+      "context": "backend-api/server.js",
+      "type": "NETWORK_ERROR"
+    },
+    {
+      "url": "https://theecigarmaestro.vercel.app",
+      "status": 404,
+      "context": "backend-api/server.js",
+      "type": "HTTP_ERROR"
+    },
+    {
+      "url": "http://localhost:3000",
+      "error": "fetch failed",
+      "context": "backend-api/server.js",
+      "type": "NETWORK_ERROR"
+    },
+    {
+      "url": "http://localhost:${this.port}",
+      "error": "Failed to parse URL from http://localhost:${this.port}",
+      "context": "backend-api/server.js",
+      "type": "NETWORK_ERROR"
+    },
+    {
+      "url": "http://localhost:${this.port}/api-docs",
+      "error": "Failed to parse URL from http://localhost:${this.port}/api-docs",
+      "context": "backend-api/server.js",
+      "type": "NETWORK_ERROR"
+    },
+    {
+      "url": "http://localhost:${this.port}/health",
+      "error": "Failed to parse URL from http://localhost:${this.port}/health",
+      "context": "backend-api/server.js",
+      "type": "NETWORK_ERROR"
+    },
+    {
+      "url": "https://cdn.jsdelivr.net;",
+      "error": "fetch failed",
+      "context": "dashboard.html",
+      "type": "NETWORK_ERROR"
+    },
+    {
+      "url": "https://fonts.googleapis.com;",
+      "error": "fetch failed",
+      "context": "dashboard.html",
+      "type": "NETWORK_ERROR"
+    },
+    {
+      "url": "https://fonts.gstatic.com;",
+      "error": "fetch failed",
+      "context": "dashboard.html",
+      "type": "NETWORK_ERROR"
+    },
+    {
+      "url": "https://theecigarmaestro.vercel.app;",
+      "error": "fetch failed",
+      "context": "dashboard.html",
+      "type": "NETWORK_ERROR"
+    },
+    {
+      "url": "https://cdn.jsdelivr.net;",
+      "error": "fetch failed",
+      "context": "flavorverse_ritual_trail_interface.html",
+      "type": "NETWORK_ERROR"
+    },
+    {
+      "url": "https://cdn.jsdelivr.net/npm/three@0.178.0/build/three.min.js",
+      "status": 404,
+      "context": "flavorverse_ritual_trail_interface.html",
+      "type": "HTTP_ERROR"
+    },
+    {
+      "url": "https://theecigarmaestro.vercel.app/api/gpt",
+      "status": 404,
+      "context": "gpt.js",
+      "type": "HTTP_ERROR"
+    },
+    {
+      "url": "https://cdn.jsdelivr.net;",
+      "error": "fetch failed",
+      "context": "index.html",
+      "type": "NETWORK_ERROR"
+    },
+    {
+      "url": "https://fonts.googleapis.com;",
+      "error": "fetch failed",
+      "context": "index.html",
+      "type": "NETWORK_ERROR"
+    },
+    {
+      "url": "https://fonts.gstatic.com;",
+      "error": "fetch failed",
+      "context": "index.html",
+      "type": "NETWORK_ERROR"
+    },
+    {
+      "url": "https://theecigarmaestro.vercel.app;",
+      "error": "fetch failed",
+      "context": "index.html",
+      "type": "NETWORK_ERROR"
+    },
+    {
+      "url": "https://cdn.jsdelivr.net/npm/three@0.178.0/build/three.min.js",
+      "status": 404,
+      "context": "index.html",
+      "type": "HTTP_ERROR"
+    },
+    {
+      "url": "https://theecigarmaestro.vercel.app/api/gpt",
+      "status": 404,
+      "context": "index.html",
+      "type": "HTTP_ERROR"
+    },
+    {
+      "url": "https://theecigarmaestro.vercel.app",
+      "status": 404,
+      "context": "manifest.json",
+      "type": "HTTP_ERROR"
+    },
+    {
+      "url": "http://localhost:8000",
+      "error": "fetch failed",
+      "context": "package.json",
+      "type": "NETWORK_ERROR"
+    },
+    {
+      "url": "https://theecigarmaestro.vercel.app",
+      "status": 404,
+      "context": "scripts/pwa-enhancer.js",
+      "type": "HTTP_ERROR"
+    },
+    {
+      "url": "https://cdn.jsdelivr.net/npm/three@0.178.0/build/three.min.js",
+      "status": 404,
+      "context": "service-worker.js",
+      "type": "HTTP_ERROR"
+    },
+    {
+      "url": "http://localhost:3000",
+      "error": "fetch failed",
+      "context": "tests/setup.js",
+      "type": "NETWORK_ERROR"
+    },
+    {
+      "url": "https://example.com/api/data",
+      "status": 404,
+      "context": "tests/utils/storage.test.js",
+      "type": "HTTP_ERROR"
+    },
+    {
+      "url": "https://example.com/api/expire",
+      "status": 404,
+      "context": "tests/utils/storage.test.js",
+      "type": "HTTP_ERROR"
+    }
+  ]
+}

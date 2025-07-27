@@ -20,7 +20,7 @@ A sophisticated web application for cigar enthusiasts featuring interactive 3D v
 
 1. **Clone the repository**
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/username/thee-cigar-maestro.git
    cd thee-cigar-maestro
    ```
 
@@ -141,10 +141,12 @@ No build process required - pure client-side application.
 ### API Configuration
 Update the GPT API endpoint in `gpt.js`:
 ```javascript
-const res = await fetch("https://your-api-endpoint.com/api/gpt", {
+const res = await fetch("https://theecigarmaestro.vercel.app/api/gpt", {
   // configuration
 });
 ```
+
+**Note**: The API endpoint is currently not implemented. The application will gracefully handle API failures and continue to function with local features.
 
 ## 📱 Browser Support
 
