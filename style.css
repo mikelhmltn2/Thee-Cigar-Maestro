@@ -15,9 +15,22 @@
   --font-family: 'Georgia', serif;
   --border-radius: 6px;
   --transition: all 0.3s ease;
+  
+  /* Enhanced responsive breakpoints */
+  --mobile-breakpoint: 768px;
+  --tablet-breakpoint: 1024px;
+  --desktop-breakpoint: 1200px;
+  
+  /* Dynamic spacing system */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  --spacing-xxl: 3rem;
 }
 
-/* Base styles */
+/* Enhanced base styles with better performance */
 * {
   box-sizing: border-box;
 }
@@ -27,27 +40,64 @@ body {
   background-color: var(--primary-bg);
   color: var(--primary-text);
   margin: 0;
-  padding: 2rem;
+  padding: var(--spacing-xl);
   line-height: 1.6;
   /* Optimized background pattern using CSS gradient instead of external image */
   background-image: 
     radial-gradient(circle at 1px 1px, rgba(255,255,255,0.05) 1px, transparent 0);
   background-size: 20px 20px;
+  /* Enhanced mobile scroll behavior */
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
 }
 
-/* Header and footer */
+/* Mobile-first responsive adjustments */
+@media (max-width: 768px) {
+  body {
+    padding: var(--spacing-md);
+    font-size: 0.9rem;
+  }
+  
+  /* Optimize spacing for mobile */
+  .container {
+    padding: var(--spacing-sm);
+  }
+  
+  /* Enhanced touch targets for mobile */
+  button, .btn, a {
+    min-height: 44px;
+    min-width: 44px;
+    padding: var(--spacing-sm) var(--spacing-md);
+  }
+}
+
+/* Tablet optimizations */
+@media (min-width: 769px) and (max-width: 1024px) {
+  body {
+    padding: var(--spacing-lg);
+  }
+}
+
+/* Header and footer with improved mobile handling */
 header, footer {
   background: var(--secondary-bg);
-  padding: 1rem 2rem;
+  padding: var(--spacing-md) var(--spacing-xl);
   border-radius: var(--border-radius);
-  margin-bottom: 1rem;
+  margin-bottom: var(--spacing-md);
+}
+
+@media (max-width: 768px) {
+  header, footer {
+    padding: var(--spacing-sm) var(--spacing-md);
+    margin-bottom: var(--spacing-sm);
+  }
 }
 
 footer {
   text-align: center;
   font-size: 0.9rem;
   color: #aaa;
-  margin-top: 3rem;
+  margin-top: var(--spacing-xxl);
   border-top: 1px solid var(--border-color);
   /* Removed external SVG dependency */
   position: relative;

@@ -1,0 +1,40 @@
+{
+  "name": "thee-cigar-maestro",
+  "version": "1.2.0",
+  "description": "Premium cigar experience with AI-powered recommendations and immersive 3D Flavorverse",
+  "main": "index.html",
+  "scripts": {
+    "start": "serve -s . -l 3000",
+    "build": "echo 'Static site - no build required'",
+    "deploy:netlify": "netlify deploy --prod --dir=.",
+    "deploy:vercel": "vercel --prod",
+    "deploy:surge": "surge . thee-cigar-maestro.surge.sh",
+    "preview": "serve -s . -l 3000"
+  },
+  "keywords": [
+    "cigars",
+    "ai",
+    "recommendations",
+    "3d",
+    "flavorverse",
+    "pwa",
+    "machine-learning"
+  ],
+  "author": "Thee Cigar Maestro Team",
+  "license": "MIT",
+  "devDependencies": {
+    "serve": "^14.0.0"
+  },
+  "engines": {
+    "node": ">=16.0.0",
+    "npm": ">=8.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/thee-cigar-maestro.git"
+  },
+  "homepage": "https://theecigarmaestro.com",
+  "bugs": {
+    "url": "https://github.com/yourusername/thee-cigar-maestro/issues"
+  }
+}

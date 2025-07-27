@@ -1,0 +1,122 @@
+[
+  {
+    "name": "Foundation Cigar Company",
+    "flavor": "Bold, earthy with dark chocolate and espresso notes",
+    "wrapper": "Maduro",
+    "color": 5865472
+  },
+  {
+    "name": "Warped Cigars",
+    "flavor": "Complex blend with cedar, leather, and spice",
+    "wrapper": "Habano",
+    "color": 8947848
+  },
+  {
+    "name": "Crowned Heads",
+    "flavor": "Smooth with hints of vanilla and toasted oak",
+    "wrapper": "Connecticut",
+    "color": 13408512
+  },
+  {
+    "name": "JRE Tobacco Co.",
+    "flavor": "Rich Honduran blend with coffee and nuts",
+    "wrapper": "Natural",
+    "color": 11642112
+  },
+  {
+    "name": "Southern Draw Cigars",
+    "flavor": "Full-bodied with pepper and dark fruit",
+    "wrapper": "Oscuro",
+    "color": 3355443
+  },
+  {
+    "name": "La Flor Dominicana",
+    "flavor": "Powerful smoke with leather and earth",
+    "wrapper": "Maduro",
+    "color": 5865472
+  },
+  {
+    "name": "Aganorsa Leaf",
+    "flavor": "Nicaraguan strength with cocoa undertones",
+    "wrapper": "Habano",
+    "color": 8947848
+  },
+  {
+    "name": "Plasencia Cigars",
+    "flavor": "Smooth and creamy with floral notes",
+    "wrapper": "Connecticut",
+    "color": 13408512
+  },
+  {
+    "name": "Arturo Fuente",
+    "flavor": "Classic Dominican elegance with cedar",
+    "wrapper": "Natural",
+    "color": 11642112
+  },
+  {
+    "name": "Padron 1964 Anniversary",
+    "flavor": "Premium aged tobacco with chocolate richness",
+    "wrapper": "Maduro",
+    "color": 5865472
+  },
+  {
+    "name": "Oliva Serie V",
+    "flavor": "Medium-full with coffee and spice",
+    "wrapper": "Habano",
+    "color": 8947848
+  },
+  {
+    "name": "Romeo y Julieta",
+    "flavor": "Mild and smooth with honey sweetness",
+    "wrapper": "Connecticut",
+    "color": 13408512
+  },
+  {
+    "name": "Montecristo",
+    "flavor": "Balanced with nuts and cream",
+    "wrapper": "Natural",
+    "color": 11642112
+  },
+  {
+    "name": "Cohiba",
+    "flavor": "Full-bodied Cuban heritage with earth",
+    "wrapper": "Oscuro",
+    "color": 3355443
+  },
+  {
+    "name": "Rocky Patel Vintage 1990",
+    "flavor": "Aged wrapper with vanilla and spice",
+    "wrapper": "Connecticut",
+    "color": 13408512
+  },
+  {
+    "name": "Ashton VSG",
+    "flavor": "Rich Ecuador wrapper with complexity",
+    "wrapper": "Maduro",
+    "color": 5865472
+  },
+  {
+    "name": "Davidoff",
+    "flavor": "Refined and elegant with subtle nuances",
+    "wrapper": "Natural",
+    "color": 11642112
+  },
+  {
+    "name": "CAO Brasilia",
+    "flavor": "Brazilian wrapper with bold character",
+    "wrapper": "Oscuro",
+    "color": 3355443
+  },
+  {
+    "name": "Macanudo Cafe",
+    "flavor": "Mild and approachable with cream",
+    "wrapper": "Connecticut",
+    "color": 13408512
+  },
+  {
+    "name": "H. Upmann",
+    "flavor": "Classic Cuban blend with leather",
+    "wrapper": "Habano",
+    "color": 8947848
+  }
+]

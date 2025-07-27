@@ -1,0 +1,269 @@
+{
+  "voiceCommandMatrix": {
+    "privacyCompliant": true,
+    "fallback": "mainMenu.prompt",
+    "intentLevels": [
+      "beginner",
+      "intermediate",
+      "expert"
+    ],
+    "triggers": {
+      "privacyCompliant": true,
+      "continue CEU": "ceuSystem.resumePath",
+      "open legacy": "legacyMode.activate",
+      "start pairing": "pairingEngine.initiate",
+      "archive my legacy": "legacyVaultMirror.archive",
+      "show final mirror": "afterlifeCapsules.render",
+      "simulate master tobacconist": "aiConciergeEngine.launchTobacconistMode",
+      "ask brand rep": "brandPersonaSim.query",
+      "bless this ritual": "sacredPairingEngine.bless",
+      "guide me in reflection": "meditativeBlendMode.activate",
+      "record in cosmos": "eternalStorylineRegistry.saveThread",
+      "recite my eternal draw": "recitationEngine.initiate"
+    }
+  },
+  "uiUx": {
+    "privacyCompliant": true,
+    "aLaCarteAddOns": true,
+    "accessibility": {
+      "privacyCompliant": true,
+      "aLaCarteAddOns": true,
+      "deduplication": true,
+      "ecoDevNote": "This module is optimized for economic reuse and minimal cost overhead.",
+      "edgeDeploymentReady": true,
+      "greenHostingCompatible": true,
+      "hapticFeedback": true,
+      "lazyLoad": true,
+      "modularization": "DRY_compliant",
+      "scalingProfile": "costOptimized",
+      "textToSpeechToggle": true,
+      "translationStatus": "complete_per_module",
+      "wcagContrastLevel": "AA"
+    },
+    "deduplication": true,
+    "designUpgrades": {
+      "privacyCompliant": true,
+      "adaTextZoomSupport": true,
+      "kioskModeSupport": true,
+      "mobileFirstEnabled": true
+    },
+    "ecoDevNote": "This module is optimized for economic reuse and minimal cost overhead.",
+    "edgeDeploymentReady": true,
+    "greenHostingCompatible": true,
+    "interactionModes": [
+      "voice",
+      "touch",
+      "type"
+    ],
+    "kioskModeUi": {
+      "privacyCompliant": true,
+      "aLaCarteAddOns": true,
+      "deduplication": true,
+      "ecoDevNote": "This module is optimized for economic reuse and minimal cost overhead.",
+      "edgeDeploymentReady": true,
+      "enabled": true,
+      "greenHostingCompatible": true,
+      "largeTouchTargets": true,
+      "lazyLoad": true,
+      "modularization": "DRY_compliant",
+      "scalingProfile": "costOptimized",
+      "swipeNavigation": true,
+      "translationStatus": "complete_per_module"
+    },
+    "lazyLoad": true,
+    "modularization": "DRY_compliant",
+    "responsiveScaleMap": {
+      "privacyCompliant": true,
+      "aLaCarteAddOns": true,
+      "base": "16px",
+      "deduplication": true,
+      "ecoDevNote": "This module is optimized for economic reuse and minimal cost overhead.",
+      "edgeDeploymentReady": true,
+      "greenHostingCompatible": true,
+      "kiosk": "calc(1.1rem + 0.5vw)",
+      "lazyLoad": true,
+      "mobile": "calc(1rem + 0.25vw)",
+      "modularization": "DRY_compliant",
+      "scalingProfile": "costOptimized",
+      "translationStatus": "complete_per_module"
+    },
+    "scalingProfile": "costOptimized",
+    "translationStatus": "complete_per_module"
+  },
+  "userOnboardingFlow": {
+    "privacyCompliant": true,
+    "aLaCarteAddOns": true,
+    "deduplication": true,
+    "ecoDevNote": "This module is optimized for economic reuse and minimal cost overhead.",
+    "edgeDeploymentReady": true,
+    "firstSmokeJourney": true,
+    "greenHostingCompatible": true,
+    "journeyMode": [
+      "firstTime",
+      "returning",
+      "powerUser"
+    ],
+    "lazyLoad": true,
+    "modularization": "DRY_compliant",
+    "personaOnboarding": {
+      "privacyCompliant": true,
+      "GM": [
+        "dashboardOverview",
+        "VIPControl"
+      ],
+      "guest": [
+        "pairingIntro",
+        "journalAccess"
+      ],
+      "staff": [
+        "floorTools",
+        "inventory"
+      ]
+    },
+    "scalingProfile": "costOptimized",
+    "steps": [
+      "Select Cigar",
+      "Scan Band",
+      "Begin Flavor Journal",
+      "Pair Suggestion",
+      "Lounge Tips"
+    ],
+    "translationStatus": "complete_per_module",
+    "uiHints": {
+      "privacyCompliant": true,
+      "aLaCarteAddOns": true,
+      "deduplication": true,
+      "ecoDevNote": "This module is optimized for economic reuse and minimal cost overhead.",
+      "edgeDeploymentReady": true,
+      "greenHostingCompatible": true,
+      "lazyLoad": true,
+      "modularization": "DRY_compliant",
+      "scalingProfile": "costOptimized",
+      "steps": [
+        {
+          "privacyCompliant": true,
+          "inputType": "dropdown",
+          "step": "Select Cigar",
+          "widgetHint": "cigarPicker"
+        },
+        {
+          "privacyCompliant": true,
+          "inputType": "camera",
+          "step": "Scan Band",
+          "widgetHint": "bandScanner"
+        },
+        {
+          "privacyCompliant": true,
+          "inputType": "text",
+          "step": "Begin Flavor Journal",
+          "widgetHint": "flavorTextArea"
+        },
+        {
+          "privacyCompliant": true,
+          "inputType": "button",
+          "step": "Pair Suggestion",
+          "widgetHint": "pairNow"
+        },
+        {
+          "privacyCompliant": true,
+          "inputType": "tipCard",
+          "step": "Lounge Tips",
+          "widgetHint": "loungeCards"
+        }
+      ],
+      "translationStatus": "complete_per_module"
+    }
+  },
+  "voiceAndKiosk": {
+    "voiceCommands": [
+      "Tell me about this cigar",
+      "What should I smoke next?",
+      "Start my ritual",
+      "Record a flavor journal"
+    ],
+    "kioskMode": true
+  },
+  "exportMetadata": {
+    "source": "Cigar Maestro",
+    "exported": true,
+    "verifiedOnly": true
+  },
+  "timelineForkUI": {
+    "enabled": true,
+    "actions": [
+      "create fork",
+      "label memory",
+      "gift ritual"
+    ],
+    "voiceCommands": [
+      "Fork this ritual",
+      "Send memory to my son",
+      "Remix this timeline"
+    ]
+  },
+  "finalMirrorUI": {
+    "enabled": true,
+    "overlayOptions": [
+      "dimmed reflection",
+      "photo + flavor playback",
+      "audio journal"
+    ]
+  },
+  "aiConciergeUI": {
+    "enabled": true,
+    "features": [
+      "bundle building",
+      "flavor education",
+      "emotion-aware upsell"
+    ]
+  },
+  "translationMatrix": {
+    "enabled": true,
+    "languagesSupported": [
+      "es",
+      "fr",
+      "zh",
+      "ja",
+      "ar",
+      "sw",
+      "ht",
+      "he",
+      "pt"
+    ],
+    "ritualVoiceSync": true
+  },
+  "globalGreetingOverlay": {
+    "enabled": true,
+    "localizationTriggers": [
+      "region",
+      "userPreference"
+    ],
+    "example": "Shalom, Maestro. Ready for your evening draw?"
+  },
+  "spiritualOverlayUI": {
+    "enabled": true,
+    "modes": [
+      "quiet reflection",
+      "interfaith wisdom prompt",
+      "meditative soundscape"
+    ]
+  },
+  "stellarOverlayUI": {
+    "enabled": true,
+    "timelineThreading": true,
+    "promptExample": "Record this in the cosmos",
+    "navigationModes": [
+      "archetype",
+      "constellation",
+      "flavor starline"
+    ]
+  },
+  "multisensoryFlavorPlayback": {
+    "enabled": true,
+    "channels": [
+      "scent",
+      "tone",
+      "memory overlay"
+    ]
+  }
+}
