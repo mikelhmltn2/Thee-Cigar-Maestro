@@ -1,4 +1,4 @@
-/* global self, caches */
+// Service Worker globals handled by ESLint config
 
 // Service Worker for Thee Cigar Maestro
 // Handles caching, offline functionality, and background sync
@@ -285,7 +285,7 @@ async function handleExternalRequest(request) {
 async function handleDefaultRequest(request) {
   try {
     return await fetch(request);
-  } catch (error) {
+  } catch (_error) {
     const cache = await caches.open(STATIC_CACHE_NAME);
     return await cache.match(request) || new Response('Offline', { status: 503 });
   }

@@ -1069,7 +1069,7 @@ class AuthenticationSystem {
   /**
    * Generate mock response for offline mode
    */
-  generateMockResponse(endpoint, options) {
+  generateMockResponse(endpoint, _options) {
     console.log('🔐 Generating mock response for:', endpoint);
     
     // Basic mock responses for common endpoints
@@ -1311,7 +1311,7 @@ class AuthenticationSystem {
       });
 
       window.uiManager?.showToast('Verification code resent', 'success');
-    } catch (error) {
+    } catch (_error) {
       window.uiManager?.showToast('Failed to resend code', 'error');
     }
   }

@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://theecigarmaestro.vercel.app;">
-  <title>Flavorverse Analytics Dashboard | Thee Cigar Maestro</title>
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://theecigarmaestro.vercel.app; worker-src 'self' blob:;">
+  <title>Thee Cigar Maestro Analytics Dashboard</title>
   <style>
     * {
       margin: 0;
@@ -349,7 +349,7 @@
 <link rel="manifest" href="/manifest.webmanifest"><script id="vite-plugin-pwa:register-sw" src="/registerSW.js"></script></head>
 <body>
   <div class="header">
-    <h1>🌀 Flavorverse Analytics Dashboard</h1>
+            <h1>🌀 Thee Cigar Maestro Analytics Dashboard</h1>
     <p>Comprehensive insights across all integrated data sources</p>
   </div>
 
@@ -403,7 +403,7 @@
       </div>
 
       <div id="searchResults" class="search-results">
-        <div class="loading" id="searchLoading">Ready to search across the Flavorverse...</div>
+        <div class="loading" id="searchLoading">Ready to search across Thee Cigar Maestro...</div>
       </div>
     </div>
 
@@ -934,7 +934,7 @@
 
     // Initialize dashboard
     async function initializeDashboard() {
-      showMessage('Loading Flavorverse analytics...');
+              showMessage('Loading Thee Cigar Maestro analytics...');
       
       const success = await dashboard.loadAllData();
       

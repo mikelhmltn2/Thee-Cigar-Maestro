@@ -8,7 +8,7 @@ console.log('🧪 Starting UI Improvements Validation...\n');
 // Check if we're running in a browser environment
 if (typeof window === 'undefined') {
   console.log('❌ This script must be run in a browser environment');
-  process.exit(1);
+  throw new Error('Browser environment required');
 }
 
 // Validation results
@@ -31,7 +31,7 @@ function test(name, condition, message = '') {
   }
 }
 
-function warn(name, message) {
+function _warn(name, message) {
   results.warnings++;
   results.details.push(`⚠️  ${name}: WARNING ${message}`);
   console.log(`⚠️  ${name}: WARNING ${message}`);
@@ -130,7 +130,7 @@ function runValidation() {
   );
   
   // Test 11: CSS Custom Properties
-  const rootStyles = getComputedStyle(document.documentElement);
+  const rootStyles = window.getComputedStyle(document.documentElement);
   test(
     'CSS Custom Properties',
     rootStyles.getPropertyValue('--accent-text').trim() !== '',
@@ -245,6 +245,6 @@ function generateReport() {
 }
 
 // Export for potential external use
-if (typeof module !== 'undefined' && module.exports) {
-  module.exports = { runValidation, results };
+if (typeof window !== 'undefined') {
+  window.uiValidationExports = { runValidation, results };
 }

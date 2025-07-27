@@ -479,7 +479,7 @@ class EnhancedDataValidator {
         try {
           const data = JSON.parse(fs.readFileSync(file, 'utf8'));
           checkXSS(data, file);
-        } catch (error) {
+        } catch (_error) {
           // Already handled in validateFile
         }
       }

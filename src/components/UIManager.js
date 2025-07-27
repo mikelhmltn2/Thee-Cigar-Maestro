@@ -521,7 +521,7 @@ class UIManager {
       // Number keys for quick navigation
       if (e.key >= '1' && e.key <= '5' && !e.target.matches('input, textarea')) {
         const sections = ['explore', 'education', 'pairings', 'journal', 'search'];
-        const index = parseInt(e.key) - 1;
+        const index = parseInt(e.key, 10) - 1;
         if (sections[index]) {
           this.navigateToSection(sections[index]);
         }

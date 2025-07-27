@@ -1163,7 +1163,7 @@ class EnhancedCigarModal {
     return stories[cigar.wrapper] || 'This premium cigar represents the pinnacle of tobacco craftsmanship, blending traditional techniques with modern quality standards.';
   }
 
-  generateTechnicalChart(cigar) {
+  generateTechnicalChart(_cigar) {
     const technicalData = [
       { label: 'Strength', value: 75 },
       { label: 'Complexity', value: 90 },
@@ -1187,7 +1187,7 @@ class EnhancedCigarModal {
   // User interaction methods
   getUserRating(cigarName) {
     const saved = localStorage.getItem(`rating_${cigarName}`);
-    return saved ? parseInt(saved) : 0;
+    return saved ? parseInt(saved, 10) : 0;
   }
 
   setUserRating(cigarName, rating) {
@@ -1298,7 +1298,7 @@ class EnhancedCigarModal {
           status.textContent = '🔴 Recording... (Click to stop)';
         }
       })
-      .catch(error => {
+      .catch(_error => {
         this.uiManager.showToast('Failed to access microphone', 'error');
       });
   }

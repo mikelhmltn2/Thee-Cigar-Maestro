@@ -39,7 +39,7 @@ describe('StorageManager', () => {
       expect(storageManager.getLocal(key)).toBe(value);
       
       // Wait for expiration
-      await new Promise(resolve => setTimeout(resolve, 20));
+      await new Promise(resolve => { setTimeout(resolve, 20); });
       
       // Should be null after expiration
       expect(storageManager.getLocal(key)).toBeNull();
@@ -131,7 +131,7 @@ describe('StorageManager', () => {
       storageManager.setMemory(key, value, expiration);
       expect(storageManager.getMemory(key)).toBe(value);
       
-      await new Promise(resolve => setTimeout(resolve, 20));
+      await new Promise(resolve => { setTimeout(resolve, 20); });
       expect(storageManager.getMemory(key)).toBeNull();
     });
 
@@ -171,7 +171,7 @@ describe('StorageManager', () => {
       expect(cached).toEqual(data);
       
       // Wait for expiration
-      await new Promise(resolve => setTimeout(resolve, 20));
+      await new Promise(resolve => { setTimeout(resolve, 20); });
       
       // Should be null after expiration
       cached = await storageManager.getCachedData(url);

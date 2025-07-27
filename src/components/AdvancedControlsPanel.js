@@ -385,7 +385,7 @@ class AdvancedControlsPanel {
     // Search functionality
     const searchInput = document.getElementById('advancedSearch');
     const searchBtn = document.getElementById('searchBtn');
-    const searchSuggestions = document.getElementById('searchSuggestions');
+    const _searchSuggestions = document.getElementById('searchSuggestions');
 
     if (searchInput) {
       searchInput.addEventListener('input', (e) => {
