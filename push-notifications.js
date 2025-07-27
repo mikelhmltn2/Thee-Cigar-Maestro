@@ -25,7 +25,7 @@ class PushNotificationManager {
     const permission = await Notification.requestPermission();
     
     if (permission === 'granted') {
-      console.log('Notification permission granted');
+      console.info('Notification permission granted');
       return true;
     } else {
       console.warn('Notification permission denied');
@@ -42,12 +42,12 @@ class PushNotificationManager {
         applicationServerKey: this.urlBase64ToUint8Array(this.vapidPublicKey)
       });
       
-      console.log('User subscribed to push notifications:', this.subscription);
+      console.info('User subscribed to push notifications:', this.subscription);
       
       // Send subscription to server
       await this.sendSubscriptionToServer(this.subscription);
       
-    } catch (_error) {
+    } catch (error) {
       console.error('Failed to subscribe user:', error);
     }
   }
@@ -63,11 +63,11 @@ class PushNotificationManager {
       });
       
       if (response.ok) {
-        console.log('Subscription sent to server successfully');
+        console.info('Subscription sent to server successfully');
       } else {
         console.error('Failed to send subscription to server');
       }
-    } catch (_error) {
+    } catch (error) {
       console.error('Error sending subscription:', error);
     }
   }

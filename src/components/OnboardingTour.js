@@ -499,7 +499,7 @@ class OnboardingTour {
    */
   trackEvent(event, data = {}) {
     // Basic event tracking - could be extended with analytics service
-    console.log(`Tour Event: ${event}`, data);
+    console.info(`Tour Event: ${event}`, data);
     
     try {
       // Store tour analytics locally
@@ -516,7 +516,7 @@ class OnboardingTour {
       }
       
       localStorage.setItem('cigar-maestro-tour-analytics', JSON.stringify(analytics));
-    } catch (_error) {
+    } catch (error) {
       console.warn('Could not save tour analytics:', error);
     }
   }

@@ -78,7 +78,7 @@ const authenticateToken = (req, res, next) => {
   const authHeader = req.headers['authorization'];
   const token = authHeader && authHeader.split(' ')[1];
 
-  if (token == null) return res.sendStatus(401);
+  if (token === null) return res.sendStatus(401);
 
   jwt.verify(token, JWT_SECRET, (err, user) => {
     if (err) return res.sendStatus(403);
@@ -293,10 +293,10 @@ app.get('/api/cigars', (req, res) => {
     ];
 
     const result = {
-      cigars: sampleCigars.slice(parseInt(offset), parseInt(offset) + parseInt(limit)),
+      cigars: sampleCigars.slice(parseInt(offset, 10), parseInt(offset, 10) + parseInt(limit, 10)),
       total: sampleCigars.length,
-      limit: parseInt(limit),
-      offset: parseInt(offset)
+      limit: parseInt(limit, 10),
+      offset: parseInt(offset, 10)
     };
 
     // Cache the result
@@ -414,7 +414,7 @@ app.post('/api/analytics/track', (req, res) => {
     const { event, properties = {} } = req.body;
 
     // In production, send to analytics service
-    console.log('Analytics event:', { event, properties, timestamp: new Date().toISOString() });
+    console.info('Analytics event:', { event, properties, timestamp: new Date().toISOString() });
 
     res.json({
       message: 'Event tracked successfully',
@@ -440,9 +440,9 @@ app.use((req, res) => {
 
 // Start server
 app.listen(PORT, () => {
-  console.log(`🚀 Thee Cigar Maestro API Server running on port ${PORT}`);
-  console.log(`📚 API Documentation available at http://localhost:${PORT}/api-docs`);
-  console.log(`🏥 Health check at http://localhost:${PORT}/api/health`);
+  console.info(`🚀 Thee Cigar Maestro API Server running on port ${PORT}`);
+  console.info(`📚 API Documentation available at http://localhost:${PORT}/api-docs`);
+  console.info(`🏥 Health check at http://localhost:${PORT}/api/health`);
 });
 
 module.exports = app;

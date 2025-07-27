@@ -22,7 +22,7 @@ class IntegrationTestSuite {
   }
 
   async runAllTests() {
-    console.log('🧪 Starting Comprehensive Integration Test Suite...\n');
+    console.info('🧪 Starting Comprehensive Integration Test Suite...\n');
     
     // Load all data sources
     await this.loadDataSources();
@@ -46,7 +46,7 @@ class IntegrationTestSuite {
   }
 
   async loadDataSources() {
-    console.log('📂 Loading all data sources...');
+    console.info('📂 Loading all data sources...');
     
     const dataFiles = [
       'flavorverse_nodes.json',
@@ -67,20 +67,20 @@ class IntegrationTestSuite {
           const content = JSON.parse(fs.readFileSync(file, 'utf8'));
           const key = file.replace('.json', '').replace('-', '_');
           this.data[key] = content;
-          console.log(`  ✓ Loaded ${file}`);
+          console.info(`  ✓ Loaded ${file}`);
         } else {
           this.addResult('FAIL', `Data Loading`, `Missing file: ${file}`);
         }
-      } catch (_error) {
-        this.addResult('FAIL', `Data Loading`, `Error loading ${file}: ${error.message}`);
+      } catch (loadError) {
+        this.addResult('FAIL', `Data Loading`, `Error loading ${file}: ${loadError.message}`);
       }
     }
     
-    console.log('');
+    console.info('');
   }
 
   testDataLoading() {
-    console.log('🔍 Testing Data Loading & Accessibility...');
+    console.info('🔍 Testing Data Loading & Accessibility...');
     
     // Test that essential data sources are loaded
     const essentialSources = ['flavorverse_nodes', 'features', 'pairings', 'education'];
@@ -105,7 +105,7 @@ class IntegrationTestSuite {
   }
 
   testDataStructures() {
-    console.log('🏗️  Testing Data Structure Integrity...');
+    console.info('🏗️  Testing Data Structure Integrity...');
     
     // Test cigar data structure
     if (this.data.flavorverse_nodes) {
@@ -140,7 +140,7 @@ class IntegrationTestSuite {
   }
 
   testCrossReferences() {
-    console.log('🔗 Testing Cross-Reference Integration...');
+    console.info('🔗 Testing Cross-Reference Integration...');
     
     // Test wrapper consistency across data sources
     if (this.data.flavorverse_nodes && this.data.pairings) {
@@ -179,7 +179,7 @@ class IntegrationTestSuite {
   }
 
   testSearchFunctionality() {
-    console.log('🔎 Testing Search & Filter Functionality...');
+    console.info('🔎 Testing Search & Filter Functionality...');
     
     // Simulate global search functionality
     if (this.data.flavorverse_nodes) {
@@ -201,7 +201,7 @@ class IntegrationTestSuite {
   }
 
   testPairingEngine() {
-    console.log('🍷 Testing Pairing Engine Integration...');
+    console.info('🍷 Testing Pairing Engine Integration...');
     
     if (this.data.pairings && this.data.pairings.pairingEngineV3) {
       const engine = this.data.pairings.pairingEngineV3;
@@ -230,7 +230,7 @@ class IntegrationTestSuite {
   }
 
   testEducationalSystem() {
-    console.log('📚 Testing Educational System Integration...');
+    console.info('📚 Testing Educational System Integration...');
     
     if (this.data.education && this.data.education.educationTracks) {
       const {tracks} = this.data.education.educationTracks;
@@ -256,7 +256,7 @@ class IntegrationTestSuite {
   }
 
   testEmotionalSystem() {
-    console.log('🎭 Testing Emotional & Ritual System...');
+    console.info('🎭 Testing Emotional & Ritual System...');
     
     if (this.data.emotional) {
       // Test ritual flows
@@ -282,7 +282,7 @@ class IntegrationTestSuite {
   }
 
   testFeatureFlags() {
-    console.log('⚙️ Testing Feature Flag System...');
+    console.info('⚙️ Testing Feature Flag System...');
     
     if (this.data.features && this.data.features.features) {
       const {features} = this.data.features;
@@ -306,7 +306,7 @@ class IntegrationTestSuite {
   }
 
   testSecurityMeasures() {
-    console.log('🔒 Testing Security Integration...');
+    console.info('🔒 Testing Security Integration...');
     
     // Test for XSS vulnerabilities in data
     const dataValues = this.getAllDataValues();
@@ -334,7 +334,7 @@ class IntegrationTestSuite {
   }
 
   testPerformance() {
-    console.log('⚡ Testing Performance Characteristics...');
+    console.info('⚡ Testing Performance Characteristics...');
     
     // Test data size
     const dataSize = this.calculateTotalDataSize();
@@ -433,48 +433,48 @@ class IntegrationTestSuite {
   }
 
   generateReport() {
-    console.log('\n📊 Integration Test Results Summary:');
-    console.log('='.repeat(60));
-    console.log(`✅ Passed: ${this.results.passed}`);
-    console.log(`❌ Failed: ${this.results.failed}`);
-    console.log(`⚠️  Warnings: ${this.results.warnings}`);
+    console.info('\n📊 Integration Test Results Summary:');
+    console.info('='.repeat(60));
+    console.info(`✅ Passed: ${this.results.passed}`);
+    console.error(`❌ Failed: ${this.results.failed}`);
+    console.warn(`⚠️  Warnings: ${this.results.warnings}`);
     
     const total = this.results.passed + this.results.failed + this.results.warnings;
     const successRate = Math.round((this.results.passed / total) * 100);
     
-    console.log(`\n📈 Success Rate: ${successRate}%`);
+    console.info(`\n📈 Success Rate: ${successRate}%`);
     
     // Detailed results by category
     const categories = [...new Set(this.results.details.map(r => r.category))];
     
-    console.log('\n📋 Detailed Results by Category:');
+    console.info('\n📋 Detailed Results by Category:');
     categories.forEach(category => {
-      console.log(`\n${category}:`);
+      console.info(`\n${category}:`);
       const categoryResults = this.results.details.filter(r => r.category === category);
       
       categoryResults.forEach(result => {
         const icon = result.status === 'PASS' ? '✅' : 
                     result.status === 'FAIL' ? '❌' : '⚠️';
-        console.log(`  ${icon} ${result.message}`);
+        console.info(`  ${icon} ${result.message}`);
       });
     });
 
     // Integration readiness assessment
-    console.log('\n🎯 Integration Readiness Assessment:');
+    console.info('\n🎯 Integration Readiness Assessment:');
     if (this.results.failed === 0) {
       if (this.results.warnings === 0) {
-        console.log('🌟 EXCELLENT: System is fully integrated and ready for production!');
+        console.info('🌟 EXCELLENT: System is fully integrated and ready for production!');
       } else if (this.results.warnings <= 3) {
-        console.log('✅ GOOD: System is well integrated with minor recommendations.');
+        console.info('✅ GOOD: System is well integrated with minor recommendations.');
       } else {
-        console.log('⚠️ ACCEPTABLE: System is integrated but has several areas for improvement.');
+        console.info('⚠️ ACCEPTABLE: System is integrated but has several areas for improvement.');
       }
     } else {
-      console.log('❌ NEEDS WORK: Critical issues must be resolved before full integration.');
+      console.info('❌ NEEDS WORK: Critical issues must be resolved before full integration.');
     }
 
     // Recommendations
-    console.log('\n💡 Integration Recommendations:');
+    console.info('\n💡 Integration Recommendations:');
     const recommendations = [];
     
     if (this.results.failed > 0) {
@@ -490,7 +490,7 @@ class IntegrationTestSuite {
     recommendations.push('🔒 Conduct security audits on data content regularly');
     
     recommendations.forEach((rec, index) => {
-      console.log(`${index + 1}. ${rec}`);
+      console.info(`${index + 1}. ${rec}`);
     });
   }
 }

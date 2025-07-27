@@ -48,10 +48,10 @@ class BackgroundSyncManager {
         }
       }
       
-      console.log(`Queued ${type} data for sync:`, queueKey);
+      console.info(`Queued ${type} data for sync:`, queueKey);
       
-    } catch (_error) {
-      console.error('Failed to queue data for sync:', error);
+    } catch (queueError) {
+      console.error('Failed to queue data for sync:', queueError);
     }
   }
 
@@ -64,7 +64,7 @@ class BackgroundSyncManager {
         return;
       }
       
-      console.log(`Processing ${entries.length} pending sync items...`);
+      console.info(`Processing ${entries.length} pending sync items...`);
       
       for (const [key, item] of entries) {
         try {
@@ -73,7 +73,7 @@ class BackgroundSyncManager {
           // Remove from queue on success
           delete pendingQueue[key];
           
-        } catch (_error) {
+        } catch (error) {
           console.error(`Failed to sync item ${key}:`, error);
           
           // Increment retry count
@@ -90,7 +90,7 @@ class BackgroundSyncManager {
       // Update localStorage
       localStorage.setItem('pendingSync', JSON.stringify(pendingQueue));
       
-    } catch (_error) {
+    } catch (error) {
       console.error('Error processing pending sync:', error);
     }
   }
@@ -123,7 +123,7 @@ class BackgroundSyncManager {
       throw new Error(`Failed to sync rating: ${response.status}`);
     }
     
-    console.log('Synced cigar rating:', data);
+    console.info('Synced cigar rating:', data);
   }
 
   async syncUserPreference(data) {
@@ -137,7 +137,7 @@ class BackgroundSyncManager {
       throw new Error(`Failed to sync preference: ${response.status}`);
     }
     
-    console.log('Synced user preference:', data);
+    console.info('Synced user preference:', data);
   }
 
   async syncAnalyticsEvent(data) {
@@ -151,7 +151,7 @@ class BackgroundSyncManager {
       throw new Error(`Failed to sync analytics: ${response.status}`);
     }
     
-    console.log('Synced analytics event:', data);
+    console.info('Synced analytics event:', data);
   }
 
   async syncFavoriteCigar(data) {
@@ -165,7 +165,7 @@ class BackgroundSyncManager {
       throw new Error(`Failed to sync favorite: ${response.status}`);
     }
     
-    console.log('Synced favorite cigar:', data);
+    console.info('Synced favorite cigar:', data);
   }
 
   // Convenience methods for specific data types

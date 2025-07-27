@@ -6,7 +6,7 @@
 
 // Register background sync
 self.addEventListener('sync', event => {
-  console.log('Background sync triggered:', event.tag);
+  console.info('Background sync triggered:', event.tag);
   
   if (event.tag === 'background-sync-cigar-data') {
     event.waitUntil(doBackgroundSync());
@@ -19,7 +19,7 @@ self.addEventListener('sync', event => {
 
 // Handle push notifications
 self.addEventListener('push', event => {
-  console.log('Push notification received:', event);
+  console.info('Push notification received:', event);
   
   const options = {
     body: event.data ? event.data.text() : 'New cigar recommendations available!',
@@ -51,7 +51,7 @@ self.addEventListener('push', event => {
 
 // Handle notification clicks
 self.addEventListener('notificationclick', event => {
-  console.log('Notification click received:', event);
+  console.info('Notification click received:', event);
   
   event.notification.close();
   
@@ -72,7 +72,7 @@ self.addEventListener('notificationclick', event => {
 // Background sync for cigar data
 async function doBackgroundSync() {
   try {
-    console.log('Performing background sync for cigar data...');
+    console.info('Performing background sync for cigar data...');
     
     // Sync pending cigar ratings
     const pendingRatings = await getPendingRatings();
@@ -86,7 +86,7 @@ async function doBackgroundSync() {
       await syncPreferences(pendingPreferences);
     }
     
-    console.log('Background sync completed successfully');
+    console.info('Background sync completed successfully');
     
     // Show success notification
     await self.registration.showNotification('Sync Complete', {
@@ -95,7 +95,7 @@ async function doBackgroundSync() {
       tag: 'sync-complete'
     });
     
-  } catch (_error) {
+  } catch (error) {
     console.error('Background sync failed:', error);
     
     // Show error notification
@@ -110,15 +110,15 @@ async function doBackgroundSync() {
 // Background sync for analytics
 async function syncAnalytics() {
   try {
-    console.log('Syncing analytics data...');
+    console.info('Syncing analytics data...');
     
     const pendingEvents = await getPendingAnalytics();
     if (pendingEvents.length > 0) {
       await sendAnalytics(pendingEvents);
     }
     
-    console.log('Analytics sync completed');
-  } catch (_error) {
+    console.info('Analytics sync completed');
+  } catch (error) {
     console.error('Analytics sync failed:', error);
   }
 }

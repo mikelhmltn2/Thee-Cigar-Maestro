@@ -51,12 +51,12 @@ class AIRecommendationEngine {
       await this.loadUserProfiles();
       
       this.isInitialized = true;
-      console.log('🤖 AI Recommendation Engine initialized');
+      console.info('🤖 AI Recommendation Engine initialized');
       
       // Start background training
       this.scheduleModelTraining();
       
-    } catch (_error) {
+    } catch (error) {
       console.error('❌ Recommendation engine initialization failed:', error);
     }
   }
@@ -79,8 +79,8 @@ class AIRecommendationEngine {
         this.userFavorites = sessionData.favoritesCigars || [];
       }
       
-      console.log('✅ Data loaded for recommendation engine');
-    } catch (_error) {
+      console.info('✅ Data loaded for recommendation engine');
+    } catch (error) {
       console.error('Error loading data:', error);
       throw error;
     }
@@ -96,7 +96,7 @@ class AIRecommendationEngine {
         throw new Error(`HTTP ${response.status}: ${response.statusText}`);
       }
       return await response.json();
-    } catch (_error) {
+    } catch (error) {
       console.error(`Error fetching ${url}:`, error);
       return [];
     }
@@ -127,8 +127,8 @@ class AIRecommendationEngine {
         this.cigarEmbeddings.set(cigar.name, features);
       });
       
-      console.log(`✅ Built feature vectors for ${this.cigarData.length} cigars`);
-    } catch (_error) {
+      console.info(`✅ Built feature vectors for ${this.cigarData.length} cigars`);
+    } catch (error) {
       console.error('Error building feature vectors:', error);
     }
   }
@@ -270,8 +270,8 @@ class AIRecommendationEngine {
       // Initialize real-time model
       this.models.realtime = new RealtimeModel();
       
-      console.log('✅ ML models initialized');
-    } catch (_error) {
+      console.info('✅ ML models initialized');
+    } catch (error) {
       console.error('Error initializing models:', error);
     }
   }
@@ -295,8 +295,8 @@ class AIRecommendationEngine {
         }
       }
       
-      console.log('✅ User profiles loaded');
-    } catch (_error) {
+      console.info('✅ User profiles loaded');
+    } catch (error) {
       console.error('Error loading user profiles:', error);
     }
   }
@@ -490,7 +490,7 @@ class AIRecommendationEngine {
 
       return recommendations.slice(0, count);
       
-    } catch (_error) {
+    } catch (error) {
       console.error('Error generating recommendations:', error);
       return this.getFallbackRecommendations(10);
     }
@@ -1022,7 +1022,7 @@ class AIRecommendationEngine {
     
     try {
       this.isTraining = true;
-      console.log('🔄 Training recommendation models...');
+      console.info('🔄 Training recommendation models...');
       
       // Update user profiles
       for (const userId of this.userProfiles.keys()) {
@@ -1039,9 +1039,9 @@ class AIRecommendationEngine {
         await this.models.contentBased.train(this.cigarEmbeddings);
       }
       
-      console.log('✅ Model training completed');
+      console.info('✅ Model training completed');
       
-    } catch (_error) {
+    } catch (error) {
       console.error('❌ Model training failed:', error);
     } finally {
       this.isTraining = false;
@@ -1066,7 +1066,7 @@ class AIRecommendationEngine {
         freshness: Date.now()
       }));
       
-    } catch (_error) {
+    } catch (error) {
       console.error('Error getting real-time recommendations:', error);
       return [];
     }

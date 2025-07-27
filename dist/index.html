@@ -14,6 +14,8 @@
   <link rel="apple-touch-icon" href="/assets/logo-192-BULeZg3q.png">
   <link rel="manifest" href="/assets/manifest-DlEqPUKp.json">
   
+  <!-- API Client and Authentication -->
+  
   <!-- Improved Styles for Better UX -->
   <style>
     :root {
@@ -107,6 +109,82 @@
     .nav-button.active {
       background: var(--accent-text);
       color: var(--primary-bg);
+    }
+
+    /* Authentication Section Styles */
+    .auth-section {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-left: auto;
+      padding-right: 1rem;
+    }
+
+    .auth-btn {
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: var(--border-radius);
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: var(--transition);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .login-btn {
+      background: rgba(198, 156, 109, 0.1);
+      color: var(--accent-text);
+      border: 1px solid var(--accent-text);
+    }
+
+    .login-btn:hover {
+      background: var(--accent-text);
+      color: var(--primary-bg);
+    }
+
+    .register-btn {
+      background: linear-gradient(135deg, var(--accent-text) 0%, #d4af37 100%);
+      color: var(--primary-bg);
+    }
+
+    .register-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 16px rgba(198, 156, 109, 0.3);
+    }
+
+    .logout-btn {
+      background: rgba(220, 53, 69, 0.1);
+      color: #ff6b6b;
+      border: 1px solid #ff6b6b;
+    }
+
+    .logout-btn:hover {
+      background: #ff6b6b;
+      color: white;
+    }
+
+    .user-menu {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .user-btn {
+      background: rgba(198, 156, 109, 0.2);
+      color: var(--accent-text);
+      border: 1px solid var(--accent-text);
+      padding: 0.5rem 1rem;
+      border-radius: var(--border-radius);
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: var(--transition);
+    }
+
+    .user-btn:hover {
+      background: rgba(198, 156, 109, 0.3);
     }
 
          /* Mobile Menu Button */
@@ -809,7 +887,7 @@
        }
      }
    </style>
-  <script type="module" crossorigin src="/assets/main-DITB23j8.js"></script>
+  <script type="module" crossorigin src="/assets/main-D5jGP-1l.js"></script>
   <link rel="modulepreload" crossorigin href="/assets/modulepreload-polyfill-YP0FEG5d.js">
 <link rel="manifest" href="/manifest.webmanifest"><script id="vite-plugin-pwa:register-sw" src="/registerSW.js"></script></head>
 <body>
@@ -835,10 +913,28 @@
       <button class="nav-button" data-section="search">
         🔍 Search
       </button>
-      <button class="nav-button" onclick="personalDashboard?.show()">
+      <button class="nav-button" onclick="window.analyticsDashboard?.show()">
         📊 Dashboard
       </button>
     </nav>
+
+    <!-- User Authentication Section -->
+    <div class="auth-section" id="authSection">
+      <button class="auth-btn login-btn" id="loginBtn" onclick="window.authUI?.show('login')">
+        🔐 Sign In
+      </button>
+      <button class="auth-btn register-btn" id="registerBtn" onclick="window.authUI?.show('register')">
+        ✨ Sign Up
+      </button>
+      <div class="user-menu" id="userMenu" style="display: none;">
+        <button class="user-btn" id="userProfileBtn">
+          <span id="userName">User</span>
+        </button>
+        <button class="auth-btn logout-btn" id="logoutBtn" onclick="window.authUI?.logout()">
+          🚪 Logout
+        </button>
+      </div>
+    </div>
     
     <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
   </header>
@@ -1104,9 +1200,53 @@
       });
     }
 
+    // Authentication State Management
+    function setupAuthStateManager() {
+      // Listen for authentication state changes
+      window.addEventListener('authStateChange', (event) => {
+        const { user, isAuthenticated } = event.detail;
+        updateAuthUI(isAuthenticated, user);
+      });
+
+      // Check initial auth state
+      const user = window.CigarMaestroAPI?.getCurrentUser();
+      if (user) {
+        updateAuthUI(true, user);
+      }
+    }
+
+    function updateAuthUI(isAuthenticated, user = null) {
+      const loginBtn = document.getElementById('loginBtn');
+      const registerBtn = document.getElementById('registerBtn');
+      const userMenu = document.getElementById('userMenu');
+      const userName = document.getElementById('userName');
+
+      if (isAuthenticated && user) {
+        // Show user menu, hide auth buttons
+        loginBtn.style.display = 'none';
+        registerBtn.style.display = 'none';
+        userMenu.style.display = 'flex';
+        userName.textContent = user.name || user.email;
+        
+        // Track authentication event
+        window.CigarMaestroAPI?.trackEvent('user_authenticated', {
+          userId: user.id,
+          userEmail: user.email
+        });
+      } else {
+        // Show auth buttons, hide user menu
+        loginBtn.style.display = 'flex';
+        registerBtn.style.display = 'flex';
+        userMenu.style.display = 'none';
+      }
+    }
+
     // Initialize the enhanced UI system
     document.addEventListener('DOMContentLoaded', async () => {
       try {
+        // Initialize authentication state management
+        setupAuthStateManager();
+        
         // Initialize UI Manager
         uiManager = new UIManager();
         window.uiManager = uiManager; // Make globally accessible for legacy code

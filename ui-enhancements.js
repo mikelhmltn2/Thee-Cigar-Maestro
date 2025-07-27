@@ -25,7 +25,7 @@ class UIEnhancementManager {
     this.setupKeyboardNavigation();
     this.createToastSystem();
     
-    console.log('✨ UI Enhancement Manager initialized');
+    console.info('✨ UI Enhancement Manager initialized');
   }
 
   /**
@@ -496,7 +496,7 @@ class UIEnhancementManager {
       }
     }, { passive: true });
 
-    console.log('✅ Mobile gesture handlers initialized');
+    console.info('✅ Mobile gesture handlers initialized');
   }
 
   /**
@@ -655,7 +655,7 @@ class UIEnhancementManager {
       document.body.classList.remove('keyboard-navigation');
     });
 
-    console.log('✅ Accessibility features initialized');
+    console.info('✅ Accessibility features initialized');
   }
 
   /**
@@ -685,7 +685,7 @@ class UIEnhancementManager {
       }
     });
 
-    console.log('✅ Keyboard navigation initialized');
+    console.info('✅ Keyboard navigation initialized');
   }
 
   /**

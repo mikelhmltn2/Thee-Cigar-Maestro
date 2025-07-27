@@ -16,7 +16,7 @@ class PersonalDashboard {
   init() {
     this.createDashboard();
     this.setupEventListeners();
-    console.log('📊 Personal Dashboard initialized');
+    console.info('📊 Personal Dashboard initialized');
   }
 
   createDashboard() {

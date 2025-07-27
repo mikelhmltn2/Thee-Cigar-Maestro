@@ -94,7 +94,7 @@ async function testEndpoint(url, options = {}) {
  * Test CDN Resources
  */
 async function testCDNResources() {
-  console.log('🔗 Testing CDN Resources...');
+  console.info('🔗 Testing CDN Resources...');
   
   const cdnTests = [
     {
@@ -132,14 +132,14 @@ async function testCDNResources() {
     
     if (isSuccess) {
       results.summary.passed++;
-      console.log(`✅ ${test.name}: OK (${result.status})`);
+      console.info(`✅ ${test.name}: OK (${result.status})`);
     } else {
       if (test.critical) {
         results.summary.failed++;
-        console.log(`❌ ${test.name}: CRITICAL FAILURE - ${result.error}`);
+        console.error(`❌ ${test.name}: CRITICAL FAILURE - ${result.error}`);
       } else {
         results.summary.warnings++;
-        console.log(`⚠️  ${test.name}: WARNING - ${result.error}`);
+        console.error(`⚠️  ${test.name}: WARNING - ${result.error}`);
       }
     }
   }
@@ -152,7 +152,7 @@ async function testCDNResources() {
  * Test API Endpoints
  */
 async function testAPIEndpoints() {
-  console.log('🔌 Testing API Endpoints...');
+  console.info('🔌 Testing API Endpoints...');
   
   const apiTests = [
     {
@@ -190,13 +190,13 @@ async function testAPIEndpoints() {
     
     if (isSuccess) {
       results.summary.passed++;
-      console.log(`✅ ${test.name}: OK (${result.status})`);
+      console.info(`✅ ${test.name}: OK (${result.status})`);
     } else if (test.expectedFail) {
       results.summary.warnings++;
-      console.log(`⚠️  ${test.name}: Expected failure - graceful fallback active`);
+      console.error(`⚠️  ${test.name}: Expected failure - graceful fallback active`);
     } else {
       results.summary.failed++;
-      console.log(`❌ ${test.name}: FAILURE - ${result.error}`);
+      console.error(`❌ ${test.name}: FAILURE - ${result.error}`);
     }
   }
   
@@ -207,7 +207,7 @@ async function testAPIEndpoints() {
  * Test Critical Files
  */
 async function testCriticalFiles() {
-  console.log('📁 Testing Critical Files...');
+  console.info('📁 Testing Critical Files...');
   
   const criticalFiles = [
     'index.html',
@@ -235,10 +235,10 @@ async function testCriticalFiles() {
     
     if (exists) {
       results.summary.passed++;
-      console.log(`✅ ${filePath}: Found`);
+      console.info(`✅ ${filePath}: Found`);
     } else {
       results.summary.failed++;
-      console.log(`❌ ${filePath}: MISSING`);
+      console.info(`❌ ${filePath}: MISSING`);
     }
   }
   
@@ -250,7 +250,7 @@ async function testCriticalFiles() {
  * Test JavaScript Syntax
  */
 async function testJavaScriptSyntax() {
-  console.log('🔍 Testing JavaScript Syntax...');
+  console.info('🔍 Testing JavaScript Syntax...');
   
   const jsFiles = [
     'gpt.js',
@@ -263,7 +263,7 @@ async function testJavaScriptSyntax() {
     const fullPath = path.join(rootDir, jsFile);
     
     if (!fs.existsSync(fullPath)) {
-      console.log(`⚠️  ${jsFile}: File not found, skipping syntax check`);
+      console.info(`⚠️  ${jsFile}: File not found, skipping syntax check`);
       continue;
     }
     
@@ -282,7 +282,7 @@ async function testJavaScriptSyntax() {
       results.categories.syntax.tests.push(testResult);
       results.summary.total++;
       results.summary.passed++;
-      console.log(`✅ ${jsFile}: Syntax OK`);
+      console.info(`✅ ${jsFile}: Syntax OK`);
       
     } catch (_error) {
       const testResult = {
@@ -296,7 +296,7 @@ async function testJavaScriptSyntax() {
       results.categories.syntax.tests.push(testResult);
       results.summary.total++;
       results.summary.failed++;
-      console.log(`❌ ${jsFile}: Syntax Error - ${error.message}`);
+      console.error(`❌ ${jsFile}: Syntax Error - ${error.message}`);
     }
   }
   
@@ -308,7 +308,7 @@ async function testJavaScriptSyntax() {
  * Test JSON Files
  */
 async function testJSONFiles() {
-  console.log('📄 Testing JSON Files...');
+  console.info('📄 Testing JSON Files...');
   
   const jsonFiles = [
     'package.json',
@@ -320,7 +320,7 @@ async function testJSONFiles() {
     const fullPath = path.join(rootDir, jsonFile);
     
     if (!fs.existsSync(fullPath)) {
-      console.log(`⚠️  ${jsonFile}: File not found, skipping`);
+      console.info(`⚠️  ${jsonFile}: File not found, skipping`);
       continue;
     }
     
@@ -338,7 +338,7 @@ async function testJSONFiles() {
       results.categories.syntax.tests.push(testResult);
       results.summary.total++;
       results.summary.passed++;
-      console.log(`✅ ${jsonFile}: Valid JSON`);
+      console.info(`✅ ${jsonFile}: Valid JSON`);
       
     } catch (_error) {
       const testResult = {
@@ -352,7 +352,7 @@ async function testJSONFiles() {
       results.categories.syntax.tests.push(testResult);
       results.summary.total++;
       results.summary.failed++;
-      console.log(`❌ ${jsonFile}: Invalid JSON - ${error.message}`);
+      console.error(`❌ ${jsonFile}: Invalid JSON - ${error.message}`);
     }
   }
 }
@@ -368,17 +368,17 @@ function generateReport() {
   results.overall = criticalFailures > 0 ? 'unhealthy' : 
                    results.summary.warnings > 0 ? 'degraded' : 'healthy';
   
-  console.log(`\n${  '='.repeat(60)}`);
-  console.log('🏥 HEALTH CHECK REPORT');
-  console.log('='.repeat(60));
-  console.log(`📊 Overall Status: ${getStatusEmoji(results.overall)} ${results.overall.toUpperCase()}`);
-  console.log(`🕐 Timestamp: ${results.timestamp}`);
-  console.log(`📈 Results: ${results.summary.passed}✅ ${results.summary.failed}❌ ${results.summary.warnings}⚠️  (${results.summary.total} total)`);
+  console.info(`\n${  '='.repeat(60)}`);
+  console.info('🏥 HEALTH CHECK REPORT');
+  console.info('='.repeat(60));
+  console.info(`📊 Overall Status: ${getStatusEmoji(results.overall)} ${results.overall.toUpperCase()}`);
+  console.info(`🕐 Timestamp: ${results.timestamp}`);
+  console.error(`📈 Results: ${results.summary.passed}✅ ${results.summary.failed}❌ ${results.summary.warnings}⚠️  (${results.summary.total} total)`);
   
-  console.log('\n📋 Category Breakdown:');
+  console.info('\n📋 Category Breakdown:');
   for (const [category, data] of Object.entries(results.categories)) {
     if (data.tests.length > 0) {
-      console.log(`  ${getStatusEmoji(data.status)} ${category.toUpperCase()}: ${data.status}`);
+      console.info(`  ${getStatusEmoji(data.status)} ${category.toUpperCase()}: ${data.status}`);
     }
   }
   
@@ -391,7 +391,7 @@ function generateReport() {
   }
   
   fs.writeFileSync(reportPath, JSON.stringify(results, null, 2));
-  console.log(`\n📝 Detailed report saved to: ${reportPath}`);
+  console.info(`\n📝 Detailed report saved to: ${reportPath}`);
   
   return results.overall === 'healthy';
 }
@@ -413,23 +413,23 @@ function getStatusEmoji(status) {
  * Main health check execution
  */
 async function runHealthCheck() {
-  console.log('🚀 Starting Comprehensive Health Check...\n');
+  console.info('🚀 Starting Comprehensive Health Check...\n');
   
   try {
     await testCDNResources();
-    console.log();
+    console.info();
     
     await testAPIEndpoints();
-    console.log();
+    console.info();
     
     await testCriticalFiles();
-    console.log();
+    console.info();
     
     await testJavaScriptSyntax();
-    console.log();
+    console.info();
     
     await testJSONFiles();
-    console.log();
+    console.info();
     
     const isHealthy = generateReport();
     

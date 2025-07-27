@@ -253,7 +253,7 @@ class DataManager {
         data: this.data
       };
 
-    } catch (_error) {
+    } catch (error) {
       errorHandler.handleError({
         type: 'data_load_critical',
         message: `Critical error loading data: ${error.message}`,
@@ -295,7 +295,7 @@ class DataManager {
       const data = await this.loadFromAPI(key, config, timeout);
       await this.cacheData(key, data);
       return data;
-    } catch (_apiError) {
+    } catch (apiError) {
       console.warn(`API load failed for ${key}, trying local file:`, apiError.message);
       
       try {
@@ -461,7 +461,7 @@ class DataManager {
         data.filter((item, index) => {
           try {
             return !this.validateItem(item, schema.items, `${key}[${index}]`);
-          } catch (_error) {
+          } catch (error) {
             console.warn(`Validation warning for ${key}[${index}]:`, error.message);
             return false; // Don't filter out, just warn
           }
@@ -564,7 +564,7 @@ class DataManager {
       }
 
       return hasValidCache ? cachedData : null;
-    } catch (_error) {
+    } catch (error) {
       console.warn('Failed to load from cache:', error);
       return null;
     }
@@ -580,7 +580,7 @@ class DataManager {
     if (!navigator.onLine) {return;}
 
     try {
-      console.log('🔄 Syncing data...');
+      console.info('🔄 Syncing data...');
       
       const result = await this.loadAllData({
         showProgress: false,
@@ -592,7 +592,7 @@ class DataManager {
       if (result.success) {
         this.notifySyncCallbacks('dataSynced', result);
       }
-    } catch (_error) {
+    } catch (error) {
       console.warn('Data sync failed:', error);
       errorHandler.handleError({
         type: 'data_sync',
@@ -671,7 +671,7 @@ class DataManager {
     this.syncCallbacks.forEach(callback => {
       try {
         callback(event, ...args);
-      } catch (_error) {
+      } catch (error) {
         console.warn('Sync callback error:', error);
       }
     });

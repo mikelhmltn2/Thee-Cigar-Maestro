@@ -48,23 +48,23 @@ const DATA_FILES = [
  * Service Worker Installation
  */
 self.addEventListener('install', (event) => {
-  console.log('🔧 Service Worker installing...');
+  console.info('🔧 Service Worker installing...');
   
   event.waitUntil(
     Promise.all([
       // Cache static assets
       caches.open(STATIC_CACHE_NAME).then((cache) => {
-        console.log('📦 Caching static files...');
+        console.info('📦 Caching static files...');
         return cache.addAll(STATIC_FILES.map(url => new Request(url, { mode: 'cors' })));
       }),
       
       // Cache data files
       caches.open(DATA_CACHE_NAME).then((cache) => {
-        console.log('📊 Caching data files...');
+        console.info('📊 Caching data files...');
         return cache.addAll(DATA_FILES);
       })
     ]).then(() => {
-      console.log('✅ Service Worker installation complete');
+      console.info('✅ Service Worker installation complete');
       return self.skipWaiting();
     })
   );
@@ -74,7 +74,7 @@ self.addEventListener('install', (event) => {
  * Service Worker Activation
  */
 self.addEventListener('activate', (event) => {
-  console.log('🚀 Service Worker activating...');
+  console.info('🚀 Service Worker activating...');
   
   event.waitUntil(
     caches.keys().then((cacheNames) => {
@@ -83,14 +83,14 @@ self.addEventListener('activate', (event) => {
           if (cacheName !== STATIC_CACHE_NAME && 
               cacheName !== DATA_CACHE_NAME && 
               cacheName !== CACHE_NAME) {
-            console.log('🗑️ Deleting old cache:', cacheName);
+            console.info('🗑️ Deleting old cache:', cacheName);
             return caches.delete(cacheName);
           }
           return Promise.resolve();
         })
       );
     }).then(() => {
-      console.log('✅ Service Worker activated');
+      console.info('✅ Service Worker activated');
       return self.clients.claim();
     })
   );
@@ -162,7 +162,7 @@ async function handleApiRequest(request) {
     
     return networkResponse;
   } catch (_error) {
-    console.log('📡 Network failed for API request, trying cache...');
+    console.error('📡 Network failed for API request, trying cache...');
     
     const cachedResponse = await caches.match(request);
     if (cachedResponse) {
@@ -295,7 +295,7 @@ async function handleDefaultRequest(request) {
  * Background Sync for data synchronization
  */
 self.addEventListener('sync', (event) => {
-  console.log('🔄 Background sync triggered:', event.tag);
+  console.info('🔄 Background sync triggered:', event.tag);
   
   if (event.tag === 'sync-user-data') {
     event.waitUntil(syncUserData());
@@ -321,8 +321,8 @@ async function syncUserData() {
       });
     });
     
-    console.log('📤 User data sync initiated');
-  } catch (_error) {
+    console.info('📤 User data sync initiated');
+  } catch (error) {
     console.error('❌ User data sync failed:', error);
   }
 }
@@ -341,8 +341,8 @@ async function syncAnalytics() {
       });
     });
     
-    console.log('📊 Analytics sync initiated');
-  } catch (_error) {
+    console.info('📊 Analytics sync initiated');
+  } catch (error) {
     console.error('❌ Analytics sync failed:', error);
   }
 }
@@ -416,7 +416,7 @@ self.addEventListener('message', (event) => {
       break;
       
     default:
-      console.log('Unknown message type:', type);
+      console.info('Unknown message type:', type);
   }
 });
 
@@ -440,8 +440,8 @@ async function handleCacheUpdate(data) {
       );
     }
     
-    console.log('✅ Cache updated successfully');
-  } catch (_error) {
+    console.info('✅ Cache updated successfully');
+  } catch (error) {
     console.error('❌ Cache update failed:', error);
   }
 }
@@ -462,8 +462,8 @@ async function handleClearCache(data) {
       );
     }
     
-    console.log('🗑️ Cache cleared successfully');
-  } catch (_error) {
+    console.info('🗑️ Cache cleared successfully');
+  } catch (error) {
     console.error('❌ Cache clearing failed:', error);
   }
 }
@@ -489,7 +489,7 @@ async function handleGetCacheInfo(event) {
       type: 'CACHE_INFO',
       data: cacheInfo
     });
-  } catch (_error) {
+  } catch (error) {
     event.ports[0].postMessage({
       type: 'CACHE_INFO_ERROR',
       error: error.message
@@ -523,13 +523,13 @@ async function cleanOldCacheEntries() {
         
         if (age > maxAge) {
           await cache.delete(request);
-          console.log('🗑️ Cleaned old cache entry:', request.url);
+          console.info('🗑️ Cleaned old cache entry:', request.url);
         }
       }
     }
-  } catch (_error) {
+  } catch (error) {
     console.error('❌ Cache cleaning failed:', error);
   }
 }
 
-console.log('🔧 Service Worker script loaded');
+console.info('🔧 Service Worker script loaded');

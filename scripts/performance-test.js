@@ -33,7 +33,7 @@ class PerformanceTester {
    * Run comprehensive performance analysis
    */
   async runPerformanceTest() {
-    console.log('🚀 Starting Performance Analysis...\n');
+    console.info('🚀 Starting Performance Analysis...\n');
 
     // Check if build exists
     if (!fs.existsSync(this.distDir)) {
@@ -58,7 +58,7 @@ class PerformanceTester {
    * Analyze the built files in dist directory
    */
   async analyzeBuildOutput() {
-    console.log('📊 Analyzing Build Output...');
+    console.info('📊 Analyzing Build Output...');
     
     const files = this.getAllFiles(this.distDir);
     let totalSize = 0;
@@ -90,31 +90,31 @@ class PerformanceTester {
       }
 
       if (sizeKB > 100) {
-        console.log(`   ⚠️  Large asset: ${relativePath} (${sizeKB}KB)`);
+        console.info(`   ⚠️  Large asset: ${relativePath} (${sizeKB}KB)`);
       } else if (sizeKB > 50) {
-        console.log(`   📄 ${relativePath}: ${sizeKB}KB`);
+        console.info(`   📄 ${relativePath}: ${sizeKB}KB`);
       }
     }
 
     this.metrics.totalSize = totalSize;
     this.metrics.largestAsset = largestFile;
     
-    console.log(`   Total assets: ${this.metrics.assetCount}`);
-    console.log(`   Total size: ${totalSize}KB`);
-    console.log(`   Largest asset: ${largestFile.name} (${largestFile.size}KB)\n`);
+    console.info(`   Total assets: ${this.metrics.assetCount}`);
+    console.info(`   Total size: ${totalSize}KB`);
+    console.info(`   Largest asset: ${largestFile.name} (${largestFile.size}KB)\n`);
   }
 
   /**
    * Check asset optimization status
    */
   async checkAssetOptimization() {
-    console.log('🖼️  Asset Optimization Check...');
+    console.info('🖼️  Asset Optimization Check...');
     
     // Check if optimized logos exist
     const logoDir = path.join(rootDir, 'assets', 'logos');
     if (fs.existsSync(logoDir)) {
       const logoFiles = fs.readdirSync(logoDir);
-      console.log(`   ✅ ${logoFiles.length} optimized logo variants found`);
+      console.info(`   ✅ ${logoFiles.length} optimized logo variants found`);
       
       let totalLogoSize = 0;
       logoFiles.forEach(file => {
@@ -122,9 +122,9 @@ class PerformanceTester {
         const stats = fs.statSync(filePath);
         totalLogoSize += stats.size;
       });
-      console.log(`   📊 Total optimized logos: ${Math.round(totalLogoSize / 1024)}KB`);
+      console.info(`   📊 Total optimized logos: ${Math.round(totalLogoSize / 1024)}KB`);
     } else {
-      console.log('   ⚠️  Optimized logo variants not found');
+      console.info('   ⚠️  Optimized logo variants not found');
     }
 
     // Check main logo size
@@ -133,45 +133,45 @@ class PerformanceTester {
       const stats = fs.statSync(mainLogo);
       const sizeKB = Math.round(stats.size / 1024);
       if (sizeKB <= 200) {
-        console.log(`   ✅ Main logo optimized: ${sizeKB}KB (under 200KB limit)`);
+        console.info(`   ✅ Main logo optimized: ${sizeKB}KB (under 200KB limit)`);
       } else {
-        console.log(`   ❌ Main logo too large: ${sizeKB}KB (should be under 200KB)`);
+        console.info(`   ❌ Main logo too large: ${sizeKB}KB (should be under 200KB)`);
       }
     }
 
-    console.log('');
+    console.info('');
   }
 
   /**
    * Validate PWA requirements
    */
   async validatePWA() {
-    console.log('📱 PWA Validation...');
+    console.info('📱 PWA Validation...');
     
     // Check manifest
     const manifestPath = path.join(this.distDir, 'manifest.webmanifest');
     if (fs.existsSync(manifestPath)) {
-      console.log('   ✅ PWA manifest generated');
+      console.info('   ✅ PWA manifest generated');
       
       try {
         const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
-        console.log(`   📱 App name: ${manifest.name}`);
-        console.log(`   🎨 Theme color: ${manifest.theme_color}`);
-        console.log(`   📐 Icons: ${manifest.icons ? manifest.icons.length : 0} variants`);
-      } catch (_error) {
-        console.log('   ⚠️  Manifest parsing error:', error.message);
+        console.info(`   📱 App name: ${manifest.name}`);
+        console.info(`   🎨 Theme color: ${manifest.theme_color}`);
+        console.info(`   📐 Icons: ${manifest.icons ? manifest.icons.length : 0} variants`);
+      } catch (error) {
+        console.error('   ⚠️  Manifest parsing error:', error.message);
       }
     } else {
-      console.log('   ❌ PWA manifest not found');
+      console.info('   ❌ PWA manifest not found');
     }
 
     // Check service worker
     const swPath = path.join(this.distDir, 'sw.js');
     if (fs.existsSync(swPath)) {
       const stats = fs.statSync(swPath);
-      console.log(`   ✅ Service worker generated: ${Math.round(stats.size / 1024)}KB`);
+      console.info(`   ✅ Service worker generated: ${Math.round(stats.size / 1024)}KB`);
     } else {
-      console.log('   ❌ Service worker not found');
+      console.info('   ❌ Service worker not found');
     }
 
     // Check workbox
@@ -179,10 +179,10 @@ class PerformanceTester {
       file.includes('workbox') && file.endsWith('.js')
     );
     if (workboxFiles.length > 0) {
-      console.log(`   ✅ Workbox runtime: ${workboxFiles[0]}`);
+      console.info(`   ✅ Workbox runtime: ${workboxFiles[0]}`);
     }
 
-    console.log('');
+    console.info('');
   }
 
   /**
@@ -210,20 +210,20 @@ class PerformanceTester {
    * Generate comprehensive performance report
    */
   generatePerformanceReport() {
-    console.log('📋 Performance Report');
-    console.log('═'.repeat(50));
+    console.info('📋 Performance Report');
+    console.info('═'.repeat(50));
     
     // Bundle Analysis
-    console.log('\n📦 Bundle Analysis:');
-    console.log(`   Total files: ${this.metrics.assetCount}`);
-    console.log(`   JavaScript files: ${this.metrics.jsAssets}`);
-    console.log(`   CSS files: ${this.metrics.cssAssets}`);
-    console.log(`   HTML files: ${this.metrics.htmlAssets}`);
-    console.log(`   Image files: ${this.metrics.imageAssets}`);
-    console.log(`   Total bundle size: ${this.metrics.totalSize}KB`);
+    console.info('\n📦 Bundle Analysis:');
+    console.info(`   Total files: ${this.metrics.assetCount}`);
+    console.info(`   JavaScript files: ${this.metrics.jsAssets}`);
+    console.info(`   CSS files: ${this.metrics.cssAssets}`);
+    console.info(`   HTML files: ${this.metrics.htmlAssets}`);
+    console.info(`   Image files: ${this.metrics.imageAssets}`);
+    console.info(`   Total bundle size: ${this.metrics.totalSize}KB`);
     
     // Performance Scores
-    console.log('\n🎯 Performance Metrics:');
+    console.info('\n🎯 Performance Metrics:');
     
     // Bundle size scoring
     let bundleScore = 100;
@@ -239,41 +239,41 @@ class PerformanceTester {
     // Calculate overall score
     const overallScore = Math.round((bundleScore + assetScore) / 2);
     
-    console.log(`   Bundle Size Score: ${bundleScore}/100`);
-    console.log(`   Asset Count Score: ${assetScore}/100`);
-    console.log(`   Overall Score: ${overallScore}/100`);
+    console.info(`   Bundle Size Score: ${bundleScore}/100`);
+    console.info(`   Asset Count Score: ${assetScore}/100`);
+    console.info(`   Overall Score: ${overallScore}/100`);
     
     // Recommendations
-    console.log('\n💡 Recommendations:');
+    console.info('\n💡 Recommendations:');
     
     if (this.metrics.totalSize > 300) {
-      console.log('   ⚠️  Consider implementing code splitting for large bundles');
+      console.info('   ⚠️  Consider implementing code splitting for large bundles');
     }
     
     if (this.metrics.assetCount > 15) {
-      console.log('   ⚠️  High asset count may impact loading performance');
+      console.info('   ⚠️  High asset count may impact loading performance');
     }
     
     if (this.metrics.largestAsset.size > 100) {
-      console.log(`   ⚠️  Large asset detected: ${this.metrics.largestAsset.name}`);
+      console.info(`   ⚠️  Large asset detected: ${this.metrics.largestAsset.name}`);
     }
     
     if (overallScore >= 90) {
-      console.log('   ✅ Excellent performance optimization!');
+      console.info('   ✅ Excellent performance optimization!');
     } else if (overallScore >= 80) {
-      console.log('   ✅ Good performance, minor optimizations possible');
+      console.info('   ✅ Good performance, minor optimizations possible');
     } else if (overallScore >= 70) {
-      console.log('   ⚠️  Performance needs improvement');
+      console.info('   ⚠️  Performance needs improvement');
     } else {
-      console.log('   ❌ Significant performance issues detected');
+      console.info('   ❌ Significant performance issues detected');
     }
 
     // Success criteria from roadmap
-    console.log('\n🎯 Roadmap Success Metrics:');
-    console.log(`   Build Success Rate: ✅ 100% (target: 100%)`);
-    console.log(`   Bundle Size: ${this.metrics.totalSize}KB (target: <500KB)`);
-    console.log(`   Asset Count: ${this.metrics.assetCount} files (target: <20)`);
-    console.log(`   Performance Score: ${overallScore}/100 (target: >80)`);
+    console.info('\n🎯 Roadmap Success Metrics:');
+    console.info(`   Build Success Rate: ✅ 100% (target: 100%)`);
+    console.info(`   Bundle Size: ${this.metrics.totalSize}KB (target: <500KB)`);
+    console.info(`   Asset Count: ${this.metrics.assetCount} files (target: <20)`);
+    console.info(`   Performance Score: ${overallScore}/100 (target: >80)`);
   }
 }
 

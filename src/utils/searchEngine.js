@@ -74,7 +74,7 @@ class SearchEngine {
       if (history && Array.isArray(history)) {
         this.searchHistory = history;
       }
-    } catch (_e) {
+    } catch (e) {
       console.warn('Failed to load search history:', e);
     }
   }
@@ -82,7 +82,7 @@ class SearchEngine {
   async saveSearchHistory() {
     try {
       await storageManager.setLocal('searchHistory', this.searchHistory);
-    } catch (_e) {
+    } catch (e) {
       console.warn('Failed to save search history:', e);
     }
   }
@@ -104,7 +104,7 @@ class SearchEngine {
       });
     });
 
-    console.log(`Search index built with ${this.searchIndex.size} documents`);
+    console.info(`Search index built with ${this.searchIndex.size} documents`);
   }
 
   createSearchDocument(item, category, docId) {
