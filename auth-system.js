@@ -796,7 +796,8 @@ class AuthenticationSystem {
         throw new Error('Password is too weak. Please use a stronger password.');
       }
 
-      const response = await this.apiRequest('/api/auth/register', {
+      // Register user with API
+      await this.apiRequest('/api/auth/register', {
         method: 'POST',
         body: JSON.stringify({
           firstName,
@@ -1038,7 +1039,7 @@ class AuthenticationSystem {
       throw new Error(errorData.message || `HTTP ${response.status}: ${response.statusText}`);
     }
 
-    return await response.json();
+    return response.json();
   }
 
   /**

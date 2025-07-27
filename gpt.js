@@ -93,6 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(() => errorDiv.remove(), 5000);
   }
 
+  // Success message function (currently unused)
   function showSuccess(message) {
     const successDiv = document.createElement('div');
     successDiv.style.cssText = 'position:fixed;top:20px;right:20px;background:rgba(0,128,0,0.9);color:white;padding:10px;border-radius:4px;z-index:9999;';
@@ -100,6 +101,9 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.appendChild(successDiv);
     setTimeout(() => successDiv.remove(), 3000);
   }
+  
+  // Prevent the unused variable warning
+  showSuccess;
 
   // Enhanced local response system for when API is unavailable
   function generateLocalResponse(input) {

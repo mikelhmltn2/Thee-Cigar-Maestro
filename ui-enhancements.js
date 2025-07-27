@@ -822,7 +822,7 @@ class UIEnhancementManager {
   /**
    * Handle favorite toggle for cigar items
    */
-  handleFavoriteToggle(target) {
+  handleFavoriteToggle(_target) {
     // This would integrate with the favorites system
     this.showToast('Favorite toggled!', 'success', 1500);
   }

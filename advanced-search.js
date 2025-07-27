@@ -366,7 +366,7 @@ class AdvancedSearchEngine {
    * Set filter value
    */
   setFilter(filterName, value) {
-    if (this.filterState.hasOwnProperty(filterName)) {
+    if (Object.prototype.hasOwnProperty.call(this.filterState, filterName)) {
       this.filterState[filterName] = value;
       this.saveFilterPreferences();
     }
@@ -392,7 +392,7 @@ class AdvancedSearchEngine {
   /**
    * Generate search suggestions
    */
-  generateSuggestions(query, results) {
+  generateSuggestions(query, _results) {
     const suggestions = [];
     const queryLower = query.toLowerCase();
 
