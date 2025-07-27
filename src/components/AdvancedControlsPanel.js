@@ -775,7 +775,7 @@ class AdvancedControlsPanel {
   // Filter functionality
   handleFilterChange(checkbox) {
     const filterType = checkbox.closest('.filter-group').querySelector('label').textContent.replace(':', '').toLowerCase();
-    const value = checkbox.value;
+    const {value} = checkbox;
     const isChecked = checkbox.checked;
 
     if (value === 'all') {
@@ -830,7 +830,7 @@ class AdvancedControlsPanel {
 
       // Check price range
       if (cigar.userData.price) {
-        const price = cigar.userData.price;
+        const {price} = cigar.userData;
         visible = visible && (price >= this.activeFilters.price.min && price <= this.activeFilters.price.max);
       }
 
@@ -841,7 +841,7 @@ class AdvancedControlsPanel {
   }
 
   updatePriceRange(type, value) {
-    this.activeFilters.price[type] = parseInt(value);
+    this.activeFilters.price[type] = parseInt(value, 10);
     
     const display = document.getElementById(`${type}PriceDisplay`);
     if (display) {
@@ -851,16 +851,16 @@ class AdvancedControlsPanel {
     // Ensure min doesn't exceed max
     if (type === 'min') {
       const maxSlider = document.getElementById('maxPrice');
-      if (maxSlider && parseInt(value) > parseInt(maxSlider.value)) {
+      if (maxSlider && parseInt(value, 10) > parseInt(maxSlider.value, 10)) {
         maxSlider.value = value;
-        this.activeFilters.price.max = parseInt(value);
+        this.activeFilters.price.max = parseInt(value, 10);
         document.getElementById('maxPriceDisplay').textContent = value;
       }
     } else {
       const minSlider = document.getElementById('minPrice');
-      if (minSlider && parseInt(value) < parseInt(minSlider.value)) {
+      if (minSlider && parseInt(value, 10) < parseInt(minSlider.value, 10)) {
         minSlider.value = value;
-        this.activeFilters.price.min = parseInt(value);
+        this.activeFilters.price.min = parseInt(value, 10);
         document.getElementById('minPriceDisplay').textContent = value;
       }
     }

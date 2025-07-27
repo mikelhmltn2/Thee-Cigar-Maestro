@@ -177,7 +177,7 @@ function findFilesToCheck() {
  * Generate report
  */
 function generateReport() {
-  console.log('\n' + '='.repeat(60));
+  console.log(`\n${  '='.repeat(60)}`);
   console.log('📊 LINK CHECK SUMMARY');
   console.log('='.repeat(60));
   console.log(`Total URLs tested: ${results.tested}`);

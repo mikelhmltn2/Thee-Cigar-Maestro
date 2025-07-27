@@ -368,7 +368,7 @@ function generateReport() {
   results.overall = criticalFailures > 0 ? 'unhealthy' : 
                    results.summary.warnings > 0 ? 'degraded' : 'healthy';
   
-  console.log('\n' + '='.repeat(60));
+  console.log(`\n${  '='.repeat(60)}`);
   console.log('🏥 HEALTH CHECK REPORT');
   console.log('='.repeat(60));
   console.log(`📊 Overall Status: ${getStatusEmoji(results.overall)} ${results.overall.toUpperCase()}`);

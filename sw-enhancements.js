@@ -1,4 +1,6 @@
 
+/* global self, caches, clients */
+
 // Enhanced Service Worker Features
 // Background Sync, Push Notifications, Advanced Caching
 
@@ -232,13 +234,13 @@ async function queueForBackgroundSync(request) {
     url: request.url,
     method: request.method,
     headers: Object.fromEntries(request.headers),
-    body: body,
+    body,
     timestamp: Date.now()
   };
   
   // Store in pending queue
   const cache = await caches.open('pending-data');
-  const pendingKey = '/pending-' + Date.now();
+  const pendingKey = `/pending-${  Date.now()}`;
   await cache.put(pendingKey, new Response(JSON.stringify(queueItem)));
   
   // Register for background sync

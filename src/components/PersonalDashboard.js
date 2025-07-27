@@ -849,7 +849,7 @@ class PersonalDashboard {
         favorites.push({
           name: cigar.name,
           wrapper: cigar.wrapper || 'Unknown',
-          rating: rating
+          rating
         });
       }
     });
@@ -1123,7 +1123,7 @@ class PersonalDashboard {
 
         // Show cigar details
         window.dispatchEvent(new CustomEvent('cigarSelected', {
-          detail: { cigar: cigar }
+          detail: { cigar }
         }));
       }
     }
@@ -1168,8 +1168,8 @@ class PersonalDashboard {
   // Methods to track user activity
   trackActivity(type, text) {
     this.userStats.recentActivity.unshift({
-      type: type,
-      text: text,
+      type,
+      text,
       timestamp: Date.now()
     });
 

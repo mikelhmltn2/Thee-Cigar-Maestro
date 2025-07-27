@@ -1,4 +1,6 @@
 
+/* global Notification */
+
 /**
  * Push Notification Handler for Thee Cigar Maestro
  * Handles notification permissions, subscription, and display
@@ -132,10 +134,11 @@ class PushNotificationManager {
 // Initialize push notification manager
 const pushManager = new PushNotificationManager();
 
-// Export for use in other modules
-if (typeof module !== 'undefined' && module.exports) {
-  module.exports = PushNotificationManager;
-} else {
+// Export for ES modules
+export default PushNotificationManager;
+
+// Also make available globally for backwards compatibility
+if (typeof window !== 'undefined') {
   window.PushNotificationManager = PushNotificationManager;
   window.pushManager = pushManager;
 }
