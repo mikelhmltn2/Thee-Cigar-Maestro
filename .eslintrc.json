@@ -1,0 +1,78 @@
+{
+  "env": {
+    "browser": true,
+    "es2022": true,
+    "node": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "prettier"
+  ],
+  "plugins": [
+    "html"
+  ],
+  "parserOptions": {
+    "ecmaVersion": 2022,
+    "sourceType": "module"
+  },
+  "rules": {
+    "no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
+    "no-console": ["warn", { "allow": ["warn", "error"] }],
+    "prefer-const": "error",
+    "no-var": "error",
+    "eqeqeq": ["error", "always"],
+    "curly": ["error", "all"],
+    "no-eval": "error",
+    "no-implied-eval": "error",
+    "no-new-func": "error",
+    "no-script-url": "error",
+    "no-alert": "warn",
+    "no-debugger": "error",
+    "no-unreachable": "error",
+    "consistent-return": "error",
+    "array-callback-return": "error",
+    "no-loop-func": "error",
+    "no-return-await": "error",
+    "prefer-promise-reject-errors": "error",
+    "no-throw-literal": "error",
+    "prefer-arrow-callback": "error",
+    "arrow-spacing": "error",
+    "no-duplicate-imports": "error",
+    "no-useless-constructor": "error",
+    "object-shorthand": "error",
+    "prefer-template": "error",
+    "template-curly-spacing": "error",
+    "yoda": ["error", "never"],
+    "spaced-comment": ["error", "always"],
+    "camelcase": ["error", { "properties": "never" }],
+    "new-cap": ["error", { "newIsCap": true, "capIsNew": false }],
+    "no-array-constructor": "error",
+    "no-new-object": "error",
+    "no-new-wrappers": "error",
+    "radix": "error"
+  },
+  "globals": {
+    "THREE": "readonly",
+    "__APP_VERSION__": "readonly",
+    "__BUILD_TIME__": "readonly"
+  },
+  "overrides": [
+    {
+      "files": ["*.html"],
+      "rules": {
+        "no-undef": "off",
+        "no-unused-vars": "off"
+      }
+    },
+    {
+      "files": ["validate-data.js", "integration-test.js"],
+      "env": {
+        "node": true,
+        "browser": false
+      },
+      "rules": {
+        "no-console": "off"
+      }
+    }
+  ]
+}

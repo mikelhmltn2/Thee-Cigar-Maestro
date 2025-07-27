@@ -1,0 +1,64 @@
+{
+  "name": "thee-cigar-maestro",
+  "version": "1.0.0",
+  "description": "A sophisticated web application for cigar enthusiasts featuring interactive 3D visualization, educational content, and AI-powered recommendations",
+  "main": "index.html",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "serve": "http-server . -p 8000 -c-1",
+    "test": "vitest",
+    "test:ui": "vitest --ui",
+    "test:coverage": "vitest --coverage",
+    "lint": "eslint . --ext .js,.html --fix",
+    "format": "prettier --write .",
+    "validate": "npm run lint && npm run test",
+    "optimize-images": "imagemin src/assets/**/*.{jpg,png,svg} --out-dir=dist/assets --plugin=imagemin-webp --plugin=imagemin-optipng",
+    "analyze": "npx vite-bundle-analyzer",
+    "lighthouse": "lighthouse http://localhost:8000 --output=html --output-path=./lighthouse-report.html",
+    "audit": "node validate-data.js && node integration-test.js"
+  },
+  "keywords": [
+    "cigar",
+    "3d-visualization",
+    "ai-assistant",
+    "education",
+    "pwa",
+    "threejs"
+  ],
+  "author": "Mike Hamilton",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/three": "^0.160.0",
+    "@vitejs/plugin-pwa": "^0.17.4",
+    "eslint": "^8.56.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-html": "^7.1.0",
+    "http-server": "^14.1.1",
+    "imagemin": "^8.0.1",
+    "imagemin-optipng": "^8.0.0",
+    "imagemin-webp": "^8.0.0",
+    "lighthouse": "^11.4.0",
+    "prettier": "^3.1.1",
+    "vite": "^5.0.10",
+    "vite-bundle-analyzer": "^0.7.0",
+    "vite-plugin-pwa": "^0.17.4",
+    "vitest": "^1.1.3",
+    "@vitest/ui": "^1.1.3",
+    "@vitest/coverage-v8": "^1.1.3",
+    "workbox-window": "^7.0.0"
+  },
+  "dependencies": {
+    "three": "^0.160.0"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ]
+}
