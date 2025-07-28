@@ -12,7 +12,15 @@ class AnalyticsDashboard {
       pageViews: {},
       userInteractions: {},
       searchQueries: [],
-      popularCigars: [],
+      popularCigars: {},
+      cigarViews: {},
+      cigarRatings: {},
+      userEngagement: {
+        totalSessions: 0,
+        averageSessionTime: 0,
+        bounceRate: 0,
+        returnUsers: 0
+      },
       sessionData: {}
     };
     
@@ -195,6 +203,45 @@ class AnalyticsDashboard {
           </div>
         </div>
 
+        <!-- Popular Cigars -->
+        <div class="cigars-card" style="
+          background: rgba(139, 69, 19, 0.1);
+          border: 1px solid #8B4513;
+          border-radius: 10px;
+          padding: 1.5rem;
+          min-height: 150px;
+        ">
+          <h3 style="color: #CD853F; margin: 0 0 1rem 0; font-size: 1.3rem;">🎯 Popular Cigars</h3>
+          <div id="popular-cigars" style="display: flex; flex-direction: column; gap: 0.5rem;">
+            <div style="color: #D2B48C; font-style: italic;">No data available</div>
+          </div>
+        </div>
+
+        <!-- User Engagement -->
+        <div class="engagement-card" style="
+          background: rgba(139, 69, 19, 0.1);
+          border: 1px solid #8B4513;
+          border-radius: 10px;
+          padding: 1.5rem;
+          min-height: 150px;
+        ">
+          <h3 style="color: #CD853F; margin: 0 0 1rem 0; font-size: 1.3rem;">📊 User Engagement</h3>
+          <div id="user-engagement" style="display: flex; flex-direction: column; gap: 0.5rem;">
+            <div class="metric-item" style="display: flex; justify-content: space-between;">
+              <span style="color: #D2B48C;">Sessions:</span>
+              <span id="total-sessions" style="color: #CD853F; font-weight: bold;">0</span>
+            </div>
+            <div class="metric-item" style="display: flex; justify-content: space-between;">
+              <span style="color: #D2B48C;">Avg Session:</span>
+              <span id="avg-session-time" style="color: #CD853F; font-weight: bold;">0m</span>
+            </div>
+            <div class="metric-item" style="display: flex; justify-content: space-between;">
+              <span style="color: #D2B48C;">Bounce Rate:</span>
+              <span id="bounce-rate" style="color: #CD853F; font-weight: bold;">0%</span>
+            </div>
+          </div>
+        </div>
+
         <!-- Performance Metrics -->
         <div class="performance-card" style="
           background: rgba(139, 69, 19, 0.1);
@@ -212,6 +259,10 @@ class AnalyticsDashboard {
             <div class="metric-item" style="display: flex; justify-content: space-between;">
               <span style="color: #D2B48C;">API Response:</span>
               <span id="api-response-time" style="color: #CD853F; font-weight: bold;">-</span>
+            </div>
+            <div class="metric-item" style="display: flex; justify-content: space-between;">
+              <span style="color: #D2B48C;">Data Load:</span>
+              <span id="data-load-time" style="color: #CD853F; font-weight: bold;">-</span>
             </div>
           </div>
         </div>
@@ -254,6 +305,54 @@ class AnalyticsDashboard {
     
     // Listen for user interactions
     this.setupInteractionTracking();
+    
+    // Add some demo data for demonstration
+    this.initializeDemoData();
+  }
+
+  initializeDemoData() {
+    // Add demo cigar views and ratings
+    const demoCigars = [
+      'Cohiba Behike',
+      'Montecristo No. 2',
+      'Romeo y Julieta Churchill',
+      'Arturo Fuente Opus X',
+      'Padron 1964 Anniversary'
+    ];
+    
+    demoCigars.forEach((cigar, index) => {
+      // Simulate different popularity levels
+      const views = Math.floor(Math.random() * 50) + 10;
+      const ratings = [];
+      const ratingCount = Math.floor(Math.random() * 10) + 3;
+      
+      for (let i = 0; i < views; i++) {
+        this.trackCigarView(cigar);
+      }
+      
+      for (let i = 0; i < ratingCount; i++) {
+        const rating = Math.floor(Math.random() * 3) + 3; // 3-5 stars
+        this.trackCigarRating(cigar, rating);
+      }
+    });
+    
+    // Add demo search queries
+    const demoSearches = [
+      'medium strength',
+      'Cuban cigars',
+      'morning smoke',
+      'full bodied',
+      'beginner friendly'
+    ];
+    
+    demoSearches.forEach(search => {
+      this.trackSearch(search);
+    });
+    
+    // Simulate some user interactions
+    this.trackPageView('/');
+    this.trackPageView('/flavorverse');
+    this.trackPageView('/dashboard');
   }
 
   trackPerformance() {
@@ -374,6 +473,8 @@ class AnalyticsDashboard {
     this.updatePopularPages();
     this.updateUserBehavior();
     this.updateSearchAnalytics();
+    this.updatePopularCigars();
+    this.updateUserEngagement();
     this.updatePerformanceMetrics();
   }
 
@@ -458,6 +559,31 @@ class AnalyticsDashboard {
     
     document.getElementById('api-response-time').textContent = 
       this.analytics.sessionData.apiResponseTime ? `${this.analytics.sessionData.apiResponseTime}ms` : '-';
+    
+    // Measure data load performance
+    const dataLoadTime = this.analytics.sessionData.dataLoadTime || '-';
+    document.getElementById('data-load-time').textContent = 
+      typeof dataLoadTime === 'number' ? `${Math.round(dataLoadTime)}ms` : dataLoadTime;
+  }
+
+  // Track data loading performance
+  trackDataLoad(startTime, endTime, dataType) {
+    const loadTime = endTime - startTime;
+    if (!this.analytics.sessionData.dataLoadTime) {
+      this.analytics.sessionData.dataLoadTime = loadTime;
+    } else {
+      // Average with previous measurements
+      this.analytics.sessionData.dataLoadTime = 
+        (this.analytics.sessionData.dataLoadTime + loadTime) / 2;
+    }
+    
+    // Send to API if authenticated
+    if (this.apiClient.isUserAuthenticated()) {
+      this.apiClient.trackEvent('data_load_performance', { 
+        dataType, 
+        loadTime: Math.round(loadTime) 
+      });
+    }
   }
 
   show() {
@@ -490,6 +616,108 @@ class AnalyticsDashboard {
     if (this.apiClient.isUserAuthenticated()) {
       this.apiClient.trackEvent('search_query', { query });
     }
+  }
+
+  // Public method to track cigar views
+  trackCigarView(cigarName) {
+    if (!this.analytics.cigarViews[cigarName]) {
+      this.analytics.cigarViews[cigarName] = 0;
+    }
+    this.analytics.cigarViews[cigarName]++;
+    
+    // Send to API if authenticated
+    if (this.apiClient.isUserAuthenticated()) {
+      this.apiClient.trackEvent('cigar_view', { cigar: cigarName });
+    }
+  }
+
+  // Public method to track cigar ratings
+  trackCigarRating(cigarName, rating) {
+    if (!this.analytics.cigarRatings[cigarName]) {
+      this.analytics.cigarRatings[cigarName] = [];
+    }
+    this.analytics.cigarRatings[cigarName].push(rating);
+    
+    // Send to API if authenticated
+    if (this.apiClient.isUserAuthenticated()) {
+      this.apiClient.trackEvent('cigar_rating', { cigar: cigarName, rating });
+    }
+  }
+
+  // Update popular cigars display
+  updatePopularCigars() {
+    const popularCigars = document.getElementById('popular-cigars');
+    if (!popularCigars) return;
+
+    // Combine views and ratings to determine popularity
+    const cigarPopularity = {};
+    
+    // Add weight from views
+    Object.entries(this.analytics.cigarViews).forEach(([cigar, views]) => {
+      cigarPopularity[cigar] = (cigarPopularity[cigar] || 0) + views;
+    });
+    
+    // Add weight from ratings (higher rated cigars get bonus points)
+    Object.entries(this.analytics.cigarRatings).forEach(([cigar, ratings]) => {
+      const avgRating = ratings.reduce((sum, rating) => sum + rating, 0) / ratings.length;
+      const ratingBonus = Math.round(avgRating * ratings.length);
+      cigarPopularity[cigar] = (cigarPopularity[cigar] || 0) + ratingBonus;
+    });
+
+    const sortedCigars = Object.entries(cigarPopularity)
+      .sort(([,a], [,b]) => b - a)
+      .slice(0, 5);
+
+    if (sortedCigars.length === 0) {
+      popularCigars.innerHTML = '<div style="color: #D2B48C; font-style: italic;">No data available</div>';
+      return;
+    }
+
+    popularCigars.innerHTML = sortedCigars.map(([cigar, score]) => {
+      const views = this.analytics.cigarViews[cigar] || 0;
+      const ratings = this.analytics.cigarRatings[cigar] || [];
+      const avgRating = ratings.length > 0 ? 
+        (ratings.reduce((sum, rating) => sum + rating, 0) / ratings.length).toFixed(1) : 'N/A';
+      
+      return `
+        <div style="padding: 0.5rem 0; border-bottom: 1px solid rgba(205, 133, 63, 0.2);">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <span style="color: #D2B48C; font-weight: bold;">${cigar}</span>
+            <span style="color: #CD853F; font-size: 0.9rem;">★ ${avgRating}</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; font-size: 0.8rem; margin-top: 0.2rem;">
+            <span style="color: #A0A0A0;">${views} views</span>
+            <span style="color: #A0A0A0;">${ratings.length} ratings</span>
+          </div>
+        </div>
+      `;
+    }).join('');
+  }
+
+  // Update user engagement metrics
+  updateUserEngagement() {
+    const totalSessions = this.analytics.userEngagement.totalSessions + 1;
+    const sessionDuration = this.analytics.sessionData.startTime ? 
+      Math.round((Date.now() - this.analytics.sessionData.startTime) / 60000) : 0;
+    
+    // Calculate average session time
+    const avgSessionTime = Math.round(sessionDuration);
+    
+    // Calculate bounce rate (sessions with less than 30 seconds and 1 page view)
+    const isBouncedSession = sessionDuration < 0.5 && this.analytics.sessionData.pageViews <= 1;
+    const bounceRate = isBouncedSession ? 
+      Math.round((1 / totalSessions) * 100) : 
+      Math.round((0 / totalSessions) * 100);
+
+    // Update engagement metrics
+    this.analytics.userEngagement.totalSessions = totalSessions;
+    this.analytics.userEngagement.averageSessionTime = avgSessionTime;
+    this.analytics.userEngagement.bounceRate = bounceRate;
+
+    // Update display
+    document.getElementById('total-sessions').textContent = totalSessions;
+    document.getElementById('avg-session-time').textContent = `${avgSessionTime}m`;
+    document.getElementById('bounce-rate').textContent = `${bounceRate}%`;
   }
 }
 
