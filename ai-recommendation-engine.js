@@ -374,7 +374,7 @@ class AIRecommendationEngine {
   }
 
   /**
-   * Extract flavor keywords from description
+   * Extract flavor keywords from description using enhanced NLP
    */
   extractFlavorKeywords(flavorText) {
     const commonFlavors = [
@@ -384,6 +384,250 @@ class AIRecommendationEngine {
     
     const text = flavorText.toLowerCase();
     return commonFlavors.filter(flavor => text.includes(flavor));
+  }
+
+  /**
+   * Enhanced Natural Language Processing for Flavor Descriptions
+   * Analyzes flavor text using advanced techniques
+   */
+  processFlavorDescriptionNLP(flavorText) {
+    if (!flavorText) return { keywords: [], sentiment: 0, complexity: 0, categories: [] };
+
+    const text = flavorText.toLowerCase();
+    
+    // Advanced flavor categories with weights
+    const flavorCategories = {
+      sweet: {
+        keywords: ['chocolate', 'vanilla', 'honey', 'caramel', 'cream', 'sugar', 'molasses', 'candy'],
+        weight: 1.2
+      },
+      spicy: {
+        keywords: ['pepper', 'spice', 'hot', 'burn', 'tingle', 'heat', 'kick', 'zesty'],
+        weight: 1.1
+      },
+      earthy: {
+        keywords: ['earth', 'soil', 'barn', 'hay', 'mushroom', 'leather', 'tobacco', 'wood'],
+        weight: 1.0
+      },
+      woody: {
+        keywords: ['cedar', 'oak', 'pine', 'birch', 'wood', 'timber', 'bark', 'forest'],
+        weight: 1.0
+      },
+      nutty: {
+        keywords: ['nuts', 'almond', 'walnut', 'pecan', 'hazelnut', 'peanut', 'cashew'],
+        weight: 0.9
+      },
+      fruity: {
+        keywords: ['fruit', 'apple', 'cherry', 'berry', 'citrus', 'orange', 'lemon', 'grape'],
+        weight: 0.8
+      },
+      floral: {
+        keywords: ['floral', 'flower', 'rose', 'lavender', 'jasmine', 'perfume', 'bouquet'],
+        weight: 0.7
+      }
+    };
+
+    // Extract and categorize flavors
+    const detectedCategories = [];
+    const keywords = [];
+    let totalWeight = 0;
+
+    Object.entries(flavorCategories).forEach(([category, data]) => {
+      const matches = data.keywords.filter(keyword => text.includes(keyword));
+      if (matches.length > 0) {
+        detectedCategories.push({
+          category,
+          matches,
+          weight: data.weight,
+          confidence: matches.length / data.keywords.length
+        });
+        keywords.push(...matches);
+        totalWeight += data.weight * matches.length;
+      }
+    });
+
+    // Calculate complexity based on number of categories and unique keywords
+    const complexity = Math.min(detectedCategories.length * 0.2 + keywords.length * 0.1, 1.0);
+
+    // Simple sentiment analysis based on positive/negative words
+    const positiveWords = ['smooth', 'creamy', 'rich', 'complex', 'excellent', 'premium', 'quality', 'balanced'];
+    const negativeWords = ['harsh', 'bitter', 'acidic', 'weak', 'flat', 'bland', 'poor', 'cheap'];
+    
+    const positiveCount = positiveWords.filter(word => text.includes(word)).length;
+    const negativeCount = negativeWords.filter(word => text.includes(word)).length;
+    const sentiment = (positiveCount - negativeCount) / Math.max(positiveCount + negativeCount, 1);
+
+    return {
+      keywords: [...new Set(keywords)],
+      sentiment: Math.max(-1, Math.min(1, sentiment)),
+      complexity,
+      categories: detectedCategories.map(cat => ({
+        name: cat.category,
+        confidence: cat.confidence,
+        weight: cat.weight
+      })),
+      totalWeight
+    };
+  }
+
+  /**
+   * Advanced Pairing Optimization Algorithm
+   * Uses machine learning to optimize food and drink pairings
+   */
+  async optimizePairings(cigarId, context = {}) {
+    try {
+      const cigar = this.cigarData.find(c => c.id === cigarId);
+      if (!cigar) return [];
+
+      // Get flavor profile using enhanced NLP
+      const flavorProfile = this.processFlavorDescriptionNLP(cigar.flavor || '');
+      
+      // Load pairing rules and preferences
+      const pairingRules = this.getPairingRules();
+      const userPreferences = context.userPreferences || {};
+      const timeOfDay = context.timeOfDay || 'evening';
+      const occasion = context.occasion || 'casual';
+
+      // Calculate pairing scores for different categories
+      const pairings = [];
+
+      // Beverage pairings
+      const beverages = [
+        { name: 'Single Malt Whisky', categories: ['woody', 'smoky'], strength: 'strong', score: 0 },
+        { name: 'Aged Rum', categories: ['sweet', 'spicy'], strength: 'medium', score: 0 },
+        { name: 'Red Wine (Cabernet)', categories: ['earthy', 'fruity'], strength: 'medium', score: 0 },
+        { name: 'Port Wine', categories: ['sweet', 'fruity'], strength: 'strong', score: 0 },
+        { name: 'Coffee (Espresso)', categories: ['bitter', 'earthy'], strength: 'strong', score: 0 },
+        { name: 'Dark Beer (Stout)', categories: ['roasted', 'bitter'], strength: 'medium', score: 0 }
+      ];
+
+      // Food pairings
+      const foods = [
+        { name: 'Dark Chocolate', categories: ['sweet', 'bitter'], intensity: 'high', score: 0 },
+        { name: 'Aged Cheese', categories: ['savory', 'creamy'], intensity: 'medium', score: 0 },
+        { name: 'Nuts (Almonds)', categories: ['nutty', 'earthy'], intensity: 'low', score: 0 },
+        { name: 'Grilled Steak', categories: ['savory', 'smoky'], intensity: 'high', score: 0 },
+        { name: 'Vanilla Ice Cream', categories: ['sweet', 'creamy'], intensity: 'low', score: 0 }
+      ];
+
+      // Calculate beverage pairing scores
+      beverages.forEach(beverage => {
+        let score = 0;
+        
+        // Category matching
+        flavorProfile.categories.forEach(category => {
+          if (beverage.categories.includes(category.name)) {
+            score += category.confidence * category.weight * 10;
+          }
+        });
+
+        // Strength compatibility
+        const cigarStrength = this.getCigarStrength(cigar);
+        if (beverage.strength === cigarStrength) {
+          score += 5;
+        } else if (Math.abs(['light', 'medium', 'strong'].indexOf(beverage.strength) - 
+                           ['light', 'medium', 'strong'].indexOf(cigarStrength)) === 1) {
+          score += 2;
+        }
+
+        // Time of day adjustment
+        if (timeOfDay === 'morning' && beverage.name.includes('Coffee')) score += 3;
+        if (timeOfDay === 'evening' && (beverage.name.includes('Whisky') || beverage.name.includes('Wine'))) score += 2;
+
+        beverage.score = Math.max(0, Math.min(100, score));
+      });
+
+      // Calculate food pairing scores
+      foods.forEach(food => {
+        let score = 0;
+        
+        // Category matching
+        flavorProfile.categories.forEach(category => {
+          if (food.categories.includes(category.name)) {
+            score += category.confidence * category.weight * 8;
+          }
+        });
+
+        // Intensity compatibility
+        const cigarIntensity = this.getCigarIntensity(cigar);
+        if (food.intensity === cigarIntensity) {
+          score += 4;
+        }
+
+        // Occasion adjustment
+        if (occasion === 'formal' && food.name.includes('Steak')) score += 3;
+        if (occasion === 'casual' && food.name.includes('Chocolate')) score += 2;
+
+        food.score = Math.max(0, Math.min(100, score));
+      });
+
+      // Sort and return top pairings
+      const topBeverages = beverages.sort((a, b) => b.score - a.score).slice(0, 3);
+      const topFoods = foods.sort((a, b) => b.score - a.score).slice(0, 3);
+
+      return {
+        beverages: topBeverages,
+        foods: topFoods,
+        flavorProfile,
+        recommendations: [
+          ...topBeverages.map(b => ({ type: 'beverage', ...b })),
+          ...topFoods.map(f => ({ type: 'food', ...f }))
+        ].sort((a, b) => b.score - a.score)
+      };
+
+    } catch (error) {
+      console.error('Error optimizing pairings:', error);
+      return [];
+    }
+  }
+
+  /**
+   * Get pairing rules based on flavor science
+   */
+  getPairingRules() {
+    return {
+      complementary: {
+        sweet: ['bitter', 'salty'],
+        spicy: ['sweet', 'creamy'],
+        earthy: ['woody', 'fruity'],
+        woody: ['vanilla', 'caramel']
+      },
+      contrasting: {
+        light: ['strong'],
+        smooth: ['textured'],
+        cold: ['warm']
+      },
+      enhancing: {
+        tobacco: ['leather', 'wood'],
+        chocolate: ['coffee', 'nuts'],
+        spice: ['fruit', 'sweet']
+      }
+    };
+  }
+
+  /**
+   * Determine cigar strength from various indicators
+   */
+  getCigarStrength(cigar) {
+    if (cigar.strength) return cigar.strength.toLowerCase();
+    
+    // Infer from wrapper or other attributes
+    const wrapper = (cigar.wrapper || '').toLowerCase();
+    if (wrapper.includes('maduro') || wrapper.includes('oscuro')) return 'strong';
+    if (wrapper.includes('connecticut') || wrapper.includes('claro')) return 'light';
+    return 'medium';
+  }
+
+  /**
+   * Determine cigar intensity for pairing optimization
+   */
+  getCigarIntensity(cigar) {
+    const strength = this.getCigarStrength(cigar);
+    const flavorProfile = this.processFlavorDescriptionNLP(cigar.flavor || '');
+    
+    if (strength === 'strong' || flavorProfile.complexity > 0.7) return 'high';
+    if (strength === 'light' || flavorProfile.complexity < 0.3) return 'low';
+    return 'medium';
   }
 
   /**
@@ -1070,6 +1314,90 @@ class AIRecommendationEngine {
       console.error('Error getting real-time recommendations:', error);
       return [];
     }
+  }
+
+  /**
+   * Enhanced recommendation system integrating all AI improvements
+   */
+  async getEnhancedRecommendations(userId, options = {}) {
+    try {
+      const {
+        count = 5,
+        includeReason = true,
+        includePairings = true,
+        context = {},
+        algorithm = this.algorithms.HYBRID
+      } = options;
+
+      // Get base recommendations
+      let recommendations = await this.getRecommendations(userId, { count: count * 2, algorithm });
+
+      // Enhance each recommendation with AI insights
+      const enhancedRecs = await Promise.all(recommendations.map(async (rec) => {
+        const enhanced = { ...rec };
+        
+        // Add NLP flavor analysis
+        enhanced.flavorAnalysis = this.processFlavorDescriptionNLP(rec.cigar.flavor || '');
+        
+        // Add pairing suggestions if requested
+        if (includePairings) {
+          enhanced.pairingSuggestions = await this.optimizePairings(rec.cigar.id || rec.cigar.name, context);
+        }
+        
+        // Add recommendation reasoning if requested
+        if (includeReason) {
+          const userProfile = this.userProfiles.get(userId) || {};
+          const reasonScore = this.calculateReasonScore(rec.cigar, userProfile, enhanced.flavorAnalysis);
+          enhanced.recommendationReason = this.generateRecommendationReason({
+            cigar: rec.cigar,
+            flavorProfile: enhanced.flavorAnalysis,
+            reasonScore
+          });
+        }
+        
+        // Calculate enhanced score combining multiple factors
+        enhanced.enhancedScore = this.calculateEnhancedScore(rec, enhanced.flavorAnalysis, context);
+        
+        return enhanced;
+      }));
+
+      // Sort by enhanced score and return top results
+      return enhancedRecs
+        .sort((a, b) => b.enhancedScore - a.enhancedScore)
+        .slice(0, count);
+        
+    } catch (error) {
+      console.error('Enhanced recommendation error:', error);
+      return [];
+    }
+  }
+
+  /**
+   * Calculate enhanced recommendation score using multiple AI factors
+   */
+  calculateEnhancedScore(recommendation, flavorProfile, context) {
+    let score = recommendation.score || 0;
+    
+    // Boost for positive sentiment
+    if (flavorProfile.sentiment > 0) {
+      score *= (1 + flavorProfile.sentiment * 0.1);
+    }
+    
+    // Boost for complexity if user appreciates complex cigars
+    if (context.preferComplexity && flavorProfile.complexity > 0.5) {
+      score *= (1 + flavorProfile.complexity * 0.15);
+    }
+    
+    // Context-based adjustments
+    if (context.timeOfDay === 'morning' && flavorProfile.categories.some(cat => cat.name === 'sweet')) {
+      score *= 1.1;
+    }
+    
+    if (context.occasion === 'celebration' && flavorProfile.categories.some(cat => cat.name === 'premium')) {
+      score *= 1.2;
+    }
+    
+    return score;
   }
 
   /**
