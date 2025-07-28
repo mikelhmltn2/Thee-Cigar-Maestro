@@ -24,7 +24,7 @@ class AdvancedControlsPanel {
     this.createControlsHTML();
     this.setupEventListeners();
     this.isInitialized = true;
-    console.log('🎛️ Advanced Controls Panel initialized');
+    console.info('🎛️ Advanced Controls Panel initialized');
   }
 
   createControlsHTML() {
@@ -936,22 +936,22 @@ class AdvancedControlsPanel {
   // Display option functions
   toggleLabels(show) {
     // Implementation for showing/hiding labels
-    console.log(`Labels ${show ? 'enabled' : 'disabled'}`);
+    console.info(`Labels ${show ? 'enabled' : 'disabled'}`);
   }
 
   toggleFlavorConnections(show) {
     // Implementation for showing flavor connections
-    console.log(`Flavor connections ${show ? 'enabled' : 'disabled'}`);
+    console.info(`Flavor connections ${show ? 'enabled' : 'disabled'}`);
   }
 
   toggleAnimations(enable) {
     document.body.style.setProperty('--transition', enable ? 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)' : 'none');
-    console.log(`Animations ${enable ? 'enabled' : 'disabled'}`);
+    console.info(`Animations ${enable ? 'enabled' : 'disabled'}`);
   }
 
   toggleSounds(enable) {
     // Implementation for sound effects
-    console.log(`Sounds ${enable ? 'enabled' : 'disabled'}`);
+    console.info(`Sounds ${enable ? 'enabled' : 'disabled'}`);
   }
 
   // Utility functions

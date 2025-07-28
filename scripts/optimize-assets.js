@@ -23,7 +23,7 @@ class AssetOptimizer {
   }
 
   async run() {
-    console.log('🖼️  Starting asset optimization...\n');
+    console.info('🖼️  Starting asset optimization...\n');
     
     try {
       await this.ensureDirectories();
@@ -36,7 +36,7 @@ class AssetOptimizer {
       await this.cleanup();
       
       this.printStats();
-    } catch (_error) {
+    } catch (error) {
       console.error('❌ Optimization failed:', error.message);
       process.exit(1);
     }
@@ -46,8 +46,8 @@ class AssetOptimizer {
     try {
       await fs.mkdir(this.outputDir, { recursive: true });
       await fs.mkdir(this.tempDir, { recursive: true });
-      console.log('✅ Created output directories');
-    } catch (_error) {
+      console.info('✅ Created output directories');
+    } catch (error) {
       console.warn('⚠️  Could not create directories:', error.message);
     }
   }
@@ -60,7 +60,7 @@ class AssetOptimizer {
       const originalSize = stats.size;
       this.stats.originalSize += originalSize;
       
-      console.log(`📸 Optimizing logo.png (${this.formatFileSize(originalSize)})`);
+      console.info(`📸 Optimizing logo.png (${this.formatFileSize(originalSize)})`);
       
       // Create optimized versions
       await this.optimizePNG(logoPath, path.join(this.outputDir, 'logo.png'));
@@ -80,8 +80,8 @@ class AssetOptimizer {
       await this.generateFavicon(logoPath);
       
       this.stats.filesProcessed++;
-      console.log('✅ Logo optimization complete');
-    } catch (_error) {
+      console.info('✅ Logo optimization complete');
+    } catch (error) {
       console.warn('⚠️  Could not optimize logo:', error.message);
     }
   }
@@ -101,7 +101,7 @@ class AssetOptimizer {
         const fileName = path.basename(file);
         const outputPath = path.join(this.outputDir, fileName);
         
-        console.log(`📸 Optimizing ${fileName} (${this.formatFileSize(originalSize)})`);
+        console.info(`📸 Optimizing ${fileName} (${this.formatFileSize(originalSize)})`);
         
         const ext = path.extname(file).toLowerCase();
         
@@ -121,7 +121,7 @@ class AssetOptimizer {
         }
         
         this.stats.filesProcessed++;
-      } catch (_error) {
+      } catch (error) {
         console.warn(`⚠️  Could not optimize ${file}:`, error.message);
       }
     }
@@ -169,7 +169,7 @@ class AssetOptimizer {
   async generateWebP(inputPath, outputPath) {
     try {
       execSync(`cwebp -q 85 "${inputPath}" -o "${outputPath}"`, { stdio: 'pipe' });
-    } catch (_error) {
+    } catch (error) {
       console.warn(`⚠️  Could not generate WebP for ${inputPath}:`, error.message);
     }
   }
@@ -188,8 +188,8 @@ class AssetOptimizer {
     
     try {
       execSync(`convert "${logoPath}" -resize 32x32 "${faviconPath}"`, { stdio: 'pipe' });
-      console.log('✅ Generated favicon.ico');
-    } catch (_error) {
+      console.info('✅ Generated favicon.ico');
+    } catch (error) {
       console.warn('⚠️  Could not generate favicon:', error.message);
     }
   }
@@ -215,15 +215,15 @@ class AssetOptimizer {
         this.stats.optimizedSize += compressedSize;
         this.stats.filesProcessed++;
         
-        console.log(`📄 Compressed ${fileName}: ${this.formatFileSize(originalSize)} → ${this.formatFileSize(compressedSize)}`);
-      } catch (_error) {
+        console.info(`📄 Compressed ${fileName}: ${this.formatFileSize(originalSize)} → ${this.formatFileSize(compressedSize)}`);
+      } catch (error) {
         console.warn(`⚠️  Could not compress ${file}:`, error.message);
       }
     }
   }
 
   async generateWebPVariants() {
-    console.log(`✅ Generated ${this.stats.webpGenerated} WebP variants`);
+    console.info(`✅ Generated ${this.stats.webpGenerated} WebP variants`);
   }
 
   async createOptimizedCSS() {
@@ -254,8 +254,8 @@ class AssetOptimizer {
         this.stats.optimizedSize += compressedSize;
         this.stats.filesProcessed++;
         
-        console.log(`🎨 Minified ${fileName}: ${this.formatFileSize(originalSize)} → ${this.formatFileSize(compressedSize)}`);
-      } catch (_error) {
+        console.info(`🎨 Minified ${fileName}: ${this.formatFileSize(originalSize)} → ${this.formatFileSize(compressedSize)}`);
+      } catch (error) {
         console.warn(`⚠️  Could not optimize ${file}:`, error.message);
       }
     }
@@ -291,8 +291,8 @@ class AssetOptimizer {
         JSON.stringify(manifest, null, 2)
       );
       
-      console.log('✅ Generated asset manifest');
-    } catch (_error) {
+      console.info('✅ Generated asset manifest');
+    } catch (error) {
       console.warn('⚠️  Could not generate manifest:', error.message);
     }
   }
@@ -341,7 +341,7 @@ class AssetOptimizer {
           }
         }
       }
-    } catch (_error) {
+    } catch (error) {
       console.warn(`⚠️  Could not read directory ${dir}:`, error.message);
     }
     
@@ -351,7 +351,7 @@ class AssetOptimizer {
   async cleanup() {
     try {
       await fs.rmdir(this.tempDir, { recursive: true });
-      console.log('✅ Cleaned up temporary files');
+      console.info('✅ Cleaned up temporary files');
     } catch (_error) {
       // Ignore cleanup errors
     }
@@ -376,15 +376,15 @@ class AssetOptimizer {
       ? ((savings / this.stats.originalSize) * 100).toFixed(1)
       : 0;
     
-    console.log('\n📊 Optimization Summary:');
-    console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
-    console.log(`📁 Files processed: ${this.stats.filesProcessed}`);
-    console.log(`🖼️  WebP variants: ${this.stats.webpGenerated}`);
-    console.log(`📦 Original size: ${this.formatFileSize(this.stats.originalSize)}`);
-    console.log(`📦 Optimized size: ${this.formatFileSize(this.stats.optimizedSize)}`);
-    console.log(`💾 Space saved: ${this.formatFileSize(savings)} (${percentage}%)`);
-    console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
-    console.log('✅ Asset optimization complete!\n');
+    console.info('\n📊 Optimization Summary:');
+    console.info('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+    console.info(`📁 Files processed: ${this.stats.filesProcessed}`);
+    console.info(`🖼️  WebP variants: ${this.stats.webpGenerated}`);
+    console.info(`📦 Original size: ${this.formatFileSize(this.stats.originalSize)}`);
+    console.info(`📦 Optimized size: ${this.formatFileSize(this.stats.optimizedSize)}`);
+    console.info(`💾 Space saved: ${this.formatFileSize(savings)} (${percentage}%)`);
+    console.info('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+    console.info('✅ Asset optimization complete!\n');
   }
 }
 

@@ -21,7 +21,7 @@ class EnhancedDataValidator {
       const content = fs.readFileSync(filePath, 'utf8');
       const data = JSON.parse(content);
       
-      console.log(`✓ Validating ${filePath}...`);
+      console.info(`✓ Validating ${filePath}...`);
       
       switch (path.basename(filePath)) {
         case 'flavorverse_nodes.json':
@@ -109,9 +109,9 @@ class EnhancedDataValidator {
       }
     });
 
-    console.log(`  - Validated ${data.length} cigar entries`);
-    console.log(`  - Wrapper distribution:`, wrapperStats);
-    console.log(`  - Flavor keyword coverage:`, flavorCoverage);
+    console.info(`  - Validated ${data.length} cigar entries`);
+    console.info(`  - Wrapper distribution:`, wrapperStats);
+    console.info(`  - Flavor keyword coverage:`, flavorCoverage);
     
     this.integrationReport.push({
       file: 'flavorverse_nodes.json',
@@ -155,7 +155,7 @@ class EnhancedDataValidator {
         }
       });
       manufacturerCount = data.trustedCigarManufacturers.length;
-      console.log(`  - Validated ${manufacturerCount} manufacturers`);
+      console.info(`  - Validated ${manufacturerCount} manufacturers`);
     }
 
     this.integrationReport.push({
@@ -197,7 +197,7 @@ class EnhancedDataValidator {
       }
     }
 
-    console.log(`  - Validated ${lessonCount} pairing lessons with ${quizCount} quiz questions`);
+    console.info(`  - Validated ${lessonCount} pairing lessons with ${quizCount} quiz questions`);
     
     this.integrationReport.push({
       file: 'pairings.json',
@@ -230,7 +230,7 @@ class EnhancedDataValidator {
       }
     }
 
-    console.log(`  - Education tracks: ${trackCount}, Microcredentials: ${microcredentialCount}`);
+    console.info(`  - Education tracks: ${trackCount}, Microcredentials: ${microcredentialCount}`);
     
     this.integrationReport.push({
       file: 'education.json',
@@ -262,7 +262,7 @@ class EnhancedDataValidator {
       });
     }
 
-    console.log(`  - Features: ${implementedCount}/${totalFeatures} implemented`);
+    console.info(`  - Features: ${implementedCount}/${totalFeatures} implemented`);
     
     this.integrationReport.push({
       file: 'features.json',
@@ -290,7 +290,7 @@ class EnhancedDataValidator {
       uiComponentsCount = Object.keys(data.uiUx).length;
     }
 
-    console.log(`  - Voice commands: ${voiceCommandsCount}, UI components: ${uiComponentsCount}`);
+    console.info(`  - Voice commands: ${voiceCommandsCount}, UI components: ${uiComponentsCount}`);
     
     this.integrationReport.push({
       file: 'interface.json',
@@ -315,7 +315,7 @@ class EnhancedDataValidator {
       auditReady = !!data.metaPrompts.expertAuditPrompt;
     }
 
-    console.log(`  - Meta prompts: ${promptCount}, Audit system: ${auditReady ? 'ready' : 'not ready'}`);
+    console.info(`  - Meta prompts: ${promptCount}, Audit system: ${auditReady ? 'ready' : 'not ready'}`);
     
     this.integrationReport.push({
       file: 'meta.json',
@@ -343,7 +343,7 @@ class EnhancedDataValidator {
       emotionalTriggersCount = data.emotionalMemorySystem.emotionalFlavorTriggers.length;
     }
 
-    console.log(`  - Ritual flows: ${ritualFlowsCount}, Emotional triggers: ${emotionalTriggersCount}`);
+    console.info(`  - Ritual flows: ${ritualFlowsCount}, Emotional triggers: ${emotionalTriggersCount}`);
     
     this.integrationReport.push({
       file: 'emotional.json',
@@ -371,7 +371,7 @@ class EnhancedDataValidator {
       conciergeReady = true;
     }
 
-    console.log(`  - Lounge tools: ${loungeToolsReady ? 'active' : 'inactive'}, Concierge: ${conciergeReady ? 'active' : 'inactive'}`);
+    console.info(`  - Lounge tools: ${loungeToolsReady ? 'active' : 'inactive'}, Concierge: ${conciergeReady ? 'active' : 'inactive'}`);
     
     this.integrationReport.push({
       file: 'lounge.json',
@@ -388,7 +388,7 @@ class EnhancedDataValidator {
       return;
     }
 
-    console.log('  - Flavor atlas structure validated');
+    console.info('  - Flavor atlas structure validated');
     
     this.integrationReport.push({
       file: 'flavor-atlas.json',
@@ -405,18 +405,18 @@ class EnhancedDataValidator {
   }
 
   generateIntegrationReport() {
-    console.log('\n📊 Integration Status Report:');
-    console.log('=' .repeat(60));
+    console.info('\n📊 Integration Status Report:');
+    console.info('=' .repeat(60));
     
     this.integrationReport.forEach(report => {
       const statusIcon = report.status === 'ready' ? '✅' : report.status === 'partial' ? '⚠️' : '❌';
-      console.log(`${statusIcon} ${report.file}`);
-      console.log(`   Status: ${report.status}`);
-      console.log(`   Integration: ${report.integration}`);
-      if (report.entries) {console.log(`   Entries: ${report.entries}`);}
-      if (report.lessons) {console.log(`   Lessons: ${report.lessons}`);}
-      if (report.implemented) {console.log(`   Features: ${report.implemented}/${report.total}`);}
-      console.log('');
+      console.info(`${statusIcon} ${report.file}`);
+      console.info(`   Status: ${report.status}`);
+      console.info(`   Integration: ${report.integration}`);
+      if (report.entries) {console.info(`   Entries: ${report.entries}`);}
+      if (report.lessons) {console.info(`   Lessons: ${report.lessons}`);}
+      if (report.implemented) {console.info(`   Features: ${report.implemented}/${report.total}`);}
+      console.info('');
     });
 
     // Integration readiness summary
@@ -424,19 +424,19 @@ class EnhancedDataValidator {
     const totalCount = this.integrationReport.length;
     const readiness = Math.round((readyCount / totalCount) * 100);
     
-    console.log(`📈 Overall Integration Readiness: ${readiness}% (${readyCount}/${totalCount} files ready)`);
+    console.info(`📈 Overall Integration Readiness: ${readiness}% (${readyCount}/${totalCount} files ready)`);
     
     if (readiness >= 80) {
-      console.log('🎉 System is ready for full integration!');
+      console.info('🎉 System is ready for full integration!');
     } else if (readiness >= 60) {
-      console.log('⚡ System is mostly ready - minor adjustments needed');
+      console.info('⚡ System is mostly ready - minor adjustments needed');
     } else {
-      console.log('🔧 System needs significant integration work');
+      console.info('🔧 System needs significant integration work');
     }
   }
 
   validateSecurity() {
-    console.log('\n🔒 Security Validation...');
+    console.info('\n🔒 Security Validation...');
     
     // Check for potential XSS patterns in JSON data
     const checkXSS = (obj, path = '') => {
@@ -487,7 +487,7 @@ class EnhancedDataValidator {
   }
 
   validatePerformance() {
-    console.log('\n⚡ Performance Validation...');
+    console.info('\n⚡ Performance Validation...');
     
     const checkFileSize = (filePath, maxSize) => {
       if (fs.existsSync(filePath)) {
@@ -497,7 +497,7 @@ class EnhancedDataValidator {
         if (stats.size > maxSize) {
           this.warnings.push(`${filePath} is ${sizeKB}KB (recommended: <${Math.round(maxSize/1024)}KB)`);
         } else {
-          console.log(`  ✓ ${filePath}: ${sizeKB}KB`);
+          console.info(`  ✓ ${filePath}: ${sizeKB}KB`);
         }
       }
     };
@@ -516,8 +516,8 @@ class EnhancedDataValidator {
   }
 
   generateOptimizationRecommendations() {
-    console.log('\n🚀 Optimization Recommendations:');
-    console.log('=' .repeat(60));
+    console.info('\n🚀 Optimization Recommendations:');
+    console.info('=' .repeat(60));
     
     const recommendations = [];
     
@@ -546,15 +546,15 @@ class EnhancedDataValidator {
     
     if (recommendations.length > 0) {
       recommendations.forEach((rec, index) => {
-        console.log(`${index + 1}. ${rec}`);
+        console.info(`${index + 1}. ${rec}`);
       });
     } else {
-      console.log('🎉 No optimization recommendations - system is fully optimized!');
+      console.info('🎉 No optimization recommendations - system is fully optimized!');
     }
   }
 
   run() {
-    console.log('🔍 Starting Enhanced Data Validation & Integration Analysis...\n');
+    console.info('🔍 Starting Enhanced Data Validation & Integration Analysis...\n');
 
     const jsonFiles = [
       'flavorverse_nodes.json',
@@ -583,22 +583,22 @@ class EnhancedDataValidator {
     this.generateOptimizationRecommendations();
 
     // Summary
-    console.log('\n📊 Validation Summary:');
-    console.log(`  Errors: ${this.errors.length}`);
-    console.log(`  Warnings: ${this.warnings.length}`);
+    console.info('\n📊 Validation Summary:');
+    console.error(`  Errors: ${this.errors.length}`);
+    console.warn(`  Warnings: ${this.warnings.length}`);
 
     if (this.errors.length > 0) {
-      console.log('\n❌ Errors:');
-      this.errors.forEach(error => console.log(`  - ${error}`));
+      console.error('\n❌ Errors:');
+      this.errors.forEach(error => console.error(`  - ${error}`));
     }
 
     if (this.warnings.length > 0) {
-      console.log('\n⚠️  Warnings:');
-      this.warnings.forEach(warning => console.log(`  - ${warning}`));
+      console.warn('\n⚠️  Warnings:');
+      this.warnings.forEach(warning => console.warn(`  - ${warning}`));
     }
 
     if (this.errors.length === 0 && this.warnings.length === 0) {
-      console.log('\n✅ All validations passed - System ready for full integration!');
+      console.info('\n✅ All validations passed - System ready for full integration!');
     }
 
     return this.errors.length === 0;

@@ -340,14 +340,14 @@ document.addEventListener('DOMContentLoaded', () => {
       statusDiv.textContent = "Ready for your next question...";
       inputArea.value = ''; // Clear input on success
 
-    } catch (_err) {
-      console.error('GPT request failed:', err);
+    } catch (error) {
+      console.error('GPT request failed:', error);
       
       let fallbackResponse;
-      if (err.name === 'AbortError') {
+      if (error.name === 'AbortError') {
         fallbackResponse = "Request timed out. Let me try to help locally...";
         statusDiv.textContent = "Connection timeout - using local assistance";
-      } else if (err.message.includes('Failed to fetch')) {
+      } else if (error.message.includes('Failed to fetch')) {
         fallbackResponse = "Network unavailable. Using local knowledge...";
         statusDiv.textContent = "Offline mode - local assistance active";
       } else {

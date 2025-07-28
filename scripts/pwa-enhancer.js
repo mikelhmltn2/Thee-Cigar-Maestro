@@ -24,7 +24,7 @@ class PWAEnhancer {
    * Apply all PWA enhancements
    */
   async enhancePWA() {
-    console.log('🚀 Enhancing PWA Features...\n');
+    console.info('🚀 Enhancing PWA Features...\n');
 
     // Enhance manifest with additional features
     await this.enhanceManifest();
@@ -49,7 +49,7 @@ class PWAEnhancer {
    * Enhance manifest with additional PWA features
    */
   async enhanceManifest() {
-    console.log('📱 Enhancing PWA Manifest...');
+    console.info('📱 Enhancing PWA Manifest...');
     
     try {
       const manifest = JSON.parse(fs.readFileSync(this.manifestPath, 'utf8'));
@@ -99,9 +99,9 @@ class PWAEnhancer {
       }
 
       fs.writeFileSync(this.manifestPath, JSON.stringify(manifest, null, 2));
-      console.log('   📱 Manifest enhanced with advanced PWA features\n');
+      console.info('   📱 Manifest enhanced with advanced PWA features\n');
       
-    } catch (_error) {
+    } catch (error) {
       console.error('   ❌ Failed to enhance manifest:', error.message);
     }
   }
@@ -110,7 +110,7 @@ class PWAEnhancer {
    * Enhance service worker with advanced features
    */
   async enhanceServiceWorker() {
-    console.log('⚙️  Enhancing Service Worker...');
+    console.info('⚙️  Enhancing Service Worker...');
     
     const enhancedSWCode = `
 // Enhanced Service Worker Features
@@ -118,7 +118,7 @@ class PWAEnhancer {
 
 // Register background sync
 self.addEventListener('sync', event => {
-  console.log('Background sync triggered:', event.tag);
+  console.info('Background sync triggered:', event.tag);
   
   if (event.tag === 'background-sync-cigar-data') {
     event.waitUntil(doBackgroundSync());
@@ -131,7 +131,7 @@ self.addEventListener('sync', event => {
 
 // Handle push notifications
 self.addEventListener('push', event => {
-  console.log('Push notification received:', event);
+  console.info('Push notification received:', event);
   
   const options = {
     body: event.data ? event.data.text() : 'New cigar recommendations available!',
@@ -163,7 +163,7 @@ self.addEventListener('push', event => {
 
 // Handle notification clicks
 self.addEventListener('notificationclick', event => {
-  console.log('Notification click received:', event);
+  console.info('Notification click received:', event);
   
   event.notification.close();
   
@@ -184,7 +184,7 @@ self.addEventListener('notificationclick', event => {
 // Background sync for cigar data
 async function doBackgroundSync() {
   try {
-    console.log('Performing background sync for cigar data...');
+    console.info('Performing background sync for cigar data...');
     
     // Sync pending cigar ratings
     const pendingRatings = await getPendingRatings();
@@ -198,7 +198,7 @@ async function doBackgroundSync() {
       await syncPreferences(pendingPreferences);
     }
     
-    console.log('Background sync completed successfully');
+    console.info('Background sync completed successfully');
     
     // Show success notification
     await self.registration.showNotification('Sync Complete', {
@@ -207,7 +207,7 @@ async function doBackgroundSync() {
       tag: 'sync-complete'
     });
     
-  } catch (_error) {
+  } catch (error) {
     console.error('Background sync failed:', error);
     
     // Show error notification
@@ -222,15 +222,15 @@ async function doBackgroundSync() {
 // Background sync for analytics
 async function syncAnalytics() {
   try {
-    console.log('Syncing analytics data...');
+    console.info('Syncing analytics data...');
     
     const pendingEvents = await getPendingAnalytics();
     if (pendingEvents.length > 0) {
       await sendAnalytics(pendingEvents);
     }
     
-    console.log('Analytics sync completed');
-  } catch (_error) {
+    console.info('Analytics sync completed');
+  } catch (error) {
     console.error('Analytics sync failed:', error);
   }
 }
@@ -363,8 +363,8 @@ async function queueForBackgroundSync(request) {
     const swEnhancementPath = path.join(rootDir, 'sw-enhancements.js');
     fs.writeFileSync(swEnhancementPath, enhancedSWCode);
     
-    console.log('   ⚙️  Enhanced service worker features created');
-    console.log('   📋 Features added: Background sync, Push notifications, Offline handling\n');
+    console.info('   ⚙️  Enhanced service worker features created');
+    console.info('   📋 Features added: Background sync, Push notifications, Offline handling\n');
     
     this.enhancements.push('✅ Created enhanced service worker with background sync');
     this.enhancements.push('✅ Added push notification support');
@@ -375,7 +375,7 @@ async function queueForBackgroundSync(request) {
    * Create push notification handler for the client
    */
   async createPushNotificationHandler() {
-    console.log('🔔 Creating Push Notification Handler...');
+    console.info('🔔 Creating Push Notification Handler...');
     
     const pushHandlerCode = `
 /**
@@ -402,7 +402,7 @@ class PushNotificationManager {
     const permission = await Notification.requestPermission();
     
     if (permission === 'granted') {
-      console.log('Notification permission granted');
+      console.info('Notification permission granted');
       return true;
     } else {
       console.warn('Notification permission denied');
@@ -419,12 +419,12 @@ class PushNotificationManager {
         applicationServerKey: this.urlBase64ToUint8Array(this.vapidPublicKey)
       });
       
-      console.log('User subscribed to push notifications:', this.subscription);
+      console.info('User subscribed to push notifications:', this.subscription);
       
       // Send subscription to server
       await this.sendSubscriptionToServer(this.subscription);
       
-    } catch (_error) {
+    } catch (error) {
       console.error('Failed to subscribe user:', error);
     }
   }
@@ -440,11 +440,11 @@ class PushNotificationManager {
       });
       
       if (response.ok) {
-        console.log('Subscription sent to server successfully');
+        console.info('Subscription sent to server successfully');
       } else {
         console.error('Failed to send subscription to server');
       }
-    } catch (_error) {
+    } catch (error) {
       console.error('Error sending subscription:', error);
     }
   }
@@ -523,7 +523,7 @@ if (typeof module !== 'undefined' && module.exports) {
     const pushHandlerPath = path.join(rootDir, 'push-notifications.js');
     fs.writeFileSync(pushHandlerPath, pushHandlerCode);
     
-    console.log('   🔔 Push notification handler created');
+    console.info('   🔔 Push notification handler created');
     this.enhancements.push('✅ Created push notification manager with cigar-specific notifications');
   }
 
@@ -531,7 +531,7 @@ if (typeof module !== 'undefined' && module.exports) {
    * Create background sync handler
    */
   async createBackgroundSyncHandler() {
-    console.log('🔄 Creating Background Sync Handler...');
+    console.info('🔄 Creating Background Sync Handler...');
     
     const syncHandlerCode = `
 /**
@@ -583,9 +583,9 @@ class BackgroundSyncManager {
         }
       }
       
-      console.log(\`Queued \${type} data for sync:\`, queueKey);
+      console.info(\`Queued \${type} data for sync:\`, queueKey);
       
-    } catch (_error) {
+    } catch (error) {
       console.error('Failed to queue data for sync:', error);
     }
   }
@@ -599,7 +599,7 @@ class BackgroundSyncManager {
         return;
       }
       
-      console.log(\`Processing \${entries.length} pending sync items...\`);
+      console.info(\`Processing \${entries.length} pending sync items...\`);
       
       for (const [key, item] of entries) {
         try {
@@ -608,7 +608,7 @@ class BackgroundSyncManager {
           // Remove from queue on success
           delete pendingQueue[key];
           
-        } catch (_error) {
+        } catch (error) {
           console.error(\`Failed to sync item \${key}:\`, error);
           
           // Increment retry count
@@ -625,7 +625,7 @@ class BackgroundSyncManager {
       // Update localStorage
       localStorage.setItem('pendingSync', JSON.stringify(pendingQueue));
       
-    } catch (_error) {
+    } catch (error) {
       console.error('Error processing pending sync:', error);
     }
   }
@@ -658,7 +658,7 @@ class BackgroundSyncManager {
       throw new Error(\`Failed to sync rating: \${response.status}\`);
     }
     
-    console.log('Synced cigar rating:', data);
+    console.info('Synced cigar rating:', data);
   }
 
   async syncUserPreference(data) {
@@ -672,7 +672,7 @@ class BackgroundSyncManager {
       throw new Error(\`Failed to sync preference: \${response.status}\`);
     }
     
-    console.log('Synced user preference:', data);
+    console.info('Synced user preference:', data);
   }
 
   async syncAnalyticsEvent(data) {
@@ -686,7 +686,7 @@ class BackgroundSyncManager {
       throw new Error(\`Failed to sync analytics: \${response.status}\`);
     }
     
-    console.log('Synced analytics event:', data);
+    console.info('Synced analytics event:', data);
   }
 
   async syncFavoriteCigar(data) {
@@ -700,7 +700,7 @@ class BackgroundSyncManager {
       throw new Error(\`Failed to sync favorite: \${response.status}\`);
     }
     
-    console.log('Synced favorite cigar:', data);
+    console.info('Synced favorite cigar:', data);
   }
 
   // Convenience methods for specific data types
@@ -741,7 +741,7 @@ if (typeof module !== 'undefined' && module.exports) {
     const syncHandlerPath = path.join(rootDir, 'background-sync.js');
     fs.writeFileSync(syncHandlerPath, syncHandlerCode);
     
-    console.log('   🔄 Background sync handler created');
+    console.info('   🔄 Background sync handler created');
     this.enhancements.push('✅ Created background sync manager for offline data');
   }
 
@@ -749,7 +749,7 @@ if (typeof module !== 'undefined' && module.exports) {
    * Create offline page
    */
   async createOfflinePage() {
-    console.log('📱 Creating Offline Page...');
+    console.info('📱 Creating Offline Page...');
     
     const offlinePageHTML = `
 <!DOCTYPE html>
@@ -906,7 +906,7 @@ if (typeof module !== 'undefined' && module.exports) {
     const offlinePagePath = path.join(rootDir, 'offline.html');
     fs.writeFileSync(offlinePagePath, offlinePageHTML);
     
-    console.log('   📱 Offline page created with cigar-specific features');
+    console.info('   📱 Offline page created with cigar-specific features');
     this.enhancements.push('✅ Created offline page with app-specific functionality');
   }
 
@@ -914,40 +914,40 @@ if (typeof module !== 'undefined' && module.exports) {
    * Generate enhancement report
    */
   generateEnhancementReport() {
-    console.log('\n📋 PWA Enhancement Report');
-    console.log('═'.repeat(50));
+    console.info('\n📋 PWA Enhancement Report');
+    console.info('═'.repeat(50));
     
-    console.log('\n✅ Enhancements Applied:');
+    console.info('\n✅ Enhancements Applied:');
     this.enhancements.forEach(enhancement => {
-      console.log(`   ${enhancement}`);
+      console.info(`   ${enhancement}`);
     });
     
-    console.log('\n🚀 New PWA Features:');
-    console.log('   📱 Enhanced manifest with display_override and link handling');
-    console.log('   🔔 Push notifications with cigar-specific templates');
-    console.log('   🔄 Background sync for offline data queuing');
-    console.log('   📶 Advanced offline functionality');
-    console.log('   🎯 App shortcuts with optimized icons');
-    console.log('   📋 Comprehensive offline page with feature list');
+    console.info('\n🚀 New PWA Features:');
+    console.info('   📱 Enhanced manifest with display_override and link handling');
+    console.info('   🔔 Push notifications with cigar-specific templates');
+    console.info('   🔄 Background sync for offline data queuing');
+    console.info('   📶 Advanced offline functionality');
+    console.info('   🎯 App shortcuts with optimized icons');
+    console.info('   📋 Comprehensive offline page with feature list');
     
-    console.log('\n📊 Implementation Status:');
-    console.log('   ✅ Offline functionality: Implemented');
-    console.log('   ✅ Background sync: Implemented');
-    console.log('   ✅ Push notifications: Framework ready');
-    console.log('   ✅ App shortcuts: Enhanced');
-    console.log('   ✅ Advanced caching: Service worker ready');
+    console.info('\n📊 Implementation Status:');
+    console.info('   ✅ Offline functionality: Implemented');
+    console.info('   ✅ Background sync: Implemented');
+    console.info('   ✅ Push notifications: Framework ready');
+    console.info('   ✅ App shortcuts: Enhanced');
+    console.info('   ✅ Advanced caching: Service worker ready');
     
-    console.log('\n🎯 Roadmap Alignment:');
-    console.log('   PWA Features: ✅ All roadmap items implemented');
-    console.log('   User Experience: ✅ Enhanced for offline usage');
-    console.log('   Performance: ✅ Optimized caching strategies');
-    console.log('   Engagement: ✅ Push notifications ready');
+    console.info('\n🎯 Roadmap Alignment:');
+    console.info('   PWA Features: ✅ All roadmap items implemented');
+    console.info('   User Experience: ✅ Enhanced for offline usage');
+    console.info('   Performance: ✅ Optimized caching strategies');
+    console.info('   Engagement: ✅ Push notifications ready');
     
-    console.log('\n📝 Next Steps:');
-    console.log('   1. Configure VAPID keys for push notifications');
-    console.log('   2. Implement server-side push notification endpoints');
-    console.log('   3. Test offline functionality across devices');
-    console.log('   4. Configure background sync registration intervals');
+    console.info('\n📝 Next Steps:');
+    console.info('   1. Configure VAPID keys for push notifications');
+    console.info('   2. Implement server-side push notification endpoints');
+    console.info('   3. Test offline functionality across devices');
+    console.info('   4. Configure background sync registration intervals');
   }
 }
 

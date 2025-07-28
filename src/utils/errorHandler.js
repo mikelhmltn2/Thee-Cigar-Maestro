@@ -1,444 +1,280 @@
 /**
- * Error Handler Utility for Thee Cigar Maestro
- * Provides consistent error handling and logging across the application
+ * Centralized Error Handling Utility
+ * Provides consistent error handling, logging, and user feedback
  */
 
 class ErrorHandler {
   constructor() {
-    this.errors = [];
+    this.isProduction = process?.env?.NODE_ENV === 'production';
+    this.errorQueue = [];
     this.maxErrors = 100;
-    this.init();
+    
+    // Setup global error handlers
+    this.setupGlobalHandlers();
   }
 
-  init() {
-    // Set up global error handling
-    window.addEventListener('error', (event) => {
-      this.handleError(event.error || new Error(event.message), {
-        filename: event.filename,
-        lineno: event.lineno,
-        colno: event.colno
+  /**
+   * Setup global error handlers for unhandled errors
+   */
+  setupGlobalHandlers() {
+    if (typeof window !== 'undefined') {
+      window.addEventListener('error', (event) => {
+        this.handleError(event.error, 'Global Error Handler');
       });
-    });
 
-    window.addEventListener('unhandledrejection', (event) => {
-      this.handleError(event.reason, {
-        type: 'unhandledrejection'
+      window.addEventListener('unhandledrejection', (event) => {
+        this.handleError(event.reason, 'Unhandled Promise Rejection');
       });
-    });
-
-    console.log('🛡️ Error Handler initialized');
-  }
-
-  handleError(error, context = {}) {
-    const errorInfo = {
-      message: error.message || error.toString(),
-      stack: error.stack,
-      timestamp: new Date().toISOString(),
-      context,
-      userAgent: navigator.userAgent,
-      url: window.location.href
-    };
-
-    // Store error
-    this.errors.unshift(errorInfo);
-    if (this.errors.length > this.maxErrors) {
-      this.errors = this.errors.slice(0, this.maxErrors);
     }
+  }
 
+  /**
+   * Main error handling method
+   * @param {Error|string} error - The error object or message
+   * @param {string} context - Context where the error occurred
+   * @param {Object} metadata - Additional metadata
+   */
+  handleError(error, context = 'Unknown', metadata = {}) {
+    const errorInfo = this.processError(error, context, metadata);
+    
     // Log error
-    console.error('🚨 Application Error:', errorInfo);
-
-    // Show user-friendly message
-    this.showUserMessage(error, context);
-
-    // Save to localStorage for debugging
-    this.saveToStorage();
-
+    this.logError(errorInfo);
+    
+    // Store error for analytics
+    this.storeError(errorInfo);
+    
+    // Show user feedback if not in production
+    if (!this.isProduction) {
+      console.error('🚨 Error Handler:', errorInfo);
+    }
+    
     return errorInfo;
   }
 
-  showUserMessage(error, context) {
-    let message = 'An unexpected error occurred.';
-    let type = 'error';
-
-    // Categorize errors for better user messages
-    if (error.name === 'NetworkError' || error.message.includes('fetch')) {
-      message = 'Network connection issue. Please check your internet connection.';
-    } else if (error.message.includes('permission')) {
-      message = 'Permission denied. Please check your browser settings.';
-    } else if (error.message.includes('3D') || error.message.includes('WebGL')) {
-      message = 'Graphics rendering issue. Try refreshing the page or updating your browser.';
-    } else if (error.message.includes('audio') || error.message.includes('microphone')) {
-      message = 'Audio feature unavailable. Please check your microphone permissions.';
-    } else if (context.type === 'data') {
-      message = 'Data loading issue. Some features may be unavailable.';
-      type = 'warning';
-    }
-
-    // Show toast if UI manager is available
-    if (window.uiManager && typeof window.uiManager.showToast === 'function') {
-      window.uiManager.showToast(message, type, 5000);
+  /**
+   * Process and normalize error information
+   * @param {Error|string} error - The error
+   * @param {string} context - Error context
+   * @param {Object} metadata - Additional data
+   * @returns {Object} Processed error information
+   */
+  processError(error, context, metadata) {
+    const timestamp = new Date().toISOString();
+    
+    // Normalize error object
+    let errorObj;
+    if (error instanceof Error) {
+      errorObj = {
+        name: error.name,
+        message: error.message,
+        stack: error.stack
+      };
+    } else if (typeof error === 'string') {
+      errorObj = {
+        name: 'CustomError',
+        message: error,
+        stack: new Error().stack
+      };
     } else {
-      // Fallback to alert
-      console.warn('Toast system unavailable, falling back to console warning:', message);
-    }
-  }
-
-  saveToStorage() {
-    try {
-      const recentErrors = this.errors.slice(0, 10); // Only save recent errors
-      localStorage.setItem('cigar_maestro_errors', JSON.stringify(recentErrors));
-    } catch (_e) {
-      console.warn('Could not save errors to localStorage:', e);
-    }
-  }
-
-  loadFromStorage() {
-    try {
-      const saved = localStorage.getItem('cigar_maestro_errors');
-      if (saved) {
-        const savedErrors = JSON.parse(saved);
-        this.errors = savedErrors.concat(this.errors);
-      }
-    } catch (_e) {
-      console.warn('Could not load errors from localStorage:', e);
-    }
-  }
-
-  // Utility methods
-  logWarning(message, context = {}) {
-    const warning = {
-      level: 'warning',
-      message,
-      timestamp: new Date().toISOString(),
-      context
-    };
-
-    console.warn('⚠️ Warning:', warning);
-    
-    if (window.uiManager && typeof window.uiManager.showToast === 'function') {
-      window.uiManager.showToast(message, 'warning', 3000);
+      errorObj = {
+        name: 'UnknownError',
+        message: 'An unknown error occurred',
+        stack: new Error().stack,
+        originalError: error
+      };
     }
 
-    return warning;
-  }
-
-  logInfo(message, context = {}) {
-    const info = {
-      level: 'info',
-      message,
-      timestamp: new Date().toISOString(),
-      context
-    };
-
-    console.info('ℹ️ Info:', info);
-    
-    if (window.uiManager && typeof window.uiManager.showToast === 'function') {
-      window.uiManager.showToast(message, 'info', 2000);
-    }
-
-    return info;
-  }
-
-  logSuccess(message, context = {}) {
-    const success = {
-      level: 'success',
-      message,
-      timestamp: new Date().toISOString(),
-      context
-    };
-
-    console.log('✅ Success:', success);
-    
-    if (window.uiManager && typeof window.uiManager.showToast === 'function') {
-      window.uiManager.showToast(message, 'success', 2000);
-    }
-
-    return success;
-  }
-
-  // Performance monitoring
-  measurePerformance(name, fn) {
-    const start = performance.now();
-    try {
-      const result = fn();
-      const end = performance.now();
-      const duration = end - start;
-      
-      console.log(`⏱️ Performance: ${name} took ${duration.toFixed(2)}ms`);
-      
-      // Log slow operations
-      if (duration > 1000) {
-        this.logWarning(`Slow operation detected: ${name} took ${duration.toFixed(2)}ms`, {
-          operation: name,
-          duration
-        });
-      }
-      
-      return result;
-    } catch (_error) {
-      const end = performance.now();
-      const duration = end - start;
-      
-      this.handleError(error, {
-        operation: name,
-        duration
-      });
-      
-      throw error;
-    }
-  }
-
-  async measureAsyncPerformance(name, asyncFn) {
-    const start = performance.now();
-    try {
-      const result = await asyncFn();
-      const end = performance.now();
-      const duration = end - start;
-      
-      console.log(`⏱️ Async Performance: ${name} took ${duration.toFixed(2)}ms`);
-      
-      // Log slow operations
-      if (duration > 2000) {
-        this.logWarning(`Slow async operation detected: ${name} took ${duration.toFixed(2)}ms`, {
-          operation: name,
-          duration
-        });
-      }
-      
-      return result;
-    } catch (_error) {
-      const end = performance.now();
-      const duration = end - start;
-      
-      this.handleError(error, {
-        operation: name,
-        duration
-      });
-      
-      throw error;
-    }
-  }
-
-  // Data validation helpers
-  validateRequired(value, fieldName) {
-    if (value === null || value === undefined || value === '') {
-      throw new Error(`Required field missing: ${fieldName}`);
-    }
-    return true;
-  }
-
-  validateType(value, expectedType, fieldName) {
-    if (typeof value !== expectedType) {
-      throw new Error(`Invalid type for ${fieldName}: expected ${expectedType}, got ${typeof value}`);
-    }
-    return true;
-  }
-
-  validateArray(value, fieldName) {
-    if (!Array.isArray(value)) {
-      throw new Error(`Invalid type for ${fieldName}: expected array, got ${typeof value}`);
-    }
-    return true;
-  }
-
-  validateObject(value, fieldName) {
-    if (typeof value !== 'object' || value === null || Array.isArray(value)) {
-      throw new Error(`Invalid type for ${fieldName}: expected object, got ${typeof value}`);
-    }
-    return true;
-  }
-
-  // Network error handling
-  handleNetworkError(error, url, options = {}) {
-    const networkError = new Error(`Network request failed: ${error.message}`);
-    networkError.name = 'NetworkError';
-    
-    return this.handleError(networkError, {
-      url,
-      options,
-      originalError: error.message
-    });
-  }
-
-  // 3D/WebGL error handling
-  handleWebGLError(error, context = {}) {
-    const webglError = new Error(`WebGL/3D rendering error: ${error.message || error}`);
-    webglError.name = 'WebGLError';
-    
-    return this.handleError(webglError, {
-      ...context,
-      webglSupported: !!window.WebGLRenderingContext,
-      webgl2Supported: !!window.WebGL2RenderingContext
-    });
-  }
-
-  // Audio error handling
-  handleAudioError(error, context = {}) {
-    const audioError = new Error(`Audio error: ${error.message || error}`);
-    audioError.name = 'AudioError';
-    
-    return this.handleError(audioError, {
-      ...context,
-      mediaDevicesSupported: !!navigator.mediaDevices,
-      getUserMediaSupported: !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia)
-    });
-  }
-
-  // Data error handling
-  handleDataError(error, dataSource, context = {}) {
-    const dataError = new Error(`Data error from ${dataSource}: ${error.message || error}`);
-    dataError.name = 'DataError';
-    
-    return this.handleError(dataError, {
-      ...context,
-      dataSource,
-      type: 'data'
-    });
-  }
-
-  // Recovery suggestions
-  getSuggestions(error) {
-    const suggestions = [];
-    
-    if (error.message.includes('network') || error.message.includes('fetch')) {
-      suggestions.push('Check your internet connection');
-      suggestions.push('Try refreshing the page');
-    }
-    
-    if (error.message.includes('WebGL') || error.message.includes('3D')) {
-      suggestions.push('Update your browser to the latest version');
-      suggestions.push('Enable hardware acceleration in browser settings');
-      suggestions.push('Try using a different browser');
-    }
-    
-    if (error.message.includes('permission')) {
-      suggestions.push('Check browser permissions for this site');
-      suggestions.push('Reload the page and allow permissions when prompted');
-    }
-    
-    if (error.message.includes('storage') || error.message.includes('localStorage')) {
-      suggestions.push('Clear browser cache and cookies');
-      suggestions.push('Check available storage space');
-    }
-    
-    return suggestions;
-  }
-
-  // Debug information
-  getDebugInfo() {
     return {
-      errors: this.errors.slice(0, 5), // Last 5 errors
-      browser: {
-        userAgent: navigator.userAgent,
-        language: navigator.language,
-        cookieEnabled: navigator.cookieEnabled,
-        onLine: navigator.onLine
-      },
-      features: {
-        webgl: !!window.WebGLRenderingContext,
-        webgl2: !!window.WebGL2RenderingContext,
-        mediaDevices: !!navigator.mediaDevices,
-        serviceWorker: 'serviceWorker' in navigator,
-        localStorage: this.checkLocalStorage(),
-        webAudio: !!(window.AudioContext || window.webkitAudioContext)
-      },
-      performance: {
-        memory: performance.memory ? {
-          used: Math.round(performance.memory.usedJSHeapSize / 1048576),
-          total: Math.round(performance.memory.totalJSHeapSize / 1048576),
-          limit: Math.round(performance.memory.jsHeapSizeLimit / 1048576)
-        } : null
+      id: this.generateErrorId(),
+      timestamp,
+      context,
+      error: errorObj,
+      metadata: {
+        userAgent: typeof navigator !== 'undefined' ? navigator.userAgent : 'Unknown',
+        url: typeof window !== 'undefined' ? window.location.href : 'Unknown',
+        ...metadata
       }
     };
   }
 
-  checkLocalStorage() {
-    try {
-      const test = '__localStorage_test__';
-      localStorage.setItem(test, test);
-      localStorage.removeItem(test);
-      return true;
-    } catch (_e) {
-      return false;
+  /**
+   * Log error based on environment
+   * @param {Object} errorInfo - Processed error information
+   */
+  logError(errorInfo) {
+    if (this.isProduction) {
+      // In production, use console.error for critical errors only
+      console.error(`[${errorInfo.context}] ${errorInfo.error.message}`);
+    } else {
+      // In development, provide detailed logging
+      console.error('🚨 Error Details:', {
+        context: errorInfo.context,
+        message: errorInfo.error.message,
+        timestamp: errorInfo.timestamp,
+        metadata: errorInfo.metadata
+      });
+      
+      if (errorInfo.error.stack) {
+        console.error('📍 Stack Trace:', errorInfo.error.stack);
+      }
     }
   }
 
-  // Export error report
-  exportErrorReport() {
-    const report = {
-      timestamp: new Date().toISOString(),
-      errors: this.errors,
-      debugInfo: this.getDebugInfo(),
-      url: window.location.href
-    };
-
-    const dataStr = JSON.stringify(report, null, 2);
-    const dataBlob = new Blob([dataStr], { type: 'application/json' });
+  /**
+   * Store error for analytics and monitoring
+   * @param {Object} errorInfo - Processed error information
+   */
+  storeError(errorInfo) {
+    // Add to error queue
+    this.errorQueue.push(errorInfo);
     
-    const link = document.createElement('a');
-    link.href = URL.createObjectURL(dataBlob);
-    link.download = `cigar-maestro-error-report-${new Date().toISOString().split('T')[0]}.json`;
-    link.click();
-
-    this.logSuccess('Error report exported successfully');
+    // Maintain queue size
+    if (this.errorQueue.length > this.maxErrors) {
+      this.errorQueue.shift();
+    }
+    
+    // Store in localStorage for debugging (development only)
+    if (!this.isProduction && typeof localStorage !== 'undefined') {
+      try {
+        const existingErrors = JSON.parse(localStorage.getItem('errorLog') || '[]');
+        existingErrors.push(errorInfo);
+        
+        // Keep only last 50 errors
+        const recentErrors = existingErrors.slice(-50);
+        localStorage.setItem('errorLog', JSON.stringify(recentErrors));
+      } catch (storageError) {
+        console.warn('Failed to store error in localStorage:', storageError);
+      }
+    }
   }
 
-  // Clear errors
+  /**
+   * Generate unique error ID
+   * @returns {string} Unique error identifier
+   */
+  generateErrorId() {
+    return `err_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+  }
+
+  /**
+   * Handle API errors specifically
+   * @param {Response} response - Fetch response object
+   * @param {string} endpoint - API endpoint
+   * @returns {Object} Error information
+   */
+  async handleApiError(response, endpoint) {
+    let errorMessage = `API Error: ${response.status} ${response.statusText}`;
+    
+    try {
+      const errorData = await response.json();
+      errorMessage = errorData.message || errorMessage;
+    } catch (parseError) {
+      // Response body is not JSON, use status text
+      console.warn('Could not parse API error response');
+    }
+    
+    return this.handleError(new Error(errorMessage), 'API Request', {
+      endpoint,
+      status: response.status,
+      statusText: response.statusText
+    });
+  }
+
+  /**
+   * Handle network errors
+   * @param {Error} networkError - Network error object
+   * @param {string} context - Context of the network operation
+   * @returns {Object} Error information
+   */
+  handleNetworkError(networkError, context = 'Network Operation') {
+    return this.handleError(networkError, context, {
+      type: 'network',
+      online: typeof navigator !== 'undefined' ? navigator.onLine : true
+    });
+  }
+
+  /**
+   * Handle validation errors
+   * @param {string} field - Field that failed validation
+   * @param {string} message - Validation error message
+   * @param {*} value - Invalid value
+   * @returns {Object} Error information
+   */
+  handleValidationError(field, message, value = null) {
+    return this.handleError(
+      new Error(`Validation Error: ${message}`),
+      'Data Validation',
+      { field, value, type: 'validation' }
+    );
+  }
+
+  /**
+   * Get recent errors for debugging
+   * @param {number} limit - Number of recent errors to return
+   * @returns {Array} Recent error objects
+   */
+  getRecentErrors(limit = 10) {
+    return this.errorQueue.slice(-limit);
+  }
+
+  /**
+   * Clear error queue
+   */
   clearErrors() {
-    this.errors = [];
-    localStorage.removeItem('cigar_maestro_errors');
-    this.logInfo('Error history cleared');
-  }
-
-  // Get error statistics
-  getErrorStats() {
-    const now = Date.now();
-    const oneHour = 60 * 60 * 1000;
-    const oneDay = 24 * oneHour;
-
-    const recentErrors = this.errors.filter(error => 
-      now - new Date(error.timestamp).getTime() < oneHour
-    );
-
-    const dailyErrors = this.errors.filter(error => 
-      now - new Date(error.timestamp).getTime() < oneDay
-    );
-
-    return {
-      total: this.errors.length,
-      lastHour: recentErrors.length,
-      lastDay: dailyErrors.length,
-      mostCommon: this.getMostCommonError()
-    };
-  }
-
-  getMostCommonError() {
-    const errorCounts = {};
+    this.errorQueue = [];
     
-    this.errors.forEach(error => {
-      const key = error.message.substring(0, 50); // First 50 chars
-      errorCounts[key] = (errorCounts[key] || 0) + 1;
-    });
+    if (!this.isProduction && typeof localStorage !== 'undefined') {
+      localStorage.removeItem('errorLog');
+    }
+  }
 
-    let mostCommon = null;
-    let maxCount = 0;
+  /**
+   * Safe async operation wrapper
+   * @param {Function} operation - Async operation to execute
+   * @param {string} context - Context for error handling
+   * @param {*} fallbackValue - Value to return on error
+   * @returns {Promise} Operation result or fallback value
+   */
+  async safeAsync(operation, context, fallbackValue = null) {
+    try {
+      return await operation();
+    } catch (error) {
+      this.handleError(error, context);
+      return fallbackValue;
+    }
+  }
 
-    Object.entries(errorCounts).forEach(([message, count]) => {
-      if (count > maxCount) {
-        maxCount = count;
-        mostCommon = { message, count };
-      }
-    });
-
-    return mostCommon;
+  /**
+   * Safe sync operation wrapper
+   * @param {Function} operation - Sync operation to execute
+   * @param {string} context - Context for error handling
+   * @param {*} fallbackValue - Value to return on error
+   * @returns {*} Operation result or fallback value
+   */
+  safeSync(operation, context, fallbackValue = null) {
+    try {
+      return operation();
+    } catch (error) {
+      this.handleError(error, context);
+      return fallbackValue;
+    }
   }
 }
 
-// Create global instance
+// Create singleton instance
 const errorHandler = new ErrorHandler();
 
-// Load any saved errors
-errorHandler.loadFromStorage();
-
+// Export for use throughout the application
 export default errorHandler;
+
+// Export specific methods for convenience
+export const {
+  handleError,
+  handleApiError,
+  handleNetworkError,
+  handleValidationError,
+  safeAsync,
+  safeSync,
+  getRecentErrors,
+  clearErrors
+} = errorHandler;

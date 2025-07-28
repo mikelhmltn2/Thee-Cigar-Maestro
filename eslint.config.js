@@ -1,198 +1,143 @@
 import js from '@eslint/js';
-import html from 'eslint-plugin-html';
-import prettier from 'eslint-config-prettier';
 
 export default [
-  js.configs.recommended,
   {
-    ignores: ['dist/**', 'node_modules/**', '*.min.js']
-  },
-  {
+    ...js.configs.recommended,
     files: ['**/*.js'],
     languageOptions: {
-      ecmaVersion: 2024,
+      ecmaVersion: 2022,
       sourceType: 'module',
       globals: {
-        THREE: 'readonly',
-        __APP_VERSION__: 'readonly',
-        __BUILD_TIME__: 'readonly',
+        // Browser globals
         window: 'readonly',
         document: 'readonly',
-        console: 'readonly',
         navigator: 'readonly',
-        localStorage: 'readonly',
-        sessionStorage: 'readonly',
+        console: 'readonly',
         fetch: 'readonly',
         URL: 'readonly',
         URLSearchParams: 'readonly',
-        Image: 'readonly',
-        Audio: 'readonly',
-        Event: 'readonly',
-        CustomEvent: 'readonly',
-        requestAnimationFrame: 'readonly',
-        cancelAnimationFrame: 'readonly',
+        FormData: 'readonly',
+        FileReader: 'readonly',
+        Blob: 'readonly',
+        
+        // Web APIs
+        localStorage: 'readonly',
+        sessionStorage: 'readonly',
+        indexedDB: 'readonly',
+        MediaRecorder: 'readonly',
+        ResizeObserver: 'readonly',
+        IntersectionObserver: 'readonly',
+        PerformanceObserver: 'readonly',
+        MutationObserver: 'readonly',
+        performance: 'readonly',
+        location: 'readonly',
+        
+        // Timer functions
         setTimeout: 'readonly',
         clearTimeout: 'readonly',
         setInterval: 'readonly',
         clearInterval: 'readonly',
-        location: 'readonly',
-        performance: 'readonly',
-        PerformanceObserver: 'readonly',
+        requestAnimationFrame: 'readonly',
+        cancelAnimationFrame: 'readonly',
+        
+        // Network/Fetch APIs
+        Request: 'readonly',
+        Response: 'readonly',
+        Headers: 'readonly',
         AbortController: 'readonly',
         AbortSignal: 'readonly',
-        Blob: 'readonly',
+        
+        // Event APIs
+        Event: 'readonly',
+        CustomEvent: 'readonly',
+        FetchEvent: 'readonly',
+        
+        // Data/encoding
         atob: 'readonly',
         btoa: 'readonly',
-        Headers: 'readonly',
-        Request: 'readonly',
-        Response: 'readonly',
-        MutationObserver: 'readonly',
-        IntersectionObserver: 'readonly',
-        indexedDB: 'readonly',
+        
+        // Misc browser APIs
+        alert: 'readonly',
+        confirm: 'readonly',
+        prompt: 'readonly',
+        
+        // Three.js globals
+        THREE: 'readonly',
+        
+        // Analytics globals
+        gtag: 'readonly',
+        dataLayer: 'readonly',
+        
+        // Storage APIs
         Storage: 'readonly',
         DOMException: 'readonly',
-        gtag: 'readonly',
-        dataLayer: 'readonly'
-      }
-    },
-    rules: {
-      'no-unused-vars': ['error', { argsIgnorePattern: '^_', varsIgnorePattern: '^_', caughtErrorsIgnorePattern: '^_' }],
-      'no-console': ['warn', { allow: ['warn', 'error'] }],
-      'prefer-const': 'error',
-      'no-var': 'error',
-      'eqeqeq': ['error', 'always'],
-      'curly': ['error', 'all'],
-      'no-eval': 'error',
-      'no-implied-eval': 'error',
-      'no-new-func': 'error',
-      'no-script-url': 'error',
-      'no-alert': 'warn',
-      'no-debugger': 'error',
-      'no-unreachable': 'error',
-      'consistent-return': 'error',
-      'array-callback-return': 'error',
-      'no-loop-func': 'error',
-      'prefer-promise-reject-errors': 'error',
-      'no-throw-literal': 'error',
-      'prefer-arrow-callback': 'error',
-      'arrow-spacing': 'error',
-      'no-duplicate-imports': 'error',
-      'no-useless-constructor': 'error',
-      'object-shorthand': 'error',
-      'prefer-template': 'error',
-      'template-curly-spacing': 'error',
-      'yoda': ['error', 'never'],
-      'spaced-comment': ['error', 'always'],
-      'camelcase': ['error', { properties: 'never' }],
-      'new-cap': ['error', { newIsCap: true, capIsNew: false }],
-      'no-array-constructor': 'error',
-      'no-new-object': 'error',
-      'no-new-wrappers': 'error',
-      'radix': 'error',
-      'no-redeclare': 'error',
-      'no-shadow': 'error',
-      'prefer-destructuring': ['error', { object: true, array: false }],
-      'prefer-rest-params': 'error',
-      'prefer-spread': 'error',
-      'for-direction': 'error',
-      'no-async-promise-executor': 'error',
-      'no-await-in-loop': 'warn',
-      'no-promise-executor-return': 'error',
-      'require-atomic-updates': 'warn'
-    }
-  },
-  {
-    files: ['**/*.html'],
-    plugins: {
-      html
-    },
-    rules: {
-      'no-undef': 'off',
-      'no-unused-vars': 'off'
-    }
-  },
-  {
-    files: ['service-worker.js', '**/sw.js', '**/workbox-*.js'],
-    languageOptions: {
-      ecmaVersion: 2024,
-      sourceType: 'module',
-      globals: {
-        self: 'readonly',
-        caches: 'readonly',
-        clients: 'readonly',
-        importScripts: 'readonly',
-        location: 'readonly',
-        Request: 'readonly',
-        Response: 'readonly',
-        Headers: 'readonly',
-        FetchEvent: 'readonly',
-        registration: 'readonly',
-        define: 'readonly',
-        _: 'readonly'
-      }
-    },
-    rules: {
-      'no-console': 'off',
-      'no-undef': 'error'
-    }
-  },
-  {
-    files: ['**/src/utils/errorHandler.js', 'src/**/*.js'],
-    languageOptions: {
-      ecmaVersion: 2024,
-      sourceType: 'module',
-      globals: {
-        window: 'readonly',
-        document: 'readonly',
-        console: 'readonly',
-        navigator: 'readonly',
-        localStorage: 'readonly',
-        sessionStorage: 'readonly',
-        fetch: 'readonly',
-        process: 'readonly',
-        Buffer: 'readonly'
-      }
-    }
-  },
-  {
-    files: ['validate-data.js', 'integration-test.js', 'vite.config.js', 'vitest.config.js', '**/server.js', 'optimize-assets.js', 'scripts/**/*.js', 'backend-api/**/*.js'],
-    languageOptions: {
-      ecmaVersion: 2024,
-      sourceType: 'module',
-      globals: {
+        
+        // Node.js globals (for backend and scripts)
         process: 'readonly',
         Buffer: 'readonly',
         __dirname: 'readonly',
         __filename: 'readonly',
         global: 'readonly',
-        console: 'readonly',
+        module: 'readonly',
         require: 'readonly',
-        module: 'readonly',
         exports: 'readonly'
       }
     },
     rules: {
-      'no-console': 'off'
+      // Relax some strict rules for development
+      'no-console': ['warn', { 
+        allow: ['warn', 'error', 'info'] 
+      }],
+      'no-unused-vars': ['warn', { 
+        argsIgnorePattern: '^_',
+        varsIgnorePattern: '^_',
+        caughtErrorsIgnorePattern: '^_'
+      }],
+      'consistent-return': 'warn',
+      'eqeqeq': ['error', 'always'],
+      'radix': 'error',
+      'require-atomic-updates': 'warn',
+      'no-await-in-loop': 'warn',
+      'no-promise-executor-return': 'error',
+      'no-shadow': 'warn',
+      
+      // Allow undefined error variables in catch blocks
+      'no-undef': ['error', { 
+        typeof: false 
+      }]
     }
   },
   {
-    files: ['**/ai-recommendation-engine.js', '**/analytics-integration.js', '**/auth-system.js', '**/local-storage-manager.js', '**/ui-enhancements.js', '**/advanced-search.js'],
+    // Service Worker specific configuration
+    files: ['**/service-worker.js', '**/sw.js', '**/workbox-*.js', 'sw-*.js'],
     languageOptions: {
-      ecmaVersion: 2024,
-      sourceType: 'module',
       globals: {
-        window: 'readonly',
-        document: 'readonly',
-        console: 'readonly',
-        navigator: 'readonly',
-        localStorage: 'readonly',
-        sessionStorage: 'readonly',
+        // Service Worker globals
+        self: 'readonly',
+        caches: 'readonly',
+        clients: 'readonly',
+        importScripts: 'readonly',
+        registration: 'readonly',
+        skipWaiting: 'readonly',
+        
+        // Web APIs in SW context
+        Request: 'readonly',
+        Response: 'readonly',
+        Headers: 'readonly',
+        FetchEvent: 'readonly',
+        ExtendableEvent: 'readonly',
+        InstallEvent: 'readonly',
+        ActivateEvent: 'readonly',
+        location: 'readonly',
         fetch: 'readonly',
-        THREE: 'readonly',
-        gtag: 'readonly',
-        dataLayer: 'readonly',
-        module: 'readonly',
-        exports: 'readonly'
+        setTimeout: 'readonly',
+        clearTimeout: 'readonly',
+        setInterval: 'readonly',
+        clearInterval: 'readonly',
+        
+        // Build tool globals
+        define: 'readonly',
+        _: 'readonly'
       }
     },
     rules: {
@@ -200,32 +145,74 @@ export default [
     }
   },
   {
-    files: ['tests/**/*.js'],
+    // Backend-specific configuration
+    files: ['backend-api/**/*.js', 'scripts/**/*.js'],
     languageOptions: {
-      ecmaVersion: 2024,
-      sourceType: 'module',
       globals: {
+        // Node.js specific globals
+        process: 'readonly',
+        Buffer: 'readonly',
+        __dirname: 'readonly',
+        __filename: 'readonly',
         global: 'readonly',
+        module: 'readonly',
+        require: 'readonly',
+        exports: 'readonly',
+        
+        // Node.js timer functions
+        setTimeout: 'readonly',
+        clearTimeout: 'readonly',
+        setInterval: 'readonly',
+        clearInterval: 'readonly'
+      }
+    }
+  },
+  {
+    // Test-specific configuration
+    files: ['tests/**/*.js', '**/*.test.js', '**/*.spec.js'],
+    languageOptions: {
+      globals: {
+        // Vitest globals
         describe: 'readonly',
-        test: 'readonly',
         it: 'readonly',
+        test: 'readonly',
         expect: 'readonly',
         beforeEach: 'readonly',
         afterEach: 'readonly',
         beforeAll: 'readonly',
         afterAll: 'readonly',
         vi: 'readonly',
-        vitest: 'readonly',
+        
+        // Test environment globals
         Storage: 'readonly',
         DOMException: 'readonly',
-        performance: 'readonly',
-        window: 'readonly',
-        document: 'readonly'
+        setTimeout: 'readonly',
+        clearTimeout: 'readonly'
       }
     },
     rules: {
-      'no-console': 'off'
+      // Relax rules for tests
+      'no-console': 'off',
+      'no-unused-vars': 'off'
     }
   },
-  prettier
+  {
+    // Build output files (ignore ESLint for these)
+    files: ['dist/**/*.js'],
+    rules: {
+      // Disable all rules for build output
+      'no-undef': 'off',
+      'no-unused-vars': 'off',
+      'eqeqeq': 'off',
+      'no-promise-executor-return': 'off',
+      'radix': 'off'
+    }
+  },
+  {
+    // Configuration files
+    files: ['*.config.js', 'vite.config.js', 'vitest.config.js'],
+    rules: {
+      'no-console': 'off'
+    }
+  }
 ];

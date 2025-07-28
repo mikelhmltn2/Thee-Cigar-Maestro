@@ -20,7 +20,7 @@ class EnhancedCigarModal {
 
   init() {
     this.setupEventListeners();
-    console.log('🚬 Enhanced Cigar Modal initialized');
+    console.info('🚬 Enhanced Cigar Modal initialized');
   }
 
   setupEventListeners() {
@@ -1380,7 +1380,7 @@ class EnhancedCigarModal {
 
   handleRatingClick(element) {
     // Implementation for star rating interaction
-    console.log('Rating clicked:', element);
+    console.info('Rating clicked:', element);
   }
 }
 

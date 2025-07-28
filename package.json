@@ -26,7 +26,10 @@
     "optimize": "node scripts/optimize-logo.js && node optimize-assets.js",
     "performance": "npm run build && node scripts/performance-test.js",
     "pwa-validate": "npm run build && node scripts/pwa-validator.js",
-    "pwa-enhance": "node scripts/pwa-enhancer.js"
+    "pwa-enhance": "node scripts/pwa-enhancer.js",
+    "fix-lint": "node scripts/fix-eslint-issues.js",
+    "quality-check": "npm run lint && npm run health:check && npm run test",
+    "dev-ready": "npm run fix-lint && npm run quality-check"
   },
   "keywords": [
     "cigar",

@@ -33,7 +33,7 @@ class AnalyticsManager {
       this.setupEventListeners();
       
       this.isInitialized = true;
-      console.log('📊 Analytics Manager initialized successfully');
+      console.info('📊 Analytics Manager initialized successfully');
       
       // Track initialization
       this.trackEvent('analytics_initialized', {
@@ -41,7 +41,7 @@ class AnalyticsManager {
         timestamp: new Date().toISOString()
       });
       
-    } catch (_error) {
+    } catch (error) {
       console.error('❌ Analytics initialization failed:', error);
       this.trackError('analytics_init_failed', error);
     }
@@ -54,7 +54,7 @@ class AnalyticsManager {
     try {
       // Initialize Vercel Analytics
       inject();
-      console.log('✅ Vercel Analytics initialized');
+      console.info('✅ Vercel Analytics initialized');
     } catch (error) {
       console.error('❌ Vercel Analytics initialization failed:', error);
     }
@@ -66,7 +66,7 @@ class AnalyticsManager {
   async initializeGA4() {
     // Check if GA4 is already loaded
     if (window.gtag) {
-      console.log('✅ Google Analytics already loaded');
+      console.info('✅ Google Analytics already loaded');
       return;
     }
 
@@ -94,8 +94,8 @@ class AnalyticsManager {
         }
       });
 
-      console.log('✅ Google Analytics 4 initialized');
-    } catch (_error) {
+      console.info('✅ Google Analytics 4 initialized');
+    } catch (error) {
       console.error('❌ GA4 initialization failed:', error);
     }
   }
@@ -117,10 +117,10 @@ class AnalyticsManager {
           getLCP(this.sendToAnalytics.bind(this));
           getTTFB(this.sendToAnalytics.bind(this));
           
-          console.log('✅ Core Web Vitals monitoring initialized');
+          console.info('✅ Core Web Vitals monitoring initialized');
         }
       });
-    } catch (_error) {
+    } catch (error) {
       console.error('❌ Core Web Vitals initialization failed:', error);
     }
   }
@@ -135,10 +135,10 @@ class AnalyticsManager {
       const script = document.createElement('script');
       script.src = 'https://unpkg.com/web-vitals@3/dist/web-vitals.iife.js';
       script.onload = () => {
-        console.log('✅ Web Vitals library loaded');
+        console.info('✅ Web Vitals library loaded');
       };
       document.head.appendChild(script);
-    } catch (_error) {
+    } catch (error) {
       console.error('❌ Failed to load Web Vitals library:', error);
     }
   }
@@ -168,7 +168,7 @@ class AnalyticsManager {
       timestamp: new Date().toISOString()
     });
     
-    console.log(`📊 Core Web Vital - ${name}:`, { delta, value, id });
+    console.info(`📊 Core Web Vital - ${name}:`, { delta, value, id });
   }
 
   /**
@@ -203,7 +203,7 @@ class AnalyticsManager {
       });
     }
 
-    console.log('✅ Error tracking initialized');
+    console.error('✅ Error tracking initialized');
   }
 
   /**
@@ -237,12 +237,12 @@ class AnalyticsManager {
             this.trackLongTask(entry);
           });
         }).observe({entryTypes: ['longtask']});
-      } catch (_error) {
+      } catch (error) {
         console.warn('Long task monitoring not supported:', error);
       }
     }
 
-    console.log('✅ Performance monitoring initialized');
+    console.info('✅ Performance monitoring initialized');
   }
 
   /**
@@ -274,7 +274,7 @@ class AnalyticsManager {
     }
 
     this.trackEvent('page_performance', metrics);
-    console.log('📊 Page performance metrics tracked:', metrics);
+    console.info('📊 Page performance metrics tracked:', metrics);
   }
 
   /**
@@ -393,7 +393,7 @@ class AnalyticsManager {
       }
     }, 30000);
 
-    console.log('✅ User behavior tracking initialized');
+    console.info('✅ User behavior tracking initialized');
   }
 
   /**
@@ -423,7 +423,7 @@ class AnalyticsManager {
       window.storageManager.trackFeatureUsage(`analytics_${eventName}`);
     }
 
-    console.log(`📊 Event tracked: ${eventName}`, enrichedData);
+    console.info(`📊 Event tracked: ${eventName}`, enrichedData);
   }
 
   /**

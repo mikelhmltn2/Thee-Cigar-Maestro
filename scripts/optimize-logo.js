@@ -30,7 +30,7 @@ class LogoOptimizer {
    * Generate optimized logo variants
    */
   async optimizeLogos() {
-    console.log('🖼️  Starting logo optimization...\n');
+    console.info('🖼️  Starting logo optimization...\n');
 
     if (!fs.existsSync(this.inputLogo)) {
       console.error(`❌ Logo file not found: ${this.inputLogo}`);
@@ -40,7 +40,7 @@ class LogoOptimizer {
     // Get original logo info
     const originalStats = fs.statSync(this.inputLogo);
     const originalSizeKB = Math.round(originalStats.size / 1024);
-    console.log(`📸 Original logo: ${originalSizeKB}KB`);
+    console.info(`📸 Original logo: ${originalSizeKB}KB`);
 
     // Define logo variants as specified in roadmap
     const variants = [
@@ -94,7 +94,7 @@ class LogoOptimizer {
         const savings = variant.size ? 0 : originalSizeKB - newSizeKB;
         totalSavings += savings;
 
-        console.log(`✅ Generated ${variant.name}: ${newSizeKB}KB${savings > 0 ? ` (saved ${savings}KB)` : ''}`);
+        console.info(`✅ Generated ${variant.name}: ${newSizeKB}KB${savings > 0 ? ` (saved ${savings}KB)` : ''}`);
 
         // Add to manifest for PWA
         if (variant.format === 'png' && variant.size) {
@@ -104,13 +104,13 @@ class LogoOptimizer {
             type: 'image/png'
           });
         }
-      } catch (_error) {
+      } catch (error) {
         console.error(`❌ Failed to generate ${variant.name}:`, error.message);
       }
     }
 
-    console.log(`\n💾 Total savings: ${totalSavings}KB`);
-    console.log(`📱 Generated ${this.manifests.length} PWA manifest icons`);
+    console.info(`\n💾 Total savings: ${totalSavings}KB`);
+    console.info(`📱 Generated ${this.manifests.length} PWA manifest icons`);
 
     // Update the main logo with the optimized version
     await this.updateMainLogo();
@@ -138,13 +138,13 @@ class LogoOptimizer {
         const newStats = fs.statSync(this.inputLogo);
         const newSizeKB = Math.round(newStats.size / 1024);
         
-        console.log(`\n🔄 Updated main Logo.png: ${newSizeKB}KB`);
+        console.info(`\n🔄 Updated main Logo.png: ${newSizeKB}KB`);
         
         if (newSizeKB <= 200) {
-          console.log(`✅ Logo now meets the <200KB requirement!`);
+          console.info(`✅ Logo now meets the <200KB requirement!`);
         }
       }
-    } catch (_error) {
+    } catch (error) {
       console.error(`❌ Failed to update main logo:`, error.message);
     }
   }
@@ -153,9 +153,9 @@ class LogoOptimizer {
    * Generate PWA manifest suggestions
    */
   generateManifestSuggestions() {
-    console.log('\n📱 PWA Manifest Icon Suggestions:');
-    console.log('Add these to your manifest.json:');
-    console.log(JSON.stringify(this.manifests, null, 2));
+    console.info('\n📱 PWA Manifest Icon Suggestions:');
+    console.info('Add these to your manifest.json:');
+    console.info(JSON.stringify(this.manifests, null, 2));
   }
 }
 

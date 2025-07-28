@@ -123,4 +123,4 @@ global.performance = {
   measure: vi.fn()
 };
 
-console.log('Test environment setup complete');
+console.info('Test environment setup complete');

@@ -44,11 +44,11 @@ async function checkUrl(url, context = '') {
       results.tested++;
 
       if (response.ok) {
-        console.log(`✅ ${url} - HTTP ${response.status}`);
+        console.info(`✅ ${url} - HTTP ${response.status}`);
         results.passed++;
         return { success: true, status: response.status, url, context };
       } else {
-        console.log(`❌ ${url} - HTTP ${response.status} ${context ? `(${context})` : ''}`);
+        console.info(`❌ ${url} - HTTP ${response.status} ${context ? `(${context})` : ''}`);
         results.failed++;
         results.errors.push({
           url,
@@ -58,9 +58,9 @@ async function checkUrl(url, context = '') {
         });
         return { success: false, status: response.status, url, context };
       }
-    } catch (_error) {
+    } catch (error) {
       if (attempt === MAX_RETRIES) {
-        console.log(`❌ ${url} - ${error.message} ${context ? `(${context})` : ''}`);
+        console.error(`❌ ${url} - ${error.message} ${context ? `(${context})` : ''}`);
         results.failed++;
         results.errors.push({
           url,
@@ -70,7 +70,7 @@ async function checkUrl(url, context = '') {
         });
         return { success: false, error: error.message, url, context };
       } else {
-        console.log(`⚠️  ${url} - Retry ${attempt}/${MAX_RETRIES}`);
+        console.info(`⚠️  ${url} - Retry ${attempt}/${MAX_RETRIES}`);
         await new Promise(resolve => setTimeout(resolve, 1000)); // Wait 1 second before retry
       }
     }
@@ -134,7 +134,7 @@ async function checkFileLinks(filePath) {
     return [];
   }
 
-  console.log(`\n📄 Checking ${urls.length} links in ${path.relative(rootDir, filePath)}`);
+  console.info(`\n📄 Checking ${urls.length} links in ${path.relative(rootDir, filePath)}`);
   
   const results = [];
   for (const url of urls) {
@@ -179,24 +179,24 @@ function findFilesToCheck() {
  * Generate report
  */
 function generateReport() {
-  console.log(`\n${  '='.repeat(60)}`);
-  console.log('📊 LINK CHECK SUMMARY');
-  console.log('='.repeat(60));
-  console.log(`Total URLs tested: ${results.tested}`);
-  console.log(`✅ Passed: ${results.passed}`);
-  console.log(`❌ Failed: ${results.failed}`);
-  console.log(`⚠️  Warnings: ${results.warnings}`);
+  console.info(`\n${  '='.repeat(60)}`);
+  console.info('📊 LINK CHECK SUMMARY');
+  console.info('='.repeat(60));
+  console.info(`Total URLs tested: ${results.tested}`);
+  console.info(`✅ Passed: ${results.passed}`);
+  console.error(`❌ Failed: ${results.failed}`);
+  console.warn(`⚠️  Warnings: ${results.warnings}`);
   
   if (results.errors.length > 0) {
-    console.log('\n🚨 FAILED LINKS:');
-    console.log('-'.repeat(40));
+    console.info('\n🚨 FAILED LINKS:');
+    console.info('-'.repeat(40));
     
     results.errors.forEach((error, index) => {
-      console.log(`${index + 1}. ${error.url}`);
-      console.log(`   Context: ${error.context}`);
-      console.log(`   Error: ${error.status || error.error}`);
-      console.log(`   Type: ${error.type}`);
-      console.log('');
+      console.error(`${index + 1}. ${error.url}`);
+      console.error(`   Context: ${error.context}`);
+      console.error(`   Error: ${error.status || error.error}`);
+      console.error(`   Type: ${error.type}`);
+      console.info('');
     });
   }
   
@@ -213,7 +213,7 @@ function generateReport() {
     errors: results.errors
   }, null, 2));
   
-  console.log(`📄 Detailed report saved to: ${path.relative(rootDir, reportPath)}`);
+  console.info(`📄 Detailed report saved to: ${path.relative(rootDir, reportPath)}`);
   
   return results.failed === 0;
 }
@@ -222,12 +222,12 @@ function generateReport() {
  * Main execution
  */
 async function main() {
-  console.log('🔍 Starting Link Check for Thee Cigar Maestro');
-  console.log('='.repeat(60));
+  console.info('🔍 Starting Link Check for Thee Cigar Maestro');
+  console.info('='.repeat(60));
   
   try {
     const files = findFilesToCheck();
-    console.log(`📁 Found ${files.length} files to check`);
+    console.info(`📁 Found ${files.length} files to check`);
     
     for (const file of files) {
       await checkFileLinks(file);
@@ -236,14 +236,14 @@ async function main() {
     const success = generateReport();
     
     if (success) {
-      console.log('\n✅ All links are working correctly!');
+      console.info('\n✅ All links are working correctly!');
       process.exit(0);
     } else {
-      console.log('\n❌ Some links are broken. Please fix them.');
+      console.info('\n❌ Some links are broken. Please fix them.');
       process.exit(1);
     }
     
-  } catch (_error) {
+  } catch (error) {
     console.error('💥 Error during link checking:', error);
     process.exit(1);
   }

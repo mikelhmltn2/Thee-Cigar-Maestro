@@ -29,13 +29,13 @@ class AuthenticationSystem {
       this.setupTokenRefresh();
       
       this.isInitialized = true;
-      console.log('🔐 Authentication System initialized');
+      console.info('🔐 Authentication System initialized');
       
       if (this.authToken) {
         await this.validateToken();
       }
       
-    } catch (_error) {
+    } catch (error) {
       console.error('❌ Authentication initialization failed:', error);
     }
   }
@@ -57,7 +57,7 @@ class AuthenticationSystem {
         const userData = localStorage.getItem('current_user');
         this.currentUser = userData ? JSON.parse(userData) : null;
       }
-    } catch (_error) {
+    } catch (error) {
       console.error('Error loading stored auth:', error);
     }
   }
@@ -93,7 +93,7 @@ class AuthenticationSystem {
           localStorage.removeItem('current_user');
         }
       }
-    } catch (_error) {
+    } catch (error) {
       console.error('Error saving auth data:', error);
     }
   }
@@ -673,7 +673,7 @@ class AuthenticationSystem {
           if (expiryTime - now < fiveMinutes) {
             await this.refreshAuthToken();
           }
-        } catch (_error) {
+        } catch (error) {
           console.error('Error checking token expiry:', error);
         }
       }
@@ -760,7 +760,7 @@ class AuthenticationSystem {
         await this.handleAuthSuccess(response);
       }
 
-    } catch (_error) {
+    } catch (error) {
       console.error('Login error:', error);
       window.uiManager?.showToast(error.message || 'Login failed', 'error');
     } finally {
@@ -812,7 +812,7 @@ class AuthenticationSystem {
       window.uiManager?.showToast('Account created successfully! Please check your email to verify your account.', 'success');
       this.switchAuthTab('login');
 
-    } catch (_error) {
+    } catch (error) {
       console.error('Registration error:', error);
       window.uiManager?.showToast(error.message || 'Registration failed', 'error');
     } finally {
@@ -847,7 +847,7 @@ class AuthenticationSystem {
 
       await this.handleAuthSuccess(response);
 
-    } catch (_error) {
+    } catch (error) {
       console.error('2FA error:', error);
       window.uiManager?.showToast(error.message || '2FA verification failed', 'error');
     }
@@ -870,7 +870,7 @@ class AuthenticationSystem {
       window.uiManager?.showToast('Password reset link sent to your email', 'success');
       this.switchAuthTab('login');
 
-    } catch (_error) {
+    } catch (error) {
       console.error('Forgot password error:', error);
       window.uiManager?.showToast(error.message || 'Failed to send reset email', 'error');
     }
@@ -900,7 +900,7 @@ class AuthenticationSystem {
         }
       }, 1000);
 
-    } catch (_error) {
+    } catch (error) {
       console.error('Social login error:', error);
       window.uiManager?.showToast('Social login failed', 'error');
     }
@@ -938,8 +938,8 @@ class AuthenticationSystem {
           method: 'POST'
         });
       }
-    } catch (_error) {
-      console.error('Logout error:', _error);
+    } catch (error) {
+      console.error('Logout error:', error);
     } finally {
       this.authToken = null;
       this.refreshToken = null;
@@ -971,7 +971,7 @@ class AuthenticationSystem {
       this.saveAuthData();
       
       return response.token;
-    } catch (_error) {
+    } catch (error) {
       console.error('Token refresh failed:', error);
       await this.logout();
       throw error;
@@ -987,7 +987,7 @@ class AuthenticationSystem {
       this.currentUser = response.user;
       this.notifyAuthStateChange(this.currentUser);
       return true;
-    } catch (_error) {
+    } catch (error) {
       console.error('Token validation failed:', error);
       await this.logout();
       return false;
@@ -1051,7 +1051,7 @@ class AuthenticationSystem {
 
       return response.json();
       
-    } catch (_error) {
+    } catch (error) {
       console.error('🔐 Auth API request failed:', error);
       
       // Mark as offline and use fallback
@@ -1070,7 +1070,7 @@ class AuthenticationSystem {
    * Generate mock response for offline mode
    */
   generateMockResponse(endpoint, _options) {
-    console.log('🔐 Generating mock response for:', endpoint);
+    console.info('🔐 Generating mock response for:', endpoint);
     
     // Basic mock responses for common endpoints
     const mockResponses = {
@@ -1211,7 +1211,7 @@ class AuthenticationSystem {
       }).join(''));
       
       return JSON.parse(jsonPayload);
-    } catch (_error) {
+    } catch (error) {
       console.error('Error parsing JWT:', error);
       return null;
     }
@@ -1232,7 +1232,7 @@ class AuthenticationSystem {
     this.authListeners.forEach(callback => {
       try {
         callback(user);
-      } catch (_error) {
+      } catch (error) {
         console.error('Error in auth state change callback:', error);
       }
     });
@@ -1325,7 +1325,7 @@ class AuthenticationSystem {
       if (response.success) {
         await this.handleAuthSuccess(response);
       }
-    } catch (_error) {
+    } catch (error) {
       console.error('Social login result check failed:', error);
     }
   }
