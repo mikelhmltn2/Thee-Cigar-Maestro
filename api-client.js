@@ -1,83 +1,81 @@
 /**
- * Thee Cigar Maestro API Client
- * Frontend client for backend API integration
+ * API Client with enhanced error handling, request/response interceptors, and retry logic
+ * Integrates with centralized error handling system
  */
 
-class CigarMaestroAPIClient {
-  constructor() {
-    this.baseURL = 'http://localhost:3000/api';
-    this.token = localStorage.getItem('authToken');
-    this.isAuthenticated = !!this.token;
+import { handleError, handleApiError, handleNetworkError, safeAsync } from './src/utils/errorHandler.js';
+
+class APIClient {
+  constructor(baseURL = 'https://api.theecigarmaestro.com') {
+    this.baseURL = baseURL;
+    this.defaultHeaders = {
+      'Content-Type': 'application/json',
+    };
     
-    // Setup interceptors
-    this.setupResponseInterceptors();
+    // Setup response interceptors for error handling
+    this.setupInterceptors();
   }
 
   /**
-   * Setup response interceptors for error handling
+   * Setup request and response interceptors
    */
-  setupResponseInterceptors() {
-    // Handle token expiration
-    this.on401 = () => {
-      this.logout();
-      window.location.href = '/login';
+  setupInterceptors() {
+    // Add auth token to requests if available
+    this.requestInterceptor = (config) => {
+      const token = localStorage.getItem('auth_token');
+      if (token) {
+        config.headers = {
+          ...config.headers,
+          'Authorization': `Bearer ${token}`
+        };
+      }
+      return config;
     };
   }
 
   /**
-   * Make authenticated API request
+   * Make HTTP request with enhanced error handling
    */
   async request(endpoint, options = {}) {
-    const url = `${this.baseURL}${endpoint}`;
-    const config = {
-      headers: {
-        'Content-Type': 'application/json',
-        ...options.headers
-      },
-      ...options
-    };
+    return await safeAsync(async () => {
+      const url = `${this.baseURL}${endpoint}`;
+      const config = {
+        headers: { ...this.defaultHeaders, ...options.headers },
+        ...options
+      };
 
-    // Add auth token if available
-    if (this.token) {
-      config.headers['Authorization'] = `Bearer ${this.token}`;
-    }
+      // Apply request interceptor
+      const finalConfig = this.requestInterceptor(config);
 
-    try {
-      const response = await fetch(url, config);
-      
-      // Handle authentication errors
-      if (response.status === 401) {
-        this.on401();
-        throw new Error('Authentication required');
-      }
+      const response = await fetch(url, finalConfig);
 
       if (!response.ok) {
-        const error = await response.json();
-        throw new Error(error.error || 'Request failed');
+        return await handleApiError(response, endpoint, {
+          enableRetry: response.status >= 500,
+          retryCallback: () => this.request(endpoint, options)
+        });
       }
 
       return await response.json();
-    } catch (error) {
-      console.error('API Request failed:', error);
-      throw error;
-    }
+    }, 'API Request', null, {
+      userMessage: `Failed to ${options.method || 'GET'} data from server`,
+      showUserNotification: true
+    });
   }
 
   /**
    * GET request
    */
-  async get(endpoint, params = {}) {
-    const queryString = new URLSearchParams(params).toString();
-    const url = queryString ? `${endpoint}?${queryString}` : endpoint;
-    
-    return this.request(url, { method: 'GET' });
+  async get(endpoint, options = {}) {
+    return this.request(endpoint, { ...options, method: 'GET' });
   }
 
   /**
    * POST request
    */
-  async post(endpoint, data = {}) {
+  async post(endpoint, data, options = {}) {
     return this.request(endpoint, {
+      ...options,
       method: 'POST',
       body: JSON.stringify(data)
     });
@@ -86,8 +84,9 @@ class CigarMaestroAPIClient {
   /**
    * PUT request
    */
-  async put(endpoint, data = {}) {
+  async put(endpoint, data, options = {}) {
     return this.request(endpoint, {
+      ...options,
       method: 'PUT',
       body: JSON.stringify(data)
     });
@@ -96,64 +95,63 @@ class CigarMaestroAPIClient {
   /**
    * DELETE request
    */
-  async delete(endpoint) {
-    return this.request(endpoint, { method: 'DELETE' });
+  async delete(endpoint, options = {}) {
+    return this.request(endpoint, { ...options, method: 'DELETE' });
   }
 
-  // Authentication methods
   /**
-   * Register new user
+   * User registration with enhanced error handling
    */
   async register(userData) {
-    try {
+    return await safeAsync(async () => {
       const response = await this.post('/auth/register', userData);
       
-      if (response.token) {
-        this.setToken(response.token);
+      if (response && response.token) {
+        localStorage.setItem('auth_token', response.token);
+        localStorage.setItem('user_data', JSON.stringify(response.user));
       }
       
       return response;
-    } catch (error) {
-      console.error('Registration failed:', error);
-      throw error;
-    }
+    }, 'User Registration', null, {
+      userMessage: 'Failed to create your account. Please try again.',
+      showUserNotification: true
+    });
   }
 
   /**
-   * Login user
+   * User login with enhanced error handling
    */
   async login(credentials) {
-    try {
+    return await safeAsync(async () => {
       const response = await this.post('/auth/login', credentials);
       
-      if (response.token) {
-        this.setToken(response.token);
+      if (response && response.token) {
+        localStorage.setItem('auth_token', response.token);
+        localStorage.setItem('user_data', JSON.stringify(response.user));
       }
       
       return response;
-    } catch (error) {
-      console.error('Login failed:', error);
-      throw error;
-    }
+    }, 'User Login', null, {
+      userMessage: 'Failed to log in. Please check your credentials.',
+      showUserNotification: true
+    });
   }
 
   /**
-   * Logout user
+   * Get cigars data
    */
-  logout() {
-    this.token = null;
-    this.isAuthenticated = false;
-    localStorage.removeItem('authToken');
-    localStorage.removeItem('userData');
+  async getCigars(filters = {}) {
+    const queryParams = new URLSearchParams(filters).toString();
+    const endpoint = `/cigars${queryParams ? `?${queryParams}` : ''}`;
+    
+    return this.get(endpoint);
   }
 
   /**
-   * Set authentication token
+   * Search cigars
    */
-  setToken(token) {
-    this.token = token;
-    this.isAuthenticated = true;
-    localStorage.setItem('authToken', token);
+  async searchCigars(query) {
+    return this.post('/cigars/search', { query });
   }
 
   /**
@@ -163,107 +161,25 @@ class CigarMaestroAPIClient {
     return this.get('/user/profile');
   }
 
-  // Cigar methods
   /**
-   * Get cigars with pagination
+   * Update user profile
    */
-  async getCigars(params = {}) {
-    return this.get('/cigars', params);
+  async updateUserProfile(profileData) {
+    return this.put('/user/profile', profileData);
   }
 
-  /**
-   * Search cigars
-   */
-  async searchCigars(searchParams) {
-    return this.post('/cigars/search', searchParams);
-  }
-
-  /**
-   * Get cigar by ID
-   */
-  async getCigar(id) {
-    return this.get(`/cigars/${id}`);
-  }
-
-  // Analytics methods
   /**
    * Track analytics event
    */
-  async trackEvent(event, properties = {}) {
-    try {
-      return await this.post('/analytics/track', { event, properties });
-    } catch (error) {
-      // Don't throw on analytics failures
-      console.warn('Analytics tracking failed:', error);
-    }
-  }
-
-  /**
-   * Track page view
-   */
-  async trackPageView(page, properties = {}) {
-    return this.trackEvent('page_view', { page, ...properties });
-  }
-
-  /**
-   * Track user interaction
-   */
-  async trackInteraction(action, target, properties = {}) {
-    return this.trackEvent('user_interaction', { action, target, ...properties });
-  }
-
-  // Health check
-  /**
-   * Check API health
-   */
-  async checkHealth() {
-    return this.get('/health');
-  }
-
-  // Utility methods
-  /**
-   * Check if user is authenticated
-   */
-  isUserAuthenticated() {
-    return this.isAuthenticated && this.token;
-  }
-
-  /**
-   * Get current user data from localStorage
-   */
-  getCurrentUser() {
-    const userData = localStorage.getItem('userData');
-    return userData ? JSON.parse(userData) : null;
-  }
-
-  /**
-   * Set current user data
-   */
-  setCurrentUser(userData) {
-    localStorage.setItem('userData', JSON.stringify(userData));
+  async trackEvent(eventData) {
+    return await safeAsync(async () => {
+      return this.post('/analytics/track', eventData);
+    }, 'Analytics Tracking', null, {
+      showUserNotification: false // Don't show errors for analytics failures
+    });
   }
 }
 
-// Create singleton instance
-const apiClient = new CigarMaestroAPIClient();
-
-// Auto-track page views
-if (typeof window !== 'undefined') {
-  // Track initial page load
-  apiClient.trackPageView(window.location.pathname);
-
-  // Track navigation changes
-  let lastUrl = window.location.pathname;
-  const observer = new MutationObserver(() => {
-    if (window.location.pathname !== lastUrl) {
-      lastUrl = window.location.pathname;
-      apiClient.trackPageView(window.location.pathname);
-    }
-  });
-
-  observer.observe(document, { subtree: true, childList: true });
-}
-
-// Export for use in other modules
-window.CigarMaestroAPI = apiClient;
+// Create and export singleton instance
+const apiClient = new APIClient();
 export default apiClient;

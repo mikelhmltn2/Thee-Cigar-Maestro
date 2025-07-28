@@ -3,6 +3,8 @@
  * Frontend authentication with JWT, social login, 2FA, and session management
  */
 
+import { handleError, handleApiError, handleNetworkError, safeAsync } from './src/utils/errorHandler.js';
+
 class AuthenticationSystem {
   constructor() {
     this.apiBaseUrl = 'https://api.theecigarmaestro.com'; // API endpoint (currently not implemented)
@@ -36,7 +38,9 @@ class AuthenticationSystem {
       }
       
     } catch (error) {
-      console.error('❌ Authentication initialization failed:', error);
+      handleError(error, 'Auth System Initialization', {
+        timestamp: new Date().toISOString()
+      });
     }
   }
 
@@ -44,58 +48,41 @@ class AuthenticationSystem {
    * Load stored authentication data
    */
   async loadStoredAuth() {
-    try {
-      if (window.storageManager) {
-        const sessionData = window.storageManager.getSessionData();
-        this.authToken = sessionData.authToken;
-        this.refreshToken = sessionData.refreshToken;
-        this.currentUser = sessionData.currentUser;
-      } else {
-        // Fallback to localStorage
-        this.authToken = localStorage.getItem('auth_token');
-        this.refreshToken = localStorage.getItem('refresh_token');
-        const userData = localStorage.getItem('current_user');
-        this.currentUser = userData ? JSON.parse(userData) : null;
+    return await safeAsync(async () => {
+      const stored = localStorage.getItem(this.storageKeys.auth);
+      if (stored) {
+        const authData = JSON.parse(stored);
+        
+        if (authData.token && !this.isTokenExpired(authData.token)) {
+          this.currentUser = authData.user;
+          this.token = authData.token;
+          this.isLoggedIn = true;
+        } else {
+          // Token expired, clear stored data
+          this.clearStoredAuth();
+        }
       }
-    } catch (error) {
-      console.error('Error loading stored auth:', error);
-    }
+    }, 'Auth Data Loading', null, {
+      userMessage: 'Failed to load your saved login. You may need to log in again.'
+    });
   }
 
   /**
-   * Save authentication data
+   * Save authentication data to storage
    */
-  saveAuthData() {
-    try {
-      if (window.storageManager) {
-        const sessionData = window.storageManager.getSessionData();
-        sessionData.authToken = this.authToken;
-        sessionData.refreshToken = this.refreshToken;
-        sessionData.currentUser = this.currentUser;
-        window.storageManager.saveData();
-      } else {
-        // Fallback to localStorage
-        if (this.authToken) {
-          localStorage.setItem('auth_token', this.authToken);
-        } else {
-          localStorage.removeItem('auth_token');
-        }
-        
-        if (this.refreshToken) {
-          localStorage.setItem('refresh_token', this.refreshToken);
-        } else {
-          localStorage.removeItem('refresh_token');
-        }
-        
-        if (this.currentUser) {
-          localStorage.setItem('current_user', JSON.stringify(this.currentUser));
-        } else {
-          localStorage.removeItem('current_user');
-        }
-      }
-    } catch (error) {
-      console.error('Error saving auth data:', error);
-    }
+  async saveAuthData(user, token) {
+    return await safeAsync(async () => {
+      const authData = {
+        user,
+        token,
+        timestamp: Date.now()
+      };
+      
+      localStorage.setItem(this.storageKeys.auth, JSON.stringify(authData));
+      localStorage.setItem(this.storageKeys.preferences, JSON.stringify(user.preferences || {}));
+    }, 'Auth Data Saving', null, {
+      userMessage: 'Failed to save your login information.'
+    });
   }
 
   /**
