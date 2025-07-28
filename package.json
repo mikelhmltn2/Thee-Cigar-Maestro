@@ -1,0 +1,55 @@
+{
+  "name": "thee-cigar-maestro",
+  "version": "1.2.0",
+  "description": "Premium cigar experience with AI-powered recommendations and immersive 3D Flavorverse",
+  "main": "index.html",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "lint": "eslint . --ext js --ignore-pattern dist/ --ignore-pattern node_modules/",
+    "lint:fix": "eslint . --ext js --fix --ignore-pattern dist/ --ignore-pattern node_modules/",
+    "test": "vitest",
+    "test:ui": "vitest --ui",
+    "serve": "serve -s dist -l 3000",
+    "deploy:netlify": "netlify deploy --prod --dir=dist",
+    "deploy:vercel": "vercel --prod",
+    "deploy:surge": "surge dist/ thee-cigar-maestro.surge.sh"
+  },
+  "keywords": [
+    "cigars",
+    "ai",
+    "recommendations",
+    "3d",
+    "flavorverse",
+    "pwa",
+    "machine-learning",
+    "vite",
+    "progressive-web-app"
+  ],
+  "author": "Mike Hamilton",
+  "license": "MIT",
+  "devDependencies": {
+    "vite": "^5.4.19",
+    "vite-plugin-pwa": "^0.19.0",
+    "eslint": "^9.0.0",
+    "vitest": "^1.6.0",
+    "@vitest/ui": "^1.6.0",
+    "jsdom": "^24.0.0",
+    "serve": "^14.0.0",
+    "terser": "^5.31.0"
+  },
+  "dependencies": {
+    "three": "^0.160.0"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ]
+}

@@ -1,7 +1,11 @@
 // Analytics Integration System - globals handled by ESLint config
 
 // Import Vercel Analytics
-import { inject } from '@vercel/analytics';
+// import { inject } from '@vercel/analytics';
+// Vercel analytics disabled for local development
+const inject = () => {
+  console.info('Vercel Analytics: inject() called (disabled for local development)');
+};
 
 // Analytics Integration System
 // Handles Google Analytics, custom events, performance monitoring, and Vercel Analytics
