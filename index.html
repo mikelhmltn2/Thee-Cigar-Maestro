@@ -964,6 +964,569 @@
          transition: none !important;
        }
      }
+
+     /* Humidor-specific styles */
+     .humidor-stats {
+       display: grid;
+       grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+       gap: 1rem;
+       margin-bottom: 2rem;
+     }
+
+     .stat-card {
+       background: rgba(44, 44, 44, 0.5);
+       border-radius: var(--border-radius);
+       padding: 1rem;
+       text-align: center;
+       border: 1px solid var(--border-color);
+       transition: var(--transition);
+     }
+
+     .stat-card:hover {
+       background: rgba(198, 156, 109, 0.1);
+       border-color: var(--accent-text);
+       transform: translateY(-2px);
+       box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+     }
+
+     .stat-number {
+       display: block;
+       font-size: 2rem;
+       font-weight: bold;
+       color: var(--accent-text);
+       margin-bottom: 0.5rem;
+       background: linear-gradient(135deg, var(--accent-text), #dab785);
+       -webkit-background-clip: text;
+       -webkit-text-fill-color: transparent;
+       background-clip: text;
+     }
+
+     .stat-label {
+       font-size: 0.85rem;
+       color: var(--secondary-text);
+       text-transform: uppercase;
+       letter-spacing: 0.5px;
+     }
+
+     .recent-additions {
+       margin-top: 2rem;
+     }
+
+     .recent-additions h5 {
+       color: var(--accent-text);
+       border-bottom: 2px solid var(--accent-text);
+       padding-bottom: 0.5rem;
+       margin-bottom: 1rem;
+     }
+
+     .cigar-list {
+       display: flex;
+       flex-direction: column;
+       gap: 0.75rem;
+     }
+
+     .cigar-item {
+       display: flex;
+       justify-content: space-between;
+       align-items: center;
+       background: rgba(44, 44, 44, 0.3);
+       padding: 1rem;
+       border-radius: var(--border-radius);
+       border: 1px solid var(--border-color);
+       transition: var(--transition);
+     }
+
+     .cigar-item:hover {
+       background: rgba(198, 156, 109, 0.1);
+       border-color: var(--accent-text);
+     }
+
+     .cigar-info .cigar-name {
+       display: block;
+       font-weight: bold;
+       color: var(--primary-text);
+       margin-bottom: 0.25rem;
+     }
+
+     .cigar-info .cigar-date {
+       font-size: 0.85rem;
+       color: var(--secondary-text);
+     }
+
+     .cigar-status {
+       padding: 0.25rem 0.75rem;
+       border-radius: 20px;
+       font-size: 0.75rem;
+       font-weight: bold;
+       text-transform: uppercase;
+       letter-spacing: 0.5px;
+     }
+
+     .cigar-status.ready {
+       background: var(--success-color);
+       color: white;
+     }
+
+     .cigar-status.aging {
+       background: var(--warning-color);
+       color: var(--primary-bg);
+     }
+
+     /* Form styles for humidor */
+     .add-cigar-form,
+     .humidor-settings {
+       max-height: 70vh;
+       overflow-y: auto;
+       padding-right: 0.5rem;
+     }
+
+     .form-group {
+       margin-bottom: 1.5rem;
+     }
+
+     .form-group label {
+       display: block;
+       margin-bottom: 0.5rem;
+       color: var(--accent-text);
+       font-weight: bold;
+     }
+
+     .form-actions {
+       display: flex;
+       gap: 1rem;
+       margin-top: 2rem;
+       padding-top: 1rem;
+       border-top: 1px solid var(--border-color);
+     }
+
+     /* QR Scanner styles */
+     .qr-scanner {
+       text-align: center;
+     }
+
+     .scanner-placeholder {
+       background: rgba(44, 44, 44, 0.3);
+       border: 2px dashed var(--border-color);
+       border-radius: var(--border-radius);
+       padding: 3rem 2rem;
+       margin-bottom: 2rem;
+       position: relative;
+     }
+
+     .camera-icon {
+       font-size: 3rem;
+       margin-bottom: 1rem;
+       opacity: 0.7;
+     }
+
+     .scan-frame {
+       position: absolute;
+       top: 50%;
+       left: 50%;
+       transform: translate(-50%, -50%);
+       width: 150px;
+       height: 150px;
+       border: 3px solid var(--accent-text);
+       border-radius: var(--border-radius);
+       opacity: 0.3;
+     }
+
+     .scanner-controls {
+       display: flex;
+       gap: 1rem;
+       justify-content: center;
+     }
+
+     /* Inventory styles */
+     .inventory-grid {
+       display: flex;
+       flex-direction: column;
+       gap: 1rem;
+       max-height: 400px;
+       overflow-y: auto;
+     }
+
+     .inventory-item {
+       display: flex;
+       justify-content: space-between;
+       align-items: center;
+       background: rgba(44, 44, 44, 0.3);
+       padding: 1rem;
+       border-radius: var(--border-radius);
+       border: 1px solid var(--border-color);
+     }
+
+     .inventory-item .item-info h5 {
+       margin: 0 0 0.5rem 0;
+       color: var(--primary-text);
+     }
+
+     .inventory-item .item-info p {
+       margin: 0;
+       font-size: 0.85rem;
+       color: var(--secondary-text);
+     }
+
+     .item-actions {
+       display: flex;
+       gap: 0.5rem;
+     }
+
+     .item-actions .action-btn {
+       padding: 0.5rem;
+       min-width: 40px;
+       display: flex;
+       align-items: center;
+       justify-content: center;
+     }
+
+     /* Aging Report styles */
+     .aging-stats {
+       display: grid;
+       grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+       gap: 1rem;
+       margin-bottom: 2rem;
+     }
+
+     .aging-stat {
+       text-align: center;
+       background: rgba(44, 44, 44, 0.3);
+       padding: 1rem;
+       border-radius: var(--border-radius);
+       border: 1px solid var(--border-color);
+     }
+
+     .aging-stat .stat-number {
+       display: block;
+       font-size: 1.5rem;
+       font-weight: bold;
+       color: var(--accent-text);
+       margin-bottom: 0.5rem;
+     }
+
+     .aging-stat .stat-label {
+       font-size: 0.8rem;
+       color: var(--secondary-text);
+     }
+
+     .aging-recommendations {
+       margin-bottom: 2rem;
+     }
+
+     .recommendation-item {
+       background: rgba(44, 44, 44, 0.3);
+       padding: 1rem;
+       border-radius: var(--border-radius);
+       border-left: 3px solid var(--accent-text);
+       margin-bottom: 1rem;
+     }
+
+     .chart-area {
+       background: rgba(44, 44, 44, 0.3);
+       padding: 3rem 2rem;
+       border-radius: var(--border-radius);
+       border: 1px solid var(--border-color);
+     }
+
+     /* Settings styles */
+     .settings-section {
+       margin-bottom: 2rem;
+       padding-bottom: 1rem;
+       border-bottom: 1px solid var(--border-color);
+     }
+
+     .settings-section:last-child {
+       border-bottom: none;
+     }
+
+     .setting-item {
+       display: flex;
+       align-items: center;
+       gap: 1rem;
+       margin-bottom: 1rem;
+     }
+
+     .setting-item label {
+       flex: 1;
+       margin-bottom: 0;
+     }
+
+     .setting-item input[type="range"] {
+       flex: 2;
+       margin: 0 1rem;
+     }
+
+     .setting-value {
+       min-width: 60px;
+       text-align: right;
+       color: var(--accent-text);
+       font-weight: bold;
+     }
+
+     .setting-toggle {
+       margin-bottom: 0.75rem;
+     }
+
+     .setting-toggle label {
+       display: flex;
+       align-items: center;
+       gap: 0.75rem;
+       cursor: pointer;
+       margin-bottom: 0;
+     }
+
+     .setting-toggle input[type="checkbox"] {
+       accent-color: var(--accent-text);
+     }
+
+     /* Mobile Navigation */
+     .mobile-nav {
+       position: fixed;
+       bottom: 0;
+       left: 0;
+       right: 0;
+       background: rgba(28, 28, 28, 0.95);
+       backdrop-filter: blur(10px);
+       border-top: 2px solid var(--accent-text);
+       z-index: 1000;
+       box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.3);
+     }
+
+     .mobile-nav-content {
+       display: flex;
+       justify-content: space-around;
+       align-items: center;
+       padding: 0.5rem 0;
+       max-width: 100%;
+       overflow-x: auto;
+       scroll-behavior: smooth;
+     }
+
+     .mobile-nav-item {
+       display: flex;
+       flex-direction: column;
+       align-items: center;
+       gap: 0.25rem;
+       background: transparent;
+       border: none;
+       color: var(--primary-text);
+       cursor: pointer;
+       padding: 0.5rem 0.25rem;
+       min-width: 60px;
+       border-radius: var(--border-radius);
+       transition: var(--transition);
+       font-family: inherit;
+     }
+
+     .mobile-nav-item:hover,
+     .mobile-nav-item.active {
+       background: rgba(198, 156, 109, 0.1);
+       color: var(--accent-text);
+     }
+
+     .mobile-nav-icon {
+       font-size: 1.2rem;
+       margin-bottom: 0.125rem;
+     }
+
+     .mobile-nav-label {
+       font-size: 0.7rem;
+       font-weight: 500;
+       text-transform: uppercase;
+       letter-spacing: 0.5px;
+       line-height: 1;
+     }
+
+     /* Enhanced mobile responsiveness */
+     @media (max-width: 768px) {
+       .main-nav {
+         display: none;
+       }
+
+       .mobile-nav {
+         display: block !important;
+       }
+
+       body {
+         padding-bottom: 80px; /* Space for mobile nav */
+       }
+
+       .main-header {
+         padding: 0 1rem;
+         height: 60px;
+       }
+
+       .logo-section h1 {
+         font-size: 1.2rem;
+       }
+
+       .canvas-container {
+         top: 60px;
+       }
+
+       .info-display {
+         top: calc(60px + 1rem);
+         left: 1rem;
+         right: 1rem;
+         max-width: none;
+         position: static;
+         margin-bottom: 1rem;
+       }
+
+       .floating-controls {
+         position: static;
+         margin: 1rem;
+         order: 2;
+       }
+
+       .quick-actions {
+         position: fixed;
+         bottom: 1rem;
+         right: 1rem;
+         flex-direction: row;
+         gap: 0.5rem;
+       }
+
+       .action-button {
+         width: 50px;
+         height: 50px;
+         font-size: 1.2rem;
+       }
+
+       .humidor-stats {
+         grid-template-columns: repeat(2, 1fr);
+         gap: 0.75rem;
+       }
+
+       .stat-card {
+         padding: 0.75rem;
+       }
+
+       .stat-number {
+         font-size: 1.5rem;
+       }
+
+       .form-actions {
+         flex-direction: column;
+       }
+
+       .scanner-controls {
+         flex-direction: column;
+       }
+
+       .inventory-item {
+         flex-direction: column;
+         align-items: flex-start;
+         gap: 1rem;
+       }
+
+       .item-actions {
+         align-self: flex-end;
+       }
+
+       .aging-stats {
+         grid-template-columns: 1fr;
+       }
+
+       .setting-item {
+         flex-direction: column;
+         align-items: flex-start;
+         gap: 0.5rem;
+       }
+
+       .setting-item input[type="range"] {
+         width: 100%;
+         margin: 0;
+       }
+
+       .setting-value {
+         align-self: flex-end;
+       }
+
+       /* Mobile modal improvements */
+       .modal-content {
+         margin: 1rem;
+         max-height: calc(100vh - 2rem);
+         width: calc(100% - 2rem);
+       }
+
+       .modal-header {
+         position: sticky;
+         top: 0;
+         background: var(--secondary-bg);
+         z-index: 1;
+       }
+
+       /* Mobile side panel improvements */
+       .side-panel {
+         width: 100%;
+         right: -100%;
+         top: 60px;
+       }
+
+       .panel-content {
+         padding-bottom: 5rem; /* Space for floating action buttons */
+       }
+     }
+
+     /* Tablet optimizations */
+     @media (min-width: 769px) and (max-width: 1024px) {
+       .main-header {
+         padding: 0 1.5rem;
+       }
+
+       .humidor-stats {
+         grid-template-columns: repeat(4, 1fr);
+       }
+
+       .inventory-grid {
+         max-height: 300px;
+       }
+
+       .modal-content {
+         max-width: 600px;
+       }
+     }
+
+     /* Large screen optimizations */
+     @media (min-width: 1200px) {
+       .humidor-stats {
+         grid-template-columns: repeat(4, 1fr);
+         gap: 1.5rem;
+       }
+
+       .stat-card {
+         padding: 1.5rem;
+       }
+
+       .modal-content {
+         max-width: 800px;
+       }
+
+       .inventory-grid {
+         max-height: 500px;
+       }
+     }
+
+     /* Enhanced accessibility improvements */
+     @media (prefers-reduced-motion: reduce) {
+       .stat-card,
+       .cigar-item,
+       .inventory-item {
+         transition: none;
+       }
+     }
+
+     /* Dark mode optimizations */
+     @media (prefers-color-scheme: dark) {
+       .scanner-placeholder {
+         background: rgba(0, 0, 0, 0.3);
+       }
+       
+       .chart-area {
+         background: rgba(0, 0, 0, 0.2);
+       }
+     }
    </style>
 </head>
 <body>
@@ -988,6 +1551,9 @@
       </button>
       <button class="nav-button" data-section="search">
         🔍 Search
+      </button>
+      <button class="nav-button" data-section="humidor">
+        🏛️ Humidor
       </button>
       <button class="nav-button" onclick="window.analyticsDashboard?.show()">
         📊 Dashboard
@@ -1025,6 +1591,36 @@
       <!-- Content will be dynamically loaded -->
     </div>
   </aside>
+
+  <!-- Mobile Navigation Menu -->
+  <nav class="mobile-nav" id="mobileNav" style="display: none;">
+    <div class="mobile-nav-content">
+      <button class="mobile-nav-item" data-section="explore">
+        <span class="mobile-nav-icon">🌀</span>
+        <span class="mobile-nav-label">Explore</span>
+      </button>
+      <button class="mobile-nav-item" data-section="education">
+        <span class="mobile-nav-icon">📚</span>
+        <span class="mobile-nav-label">Learn</span>
+      </button>
+      <button class="mobile-nav-item" data-section="pairings">
+        <span class="mobile-nav-icon">🍷</span>
+        <span class="mobile-nav-label">Pairings</span>
+      </button>
+      <button class="mobile-nav-item" data-section="journal">
+        <span class="mobile-nav-icon">📝</span>
+        <span class="mobile-nav-label">Journal</span>
+      </button>
+      <button class="mobile-nav-item" data-section="humidor">
+        <span class="mobile-nav-icon">🏛️</span>
+        <span class="mobile-nav-label">Humidor</span>
+      </button>
+      <button class="mobile-nav-item" data-section="search">
+        <span class="mobile-nav-icon">🔍</span>
+        <span class="mobile-nav-label">Search</span>
+      </button>
+    </div>
+  </nav>
 
   <!-- Main Canvas Container -->
   <div class="canvas-container" id="canvasContainer">
