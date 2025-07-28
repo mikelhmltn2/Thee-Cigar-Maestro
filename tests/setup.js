@@ -74,6 +74,8 @@ global.sessionStorage = sessionStorageMock;
 global.window = {
   localStorage: localStorageMock,
   sessionStorage: sessionStorageMock,
+  addEventListener: vi.fn(),
+  removeEventListener: vi.fn(),
   location: {
     href: 'http://localhost:3000',
     protocol: 'http:',
