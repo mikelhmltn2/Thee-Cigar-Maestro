@@ -391,6 +391,176 @@ app.get('/api/user/profile', authenticateToken, (req, res) => {
 
 /**
  * @swagger
+ * /api/user/favorites:
+ *   get:
+ *     summary: Get user favorites
+ *     description: Retrieve the current user's favorite cigars
+ *     tags: [User]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: User favorites retrieved successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 favorites:
+ *                   type: array
+ *                   items:
+ *                     type: string
+ *                   description: Array of favorite cigar names
+ *       401:
+ *         description: Unauthorized
+ *       404:
+ *         description: User not found
+ *       500:
+ *         description: Internal server error
+ */
+app.get('/api/user/favorites', authenticateToken, (req, res) => {
+  try {
+    const user = Array.from(users.values()).find(u => u.email === req.user.email);
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    res.json({
+      favorites: user.favorites || []
+    });
+  } catch (error) {
+    console.error('Favorites error:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+/**
+ * @swagger
+ * /api/user/favorites:
+ *   post:
+ *     summary: Add cigar to favorites
+ *     description: Add a cigar to the current user's favorites list
+ *     tags: [User]
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - cigarName
+ *             properties:
+ *               cigarName:
+ *                 type: string
+ *                 description: Name of the cigar to add to favorites
+ *     responses:
+ *       200:
+ *         description: Cigar added to favorites successfully
+ *       400:
+ *         description: Invalid request data or cigar already in favorites
+ *       401:
+ *         description: Unauthorized
+ *       404:
+ *         description: User not found
+ *       500:
+ *         description: Internal server error
+ */
+app.post('/api/user/favorites', authenticateToken, (req, res) => {
+  try {
+    const { cigarName } = req.body;
+    
+    if (!cigarName || typeof cigarName !== 'string') {
+      return res.status(400).json({ error: 'Valid cigar name is required' });
+    }
+
+    const user = Array.from(users.values()).find(u => u.email === req.user.email);
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    if (!user.favorites) {
+      user.favorites = [];
+    }
+
+    if (user.favorites.includes(cigarName)) {
+      return res.status(400).json({ error: 'Cigar already in favorites' });
+    }
+
+    user.favorites.push(cigarName);
+    users.set(user.email, user);
+
+    res.json({
+      message: 'Cigar added to favorites successfully',
+      favorites: user.favorites
+    });
+  } catch (error) {
+    console.error('Add favorite error:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+/**
+ * @swagger
+ * /api/user/favorites/{cigarName}:
+ *   delete:
+ *     summary: Remove cigar from favorites
+ *     description: Remove a cigar from the current user's favorites list
+ *     tags: [User]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: cigarName
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: Name of the cigar to remove from favorites
+ *     responses:
+ *       200:
+ *         description: Cigar removed from favorites successfully
+ *       400:
+ *         description: Cigar not found in favorites
+ *       401:
+ *         description: Unauthorized
+ *       404:
+ *         description: User not found
+ *       500:
+ *         description: Internal server error
+ */
+app.delete('/api/user/favorites/:cigarName', authenticateToken, (req, res) => {
+  try {
+    const { cigarName } = req.params;
+    
+    if (!cigarName) {
+      return res.status(400).json({ error: 'Cigar name is required' });
+    }
+
+    const user = Array.from(users.values()).find(u => u.email === req.user.email);
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    if (!user.favorites || !user.favorites.includes(cigarName)) {
+      return res.status(400).json({ error: 'Cigar not found in favorites' });
+    }
+
+    user.favorites = user.favorites.filter(fav => fav !== cigarName);
+    users.set(user.email, user);
+
+    res.json({
+      message: 'Cigar removed from favorites successfully',
+      favorites: user.favorites
+    });
+  } catch (error) {
+    console.error('Remove favorite error:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+/**
+ * @swagger
  * /api/analytics/track:
  *   post:
  *     summary: Track analytics event
