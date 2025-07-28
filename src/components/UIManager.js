@@ -71,12 +71,27 @@ class UIManager {
       });
     });
 
-    // Mobile menu
+    // Mobile menu with enhanced toggle logic
     const mobileMenuBtn = document.getElementById('mobileMenuBtn');
     if (mobileMenuBtn) {
-      mobileMenuBtn.addEventListener('click', () => {
-        this.toggleSidePanel();
+      mobileMenuBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        this.toggleMobileMenu();
       });
+
+      // Add keyboard accessibility
+      mobileMenuBtn.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          this.toggleMobileMenu();
+        }
+      });
+
+      // Update ARIA attributes
+      mobileMenuBtn.setAttribute('aria-label', 'Toggle navigation menu');
+      mobileMenuBtn.setAttribute('aria-expanded', 'false');
+      mobileMenuBtn.setAttribute('aria-controls', 'sidePanel');
     }
 
     // Panel controls
@@ -359,7 +374,44 @@ class UIManager {
   }
 
   /**
-   * Toggle side panel
+   * Toggle mobile menu with enhanced logic for mobile devices
+   */
+  toggleMobileMenu() {
+    if (!this.isMobile) {
+      // On desktop, use regular side panel behavior
+      this.toggleSidePanel();
+      return;
+    }
+
+    // Enhanced mobile menu logic
+    const isOpen = this.sidePanel.classList.contains('open');
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    
+    if (isOpen) {
+      this.closeMobileMenu();
+    } else {
+      this.openMobileMenu();
+    }
+
+    // Update button state and ARIA attributes
+    if (mobileMenuBtn) {
+      mobileMenuBtn.setAttribute('aria-expanded', (!isOpen).toString());
+      mobileMenuBtn.innerHTML = isOpen ? '☰' : '✕';
+      mobileMenuBtn.setAttribute('aria-label', isOpen ? 'Open navigation menu' : 'Close navigation menu');
+    }
+
+    // Track mobile menu usage
+    if (window.gtag) {
+      window.gtag('event', 'mobile_menu_toggle', {
+        'event_category': 'user_interface',
+        'event_label': isOpen ? 'close' : 'open',
+        'value': 1
+      });
+    }
+  }
+
+  /**
+   * Toggle side panel (desktop behavior)
    */
   toggleSidePanel() {
     if (this.sidePanel.classList.contains('open')) {
@@ -370,7 +422,61 @@ class UIManager {
   }
 
   /**
-   * Open side panel
+   * Open mobile menu with animation and accessibility
+   */
+  openMobileMenu() {
+    if (!this.sidePanel || !this.isMobile) return;
+
+    // Add opening class for animation
+    this.sidePanel.classList.add('opening');
+    this.sidePanel.classList.add('open');
+    
+    // Prevent body scroll
+    document.body.style.overflow = 'hidden';
+    document.body.classList.add('mobile-menu-open');
+
+    // Add backdrop
+    this.addMobileMenuBackdrop();
+
+    // Focus management for accessibility
+    setTimeout(() => {
+      this.sidePanel.classList.remove('opening');
+      const firstFocusable = this.sidePanel.querySelector('button, a, [tabindex]:not([tabindex="-1"])');
+      if (firstFocusable) {
+        firstFocusable.focus();
+      }
+    }, 50);
+
+    // Add escape key listener
+    this.addEscapeKeyListener();
+  }
+
+  /**
+   * Close mobile menu with animation
+   */
+  closeMobileMenu() {
+    if (!this.sidePanel) return;
+
+    // Add closing animation class
+    this.sidePanel.classList.add('closing');
+    
+    setTimeout(() => {
+      this.sidePanel.classList.remove('open', 'closing');
+      document.body.style.overflow = 'auto';
+      document.body.classList.remove('mobile-menu-open');
+      this.removeMobileMenuBackdrop();
+      this.removeEscapeKeyListener();
+      
+      // Return focus to menu button
+      const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+      if (mobileMenuBtn) {
+        mobileMenuBtn.focus();
+      }
+    }, 300); // Match CSS transition duration
+  }
+
+  /**
+   * Open side panel (desktop behavior)
    */
   openSidePanel() {
     if (this.sidePanel) {
@@ -380,12 +486,65 @@ class UIManager {
   }
 
   /**
-   * Close side panel
+   * Close side panel (desktop behavior)
    */
   closeSidePanel() {
     if (this.sidePanel) {
       this.sidePanel.classList.remove('open');
       document.body.style.overflow = 'auto';
+      
+      // Also close mobile menu if it's open
+      if (this.isMobile) {
+        this.closeMobileMenu();
+      }
+    }
+  }
+
+  /**
+   * Add backdrop for mobile menu
+   */
+  addMobileMenuBackdrop() {
+    if (document.querySelector('.mobile-menu-backdrop')) return;
+
+    const backdrop = document.createElement('div');
+    backdrop.className = 'mobile-menu-backdrop';
+    backdrop.addEventListener('click', () => this.closeMobileMenu());
+    document.body.appendChild(backdrop);
+
+    // Animate backdrop
+    setTimeout(() => backdrop.classList.add('visible'), 10);
+  }
+
+  /**
+   * Remove mobile menu backdrop
+   */
+  removeMobileMenuBackdrop() {
+    const backdrop = document.querySelector('.mobile-menu-backdrop');
+    if (backdrop) {
+      backdrop.classList.remove('visible');
+      setTimeout(() => backdrop.remove(), 300);
+    }
+  }
+
+  /**
+   * Add escape key listener for mobile menu
+   */
+  addEscapeKeyListener() {
+    this.escapeKeyHandler = (e) => {
+      if (e.key === 'Escape' && this.isMobile && this.sidePanel.classList.contains('open')) {
+        this.closeMobileMenu();
+      }
+    };
+    document.addEventListener('keydown', this.escapeKeyHandler);
+  }
+
+  /**
+   * Remove escape key listener
+   */
+  removeEscapeKeyListener() {
+    if (this.escapeKeyHandler) {
+      document.removeEventListener('keydown', this.escapeKeyHandler);
+      this.escapeKeyHandler = null;
     }
   }
 
@@ -477,9 +636,29 @@ class UIManager {
     const wasMobile = this.isMobile;
     this.isMobile = window.innerWidth <= this.mobileBreakpoint;
 
-    // Close panel if switching from mobile to desktop
+    // Handle transitions between mobile and desktop
     if (wasMobile && !this.isMobile) {
-      this.closeSidePanel();
+      // Switching from mobile to desktop
+      this.closeMobileMenu();
+      this.removeMobileMenuBackdrop();
+      this.removeEscapeKeyListener();
+      document.body.classList.remove('mobile-menu-open');
+      
+      // Reset mobile menu button
+      const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+      if (mobileMenuBtn) {
+        mobileMenuBtn.innerHTML = '☰';
+        mobileMenuBtn.setAttribute('aria-expanded', 'false');
+        mobileMenuBtn.setAttribute('aria-label', 'Toggle navigation menu');
+      }
+    }
+
+    // Handle side panel state when switching to mobile
+    if (!wasMobile && this.isMobile) {
+      // Close side panel if open when switching to mobile
+      if (this.sidePanel && this.sidePanel.classList.contains('open')) {
+        this.closeSidePanel();
+      }
     }
   }
 

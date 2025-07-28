@@ -825,12 +825,34 @@
 
        .mobile-menu-btn {
          display: block;
+         position: relative;
+         z-index: 1001;
+         transition: all 0.3s ease;
+       }
+
+       .mobile-menu-btn:focus-visible {
+         outline: 2px solid var(--accent-color);
+         outline-offset: 2px;
        }
 
        .side-panel {
          width: 100%;
          right: -100%;
          top: var(--header-height);
+         transition: right 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+         z-index: 1000;
+       }
+
+       .side-panel.opening {
+         right: -50%;
+       }
+
+       .side-panel.open {
+         right: 0;
+       }
+
+       .side-panel.closing {
+         right: -100%;
        }
 
        .floating-controls {
@@ -887,6 +909,58 @@
        .quick-actions {
          bottom: 0.5rem;
          right: 0.5rem;
+       }
+     }
+
+     /* Mobile Menu Backdrop and Animation Enhancements */
+     .mobile-menu-backdrop {
+       position: fixed;
+       top: 0;
+       left: 0;
+       width: 100%;
+       height: 100%;
+       background: rgba(0, 0, 0, 0.5);
+       z-index: 999;
+       opacity: 0;
+       transition: opacity 0.3s ease;
+       pointer-events: none;
+     }
+
+     .mobile-menu-backdrop.visible {
+       opacity: 1;
+       pointer-events: auto;
+     }
+
+     /* Prevent scrolling when mobile menu is open */
+     body.mobile-menu-open {
+       overflow: hidden;
+       position: fixed;
+       width: 100%;
+       height: 100%;
+     }
+
+     /* Enhanced focus management for mobile menu */
+     @media (max-width: 768px) {
+       .side-panel.open *:focus {
+         outline: 2px solid var(--accent-color);
+         outline-offset: 2px;
+       }
+
+       .side-panel {
+         box-shadow: -2px 0 8px rgba(0, 0, 0, 0.1);
+       }
+
+       .side-panel.open {
+         box-shadow: -2px 0 16px rgba(0, 0, 0, 0.2);
+       }
+     }
+
+     /* Smooth animations for mobile menu transitions */
+     @media (prefers-reduced-motion: reduce) {
+       .side-panel,
+       .mobile-menu-backdrop,
+       .mobile-menu-btn {
+         transition: none !important;
        }
      }
    </style>

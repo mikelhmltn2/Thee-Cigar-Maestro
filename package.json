@@ -9,10 +9,12 @@
     "build": "vite build",
     "preview": "vite preview",
     "serve": "http-server . -p 8000 -c-1",
-    "test": "vitest",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "test:ui": "vitest --ui",
     "test:coverage": "vitest --coverage",
-    "lint": "eslint . --ext .js --fix",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
     "validate": "npm run lint && npm run test",
     "analyze": "npx vite-bundle-analyzer",
@@ -29,7 +31,9 @@
     "pwa-enhance": "node scripts/pwa-enhancer.js",
     "fix-lint": "node scripts/fix-eslint-issues.js",
     "quality-check": "npm run lint && npm run health:check && npm run test",
-    "dev-ready": "npm run fix-lint && npm run quality-check"
+    "dev-ready": "npm run fix-lint && npm run quality-check",
+    "debug:auto": "node scripts/debug.js",
+    "debug:log": "npm run debug:auto && cat DEBUG_LOG.md"
   },
   "keywords": [
     "cigar",
