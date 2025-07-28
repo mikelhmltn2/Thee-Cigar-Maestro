@@ -290,13 +290,13 @@ async function testJavaScriptSyntax() {
         path: jsFile,
         status: 'fail',
         critical: true,
-        error: error.message
+        error: _error.message
       };
       
       results.categories.syntax.tests.push(testResult);
       results.summary.total++;
       results.summary.failed++;
-      console.error(`❌ ${jsFile}: Syntax Error - ${error.message}`);
+      console.error(`❌ ${jsFile}: Syntax Error - ${_error.message}`);
     }
   }
   
@@ -346,13 +346,13 @@ async function testJSONFiles() {
         path: jsonFile,
         status: 'fail',
         critical: true,
-        error: error.message
+        error: _error.message
       };
       
       results.categories.syntax.tests.push(testResult);
       results.summary.total++;
       results.summary.failed++;
-      console.error(`❌ ${jsonFile}: Invalid JSON - ${error.message}`);
+      console.error(`❌ ${jsonFile}: Invalid JSON - ${_error.message}`);
     }
   }
 }

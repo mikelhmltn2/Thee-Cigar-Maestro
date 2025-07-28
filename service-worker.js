@@ -249,7 +249,7 @@ async function handleStaticRequest(request) {
       }
     }
     
-    throw error;
+    throw _error;
   }
 }
 
@@ -275,7 +275,7 @@ async function handleExternalRequest(request) {
       return cachedResponse;
     }
     
-    throw error;
+    throw _error;
   }
 }
 
