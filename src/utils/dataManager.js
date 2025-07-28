@@ -304,10 +304,10 @@ class DataManager {
         return data;
       } catch (_fileError) {
         if (config.required) {
-          throw new Error(`Failed to load required data source ${key}: ${fileError.message}`);
+          throw new Error(`Failed to load required data source ${key}: ${_fileError.message}`);
         }
         
-        console.warn(`Optional data source ${key} failed to load:`, fileError.message);
+        console.warn(`Optional data source ${key} failed to load:`, _fileError.message);
         return null;
       }
     }
@@ -336,7 +336,7 @@ class DataManager {
       return this.processLoadedData(key, data);
     } catch (_error) {
       clearTimeout(timeoutId);
-      throw error;
+      throw _error;
     }
   }
 
@@ -362,7 +362,7 @@ class DataManager {
       return this.processLoadedData(key, data);
     } catch (_error) {
       clearTimeout(timeoutId);
-      throw error;
+      throw _error;
     }
   }
 
@@ -470,7 +470,7 @@ class DataManager {
 
       return true;
     } catch (_error) {
-      throw new Error(`Validation failed for ${key}: ${error.message}`);
+      throw new Error(`Validation failed for ${key}: ${_error.message}`);
     }
   }
 

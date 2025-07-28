@@ -59,7 +59,7 @@ class EnhancedDataValidator {
       }
       
     } catch (_error) {
-      this.errors.push(`${filePath}: JSON parsing error - ${error.message}`);
+      this.errors.push(`${filePath}: JSON parsing error - ${_error.message}`);
     }
   }
 

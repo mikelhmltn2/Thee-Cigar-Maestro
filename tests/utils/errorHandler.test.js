@@ -53,14 +53,14 @@ describe('Enhanced Error Handler', () => {
     vi.clearAllMocks();
     
     // Reset error handler state
-    clearErrors();
+    errorHandler.clearErrors();
     
     // Mock localStorage responses
     mockLocalStorage.getItem.mockReturnValue('[]');
   });
 
   afterEach(() => {
-    clearErrors();
+    errorHandler.clearErrors();
   });
 
   describe('Error Processing and Severity', () => {

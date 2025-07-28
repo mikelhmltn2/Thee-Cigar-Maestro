@@ -395,12 +395,12 @@ class LoadingSystem {
         } catch (_error) {
           errorHandler.handleError({
             type: 'batch_load_item',
-            message: `Failed to load batch item ${index}: ${error.message}`,
-            error
+            message: `Failed to load batch item ${index}: ${_error.message}`,
+            error: _error
           });
           
           this.completeProgressItem(id, `item_${index}`);
-          return { success: false, error, item, index };
+          return { success: false, error: _error, item, index };
         } finally {
           release();
         }

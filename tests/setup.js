@@ -125,4 +125,17 @@ global.performance = {
   measure: vi.fn()
 };
 
+// Mock DOM Events for testing
+global.KeyboardEvent = class KeyboardEvent extends Event {
+  constructor(type, eventInitDict = {}) {
+    super(type, eventInitDict);
+    this.key = eventInitDict.key || '';
+    this.code = eventInitDict.code || '';
+    this.ctrlKey = eventInitDict.ctrlKey || false;
+    this.shiftKey = eventInitDict.shiftKey || false;
+    this.altKey = eventInitDict.altKey || false;
+    this.metaKey = eventInitDict.metaKey || false;
+  }
+};
+
 console.info('Test environment setup complete');
