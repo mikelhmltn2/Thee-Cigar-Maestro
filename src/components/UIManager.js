@@ -64,10 +64,12 @@ class UIManager {
    */
   setupEventListeners() {
     // Navigation buttons
-    document.querySelectorAll('.nav-button').forEach(button => {
+    document.querySelectorAll('.nav-button, .mobile-nav-item').forEach(button => {
       button.addEventListener('click', (e) => {
-        const {section} = e.target.dataset;
-        this.navigateToSection(section);
+        const section = e.target.dataset.section || e.target.closest('[data-section]')?.dataset.section;
+        if (section) {
+          this.navigateToSection(section);
+        }
       });
     });
 
@@ -210,7 +212,7 @@ class UIManager {
    * Update active navigation button
    */
   updateActiveNavButton(section) {
-    document.querySelectorAll('.nav-button').forEach(btn => {
+    document.querySelectorAll('.nav-button, .mobile-nav-item').forEach(btn => {
       btn.classList.remove('active');
       if (btn.dataset.section === section) {
         btn.classList.add('active');
@@ -327,6 +329,76 @@ class UIManager {
             <div id="searchResults" class="search-results"></div>
           </div>
         </div>
+      `,
+      humidor: `
+        <div class="section-content">
+          <h4>🏛️ Personal Humidor</h4>
+          <p>Manage your cigar collection with intelligent tracking and aging insights.</p>
+          
+          <div class="humidor-stats">
+            <div class="stat-card">
+              <div class="stat-number" id="totalCigars">47</div>
+              <div class="stat-label">Total Cigars</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-number" id="humidityLevel">68%</div>
+              <div class="stat-label">Humidity</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-number" id="temperature">70°F</div>
+              <div class="stat-label">Temperature</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-number" id="readyToSmoke">12</div>
+              <div class="stat-label">Ready to Smoke</div>
+            </div>
+          </div>
+
+          <div class="humidor-actions">
+            <button class="action-item" onclick="uiManager.addToHumidor()">
+              ➕ Add Cigar
+            </button>
+            <button class="action-item" onclick="uiManager.scanQRCode()">
+              📷 Scan QR Code
+            </button>
+            <button class="action-item" onclick="uiManager.viewInventory()">
+              📦 View Inventory
+            </button>
+            <button class="action-item" onclick="uiManager.agingReport()">
+              📈 Aging Report
+            </button>
+            <button class="action-item" onclick="uiManager.humidorSettings()">
+              ⚙️ Humidor Settings
+            </button>
+          </div>
+
+          <div class="recent-additions">
+            <h5>Recent Additions</h5>
+            <div class="cigar-list">
+              <div class="cigar-item">
+                <div class="cigar-info">
+                  <span class="cigar-name">Montecristo No. 2</span>
+                  <span class="cigar-date">Added 2 days ago</span>
+                </div>
+                <div class="cigar-status ready">Ready</div>
+              </div>
+              <div class="cigar-item">
+                <div class="cigar-info">
+                  <span class="cigar-name">Padron 1964 Anniversary</span>
+                  <span class="cigar-date">Added 1 week ago</span>
+                </div>
+                <div class="cigar-status aging">Aging</div>
+              </div>
+              <div class="cigar-item">
+                <div class="cigar-info">
+                  <span class="cigar-name">Arturo Fuente Opus X</span>
+                  <span class="cigar-date">Added 2 weeks ago</span>
+                </div>
+                <div class="cigar-status aging">Aging</div>
+              </div>
+            </div>
+          </div>
+        </div>
       `
     };
 
@@ -343,7 +415,8 @@ class UIManager {
       education: '📚 Learn',
       pairings: '🍷 Pairings',
       journal: '📝 Journal',
-      search: '🔍 Search'
+      search: '🔍 Search',
+      humidor: '🏛️ Humidor'
     };
 
     if (panelTitle) {
@@ -351,7 +424,7 @@ class UIManager {
     }
 
     // Auto-open panel on mobile for certain sections
-    if (this.isMobile && ['education', 'pairings', 'journal', 'search'].includes(section)) {
+    if (this.isMobile && ['education', 'pairings', 'journal', 'search', 'humidor'].includes(section)) {
       this.openSidePanel();
     }
   }
@@ -365,7 +438,8 @@ class UIManager {
       education: 'Explore our educational content to deepen your cigar knowledge and expertise.',
       pairings: 'Discover perfect beverage and food pairings to enhance your cigar experience.',
       journal: 'Document your cigar journey with detailed tasting notes and personal reviews.',
-      search: 'Use advanced search to find exactly the cigar you\'re looking for.'
+      search: 'Use advanced search to find exactly the cigar you\'re looking for.',
+      humidor: 'Manage your personal cigar collection with smart tracking, aging insights, and environmental monitoring.'
     };
 
     if (this.dynamicInfo) {
@@ -984,6 +1058,303 @@ class UIManager {
   saveCurrentState() {
     // Save current application state
     this.showToast('State saved', 'success');
+  }
+
+  /**
+   * Humidor functionality methods
+   */
+  addToHumidor() {
+    this.showModal('➕ Add Cigar to Humidor', `
+      <div class="add-cigar-form">
+        <div class="form-group">
+          <label for="cigarName">Cigar Name</label>
+          <input type="text" id="cigarName" placeholder="e.g., Montecristo No. 2" class="search-input" />
+        </div>
+        <div class="form-group">
+          <label for="cigarBrand">Brand</label>
+          <input type="text" id="cigarBrand" placeholder="e.g., Montecristo" class="search-input" />
+        </div>
+        <div class="form-group">
+          <label for="cigarWrapper">Wrapper</label>
+          <select id="cigarWrapper" class="search-input">
+            <option value="">Select wrapper</option>
+            <option value="Connecticut">Connecticut</option>
+            <option value="Maduro">Maduro</option>
+            <option value="Habano">Habano</option>
+            <option value="Oscuro">Oscuro</option>
+            <option value="Natural">Natural</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="cigarQuantity">Quantity</label>
+          <input type="number" id="cigarQuantity" value="1" min="1" class="search-input" />
+        </div>
+        <div class="form-group">
+          <label for="purchaseDate">Purchase Date</label>
+          <input type="date" id="purchaseDate" class="search-input" />
+        </div>
+        <div class="form-group">
+          <label for="cigarNotes">Notes</label>
+          <textarea id="cigarNotes" placeholder="Optional notes about this cigar..." rows="3" class="search-input"></textarea>
+        </div>
+        <div class="form-actions">
+          <button onclick="uiManager.saveCigarToHumidor()" class="action-btn primary">
+            💾 Save to Humidor
+          </button>
+          <button onclick="uiManager.closeModal()" class="action-btn">
+            ❌ Cancel
+          </button>
+        </div>
+      </div>
+    `);
+  }
+
+  scanQRCode() {
+    this.showModal('📷 Scan QR Code', `
+      <div class="qr-scanner">
+        <div class="scanner-placeholder">
+          <div class="camera-icon">📷</div>
+          <p>Position the QR code within the frame</p>
+          <div class="scan-frame"></div>
+        </div>
+        <div class="scanner-controls">
+          <button onclick="uiManager.startScanning()" class="action-btn primary">
+            📸 Start Camera
+          </button>
+          <button onclick="uiManager.manualEntry()" class="action-btn">
+            ⌨️ Manual Entry
+          </button>
+        </div>
+      </div>
+    `);
+  }
+
+  viewInventory() {
+    this.showModal('📦 Humidor Inventory', `
+      <div class="inventory-view">
+        <div class="inventory-filters">
+          <select id="sortBy" class="search-input" style="margin-bottom: 1rem;">
+            <option value="recent">Sort by: Recently Added</option>
+            <option value="alphabetical">Sort by: Name A-Z</option>
+            <option value="wrapper">Sort by: Wrapper Type</option>
+            <option value="ready">Sort by: Ready to Smoke</option>
+          </select>
+        </div>
+        <div class="inventory-grid">
+          <div class="inventory-item">
+            <div class="item-info">
+              <h5>Montecristo No. 2</h5>
+              <p>Maduro • Added 2 days ago • Qty: 5</p>
+              <div class="item-status ready">Ready to Smoke</div>
+            </div>
+            <div class="item-actions">
+              <button onclick="uiManager.editCigar('1')" class="action-btn">✏️</button>
+              <button onclick="uiManager.smokeCigar('1')" class="action-btn primary">🔥</button>
+            </div>
+          </div>
+          <div class="inventory-item">
+            <div class="item-info">
+              <h5>Padron 1964 Anniversary</h5>
+              <p>Natural • Added 1 week ago • Qty: 3</p>
+              <div class="item-status aging">Aging (2 weeks left)</div>
+            </div>
+            <div class="item-actions">
+              <button onclick="uiManager.editCigar('2')" class="action-btn">✏️</button>
+              <button onclick="uiManager.smokeCigar('2')" class="action-btn" disabled>🕐</button>
+            </div>
+          </div>
+          <div class="inventory-item">
+            <div class="item-info">
+              <h5>Arturo Fuente Opus X</h5>
+              <p>Habano • Added 2 weeks ago • Qty: 2</p>
+              <div class="item-status aging">Aging (1 month left)</div>
+            </div>
+            <div class="item-actions">
+              <button onclick="uiManager.editCigar('3')" class="action-btn">✏️</button>
+              <button onclick="uiManager.smokeCigar('3')" class="action-btn" disabled>🕐</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    `);
+  }
+
+  agingReport() {
+    this.showModal('📈 Aging Report & Analytics', `
+      <div class="aging-report">
+        <div class="report-summary">
+          <h5>📊 Collection Overview</h5>
+          <div class="aging-stats">
+            <div class="aging-stat">
+              <span class="stat-number">12</span>
+              <span class="stat-label">Ready to Smoke</span>
+            </div>
+            <div class="aging-stat">
+              <span class="stat-number">25</span>
+              <span class="stat-label">Currently Aging</span>
+            </div>
+            <div class="aging-stat">
+              <span class="stat-number">10</span>
+              <span class="stat-label">Optimal Window</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="aging-recommendations">
+          <h5>🎯 AI Recommendations</h5>
+          <div class="recommendation-item">
+            <strong>🔴 Smoke Soon:</strong> Montecristo White Series - optimal window closing in 1 week
+          </div>
+          <div class="recommendation-item">
+            <strong>🟡 Check Progress:</strong> Padron Anniversary Series - entering peak aging window
+          </div>
+          <div class="recommendation-item">
+            <strong>🟢 Continue Aging:</strong> Opus X collection - 2 months until optimal
+          </div>
+        </div>
+
+        <div class="aging-chart-placeholder">
+          <h5>📈 Aging Timeline</h5>
+          <div class="chart-area">
+            <p style="text-align: center; color: #a67856; font-style: italic;">
+              Interactive aging timeline chart would appear here
+            </p>
+          </div>
+        </div>
+      </div>
+    `);
+  }
+
+  humidorSettings() {
+    this.showModal('⚙️ Humidor Settings', `
+      <div class="humidor-settings">
+        <div class="settings-section">
+          <h5>🌡️ Environmental Controls</h5>
+          <div class="setting-item">
+            <label>Target Humidity (%)</label>
+            <input type="range" min="65" max="75" value="68" class="humidity-slider" />
+            <span class="setting-value">68%</span>
+          </div>
+          <div class="setting-item">
+            <label>Target Temperature (°F)</label>
+            <input type="range" min="65" max="75" value="70" class="temp-slider" />
+            <span class="setting-value">70°F</span>
+          </div>
+        </div>
+
+        <div class="settings-section">
+          <h5>🔔 Notifications</h5>
+          <div class="setting-toggle">
+            <label>
+              <input type="checkbox" checked /> Humidity alerts
+            </label>
+          </div>
+          <div class="setting-toggle">
+            <label>
+              <input type="checkbox" checked /> Temperature alerts
+            </label>
+          </div>
+          <div class="setting-toggle">
+            <label>
+              <input type="checkbox" checked /> Aging reminders
+            </label>
+          </div>
+          <div class="setting-toggle">
+            <label>
+              <input type="checkbox" /> Weekly inventory reports
+            </label>
+          </div>
+        </div>
+
+        <div class="settings-section">
+          <h5>🤖 AI Features</h5>
+          <div class="setting-toggle">
+            <label>
+              <input type="checkbox" checked /> Smart aging recommendations
+            </label>
+          </div>
+          <div class="setting-toggle">
+            <label>
+              <input type="checkbox" checked /> Optimal smoking windows
+            </label>
+          </div>
+          <div class="setting-toggle">
+            <label>
+              <input type="checkbox" /> Auto-reorder suggestions
+            </label>
+          </div>
+        </div>
+
+        <div class="settings-actions">
+          <button onclick="uiManager.saveHumidorSettings()" class="action-btn primary">
+            💾 Save Settings
+          </button>
+          <button onclick="uiManager.resetToDefaults()" class="action-btn">
+            🔄 Reset to Defaults
+          </button>
+        </div>
+      </div>
+    `);
+  }
+
+  saveCigarToHumidor() {
+    const name = document.getElementById('cigarName')?.value;
+    const brand = document.getElementById('cigarBrand')?.value;
+    
+    if (!name || !brand) {
+      this.showToast('Please fill in the required fields', 'error');
+      return;
+    }
+    
+    this.showToast(`Added ${name} to your humidor!`, 'success');
+    this.closeModal();
+    // Update humidor stats
+    this.updateHumidorStats();
+  }
+
+  startScanning() {
+    this.showToast('Starting camera for QR scanning...', 'info');
+    // Implementation would connect to camera API
+  }
+
+  manualEntry() {
+    this.closeModal();
+    this.addToHumidor();
+  }
+
+  editCigar(id) {
+    this.showToast(`Editing cigar ${id}...`, 'info');
+  }
+
+  smokeCigar(id) {
+    this.closeModal();
+    this.navigateToSection('journal');
+    this.showToast('Starting smoking session. Document your experience!', 'success');
+  }
+
+  saveHumidorSettings() {
+    this.showToast('Humidor settings saved successfully!', 'success');
+    this.closeModal();
+  }
+
+  resetToDefaults() {
+    this.showToast('Settings reset to defaults', 'info');
+  }
+
+  updateHumidorStats() {
+    // Update the stats in the humidor section
+    const totalCigars = document.getElementById('totalCigars');
+    const readyToSmoke = document.getElementById('readyToSmoke');
+    
+    if (totalCigars) {
+      const current = parseInt(totalCigars.textContent) || 47;
+      totalCigars.textContent = current + 1;
+    }
+    
+    if (readyToSmoke) {
+      const current = parseInt(readyToSmoke.textContent) || 12;
+      readyToSmoke.textContent = current + 1;
+    }
   }
 }
 

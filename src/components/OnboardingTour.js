@@ -62,6 +62,13 @@ class OnboardingTour {
         action: 'highlight'
       },
       {
+        target: '.nav-button[data-section="humidor"]',
+        title: 'Personal Humidor 🏛️',
+        content: 'Manage your cigar collection with smart tracking, aging insights, and environmental monitoring.',
+        position: 'bottom',
+        action: 'highlight'
+      },
+      {
         target: '.info-display',
         title: 'Contextual Information ℹ️',
         content: 'This panel provides helpful information based on what you\'re currently doing.',
