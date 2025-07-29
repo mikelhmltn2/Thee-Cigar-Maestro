@@ -1706,6 +1706,19 @@
     </div>
   </div>
 
+  <!-- Script to show skip button -->
+  <script>
+    // Show skip button after 3 seconds
+    setTimeout(() => {
+      const skipBtn = document.getElementById('skipLoadingBtn');
+      const loadingOverlay = document.getElementById('loadingOverlay');
+      if (skipBtn && loadingOverlay && loadingOverlay.style.display !== 'none') {
+        skipBtn.style.display = 'block';
+        console.log('💡 Skip button is now available');
+      }
+    }, 3000);
+  </script>
+
   <!-- Toast Container -->
   <div class="toast-container" id="toastContainer"></div>
 
@@ -2463,6 +2476,15 @@
 
     // Initialize the enhanced UI system
     document.addEventListener('DOMContentLoaded', async () => {
+      // Add immediate fail-safe timeout for loading overlay (5 seconds)
+      const failSafeTimeout = setTimeout(() => {
+        console.warn('⚠️ Fail-safe timeout: Dismissing loading overlay');
+        const loadingOverlay = document.getElementById('loadingOverlay');
+        if (loadingOverlay) {
+          loadingOverlay.style.display = 'none';
+        }
+      }, 5000); // 5 second fail-safe
+
       // Set a global timeout for the entire initialization process
       const globalTimeout = setTimeout(() => {
         console.error('❌ Application initialization timed out');
@@ -2483,7 +2505,7 @@
             </button>
           </div>
         `);
-      }, 30000); // 30 second timeout
+      }, 15000); // Reduced to 15 second timeout
       
       try {
         console.log('🚀 Starting application initialization...');
@@ -2572,7 +2594,8 @@
         
         console.log('🎉 Application fully initialized');
         
-        // Clear the global timeout since initialization completed successfully
+        // Clear both timeouts since initialization completed successfully
+        clearTimeout(failSafeTimeout);
         clearTimeout(globalTimeout);
         
       } catch (error) {
