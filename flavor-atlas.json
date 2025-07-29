@@ -1,0 +1,48 @@
+{
+  "flavorAtlas": {
+    "description": "Comprehensive flavor mapping system for cigar tasting notes",
+    "version": "1.0.0",
+    "categories": {
+      "earthyNotes": {
+        "description": "Ground-based flavor profiles",
+        "flavors": ["soil", "mushroom", "forest", "mineral", "stone"]
+      },
+      "woodyNotes": {
+        "description": "Wood-derived flavor profiles", 
+        "flavors": ["cedar", "oak", "pine", "mahogany", "sandalwood"]
+      },
+      "spicyNotes": {
+        "description": "Spice-forward flavor profiles",
+        "flavors": ["pepper", "cinnamon", "nutmeg", "clove", "cardamom"]
+      },
+      "sweetNotes": {
+        "description": "Sweet flavor profiles",
+        "flavors": ["honey", "molasses", "caramel", "vanilla", "chocolate"]
+      },
+      "floralNotes": {
+        "description": "Floral and aromatic profiles",
+        "flavors": ["lavender", "rose", "jasmine", "bergamot", "citrus"]
+      },
+      "nuttyNotes": {
+        "description": "Nut-based flavor profiles",
+        "flavors": ["almond", "hazelnut", "walnut", "pecan", "cashew"]
+      }
+    },
+    "intensityLevels": {
+      "mild": "Subtle, gentle flavor presence",
+      "medium": "Balanced, noticeable flavor presence", 
+      "full": "Bold, dominant flavor presence"
+    },
+    "pairingMatrix": {
+      "description": "Flavor pairing compatibility matrix",
+      "compatible": {
+        "earthyNotes": ["woodyNotes", "spicyNotes"],
+        "woodyNotes": ["nuttyNotes", "sweetNotes"],
+        "spicyNotes": ["sweetNotes", "earthyNotes"],
+        "sweetNotes": ["nuttyNotes", "floralNotes"],
+        "floralNotes": ["sweetNotes", "spicyNotes"],
+        "nuttyNotes": ["woodyNotes", "sweetNotes"]
+      }
+    }
+  }
+}

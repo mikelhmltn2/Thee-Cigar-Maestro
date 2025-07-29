@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loading Test - Thee Cigar Maestro</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background: #121212;
+            color: #f0e6d2;
+        }
+        .test-result {
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .success { background: #28a745; }
+        .error { background: #dc3545; }
+        .warning { background: #ffc107; color: #212529; }
+        .loading { background: #17a2b8; }
+    </style>
+</head>
+<body>
+    <h1>🧪 Thee Cigar Maestro - Loading Test</h1>
+    <p>This page tests if all required data files can be loaded successfully.</p>
+    
+    <div id="results"></div>
+    
+    <script>
+        async function testFileLoading() {
+            const results = document.getElementById('results');
+            
+            const dataFiles = [
+                { key: 'cigars', file: 'flavorverse_nodes.json' },
+                { key: 'features', file: 'features.json' },
+                { key: 'education', file: 'education.json' },
+                { key: 'pairings', file: 'pairings.json' },
+                { key: 'interface', file: 'interface.json' },
+                { key: 'meta', file: 'meta.json' },
+                { key: 'emotional', file: 'emotional.json' },
+                { key: 'lounge', file: 'lounge.json' },
+                { key: 'flavorAtlas', file: 'flavor-atlas.json' },
+                { key: 'specs', file: 'cigar-specs.json' }
+            ];
+            
+            console.log('🧪 Starting loading test...');
+            
+            for (const { key, file } of dataFiles) {
+                const testDiv = document.createElement('div');
+                testDiv.className = 'test-result loading';
+                testDiv.textContent = `🔄 Testing ${file}...`;
+                results.appendChild(testDiv);
+                
+                try {
+                    const response = await fetch(file);
+                    if (!response.ok) {
+                        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                    }
+                    
+                    const data = await response.json();
+                    testDiv.className = 'test-result success';
+                    testDiv.textContent = `✅ ${file} loaded successfully (${JSON.stringify(data).length} characters)`;
+                    console.log(`✅ ${file} loaded successfully`);
+                    
+                } catch (error) {
+                    testDiv.className = 'test-result error';
+                    testDiv.textContent = `❌ ${file} failed to load: ${error.message}`;
+                    console.error(`❌ ${file} failed:`, error);
+                }
+                
+                // Small delay to make results visible
+                await new Promise(resolve => setTimeout(resolve, 200));
+            }
+            
+            // Test component files
+            const componentFiles = [
+                'src/components/UIManager.js',
+                'src/components/OnboardingTour.js',
+                'src/components/AdvancedControlsPanel.js',
+                'src/components/EnhancedCigarModal.js',
+                'src/components/PersonalDashboard.js'
+            ];
+            
+            for (const file of componentFiles) {
+                const testDiv = document.createElement('div');
+                testDiv.className = 'test-result loading';
+                testDiv.textContent = `🔄 Testing ${file}...`;
+                results.appendChild(testDiv);
+                
+                try {
+                    const response = await fetch(file);
+                    if (!response.ok) {
+                        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                    }
+                    
+                    const text = await response.text();
+                    testDiv.className = 'test-result success';
+                    testDiv.textContent = `✅ ${file} accessible (${text.length} characters)`;
+                    console.log(`✅ ${file} accessible`);
+                    
+                } catch (error) {
+                    testDiv.className = 'test-result error';
+                    testDiv.textContent = `❌ ${file} failed to load: ${error.message}`;
+                    console.error(`❌ ${file} failed:`, error);
+                }
+                
+                await new Promise(resolve => setTimeout(resolve, 200));
+            }
+            
+            console.log('🎉 Loading test completed');
+            
+            const summaryDiv = document.createElement('div');
+            summaryDiv.className = 'test-result success';
+            summaryDiv.innerHTML = `
+                <h3>Test Complete!</h3>
+                <p>Check the console for detailed results. If all files loaded successfully, 
+                the main application should work properly.</p>
+                <a href="index.html" style="color: #c69c6d; text-decoration: underline;">
+                    → Go to Main Application
+                </a>
+            `;
+            results.appendChild(summaryDiv);
+        }
+        
+        // Start the test when page loads
+        window.addEventListener('DOMContentLoaded', testFileLoading);
+    </script>
+</body>
+</html>
