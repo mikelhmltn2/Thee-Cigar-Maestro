@@ -1347,12 +1347,12 @@ class UIManager {
     const readyToSmoke = document.getElementById('readyToSmoke');
     
     if (totalCigars) {
-      const current = parseInt(totalCigars.textContent) || 47;
+      const current = parseInt(totalCigars.textContent, 10) || 47;
       totalCigars.textContent = current + 1;
     }
     
     if (readyToSmoke) {
-      const current = parseInt(readyToSmoke.textContent) || 12;
+      const current = parseInt(readyToSmoke.textContent, 10) || 12;
       readyToSmoke.textContent = current + 1;
     }
   }

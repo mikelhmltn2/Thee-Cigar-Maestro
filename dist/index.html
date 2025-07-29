@@ -981,6 +981,8 @@
      .stat-card:hover {
        background: rgba(198, 156, 109, 0.1);
        border-color: var(--accent-text);
+       transform: translateY(-2px);
+       box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
      }
 
      .stat-number {
@@ -989,6 +991,10 @@
        font-weight: bold;
        color: var(--accent-text);
        margin-bottom: 0.5rem;
+       background: linear-gradient(135deg, var(--accent-text), #dab785);
+       -webkit-background-clip: text;
+       -webkit-text-fill-color: transparent;
+       background-clip: text;
      }
 
      .stat-label {
@@ -1518,7 +1524,7 @@
        }
      }
    </style>
-  <script type="module" crossorigin src="/assets/main-Co9EjUKP.js"></script>
+  <script type="module" crossorigin src="/assets/main-BvQ_NbVm.js"></script>
   <link rel="modulepreload" crossorigin href="/assets/modulepreload-polyfill-YP0FEG5d.js">
 <link rel="manifest" href="/manifest.webmanifest"><script id="vite-plugin-pwa:register-sw" src="/registerSW.js"></script></head>
 <body>
@@ -1682,8 +1688,34 @@
     <div class="loading-content">
       <div class="loading-spinner"></div>
       <p id="loadingMessage">Loading your cigar experience...</p>
+      <button id="skipLoadingBtn" style="
+        display: none;
+        margin-top: 20px;
+        background: transparent;
+        border: 2px solid var(--accent-text);
+        color: var(--accent-text);
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-family: inherit;
+      " onclick="document.getElementById('loadingOverlay').style.display = 'none';">
+        Continue Anyway
+      </button>
     </div>
   </div>
+
+  <!-- Script to show skip button -->
+  <script>
+    // Show skip button after 3 seconds
+    setTimeout(() => {
+      const skipBtn = document.getElementById('skipLoadingBtn');
+      const loadingOverlay = document.getElementById('loadingOverlay');
+      if (skipBtn && loadingOverlay && loadingOverlay.style.display !== 'none') {
+        skipBtn.style.display = 'block';
+        console.log('💡 Skip button is now available');
+      }
+    }, 3000);
+  </script>
 
   <!-- Toast Container -->
   <div class="toast-container" id="toastContainer"></div>
@@ -1907,22 +1939,84 @@
 
     // Initialize the enhanced UI system
     document.addEventListener('DOMContentLoaded', async () => {
+      // Add immediate fail-safe timeout for loading overlay (5 seconds)
+      const failSafeTimeout = setTimeout(() => {
+        console.warn('⚠️ Fail-safe timeout: Dismissing loading overlay');
+        const loadingOverlay = document.getElementById('loadingOverlay');
+        if (loadingOverlay) {
+          loadingOverlay.style.display = 'none';
+        }
+      }, 5000); // 5 second fail-safe
+
+      // Set a global timeout for the entire initialization process
+      const globalTimeout = setTimeout(() => {
+        console.error('❌ Application initialization timed out');
+        const loadingOverlay = document.getElementById('loadingOverlay');
+        if (loadingOverlay) {
+          loadingOverlay.style.display = 'none';
+        }
+        
+        document.body.insertAdjacentHTML('beforeend', `
+          <div style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); 
+                      background: #ffc107; color: #212529; padding: 20px; border-radius: 8px; 
+                      z-index: 10000; text-align: center; max-width: 400px;">
+            <h3>Loading Taking Too Long</h3>
+            <p>Thee Cigar Maestro is taking longer than expected to load. This might be due to a slow connection or server issue.</p>
+            <button onclick="location.reload()" style="background: #212529; color: white; border: none; 
+                           padding: 10px 20px; border-radius: 4px; cursor: pointer; margin-top: 10px;">
+              Try Again
+            </button>
+          </div>
+        `);
+      }, 15000); // Reduced to 15 second timeout
+      
       try {
+        console.log('🚀 Starting application initialization...');
+        
+        // Enable debug mode if URL parameter is present
+        const urlParams = new URLSearchParams(window.location.search);
+        const debugMode = urlParams.has('debug');
+        
+        if (debugMode) {
+          console.log('🐛 Debug mode enabled');
+          window.debugMode = true;
+        }
+        
         // Initialize authentication state management
         setupAuthStateManager();
+        console.log('✓ Auth state manager initialized');
         
         // Initialize UI Manager
         uiManager = new UIManager();
         window.uiManager = uiManager; // Make globally accessible for legacy code
+        console.log('✓ UI Manager initialized');
+        
+        // Show initial loading message
+        uiManager.showLoading('Loading your cigar experience...');
         
         // Initialize onboarding tour
         onboardingTour = new OnboardingTour(uiManager);
         window.onboardingTour = onboardingTour; // Make globally accessible
+        console.log('✓ Onboarding tour initialized');
         
-        // Initialize data manager
+        // Initialize data manager with timeout
+        console.log('📊 Loading application data...');
         const dataManager = new DataManager();
+        const dataLoadTimeout = setTimeout(() => {
+          console.warn('⚠️ Data loading is taking longer than expected...');
+          uiManager.showToast('Data loading is taking longer than expected. Please wait...', 'warning', 5000);
+          
+          // Show the skip loading button after 10 seconds
+          const skipBtn = document.getElementById('skipLoadingBtn');
+          if (skipBtn) {
+            skipBtn.style.display = 'block';
+          }
+        }, 10000);
+        
         await dataManager.loadAllData();
+        clearTimeout(dataLoadTimeout);
         window.dataManager = dataManager; // Make globally accessible
+        console.log('✓ Data manager initialized');
         
         // Initialize advanced components
         advancedControls = new AdvancedControlsPanel(uiManager, dataManager);
@@ -1935,14 +2029,18 @@
         window.personalDashboard = personalDashboard;
         
         // Initialize 3D scene
+        console.log('🎨 Initializing 3D visualization...');
         uiManager.showLoading('Loading 3D visualization...');
         await init3DScene();
         uiManager.hideLoading();
+        console.log('✓ 3D scene initialized');
         
-        // Load cigars into the scene
+        // Load cigars into the scene  
+        console.log('🚬 Loading cigars into scene...');
         uiManager.showLoading('Loading cigar data...');
         await loadCigars();
         uiManager.hideLoading();
+        console.log('✓ Cigars loaded into scene');
         
         // Show welcome message
         uiManager.showToast('Welcome to Thee Cigar Maestro! 🚬', 'success', 5000);
@@ -1959,9 +2057,49 @@
         
         console.log('🎉 Application fully initialized');
         
+        // Clear both timeouts since initialization completed successfully
+        clearTimeout(failSafeTimeout);
+        clearTimeout(globalTimeout);
+        
       } catch (error) {
+        clearTimeout(globalTimeout);
         console.error('❌ Failed to initialize application:', error);
-        uiManager?.showToast('Failed to load application. Please refresh.', 'error', 10000);
+        uiManager?.hideLoading();
+        uiManager?.showToast('Failed to load application. Attempting recovery mode...', 'error', 5000);
+        
+        // Try to provide minimal functionality even if initialization fails
+        try {
+          console.log('🔄 Attempting recovery mode...');
+          if (uiManager) {
+            uiManager.showToast('Running in recovery mode with limited features.', 'warning', 10000);
+            // Hide loading overlay manually if UI manager failed
+            const loadingOverlay = document.getElementById('loadingOverlay');
+            if (loadingOverlay) {
+              loadingOverlay.style.display = 'none';
+            }
+          }
+        } catch (recoveryError) {
+          console.error('❌ Recovery mode also failed:', recoveryError);
+          // Force hide loading overlay
+          const loadingOverlay = document.getElementById('loadingOverlay');
+          if (loadingOverlay) {
+            loadingOverlay.style.display = 'none';
+          }
+          
+          // Show error message directly in the DOM
+          document.body.insertAdjacentHTML('beforeend', `
+            <div style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); 
+                        background: #dc3545; color: white; padding: 20px; border-radius: 8px; 
+                        z-index: 10000; text-align: center; max-width: 400px;">
+              <h3>Application Loading Failed</h3>
+              <p>There was an error loading Thee Cigar Maestro. Please refresh the page or try again later.</p>
+              <button onclick="location.reload()" style="background: white; color: #dc3545; border: none; 
+                             padding: 10px 20px; border-radius: 4px; cursor: pointer; margin-top: 10px;">
+                Refresh Page
+              </button>
+            </div>
+          `);
+        }
       }
     });
 

@@ -556,15 +556,13 @@ const errorHandler = new ErrorHandler();
 // Export for use throughout the application
 export default errorHandler;
 
-// Export specific methods for convenience
-export const {
-  handleError,
-  handleApiError,
-  handleNetworkError,
-  handleValidationError,
-  safeAsync,
-  safeSync,
-  getRecentErrors,
-  getErrorStats,
-  clearErrors
-} = errorHandler;
+// Export specific methods for convenience with proper binding
+export const handleError = errorHandler.handleError.bind(errorHandler);
+export const handleApiError = errorHandler.handleApiError.bind(errorHandler);
+export const handleNetworkError = errorHandler.handleNetworkError.bind(errorHandler);
+export const handleValidationError = errorHandler.handleValidationError.bind(errorHandler);
+export const safeAsync = errorHandler.safeAsync.bind(errorHandler);
+export const safeSync = errorHandler.safeSync.bind(errorHandler);
+export const getRecentErrors = errorHandler.getRecentErrors.bind(errorHandler);
+export const getErrorStats = errorHandler.getErrorStats.bind(errorHandler);
+export const clearErrors = errorHandler.clearErrors.bind(errorHandler);
