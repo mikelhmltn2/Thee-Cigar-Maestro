@@ -4,26 +4,544 @@
     <head>
       <meta charset="UTF-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-      <title>Pairing Engine</title>
+      <title>Pairing Engine - Thee Cigar Maestro</title>
       <link rel="stylesheet" href="style.css" />
-    </head>
-    <body>
-      <header>
-        <h1>Pairing Engine</h1>
-        <nav>
-          <a href="index.html">Home</a>
-          <a href="specs.html">Specs</a>
-          <a href="pairing.html">Pairing</a>
-          <a href="education.html">Education</a>
-          <a href="legacy.html">Legacy</a>
-          <a href="contact.html">Contact</a>
-        </nav>
-      </header>
-      <section>
-        <h2>Flavor, Emotion, and Ritual Sync</h2>
-        <p>Discover pairings by wrapper, mood, memory, or sacred context.</p>
-      </section>
-    <script type="module" src="gpt.js"></script>
+      <style>
+    .pairing-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: var(--spacing-xl);
+    }
+    
+    .pairing-interface {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: var(--spacing-xxl);
+      margin-top: var(--spacing-xl);
+    }
+    
+    .filters-panel {
+      background: var(--secondary-bg);
+      padding: var(--spacing-xl);
+      border-radius: var(--border-radius);
+      border: 1px solid var(--border-color);
+      height: fit-content;
+      position: sticky;
+      top: var(--spacing-xl);
+    }
+    
+    .filter-group {
+      margin-bottom: var(--spacing-lg);
+    }
+    
+    .filter-group h3 {
+      color: var(--accent-text);
+      margin-bottom: var(--spacing-md);
+      font-size: 1.1rem;
+    }
+    
+    .filter-options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--spacing-sm);
+    }
+    
+    .filter-chip {
+      background: var(--accent-bg);
+      color: var(--primary-text);
+      border: 1px solid var(--border-color);
+      padding: var(--spacing-sm) var(--spacing-md);
+      border-radius: 20px;
+      cursor: pointer;
+      transition: var(--transition);
+      font-size: 0.9rem;
+    }
+    
+    .filter-chip:hover,
+    .filter-chip.active {
+      background: var(--accent-text);
+      color: var(--primary-bg);
+      border-color: var(--accent-text);
+    }
+    
+    .pairing-input {
+      width: 100%;
+      padding: var(--spacing-md);
+      background: var(--accent-bg);
+      border: 1px solid var(--border-color);
+      border-radius: var(--border-radius);
+      color: var(--primary-text);
+      font-family: var(--font-family);
+      margin-bottom: var(--spacing-md);
+    }
+    
+    .search-btn {
+      background: linear-gradient(135deg, var(--accent-text), var(--secondary-text));
+      color: var(--primary-bg);
+      border: none;
+      padding: var(--spacing-md) var(--spacing-xl);
+      border-radius: var(--border-radius);
+      cursor: pointer;
+      font-family: var(--font-family);
+      font-weight: bold;
+      transition: var(--transition);
+      width: 100%;
+    }
+    
+    .search-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(198, 156, 109, 0.3);
+    }
+    
+    .results-panel {
+      background: var(--secondary-bg);
+      border-radius: var(--border-radius);
+      border: 1px solid var(--border-color);
+      min-height: 400px;
+    }
+    
+    .results-header {
+      padding: var(--spacing-xl);
+      border-bottom: 1px solid var(--border-color);
+      background: var(--accent-bg);
+      border-radius: var(--border-radius) var(--border-radius) 0 0;
+    }
+    
+    .results-content {
+      padding: var(--spacing-xl);
+    }
+    
+    .pairing-card {
+      background: var(--accent-bg);
+      border: 1px solid var(--border-color);
+      border-radius: var(--border-radius);
+      padding: var(--spacing-lg);
+      margin-bottom: var(--spacing-lg);
+      transition: var(--transition);
+    }
+    
+    .pairing-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      border-color: var(--accent-text);
+    }
+    
+    .pairing-title {
+      color: var(--accent-text);
+      font-size: 1.3rem;
+      margin-bottom: var(--spacing-md);
+    }
+    
+    .pairing-details {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--spacing-md);
+      margin-bottom: var(--spacing-md);
+    }
+    
+    .detail-item {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-sm);
+    }
+    
+    .detail-label {
+      font-weight: bold;
+      color: var(--secondary-text);
+    }
+    
+    .flavor-notes {
+      background: var(--primary-bg);
+      padding: var(--spacing-md);
+      border-radius: var(--border-radius);
+      margin-top: var(--spacing-md);
+    }
+    
+    .quiz-section {
+      background: var(--accent-bg);
+      padding: var(--spacing-xl);
+      border-radius: var(--border-radius);
+      border: 1px solid var(--border-color);
+      margin-top: var(--spacing-xl);
+    }
+    
+    .quiz-question {
+      margin-bottom: var(--spacing-lg);
+    }
+    
+    .quiz-options {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: var(--spacing-md);
+      margin: var(--spacing-md) 0;
+    }
+    
+    .quiz-option {
+      background: var(--secondary-bg);
+      border: 1px solid var(--border-color);
+      padding: var(--spacing-md);
+      border-radius: var(--border-radius);
+      cursor: pointer;
+      transition: var(--transition);
+      text-align: center;
+    }
+    
+    .quiz-option:hover,
+    .quiz-option.selected {
+      background: var(--accent-text);
+      color: var(--primary-bg);
+      border-color: var(--accent-text);
+    }
+    
+    .mood-selector {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: var(--spacing-md);
+      margin-top: var(--spacing-md);
+    }
+    
+    .mood-option {
+      background: var(--accent-bg);
+      border: 1px solid var(--border-color);
+      padding: var(--spacing-lg);
+      border-radius: var(--border-radius);
+      text-align: center;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    
+    .mood-option:hover,
+    .mood-option.selected {
+      background: var(--accent-text);
+      color: var(--primary-bg);
+      border-color: var(--accent-text);
+      transform: scale(1.05);
+    }
+    
+    .mood-emoji {
+      font-size: 2rem;
+      margin-bottom: var(--spacing-sm);
+    }
+    
+    @media (max-width: 1024px) {
+      .pairing-interface {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-lg);
+      }
+      
+      .filters-panel {
+        position: static;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .pairing-details {
+        grid-template-columns: 1fr;
+      }
+      
+      .quiz-options {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Pairing Engine</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="specs.html">Specs</a>
+      <a href="pairing.html" class="active">Pairing</a>
+      <a href="education.html">Education</a>
+      <a href="legacy.html">Legacy</a>
+      <a href="flavorverse.html">Flavorverse</a>
+      <a href="nft.html">NFT Vault</a>
+      <a href="kiosk.html">Kiosk</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <div class="pairing-container">
+    <section>
+      <h2>Flavor, Emotion, and Ritual Sync</h2>
+      <p>Discover perfect pairings by wrapper, mood, memory, or sacred context. Our AI-powered engine analyzes your preferences to suggest harmonious combinations.</p>
+    </section>
+
+    <div class="pairing-interface">
+      <div class="filters-panel">
+        <h3>🎯 Find Your Perfect Pairing</h3>
+        
+        <div class="filter-group">
+          <h3>Pairing Type</h3>
+          <input type="text" class="pairing-input" id="pairingInput" placeholder="Enter drink, food, or activity...">
+        </div>
+        
+        <div class="filter-group">
+          <h3>Wrapper Type</h3>
+          <div class="filter-options">
+            <div class="filter-chip" data-filter="wrapper" data-value="Connecticut">Connecticut</div>
+            <div class="filter-chip" data-filter="wrapper" data-value="Maduro">Maduro</div>
+            <div class="filter-chip" data-filter="wrapper" data-value="Habano">Habano</div>
+            <div class="filter-chip" data-filter="wrapper" data-value="Corojo">Corojo</div>
+            <div class="filter-chip" data-filter="wrapper" data-value="Candela">Candela</div>
+          </div>
+        </div>
+        
+        <div class="filter-group">
+          <h3>Body Strength</h3>
+          <div class="filter-options">
+            <div class="filter-chip" data-filter="body" data-value="Mild">Mild</div>
+            <div class="filter-chip" data-filter="body" data-value="Medium">Medium</div>
+            <div class="filter-chip" data-filter="body" data-value="Full">Full</div>
+          </div>
+        </div>
+        
+        <div class="filter-group">
+          <h3>Origin</h3>
+          <div class="filter-options">
+            <div class="filter-chip" data-filter="origin" data-value="Nicaragua">Nicaragua</div>
+            <div class="filter-chip" data-filter="origin" data-value="Dominican">Dominican</div>
+            <div class="filter-chip" data-filter="origin" data-value="Honduras">Honduras</div>
+            <div class="filter-chip" data-filter="origin" data-value="Cuba">Cuba</div>
+          </div>
+        </div>
+        
+        <div class="filter-group">
+          <h3>Current Mood</h3>
+          <div class="mood-selector">
+            <div class="mood-option" data-mood="contemplative">
+              <div class="mood-emoji">🧘</div>
+              <div>Contemplative</div>
+            </div>
+            <div class="mood-option" data-mood="celebratory">
+              <div class="mood-emoji">🎉</div>
+              <div>Celebratory</div>
+            </div>
+            <div class="mood-option" data-mood="relaxed">
+              <div class="mood-emoji">😌</div>
+              <div>Relaxed</div>
+            </div>
+            <div class="mood-option" data-mood="adventurous">
+              <div class="mood-emoji">🌟</div>
+              <div>Adventurous</div>
+            </div>
+          </div>
+        </div>
+        
+        <button class="search-btn" onclick="findPairings()">Find Perfect Pairings</button>
+      </div>
+
+      <div class="results-panel">
+        <div class="results-header">
+          <h3>🔍 Pairing Recommendations</h3>
+          <p>AI-curated suggestions based on your preferences</p>
+        </div>
+        <div class="results-content" id="resultsContent">
+          <div style="text-align: center; color: var(--secondary-text); margin-top: var(--spacing-xxl);">
+            <p>🌿 Select your preferences and discover harmonious pairings</p>
+            <p>Our algorithm considers flavor profiles, mood, and ritual context to create the perfect match.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="quiz-section">
+      <h3>🎓 Pairing Knowledge Quiz</h3>
+      <p>Test your pairing expertise with our interactive quiz!</p>
+      
+      <div class="quiz-question" id="currentQuiz">
+        <h4>Which spirit best complements a San Andrés wrapper?</h4>
+        <div class="quiz-options">
+          <div class="quiz-option" onclick="selectQuizAnswer(this, false)">Scotch</div>
+          <div class="quiz-option" onclick="selectQuizAnswer(this, false)">Gin</div>
+          <div class="quiz-option" onclick="selectQuizAnswer(this, true)">Mezcal</div>
+          <div class="quiz-option" onclick="selectQuizAnswer(this, false)">Vodka</div>
+        </div>
+        <div id="quizExplanation" style="display: none; margin-top: var(--spacing-md); padding: var(--spacing-md); background: var(--primary-bg); border-radius: var(--border-radius);">
+          <strong>Correct!</strong> The smoky, earthy notes of mezcal echo the dark cocoa and spice of San Andrés wrappers.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let selectedFilters = {
+      wrapper: '',
+      body: '',
+      origin: '',
+      mood: ''
+    };
+
+    // Sample pairing data
+    const pairings = [
+      {
+        cigar: "Maduro Churchill",
+        pairing: "Espresso",
+        wrapper: "Maduro",
+        body: "Full",
+        origin: "Nicaragua",
+        flavorNotes: "Rich chocolate, espresso, dark fruits",
+        reasoning: "The bold coffee flavors complement the cigar's cocoa and earth tones",
+        mood: "contemplative"
+      },
+      {
+        cigar: "Connecticut Robusto",
+        pairing: "Champagne",
+        wrapper: "Connecticut",
+        body: "Mild",
+        origin: "Dominican",
+        flavorNotes: "Cream, vanilla, light spice",
+        reasoning: "Effervescent bubbles cleanse the palate between draws",
+        mood: "celebratory"
+      },
+      {
+        cigar: "Habano Toro",
+        pairing: "Single Malt Scotch",
+        wrapper: "Habano",
+        body: "Medium",
+        origin: "Honduras",
+        flavorNotes: "Leather, cedar, pepper",
+        reasoning: "Complementary oak aging and complex flavor development",
+        mood: "relaxed"
+      },
+      {
+        cigar: "Corojo Corona",
+        pairing: "Aged Rum",
+        wrapper: "Corojo",
+        body: "Medium",
+        origin: "Nicaragua",
+        flavorNotes: "Spice, nuts, caramel",
+        reasoning: "Sweet rum balances the spicy wrapper characteristics",
+        mood: "adventurous"
+      }
+    ];
+
+    // Handle filter selection
+    document.addEventListener('DOMContentLoaded', function() {
+      const filterChips = document.querySelectorAll('.filter-chip');
+      const moodOptions = document.querySelectorAll('.mood-option');
+      
+      filterChips.forEach(chip => {
+        chip.addEventListener('click', function() {
+          const filterType = this.dataset.filter;
+          const filterValue = this.dataset.value;
+          
+          // Remove active class from other chips in the same group
+          document.querySelectorAll(`[data-filter="${filterType}"]`).forEach(c => c.classList.remove('active'));
+          
+          // Toggle active state
+          if (selectedFilters[filterType] === filterValue) {
+            selectedFilters[filterType] = '';
+            this.classList.remove('active');
+          } else {
+            selectedFilters[filterType] = filterValue;
+            this.classList.add('active');
+          }
+        });
+      });
+      
+      moodOptions.forEach(option => {
+        option.addEventListener('click', function() {
+          const mood = this.dataset.mood;
+          
+          // Remove selected from all moods
+          moodOptions.forEach(o => o.classList.remove('selected'));
+          
+          // Toggle selected state
+          if (selectedFilters.mood === mood) {
+            selectedFilters.mood = '';
+          } else {
+            selectedFilters.mood = mood;
+            this.classList.add('selected');
+          }
+        });
+      });
+    });
+
+    function findPairings() {
+      const pairingInput = document.getElementById('pairingInput').value.toLowerCase();
+      const resultsContent = document.getElementById('resultsContent');
+      
+      // Filter pairings based on selected criteria
+      let filteredPairings = pairings.filter(pairing => {
+        let matches = true;
+        
+        if (selectedFilters.wrapper && pairing.wrapper !== selectedFilters.wrapper) matches = false;
+        if (selectedFilters.body && pairing.body !== selectedFilters.body) matches = false;
+        if (selectedFilters.origin && pairing.origin !== selectedFilters.origin) matches = false;
+        if (selectedFilters.mood && pairing.mood !== selectedFilters.mood) matches = false;
+        
+        if (pairingInput && !pairing.pairing.toLowerCase().includes(pairingInput)) matches = false;
+        
+        return matches;
+      });
+      
+      // If no specific filters, show all pairings
+      if (!pairingInput && Object.values(selectedFilters).every(f => !f)) {
+        filteredPairings = pairings;
+      }
+      
+      // Display results
+      if (filteredPairings.length === 0) {
+        resultsContent.innerHTML = `
+          <div style="text-align: center; color: var(--secondary-text); margin-top: var(--spacing-xxl);">
+            <p>🔍 No pairings match your current criteria</p>
+            <p>Try adjusting your filters or exploring different options.</p>
+          </div>
+        `;
+      } else {
+        resultsContent.innerHTML = filteredPairings.map(pairing => `
+          <div class="pairing-card">
+            <h4 class="pairing-title">${pairing.cigar} + ${pairing.pairing}</h4>
+            <div class="pairing-details">
+              <div class="detail-item">
+                <span class="detail-label">Wrapper:</span>
+                <span>${pairing.wrapper}</span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-label">Body:</span>
+                <span>${pairing.body}</span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-label">Origin:</span>
+                <span>${pairing.origin}</span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-label">Mood:</span>
+                <span style="text-transform: capitalize;">${pairing.mood}</span>
+              </div>
+            </div>
+            <div class="flavor-notes">
+              <strong>Flavor Profile:</strong> ${pairing.flavorNotes}<br>
+              <strong>Why it works:</strong> ${pairing.reasoning}
+            </div>
+          </div>
+        `).join('');
+      }
+    }
+
+    function selectQuizAnswer(element, isCorrect) {
+      // Remove previous selections
+      document.querySelectorAll('.quiz-option').forEach(opt => {
+        opt.classList.remove('selected');
+        opt.style.background = '';
+      });
+      
+      // Mark selection
+      element.classList.add('selected');
+      
+      if (isCorrect) {
+        element.style.background = 'var(--success-color)';
+        document.getElementById('quizExplanation').style.display = 'block';
+      } else {
+        element.style.background = 'var(--error-color)';
+        document.getElementById('quizExplanation').innerHTML = '<strong>Not quite!</strong> Try again or explore our education section for more pairing knowledge.';
+        document.getElementById('quizExplanation').style.display = 'block';
+      }
+    }
+  </script>
+  
+  <script type="module" src="gpt.js"></script>
 </body>
-    </html>
+</html>
     
