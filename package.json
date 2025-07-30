@@ -12,7 +12,22 @@
     "test": "vitest",
     "test:ui": "vitest --ui",
     "type-check": "tsc --noEmit",
-    "analyze": "cross-env ANALYZE=true next build"
+    "analyze": "cross-env ANALYZE=true next build",
+    "health:check": "node scripts/health-check.js",
+    "security:scan": "node scripts/security-check.js",
+    "monitor:start": "node scripts/monitoring-automation.js start",
+    "monitor:check": "node scripts/monitoring-automation.js check",
+    "backup:daily": "node scripts/backup-automation.js daily",
+    "backup:critical": "node scripts/backup-automation.js critical",
+    "backup:restore": "node scripts/backup-automation.js restore",
+    "backup:list": "node scripts/backup-automation.js list",
+    "assets:optimize": "node scripts/optimize-assets.js",
+    "performance:test": "node scripts/performance-test.js",
+    "automation:all": "npm run health:check && npm run security:scan && npm run assets:optimize",
+    "dashboard:start": "node scripts/automation-dashboard.js start",
+    "dashboard:check": "node scripts/automation-dashboard.js check",
+    "dashboard:report": "node scripts/automation-dashboard.js report",
+    "automation:suite": "node scripts/automation-dashboard.js run-all"
   },
   "keywords": [
     "cigars",
