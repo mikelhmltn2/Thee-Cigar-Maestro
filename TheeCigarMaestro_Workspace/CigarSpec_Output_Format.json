@@ -1,0 +1,42 @@
+{
+  "cigarSpecFormat": {
+    "example": {
+      "cigarName": "Padron 1964 Anniversary Maduro Exclusivo",
+      "length": "5.5\u201d",
+      "ringGauge": 50,
+      "shape": "Robusto",
+      "color": "Maduro",
+      "strength": "Full",
+      "body": "Full",
+      "country": "Nicaragua",
+      "wrapper": "Nicaraguan Maduro",
+      "binder": "Nicaragua",
+      "filler": "Nicaragua",
+      "tastingNotes": "Earthy, cocoa, espresso, and pepper with a long finish",
+      "similarCigars": [
+        {
+          "name": "Oliva Serie V Melanio Maduro Robusto",
+          "description": "Full-bodied, Nicaraguan, chocolate and spice notes"
+        },
+        {
+          "name": "Drew Estate Liga Privada No. 9 Robusto",
+          "description": "Maduro wrapper, rich earthy flavor, full-bodied"
+        },
+        {
+          "name": "My Father Le Bijou 1922 Toro",
+          "description": "Nicaraguan Oscuro wrapper, bold, peppery and sweet finish"
+        }
+      ]
+    },
+    "notes": {
+      "dataSource": "Only official manufacturer descriptions allowed",
+      "recommendationBasis": [
+        "Flavor profile",
+        "Wrapper type",
+        "Strength",
+        "Country of origin"
+      ],
+      "outputConsistency": "Required across all spec requests"
+    }
+  }
+}

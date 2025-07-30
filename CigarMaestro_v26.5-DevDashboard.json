@@ -1,0 +1,37 @@
+{
+  "version": "v26.2",
+  "modulesCount": 9,
+  "defsCount": 5,
+  "featureFlags": [
+    "aiFeatures",
+    "hardwareIntegration",
+    "platformCapabilities"
+  ],
+  "gptAssistMeta": {
+    "enabled": true,
+    "triggers": [
+      "cigar spec",
+      "compare cigars",
+      "pair with whiskey"
+    ],
+    "fallbacks": [
+      "showWrapperInfo",
+      "explainBlend"
+    ],
+    "persona": "Certified Cigar Maestro AI",
+    "meta": {
+      "gptHint": "This module supports certified tobacco dialogue, pairing suggestions, and spec comparisons.",
+      "expectedOutput": "Structured cigar specification response or pairing list.",
+      "examplePrompt": "Compare a Padron 1964 with an Oliva Serie V for flavor and construction."
+    },
+    "difficulty": "intermediate",
+    "contextualDepth": "high",
+    "gptIntentType": "compare_cigars",
+    "gptFunctionRole": "CertifiedCigarSpecComparison",
+    "biasSensitivityFlag": false,
+    "semanticContextLevel": "structured_output"
+  },
+  "auditLogEnabled": true,
+  "i18nEnabled": true,
+  "accessibilityIncluded": true
+}

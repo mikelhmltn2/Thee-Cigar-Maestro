@@ -1,0 +1,3077 @@
+{
+  "projectName": "Cigar Maestro",
+  "version": "v1.0",
+  "metadata": {
+    "lastUpdated": "2025-06-14",
+    "author": "CigarMaestro AI Core",
+    "schemaVersion": "1.0.0",
+    "hashType": "SHA-256",
+    "upgradeReviewedOn": "2025-06-14",
+    "upgradeVersion": "v1.0",
+    "upgradedBy": "ChatGPT Upgrader AI",
+    "embeddedSchema": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "Cigar Maestro JSON Schema",
+      "type": "object",
+      "properties": {
+        "projectName": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        },
+        "metadata": {
+          "type": "object",
+          "properties": {
+            "lastUpdated": {
+              "type": "string"
+            },
+            "author": {
+              "type": "string"
+            },
+            "schemaVersion": {
+              "type": "string"
+            },
+            "hashType": {
+              "type": "string"
+            },
+            "upgradeReviewedOn": {
+              "type": "string"
+            },
+            "upgradeVersion": {
+              "type": "string"
+            },
+            "upgradedBy": {
+              "type": "string"
+            },
+            "version": {
+              "type": "string"
+            },
+            "embeddedSchema": {
+              "type": "object",
+              "description": "Embedded self-reference to the full JSON schema for validation purposes."
+            }
+          },
+          "additionalProperties": false
+        },
+        "integrityToken": {
+          "type": "string"
+        },
+        "changelog": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "version": {
+                "type": "string"
+              },
+              "summary": {
+                "type": "string"
+              },
+              "date": {
+                "type": "string"
+              },
+              "changeImpactScore": {
+                "type": "integer"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "modules": {
+          "type": "object",
+          "properties": {
+            "uiUx": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string"
+                },
+                "features": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "additionalProperties": false
+            },
+            "history": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string"
+                },
+                "includes": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "features": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "additionalProperties": false
+            },
+            "education": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string"
+                },
+                "features": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "metadata": {
+                  "type": "object",
+                  "properties": {
+                    "note": {
+                      "type": "string"
+                    },
+                    "tieredStructure": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "tier": {
+                            "type": "string"
+                          },
+                          "description": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": false
+                      }
+                    },
+                    "trustedSources": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "title": {
+                            "type": "string"
+                          },
+                          "author": {
+                            "type": "string"
+                          },
+                          "type": {
+                            "type": "string"
+                          },
+                          "notes": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "title",
+                          "author",
+                          "type"
+                        ]
+                      }
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                "accessibilityMetadata": {
+                  "type": "object",
+                  "properties": {
+                    "screenReaderOptimized": {
+                      "type": "boolean"
+                    },
+                    "readingLevel": {
+                      "type": "string"
+                    },
+                    "mediaType": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              },
+              "additionalProperties": false
+            },
+            "accreditation": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string"
+                },
+                "integrations": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "features": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "metadata": {
+                  "type": "object",
+                  "properties": {
+                    "tiers": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "lessonFlags": {
+                      "type": "object",
+                      "properties": {
+                        "modules": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "string"
+                              },
+                              "tier": {
+                                "type": "string"
+                              }
+                            },
+                            "additionalProperties": false
+                          }
+                        },
+                        "notes": {
+                          "type": "string"
+                        }
+                      },
+                      "additionalProperties": false
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              },
+              "additionalProperties": false
+            },
+            "systemIntegrity": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string"
+                },
+                "fallbacks": {
+                  "type": "boolean"
+                },
+                "versionControl": {
+                  "type": "boolean"
+                },
+                "schemaCheck": {
+                  "type": "boolean"
+                },
+                "promptValidation": {
+                  "type": "boolean"
+                }
+              },
+              "additionalProperties": false
+            },
+            "socialCommunity": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string"
+                },
+                "features": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "additionalProperties": false
+            },
+            "humidorManagement": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string"
+                },
+                "features": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "additionalProperties": false
+            },
+            "retailUtility": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string"
+                },
+                "features": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          "additionalProperties": false
+        },
+        "scorecard": {
+          "type": "object",
+          "properties": {
+            "metadata": {
+              "type": "object",
+              "properties": {
+                "scale": {
+                  "type": "string"
+                },
+                "source": {
+                  "type": "string"
+                },
+                "readinessExplanation": {
+                  "type": "string"
+                }
+              },
+              "additionalProperties": false
+            },
+            "scores": {
+              "type": "object",
+              "properties": {
+                "accreditation": {
+                  "type": "integer"
+                },
+                "educationDepth": {
+                  "type": "integer"
+                },
+                "historyIntegration": {
+                  "type": "integer"
+                },
+                "humidorManagement": {
+                  "type": "integer"
+                },
+                "readinessScore": {
+                  "type": "integer"
+                },
+                "retailUtility": {
+                  "type": "integer"
+                },
+                "socialCommunity": {
+                  "type": "integer"
+                },
+                "systemStability": {
+                  "type": "integer"
+                },
+                "uiUx": {
+                  "type": "integer"
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          "additionalProperties": false
+        },
+        "featureFlags": {
+          "type": "object",
+          "properties": {
+            "interactiveDistillerySuggestions": {
+              "type": "boolean"
+            },
+            "barcodeScanning": {
+              "type": "boolean"
+            },
+            "offlineMode": {
+              "type": "boolean"
+            },
+            "cigarAuthentication": {
+              "type": "boolean"
+            },
+            "userSpiritInventory": {
+              "type": "boolean"
+            },
+            "biometricVoiceLogging": {
+              "type": "boolean"
+            },
+            "voiceOnboarding": {
+              "type": "boolean"
+            }
+          },
+          "additionalProperties": false
+        },
+        "cuttingEdgeFeatures": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "userRolesAndViews": {
+          "type": "object",
+          "properties": {
+            "availableRoles": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "availableThemes": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "defaultViewTheme": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        },
+        "externalIntegrations": {
+          "type": "object",
+          "properties": {
+            "POS": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "LMS": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "additionalProperties": false
+        },
+        "distilleryPairings": {
+          "type": "object",
+          "properties": {
+            "normalizedDistilleries": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "country": {
+                    "type": "string"
+                  },
+                  "type": {
+                    "type": "string"
+                  },
+                  "pairingNotes": {
+                    "type": "string"
+                  },
+                  "wrapperCompatibility": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "additionalProperties": false
+              }
+            },
+            "byBody": {
+              "type": "object",
+              "properties": {
+                "metadata": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string"
+                    },
+                    "note": {
+                      "type": "string"
+                    },
+                    "isPopulated": {
+                      "type": "boolean"
+                    },
+                    "plannedForVersion": {
+                      "type": "string"
+                    },
+                    "isPlaceholder": {
+                      "type": "boolean"
+                    },
+                    "reviewed": {
+                      "type": "boolean"
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                "entries": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "body": {
+                        "type": "string"
+                      },
+                      "wrappers": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "recommendations": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "additionalProperties": false
+                  }
+                }
+              },
+              "additionalProperties": false
+            },
+            "byFlavorNote": {
+              "type": "object",
+              "properties": {
+                "metadata": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string"
+                    },
+                    "note": {
+                      "type": "string"
+                    },
+                    "isPopulated": {
+                      "type": "boolean"
+                    },
+                    "plannedForVersion": {
+                      "type": "string"
+                    },
+                    "isPlaceholder": {
+                      "type": "boolean"
+                    },
+                    "reviewed": {
+                      "type": "boolean"
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                "entries": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "note": {
+                        "type": "string"
+                      },
+                      "distilleries": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "additionalProperties": false
+                  }
+                }
+              },
+              "additionalProperties": false
+            },
+            "topPairings": {
+              "type": "object",
+              "properties": {
+                "metadata": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string"
+                    },
+                    "note": {
+                      "type": "string"
+                    },
+                    "isPopulated": {
+                      "type": "boolean"
+                    },
+                    "plannedForVersion": {
+                      "type": "string"
+                    },
+                    "isPlaceholder": {
+                      "type": "boolean"
+                    },
+                    "reviewed": {
+                      "type": "boolean"
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                "entries": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "cigarWrapper": {
+                        "type": "string"
+                      },
+                      "topMatches": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "additionalProperties": false
+                  }
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          "additionalProperties": false
+        },
+        "pairingExportOptions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "systemCapabilities": {
+          "type": "object",
+          "properties": {
+            "scanToPair": {
+              "type": "boolean"
+            },
+            "spiritInventoryTracking": {
+              "type": "boolean"
+            },
+            "arOverlayCapable": {
+              "type": "boolean"
+            },
+            "ugcPairingLogs": {
+              "type": "boolean"
+            },
+            "multiLanguageSupport": {
+              "type": "boolean"
+            },
+            "pairingSharingEnabled": {
+              "type": "boolean"
+            },
+            "qrPairingExport": {
+              "type": "boolean"
+            }
+          },
+          "additionalProperties": false
+        },
+        "authenticationModule": {
+          "type": "object",
+          "properties": {
+            "methodsSupported": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "status": {
+              "type": "string"
+            },
+            "visualAiTrainedBrands": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "externalSources": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "brand": {
+                    "type": "string"
+                  },
+                  "url": {
+                    "type": "string"
+                  }
+                },
+                "additionalProperties": false
+              }
+            },
+            "userEntryModes": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "trustFeedback": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "supportingUi": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "component": {
+                    "type": "string"
+                  },
+                  "type": {
+                    "type": "string"
+                  },
+                  "status": {
+                    "type": "string"
+                  }
+                },
+                "additionalProperties": false
+              }
+            },
+            "features": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "additionalProperties": false
+        },
+        "apiConfig": {
+          "type": "object",
+          "properties": {
+            "baseURL": {
+              "type": "string"
+            },
+            "endpoints": {
+              "type": "object",
+              "properties": {
+                "authenticationResult": {
+                  "type": "object",
+                  "properties": {
+                    "url": {
+                      "type": "string"
+                    },
+                    "version": {
+                      "type": "string"
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                "ceuTracking": {
+                  "type": "object",
+                  "properties": {
+                    "url": {
+                      "type": "string"
+                    },
+                    "version": {
+                      "type": "string"
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                "humidorSync": {
+                  "type": "object",
+                  "properties": {
+                    "url": {
+                      "type": "string"
+                    },
+                    "version": {
+                      "type": "string"
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                "pairingSuggestions": {
+                  "type": "object",
+                  "properties": {
+                    "url": {
+                      "type": "string"
+                    },
+                    "version": {
+                      "type": "string"
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                "ceuExport": {
+                  "type": "object",
+                  "properties": {
+                    "url": {
+                      "type": "string"
+                    },
+                    "version": {
+                      "type": "string"
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                "flavorTraining": {
+                  "type": "object",
+                  "properties": {
+                    "url": {
+                      "type": "string"
+                    },
+                    "version": {
+                      "type": "string"
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                "storyVisual": {
+                  "type": "object",
+                  "properties": {
+                    "url": {
+                      "type": "string"
+                    },
+                    "version": {
+                      "type": "string"
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          "additionalProperties": false
+        },
+        "userOnboardingFlow": {
+          "type": "object",
+          "properties": {
+            "firstSmokeJourney": {
+              "type": "boolean"
+            },
+            "steps": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "uiHints": {
+              "type": "object",
+              "properties": {
+                "steps": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "step": {
+                        "type": "string"
+                      },
+                      "inputType": {
+                        "type": "string"
+                      },
+                      "widgetHint": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "step",
+                      "inputType"
+                    ]
+                  }
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          "additionalProperties": false
+        },
+        "flavorJourneyTracker": {
+          "type": "object",
+          "properties": {
+            "enabled": {
+              "type": "boolean"
+            },
+            "milestones": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "trackableMetrics": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "additionalProperties": false
+        },
+        "membershipSystem": {
+          "type": "object",
+          "properties": {
+            "membershipTiers": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "tierName": {
+                    "type": "string"
+                  },
+                  "priceMonthly": {
+                    "type": "number"
+                  },
+                  "targetAudience": {
+                    "type": "string"
+                  },
+                  "features": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "restrictions": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          },
+          "additionalProperties": false
+        },
+        "administrativeAccess": {
+          "type": "object",
+          "properties": {
+            "admins": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "additionalProperties": false
+        },
+        "projectDirective": {
+          "type": "object",
+          "properties": {
+            "purpose": {
+              "type": "string"
+            },
+            "stakeholders": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "evaluationPillars": {
+              "type": "object",
+              "properties": {
+                "UI/UX": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "Cigar History Integration": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "Cigar Knowledge & Educational Depth": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "Academic & Accreditation Readiness": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "System Weaknesses & Fixes": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "additionalProperties": false
+            },
+            "finalDeliverables": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "preserveWithoutCompromise": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "goal": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "additionalProperties": false
+        },
+        "recommendedActionPlan": {
+          "type": "object",
+          "properties": {
+            "development": {
+              "type": "object",
+              "properties": {
+                "highPriority": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "mediumPriority": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "additionalProperties": false
+            },
+            "design": {
+              "type": "object",
+              "properties": {
+                "highPriority": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "mediumPriority": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "additionalProperties": false
+            },
+            "content": {
+              "type": "object",
+              "properties": {
+                "highPriority": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "mediumPriority": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "additionalProperties": false
+            },
+            "ux": {
+              "type": "object",
+              "properties": {
+                "highPriority": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "mediumPriority": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          "additionalProperties": false
+        },
+        "historyUpgrades": {
+          "type": "object",
+          "properties": {
+            "multimediaIntegration": {
+              "type": "object",
+              "properties": {
+                "features": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "notes": {
+                  "type": "string"
+                }
+              },
+              "additionalProperties": false
+            },
+            "storyModeNavigation": {
+              "type": "object",
+              "properties": {
+                "features": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "notes": {
+                  "type": "string"
+                }
+              },
+              "additionalProperties": false
+            },
+            "regionalLegacyMapExpansion": {
+              "type": "object",
+              "properties": {
+                "features": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "notes": {
+                  "type": "string"
+                }
+              },
+              "additionalProperties": false
+            },
+            "anniversaryTriggers": {
+              "type": "object",
+              "properties": {
+                "features": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "notes": {
+                  "type": "string"
+                }
+              },
+              "additionalProperties": false
+            },
+            "crossLinkedEducation": {
+              "type": "object",
+              "properties": {
+                "features": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "notes": {
+                  "type": "string"
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          "additionalProperties": false
+        },
+        "$defs": {
+          "type": "object"
+        },
+        "$id": {
+          "type": "object"
+        },
+        "Copyright": {
+          "type": "object"
+        },
+        "flavorEnhancements": {
+          "type": "object"
+        },
+        "culinaryPairingModule": {
+          "type": "object"
+        },
+        "finalAuditActionPlan": {
+          "type": "object"
+        },
+        "gptAssist": {
+          "type": "object"
+        },
+        "gptInteractionContexts": {
+          "type": "object"
+        },
+        "gptPromptTemplates": {
+          "type": "object"
+        },
+        "auditScorecard": {
+          "type": "object"
+        },
+        "accessibilityConformance": {
+          "type": "object"
+        },
+        "auditLog": {
+          "type": "object"
+        },
+        "blendProfileTemplate": {
+          "type": "object"
+        },
+        "ceuMetadataExample": {
+          "type": "object"
+        },
+        "compliance": {
+          "type": "object"
+        },
+        "constraints": {
+          "type": "object"
+        },
+        "description": {
+          "type": "object"
+        },
+        "differentiationUpgrades": {
+          "type": "object"
+        },
+        "examples": {
+          "type": "object"
+        },
+        "featureExpansions": {
+          "type": "object"
+        },
+        "features": {
+          "type": "object"
+        },
+        "i18n": {
+          "type": "object"
+        },
+        "innovationStack": {
+          "type": "object"
+        },
+        "legalGuidance": {
+          "type": "object"
+        },
+        "license": {
+          "type": "object"
+        },
+        "licenseAgreement": {
+          "type": "object"
+        },
+        "localization": {
+          "type": "object"
+        },
+        "loungeExperienceAssets": {
+          "type": "object"
+        },
+        "socialAssetsTemplate": {
+          "type": "object"
+        },
+        "templateModules": {
+          "type": "object"
+        },
+        "title": {
+          "type": "object"
+        },
+        "futureFeatures": {
+          "type": "object",
+          "properties": {
+            "predictiveFlavorGraph": {
+              "type": "object"
+            },
+            "gptMemoryContexts": {
+              "type": "object"
+            },
+            "instructorLiveDashboard": {
+              "type": "object"
+            },
+            "archiveEngine": {
+              "type": "object"
+            },
+            "localizationMatrix": {
+              "type": "object"
+            },
+            "creatorToolkit": {
+              "type": "object"
+            },
+            "neuroadaptiveFeedback": {
+              "type": "object"
+            }
+          },
+          "additionalProperties": true
+        }
+      },
+      "required": [
+        "projectName",
+        "version",
+        "metadata",
+        "integrityToken",
+        "changelog",
+        "modules",
+        "scorecard",
+        "featureFlags",
+        "cuttingEdgeFeatures",
+        "userRolesAndViews",
+        "externalIntegrations",
+        "distilleryPairings",
+        "pairingExportOptions",
+        "systemCapabilities",
+        "authenticationModule",
+        "apiConfig",
+        "userOnboardingFlow",
+        "flavorJourneyTracker",
+        "membershipSystem",
+        "administrativeAccess",
+        "projectDirective",
+        "recommendedActionPlan",
+        "historyUpgrades",
+        "featureFlags",
+        "cuttingEdgeFeatures"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "integrityToken": "d8d210f3619e3290841c9eb127ae07ffd5fb8e845555ae7b7bf73b1f0e0a5810",
+  "changelog": [
+    {
+      "version": "v1.0",
+      "summary": "Initial development reset for next-generation schema and system features.",
+      "date": "2025-06-14",
+      "changeImpactScore": 3
+    }
+  ],
+  "modules": {
+    "uiUx": {
+      "status": "elite",
+      "features": [
+        "ada",
+        "alt_text_support",
+        "dynamic_type_scaling",
+        "grayscale_support",
+        "high_contrast_mode",
+        "kiosk",
+        "landscape_mode",
+        "mobile",
+        "responsive_typography",
+        "touch_optimization",
+        "wcag_compliance",
+        "dark_mode_toggle",
+        "multilingual_ui_preview",
+        "grayscale_support",
+        "high_contrast_mode",
+        "responsive_typography"
+      ]
+    },
+    "history": {
+      "status": "expanded",
+      "includes": [
+        "timeline_events",
+        "founder_tags",
+        "flagship_products",
+        "brand_legacy_map",
+        "clickable_era_tags"
+      ],
+      "features": [
+        "TimelineExport",
+        "InteractiveLegacyMap",
+        "ShareableBrandQuotes",
+        "FoundersEraTags",
+        "visualTimelineExport",
+        "founderBioCards",
+        "LegacyMultimediaEngine",
+        "InteractiveStoryMode",
+        "GeographicMigrationMap",
+        "AnniversaryEventScheduler",
+        "HistoricalEducationLinker"
+      ]
+    },
+    "education": {
+      "status": "mastercrafted",
+      "features": [
+        "FlavorDepthAcademy",
+        "LexiconGlossary",
+        "VitolaAnatomyExplorer",
+        "WrapperOriginsMap",
+        "ConstructionSkillTree",
+        "InteractiveFlavorWheel",
+        "BlendLogicTrainer",
+        "MicrolearningSeries",
+        "SmokeScienceToolkit",
+        "SensoryCalibrationTips",
+        "DidYouKnowFactGrid",
+        "VisualBurnGuide",
+        "DrawResistanceDiagrams",
+        "PalateProgressionCharts",
+        "CigarPairingTheoryDecks",
+        "FlavorDuelBattleCards",
+        "LifestylePairingDecks",
+        "LifestyleContextDecks",
+        "PipeTobaccoBlendingToolkit",
+        "TobaccoOriginOverlay",
+        "PipeBlendSimulatorExport",
+        "FlavorDNAChainBuilder",
+        "VisualPalateTracker",
+        "TastingJournalExport"
+      ],
+      "metadata": {
+        "note": "Completely redesigned for independent, CEU-viable, tobacconist-free education.",
+        "tieredStructure": [
+          {
+            "tier": "Foundation",
+            "description": "Core fundamentals of cigar anatomy, wrapper origins, and sensory training"
+          },
+          {
+            "tier": "Development",
+            "description": "Intermediate knowledge in construction dynamics, blend architecture, and draw behavior"
+          },
+          {
+            "tier": "Mastery",
+            "description": "Advanced exploration of pairing logic, palate mapping, and flavor memory techniques"
+          }
+        ],
+        "trustedSources": [
+          {
+            "title": "The Ultimate Cigar Book",
+            "author": "Richard Carleton Hacker",
+            "type": "Reference",
+            "notes": "Comprehensive overview on history, etiquette, construction, storage, and pairings."
+          },
+          {
+            "title": "Perelman's Pocket Cyclopedia of Cigars",
+            "author": "Richard Perelman",
+            "type": "Encyclopedia",
+            "notes": "Updated annually; contains detailed cigar brand profiles and vitola references."
+          },
+          {
+            "title": "The World of the Havana Cigar",
+            "author": "Min Ron Nee",
+            "type": "Collector's Volume",
+            "notes": "Extremely detailed and rare; revered for Cuban cigar insights, production, and photography."
+          },
+          {
+            "title": "Cigar Aficionado\u2019s World of Cigars",
+            "author": "Marvin R. Shanken",
+            "type": "Magazine Reference",
+            "notes": "Visually engaging global cigar guide; includes interviews, factory tours, and tasting guidance."
+          },
+          {
+            "title": "The Cigar: Moments of Pleasure",
+            "author": "Barnaby Conrad III",
+            "type": "Lifestyle & History",
+            "notes": "Captures the art and lifestyle of cigars with stories, culture, and famous aficionados."
+          },
+          {
+            "title": "The Bar Book",
+            "author": "Jeffrey Morgenthaler",
+            "type": "Reference",
+            "notes": "Masterclass in bartending techniques: ice, juice, syrups, shaking, stirring. Clear, practical, essential for both beginners and pros."
+          },
+          {
+            "title": "Meehan\u2019s Bartender Manual",
+            "author": "Jim Meehan",
+            "type": "Manual",
+            "notes": "Deep dive into bar design, tools, spirits, hospitality, and philosophy. Industry-insider insights from a true pioneer."
+          },
+          {
+            "title": "Liquid Intelligence",
+            "author": "Dave Arnold",
+            "type": "Science & Innovation",
+            "notes": "Innovative, science-driven exploration of cocktails. Includes advanced methods: clarifying juices, carbonation, liquid nitrogen."
+          },
+          {
+            "title": "The Savoy Cocktail Book",
+            "author": "Harry Craddock",
+            "type": "Classic",
+            "notes": "Iconic 1930s classic filled with over 750 vintage recipes. Aesthetic, historical, and foundational."
+          },
+          {
+            "title": "Death & Co: Modern Classic Cocktails",
+            "author": "David Kaplan, Nick Fauchald, Alex Day",
+            "type": "Modern Mixology",
+            "notes": "Signature drinks from the famed NYC bar. Combines recipes, philosophy, and modern mixology artistry."
+          },
+          {
+            "title": "Cigar Aficionado\u2019s World of Cigars",
+            "author": "Marvin R. Shanken",
+            "type": "Lifestyle & Pairing",
+            "notes": "The cornerstone of cigar culture. Features chefs and curated pairings across food, wine, and cigars."
+          },
+          {
+            "title": "The Flavor Bible",
+            "author": "Karen Page & Andrew Dornenburg",
+            "type": "Pairing Matrix",
+            "notes": "A pairing matrix masterpiece. Reverse-engineer cigar flavors to match with foods and spirits."
+          },
+          {
+            "title": "Culinary Artistry",
+            "author": "Andrew Dornenburg & Karen Page",
+            "type": "Culinary Guide",
+            "notes": "A chef\u2019s toolkit for building harmonious, multisensory menus\u2014perfect for pairing events."
+          },
+          {
+            "title": "The Impossible Collection of Cigars",
+            "author": "Assouline",
+            "type": "Luxury Lifestyle",
+            "notes": "High design meets high taste. Features celebrity chefs and luxury lifestyle integrations."
+          },
+          {
+            "title": "Salt, Fat, Acid, Heat",
+            "author": "Samin Nosrat",
+            "type": "Flavor Theory",
+            "notes": "Fundamental flavor alchemy. Apply her quadrant theory to cigar pairing like a master blender."
+          },
+          {
+            "title": "Larousse Gastronomique",
+            "author": "Larousse Editors",
+            "type": "Culinary Encyclopedia",
+            "notes": "The definitive culinary encyclopedia. Use it to match regional cuisines, sauces, or techniques to cigar terroir."
+          }
+        ]
+      },
+      "accessibilityMetadata": {
+        "screenReaderOptimized": true,
+        "readingLevel": "Grade 10",
+        "mediaType": [
+          "video",
+          "text",
+          "interactive"
+        ]
+      }
+    },
+    "accreditation": {
+      "status": "certified",
+      "integrations": [
+        "Canvas",
+        "Moodle",
+        "SCORM-lite"
+      ],
+      "features": [
+        "InstructorNotes",
+        "GradingRubrics",
+        "ProgressTracking",
+        "TieredCertificationFlags",
+        "quizExplanations",
+        "dynamicFeedbackFlags",
+        "CEUTranscriptExport",
+        "AuditLogForAccreditation",
+        "InstructorPerformanceDashboard",
+        "InstructorDashboard",
+        "LMSTranscriptExport",
+        "ceuTracking",
+        "SCORMExport",
+        "LMSVerificationToolkit"
+      ],
+      "metadata": {
+        "tiers": [
+          "Introductory",
+          "Professional",
+          "Expert"
+        ],
+        "lessonFlags": {
+          "modules": [
+            {
+              "id": "intro101",
+              "tier": "Introductory"
+            },
+            {
+              "id": "pro201",
+              "tier": "Professional"
+            },
+            {
+              "id": "expert301",
+              "tier": "Expert"
+            }
+          ],
+          "notes": "Used to dynamically segment content by learning depth and accreditation status"
+        }
+      }
+    },
+    "systemIntegrity": {
+      "status": "stable",
+      "fallbacks": true,
+      "versionControl": true,
+      "schemaCheck": true,
+      "promptValidation": true
+    },
+    "socialCommunity": {
+      "status": "elite",
+      "features": [
+        "RatingReviewEngine",
+        "TastingThreads",
+        "FlavorMatchAI",
+        "VirtualHerfRooms",
+        "VoiceFlavorJournals",
+        "FollowerSystem",
+        "PairingDecks",
+        "CigarChallenges",
+        "UserAchievements",
+        "MediaUploadAndTagging",
+        "UGCPairingFeedback",
+        "LiveHerfRoom",
+        "RewardCoinSystem",
+        "FlavorPairingLeaderboard",
+        "SurpriseBoxSimulator",
+        "LoyaltyStampbookSystem",
+        "InfluencerPluginAskTheMaestro",
+        "PairingBracketLeaderboard",
+        "SurpriseUnboxAnimation",
+        "SwitcherImportCredit",
+        "FlavorDuelAI",
+        "SurpriseBoxReveal",
+        "LoyaltyStampbookSystem",
+        "LoungeTierBadgeSystem"
+      ]
+    },
+    "humidorManagement": {
+      "status": "smart",
+      "features": [
+        "DigitalHumidor",
+        "BatchEntryCSV",
+        "FlavorDNAProfiles",
+        "HumidorHealthMonitor",
+        "SmartReplenishment",
+        "AgingIntelligenceEngine",
+        "HumidityAlerts",
+        "InventoryAnalytics",
+        "BluetoothHygrometerSupport",
+        "AIRestockPrediction",
+        "NFCTagIntegration",
+        "VisualHumidorTileSort",
+        "CSVBatchUploadWithFlavorPreview",
+        "CollectorModeVintageBoxLog",
+        "LockerPassportQRShare",
+        "CSVImportPairingHeatmap",
+        "QRLockerTourShare",
+        "CSVImportPairingHeatmap",
+        "LegacyLockerNFT",
+        "BoxCertificateExport",
+        "QRLockerTours"
+      ]
+    },
+    "retailUtility": {
+      "status": "elite",
+      "features": [
+        "RetailLocatorMap",
+        "EventCalendarRSVP",
+        "POSInventorySync",
+        "LoungePassportProgram",
+        "RetailerTrainingMode",
+        "WhiteLabelLoungeApp",
+        "HumidorSyncToBuy",
+        "TravelPairingConcierge",
+        "TastingTicketToolkit",
+        "LoungePOSPricingToggle",
+        "QRRSVPToolkit",
+        "EventMenuDesigner",
+        "RSVPToolkit",
+        "PairingMenuGenerator",
+        "POSMSRPToggle",
+        "LoungeSocialContentGenerator"
+      ]
+    }
+  },
+  "scorecard": {
+    "metadata": {
+      "scale": "1-10",
+      "source": "internal QA metrics",
+      "readinessExplanation": "Percentage of QA criteria passed for release approval"
+    },
+    "scores": {
+      "accreditation": 10,
+      "educationDepth": 10,
+      "historyIntegration": 10,
+      "humidorManagement": 10,
+      "readinessScore": 100,
+      "retailUtility": 10,
+      "socialCommunity": 10,
+      "systemStability": 10,
+      "uiUx": 10
+    }
+  },
+  "userRolesAndViews": {
+    "availableRoles": [
+      "Lounge",
+      "Instructor",
+      "General"
+    ],
+    "availableThemes": [
+      "LoungeHost",
+      "Instructor",
+      "SocialInfluencer",
+      "AcademicReviewer",
+      "BrandHistorian",
+      "VirtualLoungeHost"
+    ],
+    "defaultViewTheme": "LoungeHost"
+  },
+  "externalIntegrations": {
+    "POS": [
+      "ToroPOS"
+    ],
+    "LMS": [
+      "Canvas",
+      "Moodle"
+    ]
+  },
+  "distilleryPairings": {
+    "normalizedDistilleries": [
+      {
+        "name": "Placeholder Distillery",
+        "country": "Scotland",
+        "type": "Whisky",
+        "pairingNotes": "Ideal with earthy maduros",
+        "wrapperCompatibility": [
+          "maduro",
+          "oscuro"
+        ]
+      }
+    ],
+    "byBody": {
+      "metadata": {
+        "status": "complete",
+        "note": "Fully populated in v24.0",
+        "isPopulated": true,
+        "plannedForVersion": "v24.0",
+        "isPlaceholder": false,
+        "reviewed": true
+      },
+      "entries": [
+        {
+          "body": "mild",
+          "wrappers": [
+            "connecticut",
+            "shade-grown"
+          ],
+          "recommendations": [
+            "Glen Grant",
+            "Hine Cognac"
+          ]
+        },
+        {
+          "body": "medium",
+          "wrappers": [
+            "habano",
+            "criollo"
+          ],
+          "recommendations": [
+            "Buffalo Trace",
+            "Paul John Distillery"
+          ]
+        },
+        {
+          "body": "full",
+          "wrappers": [
+            "maduro",
+            "oscuro"
+          ],
+          "recommendations": [
+            "Lagavulin",
+            "Ardbeg Distillery"
+          ]
+        }
+      ]
+    },
+    "byFlavorNote": {
+      "metadata": {
+        "status": "complete",
+        "note": "Fully populated in v24.0",
+        "isPopulated": true,
+        "plannedForVersion": "v24.0",
+        "isPlaceholder": false,
+        "reviewed": true
+      },
+      "entries": [
+        {
+          "note": "spicy",
+          "distilleries": [
+            "Heaven Hill",
+            "Sazerac Company",
+            "El Tesoro"
+          ]
+        },
+        {
+          "note": "sweet",
+          "distilleries": [
+            "Ron Zacapa",
+            "Don Papa Rum",
+            "Clase Azul"
+          ]
+        },
+        {
+          "note": "smoky",
+          "distilleries": [
+            "Lagavulin",
+            "Del Maguey Mezcal",
+            "Ardbeg Distillery"
+          ]
+        }
+      ]
+    },
+    "topPairings": {
+      "metadata": {
+        "status": "complete",
+        "note": "Fully populated in v24.0",
+        "isPopulated": true,
+        "plannedForVersion": "v24.0",
+        "isPlaceholder": false,
+        "reviewed": true
+      },
+      "entries": [
+        {
+          "cigarWrapper": "maduro",
+          "topMatches": [
+            "Macallan",
+            "Ron Zacapa",
+            "Balcones Distilling"
+          ]
+        },
+        {
+          "cigarWrapper": "connecticut",
+          "topMatches": [
+            "Hine Cognac",
+            "Glen Grant",
+            "Clase Azul"
+          ]
+        },
+        {
+          "cigarWrapper": "oscuro",
+          "topMatches": [
+            "Lagavulin",
+            "Ardbeg",
+            "Mortlach"
+          ]
+        }
+      ]
+    }
+  },
+  "pairingExportOptions": [
+    "PDF",
+    "QR",
+    "JSON"
+  ],
+  "systemCapabilities": {
+    "scanToPair": true,
+    "spiritInventoryTracking": true,
+    "arOverlayCapable": true,
+    "ugcPairingLogs": true,
+    "multiLanguageSupport": true,
+    "pairingSharingEnabled": true,
+    "qrPairingExport": true
+  },
+  "authenticationModule": {
+    "methodsSupported": [
+      "visual_band_scan",
+      "serial_code_input"
+    ],
+    "status": "integrated",
+    "visualAiTrainedBrands": [
+      "Habanos",
+      "Padron",
+      "Davidoff",
+      "Oliva"
+    ],
+    "externalSources": [
+      {
+        "brand": "Habanos",
+        "url": "https://www.habanos.com/en/verify"
+      },
+      {
+        "brand": "Davidoff",
+        "url": "https://www.davidoff.com/authenticate"
+      }
+    ],
+    "userEntryModes": [
+      "camera_scan",
+      "manual_code_entry"
+    ],
+    "trustFeedback": [
+      "verified",
+      "partial",
+      "unverified",
+      "scan_error_handling",
+      "manual_override_request"
+    ],
+    "supportingUi": [
+      {
+        "component": "scan__band",
+        "type": "ui_element",
+        "status": "active"
+      },
+      {
+        "component": "enter__code",
+        "type": "ui_element",
+        "status": "active"
+      },
+      {
+        "component": "authentication__result__overlay",
+        "type": "ui_element",
+        "status": "active"
+      },
+      {
+        "component": "trust_score_display",
+        "type": "ui_element",
+        "status": "active"
+      },
+      {
+        "component": "band_recognition_overlay",
+        "type": "ui_element",
+        "status": "active"
+      },
+      {
+        "component": "band_comparison_overlay",
+        "type": "ui_element",
+        "status": "planned"
+      },
+      {
+        "component": "scan_trust_overlay",
+        "type": "ui_element",
+        "status": "planned"
+      }
+    ],
+    "features": [
+      "ScanToPairRateSave"
+    ]
+  },
+  "apiConfig": {
+    "baseURL": "https://api.cigarmaestro.ai",
+    "endpoints": {
+      "authenticationResult": {
+        "url": "/api/auth/verify",
+        "version": "v1"
+      },
+      "ceuTracking": {
+        "url": "/api/ceu/progress",
+        "version": "v1"
+      },
+      "humidorSync": {
+        "url": "/api/humidor",
+        "version": "v1"
+      },
+      "pairingSuggestions": {
+        "url": "/api/pairing",
+        "version": "v1"
+      },
+      "ceuExport": {
+        "url": "/api/ceu/export",
+        "version": "v1"
+      },
+      "flavorTraining": {
+        "url": "/api/flavor/training",
+        "version": "v1"
+      },
+      "storyVisual": {
+        "url": "/api/story/visual",
+        "version": "v1"
+      }
+    }
+  },
+  "userOnboardingFlow": {
+    "firstSmokeJourney": true,
+    "steps": [
+      "Select Cigar",
+      "Scan Band",
+      "Begin Flavor Journal",
+      "Pair Suggestion",
+      "Lounge Tips"
+    ],
+    "uiHints": {
+      "steps": [
+        {
+          "step": "Select Cigar",
+          "inputType": "dropdown",
+          "widgetHint": "cigarPicker"
+        },
+        {
+          "step": "Scan Band",
+          "inputType": "camera",
+          "widgetHint": "bandScanner"
+        },
+        {
+          "step": "Begin Flavor Journal",
+          "inputType": "text",
+          "widgetHint": "flavorTextArea"
+        },
+        {
+          "step": "Pair Suggestion",
+          "inputType": "button",
+          "widgetHint": "pairNow"
+        },
+        {
+          "step": "Lounge Tips",
+          "inputType": "tipCard",
+          "widgetHint": "loungeCards"
+        }
+      ]
+    }
+  },
+  "flavorJourneyTracker": {
+    "enabled": true,
+    "milestones": [
+      "First Flavor Match",
+      "10 Pairings",
+      "Custom Profile Unlocked",
+      "NFTFlavorJourneyBadge",
+      "NFTMilestoneFlavorBadge"
+    ],
+    "trackableMetrics": [
+      "flavor_tags",
+      "pairing_types",
+      "review_sentiment"
+    ]
+  },
+  "membershipSystem": {
+    "membershipTiers": [
+      {
+        "tierName": "Aficionado",
+        "priceMonthly": 9.99,
+        "targetAudience": "Casual smokers looking to deepen their cigar knowledge",
+        "features": [
+          "Unlimited official cigar spec lookups",
+          "10 pairing recommendations per month",
+          "Save up to 25 favorite cigars",
+          "Access to flavor trails and wrapper origin maps",
+          "Basic educational content",
+          "Read-only Community Wall access"
+        ],
+        "restrictions": [
+          "No humidor management",
+          "No AI spec assistant access"
+        ]
+      },
+      {
+        "tierName": "Connoisseur",
+        "priceMonthly": 19.99,
+        "targetAudience": "Enthusiasts seeking full pairing power and personal collection tools",
+        "features": [
+          "All Aficionado features",
+          "Unlimited pairing recommendations",
+          "Smart Pairing Engine (by wrapper, flavor, strength, etc.)",
+          "Personal Humidor (up to 250 cigars)",
+          "Save tasting notes and smoking history",
+          "Flavor-matching AI to discover similar cigars",
+          "5 'Ask the Maestro' comparison requests per month",
+          "Full access to Lounge Feed and community threads"
+        ]
+      },
+      {
+        "tierName": "Maestro\u2019s Circle",
+        "priceMonthly": 39.99,
+        "targetAudience": "Avid collectors, professionals, and flavor explorers",
+        "features": [
+          "All Connoisseur features",
+          "Unlimited Maestro AI Spec Assistant access",
+          "Advanced cigar search filters (flavor, body, origin, vitola, region)",
+          "Humidor Pro: Unlimited capacity, age tracking, box-date logging",
+          "Exportable humidor reports (PDF/CSV)",
+          "Access to Masterclass Library (blending, terroir, pairing theory)",
+          "Entry to exclusive Maestro\u2019s Circle Forum",
+          "Priority support and early access to features"
+        ]
+      },
+      {
+        "tierName": "Lounge Operator",
+        "priceMonthly": 249.99,
+        "targetAudience": "Cigar lounges, retailers, and cigar hospitality businesses",
+        "features": [
+          "All Maestro\u2019s Circle features",
+          "Lounge Command Hub: Multi-location humidor dashboard",
+          "Centralized inventory and reorder tracking",
+          "5 Staff Logins with custom permission levels",
+          "Digital menu builder (QR-linked)",
+          "Custom printable spec cards, pairing sheets, and locker labels",
+          "Event toolkit: RSVP management, ticket generation, tasting menus",
+          "Lounge Analytics: cigar trends, pairing behavior, sales data",
+          "Verified Lounge Badge with public platform listing",
+          "Social Media Promo Generator: branded posts, flyers, QR menus",
+          "Exclusive B2B Concierge Support",
+          "Private Lounge Network Access (with brands, reps, partner lounges)"
+        ]
+      }
+    ]
+  },
+  "administrativeAccess": {
+    "admins": [
+      "Michael Hamilton",
+      "Tamera Perryman-Hamilton"
+    ]
+  },
+  "projectDirective": {
+    "purpose": "Conduct a Multilayered Expert-Level Audit & Rebuild of the latest cigarmaestro.json, encompassing full review, structured enhancement, and stakeholder-aligned upgrades. This process must preserve all Eternal Directives, architectural integrity, and guiding principles\u2014while elevating the file\u2019s technical, educational, and experiential value.",
+    "stakeholders": [
+      "Master Tobacconist \u2013 Flavor fidelity and practical training",
+      "Master Blender \u2013 Tobacco metadata and blend construction logic",
+      "College Professor \u2013 CEU alignment and LMS compatibility",
+      "Lounge Owner \u2013 Operational UX and brand storytelling",
+      "General Manager \u2013 Workflow efficiency and reliability",
+      "Cigar Enthusiasts \u2013 Engagement, clarity, and flavor discovery",
+      "Social Marketer \u2013 Visual appeal and shareable features",
+      "UI/UX Designer \u2013 Responsive design and typographic hierarchy",
+      "GPT Developer \u2013 Schema stability and prompt logic"
+    ],
+    "evaluationPillars": {
+      "Cigar History Integration": [
+        "Expand brand timelines and metadata",
+        "Format stories for both academic use and social media"
+      ]
+    },
+    "finalDeliverables": [
+      "Scoring (1\u201310) for each of the five pillars",
+      "Overall system readiness rating (0\u2013100)",
+      "Prioritized action plan by discipline: Development, Design, Content, UX",
+      "Enhanced JSON file including updated prompts and GPT-ready dialogue",
+      "Schema refinements and fallback logic",
+      "Educational updates and metadata alignment",
+      "Voice/touch interaction schema",
+      "Accreditation flags and system modularity",
+      "Full preservation of core architecture"
+    ],
+    "preserveWithoutCompromise": [
+      "Eternal Directives",
+      "Guiding Principles",
+      "Metadata schema",
+      "Prompt logic hierarchy",
+      "Modular versioning and changelogs"
+    ],
+    "goal": [
+      "A cigarmaestro.json that is: Lounge-ready. Classroom-certified. GPT-stable. Brand-elevating. Developer-friendly. Unmistakably valuable."
+    ]
+  },
+  "recommendedActionPlan": {
+    "development": {
+      "highPriority": [
+        "Refactor outdated or ambiguous keys in cigar spec modules using certified tobacconist phrasing.",
+        "Normalize nested modules for clearer GPT parsing.",
+        "Implement fallback chains and response triggers in schema for GPT-based conversations.",
+        "Ensure full SCORM-lite metadata encoding for LMS output compatibility.",
+        "Implement dynamic response templating for GPT replies and spec lookups across all modules.",
+        "Expand fallback logic trees for incomplete inputs, barcode errors, and ambiguous queries.",
+        "Deploy multilingual GPT prompt sets with translation fidelity checks."
+      ],
+      "mediumPriority": [
+        "Modularize kiosk logic and POS pathways for scalability across retail environments.",
+        "Enforce strict camelCase convention across all keys.",
+        "Auto-generate REST API documentation from embedded schema for 3rd-party developers.",
+        "Add unit tests for schema validation and prompt accuracy.",
+        "Implement automated API schema documentation for public use.",
+        "Refactor GPT fallback logic to support multilingual queries and edge-case ambiguity detection.",
+        "Implement expanded pairing types UI/logic"
+      ]
+    },
+    "design": {
+      "highPriority": [
+        "Apply WCAG and ADA compliance layers to all UI modules.",
+        "Polish interactive elements like dark mode toggles, contrast scaling, and touch zones.",
+        "Refactor kiosk interface for improved mobile-first touch interaction, including enlarged flavor wheels and cigar cards."
+      ],
+      "mediumPriority": [
+        "Inject typographic hierarchy into story exports and pairing displays.",
+        "Refine kiosk layouts for brand-forward storytelling: include founder quotes, featured blends.",
+        "Add user-selectable UI theme packs for roles or aesthetics (e.g., Dark Humidor, Vintage Box).",
+        "Enable user-selectable UI theme packs based on mood, era, or role.",
+        "Enhance story and pairing card visuals with layered media: GIF support, audio blurbs."
+      ]
+    },
+    "content": {
+      "highPriority": [
+        "Expand CEU-aligned learning content with instructor notes, rubric logic, and quiz explanation fields.",
+        "Enhance glossary and flavor wheel links with shareable anchors and visual aids.",
+        "Insert 'Did You Know?' facts, sensory cues, and vitola diagrams directly into educational paths.",
+        "Integrate flavor diagram generator to visualize each cigar\u2019s tasting profile in SVG format.",
+        "Add support for Masterclass video URL embedding in educational content modules."
+      ],
+      "mediumPriority": [
+        "Update brand legacy maps and founder bio cards with Instagram-friendly assets.",
+        "Localize key terms for multilingual preview support.",
+        "Enable terroir-based filtering (e.g., Jalapa vs Estel\u00ed) in blend and flavor search tools.",
+        "Integrate historical trivia popups during lounge pairing experiences.",
+        "Embed CEU module sample video previews using LMS-friendly formats.",
+        "Cross-tag glossary items with flavor wheels and wrapper maps for seamless semantic discovery."
+      ]
+    },
+    "ux": {
+      "highPriority": [
+        "Refactor onboarding flows for first-time users across all roles.",
+        "Ensure kiosk modules are optimized for tap-only environments and offline caching.",
+        "Enable full voice-only navigation mode for kiosk and hands-free scenarios.",
+        "Conduct real-world UX trials with lounge patrons and instructors to validate flow and usability."
+      ],
+      "mediumPriority": [
+        "Enable timeline exploration and brand history via intuitive sliders and tag-based filters.",
+        "Gamify educational progress with badges for tasting milestones and quiz completions.",
+        "Enhance Flavor Journey gamification with collectible milestones and flavor discovery badges.",
+        "Develop drag-and-drop UI for humidor sorting and tagging.",
+        "Add tactile feedback triggers for kiosk interface (haptic sound/tap effects where applicable).",
+        "Build UGC-driven flavor leaderboard system"
+      ]
+    }
+  },
+  "historyUpgrades": {
+    "multimediaIntegration": {
+      "features": [
+        "archivalImages",
+        "vintageAdGallery",
+        "legacyBoxScanner",
+        "founderAudioStories",
+        "timelineVideoSnippets"
+      ],
+      "notes": "Enable multimedia assets for deeper storytelling and brand immersion."
+    },
+    "storyModeNavigation": {
+      "features": [
+        "interactiveStoryPaths",
+        "founderJourneyNarratives",
+        "decisionTreeExploration"
+      ],
+      "notes": "Allow users to follow guided historical journeys, simulating a museum-like experience."
+    },
+    "regionalLegacyMapExpansion": {
+      "features": [
+        "caribbeanOriginOverlay",
+        "cubanExodusMigrationMap",
+        "nicaraguanRevivalZones",
+        "dominicanBoomTimeline"
+      ],
+      "notes": "Geographic expansion of cigar legacy for regional storytelling."
+    },
+    "anniversaryTriggers": {
+      "features": [
+        "milestoneAnniversaryAlerts",
+        "brandCenturyTimers",
+        "interactiveFoundingCelebrations"
+      ],
+      "notes": "Auto-trigger educational or promotional events around significant brand anniversaries."
+    },
+    "crossLinkedEducation": {
+      "features": [
+        "blendEvolutionReferences",
+        "wrapperHeritageConnections",
+        "moduleActivationFromHistoryClick"
+      ],
+      "notes": "Connect history blocks to relevant educational paths and glossary terms."
+    }
+  },
+  "Copyright": {
+    "notice": "\u00a9 2025 Michael Hamilton. All rights reserved."
+  },
+  "flavorEnhancements": {
+    "wrapperToPalateMap": {
+      "maduro": [
+        "cocoa",
+        "espresso",
+        "earth"
+      ],
+      "connecticut": [
+        "cream",
+        "cedar",
+        "hay"
+      ],
+      "habano": [
+        "pepper",
+        "cinnamon",
+        "wood"
+      ],
+      "oscuro": [
+        "molasses",
+        "char",
+        "dark chocolate"
+      ]
+    },
+    "blendOriginTraceability": true
+  },
+  "blendProfileTemplate": {
+    "coreNotes": [
+      "earth",
+      "pepper",
+      "cocoa"
+    ],
+    "leafOrigins": {
+      "wrapper": "Nicaragua",
+      "binder": "Honduras",
+      "filler": [
+        "Nicaragua",
+        "Dominican Republic"
+      ]
+    },
+    "constructionFocus": "slow burn, dense draw",
+    "fermentationStyle": "triple fermentation (maduro)"
+  },
+  "ceuMetadataExample": {
+    "ceuValue": 0.5,
+    "quizId": "blendBasics101",
+    "lmsFlag": true,
+    "tier": "Introductory"
+  },
+  "loungeExperienceAssets": {
+    "printableCards": true,
+    "qrPairingLinks": true,
+    "eventMenuBlockTemplate": {
+      "eventTitle": "Pairing Night: Maduro Meets Bourbon",
+      "featuredCigars": [
+        "Padron 1926 Maduro",
+        "Oliva V Melanio"
+      ],
+      "pairings": [
+        "Buffalo Trace",
+        "Four Roses Small Batch"
+      ],
+      "menuDate": "TBD"
+    },
+    "accessibility": {
+      "altTextProvided": true,
+      "captionAvailable": true,
+      "audioDescribed": false
+    }
+  },
+  "socialAssetsTemplate": {
+    "quote": "Born in the volcanic soils of Estel\u00ed, this cigar roars with heritage.",
+    "hashtags": [
+      "#NicaraguanPower",
+      "#CigarMaestro"
+    ],
+    "promoTemplate": "story01",
+    "accessibility": {
+      "altTextProvided": true,
+      "captionAvailable": true
+    }
+  },
+  "gptAssist": {
+    "enabled": true,
+    "contextualDepth": "high",
+    "gptIntentType": "compare_cigars",
+    "gptFunctionRole": "CertifiedCigarSpecComparison",
+    "biasSensitivityFlag": false
+  },
+  "auditScorecard": {
+    "pillars": {
+      "UI/UX Optimization": 10,
+      "Cigar History Integration": 10,
+      "Educational Depth": 10,
+      "Accreditation Readiness": 10,
+      "System Stability and Fixes": 10
+    },
+    "overallReadinessScore": 100
+  },
+  "finalAuditActionPlan": {
+    "development": [
+      "Validate all schema logic with SCORM and CEU compliance models",
+      "Normalize nested module logic with fallbacks and language toggles"
+    ],
+    "design": [
+      "Enforce mobile-first kiosk design with ADA and WCAG overlays",
+      "Add user-role based UI theming for Instructors, Lounges, Collectors"
+    ],
+    "content": [
+      "Refine pairing decks with music/setting/mood data",
+      "Expand pipe tobacco blend metadata and export paths"
+    ],
+    "ux": [
+      "Gamify Flavor Journey and pairing unlocks",
+      "Improve onboarding flow for first-time users in lounge mode"
+    ]
+  },
+  "compliance": {
+    "ageRestricted": true,
+    "dataConsentRequired": true,
+    "ethicsAudited": true,
+    "ethicsMetadata": {
+      "auditedBy": "AI Ethics & Accessibility Consultant",
+      "dateReviewed": "2025-06-14",
+      "issuesResolved": [
+        "bias check",
+        "accessibility gaps",
+        "age restriction confirmations"
+      ]
+    }
+  },
+  "localization": {
+    "languagesAvailable": [
+      "en",
+      "es",
+      "fr"
+    ],
+    "translationStatus": {
+      "education": "partial",
+      "history": "complete"
+    }
+  },
+  "templateModules": {
+    "pairingCard": {
+      "fields": [
+        "wrapper",
+        "flavorNotes",
+        "recommendedDistilleries"
+      ]
+    },
+    "ceuModule": {
+      "fields": [
+        "quizId",
+        "ceuValue",
+        "tier",
+        "lmsFlag"
+      ]
+    }
+  },
+  "i18n": {
+    "i18nKeys": {
+      "education.title": "education_title",
+      "modules.history.features": "history_features"
+    },
+    "translationMap": {
+      "en": "i18n/en.json",
+      "es": "i18n/es.json",
+      "fr": "i18n/fr.json"
+    },
+    "roleThemes": {
+      "themes": [
+        "LoungeHost",
+        "Instructor",
+        "SocialInfluencer",
+        "AcademicReviewer",
+        "BrandHistorian",
+        "VirtualLoungeHost"
+      ],
+      "translationKeys": {
+        "LoungeHost": "theme.loungehost",
+        "Instructor": "theme.instructor",
+        "SocialInfluencer": "theme.socialinfluencer",
+        "AcademicReviewer": "theme.academicreviewer",
+        "BrandHistorian": "theme.brandhistorian",
+        "VirtualLoungeHost": "theme.virtualloungehost"
+      }
+    }
+  },
+  "auditLog": {
+    "lastUsedBy": "GPT-4o",
+    "lastSchemaValidated": "2025-06-13",
+    "fallbackTriggered": false,
+    "validatedVersion": "v26.2"
+  },
+  "$defs": {
+    "pairingEntry": {
+      "type": "object",
+      "properties": {
+        "body": {
+          "type": "string",
+          "description": "Body strength of the cigar (e.g., mild, medium, full)"
+        },
+        "wrappers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Wrapper types compatible with this body strength"
+        },
+        "recommendations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of recommended distilleries"
+        }
+      },
+      "required": [
+        "body",
+        "wrappers"
+      ],
+      "description": "A structured entry for body-based cigar pairings"
+    },
+    "distilleryEntry": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "country": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "pairingNotes": {
+          "type": "string"
+        },
+        "wrapperCompatibility": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "name",
+        "country",
+        "type"
+      ],
+      "description": "Details for a single distillery's cigar pairing profile"
+    },
+    "ceuModule": {
+      "type": "object",
+      "properties": {
+        "quizId": {
+          "type": "string"
+        },
+        "ceuValue": {
+          "type": "number"
+        },
+        "lmsFlag": {
+          "type": "boolean"
+        },
+        "tier": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "quizId",
+        "ceuValue",
+        "tier"
+      ],
+      "description": "Reusable CEU module metadata structure"
+    },
+    "membershipTier": {
+      "type": "object",
+      "properties": {
+        "tierName": {
+          "type": "string"
+        },
+        "priceMonthly": {
+          "type": "number"
+        },
+        "targetAudience": {
+          "type": "string"
+        },
+        "features": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "restrictions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "tierName",
+        "priceMonthly",
+        "features"
+      ],
+      "description": "Describes each subscription level and its constraints"
+    },
+    "uiHintStep": {
+      "type": "object",
+      "properties": {
+        "step": {
+          "type": "string"
+        },
+        "inputType": {
+          "type": "string"
+        },
+        "widgetHint": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "step",
+        "inputType"
+      ],
+      "description": "Standardized UI guidance for onboarding steps"
+    },
+    "standardSupportingUi": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "component": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "component",
+          "type",
+          "status"
+        ]
+      }
+    },
+    "accessibilityFlags": {
+      "type": "object",
+      "properties": {
+        "altTextProvided": {
+          "type": "boolean"
+        },
+        "captionAvailable": {
+          "type": "boolean"
+        },
+        "audioDescribed": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "altTextProvided",
+        "captionAvailable"
+      ]
+    }
+  },
+  "$id": {
+    "value": "https://cigarmaestro.ai/schema/v26.4"
+  },
+  "title": {
+    "value": "Cigar Maestro Elite Schema"
+  },
+  "description": {
+    "value": "Validated modular schema for Cigar Maestro system including pairing logic, AI prompt triggers, educational modules, and LMS compatibility."
+  },
+  "examples": {
+    "exampleList": [
+      {
+        "projectName": "Cigar Maestro",
+        "version": "v26.4",
+        "modules": {
+          "education": {
+            "status": "mastercrafted",
+            "features": [
+              "FlavorDepthAcademy",
+              "WrapperOriginsMap"
+            ]
+          }
+        },
+        "distilleryPairings": {
+          "byBody": {
+            "entries": [
+              {
+                "body": "full",
+                "wrappers": [
+                  "maduro"
+                ],
+                "recommendations": [
+                  "Lagavulin"
+                ]
+              }
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "accessibilityConformance": {
+    "complianceLevel": "WCAG 2.1 AA",
+    "vpatLink": "https://cigarmaestro.ai/accessibility/vpat-2025.pdf",
+    "certifiedBy": "Accessibility & Ethics Advisor",
+    "lastReviewed": "2025-06-13"
+  },
+  "constraints": {
+    "userRoles": {
+      "enum": [
+        "Lounge",
+        "Instructor",
+        "General"
+      ]
+    },
+    "themes": {
+      "enum": [
+        "LoungeHost",
+        "Instructor",
+        "SocialInfluencer",
+        "AcademicReviewer",
+        "BrandHistorian",
+        "VirtualLoungeHost"
+      ]
+    },
+    "languages": {
+      "enum": [
+        "en",
+        "es",
+        "fr"
+      ]
+    },
+    "maxFavoritesAllowed": 250,
+    "uniqueFlavorNotes": true
+  },
+  "futureFeatures": {
+    "predictiveFlavorGraph": {
+      "status": "planned",
+      "description": "Integrates flavor_graph.jsonld for trajectory-based flavor prediction.",
+      "targetStakeholders": [
+        "Master Blender",
+        "AI Developer"
+      ],
+      "plannedVersion": "v30.0"
+    },
+    "gptMemoryContexts": {
+      "status": "planned",
+      "description": "Allows toggling GPT memory between Retail, Learning, and Personal contexts.",
+      "targetStakeholders": [
+        "Lounge Patron",
+        "GPT Developer"
+      ],
+      "plannedVersion": "v30.0"
+    },
+    "instructorLiveDashboard": {
+      "status": "planned",
+      "description": "Instructor dashboard with quiz analytics and adaptive grading.",
+      "targetStakeholders": [
+        "College Professor",
+        "LMS Admin"
+      ],
+      "plannedVersion": "v30.0"
+    },
+    "archiveEngine": {
+      "status": "planned",
+      "description": "Support for vintage specs, box code decoding, and resale value matrix.",
+      "targetStakeholders": [
+        "Archivist",
+        "Lounge Owner"
+      ],
+      "plannedVersion": "v30.0"
+    },
+    "localizationMatrix": {
+      "status": "planned",
+      "description": "Flavor lexicon and quiz translations across multiple languages.",
+      "targetStakeholders": [
+        "Global Instructor",
+        "Social Marketer"
+      ],
+      "plannedVersion": "v30.0"
+    },
+    "creatorToolkit": {
+      "status": "planned",
+      "description": "Templates and tools for content creators: pairing reels, captions, export formats.",
+      "targetStakeholders": [
+        "Influencer",
+        "Lounge Host"
+      ],
+      "plannedVersion": "v30.0"
+    },
+    "neuroadaptiveFeedback": {
+      "status": "planned",
+      "description": "Emotional and sentiment-based flavor recommendation adaptation.",
+      "targetStakeholders": [
+        "AI Ethics Consultant",
+        "UX Designer"
+      ],
+      "plannedVersion": "v30.0"
+    }
+  },
+  "innovationStack": {
+    "shortTerm": [
+      "liveReviewAggregator",
+      "auctionTracker",
+      "cigarValueEstimator",
+      "creatorToolkit",
+      "timelineStoryWidgets"
+    ],
+    "midTerm": [
+      "aiGeneratedSpecCards",
+      "spreadsheetImportSync",
+      "personalFlavorCoach",
+      "flavorLeaderboards"
+    ],
+    "longTerm": [
+      "neuroadaptiveUXFeedback",
+      "b2bPartnershipPortal",
+      "globalSpiritsExplorer",
+      "nftVaultCollectibles",
+      "gptMemoryModes"
+    ]
+  },
+  "featureExpansions": {
+    "implementedFromCompetitorAudit": [
+      "GlobalLoungeLocatorMap",
+      "UGCSocialCardTemplate",
+      "SurpriseBoxRevealMode",
+      "QuickCompareSpecs",
+      "LoungeBoxSubscriptionIntegration",
+      "RareDropNotificationEngine",
+      "B2BEcommerceModule",
+      "SpiritsPriceHistoryEngine",
+      "GoogleSheetsPairingSync",
+      "DealSyncRetailLocator",
+      "EditorialVoicesOfTheLeaf",
+      "CigarConditionLogger",
+      "SwipeToRateUX",
+      "AutoAgeClock",
+      "FreeformJournalTemplateExport",
+      "CocktailMoodMatchPairing",
+      "VintageBoxValuation",
+      "LegacyTagCurationBank",
+      "AffiliateMarketplaceBridge",
+      "SharedBoxSplitTracking",
+      "VisualPairingJournalCards",
+      "PairingReportBuilder",
+      "FlavorBeltGamification",
+      "BarcodePriceScan",
+      "CrowdsourcedSpecValidation",
+      "ExpandedAITaggedScanBrands",
+      "RetailMSRPVerificationOverlay",
+      "BottleRatingAndReviews",
+      "PhotoReviewOverlay",
+      "OfflineHumidorSync",
+      "MancaveShowcaseUGC",
+      "QRBoxCertificateTracker",
+      "SpiritsRarityIndex",
+      "GamifiedBeginnerJourneyDeck"
+    ]
+  },
+  "differentiationUpgrades": {
+    "gptMemoryContexts": [
+      "Retail",
+      "Learning",
+      "Personal"
+    ],
+    "palateCoachAI": {
+      "status": "planned",
+      "features": [
+        "pairingHeatmapGenerator",
+        "adaptiveFlavorRecommendations",
+        "journeyMilestoneTracking"
+      ]
+    },
+    "creatorToolkitV2": {
+      "status": "planned",
+      "features": [
+        "autoSocialImageCards",
+        "reelExportTemplates",
+        "captionGenerator"
+      ]
+    },
+    "customReportBuilder": {
+      "status": "planned",
+      "features": [
+        "dragAndDropWidgets",
+        "PDFHeatmapExport",
+        "flavorTrendGraphs"
+      ]
+    },
+    "nftFlavorJourney": {
+      "status": "planned",
+      "features": [
+        "milestoneBadges",
+        "tastingAchievementNFTs",
+        "lockerTimeCapsuleLogs"
+      ]
+    },
+    "neuroadaptivePairingEngine": {
+      "status": "planned",
+      "features": [
+        "moodToFlavorAnalysis",
+        "sentimentToCigarMap",
+        "emotionBasedRecommendations"
+      ]
+    },
+    "distilleryExplorerMap": {
+      "status": "planned",
+      "features": [
+        "moodFilter",
+        "wrapperSync",
+        "globalSpiritsOverlay"
+      ]
+    },
+    "contributorEditorials": {
+      "status": "planned",
+      "features": [
+        "expertVoiceInterviews",
+        "loungePodiumEditor",
+        "guestTastingColumns"
+      ]
+    },
+    "priceIndexEngine": {
+      "status": "planned",
+      "features": [
+        "realTimeSpecValuation",
+        "boxROITracker",
+        "resaleHeatmaps"
+      ]
+    }
+  },
+  "culinaryPairingModule": {
+    "status": "planned",
+    "sourcesUsed": [
+      "Cigar Aficionado\u2019s World of Cigars",
+      "The Flavor Bible",
+      "Culinary Artistry",
+      "The Impossible Collection of Cigars",
+      "Salt, Fat, Acid, Heat",
+      "Larousse Gastronomique"
+    ],
+    "features": [
+      "flavorToCuisineMatcher",
+      "regionalCuisineToWrapperEngine",
+      "eventPairingMenuGenerator",
+      "terroirTechniqueCrossRef",
+      "heatAcidBalanceSuggestor",
+      "celebrityChefInspirationDecks",
+      "ingredientToWrapperCompatibility"
+    ],
+    "aiSupport": {
+      "promptIntent": "culinary_pairing",
+      "gptRole": "CigarSommelierEventAI",
+      "examplePrompt": "Create a pairing menu using a Maduro cigar and French cuisine focusing on sauce-heavy dishes."
+    },
+    "modulesIncluded": [
+      "pairingMenuBuilder",
+      "chefQuoteOverlay",
+      "multisensoryPairingTemplates",
+      "LoungeKitchenIntegrationTips"
+    ],
+    "plannedVersion": "v32.0"
+  },
+  "features": {
+    "ai": {
+      "interactiveDistillerySuggestions": true,
+      "biometricVoiceLogging": true,
+      "rarePairingAlerts": true
+    },
+    "hardware": {},
+    "platform": {},
+    "advancedAi": [
+      "AIHabitMapping",
+      "OfflineAICaching",
+      "AIBlendingSimulator",
+      "AISpecInspector",
+      "AISpecInspectorDrawBurnAroma"
+    ],
+    "enhancements": [],
+    "gamification": []
+  },
+  "license": {
+    "notice": "This JSON structure is proprietary to the Cigar Maestro project. No part of this file may be copied, distributed, reverse engineered, or reused without express written permission from the copyright holder."
+  },
+  "licenseAgreement": {
+    "title": "Cigar Maestro JSON License (Proprietary)",
+    "owner": "Michael Hamilton",
+    "year": "2025",
+    "rightsReserved": true,
+    "terms": [
+      "This software and all intellectual property contained within remain the sole property of Michael Hamilton.",
+      "You may not copy, modify, sublicense, sell, or distribute this file, in whole or in part, without express written permission.",
+      "This file is provided 'as-is' without warranty of any kind, express or implied. Use at your own risk.",
+      "Decompiling, reverse engineering, or attempting to extract source logic is strictly prohibited.",
+      "Commercial usage, integration, or publication of this file requires a separate license agreement.",
+      "Unauthorized use may result in legal action under applicable intellectual property and software protection laws."
+    ],
+    "registrationFilingTemplate": {
+      "titleOfWork": "Cigar Maestro JSON Configuration v25.1",
+      "typeOfWork": "Literary Work (Software \u2013 JSON Data Structure)",
+      "author": "Michael Hamilton",
+      "yearOfCompletion": "2025",
+      "wasPublished": "No",
+      "materialCreated": "Entire JSON architecture, structure, and content. Includes educational modules, flavor mapping logic, accreditation framework, and pairing engine specifications.",
+      "exclusions": "Does not include generic schema formats or publicly available flavor descriptions.",
+      "submissionURL": "https://www.copyright.gov/registration/"
+    }
+  },
+  "gptInteractionContexts": {
+    "contexts": [
+      {
+        "intent": "cigarSpec",
+        "triggerPhrases": [
+          "cigar spec",
+          "get specs",
+          "show profile"
+        ],
+        "expectedOutput": "Structured cigar spec",
+        "fallbacks": [
+          "showWrapperInfo",
+          "explainBlend"
+        ],
+        "explanationHint": "This response was selected based on wrapper, flavor profile, and GPT pairing logic.",
+        "fallbackReasonHint": "Defaulted to wrapper category if exact cigar was unavailable.",
+        "gptConfidenceScore": 0.95
+      },
+      {
+        "intent": "pairingRecommendation",
+        "triggerPhrases": [
+          "pair with whiskey",
+          "what matches this cigar"
+        ],
+        "expectedOutput": "List of spirits or food",
+        "fallbacks": [
+          "suggestSimilarWrapper",
+          "getFlavorNote"
+        ],
+        "explanationHint": "This response was selected based on wrapper, flavor profile, and GPT pairing logic.",
+        "fallbackReasonHint": "Defaulted to wrapper category if exact cigar was unavailable.",
+        "gptConfidenceScore": 0.95
+      },
+      {
+        "intent": "compareCigars",
+        "triggerPhrases": [
+          "compare cigars",
+          "which is better"
+        ],
+        "expectedOutput": "Flavor and spec comparison",
+        "fallbacks": [
+          "explainBlend",
+          "showSpecs"
+        ],
+        "explanationHint": "This response was selected based on wrapper, flavor profile, and GPT pairing logic.",
+        "fallbackReasonHint": "Defaulted to wrapper category if exact cigar was unavailable.",
+        "gptConfidenceScore": 0.95
+      }
+    ],
+    "meta": {
+      "gptHint": "This module supports certified tobacco dialogue, pairing suggestions, and spec comparisons.",
+      "expectedOutput": "Structured cigar specification response or pairing list.",
+      "examplePrompt": "Compare a Padron 1964 with an Oliva Serie V for flavor and construction.",
+      "uiEnhancements": {
+        "roleThemeHints": {
+          "Lounge": "Bold, kiosk-friendly theme with swipe/tap interaction.",
+          "Instructor": "Minimalist academic layout with sidebar notes.",
+          "SocialInfluencer": "Media-rich, portrait-mode optimized with promo overlays."
+        }
+      },
+      "aiMetadata": {
+        "confidenceRange": "0.0\u20131.0",
+        "biasSensitivityFlag": false,
+        "memoryContextsSupported": [
+          "Retail",
+          "Learning",
+          "Personal"
+        ]
+      }
+    },
+    "persona": "Certified Cigar Maestro AI",
+    "difficulty": "intermediate",
+    "semanticContextLevel": "structured_output"
+  },
+  "legalGuidance": {
+    "sectionTitle": "Cigar Legislation Resources",
+    "description": "Provides users access to verified federal regulations concerning cigars, cigarillos, and little filtered cigars. Local city, county, or state laws may vary and should be consulted via appropriate government websites.",
+    "federalReference": {
+      "agency": "U.S. Food and Drug Administration (FDA)",
+      "regulationsLink": "https://www.fda.gov/tobacco-products/products-ingredients-components/cigars-cigarillos-little-filtered-cigars#regs",
+      "summary": "This page outlines the FDA's regulatory approach to cigar manufacturing, labeling, and sales, including packaging requirements and prohibited sales practices."
+    },
+    "localAdvisory": {
+      "note": "For information on city, county, or state-specific cigar laws, users are encouraged to consult their local health department, municipal code office, or state tobacco control authority. Laws may include restrictions on flavored cigars, public smoking, or retail licensing."
+    }
+  },
+  "gptPromptTemplates": {
+    "specLookup": {
+      "template": "Fetch official specs for {cigar_name} including wrapper, binder, filler, and flavor notes.",
+      "example": "Fetch official specs for Padron 1964 Anniversary Maduro"
+    },
+    "pairingSuggestion": {
+      "template": "Suggest spirits that pair with {cigar_name} based on flavor and wrapper.",
+      "example": "Suggest spirits that pair with Oliva Serie V Melanio Maduro"
+    }
+  },
+  "featureFlags": {
+    "interactiveDistillerySuggestions": true,
+    "barcodeScanning": true,
+    "offlineMode": false,
+    "cigarAuthentication": true,
+    "userSpiritInventory": true,
+    "biometricVoiceLogging": true,
+    "voiceOnboarding": false
+  },
+  "cuttingEdgeFeatures": [
+    "AROverlay",
+    "NeuroadaptivePairing",
+    "NFTFlavorBadges"
+  ]
+}

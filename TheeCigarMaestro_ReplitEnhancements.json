@@ -1,0 +1,110 @@
+{
+    "gpt_modules": {
+        "commands": [
+            "getSpecsByWrapper",
+            "suggestByEmotion",
+            "recommendByInventory",
+            "getCEULesson"
+        ],
+        "filters": [
+            "wrapper_type",
+            "country_of_origin",
+            "flavor_notes",
+            "inventory_status",
+            "ceu_progress_stage"
+        ],
+        "admin_tools": {
+            "prompt_debug_console": true,
+            "prompt_simulator_enabled": true
+        }
+    },
+    "developer_tools": {
+        "live_json_editor": {
+            "enabled": true,
+            "schema_validation": true,
+            "change_history_tracking": true
+        },
+        "replit_db_cache": {
+            "enabled": true,
+            "cache_targets": [
+                "cigars",
+                "pairings",
+                "inventory"
+            ]
+        },
+        "dynamic_lazy_loading": {
+            "enabled": true,
+            "modules": [
+                "wrapper_clusters",
+                "manufacturer_catalog"
+            ]
+        }
+    },
+    "ux_ui": {
+        "flavor_visualization_engine": {
+            "enabled": true,
+            "type": "radar_chart",
+            "data_source": "tasting_notes"
+        },
+        "wrapper_clustering_map": {
+            "enabled": true,
+            "navigation_order": [
+                "wrapper_type",
+                "country",
+                "strength",
+                "flavor"
+            ]
+        },
+        "ceu_dashboard": {
+            "enabled": true,
+            "gamification": true,
+            "badges": true
+        },
+        "lounge_mode": {
+            "enabled": true,
+            "features": [
+                "cigar_of_the_day",
+                "public_display",
+                "local_inventory"
+            ]
+        }
+    },
+    "admin_analytics": {
+        "admin_panel": {
+            "enabled": true,
+            "content_controls": [
+                "approve_cigar",
+                "feature_flags",
+                "maestro_choice"
+            ]
+        },
+        "telemetry": {
+            "enabled": true,
+            "metrics_tracked": [
+                "viewed_cigars",
+                "flavor_filters",
+                "pairing_trends"
+            ]
+        }
+    },
+    "content_enhancements": {
+        "multimedia": {
+            "audio_notes": true,
+            "video_clips": true
+        },
+        "flashcards": {
+            "enabled": true,
+            "adaptive_learning": true
+        }
+    },
+    "user_features": {
+        "pairing_journal": {
+            "enabled": true,
+            "flavor_recall_prompts": true
+        },
+        "maestro_recommendation_engine": {
+            "enabled": true,
+            "preference_learning": true
+        }
+    }
+}

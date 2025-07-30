@@ -1,0 +1,10 @@
+{
+  "LoungeHost": {
+    "background": "#111111",
+    "primaryText": "#ffffff"
+  },
+  "DarkMode": {
+    "background": "#000000",
+    "accent": "#ff9900"
+  }
+}

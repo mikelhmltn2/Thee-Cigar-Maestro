@@ -1,0 +1,14 @@
+{
+  "ceuModules": [
+    {
+      "id": "blendBasics101",
+      "title": "Blend Basics",
+      "ceuValue": 0.5,
+      "tier": "Introductory"
+    }
+  ],
+  "lmsCompatible": [
+    "Canvas",
+    "Moodle"
+  ]
+}

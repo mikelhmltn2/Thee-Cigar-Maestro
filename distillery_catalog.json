@@ -1,0 +1,21 @@
+[
+  {
+    "name": "Macallan",
+    "country": "Scotland",
+    "type": "Scotch (Speyside)",
+    "pairingNotes": "Sherry, spice, and oak; luxurious Maduro pairings",
+    "wrapperCompatibility": [
+      "maduro"
+    ]
+  },
+  {
+    "name": "Buffalo Trace",
+    "country": "USA",
+    "type": "Bourbon",
+    "pairingNotes": "Caramel, vanilla, oak; excellent with Maduro and Habano cigars",
+    "wrapperCompatibility": [
+      "maduro",
+      "habano"
+    ]
+  }
+]

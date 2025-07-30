@@ -1,0 +1,17 @@
+Thee Cigar Maestro – Branding Guide
+
+Tagline: "The Art. The Ritual. The Maestro."
+
+Brand Colors:
+- Primary: #4B2E2E
+- Accent: #D6A85D
+- Background: #F9F6F2
+
+Accessibility:
+- ADA Support: Yes
+- Screen Reader Mode: Yes
+- WCAG Level: 2.1 AA
+- Alt Text Requirement: Enabled
+
+Voice & Tone:
+- Warm, Educational, Luxury Concierge

@@ -1,0 +1,3303 @@
+[
+  {
+    "name": "Foundation Cigar Company",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2015,
+    "knownFlagshipLines": [
+      "El G\u00fceg\u00fcense",
+      "The Wise Man Maduro"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Warped Cigars",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2008,
+    "knownFlagshipLines": [
+      "La Hacienda",
+      "Serie Gran Reserva 1988"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Crowned Heads",
+    "countryOfOrigin": "Dominican Republic",
+    "yearEstablished": 2011,
+    "knownFlagshipLines": [
+      "Four Kicks",
+      "Jericho Hill"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "JRE Tobacco Co.",
+    "countryOfOrigin": "Honduras",
+    "yearEstablished": 2016,
+    "knownFlagshipLines": [
+      "Aladino",
+      "Aladino Corojo Reserva"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Southern Draw Cigars",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2014,
+    "knownFlagshipLines": [
+      "Kudzu",
+      "Jacob\u2019s Ladder"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "La Flor Dominicana",
+    "countryOfOrigin": "Dominican Republic",
+    "yearEstablished": 1996,
+    "knownFlagshipLines": [
+      "LFD Double Ligero",
+      "Andalusian Bull"
+    ],
+    "reputationTier": "Legacy",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Aganorsa Leaf",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 1998,
+    "knownFlagshipLines": [
+      "Guardian of the Farm",
+      "Signature Selection"
+    ],
+    "reputationTier": "Global",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Plasencia Cigars",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 1865,
+    "knownFlagshipLines": [
+      "Alma Fuerte",
+      "Reserva Original"
+    ],
+    "reputationTier": "Ultra-Premium",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Casdagli Cigars",
+    "countryOfOrigin": "Costa Rica",
+    "yearEstablished": 1997,
+    "knownFlagshipLines": [
+      "Daughters of the Wind",
+      "Bespoke Traditional Line"
+    ],
+    "reputationTier": "Ultra-Premium",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Debonaire House",
+    "countryOfOrigin": "Dominican Republic",
+    "yearEstablished": 2012,
+    "knownFlagshipLines": [
+      "Debonaire Maduro",
+      "Indian Motorcycle"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Illusione Cigars",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2006,
+    "knownFlagshipLines": [
+      "Epernay",
+      "Original Documents"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Gran Habano",
+    "countryOfOrigin": "Honduras",
+    "yearEstablished": 2003,
+    "knownFlagshipLines": [
+      "Corojo #5",
+      "Blue in Green"
+    ],
+    "reputationTier": "Global",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "El Septimo Geneva",
+    "countryOfOrigin": "Costa Rica",
+    "yearEstablished": 2005,
+    "knownFlagshipLines": [
+      "Emperor Collection",
+      "ALEXANDER III"
+    ],
+    "reputationTier": "Ultra-Premium",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Room101 Cigars",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2009,
+    "knownFlagshipLines": [
+      "Farce",
+      "10th Anniversary"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Casa Turrent",
+    "countryOfOrigin": "Mexico",
+    "yearEstablished": 1880,
+    "knownFlagshipLines": [
+      "1880 Series",
+      "Serie 1942"
+    ],
+    "reputationTier": "Legacy",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "A.J. Fernandez Cigars",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2002,
+    "knownFlagshipLines": [
+      "San Lotano",
+      "New World"
+    ],
+    "reputationTier": "Global",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Mombacho Cigars SA (Favilli)",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2006,
+    "knownFlagshipLines": [
+      "Liga Maestro",
+      "Tierra Volc\u00e1n"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "HVC Cigars",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2011,
+    "knownFlagshipLines": [
+      "Hot Cake",
+      "500th Anniversary"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "La Aurora",
+    "countryOfOrigin": "Dominican Republic",
+    "yearEstablished": 1903,
+    "knownFlagshipLines": [
+      "Preferidos",
+      "107 Series"
+    ],
+    "reputationTier": "Legacy",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "AVO Cigars",
+    "countryOfOrigin": "Dominican Republic",
+    "yearEstablished": 1987,
+    "knownFlagshipLines": [
+      "AVO Classic",
+      "AVO Syncro Nicaragua"
+    ],
+    "reputationTier": "Global",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Espinosa Cigars",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2012,
+    "knownFlagshipLines": [
+      "601 Serie",
+      "Laranja Reserva"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Kristoff Cigars",
+    "countryOfOrigin": "Dominican Republic",
+    "yearEstablished": 2004,
+    "knownFlagshipLines": [
+      "Kristoff Maduro",
+      "Kristoff Ligero"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Tatuaje Cigars",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2003,
+    "knownFlagshipLines": [
+      "Brown Label",
+      "Monster Series"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Joya de Nicaragua",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 1968,
+    "knownFlagshipLines": [
+      "Anta\u00f1o 1970",
+      "Joya Black"
+    ],
+    "reputationTier": "Legacy",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Byron Cigars",
+    "countryOfOrigin": "Costa Rica",
+    "yearEstablished": 1850,
+    "knownFlagshipLines": [
+      "Byron Reserva",
+      "Byron Serie Siglo XXI"
+    ],
+    "reputationTier": "Ultra-Premium",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Black Label Trading Co.",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2013,
+    "knownFlagshipLines": [
+      "Last Rites",
+      "Bishops Blend"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "RoMa Craft Tobac",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2012,
+    "knownFlagshipLines": [
+      "CroMagnon",
+      "Intemperance"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Vegas Robaina",
+    "countryOfOrigin": "Cuba",
+    "yearEstablished": 1997,
+    "knownFlagshipLines": [
+      "Famosos",
+      "Clasicos"
+    ],
+    "reputationTier": "Legacy",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Davtian Cigars",
+    "countryOfOrigin": "Dominican Republic",
+    "yearEstablished": 2007,
+    "knownFlagshipLines": [
+      "Primus",
+      "Rubina"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Principle Cigars",
+    "countryOfOrigin": "Dominican Republic",
+    "yearEstablished": 2013,
+    "knownFlagshipLines": [
+      "Aviator Series",
+      "Martinique"
+    ],
+    "reputationTier": "Ultra-Premium",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Curivari Cigars",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2003,
+    "knownFlagshipLines": [
+      "Buenaventura",
+      "Reserva Limitada"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Cavalier Gen\u00e8ve",
+    "countryOfOrigin": "Honduras",
+    "yearEstablished": 2015,
+    "knownFlagshipLines": [
+      "White Series",
+      "Black II"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Dapper Cigar Co.",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2013,
+    "knownFlagshipLines": [
+      "La Madrina",
+      "El Borracho"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Hiram & Solomon Cigars",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2014,
+    "knownFlagshipLines": [
+      "Entered Apprentice",
+      "Veiled Prophet"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "La Palina",
+    "countryOfOrigin": "Dominican Republic",
+    "yearEstablished": 1896,
+    "knownFlagshipLines": [
+      "El Diario",
+      "Goldie"
+    ],
+    "reputationTier": "Legacy",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Oscar Valladares Tobacco & Co.",
+    "countryOfOrigin": "Honduras",
+    "yearEstablished": 2012,
+    "knownFlagshipLines": [
+      "Leaf by Oscar",
+      "2012 by Oscar"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Paul Garmirian Cigars",
+    "countryOfOrigin": "Dominican Republic",
+    "yearEstablished": 1990,
+    "knownFlagshipLines": [
+      "PG Gourmet Series",
+      "Artisan\u2019s Passion"
+    ],
+    "reputationTier": "Ultra-Premium",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Casa Cuevas Cigars",
+    "countryOfOrigin": "Dominican Republic",
+    "yearEstablished": 2016,
+    "knownFlagshipLines": [
+      "Reserva Maduro",
+      "Habano"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Sinistro Cigars",
+    "countryOfOrigin": "Dominican Republic",
+    "yearEstablished": 2015,
+    "knownFlagshipLines": [
+      "Mr. White",
+      "The Last Cowboy"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Tabacalera Palma",
+    "countryOfOrigin": "Dominican Republic",
+    "yearEstablished": 1936,
+    "knownFlagshipLines": [
+      "Aging Room",
+      "La Galera"
+    ],
+    "reputationTier": "Legacy",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Cornelius & Anthony",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2016,
+    "knownFlagshipLines": [
+      "Daddy Mac",
+      "Venganza"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Micallef Cigars",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2016,
+    "knownFlagshipLines": [
+      "Micallef Leyenda",
+      "Herencia"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Lampert Cigars",
+    "countryOfOrigin": "Costa Rica",
+    "yearEstablished": 2020,
+    "knownFlagshipLines": [
+      "Don Patron",
+      "Ocean Breeze"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Casa Fernandez (AGANORSA)",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 1998,
+    "knownFlagshipLines": [
+      "JFR Lunatic",
+      "Casa Fernandez Miami"
+    ],
+    "reputationTier": "Global",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Selected Tobacco",
+    "countryOfOrigin": "Costa Rica",
+    "yearEstablished": 2005,
+    "knownFlagshipLines": [
+      "Atabey",
+      "Bandolero"
+    ],
+    "reputationTier": "Ultra-Premium",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Felix Assouline Cigars",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2013,
+    "knownFlagshipLines": [
+      "EGO",
+      "Ringo"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Patoro Cigars",
+    "countryOfOrigin": "Dominican Republic",
+    "yearEstablished": 2001,
+    "knownFlagshipLines": [
+      "Gran A\u00f1ejo",
+      "Platino"
+    ],
+    "reputationTier": "Ultra-Premium",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Blanco Cigar Company",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 1998,
+    "knownFlagshipLines": [
+      "Liga Exclusiva de Familia",
+      "Primo del Rey"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "VegaFina",
+    "countryOfOrigin": "Dominican Republic",
+    "yearEstablished": 1998,
+    "knownFlagshipLines": [
+      "VegaFina Classic",
+      "Nicaragua"
+    ],
+    "reputationTier": "Global",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Fratello Cigars",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2013,
+    "knownFlagshipLines": [
+      "Fratello Classico",
+      "Navetta Inverso"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Aging Room Cigars",
+    "countryOfOrigin": "Dominican Republic",
+    "yearEstablished": 2011,
+    "knownFlagshipLines": [
+      "Quattro Nicaragua",
+      "M356"
+    ],
+    "reputationTier": "Global",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Emilio Cigars",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2010,
+    "knownFlagshipLines": [
+      "AF Series",
+      "Suave"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Fabrica Oveja Negra",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2015,
+    "knownFlagshipLines": [
+      "Black Label Trading Co.",
+      "BLK WKS Studio"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "A.C.E. Prime / Luciano Cigars",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2019,
+    "knownFlagshipLines": [
+      "The Dreamer",
+      "Fiat Lux"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Jas Sum Kral (JSK)",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2015,
+    "knownFlagshipLines": [
+      "Red Knight",
+      "Nugg"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Don Doroteo Cigars",
+    "countryOfOrigin": "Dominican Republic",
+    "yearEstablished": 2021,
+    "knownFlagshipLines": [
+      "Salt of the Earth",
+      "El Legado"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Reinado Cigars",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2009,
+    "knownFlagshipLines": [
+      "Grand Apex",
+      "Original Blend"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "El Artista Cigars",
+    "countryOfOrigin": "Dominican Republic",
+    "yearEstablished": 1956,
+    "knownFlagshipLines": [
+      "Buffalo TEN",
+      "Big Papi"
+    ],
+    "reputationTier": "Legacy",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Room101 Farce Collection",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2018,
+    "knownFlagshipLines": [
+      "Farce Maduro",
+      "Farce Connecticut"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Kafie 1901 Cigars",
+    "countryOfOrigin": "Honduras",
+    "yearEstablished": 2013,
+    "knownFlagshipLines": [
+      "Don Fernando Maduro",
+      "San Andres Toro Bello"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "La Barba Cigars",
+    "countryOfOrigin": "Dominican Republic",
+    "yearEstablished": 2012,
+    "knownFlagshipLines": [
+      "Purple",
+      "Red"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Dunbarton Tobacco & Trust",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2015,
+    "knownFlagshipLines": [
+      "Sobremesa",
+      "Mi Querida"
+    ],
+    "reputationTier": "Ultra-Premium",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Stolen Throne Cigars",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2019,
+    "knownFlagshipLines": [
+      "Crook of the Crown",
+      "Call to Arms"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Epic Cigars",
+    "countryOfOrigin": "Dominican Republic",
+    "yearEstablished": 2010,
+    "knownFlagshipLines": [
+      "Epic Maduro Reserva",
+      "Epic Corojo"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Patina Cigars",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2016,
+    "knownFlagshipLines": [
+      "Patina Habano",
+      "Patina Maduro"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "West Tampa Tobacco Co.",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2022,
+    "knownFlagshipLines": [
+      "White",
+      "Black"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "El Titan de Bronze",
+    "countryOfOrigin": "USA",
+    "yearEstablished": 1995,
+    "knownFlagshipLines": [
+      "Redemption",
+      "Gran Reserve"
+    ],
+    "reputationTier": "Legacy",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Serino Cigar Co.",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2016,
+    "knownFlagshipLines": [
+      "Serino Royale Maduro",
+      "Wayfarer"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Bellas Artes by AJ Fernandez",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2016,
+    "knownFlagshipLines": [
+      "Bellas Artes Maduro",
+      "Bellas Artes Habano"
+    ],
+    "reputationTier": "Ultra-Premium",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Gran Reserva by Perdomo",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 1998,
+    "knownFlagshipLines": [
+      "Perdomo Reserve Champagne",
+      "10th Anniversary Maduro"
+    ],
+    "reputationTier": "Global",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Casa Caraballo",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2016,
+    "knownFlagshipLines": [
+      "The Post Embargo Series",
+      "Apache"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Tres Lindas Cubanas Cigars",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2014,
+    "knownFlagshipLines": [
+      "La Negrita",
+      "La Clarita"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "ATL Cigar Co.",
+    "countryOfOrigin": "Dominican Republic",
+    "yearEstablished": 2020,
+    "knownFlagshipLines": [
+      "ATL Magic",
+      "ATL Black"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "FQ Cigars (Fernandez Quiroga)",
+    "countryOfOrigin": "Dominican Republic",
+    "yearEstablished": 2013,
+    "knownFlagshipLines": [
+      "Phenom Series",
+      "Proper"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Arandoza Cigars",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2011,
+    "knownFlagshipLines": [
+      "Defcon",
+      "White Label"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Dunhill Cigars (Legacy Brand)",
+    "countryOfOrigin": "Honduras",
+    "yearEstablished": 1907,
+    "knownFlagshipLines": [
+      "Aged Selection",
+      "Signed Range"
+    ],
+    "reputationTier": "Legacy",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Don Kiki Cigars",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 1990,
+    "knownFlagshipLines": [
+      "Don Kiki White Label",
+      "Brown Label"
+    ],
+    "reputationTier": "Legacy",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Veritas Cigars",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2011,
+    "knownFlagshipLines": [
+      "3 Blends",
+      "Veritas Torch"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Black Works Studio",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2015,
+    "knownFlagshipLines": [
+      "Killer Bee",
+      "Green Hornet"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Sosa Cigars",
+    "countryOfOrigin": "Dominican Republic",
+    "yearEstablished": 1964,
+    "knownFlagshipLines": [
+      "Classic Natural",
+      "Underground Connecticut"
+    ],
+    "reputationTier": "Legacy",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Dominican Big Leaguer (DBL) Cigars",
+    "countryOfOrigin": "Dominican Republic",
+    "yearEstablished": 2013,
+    "knownFlagshipLines": [
+      "DBL Extra Viejo",
+      "Formula"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Don Reynaldo by Warped",
+    "countryOfOrigin": "Dominican Republic",
+    "yearEstablished": 2014,
+    "knownFlagshipLines": [
+      "Don Reynaldo Regalos",
+      "Corona de Luxe"
+    ],
+    "reputationTier": "Ultra-Premium",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "1516 Cigars",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2020,
+    "knownFlagshipLines": [
+      "La Riqueza",
+      "1516 Original Blend"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Ohana Cigars",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2015,
+    "knownFlagshipLines": [
+      "Pulse",
+      "Friends and Family"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Cordoba & Morales Cigars",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2011,
+    "knownFlagshipLines": [
+      "Clave Cubana",
+      "Finca Santa Fe"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Pichardo Cigars",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2013,
+    "knownFlagshipLines": [
+      "Reserva Familiar",
+      "Clasico"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "La Sirena Cigars",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2009,
+    "knownFlagshipLines": [
+      "La Sirena Original",
+      "LTZ"
+    ],
+    "reputationTier": "Global",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Cumpay by Maya Selva Cigars",
+    "countryOfOrigin": "Honduras",
+    "yearEstablished": 1995,
+    "knownFlagshipLines": [
+      "Cumpay Robusto",
+      "Cumpay Volcano"
+    ],
+    "reputationTier": "Global",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "El Rey del Mundo (Non-Cuban)",
+    "countryOfOrigin": "Honduras",
+    "yearEstablished": 1994,
+    "knownFlagshipLines": [
+      "Robusto Oscuro",
+      "Choix Supreme"
+    ],
+    "reputationTier": "Legacy",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Gilberto Oliva Reserva",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2017,
+    "knownFlagshipLines": [
+      "Gilberto Oliva Blanc",
+      "Gilberto Reserva"
+    ],
+    "reputationTier": "Legacy",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Dapper Cigars",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2013,
+    "knownFlagshipLines": [
+      "Cubao",
+      "La Madrina Shade"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Leaf by Oscar",
+    "countryOfOrigin": "Honduras",
+    "yearEstablished": 2011,
+    "knownFlagshipLines": [
+      "Leaf by Oscar Maduro",
+      "Leaf by Oscar Connecticut"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Falto Cigars",
+    "countryOfOrigin": "Dominican Republic",
+    "yearEstablished": 1995,
+    "knownFlagshipLines": [
+      "Falto Prominente",
+      "Falto La Pureza"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Don Lino by Miami Cigar & Co.",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 1994,
+    "knownFlagshipLines": [
+      "Africa Series",
+      "Don Lino Maduro"
+    ],
+    "reputationTier": "Legacy",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Yagua by J.C. Newman",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2020,
+    "knownFlagshipLines": [
+      "Yagua"
+    ],
+    "reputationTier": "Ultra-Premium",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Puros Huerfanos by Caldwell",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2019,
+    "knownFlagshipLines": [
+      "Puros Huerfanos Robusto",
+      "Toro"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Chinnock Cellars Cigars",
+    "countryOfOrigin": "Dominican Republic",
+    "yearEstablished": 2010,
+    "knownFlagshipLines": [
+      "Pressoir",
+      "Terroir"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Reyes Family Cigars",
+    "countryOfOrigin": "Honduras",
+    "yearEstablished": 1997,
+    "knownFlagshipLines": [
+      "Viejo Mundo",
+      "Premier"
+    ],
+    "reputationTier": "Legacy",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Emperors Cut Cigars",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2017,
+    "knownFlagshipLines": [
+      "Jazz Series",
+      "Natural Pleasure"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Maya Selva Cigars",
+    "countryOfOrigin": "Honduras",
+    "yearEstablished": 1995,
+    "knownFlagshipLines": [
+      "Flor de Selva",
+      "Villa Zamorano"
+    ],
+    "reputationTier": "Global",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Cavalier Gen\u00e8ve Limited Edition",
+    "countryOfOrigin": "Honduras",
+    "yearEstablished": 2016,
+    "knownFlagshipLines": [
+      "LE2020",
+      "LE2022"
+    ],
+    "reputationTier": "Ultra-Premium",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Table 36 Cigars",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2012,
+    "knownFlagshipLines": [
+      "Integrity",
+      "Fellowship"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Rojas Cigars",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2019,
+    "knownFlagshipLines": [
+      "Street Tacos",
+      "Bluebonnets"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Foundry Tobacco Company",
+    "countryOfOrigin": "Dominican Republic",
+    "yearEstablished": 2012,
+    "knownFlagshipLines": [
+      "Weld Wheels",
+      "Time Flies"
+    ],
+    "reputationTier": "Legacy",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Nova Cigars (Plasencia Collaboration)",
+    "countryOfOrigin": "Dominican Republic",
+    "yearEstablished": 2019,
+    "knownFlagshipLines": [
+      "Personal Reserve Leo X",
+      "Nova Platinum"
+    ],
+    "reputationTier": "Ultra-Premium",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Barreda Cigars",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2010,
+    "knownFlagshipLines": [
+      "Barreda Connecticut",
+      "Barreda Maduro"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "La Galera by Tabacalera Palma",
+    "countryOfOrigin": "Dominican Republic",
+    "yearEstablished": 2015,
+    "knownFlagshipLines": [
+      "La Galera Connecticut",
+      "La Galera Maduro"
+    ],
+    "reputationTier": "Global",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Blanco Liga Exclusiva",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2012,
+    "knownFlagshipLines": [
+      "Liga Exclusiva de Familia Maduro",
+      "Habano Rosado"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Don Lucas Cigars",
+    "countryOfOrigin": "Dominican Republic",
+    "yearEstablished": 1992,
+    "knownFlagshipLines": [
+      "Series 2000",
+      "Don Lucas Family Reserve"
+    ],
+    "reputationTier": "Legacy",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Principes by La Aurora",
+    "countryOfOrigin": "Dominican Republic",
+    "yearEstablished": 1903,
+    "knownFlagshipLines": [
+      "Principes Corona",
+      "Natural Vanilla"
+    ],
+    "reputationTier": "Legacy",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Hooten Young Cigars",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2020,
+    "knownFlagshipLines": [
+      "Operation Gothic Serpent",
+      "Hooten Young 2020"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Casa Trompeta Cigars",
+    "countryOfOrigin": "Dominican Republic",
+    "yearEstablished": 2015,
+    "knownFlagshipLines": [
+      "Don Pancho",
+      "Trumpet"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Micallef Reserva",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2016,
+    "knownFlagshipLines": [
+      "Reserva Limitada",
+      "Micallef Maduro"
+    ],
+    "reputationTier": "Ultra-Premium",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "La Instructora",
+    "countryOfOrigin": "Dominican Republic",
+    "yearEstablished": 2016,
+    "knownFlagshipLines": [
+      "Box Pressed",
+      "Perfeccion"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "De Los Reyes Cigars",
+    "countryOfOrigin": "Dominican Republic",
+    "yearEstablished": 1992,
+    "knownFlagshipLines": [
+      "Saga Short Tales",
+      "Saga Solaz"
+    ],
+    "reputationTier": "Global",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Cavalier Gen\u00e8ve White Series",
+    "countryOfOrigin": "Honduras",
+    "yearEstablished": 2015,
+    "knownFlagshipLines": [
+      "White Series Lancero",
+      "White Series Robusto"
+    ],
+    "reputationTier": "Global",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Oscar Valladares Wild Hunter",
+    "countryOfOrigin": "Honduras",
+    "yearEstablished": 2019,
+    "knownFlagshipLines": [
+      "Wild Hunter Oscuro",
+      "Wild Hunter Natural"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Emilio LJZ Series",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2018,
+    "knownFlagshipLines": [
+      "LJZ Limited Edition",
+      "LJZ Toro"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Casa 1910 Cigars",
+    "countryOfOrigin": "Mexico",
+    "yearEstablished": 2021,
+    "knownFlagshipLines": [
+      "Revolution",
+      "Cuchillo Parado"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Flor y Nata Cigars",
+    "countryOfOrigin": "Dominican Republic",
+    "yearEstablished": 2012,
+    "knownFlagshipLines": [
+      "Flor y Nata Maduro",
+      "Flor y Nata Connecticut"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Artesano Del Tobacco",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2015,
+    "knownFlagshipLines": [
+      "Viva La Vida",
+      "El Pulpo"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Hiram & Solomon Traveling Man",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2016,
+    "knownFlagshipLines": [
+      "Traveling Man Toro",
+      "Traveling Man Robusto"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Lure Cigars",
+    "countryOfOrigin": "Dominican Republic",
+    "yearEstablished": 2021,
+    "knownFlagshipLines": [
+      "Lure Maduro",
+      "Lure Habano"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Peter James Cigars",
+    "countryOfOrigin": "Dominican Republic",
+    "yearEstablished": 2022,
+    "knownFlagshipLines": [
+      "Los Estoico",
+      "Elegancia"
+    ],
+    "reputationTier": "Ultra-Premium",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Valacari Cigars",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2014,
+    "knownFlagshipLines": [
+      "Valacari NeoClassic",
+      "Valacari Revelation"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Zander-Greg (Nat Cicco)",
+    "countryOfOrigin": "Honduras",
+    "yearEstablished": 1965,
+    "knownFlagshipLines": [
+      "Aniversario 1965",
+      "HHB Classic"
+    ],
+    "reputationTier": "Legacy",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Fable Cigars",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2015,
+    "knownFlagshipLines": [
+      "Fourth Prime",
+      "Two Things"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Los Caidos Cigars",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2018,
+    "knownFlagshipLines": [
+      "Los Caidos Blue",
+      "Los Caidos Red"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Cabinet Selection by La Aurora",
+    "countryOfOrigin": "Dominican Republic",
+    "yearEstablished": 2015,
+    "knownFlagshipLines": [
+      "Cabinet Selection Connecticut",
+      "Cabinet Selection Maduro"
+    ],
+    "reputationTier": "Global",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "HVC Hot Cake Series",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2020,
+    "knownFlagshipLines": [
+      "Hot Cake Maduro",
+      "Hot Cake Golden Line"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Boca de Oro Cigars",
+    "countryOfOrigin": "Dominican Republic",
+    "yearEstablished": 2020,
+    "knownFlagshipLines": [
+      "Boca de Oro Gold",
+      "Boca de Oro Maduro"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Ozgener Family Cigars",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2022,
+    "knownFlagshipLines": [
+      "Bosphorus",
+      "Aramas"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "D\u2019Crossier Cigars",
+    "countryOfOrigin": "Costa Rica",
+    "yearEstablished": 2007,
+    "knownFlagshipLines": [
+      "Presidential Collection",
+      "Golden Blend"
+    ],
+    "reputationTier": "Ultra-Premium",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Cumpay by Maya Selva (Nicaragua)",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 1999,
+    "knownFlagshipLines": [
+      "Cumpay Volcano",
+      "Cumpay Robusto"
+    ],
+    "reputationTier": "Global",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Trinidad Espiritu by A.J. Fernandez",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2019,
+    "knownFlagshipLines": [
+      "Espiritu Series No. 1",
+      "Espiritu Series No. 2"
+    ],
+    "reputationTier": "Global",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Nomad Cigar Co.",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2012,
+    "knownFlagshipLines": [
+      "Fugitive",
+      "S-307"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "El Septimo Sacred Arts Collection",
+    "countryOfOrigin": "Costa Rica",
+    "yearEstablished": 2020,
+    "knownFlagshipLines": [
+      "Van Gogh",
+      "Michelangelo"
+    ],
+    "reputationTier": "Ultra-Premium",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "GTO Dominican Cigars",
+    "countryOfOrigin": "Dominican Republic",
+    "yearEstablished": 2010,
+    "knownFlagshipLines": [
+      "Pain Killer",
+      "GTO Corona de GTO"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Manolo Estate Cigars",
+    "countryOfOrigin": "Dominican Republic",
+    "yearEstablished": 2013,
+    "knownFlagshipLines": [
+      "Habano Serie 32",
+      "Connecticut Limited"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Blackbird Cigar Co.",
+    "countryOfOrigin": "Dominican Republic",
+    "yearEstablished": 2016,
+    "knownFlagshipLines": [
+      "Unkind",
+      "Crow"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Pura Soul Cigars",
+    "countryOfOrigin": "Honduras",
+    "yearEstablished": 2013,
+    "knownFlagshipLines": [
+      "Pura Soul Maduro",
+      "Pura Soul Nicaragua"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Guayacan Cigars",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2011,
+    "knownFlagshipLines": [
+      "Habano Corojo",
+      "Maduro"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Yaya Cigars (by CigarZona)",
+    "countryOfOrigin": "Dominican Republic",
+    "yearEstablished": 2021,
+    "knownFlagshipLines": [
+      "Yaya Maduro",
+      "Yaya Habano"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Dapper Siempre Series",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2016,
+    "knownFlagshipLines": [
+      "Siempre Sun Grown",
+      "Siempre Rosado"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Jas Sum Kral Nuggs",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2019,
+    "knownFlagshipLines": [
+      "Nuggs Habano",
+      "Nuggs Maduro"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Cohiba Nicaragua (General Cigar)",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2014,
+    "knownFlagshipLines": [
+      "Cohiba Nicaragua N54",
+      "Cohiba Black"
+    ],
+    "reputationTier": "Global",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Crux Cigars",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2014,
+    "knownFlagshipLines": [
+      "Epicure",
+      "Bull & Bear"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "La Libertad (Villiger Cigars)",
+    "countryOfOrigin": "Dominican Republic",
+    "yearEstablished": 2010,
+    "knownFlagshipLines": [
+      "La Libertad Robusto",
+      "Toro"
+    ],
+    "reputationTier": "Global",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Don Benigno Cigars",
+    "countryOfOrigin": "Costa Rica",
+    "yearEstablished": 1999,
+    "knownFlagshipLines": [
+      "Don Benigno Maduro",
+      "Don Benigno Natural"
+    ],
+    "reputationTier": "Legacy",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Casa Torres Cigars",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2017,
+    "knownFlagshipLines": [
+      "Casa Torres Nicaragua",
+      "Casa Torres Maduro"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Balmoral Cigars (Royal Agio)",
+    "countryOfOrigin": "Dominican Republic",
+    "yearEstablished": 1895,
+    "knownFlagshipLines": [
+      "Balmoral Anejo XO",
+      "Balmoral Serie Signaturas"
+    ],
+    "reputationTier": "Legacy",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Sinistro Mr. White Series",
+    "countryOfOrigin": "Dominican Republic",
+    "yearEstablished": 2016,
+    "knownFlagshipLines": [
+      "Mr. White Gold Edition",
+      "Mr. White El Presidente"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Cavalier Gen\u00e8ve Black Series II",
+    "countryOfOrigin": "Honduras",
+    "yearEstablished": 2018,
+    "knownFlagshipLines": [
+      "Black Series II Robusto",
+      "Limited Edition 2023"
+    ],
+    "reputationTier": "Ultra-Premium",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Ferio Tego Cigars",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2021,
+    "knownFlagshipLines": [
+      "Elegancia",
+      "Generoso"
+    ],
+    "reputationTier": "Ultra-Premium",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Casa Cuevas Sangre Nueva",
+    "countryOfOrigin": "Dominican Republic",
+    "yearEstablished": 2022,
+    "knownFlagshipLines": [
+      "Sangre Nueva Habano",
+      "Sangre Nueva Maduro"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Ristefari Cigars (JSK)",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2015,
+    "knownFlagshipLines": [
+      "Tyrannical Buc",
+      "Ristefari 2022"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Reinado Grand Apex",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2009,
+    "knownFlagshipLines": [
+      "Grand Apex Maduro",
+      "Grand Apex Robusto"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Tatuaje Havana VI Verocu",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2007,
+    "knownFlagshipLines": [
+      "Verocu No. 5",
+      "Verocu Blue"
+    ],
+    "reputationTier": "Global",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Bellatto Premium Cigars",
+    "countryOfOrigin": "Dominican Republic",
+    "yearEstablished": 2014,
+    "knownFlagshipLines": [
+      "Edition Limitada",
+      "Bellatto Habano"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Maceda Brand Cigars",
+    "countryOfOrigin": "Dominican Republic",
+    "yearEstablished": 2019,
+    "knownFlagshipLines": [
+      "Maceda Legacy",
+      "Maceda Maduro"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Ohana Nui Cigars",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2016,
+    "knownFlagshipLines": [
+      "The Pulse",
+      "Friends and Family"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Nova Platinum Cigars",
+    "countryOfOrigin": "Dominican Republic",
+    "yearEstablished": 2019,
+    "knownFlagshipLines": [
+      "Nova Sultan",
+      "Nova Mirage"
+    ],
+    "reputationTier": "Ultra-Premium",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Ramon Allones by AJ Fernandez",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2018,
+    "knownFlagshipLines": [
+      "Ramon Allones Toro",
+      "Robusto"
+    ],
+    "reputationTier": "Global",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Espinosa Knuckle Sandwich",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2022,
+    "knownFlagshipLines": [
+      "Knuckle Sandwich Maduro",
+      "Habano"
+    ],
+    "reputationTier": "Global",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Don Doroteo Legacy Collection",
+    "countryOfOrigin": "Dominican Republic",
+    "yearEstablished": 2021,
+    "knownFlagshipLines": [
+      "Salt of the Earth",
+      "El Legado"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Somm Cigars",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2023,
+    "knownFlagshipLines": [
+      "Sommelier",
+      "N\u00e9gociant"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Tabacalera de Garcia (Non-Cuban)",
+    "countryOfOrigin": "Dominican Republic",
+    "yearEstablished": 1969,
+    "knownFlagshipLines": [
+      "Montecristo",
+      "Romeo y Julieta",
+      "H. Upmann"
+    ],
+    "reputationTier": "Legacy",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "El Pulpo by Artesano Del Tobacco",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2023,
+    "knownFlagshipLines": [
+      "El Pulpo Toro",
+      "El Pulpo Robusto"
+    ],
+    "reputationTier": "Ultra-Premium",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Matilde Cigars",
+    "countryOfOrigin": "Dominican Republic",
+    "yearEstablished": 2014,
+    "knownFlagshipLines": [
+      "Serena",
+      "Oscura",
+      "Quadrata"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Domenico Cigars",
+    "countryOfOrigin": "Dominican Republic",
+    "yearEstablished": 2009,
+    "knownFlagshipLines": [
+      "Domenico Double Ligero",
+      "Domenico 10th Anniversary"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Wynwood Hills by CLE",
+    "countryOfOrigin": "Honduras",
+    "yearEstablished": 2018,
+    "knownFlagshipLines": [
+      "Unhinged",
+      "Deranged"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Casa Doble Cigars",
+    "countryOfOrigin": "Dominican Republic",
+    "yearEstablished": 2017,
+    "knownFlagshipLines": [
+      "Doble Maduro",
+      "Doble Connecticut"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Emilio Suave Series",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2017,
+    "knownFlagshipLines": [
+      "Suave Robusto",
+      "Suave Toro"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Toscano Cigars",
+    "countryOfOrigin": "Italy",
+    "yearEstablished": 1818,
+    "knownFlagshipLines": [
+      "Toscano Classico",
+      "Antico"
+    ],
+    "reputationTier": "Legacy",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "La Sirena Original Series",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2009,
+    "knownFlagshipLines": [
+      "La Sirena Original",
+      "LTZ"
+    ],
+    "reputationTier": "Global",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Principle Aviator Series",
+    "countryOfOrigin": "Dominican Republic",
+    "yearEstablished": 2014,
+    "knownFlagshipLines": [
+      "Viento",
+      "Martinique"
+    ],
+    "reputationTier": "Ultra-Premium",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Eiroa Cigars",
+    "countryOfOrigin": "Honduras",
+    "yearEstablished": 2013,
+    "knownFlagshipLines": [
+      "Eiroa Classic",
+      "Eiroa CBT Maduro"
+    ],
+    "reputationTier": "Global",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Curivari Buenaventura",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2012,
+    "knownFlagshipLines": [
+      "BV560",
+      "BV500"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Flor de Cesar Cigars",
+    "countryOfOrigin": "Dominican Republic",
+    "yearEstablished": 2015,
+    "knownFlagshipLines": [
+      "Cesar Natural",
+      "Cesar Maduro"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Casa Habano Cigars",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2010,
+    "knownFlagshipLines": [
+      "Gold Series",
+      "Black Label"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Don Rafa Cigars",
+    "countryOfOrigin": "Dominican Republic",
+    "yearEstablished": 1999,
+    "knownFlagshipLines": [
+      "Don Rafa Maduro",
+      "Don Rafa Connecticut"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "La Hoja Cigar Co.",
+    "countryOfOrigin": "Dominican Republic",
+    "yearEstablished": 1994,
+    "knownFlagshipLines": [
+      "Hoja de Flores",
+      "Cabinet Reserva"
+    ],
+    "reputationTier": "Legacy",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Casa Montecristo (Non-Cuban Retail Brand)",
+    "countryOfOrigin": "USA",
+    "yearEstablished": 2008,
+    "knownFlagshipLines": [
+      "Casa Montecristo Exclusive",
+      "Anniversary Series"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Villiger La Vencedora",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2017,
+    "knownFlagshipLines": [
+      "La Vencedora Robusto",
+      "Toro"
+    ],
+    "reputationTier": "Global",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Maria Lucia by ACE Prime",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2022,
+    "knownFlagshipLines": [
+      "Maria Lucia Toro",
+      "Maria Lucia Robusto"
+    ],
+    "reputationTier": "Ultra-Premium",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Escobar Cigars by Nas",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2021,
+    "knownFlagshipLines": [
+      "Escobar Maduro",
+      "Escobar Natural"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Elogio Cigars",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2010,
+    "knownFlagshipLines": [
+      "Elogio Habano",
+      "Elogio LSV"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Casa Favilli",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2016,
+    "knownFlagshipLines": [
+      "Favilli Cosecha",
+      "Favilli Linea Classica"
+    ],
+    "reputationTier": "Ultra-Premium",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Tres Reynas (Quesada + Garcia Collab)",
+    "countryOfOrigin": "Dominican Republic",
+    "yearEstablished": 2012,
+    "knownFlagshipLines": [
+      "Tres Reynas Robusto",
+      "Toro"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Finca Santa Fe Cigars",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2013,
+    "knownFlagshipLines": [
+      "Santa Fe Maduro",
+      "Connecticut Reserve"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "El Mago Cigars",
+    "countryOfOrigin": "Dominican Republic",
+    "yearEstablished": 2015,
+    "knownFlagshipLines": [
+      "El Mago Maduro",
+      "El Mago Habano"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Cuba Rica Cigar Co.",
+    "countryOfOrigin": "Costa Rica",
+    "yearEstablished": 2013,
+    "knownFlagshipLines": [
+      "Spirit of Art",
+      "Via Havana"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Yunior Cigars",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2018,
+    "knownFlagshipLines": [
+      "Yunior Gold",
+      "Yunior Black"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Dominican Big Leaguer (DBL) Extra Viejo",
+    "countryOfOrigin": "Dominican Republic",
+    "yearEstablished": 2013,
+    "knownFlagshipLines": [
+      "DBL Extra Viejo",
+      "Formula"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Casa De Sue\u00f1os",
+    "countryOfOrigin": "Dominican Republic",
+    "yearEstablished": 2014,
+    "knownFlagshipLines": [
+      "Inception",
+      "Robusto Deluxe"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Linga Cigars",
+    "countryOfOrigin": "Honduras",
+    "yearEstablished": 2016,
+    "knownFlagshipLines": [
+      "Linga Legacy",
+      "Linga Natural"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Vintage Rock-A-Feller Cigar Group",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2010,
+    "knownFlagshipLines": [
+      "Art of Magic",
+      "Gold Series"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "El Primer Mundo",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2006,
+    "knownFlagshipLines": [
+      "Blue Label",
+      "Epiphany"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "MoyaRuiz Cigars",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2013,
+    "knownFlagshipLines": [
+      "La Jugada",
+      "The Rake"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Las Cumbres Tabaco",
+    "countryOfOrigin": "Dominican Republic",
+    "yearEstablished": 2014,
+    "knownFlagshipLines": [
+      "Se\u00f1orial",
+      "Saga Short Tales"
+    ],
+    "reputationTier": "Global",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Cavalier Gen\u00e8ve Inner Circle",
+    "countryOfOrigin": "Honduras",
+    "yearEstablished": 2022,
+    "knownFlagshipLines": [
+      "Inner Circle Domain",
+      "Inner Circle Limited"
+    ],
+    "reputationTier": "Ultra-Premium",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Patina Oro de Nicaragua",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2023,
+    "knownFlagshipLines": [
+      "Oro de Nicaragua Toro",
+      "Oro de Nicaragua Robusto"
+    ],
+    "reputationTier": "Ultra-Premium",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Don Fausto Cigars",
+    "countryOfOrigin": "Dominican Republic",
+    "yearEstablished": 2015,
+    "knownFlagshipLines": [
+      "Don Fausto Connecticut",
+      "Don Fausto Maduro"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Casa Carrillo",
+    "countryOfOrigin": "Dominican Republic",
+    "yearEstablished": 2020,
+    "knownFlagshipLines": [
+      "Casa Carrillo Rosado",
+      "Casa Carrillo Maduro"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Adventura The Royal Return",
+    "countryOfOrigin": "Dominican Republic",
+    "yearEstablished": 2018,
+    "knownFlagshipLines": [
+      "Queen\u2019s Pearls",
+      "King\u2019s Gold"
+    ],
+    "reputationTier": "Ultra-Premium",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "K by Karen Berger",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2016,
+    "knownFlagshipLines": [
+      "K Maduro",
+      "K Habano"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "El Septimo Emperor Collection",
+    "countryOfOrigin": "Costa Rica",
+    "yearEstablished": 2021,
+    "knownFlagshipLines": [
+      "Alexander",
+      "Napoleon",
+      "Augustus"
+    ],
+    "reputationTier": "Ultra-Premium",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Sabor Cubano Cigars",
+    "countryOfOrigin": "Honduras",
+    "yearEstablished": 2012,
+    "knownFlagshipLines": [
+      "Sabor Cubano Original",
+      "Gran Reserva"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Cumpay Nicaragua",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 1999,
+    "knownFlagshipLines": [
+      "Cumpay Volcano",
+      "Cumpay Robusto"
+    ],
+    "reputationTier": "Global",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Tabacalera 1844",
+    "countryOfOrigin": "Dominican Republic",
+    "yearEstablished": 2015,
+    "knownFlagshipLines": [
+      "1844 Classic",
+      "1844 Heritage"
+    ],
+    "reputationTier": "Global",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Tres Hermanos Cigars",
+    "countryOfOrigin": "Dominican Republic",
+    "yearEstablished": 2019,
+    "knownFlagshipLines": [
+      "Hermanos Classic",
+      "Hermanos Reserva"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Casa Cubana Cigars",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2012,
+    "knownFlagshipLines": [
+      "Habano Especial",
+      "Cubana Maduro"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Davidoff Chef\u2019s Edition",
+    "countryOfOrigin": "Dominican Republic",
+    "yearEstablished": 2016,
+    "knownFlagshipLines": [
+      "2018 Edition",
+      "2021 Edition"
+    ],
+    "reputationTier": "Ultra-Premium",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "HVC 10th Anniversary",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2021,
+    "knownFlagshipLines": [
+      "10th Anniversary Toro",
+      "Selectos"
+    ],
+    "reputationTier": "Ultra-Premium",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Leaf by Esteban",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2017,
+    "knownFlagshipLines": [
+      "Esteban Maduro",
+      "Esteban Natural"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Patoro Cigars",
+    "countryOfOrigin": "Dominican Republic",
+    "yearEstablished": 2001,
+    "knownFlagshipLines": [
+      "Gran A\u00f1ejo Reserva",
+      "Brazil"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Zino Nicaragua",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2021,
+    "knownFlagshipLines": [
+      "Zino Nicaragua Toro",
+      "Robusto"
+    ],
+    "reputationTier": "Global",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Toscanello Cigars",
+    "countryOfOrigin": "Italy",
+    "yearEstablished": 1948,
+    "knownFlagshipLines": [
+      "Toscanello Rosso",
+      "Toscanello Vaniglia"
+    ],
+    "reputationTier": "Legacy",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Black Star Line Cigars",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2019,
+    "knownFlagshipLines": [
+      "War Witch",
+      "Dark War Witch"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Cabal Cigars",
+    "countryOfOrigin": "Dominican Republic",
+    "yearEstablished": 2013,
+    "knownFlagshipLines": [
+      "Cabal Original",
+      "Cabal Black"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Somm BDX Series",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2023,
+    "knownFlagshipLines": [
+      "BDX I",
+      "BDX II"
+    ],
+    "reputationTier": "Ultra-Premium",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Boneshaker Cigars",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2012,
+    "knownFlagshipLines": [
+      "Full Body Cast",
+      "Morning Star"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Chog\u00fc\u00ed Cigars",
+    "countryOfOrigin": "Dominican Republic",
+    "yearEstablished": 2014,
+    "knownFlagshipLines": [
+      "Dos77",
+      "Papa Chog\u00fc\u00ed"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "A.C.E. Prime The Sergeant",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2021,
+    "knownFlagshipLines": [
+      "The Sergeant Robusto",
+      "Box Pressed"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Maya Selva Flor de Selva 25 Aniversario",
+    "countryOfOrigin": "Honduras",
+    "yearEstablished": 2020,
+    "knownFlagshipLines": [
+      "Flor de Selva No. 20",
+      "Anniversary Robusto"
+    ],
+    "reputationTier": "Ultra-Premium",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Casa Magna Jalapa Claro",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2021,
+    "knownFlagshipLines": [
+      "Toro",
+      "Robusto"
+    ],
+    "reputationTier": "Global",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Gran Habano Blue in Green",
+    "countryOfOrigin": "Honduras",
+    "yearEstablished": 2018,
+    "knownFlagshipLines": [
+      "Gran Robusto",
+      "Churchill"
+    ],
+    "reputationTier": "Global",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "The Circus by Caldwell",
+    "countryOfOrigin": "Dominican Republic",
+    "yearEstablished": 2022,
+    "knownFlagshipLines": [
+      "The Circus Super Toro",
+      "Lonsdale"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Finca San Andres Cigars",
+    "countryOfOrigin": "Mexico",
+    "yearEstablished": 2016,
+    "knownFlagshipLines": [
+      "San Andres Maduro",
+      "Reserva Especial"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Villiger 1888 Nicaragua",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2020,
+    "knownFlagshipLines": [
+      "Robusto",
+      "Toro"
+    ],
+    "reputationTier": "Legacy",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Valentino Siesto Cigars",
+    "countryOfOrigin": "Dominican Republic",
+    "yearEstablished": 2014,
+    "knownFlagshipLines": [
+      "Reserva Especial",
+      "Limited Edition Maduro"
+    ],
+    "reputationTier": "Ultra-Premium",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Casa Turrent 1880 Series",
+    "countryOfOrigin": "Mexico",
+    "yearEstablished": 2015,
+    "knownFlagshipLines": [
+      "1880 Claro",
+      "1880 Maduro"
+    ],
+    "reputationTier": "Global",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Alfonso by Selected Tobacco",
+    "countryOfOrigin": "Costa Rica",
+    "yearEstablished": 2022,
+    "knownFlagshipLines": [
+      "Alfonso Extra A\u00f1ejo",
+      "Gran Selecci\u00f3n"
+    ],
+    "reputationTier": "Ultra-Premium",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Ramon Bueso Cigars",
+    "countryOfOrigin": "Honduras",
+    "yearEstablished": 2012,
+    "knownFlagshipLines": [
+      "Genesis The Project",
+      "Olancho"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "La Palina Goldie Series",
+    "countryOfOrigin": "USA",
+    "yearEstablished": 2012,
+    "knownFlagshipLines": [
+      "Laguito No. 2",
+      "Prominente"
+    ],
+    "reputationTier": "Ultra-Premium",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Emperor's Collection by Emperors Cut",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2023,
+    "knownFlagshipLines": [
+      "The Emperors Gold",
+      "Midnight Blaq"
+    ],
+    "reputationTier": "Ultra-Premium",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Kafie 1901 Cigars",
+    "countryOfOrigin": "Honduras",
+    "yearEstablished": 2013,
+    "knownFlagshipLines": [
+      "San Andres Maduro",
+      "Sumatra"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Freud Cigar Co.",
+    "countryOfOrigin": "Dominican Republic",
+    "yearEstablished": 2022,
+    "knownFlagshipLines": [
+      "SuperEgo",
+      "Agape"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "El Septimo Sacred Arts Collection",
+    "countryOfOrigin": "Costa Rica",
+    "yearEstablished": 2020,
+    "knownFlagshipLines": [
+      "Da Vinci",
+      "Michelangelo"
+    ],
+    "reputationTier": "Ultra-Premium",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Chateau Diadem Cigars",
+    "countryOfOrigin": "Dominican Republic",
+    "yearEstablished": 2021,
+    "knownFlagshipLines": [
+      "Imperiale",
+      "Royal Return"
+    ],
+    "reputationTier": "Ultra-Premium",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Principle Cigars Aviator Series",
+    "countryOfOrigin": "Dominican Republic",
+    "yearEstablished": 2013,
+    "knownFlagshipLines": [
+      "Viento",
+      "Martinique"
+    ],
+    "reputationTier": "Ultra-Premium",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "ATL Cigar Co.",
+    "countryOfOrigin": "Dominican Republic",
+    "yearEstablished": 2020,
+    "knownFlagshipLines": [
+      "Good Trouble",
+      "ATL Black"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Powstanie Cigars",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2015,
+    "knownFlagshipLines": [
+      "Habano",
+      "Broadleaf"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Don Doroteo Cigars",
+    "countryOfOrigin": "Dominican Republic",
+    "yearEstablished": 2022,
+    "knownFlagshipLines": [
+      "El Legado",
+      "Salt of the Earth"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Don Kiki Cigars",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 1990,
+    "knownFlagshipLines": [
+      "Red Label",
+      "Brown Label"
+    ],
+    "reputationTier": "Legacy",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Lure Cigars",
+    "countryOfOrigin": "Dominican Republic",
+    "yearEstablished": 2021,
+    "knownFlagshipLines": [
+      "Lure Maduro",
+      "Lure Habano"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Tatuaje Cabaiguan",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2006,
+    "knownFlagshipLines": [
+      "Cabaiguan Imperiales",
+      "Guapo"
+    ],
+    "reputationTier": "Global",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "El Artista Cigars",
+    "countryOfOrigin": "Dominican Republic",
+    "yearEstablished": 1956,
+    "knownFlagshipLines": [
+      "Buffalo TEN",
+      "Big Papi"
+    ],
+    "reputationTier": "Global",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "J London Cigars",
+    "countryOfOrigin": "Dominican Republic",
+    "yearEstablished": 2019,
+    "knownFlagshipLines": [
+      "Gold Series",
+      "J London Original"
+    ],
+    "reputationTier": "Ultra-Premium",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Maya Selva Villa Zamorano Reserva",
+    "countryOfOrigin": "Honduras",
+    "yearEstablished": 2020,
+    "knownFlagshipLines": [
+      "Reserva Robusto",
+      "Reserva Soberano"
+    ],
+    "reputationTier": "Global",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Room101 13th Anniversary",
+    "countryOfOrigin": "Honduras",
+    "yearEstablished": 2022,
+    "knownFlagshipLines": [
+      "13th Anniversary Toro",
+      "Anniversary Robusto"
+    ],
+    "reputationTier": "Ultra-Premium",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "La Barba Cigars",
+    "countryOfOrigin": "Dominican Republic",
+    "yearEstablished": 2013,
+    "knownFlagshipLines": [
+      "Purple",
+      "Ricochet"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Casa 1910 Cuchillo Parado",
+    "countryOfOrigin": "Mexico",
+    "yearEstablished": 2021,
+    "knownFlagshipLines": [
+      "Cuchillo Parado",
+      "Revolution"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Casa Caraballo Cigars",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2016,
+    "knownFlagshipLines": [
+      "Don Nelo Series",
+      "Caraballo 828"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Big Sky Cigars",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2019,
+    "knownFlagshipLines": [
+      "Mad Minnow",
+      "Rivers Series"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Don Pepin Garcia Original",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2003,
+    "knownFlagshipLines": [
+      "Blue Label",
+      "JJ Maduro"
+    ],
+    "reputationTier": "Legacy",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Artesano Del Tobacco El Pulpo",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2023,
+    "knownFlagshipLines": [
+      "El Pulpo Robusto",
+      "El Pulpo Toro"
+    ],
+    "reputationTier": "Ultra-Premium",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Aganorsa Leaf Aniversario",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2013,
+    "knownFlagshipLines": [
+      "Aniversario Maduro",
+      "Connecticut"
+    ],
+    "reputationTier": "Global",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Falto Cigars",
+    "countryOfOrigin": "Dominican Republic",
+    "yearEstablished": 1995,
+    "knownFlagshipLines": [
+      "La Pureza",
+      "Prominente"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Luxury Cigar Club Privada",
+    "countryOfOrigin": "Various",
+    "yearEstablished": 2018,
+    "knownFlagshipLines": [
+      "Choshi",
+      "Vulcan"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Pichardo Reserva Familiar",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2019,
+    "knownFlagshipLines": [
+      "Habano",
+      "San Andr\u00e9s"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Serino Cigar Co.",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2016,
+    "knownFlagshipLines": [
+      "Serino Royale",
+      "Taino Heritage"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Gran Habano Persian King",
+    "countryOfOrigin": "Honduras",
+    "yearEstablished": 2010,
+    "knownFlagshipLines": [
+      "Maduro",
+      "Natural"
+    ],
+    "reputationTier": "Global",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Jake Wyatt Cigar Co.",
+    "countryOfOrigin": "Dominican Republic",
+    "yearEstablished": 2020,
+    "knownFlagshipLines": [
+      "Herbert Spencer",
+      "Gourmet Collection"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "The American by J.C. Newman",
+    "countryOfOrigin": "USA",
+    "yearEstablished": 2019,
+    "knownFlagshipLines": [
+      "The American Toro",
+      "Double Robusto"
+    ],
+    "reputationTier": "Ultra-Premium",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Muestra de Saka",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2017,
+    "knownFlagshipLines": [
+      "Unstolen Valor",
+      "The Bewitched"
+    ],
+    "reputationTier": "Ultra-Premium",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Alec Bradley Fine & Rare",
+    "countryOfOrigin": "Honduras",
+    "yearEstablished": 2011,
+    "knownFlagshipLines": [
+      "Fine & Rare HOF/506",
+      "Fine & Rare BC-(13)4EV"
+    ],
+    "reputationTier": "Ultra-Premium",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Ohana Nui Cigars",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2016,
+    "knownFlagshipLines": [
+      "Friends and Family",
+      "The Pulse"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Patina Cigars",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2017,
+    "knownFlagshipLines": [
+      "Habano",
+      "Maduro"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "E.P. Carrillo Pledge",
+    "countryOfOrigin": "Dominican Republic",
+    "yearEstablished": 2020,
+    "knownFlagshipLines": [
+      "Prequel",
+      "Sojourn"
+    ],
+    "reputationTier": "Ultra-Premium",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "La Aurora Hors d\u2019Age",
+    "countryOfOrigin": "Dominican Republic",
+    "yearEstablished": 2018,
+    "knownFlagshipLines": [
+      "Hors d\u2019Age 2017",
+      "Hors d\u2019Age 2020"
+    ],
+    "reputationTier": "Ultra-Premium",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Diesel Whiskey Row",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2018,
+    "knownFlagshipLines": [
+      "Sherry Cask",
+      "PX Sherry Cask"
+    ],
+    "reputationTier": "Global",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Black Works Studio",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2015,
+    "knownFlagshipLines": [
+      "NBK",
+      "Killer Bee"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Jas Sum Kral Nuggs",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2019,
+    "knownFlagshipLines": [
+      "Nuggs Maduro",
+      "Nuggs Habano"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Don Lucas Cigars",
+    "countryOfOrigin": "Dominican Republic",
+    "yearEstablished": 1992,
+    "knownFlagshipLines": [
+      "Classic",
+      "Serie 5"
+    ],
+    "reputationTier": "Legacy",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Room101 Farce Series",
+    "countryOfOrigin": "Dominican Republic",
+    "yearEstablished": 2018,
+    "knownFlagshipLines": [
+      "Farce Maduro",
+      "Farce Connecticut"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Drew Estate Nica Rustica",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2013,
+    "knownFlagshipLines": [
+      "Broadleaf",
+      "Adobe"
+    ],
+    "reputationTier": "Global",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Zaya y Paola Cigars",
+    "countryOfOrigin": "Honduras",
+    "yearEstablished": 2022,
+    "knownFlagshipLines": [
+      "Maduro",
+      "Habano"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Stolen Throne Cigars",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2019,
+    "knownFlagshipLines": [
+      "Crook of the Crown",
+      "Call to Arms"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Sencillo Black by God of Fire",
+    "countryOfOrigin": "Honduras",
+    "yearEstablished": 2010,
+    "knownFlagshipLines": [
+      "Sencillo Black Robusto",
+      "Double Robusto"
+    ],
+    "reputationTier": "Ultra-Premium",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Don Reynaldo by Warped",
+    "countryOfOrigin": "Dominican Republic",
+    "yearEstablished": 2014,
+    "knownFlagshipLines": [
+      "Don Reynaldo Regalos",
+      "Coronas de Luxe"
+    ],
+    "reputationTier": "Ultra-Premium",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Cavalier Gen\u00e8ve White Series",
+    "countryOfOrigin": "Honduras",
+    "yearEstablished": 2016,
+    "knownFlagshipLines": [
+      "White Series Toro",
+      "Diplomate"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Illusione OneOff",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2018,
+    "knownFlagshipLines": [
+      "OneOff Corona",
+      "OneOff Robusto"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Ferio Tego Timeless",
+    "countryOfOrigin": "Dominican Republic",
+    "yearEstablished": 2021,
+    "knownFlagshipLines": [
+      "Timeless Prestige",
+      "Timeless Supreme"
+    ],
+    "reputationTier": "Global",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "La Flor Dominicana Andalusian Bull",
+    "countryOfOrigin": "Dominican Republic",
+    "yearEstablished": 2016,
+    "knownFlagshipLines": [
+      "Andalusian Bull"
+    ],
+    "reputationTier": "Ultra-Premium",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Gran Habano Corojo #5",
+    "countryOfOrigin": "Honduras",
+    "yearEstablished": 2003,
+    "knownFlagshipLines": [
+      "Corojo #5 Gran Robusto",
+      "Imperiales"
+    ],
+    "reputationTier": "Global",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Sinistro Mr. Red",
+    "countryOfOrigin": "Dominican Republic",
+    "yearEstablished": 2017,
+    "knownFlagshipLines": [
+      "Mr. Red Robusto",
+      "Mr. Red Maduro"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Chinchalle Cigars",
+    "countryOfOrigin": "Dominican Republic",
+    "yearEstablished": 2021,
+    "knownFlagshipLines": [
+      "Chinchalle Habano",
+      "Chinchalle Maduro"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Montosa Cigars",
+    "countryOfOrigin": "Dominican Republic",
+    "yearEstablished": 2020,
+    "knownFlagshipLines": [
+      "Montosa Maduro",
+      "Montosa Natural"
+    ],
+    "reputationTier": "Global",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "El Galan Cigars",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2012,
+    "knownFlagshipLines": [
+      "Reserva Especial",
+      "Do\u00f1a Nieves Sentimiento"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "La Sirena Original Series",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2009,
+    "knownFlagshipLines": [
+      "La Sirena Original",
+      "LTZ"
+    ],
+    "reputationTier": "Global",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Hiram & Solomon Cigars",
+    "countryOfOrigin": "Dominican Republic",
+    "yearEstablished": 2015,
+    "knownFlagshipLines": [
+      "Master Mason",
+      "Veiled Prophet"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Arandoza Cigars",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2011,
+    "knownFlagshipLines": [
+      "Defcon",
+      "White Label"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "La Estrella Cubana",
+    "countryOfOrigin": "Honduras",
+    "yearEstablished": 2010,
+    "knownFlagshipLines": [
+      "Habano",
+      "Connecticut"
+    ],
+    "reputationTier": "Global",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "PDR Cigars",
+    "countryOfOrigin": "Dominican Republic",
+    "yearEstablished": 2004,
+    "knownFlagshipLines": [
+      "A. Flores Serie Privada",
+      "PDR 1878"
+    ],
+    "reputationTier": "Global",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Cabinet Selection by Casdagli",
+    "countryOfOrigin": "Dominican Republic",
+    "yearEstablished": 2021,
+    "knownFlagshipLines": [
+      "Cabinet Selection No. 1",
+      "No. 4"
+    ],
+    "reputationTier": "Ultra-Premium",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "La Instructora Cigars",
+    "countryOfOrigin": "Dominican Republic",
+    "yearEstablished": 2016,
+    "knownFlagshipLines": [
+      "Perfection Line",
+      "Box Pressed Toro"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "M Bombay Tobak",
+    "countryOfOrigin": "Costa Rica",
+    "yearEstablished": 2014,
+    "knownFlagshipLines": [
+      "MBombay Classic",
+      "Gaaja"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "Gurkha Ghost Gold",
+    "countryOfOrigin": "Dominican Republic",
+    "yearEstablished": 2018,
+    "knownFlagshipLines": [
+      "Gold Shadow",
+      "Gold Exorcist"
+    ],
+    "reputationTier": "Global",
+    "trustStatus": "Verified"
+  },
+  {
+    "name": "The American Caribbean Cigars",
+    "countryOfOrigin": "Nicaragua",
+    "yearEstablished": 2011,
+    "knownFlagshipLines": [
+      "AC Cigar Co.",
+      "Original Blend"
+    ],
+    "reputationTier": "Boutique",
+    "trustStatus": "Verified"
+  }
+]

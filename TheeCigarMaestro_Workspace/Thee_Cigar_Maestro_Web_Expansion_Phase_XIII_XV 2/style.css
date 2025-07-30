@@ -1,0 +1,47 @@
+
+body {
+  font-family: 'Georgia', serif;
+  background-color: #121212;
+  color: #f0e6d2;
+  margin: 0;
+  padding: 2rem;
+}
+header, footer {
+  background: #1c1c1c;
+  padding: 1rem 2rem;
+}
+h1 {
+  color: #c69c6d;
+  margin: 0;
+}
+h2 {
+  color: #a67856;
+}
+nav a {
+  color: #dab785;
+  margin-right: 15px;
+  text-decoration: none;
+}
+nav a:hover {
+  text-decoration: underline;
+}
+section {
+  margin-top: 2rem;
+}
+
+body {
+  background-image: url('https://www.transparenttextures.com/patterns/dark-leather.png');
+  background-repeat: repeat;
+}
+footer {
+  text-align: center;
+  padding: 1rem;
+  font-size: 0.9rem;
+  color: #aaa;
+  margin-top: 3rem;
+  border-top: 1px solid #444;
+}
+.smoke-footer {
+  background: url('https://svgshare.com/i/uEY.svg') no-repeat center bottom;
+  height: 80px;
+}

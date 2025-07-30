@@ -1,0 +1,10 @@
+{
+  "compareFlavor": {
+    "intent": "flavor_comparison",
+    "prompt": "Compare the flavor notes of {cigarA} and {cigarB}."
+  },
+  "specRequest": {
+    "intent": "spec_lookup",
+    "prompt": "Provide the full specification for {cigarName}."
+  }
+}

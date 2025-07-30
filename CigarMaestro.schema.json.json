@@ -1,0 +1,1128 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Cigar Maestro JSON Schema",
+  "type": "object",
+  "properties": {
+    "projectName": {
+      "type": "string"
+    },
+    "version": {
+      "type": "string"
+    },
+    "metadata": {
+      "type": "object",
+      "properties": {
+        "lastUpdated": {
+          "type": "string"
+        },
+        "author": {
+          "type": "string"
+        },
+        "schemaVersion": {
+          "type": "string"
+        },
+        "hashType": {
+          "type": "string"
+        },
+        "upgradeReviewedOn": {
+          "type": "string"
+        },
+        "upgradeVersion": {
+          "type": "string"
+        },
+        "upgradedBy": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        },
+        "embeddedSchema": {
+          "type": "object"
+        }
+      },
+      "additionalProperties": true
+    },
+    "integrityToken": {
+      "type": "string"
+    },
+    "changelog": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "version": {
+            "type": "string"
+          },
+          "summary": {
+            "type": "string"
+          },
+          "date": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "modules": {
+      "type": "object",
+      "properties": {
+        "uiUx": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "string"
+            },
+            "features": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "additionalProperties": false
+        },
+        "history": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "string"
+            },
+            "includes": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "features": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "additionalProperties": false
+        },
+        "education": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "string"
+            },
+            "features": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "metadata": {
+              "type": "object",
+              "properties": {
+                "note": {
+                  "type": "string"
+                },
+                "tieredStructure": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "tier": {
+                        "type": "string"
+                      },
+                      "description": {
+                        "type": "string"
+                      }
+                    },
+                    "additionalProperties": false
+                  }
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          "additionalProperties": false
+        },
+        "accreditation": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "string"
+            },
+            "integrations": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "features": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "metadata": {
+              "type": "object",
+              "properties": {
+                "tiers": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "lessonFlags": {
+                  "type": "object",
+                  "properties": {
+                    "modules": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string"
+                          },
+                          "tier": {
+                            "type": "string"
+                          }
+                        },
+                        "additionalProperties": false
+                      }
+                    },
+                    "notes": {
+                      "type": "string"
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          "additionalProperties": false
+        },
+        "systemIntegrity": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "string"
+            },
+            "fallbacks": {
+              "type": "boolean"
+            },
+            "versionControl": {
+              "type": "boolean"
+            },
+            "schemaCheck": {
+              "type": "boolean"
+            },
+            "promptValidation": {
+              "type": "boolean"
+            }
+          },
+          "additionalProperties": false
+        },
+        "socialCommunity": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "string"
+            },
+            "features": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "additionalProperties": false
+        },
+        "humidorManagement": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "string"
+            },
+            "features": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "additionalProperties": false
+        },
+        "retailUtility": {
+          "type": "object",
+          "properties": {
+            "status": {
+              "type": "string"
+            },
+            "features": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "scorecard": {
+      "type": "object",
+      "properties": {
+        "metadata": {
+          "type": "object",
+          "properties": {
+            "scale": {
+              "type": "string"
+            },
+            "source": {
+              "type": "string"
+            },
+            "readinessExplanation": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        },
+        "scores": {
+          "type": "object",
+          "properties": {
+            "accreditation": {
+              "type": "integer"
+            },
+            "educationDepth": {
+              "type": "integer"
+            },
+            "historyIntegration": {
+              "type": "integer"
+            },
+            "humidorManagement": {
+              "type": "integer"
+            },
+            "readinessScore": {
+              "type": "integer"
+            },
+            "retailUtility": {
+              "type": "integer"
+            },
+            "socialCommunity": {
+              "type": "integer"
+            },
+            "systemStability": {
+              "type": "integer"
+            },
+            "uiUx": {
+              "type": "integer"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "featureFlags": {
+      "type": "object",
+      "properties": {
+        "interactiveDistillerySuggestions": {
+          "type": "boolean"
+        },
+        "barcodeScanning": {
+          "type": "boolean"
+        },
+        "offlineMode": {
+          "type": "boolean"
+        },
+        "cigarAuthentication": {
+          "type": "boolean"
+        },
+        "userSpiritInventory": {
+          "type": "boolean"
+        },
+        "biometricVoiceLogging": {
+          "type": "boolean"
+        },
+        "voiceOnboarding": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    },
+    "cuttingEdgeFeatures": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "userRolesAndViews": {
+      "type": "object",
+      "properties": {
+        "availableRoles": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "availableThemes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "defaultViewTheme": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "externalIntegrations": {
+      "type": "object",
+      "properties": {
+        "POS": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "LMS": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "distilleryPairings": {
+      "type": "object",
+      "properties": {
+        "normalizedDistilleries": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "country": {
+                "type": "string"
+              },
+              "type": {
+                "type": "string"
+              },
+              "pairingNotes": {
+                "type": "string"
+              },
+              "wrapperCompatibility": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "byBody": {
+          "type": "object",
+          "properties": {
+            "metadata": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string"
+                },
+                "note": {
+                  "type": "string"
+                },
+                "isPopulated": {
+                  "type": "boolean"
+                },
+                "plannedForVersion": {
+                  "type": "string"
+                },
+                "isPlaceholder": {
+                  "type": "boolean"
+                },
+                "reviewed": {
+                  "type": "boolean"
+                }
+              },
+              "additionalProperties": false
+            },
+            "entries": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "body": {
+                    "type": "string"
+                  },
+                  "wrappers": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "recommendations": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          },
+          "additionalProperties": false
+        },
+        "byFlavorNote": {
+          "type": "object",
+          "properties": {
+            "metadata": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string"
+                },
+                "note": {
+                  "type": "string"
+                },
+                "isPopulated": {
+                  "type": "boolean"
+                },
+                "plannedForVersion": {
+                  "type": "string"
+                },
+                "isPlaceholder": {
+                  "type": "boolean"
+                },
+                "reviewed": {
+                  "type": "boolean"
+                }
+              },
+              "additionalProperties": false
+            },
+            "entries": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "note": {
+                    "type": "string"
+                  },
+                  "distilleries": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          },
+          "additionalProperties": false
+        },
+        "topPairings": {
+          "type": "object",
+          "properties": {
+            "metadata": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string"
+                },
+                "note": {
+                  "type": "string"
+                },
+                "isPopulated": {
+                  "type": "boolean"
+                },
+                "plannedForVersion": {
+                  "type": "string"
+                },
+                "isPlaceholder": {
+                  "type": "boolean"
+                },
+                "reviewed": {
+                  "type": "boolean"
+                }
+              },
+              "additionalProperties": false
+            },
+            "entries": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "cigarWrapper": {
+                    "type": "string"
+                  },
+                  "topMatches": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "pairingExportOptions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "systemCapabilities": {
+      "type": "object",
+      "properties": {
+        "scanToPair": {
+          "type": "boolean"
+        },
+        "spiritInventoryTracking": {
+          "type": "boolean"
+        },
+        "arOverlayCapable": {
+          "type": "boolean"
+        },
+        "ugcPairingLogs": {
+          "type": "boolean"
+        },
+        "multiLanguageSupport": {
+          "type": "boolean"
+        },
+        "pairingSharingEnabled": {
+          "type": "boolean"
+        },
+        "qrPairingExport": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    },
+    "authenticationModule": {
+      "type": "object",
+      "properties": {
+        "methodsSupported": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "status": {
+          "type": "string"
+        },
+        "visualAiTrainedBrands": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "externalSources": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "brand": {
+                "type": "string"
+              },
+              "url": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "userEntryModes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "trustFeedback": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "supportingUi": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "component": {
+                "type": "string"
+              },
+              "type": {
+                "type": "string"
+              },
+              "status": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "apiConfig": {
+      "type": "object",
+      "properties": {
+        "baseURL": {
+          "type": "string"
+        },
+        "endpoints": {
+          "type": "object",
+          "properties": {
+            "authenticationResult": {
+              "type": "object",
+              "properties": {
+                "url": {
+                  "type": "string"
+                },
+                "version": {
+                  "type": "string"
+                }
+              },
+              "additionalProperties": false
+            },
+            "ceuTracking": {
+              "type": "object",
+              "properties": {
+                "url": {
+                  "type": "string"
+                },
+                "version": {
+                  "type": "string"
+                }
+              },
+              "additionalProperties": false
+            },
+            "humidorSync": {
+              "type": "object",
+              "properties": {
+                "url": {
+                  "type": "string"
+                },
+                "version": {
+                  "type": "string"
+                }
+              },
+              "additionalProperties": false
+            },
+            "pairingSuggestions": {
+              "type": "object",
+              "properties": {
+                "url": {
+                  "type": "string"
+                },
+                "version": {
+                  "type": "string"
+                }
+              },
+              "additionalProperties": false
+            },
+            "ceuExport": {
+              "type": "object",
+              "properties": {
+                "url": {
+                  "type": "string"
+                },
+                "version": {
+                  "type": "string"
+                }
+              },
+              "additionalProperties": false
+            },
+            "flavorTraining": {
+              "type": "object",
+              "properties": {
+                "url": {
+                  "type": "string"
+                },
+                "version": {
+                  "type": "string"
+                }
+              },
+              "additionalProperties": false
+            },
+            "storyVisual": {
+              "type": "object",
+              "properties": {
+                "url": {
+                  "type": "string"
+                },
+                "version": {
+                  "type": "string"
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "userOnboardingFlow": {
+      "type": "object",
+      "properties": {
+        "firstSmokeJourney": {
+          "type": "boolean"
+        },
+        "steps": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "flavorJourneyTracker": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "milestones": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "trackableMetrics": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "membershipSystem": {
+      "type": "object",
+      "properties": {
+        "membershipTiers": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "tierName": {
+                "type": "string"
+              },
+              "priceMonthly": {
+                "type": "number"
+              },
+              "targetAudience": {
+                "type": "string"
+              },
+              "features": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "restrictions": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "additionalProperties": false
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "administrativeAccess": {
+      "type": "object",
+      "properties": {
+        "admins": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "projectDirective": {
+      "type": "object",
+      "properties": {
+        "purpose": {
+          "type": "string"
+        },
+        "stakeholders": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "evaluationPillars": {
+          "type": "object",
+          "properties": {
+            "UI/UX": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "Cigar History Integration": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "Cigar Knowledge & Educational Depth": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "Academic & Accreditation Readiness": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "System Weaknesses & Fixes": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "additionalProperties": false
+        },
+        "finalDeliverables": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "preserveWithoutCompromise": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "goal": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "recommendedActionPlan": {
+      "type": "object",
+      "properties": {
+        "development": {
+          "type": "object",
+          "properties": {
+            "highPriority": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "mediumPriority": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "additionalProperties": false
+        },
+        "design": {
+          "type": "object",
+          "properties": {
+            "highPriority": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "mediumPriority": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "additionalProperties": false
+        },
+        "content": {
+          "type": "object",
+          "properties": {
+            "highPriority": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "mediumPriority": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "additionalProperties": false
+        },
+        "ux": {
+          "type": "object",
+          "properties": {
+            "highPriority": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "mediumPriority": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "historyUpgrades": {
+      "type": "object",
+      "properties": {
+        "multimediaIntegration": {
+          "type": "object",
+          "properties": {
+            "features": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "notes": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        },
+        "storyModeNavigation": {
+          "type": "object",
+          "properties": {
+            "features": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "notes": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        },
+        "regionalLegacyMapExpansion": {
+          "type": "object",
+          "properties": {
+            "features": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "notes": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        },
+        "anniversaryTriggers": {
+          "type": "object",
+          "properties": {
+            "features": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "notes": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        },
+        "crossLinkedEducation": {
+          "type": "object",
+          "properties": {
+            "features": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "notes": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "_copyright": {
+      "type": "string"
+    },
+    "_license": {
+      "type": "string"
+    },
+    "_licenseAgreement": {
+      "type": "object"
+    }
+  },
+  "required": [
+    "projectName",
+    "version",
+    "metadata",
+    "integrityToken",
+    "changelog",
+    "modules",
+    "scorecard",
+    "featureFlags",
+    "cuttingEdgeFeatures",
+    "userRolesAndViews",
+    "externalIntegrations",
+    "distilleryPairings",
+    "pairingExportOptions",
+    "systemCapabilities",
+    "authenticationModule",
+    "apiConfig",
+    "userOnboardingFlow",
+    "flavorJourneyTracker",
+    "membershipSystem",
+    "administrativeAccess",
+    "projectDirective",
+    "recommendedActionPlan",
+    "historyUpgrades",
+    "_copyright",
+    "_license",
+    "_licenseAgreement"
+  ],
+  "additionalProperties": false
+}

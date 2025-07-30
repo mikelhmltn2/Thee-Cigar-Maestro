@@ -1,0 +1,8 @@
+[
+    {
+        "error_code": "UNSUPPORTED_DOMAIN",
+        "message": "This request is outside the supported cigar domain.",
+        "action_suggestion": "Please ask about a specific cigar or pairing.",
+        "gpt_response": "I'm here to help with cigar-related questions only."
+    }
+]

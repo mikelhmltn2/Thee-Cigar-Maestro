@@ -1,0 +1,9 @@
+[
+  {
+    "timestamp": "2025-06-13T10:00:00Z",
+    "action": "fallbackTriggered",
+    "module": "gptAssist",
+    "input": "Compare Padron and Oliva",
+    "responseHandledBy": "fallback.showWrapperInfo"
+  }
+]

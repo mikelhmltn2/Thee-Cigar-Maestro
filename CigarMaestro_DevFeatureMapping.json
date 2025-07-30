@@ -1,0 +1,242 @@
+[
+  {
+    "category": "Education",
+    "feature": "Adaptive learning engine with difficulty scaling quizzes",
+    "suggestedUiComponent": "EducationView or Modal",
+    "activationMethod": "UI / Voice"
+  },
+  {
+    "category": "Education",
+    "feature": "Voice-activated lesson initiation",
+    "suggestedUiComponent": "EducationView or Modal",
+    "activationMethod": "UI / Voice"
+  },
+  {
+    "category": "Education",
+    "feature": "Scenario-based tasting decision trees",
+    "suggestedUiComponent": "EducationView or Modal",
+    "activationMethod": "UI / Voice"
+  },
+  {
+    "category": "Education",
+    "feature": "Gamified CEU system with unlockable content",
+    "suggestedUiComponent": "EducationView or Modal",
+    "activationMethod": "UI / Voice"
+  },
+  {
+    "category": "Pairing Engine",
+    "feature": "Terroir-based pairing logic",
+    "suggestedUiComponent": "Pairing EngineView or Modal",
+    "activationMethod": "UI / Voice"
+  },
+  {
+    "category": "Pairing Engine",
+    "feature": "Precision flavor filters with multilayer logic",
+    "suggestedUiComponent": "Pairing EngineView or Modal",
+    "activationMethod": "UI / Voice"
+  },
+  {
+    "category": "Pairing Engine",
+    "feature": "Visual flavor heatmaps and pairing taste wheels",
+    "suggestedUiComponent": "Pairing EngineView or Modal",
+    "activationMethod": "UI / Voice"
+  },
+  {
+    "category": "Pairing Engine",
+    "feature": "Live inventory-based real-time pairing suggestions",
+    "suggestedUiComponent": "Pairing EngineView or Modal",
+    "activationMethod": "UI / Voice"
+  },
+  {
+    "category": "Lounge Tools",
+    "feature": "AI-powered dashboard with real-time insights",
+    "suggestedUiComponent": "Lounge ToolsView or Modal",
+    "activationMethod": "UI / Voice"
+  },
+  {
+    "category": "Lounge Tools",
+    "feature": "Autopilot event mode using available inventory",
+    "suggestedUiComponent": "Lounge ToolsView or Modal",
+    "activationMethod": "UI / Voice"
+  },
+  {
+    "category": "Lounge Tools",
+    "feature": "Dynamic QR table menus with personalized flavor logic",
+    "suggestedUiComponent": "Lounge ToolsView or Modal",
+    "activationMethod": "UI / Voice"
+  },
+  {
+    "category": "Lounge Tools",
+    "feature": "POS-linked loyalty logs and pairing receipts",
+    "suggestedUiComponent": "Lounge ToolsView or Modal",
+    "activationMethod": "UI / Voice"
+  },
+  {
+    "category": "AI Assistant",
+    "feature": "Flavor memory storytelling and emotional summaries",
+    "suggestedUiComponent": "AI AssistantView or Modal",
+    "activationMethod": "UI / Voice"
+  },
+  {
+    "category": "AI Assistant",
+    "feature": "GPT persona layer (blender, host, professor)",
+    "suggestedUiComponent": "AI AssistantView or Modal",
+    "activationMethod": "UI / Voice"
+  },
+  {
+    "category": "AI Assistant",
+    "feature": "Auto-context pairing based on latest scan",
+    "suggestedUiComponent": "AI AssistantView or Modal",
+    "activationMethod": "UI / Voice"
+  },
+  {
+    "category": "AI Assistant",
+    "feature": "Voice-layered multi-action prompts",
+    "suggestedUiComponent": "AI AssistantView or Modal",
+    "activationMethod": "UI / Voice"
+  },
+  {
+    "category": "Smart Humidor & Inventory",
+    "feature": "AI-based cigar aging insights",
+    "suggestedUiComponent": "Smart Humidor and InventoryView or Modal",
+    "activationMethod": "UI / Voice"
+  },
+  {
+    "category": "Smart Humidor & Inventory",
+    "feature": "Rotation alerting based on neglect or readiness",
+    "suggestedUiComponent": "Smart Humidor and InventoryView or Modal",
+    "activationMethod": "UI / Voice"
+  },
+  {
+    "category": "Smart Humidor & Inventory",
+    "feature": "Box cloning for mass logging",
+    "suggestedUiComponent": "Smart Humidor and InventoryView or Modal",
+    "activationMethod": "UI / Voice"
+  },
+  {
+    "category": "Smart Humidor & Inventory",
+    "feature": "Bluetooth humidor integration",
+    "suggestedUiComponent": "Smart Humidor and InventoryView or Modal",
+    "activationMethod": "UI / Voice"
+  },
+  {
+    "category": "Membership & Personalization",
+    "feature": "Flavor DNA graphing engine",
+    "suggestedUiComponent": "Membership and PersonalizationView or Modal",
+    "activationMethod": "UI / Voice"
+  },
+  {
+    "category": "Membership & Personalization",
+    "feature": "Gamified tasting titles and journey labels",
+    "suggestedUiComponent": "Membership and PersonalizationView or Modal",
+    "activationMethod": "UI / Voice"
+  },
+  {
+    "category": "Membership & Personalization",
+    "feature": "Emotional pairing feedback loop",
+    "suggestedUiComponent": "Membership and PersonalizationView or Modal",
+    "activationMethod": "UI / Voice"
+  },
+  {
+    "category": "Membership & Personalization",
+    "feature": "Environment-aware sensory matches (music, lighting)",
+    "suggestedUiComponent": "Membership and PersonalizationView or Modal",
+    "activationMethod": "UI / Voice"
+  },
+  {
+    "category": "Scan & Identification",
+    "feature": "Visual AI label recognition",
+    "suggestedUiComponent": "Scan and IdentificationView or Modal",
+    "activationMethod": "UI / Voice"
+  },
+  {
+    "category": "Scan & Identification",
+    "feature": "Instant overlay of regional/wrapper/spec",
+    "suggestedUiComponent": "Scan and IdentificationView or Modal",
+    "activationMethod": "UI / Voice"
+  },
+  {
+    "category": "Scan & Identification",
+    "feature": "Batch scan mode",
+    "suggestedUiComponent": "Scan and IdentificationView or Modal",
+    "activationMethod": "UI / Voice"
+  },
+  {
+    "category": "Scan & Identification",
+    "feature": "Post-scan automatic pairing suggestions",
+    "suggestedUiComponent": "Scan and IdentificationView or Modal",
+    "activationMethod": "UI / Voice"
+  },
+  {
+    "category": "Gamification & Progress",
+    "feature": "Flavor questlines with time-based challenges",
+    "suggestedUiComponent": "Gamification and ProgressView or Modal",
+    "activationMethod": "UI / Voice"
+  },
+  {
+    "category": "Gamification & Progress",
+    "feature": "Geographic unlock maps for exploration",
+    "suggestedUiComponent": "Gamification and ProgressView or Modal",
+    "activationMethod": "UI / Voice"
+  },
+  {
+    "category": "Gamification & Progress",
+    "feature": "Lounge leaderboard with rewards",
+    "suggestedUiComponent": "Gamification and ProgressView or Modal",
+    "activationMethod": "UI / Voice"
+  },
+  {
+    "category": "Gamification & Progress",
+    "feature": "Badge creation toolkit for lounges and hosts",
+    "suggestedUiComponent": "Gamification and ProgressView or Modal",
+    "activationMethod": "UI / Voice"
+  },
+  {
+    "category": "NFT & Blockchain",
+    "feature": "Tradeable proof-of-palate logs",
+    "suggestedUiComponent": "NFT and BlockchainView or Modal",
+    "activationMethod": "UI / Voice"
+  },
+  {
+    "category": "NFT & Blockchain",
+    "feature": "Collectible flavor badge series",
+    "suggestedUiComponent": "NFT and BlockchainView or Modal",
+    "activationMethod": "UI / Voice"
+  },
+  {
+    "category": "NFT & Blockchain",
+    "feature": "Web3-access-only lounges",
+    "suggestedUiComponent": "NFT and BlockchainView or Modal",
+    "activationMethod": "UI / Voice"
+  },
+  {
+    "category": "NFT & Blockchain",
+    "feature": "Blockchain-authenticated flavor journals",
+    "suggestedUiComponent": "NFT and BlockchainView or Modal",
+    "activationMethod": "UI / Voice"
+  },
+  {
+    "category": "Accessibility & Compliance",
+    "feature": "Screenreader-friendly UI with narration toggles",
+    "suggestedUiComponent": "Accessibility and ComplianceView or Modal",
+    "activationMethod": "UI / Voice"
+  },
+  {
+    "category": "Accessibility & Compliance",
+    "feature": "Tap-to-hear interface",
+    "suggestedUiComponent": "Accessibility and ComplianceView or Modal",
+    "activationMethod": "UI / Voice"
+  },
+  {
+    "category": "Accessibility & Compliance",
+    "feature": "Multilingual onboarding by region detection",
+    "suggestedUiComponent": "Accessibility and ComplianceView or Modal",
+    "activationMethod": "UI / Voice"
+  },
+  {
+    "category": "Accessibility & Compliance",
+    "feature": "Automated compliance tagging by country/state",
+    "suggestedUiComponent": "Accessibility and ComplianceView or Modal",
+    "activationMethod": "UI / Voice"
+  }
+]

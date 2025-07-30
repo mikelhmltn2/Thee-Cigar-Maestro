@@ -1,0 +1,93 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Flavorverse — Live 3D Constellation</title>
+  <style>
+    body { margin: 0; background-color: #121212; color: #f0e6d2; overflow: hidden; }
+    canvas { display: block; }
+    #info {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background: rgba(0,0,0,0.6);
+      padding: 10px;
+      font-family: Georgia, serif;
+      font-size: 16px;
+      border: 1px solid #444;
+      color: #f0e6d2;
+      z-index: 1;
+    }
+  </style>
+</head>
+<body>
+  <div id="info">🌀 Flavorverse — Live 3D Constellation</div>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.152.2/build/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.152.2/examples/js/controls/OrbitControls.js"></script>
+  <script>
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color("#121212");
+
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
+    camera.position.z = 40;
+
+    const renderer = new THREE.WebGLRenderer();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    document.body.appendChild(renderer.domElement);
+
+    const controls = new THREE.OrbitControls(camera, renderer.domElement);
+
+    const geometry = new THREE.SphereGeometry(1.2, 32, 32);
+    const raycaster = new THREE.Raycaster();
+    const mouse = new THREE.Vector2();
+    const stars = [];
+    const info = document.getElementById("info");
+
+    async function loadCigars() {
+      const res = await fetch("flavorverse_nodes.json");
+      const data = await res.json();
+
+      data.forEach(item => {
+        const mat = new THREE.MeshStandardMaterial({ color: item.color });
+        const star = new THREE.Mesh(geometry, mat);
+        star.position.set(
+          Math.random() * 60 - 30,
+          Math.random() * 60 - 30,
+          Math.random() * 60 - 30
+        );
+        star.name = item.name + " — " + item.wrapper + " — " + item.flavor;
+        scene.add(star);
+        stars.push(star);
+      });
+    }
+
+    const light = new THREE.PointLight(0xffffff, 1, 200);
+    light.position.set(10, 10, 10);
+    scene.add(light);
+
+    function onMouseMove(event) {
+      mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+      mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+    }
+
+    function animate() {
+      requestAnimationFrame(animate);
+      controls.update();
+      renderer.render(scene, camera);
+
+      raycaster.setFromCamera(mouse, camera);
+      const intersects = raycaster.intersectObjects(stars);
+      if (intersects.length > 0) {
+        info.innerHTML = "⭐ " + intersects[0].object.name;
+      } else {
+        info.innerHTML = "🌀 Flavorverse — Live 3D Constellation";
+      }
+    }
+
+    window.addEventListener('mousemove', onMouseMove, false);
+    loadCigars();
+    animate();
+  </script>
+</body>
+</html>

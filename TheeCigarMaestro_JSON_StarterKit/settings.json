@@ -1,0 +1,11 @@
+{
+    "brand_name": "Thee Cigar Maestro",
+    "logo_path": "/public/images/logo.png",
+    "theme": "dark",
+    "language_default": "en",
+    "api_keys": {},
+    "feature_flags": {
+        "enableGPT": true,
+        "enableLoungeMode": true
+    }
+}

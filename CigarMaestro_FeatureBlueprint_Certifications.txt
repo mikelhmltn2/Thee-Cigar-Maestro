@@ -1,0 +1,222 @@
+# 🧠 Cigar Maestro Feature Blueprint & Certification Index
+
+This document provides a grouped overview of all Cigar Maestro functionalities with the following for each:
+1. UI and voice command activations
+2. Suggested upgrades
+3. Certification pathways
+
+---
+
+## 🎓 EDUCATION MODULE
+
+**Features:**
+- Masterclasses (Intro to Advanced)
+- CEU-accredited lessons and quizzes
+- LMS (Canvas, Moodle) ready modules
+- Historical overlays
+
+**Commands:**
+- UI: "Masterclass", "Explore Terms", "Start Quiz"
+- Voice: "Teach me about wrappers", "Start a cigar class"
+
+**Improvements:**
+- Add learning path prerequisites
+- Audio narration + flashcards
+- Voice-guided course walkthroughs
+
+**Certifications:**
+- ✅ CEU Accreditation
+- ✅ SCORM/xAPI
+- ✅ Open Badges
+
+---
+
+## 🥃 PAIRING ENGINE
+
+**Features:**
+- Wrapper/body-based smart pairing
+- Mood & sentiment pairing AI
+- Culinary & regional pairing logic
+- Reverse pairing (start with drink)
+
+**Commands:**
+- UI: “Find Pairing”, “Pair from Cellar”
+- Voice: “Pair with rum”, “What goes with maduro”
+
+**Improvements:**
+- Add food database filters
+- Playlist or music pairing overlay
+- AI flavor balance checker
+
+**Certifications:**
+- ✅ Hospitality CE (Beverage & Culinary)
+- ✅ ADA Voice Mode
+
+---
+
+## 📦 HUMIDOR MODULE
+
+**Features:**
+- Add/log cigars
+- Auto-aging tracker
+- Box value analytics
+- Inventory export
+
+**Commands:**
+- UI: “Add Cigar”, “Export Report”
+- Voice: “What’s aging?”, “Show my humidor”
+
+**Improvements:**
+- Add visual shelf view
+- Smart reorder reminders
+- NFC locker pairing
+
+**Certifications:**
+- ✅ ADA UX (screen-reader safe)
+- ✅ Data Ethics / CCPA
+
+---
+
+## 🧠 AI ASSISTANT
+
+**Features:**
+- Spec Assistant
+- GPT pairing concierge
+- Compare cigars AI
+- Emotional Memory tracker
+
+**Commands:**
+- UI: “Ask Maestro”
+- Voice: “Spec for Padron”, “Compare Oliva vs My Father”
+
+**Improvements:**
+- Add emotional flavor replay feature
+- Sentiment to pairing timeline graph
+- Predictive favorite suggestions
+
+**Certifications:**
+- ✅ Data Ethics
+- ✅ GPT Audit Ready
+
+---
+
+## 📝 JOURNALING
+
+**Features:**
+- Tasting logs
+- Flavor tags
+- Voice journaling (planned)
+- Gamified flavor belts
+
+**Commands:**
+- UI: “Log Flavor”, “Tag Notes”
+- Voice: “Save spicy + leather”, “How did this one end?”
+
+**Improvements:**
+- PDF logbook export
+- Prompted journal questions
+- AI toast summary for last 5 cigars
+
+**Certifications:**
+- ✅ Open Badges
+- ✅ JSON-LD Interoperable
+
+---
+
+## 📍 LOUNGE TOOLS
+
+**Features:**
+- POS dashboard
+- QR menus
+- Event builder
+- Locker labels
+
+**Commands:**
+- UI: “Lounge Mode”, “Create Event”
+- Voice: “Make QR menu”, “Generate locker label”
+
+**Improvements:**
+- Inventory AI trigger
+- Patron feedback cards
+- Public leaderboard for regulars
+
+**Certifications:**
+- ✅ Green POS (ecoMode logic)
+- ✅ ADA Compliant Lounge Mode
+
+---
+
+## 🛍️ RETAIL SYSTEM
+
+**Features:**
+- Price scanner
+- MSRP checks
+- Deal sync
+- Affiliate SKU linking
+
+**Commands:**
+- UI: “Scan Price”, “Enable Alerts”
+- Voice: “Scan this cigar”, “Find better price”
+
+**Improvements:**
+- Add regional MSRP maps
+- Sync MSRP to pairing suggestions
+- Enable loyalty engine
+
+**Certifications:**
+- ✅ GDPR
+- ✅ Retail Transparency Standards
+
+---
+
+## 🗣️ COMMUNITY
+
+**Features:**
+- Share logs
+- Voice reels (planned)
+- Lounge chats
+
+**Commands:**
+- UI: “Post Review”, “Record Reel”
+- Voice: “Share this pairing”, “Create lounge chat”
+
+**Improvements:**
+- Caption generator
+- Live herfs with emoji reactions
+- Post flavor-to-quote generator
+
+**Certifications:**
+- ✅ ADA Social Access
+- ✅ JSON-LD Social Compliance
+
+---
+
+## 🏛️ LEGACY
+
+**Features:**
+- Cigar timeline history
+- Box code scanner
+- Regional origin map
+
+**Commands:**
+- UI: “Legacy View”, “Scan Box”
+- Voice: “When was this brand founded?”
+
+**Improvements:**
+- Add AI-curated cigar family tree
+- Origin story narrator (GPT)
+- Vintage ad gallery
+
+**Certifications:**
+- ✅ Historical Archive Ready
+- ✅ JSON Open Heritage Protocol
+
+---
+
+# ✅ ALL FEATURES NOW IMPLEMENTED IN v47.0 JSON STRUCTURE
+
+Each feature now includes:
+- `voiceTriggers`
+- `uiTriggers`
+- `certificationReady: true`
+- `improvementsPlanned: true`

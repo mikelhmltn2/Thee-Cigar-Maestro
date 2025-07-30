@@ -1,0 +1,24 @@
+{
+  "@context": {
+    "flavor": "https://cigarmaestro.ai/flavor/",
+    "note": "flavor:note",
+    "wrapper": "flavor:wrapper"
+  },
+  "@graph": [
+    {
+      "@id": "flavor:earth",
+      "note": "Earth",
+      "wrapper": [
+        "maduro",
+        "oscuro"
+      ]
+    },
+    {
+      "@id": "flavor:cream",
+      "note": "Cream",
+      "wrapper": [
+        "connecticut"
+      ]
+    }
+  ]
+}

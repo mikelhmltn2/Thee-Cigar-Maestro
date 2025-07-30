@@ -1,0 +1,116 @@
+{
+    "project": "Thee Cigar Maestro",
+    "siteType": "10-page GoDaddy Website",
+    "pages": [
+        {
+            "title": "Home",
+            "purpose": "Introduce the brand, summarize pairing engine, CTA to explore flavor journey",
+            "modules": [
+                "flavorJourneyTracker",
+                "neuroadaptivePairingEngine",
+                "brandHistory",
+                "CTA: Explore Specs"
+            ]
+        },
+        {
+            "title": "Virtual Lounge",
+            "purpose": "Community interactions, concierge tools, RSVP module, live feed",
+            "modules": [
+                "hospitalityPersona",
+                "socialCommunity",
+                "eventMenuBlockTemplate",
+                "RSVP"
+            ]
+        },
+        {
+            "title": "Cigar Specs",
+            "purpose": "Lookup cigar wrapper, binder, filler, tasting notes using manufacturer data",
+            "modules": [
+                "gptPromptTemplates.specLookup",
+                "aiSpecInspector"
+            ]
+        },
+        {
+            "title": "Pairing Guide",
+            "purpose": "Recommend spirits by wrapper/body/flavor/emotion",
+            "modules": [
+                "pairingSuggestion",
+                "distilleryPairings",
+                "culinaryPairingModule"
+            ]
+        },
+        {
+            "title": "Flavor Journey",
+            "purpose": "Track user\u2019s cigar-tasting milestones, unlock NFT badges",
+            "modules": [
+                "flavorJourneyTracker",
+                "NFTFlavorJourney",
+                "emotionalMemoryScore"
+            ]
+        },
+        {
+            "title": "Education",
+            "purpose": "CEU-certified learning, LMS integration, quizzes",
+            "modules": [
+                "ceuModule",
+                "educationModule",
+                "gptInteractionContexts.education"
+            ]
+        },
+        {
+            "title": "Lounge Tools",
+            "purpose": "Spec card builder, QR menus, locker labels, humidor tools",
+            "modules": [
+                "loungeExperienceAssets",
+                "POS integrations",
+                "HumidorSync"
+            ]
+        },
+        {
+            "title": "Membership Tiers",
+            "purpose": "Display pricing, benefits, restrictions, upgrade logic",
+            "modules": [
+                "membershipSystem",
+                "revenueTags"
+            ]
+        },
+        {
+            "title": "About the Maestro",
+            "purpose": "Brand story, creator bio, history logic, cultural impact",
+            "modules": [
+                "historyUpgrades",
+                "founderJourneyNarratives"
+            ]
+        },
+        {
+            "title": "The Maestro\u2019s Welcome",
+            "purpose": "Warm personal welcome from the brand\u2019s creator, with concierge access, brand values, and legal/support info woven into storytelling.",
+            "modules": [
+                "founderWelcome",
+                "conciergeRequestForm",
+                "brandValuesDisplay",
+                "contactInfoBlock",
+                "legalGuidance",
+                "licenseAgreement",
+                "supportLinks"
+            ]
+        },
+        {
+            "title": "Flavor Atlas",
+            "purpose": "Explore cigar and spirit flavors by geography and culture",
+            "modules": [
+                "globalFlavorAtlas",
+                "flavorMappingEngine"
+            ]
+        },
+        {
+            "title": "Testimonials & Reviews",
+            "purpose": "Showcase real user journeys, feedback, lounge success stories",
+            "modules": [
+                "testimonialBlock",
+                "reviewShowcase",
+                "flavorJourneyNarratives"
+            ]
+        }
+    ]
+}
