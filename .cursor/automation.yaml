@@ -1,0 +1,135 @@
+# =========================================
+# Cursor Automation File
+# Thee Cigar Maestro – Phases I–V.5
+# Repository: mikelhmltn2/thee-cigar-maestro
+# Target: https://theecigarmaestro.com
+# AI Agent: Claude 4 Sonnet
+# =========================================
+
+autonomy:
+  mode: "continuous"
+  control_level: "auto-with-human-override"
+  execution_frequency: "weekly"
+  max_parallel_tasks: 3
+  log_changes: true
+
+repo:
+  provider: "github"
+  owner: "mikelhmltn2"
+  name: "thee-cigar-maestro"
+  branch: "main"
+  auth_method: "token"
+  permissions:
+    - read
+    - write
+    - create_pull_requests
+    - push_code
+
+deployment:
+  platform: "vercel"
+  auto_deploy: true
+  rollback_on_failure: true
+  test_pipeline:
+    - lighthouse
+    - accessibility
+    - pci_compliance
+    - wcag_2_1
+    - security_scan
+
+ai_engine:
+  model: "claude-4-sonnet"
+  memory_mode: "long_context"
+  safety_filter: "strict"
+  task_style: "structured_development"
+  file_structure_optimization: true
+
+phases:
+  - id: "luxury-phaseI"
+    description: "Luxury Website Foundation – Core AI Features"
+    trigger: "immediate"
+  - id: "evolution-phaseII"
+    description: "Self-Evolving Loop – Data-driven optimization"
+    trigger: "post-phaseI-completion"
+  - id: "growth-phaseIII"
+    description: "Autonomous Growth Engine – Funnels and Marketing Automation"
+    trigger: "post-phaseII-2weeks"
+  - id: "global-phaseIV"
+    description: "Global Expansion – Multi-language, Virtual Lounges, NFT Collectibles"
+    trigger: "post-phaseIII-6weeks"
+  - id: "ritual-phaseV"
+    description: "Ritual Intelligence – 3D Flavorverse and Emotional Pairing AI"
+    trigger: "post-global-phaseIV-approval"
+  - id: "ritual-phaseV.5"
+    description: "AI Lounge Concierge – Live 3D Dashboard and Real-Time Global Sessions"
+    trigger: "post-ritual-phaseV-completion"
+
+core_directives:
+  - Maintain luxury brand integrity (colors, typography, high-end aesthetic)
+  - Guarantee PCI DSS secure payments and real-time age verification
+  - Ensure WCAG 2.1 accessibility and inclusive design
+  - Optimize SEO, fast load speeds (<2.5s mobile), smooth interactions
+  - Provide manual PR approval and rollback options
+
+ai_capabilities:
+  development:
+    - responsive_web_design
+    - full_stack_modern_js (Next.js, Node.js)
+    - AI pairing engine integration
+    - virtual humidor with real-time sync
+    - secure checkout + verification flows
+  innovation:
+    - 3D Flavorverse environment
+    - emotional pairing AI
+    - AI chatbot concierge with NLP
+    - NFT collectible badges
+    - live lounge sessions (WebRTC + VR-ready dashboard)
+  automation:
+    - auto-generate SEO content (blogs, reviews, pages)
+    - marketing funnels and email campaigns
+    - weekly AI data optimization and analytics tracking
+
+file_management:
+  structured_commits: true
+  version_tags:
+    - "luxury-phaseI-vX.Y"
+    - "evolution-phaseII-vX.Y"
+    - "growth-phaseIII-vX.Y"
+    - "global-phaseIV-vX.Y"
+    - "ritual-phaseV-vX.Y"
+    - "ritual-phaseV5-vX.Y"
+  logs:
+    - "UPGRADE_LOG.md"
+    - "EVOLUTION_LOG.md"
+    - "GROWTH_LOG.md"
+    - "GLOBAL_LOG.md"
+    - "RITUAL_LOG.md"
+    - "LOUNGE_LOG.md"
+
+security:
+  data_privacy: "GDPR-compliant"
+  encryption: "AES-256"
+  vulnerability_scan: "run-every-deployment"
+
+analytics:
+  enable_tracking: true
+  tools:
+    - google_analytics_4
+    - plausible
+    - search_console
+  metrics:
+    - user_behavior
+    - AI_feature_engagement
+    - sales_conversion_rate
+    - retention
+    - SEO_ranking
+
+human_review:
+  pull_request_required: true
+  approval_threshold: "admin"
+  notification_method: "email: info@theecigarmaestro.com"
+
+success_criteria:
+  - Thee Cigar Maestro evolves continuously toward **global luxury leadership**
+  - AI concierge features and immersive lounges set a new market standard
+  - Revenue, memberships, and engagement grow autonomously
+  - 3D Flavorverse and Ritual Intelligence position site as the **first AI cigar metaverse**
