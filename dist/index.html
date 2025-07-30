@@ -1,52 +1,403 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; media-src 'self' blob:; connect-src 'self' https://theecigarmaestro.vercel.app; worker-src 'self' blob:;" />
-  <title>Thee Cigar Maestro — Your Personal Cigar Journey</title>
+  <title>Thee Cigar Maestro — The Art. The Ritual. The Maestro.</title>
   
   <!-- Progressive Web App Meta Tags -->
-  <meta name="theme-color" content="#121212">
+  <meta name="theme-color" content="#1a0f0a">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <link rel="apple-touch-icon" href="/assets/logo-192-BULeZg3q.png">
   <link rel="manifest" href="/manifest.json">
   
+  <!-- Luxury Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Source+Serif+Pro:wght@300;400;600&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  
   <!-- API Client and Authentication -->
   
-  <!-- Improved Styles for Better UX -->
+  <!-- Enhanced Luxury Components (Phase I Autonomous Upgrade) -->
+  
+  <!-- Luxury Brand Styles -->
   <style>
     :root {
-      --primary-bg: #121212;
-      --secondary-bg: #1c1c1c;
-      --accent-bg: #2c2c2c;
-      --primary-text: #f0e6d2;
-      --accent-text: #c69c6d;
-      --secondary-text: #a67856;
-      --border-color: #444;
-      --success-color: #28a745;
-      --warning-color: #ffc107;
+      /* Luxury Color Palette */
+      --primary-bg: #1a0f0a;
+      --secondary-bg: #2a1b14;
+      --accent-bg: #3d2a1f;
+      --leather-bg: #4a3429;
+      --gold-primary: #d4af37;
+      --gold-secondary: #b8941f;
+      --gold-accent: #ffd700;
+      --cream-primary: #f4f1e8;
+      --cream-secondary: #ede7d3;
+      --mahogany: #c04000;
+      --deep-brown: #3c1810;
+      --warm-white: #faf8f3;
+      
+      /* Text Colors */
+      --primary-text: var(--cream-primary);
+      --accent-text: var(--gold-primary);
+      --secondary-text: var(--cream-secondary);
+      --muted-text: #a67856;
+      
+      /* Interactive States */
+      --hover-gold: #e6c551;
+      --success-color: #228b22;
+      --warning-color: #ffa500;
       --error-color: #dc3545;
-      --header-height: 80px;
-      --sidebar-width: 320px;
-      --border-radius: 8px;
-      --shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      
+      /* Layout Variables */
+      --header-height: 90px;
+      --sidebar-width: 350px;
+      --border-radius-small: 6px;
+      --border-radius: 12px;
+      --border-radius-large: 20px;
+      --luxury-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+      --gold-shadow: 0 4px 20px rgba(212, 175, 55, 0.3);
+      --smooth-transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+      
+      /* Typography */
+      --font-display: 'Playfair Display', serif;
+      --font-body: 'Source Serif Pro', serif;
+      --font-accent: 'Crimson Text', serif;
     }
 
     * {
       box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
 
     body { 
-      margin: 0; 
-      background: linear-gradient(135deg, var(--primary-bg) 0%, var(--secondary-bg) 100%);
-      overflow: hidden; 
+      background: linear-gradient(135deg, var(--primary-bg) 0%, var(--secondary-bg) 35%, var(--deep-brown) 100%);
+      overflow-x: hidden; 
       color: var(--primary-text); 
-      font-family: Georgia, serif;
-      line-height: 1.6;
+      font-family: var(--font-body);
+      line-height: 1.7;
+      font-weight: 400;
+      letter-spacing: 0.02em;
+    }
+
+    /* Luxury Header Navigation */
+    .main-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: var(--header-height);
+      background: linear-gradient(180deg, rgba(26, 15, 10, 0.98) 0%, rgba(42, 27, 20, 0.95) 100%);
+      backdrop-filter: blur(20px);
+      border-bottom: 3px solid var(--gold-primary);
+      box-shadow: var(--luxury-shadow);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 3rem;
+    }
+
+    .logo-section {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .logo-section h1 {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-weight: 600;
+      color: var(--gold-primary);
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+      letter-spacing: 0.05em;
+    }
+
+    .tagline {
+      font-family: var(--font-accent);
+      font-size: 0.9rem;
+      color: var(--cream-secondary);
+      font-style: italic;
+      margin-top: 0.2rem;
+      letter-spacing: 0.1em;
+    }
+
+    /* Navigation Menu */
+    .main-nav {
+      display: flex;
+      gap: 2.5rem;
+      align-items: center;
+    }
+
+    .nav-item {
+      position: relative;
+    }
+
+    .nav-button {
+      background: transparent;
+      border: 2px solid transparent;
+      color: var(--primary-text);
+      padding: 0.8rem 1.5rem;
+      border-radius: var(--border-radius);
+      cursor: pointer;
+      font-family: var(--font-body);
+      font-size: 1rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      transition: var(--smooth-transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .nav-button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, var(--gold-primary), transparent);
+      transition: var(--smooth-transition);
+      opacity: 0;
+    }
+
+    .nav-button:hover {
+      color: var(--gold-primary);
+      border-color: var(--gold-primary);
+      box-shadow: var(--gold-shadow);
+      transform: translateY(-2px);
+    }
+
+    .nav-button:hover::before {
+      left: 100%;
+      opacity: 0.3;
+    }
+
+    .nav-button.active {
+      background: linear-gradient(135deg, var(--gold-primary), var(--gold-secondary));
+      color: var(--deep-brown);
+      border-color: var(--gold-accent);
+      box-shadow: var(--gold-shadow);
+    }
+
+    /* Dropdown Menus */
+    .dropdown-menu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: linear-gradient(180deg, var(--secondary-bg) 0%, var(--accent-bg) 100%);
+      border: 2px solid var(--gold-primary);
+      border-radius: var(--border-radius);
+      box-shadow: var(--luxury-shadow);
+      min-width: 220px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px);
+      transition: var(--smooth-transition);
+      z-index: 1001;
+    }
+
+    .nav-item:hover .dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .dropdown-item {
+      display: block;
+      padding: 1rem 1.5rem;
+      color: var(--primary-text);
+      text-decoration: none;
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+      transition: var(--smooth-transition);
+    }
+
+    .dropdown-item:hover {
+      background: linear-gradient(90deg, var(--gold-primary), var(--gold-secondary));
+      color: var(--deep-brown);
+      padding-left: 2rem;
+    }
+
+    .dropdown-item:last-child {
+      border-bottom: none;
+      border-radius: 0 0 var(--border-radius) var(--border-radius);
+    }
+
+    /* Hero Section */
+    .hero-section {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+      background: linear-gradient(135deg, var(--primary-bg) 0%, var(--secondary-bg) 50%, var(--deep-brown) 100%);
+      overflow: hidden;
+    }
+
+    .hero-content {
+      max-width: 800px;
+      padding: 2rem;
+      z-index: 2;
+    }
+
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: 4.5rem;
+      font-weight: 700;
+      color: var(--gold-primary);
+      text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.7);
+      margin-bottom: 1.5rem;
+      letter-spacing: 0.05em;
+      line-height: 1.2;
+    }
+
+    .hero-tagline {
+      font-family: var(--font-accent);
+      font-size: 1.8rem;
+      color: var(--cream-primary);
+      font-style: italic;
+      margin-bottom: 3rem;
+      letter-spacing: 0.1em;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+
+    .hero-cta {
+      display: inline-flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .cta-button {
+      padding: 1.2rem 2.5rem;
+      background: linear-gradient(135deg, var(--gold-primary), var(--gold-secondary));
+      color: var(--deep-brown);
+      border: none;
+      border-radius: var(--border-radius);
+      font-family: var(--font-body);
+      font-size: 1.1rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      cursor: pointer;
+      transition: var(--smooth-transition);
+      box-shadow: var(--gold-shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      transition: var(--smooth-transition);
+    }
+
+    .cta-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 40px rgba(212, 175, 55, 0.4);
+    }
+
+    .cta-button:hover::before {
+      left: 100%;
+    }
+
+    .cta-button.secondary {
+      background: transparent;
+      color: var(--gold-primary);
+      border: 2px solid var(--gold-primary);
+      box-shadow: var(--luxury-shadow);
+    }
+
+    .cta-button.secondary:hover {
+      background: var(--gold-primary);
+      color: var(--deep-brown);
+    }
+
+    /* Background Pattern */
+    .hero-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(ellipse at center, transparent 0%, rgba(26, 15, 10, 0.3) 70%);
+      background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23d4af37' fill-opacity='0.05'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      z-index: 1;
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 768px) {
+      .main-header {
+        padding: 0 1.5rem;
+      }
+      
+      .logo-section h1 {
+        font-size: 1.5rem;
+      }
+      
+      .main-nav {
+        gap: 1rem;
+      }
+      
+      .nav-button {
+        padding: 0.6rem 1rem;
+        font-size: 0.9rem;
+      }
+      
+      .hero-title {
+        font-size: 3rem;
+      }
+      
+      .hero-tagline {
+        font-size: 1.3rem;
+      }
+      
+      .cta-button {
+        padding: 1rem 2rem;
+        font-size: 1rem;
+      }
+      
+      .hero-cta {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+
+    /* Loading States */
+    .loading {
+      opacity: 0.7;
+      pointer-events: none;
+      position: relative;
+    }
+
+    .loading::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 20px;
+      height: 20px;
+      margin: -10px 0 0 -10px;
+      border: 2px solid var(--gold-primary);
+      border-top: 2px solid transparent;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
     }
 
     /* Main Header Navigation */
@@ -1524,60 +1875,113 @@
        }
      }
    </style>
-  <script type="module" crossorigin src="/assets/main-dXVUct0D.js"></script>
+  <script type="module" crossorigin src="/assets/main-DoTqPyls.js"></script>
   <link rel="modulepreload" crossorigin href="/assets/modulepreload-polyfill-YP0FEG5d.js">
 <link rel="manifest" href="/manifest.webmanifest"><script id="vite-plugin-pwa:register-sw" src="/registerSW.js"></script></head>
 <body>
-  <!-- Main Header -->
-  <header class="main-header">
+  <!-- Luxury Header -->
+  <header class="main-header" role="banner">
     <div class="logo-section">
-      <h1>🚬 Thee Cigar Maestro</h1>
-    </div>
-    
-    <nav class="main-nav">
-      <button class="nav-button active" data-section="explore">
-        🌀 Explore
-      </button>
-      <button class="nav-button" data-section="education">
-        📚 Learn
-      </button>
-      <button class="nav-button" data-section="pairings">
-        🍷 Pairings
-      </button>
-      <button class="nav-button" data-section="journal">
-        📝 Journal
-      </button>
-      <button class="nav-button" data-section="search">
-        🔍 Search
-      </button>
-      <button class="nav-button" data-section="humidor">
-        🏛️ Humidor
-      </button>
-      <button class="nav-button" onclick="window.analyticsDashboard?.show()">
-        📊 Dashboard
-      </button>
-    </nav>
-
-    <!-- User Authentication Section -->
-    <div class="auth-section" id="authSection">
-      <button class="auth-btn login-btn" id="loginBtn" onclick="window.authUI?.show('login')">
-        🔐 Sign In
-      </button>
-      <button class="auth-btn register-btn" id="registerBtn" onclick="window.authUI?.show('register')">
-        ✨ Sign Up
-      </button>
-      <div class="user-menu" id="userMenu" style="display: none;">
-        <button class="user-btn" id="userProfileBtn">
-          <span id="userName">User</span>
-        </button>
-        <button class="auth-btn logout-btn" id="logoutBtn" onclick="window.authUI?.logout()">
-          🚪 Logout
-        </button>
+      <div>
+        <h1>Thee Cigar Maestro</h1>
+        <div class="tagline">The Art. The Ritual. The Maestro.</div>
       </div>
     </div>
     
-    <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
+    <nav class="main-nav" role="navigation" aria-label="Main navigation">
+      <div class="nav-item">
+        <button class="nav-button active" data-section="explore" aria-label="Home">Home</button>
+      </div>
+      
+      <div class="nav-item">
+        <button class="nav-button" aria-label="Cigars">Cigars</button>
+        <div class="dropdown-menu">
+          <a href="#" class="dropdown-item" data-section="explore">Flavorverse</a>
+          <a href="#" class="dropdown-item" onclick="window.navigation.showSpecs()">Specifications</a>
+          <a href="#" class="dropdown-item" onclick="window.navigation.showCatalog()">Catalog</a>
+          <a href="#" class="dropdown-item" onclick="window.navigation.showReviews()">Reviews</a>
+        </div>
+      </div>
+      
+      <div class="nav-item">
+        <button class="nav-button" aria-label="Pairings">Pairings</button>
+        <div class="dropdown-menu">
+          <a href="#" class="dropdown-item" data-section="pairings">Pairing Guide</a>
+          <a href="#" class="dropdown-item" onclick="window.navigation.showSpirits()">Spirits</a>
+          <a href="#" class="dropdown-item" onclick="window.navigation.showCoffee()">Coffee</a>
+          <a href="#" class="dropdown-item" onclick="window.navigation.showFood()">Food</a>
+        </div>
+      </div>
+      
+      <div class="nav-item">
+        <button class="nav-button" onclick="window.navigation.showAIConcierge()" aria-label="AI Concierge">AI Concierge</button>
+      </div>
+      
+      <div class="nav-item">
+        <button class="nav-button" aria-label="Blog">Blog/News</button>
+        <div class="dropdown-menu">
+          <a href="#" class="dropdown-item" onclick="window.navigation.showBlog()">Latest Articles</a>
+          <a href="#" class="dropdown-item" onclick="window.navigation.showNews()">Industry News</a>
+          <a href="#" class="dropdown-item" data-section="education">Education</a>
+          <a href="#" class="dropdown-item" onclick="window.navigation.showEvents()">Events</a>
+        </div>
+      </div>
+      
+      <div class="nav-item">
+        <button class="nav-button" data-section="humidor" aria-label="Virtual Humidor">Virtual Humidor</button>
+      </div>
+      
+      <div class="nav-item">
+        <button class="nav-button" aria-label="Shop">Shop</button>
+        <div class="dropdown-menu">
+          <a href="#" class="dropdown-item" onclick="window.navigation.showShop()">Browse Products</a>
+          <a href="#" class="dropdown-item" onclick="window.navigation.showCart()">Shopping Cart</a>
+          <a href="#" class="dropdown-item" onclick="window.navigation.showWishlist()">Wishlist</a>
+          <a href="#" class="dropdown-item" onclick="window.navigation.showOrders()">My Orders</a>
+        </div>
+      </div>
+      
+      <div class="nav-item">
+        <button class="nav-button" onclick="window.navigation.showContact()" aria-label="Contact">Contact</button>
+      </div>
+
+      <!-- User Authentication Section -->
+      <div class="auth-section" id="authSection">
+        <button class="auth-btn login-btn" id="loginBtn" onclick="window.authUI?.show('login')">
+          Sign In
+        </button>
+        <button class="auth-btn register-btn" id="registerBtn" onclick="window.authUI?.show('register')">
+          Sign Up
+        </button>
+        <div class="user-menu" id="userMenu" style="display: none;">
+          <button class="user-btn" id="userProfileBtn">
+            <span id="userName">User</span>
+          </button>
+          <button class="auth-btn logout-btn" id="logoutBtn" onclick="window.authUI?.logout()">
+            Logout
+          </button>
+        </div>
+      </div>
+      
+      <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
+    </nav>
   </header>
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="hero-content">
+      <h1 class="hero-title">Thee Cigar Maestro</h1>
+      <p class="hero-tagline">The Art. The Ritual. The Maestro.</p>
+      <div class="hero-cta">
+        <button class="cta-button" data-section="explore">
+          Explore Flavorverse
+        </button>
+        <button class="cta-button secondary" onclick="window.navigation.showAIConcierge()">
+          Meet Your AI Concierge
+        </button>
+      </div>
+    </div>
+  </section>
 
   <!-- Side Panel for detailed controls -->
   <aside class="side-panel" id="sidePanel">
