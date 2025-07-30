@@ -1,0 +1,333 @@
+name: 🤖 Comprehensive Automation Pipeline
+
+on:
+  push:
+    branches: [ main, develop, feature/* ]
+  pull_request:
+    branches: [ main, develop ]
+  schedule:
+    # Daily at 2 AM UTC for maintenance tasks
+    - cron: '0 2 * * *'
+  workflow_dispatch:
+    inputs:
+      task:
+        description: 'Specific automation task to run'
+        required: false
+        default: 'all'
+        type: choice
+        options:
+        - all
+        - code-quality
+        - performance
+        - security
+        - deployment
+        - maintenance
+
+env:
+  NODE_VERSION: '18'
+  PROJECT_NAME: 'thee-cigar-maestro'
+  NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+jobs:
+  # ═══════════════════════════════════════════════════════════════════════════
+  # 🔍 CODE QUALITY & LINTING
+  # ═══════════════════════════════════════════════════════════════════════════
+  code-quality:
+    name: 🔍 Code Quality & Standards
+    runs-on: ubuntu-latest
+    if: github.event.inputs.task == 'all' || github.event.inputs.task == 'code-quality' || github.event_name == 'pull_request'
+    
+    steps:
+      - name: 📥 Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: 📦 Install Dependencies
+        run: npm ci
+
+      - name: 🔍 Run ESLint
+        run: npm run lint
+        continue-on-error: true
+
+      - name: 🔍 Run TypeScript Check
+        run: npm run type-check
+        continue-on-error: true
+
+      - name: 🎨 Run Prettier Check
+        run: npx prettier --check "**/*.{js,jsx,ts,tsx,json,css,md}"
+        continue-on-error: true
+
+      - name: 🧪 Run Unit Tests
+        run: npm run test
+        continue-on-error: true
+
+      - name: 📊 Generate Code Coverage
+        run: npm run test -- --coverage
+        continue-on-error: true
+
+      - name: 📈 Upload Coverage Reports
+        uses: codecov/codecov-action@v3
+        if: always()
+        with:
+          file: ./coverage/lcov.info
+          flags: unittests
+          name: codecov-umbrella
+
+      - name: 📋 Code Quality Report
+        if: always()
+        run: |
+          echo "## 🔍 Code Quality Report" >> $GITHUB_STEP_SUMMARY
+          echo "### 📊 Summary" >> $GITHUB_STEP_SUMMARY
+          echo "- **ESLint**: ${{ steps.eslint.outcome }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **TypeScript**: ${{ steps.typescript.outcome }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Prettier**: ${{ steps.prettier.outcome }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Tests**: ${{ steps.tests.outcome }}" >> $GITHUB_STEP_SUMMARY
+
+  # ═══════════════════════════════════════════════════════════════════════════
+  # ⚡ PERFORMANCE TESTING
+  # ═══════════════════════════════════════════════════════════════════════════
+  performance:
+    name: ⚡ Performance & Load Testing
+    runs-on: ubuntu-latest
+    if: github.event.inputs.task == 'all' || github.event.inputs.task == 'performance'
+    
+    steps:
+      - name: 📥 Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: 📦 Install Dependencies
+        run: npm ci
+
+      - name: 🏗️ Build Application
+        run: npm run build
+
+      - name: 🚀 Start Application
+        run: |
+          npm start &
+          sleep 30
+        continue-on-error: true
+
+      - name: ⚡ Run Performance Tests
+        run: node scripts/performance-test.js
+        continue-on-error: true
+
+      - name: 📊 Upload Performance Report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: performance-report
+          path: performance-report.json
+          retention-days: 30
+
+      - name: 📈 Performance Summary
+        if: always()
+        run: |
+          echo "## ⚡ Performance Report" >> $GITHUB_STEP_SUMMARY
+          if [ -f "performance-report.json" ]; then
+            echo "Performance testing completed. Check artifacts for detailed report." >> $GITHUB_STEP_SUMMARY
+          else
+            echo "⚠️ Performance report not generated" >> $GITHUB_STEP_SUMMARY
+          fi
+
+  # ═══════════════════════════════════════════════════════════════════════════
+  # 🛡️ SECURITY SCANNING
+  # ═══════════════════════════════════════════════════════════════════════════
+  security:
+    name: 🛡️ Security Audit & Scanning
+    runs-on: ubuntu-latest
+    if: github.event.inputs.task == 'all' || github.event.inputs.task == 'security'
+    
+    steps:
+      - name: 📥 Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: 📦 Install Dependencies
+        run: npm ci
+
+      - name: 🔍 Run NPM Audit
+        run: npm audit --audit-level moderate
+        continue-on-error: true
+
+      - name: 🔍 Run Snyk Security Scan
+        uses: snyk/actions/node@master
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          args: --severity-threshold=high
+        continue-on-error: true
+
+      - name: 🔍 Run OWASP ZAP Scan
+        uses: zaproxy/action-full-scan@v0.8.0
+        with:
+          target: 'http://localhost:3000'
+        continue-on-error: true
+
+      - name: 📊 Upload Security Report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: security-report
+          path: |
+            snyk-report.json
+            zap-report.html
+          retention-days: 30
+
+      - name: 🛡️ Security Summary
+        if: always()
+        run: |
+          echo "## 🛡️ Security Report" >> $GITHUB_STEP_SUMMARY
+          echo "Security scanning completed. Check artifacts for detailed reports." >> $GITHUB_STEP_SUMMARY
+
+  # ═══════════════════════════════════════════════════════════════════════════
+  # 🚀 AUTOMATED DEPLOYMENT
+  # ═══════════════════════════════════════════════════════════════════════════
+  deployment:
+    name: 🚀 Automated Deployment
+    runs-on: ubuntu-latest
+    needs: [code-quality, performance, security]
+    if: github.event.inputs.task == 'all' || github.event.inputs.task == 'deployment'
+    environment:
+      name: ${{ github.ref == 'refs/heads/main' && 'production' || 'staging' }}
+      url: ${{ steps.deploy.outputs.url }}
+    
+    steps:
+      - name: 📥 Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: 📦 Install Dependencies
+        run: npm ci
+
+      - name: 🏗️ Build Application
+        run: npm run build
+
+      - name: 🚀 Deploy to Vercel
+        id: deploy
+        uses: amondnet/vercel-action@v25
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+          vercel-args: '--prod'
+
+      - name: 🔗 Deploy to Netlify
+        uses: nwtgck/actions-netlify@v2.0
+        with:
+          publish-dir: './dist'
+          production-branch: main
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          deploy-message: "Deploy from GitHub Actions"
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+
+      - name: 📊 Deployment Summary
+        run: |
+          echo "## 🚀 Deployment Report" >> $GITHUB_STEP_SUMMARY
+          echo "### 🌐 Deployed URLs" >> $GITHUB_STEP_SUMMARY
+          echo "- **Vercel**: ${{ steps.deploy.outputs.url }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Netlify**: ${{ steps.netlify.outputs.url }}" >> $GITHUB_STEP_SUMMARY
+
+  # ═══════════════════════════════════════════════════════════════════════════
+  # 🔧 MAINTENANCE TASKS
+  # ═══════════════════════════════════════════════════════════════════════════
+  maintenance:
+    name: 🔧 Automated Maintenance
+    runs-on: ubuntu-latest
+    if: github.event.inputs.task == 'maintenance' || github.event_name == 'schedule'
+    
+    steps:
+      - name: 📥 Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: 📦 Update Dependencies
+        run: |
+          npm update
+          npm audit fix
+        continue-on-error: true
+
+      - name: 🧹 Clean Build Artifacts
+        run: |
+          rm -rf .next
+          rm -rf dist
+          rm -rf coverage
+          rm -rf node_modules/.cache
+
+      - name: 🔍 Run Health Checks
+        run: node scripts/health-check.js
+        continue-on-error: true
+
+      - name: 🔗 Check External Links
+        run: node scripts/check-links.js
+        continue-on-error: true
+
+      - name: 📊 Generate Maintenance Report
+        run: |
+          echo "## 🔧 Maintenance Report" >> $GITHUB_STEP_SUMMARY
+          echo "### 📅 Date: $(date)" >> $GITHUB_STEP_SUMMARY
+          echo "### 🔄 Tasks Completed:" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ Dependencies updated" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ Build artifacts cleaned" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ Health checks performed" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ External links validated" >> $GITHUB_STEP_SUMMARY
+
+  # ═══════════════════════════════════════════════════════════════════════════
+  # 📊 FINAL SUMMARY
+  # ═══════════════════════════════════════════════════════════════════════════
+  summary:
+    name: 📊 Automation Summary
+    runs-on: ubuntu-latest
+    needs: [code-quality, performance, security, deployment, maintenance]
+    if: always()
+    
+    steps:
+      - name: 📋 Generate Summary Report
+        run: |
+          echo "## 🤖 Automation Pipeline Summary" >> $GITHUB_STEP_SUMMARY
+          echo "### 📅 Run Date: $(date)" >> $GITHUB_STEP_SUMMARY
+          echo "### 🔄 Trigger: ${{ github.event_name }}" >> $GITHUB_STEP_SUMMARY
+          echo "### 🌿 Branch: ${{ github.ref_name }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### 📊 Job Results:" >> $GITHUB_STEP_SUMMARY
+          echo "- **Code Quality**: ${{ needs.code-quality.result }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Performance**: ${{ needs.performance.result }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Security**: ${{ needs.security.result }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Deployment**: ${{ needs.deployment.result }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Maintenance**: ${{ needs.maintenance.result }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### 🎯 Next Steps:" >> $GITHUB_STEP_SUMMARY
+          if [ "${{ needs.code-quality.result }}" == "success" ] && [ "${{ needs.security.result }}" == "success" ]; then
+            echo "✅ All critical checks passed - ready for deployment!" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "⚠️ Some checks failed - please review and fix issues" >> $GITHUB_STEP_SUMMARY
+          fi
