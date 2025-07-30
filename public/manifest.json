@@ -1,15 +1,12 @@
 {
-  "name": "Thee Cigar Maestro - Premium AI-Driven Cigar Experience",
+  "name": "Thee Cigar Maestro - Luxury Cigar Experience",
   "short_name": "Cigar Maestro",
-  "description": "Experience the pinnacle of cigar culture with AI-driven recommendations, luxury curation, and immersive digital experiences.",
+  "description": "Experience luxury cigars with AI-powered recommendations, 3D visualization, and exclusive member benefits",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#1a0f0a",
   "theme_color": "#d4af37",
   "orientation": "portrait-primary",
-  "scope": "/",
-  "lang": "en",
-  "categories": ["lifestyle", "shopping", "entertainment"],
   "icons": [
     {
       "src": "/icons/icon-72x72.png",
@@ -60,50 +57,43 @@
       "purpose": "maskable any"
     }
   ],
+  "categories": ["lifestyle", "shopping"],
+  "screenshots": [
+    {
+      "src": "/screenshots/home.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "label": "Luxury Home Experience"
+    },
+    {
+      "src": "/screenshots/ai-concierge.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "label": "AI Concierge"
+    },
+    {
+      "src": "/screenshots/3d-explorer.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "label": "3D Cigar Explorer"
+    }
+  ],
   "shortcuts": [
     {
       "name": "AI Concierge",
-      "short_name": "AI Help",
-      "description": "Get instant cigar recommendations from our AI sommelier",
+      "short_name": "Concierge",
+      "description": "Get personalized cigar recommendations",
       "url": "/ai-concierge",
-      "icons": [
-        {
-          "src": "/icons/shortcut-ai.png",
-          "sizes": "192x192"
-        }
-      ]
+      "icons": [{ "src": "/icons/ai-icon-96x96.png", "sizes": "96x96" }]
     },
     {
       "name": "Virtual Humidor",
-      "short_name": "My Collection",
-      "description": "Manage your cigar collection digitally",
+      "short_name": "Humidor",
+      "description": "Manage your cigar collection",
       "url": "/humidor",
-      "icons": [
-        {
-          "src": "/icons/shortcut-humidor.png",
-          "sizes": "192x192"
-        }
-      ]
-    },
-    {
-      "name": "Shop Cigars",
-      "short_name": "Shop",
-      "description": "Browse our premium cigar collection",
-      "url": "/shop",
-      "icons": [
-        {
-          "src": "/icons/shortcut-shop.png",
-          "sizes": "192x192"
-        }
-      ]
+      "icons": [{ "src": "/icons/humidor-icon-96x96.png", "sizes": "96x96" }]
     }
   ],
-  "related_applications": [],
   "prefer_related_applications": false,
-  "features": [
-    "ai-recommendations",
-    "virtual-humidor",
-    "3d-visualization",
-    "offline-browsing"
-  ]
+  "related_applications": []
 }
