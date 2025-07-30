@@ -483,13 +483,13 @@ class AIRecommendationEngine {
       const flavorProfile = this.processFlavorDescriptionNLP(cigar.flavor || '');
       
       // Load pairing rules and preferences
-      const pairingRules = this.getPairingRules();
-      const userPreferences = context.userPreferences || {};
+      const _pairingRules = this.getPairingRules();
+      const _userPreferences = context.userPreferences || {};
       const timeOfDay = context.timeOfDay || 'evening';
       const occasion = context.occasion || 'casual';
 
       // Calculate pairing scores for different categories
-      const pairings = [];
+      const _pairings = [];
 
       // Beverage pairings
       const beverages = [

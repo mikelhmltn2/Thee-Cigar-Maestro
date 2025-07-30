@@ -3,7 +3,7 @@
  * Integrates with centralized error handling system
  */
 
-import { handleError, handleApiError, handleNetworkError, safeAsync } from './src/utils/errorHandler.js';
+import { safeAsync, handleError as _handleError, handleApiError as _handleApiError, handleNetworkError as _handleNetworkError } from './src/utils/errorHandler.js';
 
 class APIClient {
   constructor(baseURL = 'https://api.theecigarmaestro.com') {

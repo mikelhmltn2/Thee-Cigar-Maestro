@@ -338,7 +338,9 @@ document.addEventListener('DOMContentLoaded', () => {
       // Add response to conversation
       addToConversation(data.response);
       statusDiv.textContent = "Ready for your next question...";
-      inputArea.value = ''; // Clear input on success
+      // Clear input on success - avoid race condition
+      const currentInput = inputArea;
+      currentInput.value = '';
 
     } catch (error) {
       console.error('GPT request failed:', error);
@@ -366,9 +368,11 @@ document.addEventListener('DOMContentLoaded', () => {
       }, 500);
       
     } finally {
-      // Re-enable inputs
-      sendBtn.disabled = false;
-      inputArea.disabled = false;
+      // Re-enable inputs - avoid race condition
+      const currentBtn = sendBtn;
+      const currentInput = inputArea;
+      currentBtn.disabled = false;
+      currentInput.disabled = false;
     }
   }
 

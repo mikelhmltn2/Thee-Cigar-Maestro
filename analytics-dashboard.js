@@ -320,10 +320,10 @@ class AnalyticsDashboard {
       'Padron 1964 Anniversary'
     ];
     
-    demoCigars.forEach((cigar, index) => {
+    demoCigars.forEach((cigar, _index) => {
       // Simulate different popularity levels
       const views = Math.floor(Math.random() * 50) + 10;
-      const ratings = [];
+      const _ratings = [];
       const ratingCount = Math.floor(Math.random() * 10) + 3;
       
       for (let i = 0; i < views; i++) {
@@ -371,7 +371,7 @@ class AnalyticsDashboard {
       const endTime = performance.now();
       
       this.analytics.sessionData.apiResponseTime = Math.round(endTime - startTime);
-    } catch (error) {
+            } catch (_error) {
       this.analytics.sessionData.apiResponseTime = 'Failed';
     }
   }
