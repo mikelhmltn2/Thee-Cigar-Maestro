@@ -21,7 +21,15 @@
     "automation:fix": "AUTO_FIX=true node scripts/automated-code-analysis.js",
     "automation:deploy": "npm run build && npm run automation:full",
     "automation:maintenance": "npm update && npm audit fix && npm run automation:health",
-    "automation:dashboard": "node scripts/automation-dashboard.js"
+    "automation:dashboard": "node scripts/automation-dashboard.js",
+    "autonomous:init": "node scripts/autonomous-init.js",
+    "autonomous:start": "node scripts/autonomous-orchestrator.js",
+    "autonomous:evolution": "node scripts/autonomous-evolution-engine.js",
+    "autonomous:deploy": "node scripts/autonomous-deployment.js",
+    "autonomous:status": "node scripts/autonomous-status.js",
+    "autonomous:stop": "node scripts/autonomous-stop.js",
+    "lighthouse": "lighthouse http://localhost:3000 --output=json --output-path=./lighthouse-report.json",
+    "accessibility-test": "pa11y http://localhost:3000 --json > accessibility-report.json"
   },
   "keywords": [
     "cigars",
@@ -70,7 +78,10 @@
     "react-confetti": "^6.1.0",
     "embla-carousel-react": "^8.0.0-rc19",
     "@headlessui/react": "^1.7.17",
-    "react-lazyload": "^3.2.0"
+    "react-lazyload": "^3.2.0",
+    "js-yaml": "^4.1.0",
+    "lighthouse": "^11.6.0",
+    "pa11y": "^6.2.3"
   },
   "devDependencies": {
     "@types/node": "^20.11.5",

@@ -1,0 +1,130 @@
+# Cursor Autonomy Configuration for Thee Cigar Maestro
+# AI Agent: Claude 4 Sonnet
+# Repository: mikelhmltn2/thee-cigar-maestro
+# Target Website: https://theecigarmaestro.com
+
+autonomy:
+  mode: "continuous"
+  control_level: "auto-with-human-override"
+  execution_frequency: "weekly"
+  max_parallel_tasks: 3
+  log_changes: true
+
+repo:
+  provider: "github"
+  owner: "mikelhmltn2"
+  name: "thee-cigar-maestro"
+  branch: "main"
+  auth_method: "token"
+  permissions:
+    - read
+    - write
+    - create_pull_requests
+    - push_code
+
+deployment:
+  platform: "vercel"
+  auto_deploy: true
+  rollback_on_failure: true
+  test_pipeline:
+    - lighthouse
+    - accessibility
+    - pci_compliance
+    - wcag_2_1
+    - security_scan
+
+ai_engine:
+  model: "claude-4-sonnet"
+  memory_mode: "long_context"
+  safety_filter: "strict"
+  task_style: "structured_development"
+  file_structure_optimization: true
+
+phases:
+  - id: "luxury-phaseI"
+    description: "Autonomous Website Upgrade – Luxury Aesthetic + Core AI Features"
+    trigger: "immediate"
+  - id: "evolution-phaseII"
+    description: "Self-Evolving Loop – Analytics-driven UX & AI optimization"
+    trigger: "post-phaseI-completion"
+  - id: "growth-phaseIII"
+    description: "Autonomous Growth Engine – Funnels, Marketing, Monetization"
+    trigger: "post-phaseII-2weeks"
+  - id: "global-phaseIV"
+    description: "Global Luxury Ecosystem Expansion – Multi-language, Virtual Lounges, Blockchain Collectibles"
+    trigger: "post-phaseIII-6weeks"
+  - id: "ritual-phaseV"
+    description: "Ritual Intelligence & 3D Flavorverse Expansion – Immersive AI Metaverse Experience"
+    trigger: "post-phaseIV-approval"
+
+core_directives:
+  - Maintain luxury brand integrity, premium aesthetic
+  - Ensure PCI DSS compliance, secure payments, real-time age verification
+  - Guarantee WCAG 2.1 accessibility for all users
+  - Build modular, scalable architecture for future features
+  - Optimize SEO, performance (<2.5s mobile load)
+  - Provide manual override before major deployments
+
+ai_capabilities:
+  development:
+    - full_stack_web
+    - responsive_design
+    - UI/UX refinement
+    - AI recommendation system integration
+    - chatbot with NLP training
+    - analytics dashboard
+    - ecommerce + secure payments
+  innovation:
+    - 3D immersive UI
+    - ritual intelligence engine
+    - virtual humidor sync
+    - blockchain collectibles (NFT badges)
+  automation:
+    - auto-generate landing pages
+    - auto-create blog posts
+    - SEO content optimization
+    - marketing funnel scripting
+
+file_management:
+  structured_commits: true
+  version_tags:
+    - "luxury-phaseI-vX.Y"
+    - "evolution-phaseII-vX.Y"
+    - "growth-phaseIII-vX.Y"
+    - "global-phaseIV-vX.Y"
+    - "ritual-phaseV-vX.Y"
+  logs:
+    - "UPGRADE_LOG.md"
+    - "EVOLUTION_LOG.md"
+    - "GROWTH_LOG.md"
+    - "GLOBAL_LOG.md"
+    - "RITUAL_LOG.md"
+
+security:
+  data_privacy: "GDPR-compliant"
+  encryption: "AES-256"
+  vulnerability_scan: "run-every-deployment"
+
+analytics:
+  enable_tracking: true
+  tools:
+    - google_analytics_4
+    - plausible
+    - search_console
+  metrics:
+    - user_behavior
+    - AI_feature_engagement
+    - sales_conversion_rate
+    - retention
+    - SEO_ranking
+
+human_review:
+  pull_request_required: true
+  approval_threshold: "admin"
+  notification_method: "email: info@theecigarmaestro.com"
+
+success_criteria:
+  - Site continuously evolves toward global luxury leadership
+  - AI concierge features lead the industry
+  - Revenue, memberships, and user engagement grow autonomously
+  - 3D Flavorverse creates a **world-first digital cigar metaverse**
