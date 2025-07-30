@@ -3,6 +3,8 @@
  * Tests mobile menu functionality under 768px viewport
  */
 
+/* global KeyboardEvent */
+
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 
 // Mock the UIManager since we're testing the mobile menu specifically
