@@ -66,7 +66,8 @@ class BackgroundSyncManager {
       
       console.info(`Processing ${entries.length} pending sync items...`);
       
-      for (const [key, item] of entries) {
+      // Process items in parallel to avoid await-in-loop
+      const syncPromises = entries.map(async ([key, item]) => {
         try {
           await this.syncItem(item);
           
@@ -85,7 +86,10 @@ class BackgroundSyncManager {
             delete pendingQueue[key];
           }
         }
-      }
+      });
+      
+      // Wait for all sync operations to complete
+      await Promise.allSettled(syncPromises);
       
       // Update localStorage
       localStorage.setItem('pendingSync', JSON.stringify(pendingQueue));

@@ -67,8 +67,8 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
 
 // In-memory storage (replace with database in production)
 const users = new Map();
-const cigars = new Map();
-const reviews = new Map();
+const _cigars = new Map();
+const _reviews = new Map();
 
 // JWT secret
 const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key-change-in-production';
@@ -80,10 +80,10 @@ const authenticateToken = (req, res, next) => {
 
   if (token === null) return res.sendStatus(401);
 
-  jwt.verify(token, JWT_SECRET, (err, user) => {
+  return jwt.verify(token, JWT_SECRET, (err, user) => {
     if (err) return res.sendStatus(403);
     req.user = user;
-    next();
+    return next();
   });
 };
 
@@ -166,14 +166,14 @@ app.post('/api/auth/register', async (req, res) => {
     // Generate token
     const token = jwt.sign({ userId, email }, JWT_SECRET, { expiresIn: '24h' });
 
-    res.status(201).json({
+    return res.status(201).json({
       message: 'User registered successfully',
       token,
       user: { id: userId, email, name }
     });
   } catch (error) {
     console.error('Registration error:', error);
-    res.status(500).json({ error: 'Internal server error' });
+    return res.status(500).json({ error: 'Internal server error' });
   }
 });
 
@@ -221,14 +221,14 @@ app.post('/api/auth/login', async (req, res) => {
     // Generate token
     const token = jwt.sign({ userId: user.id, email }, JWT_SECRET, { expiresIn: '24h' });
 
-    res.json({
+    return res.json({
       message: 'Login successful',
       token,
       user: { id: user.id, email: user.email, name: user.name }
     });
   } catch (error) {
     console.error('Login error:', error);
-    res.status(500).json({ error: 'Internal server error' });
+    return res.status(500).json({ error: 'Internal server error' });
   }
 });
 

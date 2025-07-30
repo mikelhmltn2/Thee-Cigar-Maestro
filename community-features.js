@@ -39,7 +39,7 @@ class CommunityManager {
       } else {
         this.currentUser = this.createGuestProfile();
       }
-    } catch (error) {
+    } catch (_error) {
       this.currentUser = this.createGuestProfile();
     }
   }
@@ -959,7 +959,7 @@ class CommunityManager {
 
   getSocialRecommendations() {
     // Generate recommendations based on community activity
-    const recommendations = [];
+    const _recommendations = [];
     
     // Friend recommendations
     const potentialFriends = this.friends.filter(friend => 

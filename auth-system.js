@@ -3,7 +3,7 @@
  * Frontend authentication with JWT, social login, 2FA, and session management
  */
 
-import { handleError, handleApiError, handleNetworkError, safeAsync } from './src/utils/errorHandler.js';
+import { safeAsync, handleError as _handleError, handleApiError as _handleApiError, handleNetworkError as _handleNetworkError } from './src/utils/errorHandler.js';
 
 class AuthenticationSystem {
   constructor() {
