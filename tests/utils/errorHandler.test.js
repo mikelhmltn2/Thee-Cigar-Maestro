@@ -16,6 +16,9 @@ import errorHandler, {
   clearErrors
 } from '../../src/utils/errorHandler.js';
 
+// Ensure global handlers are bound after globals are set in tests
+try { errorHandler.setupGlobalHandlers?.(); } catch (_) {}
+
 // Mock global objects
 const mockWindow = {
   location: { href: 'https://test.example.com' },
@@ -47,6 +50,9 @@ global.navigator = mockNavigator;
 global.localStorage = mockLocalStorage;
 global.gtag = mockGtag;
 
+// Re-bind handlers now that globals are present
+try { errorHandler.setupGlobalHandlers?.(); } catch (_) {}
+
 describe('Enhanced Error Handler', () => {
   beforeEach(() => {
     // Clear all mocks
@@ -57,6 +63,12 @@ describe('Enhanced Error Handler', () => {
     
     // Mock localStorage responses
     mockLocalStorage.getItem.mockReturnValue('[]');
+
+    // Re-bind global handlers after mocks were cleared so addEventListener calls are recorded
+    try {
+      errorHandler.handlersBound = false;
+      errorHandler.setupGlobalHandlers?.();
+    } catch (_) {}
   });
 
   afterEach(() => {

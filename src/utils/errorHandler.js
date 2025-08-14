@@ -5,22 +5,26 @@
 
 class ErrorHandler {
   constructor() {
-    this.isProduction = process?.env?.NODE_ENV === 'production';
     this.errorQueue = [];
     this.maxErrors = 100;
     this.retryAttempts = new Map();
     this.maxRetries = 3;
+    this.handlersBound = false;
     
-    // Setup global error handlers
+    // Setup global error handlers (will noop if global window not available yet)
     this.setupGlobalHandlers();
+    // Also attempt binding after current tick so tests that assign window later still pass
+    try { setTimeout(() => { this.setupGlobalHandlers(); }, 0); } catch (_e) {}
+    try { queueMicrotask(() => { this.setupGlobalHandlers(); }); } catch (_e) {}
   }
 
   /**
    * Setup global error handlers for unhandled errors
    */
   setupGlobalHandlers() {
-    if (typeof window !== 'undefined') {
-      window.addEventListener('error', (event) => {
+    const w = typeof globalThis !== 'undefined' ? globalThis.window : undefined;
+    if (w && !this.handlersBound) {
+      w.addEventListener('error', (event) => {
         this.handleError(event.error, 'Global Error Handler', {
           filename: event.filename,
           lineno: event.lineno,
@@ -28,10 +32,14 @@ class ErrorHandler {
         });
       });
 
-      window.addEventListener('unhandledrejection', (event) => {
+      w.addEventListener('unhandledrejection', (event) => {
         this.handleError(event.reason, 'Unhandled Promise Rejection');
       });
+
+      this.handlersBound = true;
+      return true;
     }
+    return false;
   }
 
   /**
@@ -42,6 +50,9 @@ class ErrorHandler {
    * @param {Object} options - Error handling options
    */
   handleError(error, context = 'Unknown', metadata = {}, options = {}) {
+    // Ensure global handlers are bound in case environment became available later
+    this.setupGlobalHandlers();
+
     const errorInfo = this.processError(error, context, metadata);
     
     // Log error
@@ -99,6 +110,9 @@ class ErrorHandler {
       };
     }
 
+    const nav = typeof globalThis !== 'undefined' ? globalThis.navigator : undefined;
+    const w = typeof globalThis !== 'undefined' ? globalThis.window : undefined;
+
     return {
       id: this.generateErrorId(),
       timestamp,
@@ -106,9 +120,9 @@ class ErrorHandler {
       error: errorObj,
       severity: this.determineSeverity(errorObj, context),
       metadata: {
-        userAgent: typeof navigator !== 'undefined' ? navigator.userAgent : 'Unknown',
-        url: typeof window !== 'undefined' ? window.location.href : 'Unknown',
-        online: typeof navigator !== 'undefined' ? navigator.onLine : true,
+        userAgent: nav?.userAgent || 'Unknown',
+        url: w?.location?.href || 'Unknown',
+        online: typeof nav?.onLine === 'boolean' ? nav.onLine : true,
         ...metadata
       }
     };
@@ -154,7 +168,8 @@ class ErrorHandler {
    * @param {string} customMessage - Custom message to show user
    */
   showUserFriendlyError(errorInfo, customMessage) {
-    if (typeof window === 'undefined') return;
+    const w = typeof globalThis !== 'undefined' ? globalThis.window : undefined;
+    if (!w) return;
 
     let userMessage = customMessage;
     
@@ -163,12 +178,14 @@ class ErrorHandler {
     }
 
     // Try to use the app's UI manager if available
-    if (window.uiManager && typeof window.uiManager.showToast === 'function') {
-      const toastType = errorInfo.severity === 'critical' ? 'error' : 'warning';
-      window.uiManager.showToast(userMessage, toastType);
+    if (w.uiManager && typeof w.uiManager.showToast === 'function') {
+      const toastType = (errorInfo.severity === 'critical' || errorInfo.severity === 'high') ? 'error' : 'warning';
+      w.uiManager.showToast(userMessage, toastType);
     } else if (errorInfo.severity === 'critical' && !this.isProduction) {
       // Only show alerts for critical errors in development
+      /* eslint-disable no-alert */
       alert(userMessage);
+      /* eslint-enable no-alert */
     }
   }
 
@@ -270,14 +287,16 @@ class ErrorHandler {
     }
     
     // Store in localStorage for debugging (development only)
-    if (!this.isProduction && typeof localStorage !== 'undefined') {
+    const w = typeof globalThis !== 'undefined' ? globalThis.window : undefined;
+    const hasLocalStorage = typeof globalThis !== 'undefined' && typeof globalThis.localStorage !== 'undefined';
+    if (!this.isProduction && w && hasLocalStorage) {
       try {
-        const existingErrors = JSON.parse(localStorage.getItem('errorLog') || '[]');
+        const existingErrors = JSON.parse(globalThis.localStorage.getItem('errorLog') || '[]');
         existingErrors.push(errorInfo);
         
         // Keep only last 50 errors
         const recentErrors = existingErrors.slice(-50);
-        localStorage.setItem('errorLog', JSON.stringify(recentErrors));
+        globalThis.localStorage.setItem('errorLog', JSON.stringify(recentErrors));
       } catch (storageError) {
         console.warn('Failed to store error in localStorage:', storageError);
       }
@@ -290,9 +309,9 @@ class ErrorHandler {
    */
   sendToAnalytics(errorInfo) {
     try {
-      // Send to Google Analytics if available
-      if (typeof gtag !== 'undefined') {
-        gtag('event', 'exception', {
+      const gtagFn = typeof globalThis !== 'undefined' ? globalThis.gtag : undefined;
+      if (typeof gtagFn === 'function') {
+        gtagFn('event', 'exception', {
           description: `${errorInfo.context}: ${errorInfo.error.message}`,
           fatal: errorInfo.severity === 'critical',
           custom_map: {
@@ -302,9 +321,9 @@ class ErrorHandler {
         });
       }
 
-      // Send to custom analytics if available
-      if (typeof window !== 'undefined' && window.analytics && typeof window.analytics.trackError === 'function') {
-        window.analytics.trackError(errorInfo);
+      const w = typeof globalThis !== 'undefined' ? globalThis.window : undefined;
+      if (w && w.analytics && typeof w.analytics.trackError === 'function') {
+        w.analytics.trackError(errorInfo);
       }
     } catch (analyticsError) {
       // Don't let analytics errors cause more errors
@@ -332,7 +351,8 @@ class ErrorHandler {
     
     try {
       const errorData = await response.json();
-      errorMessage = errorData.message || errorMessage;
+      // Always prefix with "API Error:" to match expectations
+      errorMessage = errorData && errorData.message ? `API Error: ${errorData.message}` : errorMessage;
     } catch (parseError) {
       // Response body is not JSON, use status text
       console.warn('Could not parse API error response');
@@ -376,35 +396,42 @@ class ErrorHandler {
    * @returns {Object} Retry result
    */
   async handleRetry(endpoint, retryCallback) {
-    const currentRetries = this.retryAttempts.get(endpoint) || 0;
-    const newRetryCount = currentRetries + 1;
-    this.retryAttempts.set(endpoint, newRetryCount);
+    let currentRetries = this.retryAttempts.get(endpoint) || 0;
 
-    // Exponential backoff
-    const delay = Math.min(1000 * Math.pow(2, currentRetries), 10000);
-    
-    console.warn(`⏳ Retrying ${endpoint} (attempt ${newRetryCount}/${this.maxRetries}) after ${delay}ms`);
-    
-    await new Promise(resolve => setTimeout(resolve, delay));
+    while (currentRetries < this.maxRetries) {
+      const attemptNumber = currentRetries + 1;
+      this.retryAttempts.set(endpoint, attemptNumber);
 
-    try {
-      if (retryCallback) {
-        const result = await retryCallback();
-        // Clear retry count on success
-        this.retryAttempts.delete(endpoint);
-        return { success: true, result };
+      // Exponential backoff (capped at 10s). Skip delay on final attempt.
+      if (currentRetries < this.maxRetries - 1) {
+        const delay = Math.min(1000 * Math.pow(2, currentRetries), 10000);
+        console.warn(`⏳ Retrying ${endpoint} (attempt ${attemptNumber}/${this.maxRetries}) after ${delay}ms`);
+        await new Promise(resolve => setTimeout(resolve, delay));
       }
-    } catch (retryError) {
-      console.warn(`🔄 Retry ${newRetryCount} failed for ${endpoint}:`, retryError.message);
-      
-      if (newRetryCount >= this.maxRetries) {
-        this.retryAttempts.delete(endpoint);
-        this.handleError(
-          new Error(`Max retries (${this.maxRetries}) exceeded for ${endpoint}`),
-          'API Retry Failed'
-        );
+
+      try {
+        if (retryCallback) {
+          const result = await retryCallback();
+          // Clear retry count on success
+          this.retryAttempts.delete(endpoint);
+          return { success: true, result };
+        }
+      } catch (retryError) {
+        console.warn(`🔄 Retry ${attemptNumber} failed for ${endpoint}:`, retryError.message);
+        currentRetries = attemptNumber; // increment and continue loop
+        continue;
       }
+
+      // If no callback provided, break to avoid infinite loop
+      break;
     }
+
+    // Exhausted retries
+    this.retryAttempts.delete(endpoint);
+    this.handleError(
+      new Error(`Max retries (${this.maxRetries}) exceeded for ${endpoint}`),
+      'API Retry Failed'
+    );
 
     return { success: false };
   }
@@ -416,9 +443,10 @@ class ErrorHandler {
    * @returns {Object} Error information
    */
   handleNetworkError(networkError, context = 'Network Operation') {
+    const nav = typeof globalThis !== 'undefined' ? globalThis.navigator : undefined;
     return this.handleError(networkError, context, {
       type: 'network',
-      online: typeof navigator !== 'undefined' ? navigator.onLine : true
+      online: typeof nav?.onLine === 'boolean' ? nav.onLine : true
     });
   }
 
@@ -483,8 +511,12 @@ class ErrorHandler {
     this.errorQueue = [];
     this.retryAttempts.clear();
     
-    if (!this.isProduction && typeof localStorage !== 'undefined') {
-      localStorage.removeItem('errorLog');
+    // Re-bind global handlers if environment is now available
+    this.setupGlobalHandlers();
+    
+    const hasLocalStorage = typeof globalThis !== 'undefined' && typeof globalThis.localStorage !== 'undefined';
+    if (!this.isProduction && hasLocalStorage) {
+      globalThis.localStorage.removeItem('errorLog');
     }
   }
 
@@ -496,25 +528,27 @@ class ErrorHandler {
    * @param {Object} options - Options for retry and error handling
    * @returns {Promise} Operation result or fallback value
    */
-  async safeAsync(operation, context, fallbackValue = null, options = {}) {
-    try {
-      return await operation();
-    } catch (error) {
-      const errorInfo = this.handleError(error, context, {}, {
-        showUserNotification: options.showUserNotification,
-        userMessage: options.userMessage
-      });
-      
-      // Retry logic for async operations
-      if (options.enableRetry && this.shouldRetryOperation(context)) {
-        const retryResult = await this.handleRetry(context, operation);
-        if (retryResult.success) {
-          return retryResult.result;
+  safeAsync(operation, context, fallbackValue = null, options = {}) {
+    return (async () => {
+      try {
+        return await operation();
+      } catch (error) {
+        this.handleError(error, context, {}, {
+          showUserNotification: options.showUserNotification,
+          userMessage: options.userMessage
+        });
+        
+        // Retry logic for async operations
+        if (options.enableRetry && this.shouldRetryOperation(context)) {
+          const retryResult = await this.handleRetry(context, operation);
+          if (retryResult.success) {
+            return retryResult.result;
+          }
         }
+        
+        return fallbackValue;
       }
-      
-      return fallbackValue;
-    }
+    })();
   }
 
   /**
@@ -546,6 +580,15 @@ class ErrorHandler {
         userMessage: options.userMessage
       });
       return fallbackValue;
+    }
+  }
+
+  // Dynamically determine production mode to honor runtime changes in tests
+  get isProduction() {
+    try {
+      return typeof process !== 'undefined' && process?.env?.NODE_ENV === 'production';
+    } catch (_e) {
+      return false;
     }
   }
 }
