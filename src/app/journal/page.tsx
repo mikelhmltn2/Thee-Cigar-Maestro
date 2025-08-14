@@ -24,6 +24,9 @@ export default function JournalPage() {
 		notes: '',
 	})
 	const [isReady, setIsReady] = useState(false)
+	const [query, setQuery] = useState('')
+	const [wrapperFilter, setWrapperFilter] = useState('')
+	const [minRating, setMinRating] = useState(1)
 
 	useEffect(() => {
 		let isMounted = true
@@ -50,9 +53,14 @@ export default function JournalPage() {
 		try {
 			const mod = await import('@/utils/storage.js')
 			await mod.default.setLocal(STORAGE_KEY, next)
+			await mod.default.setIndexedDB('userData', { id: 'journal', data: next, updatedAt: Date.now() })
 		} catch (_e) {
 			// ignore
 		}
+	}
+
+	const syncNow = async () => {
+		await persist(entries)
 	}
 
 	const addEntry = async () => {
@@ -70,10 +78,19 @@ export default function JournalPage() {
 		await persist(updated)
 	}
 
+	const filtered = useMemo(() => {
+		return entries.filter(e => {
+			if (wrapperFilter && e.wrapper !== wrapperFilter) return false
+			if (e.rating < minRating) return false
+			if (query && !(e.cigarName?.toLowerCase().includes(query.toLowerCase()) || e.notes?.toLowerCase().includes(query.toLowerCase()))) return false
+			return true
+		})
+	}, [entries, query, wrapperFilter, minRating])
+
 	const averageRating = useMemo(() => {
-		if (entries.length === 0) return 0
-		return Math.round((entries.reduce((s, e) => s + (e.rating || 0), 0) / entries.length) * 10) / 10
-	}, [entries])
+		if (filtered.length === 0) return 0
+		return Math.round((filtered.reduce((s, e) => s + (e.rating || 0), 0) / filtered.length) * 10) / 10
+	}, [filtered])
 
 	return (
 		<div className="min-h-screen pt-20 bg-gradient-to-br from-background-primary via-background-secondary to-background-accent">
@@ -128,16 +145,43 @@ export default function JournalPage() {
 
 						<LuxuryCard variant="premium" className="p-6">
 							<h3 className="text-text-primary font-semibold mb-2">Stats</h3>
-							<p className="text-text-muted">Entries: {entries.length}</p>
+							<p className="text-text-muted">Entries: {filtered.length}</p>
 							<p className="text-text-muted">Average Rating: {averageRating}</p>
+							<div className="mt-4 flex gap-3">
+								<LuxuryButton size="sm" variant="secondary" onClick={syncNow}>Sync Now</LuxuryButton>
+							</div>
 						</LuxuryCard>
 					</div>
 
-					<div className="mt-10 space-y-6">
-						{entries.length === 0 && (
-							<LuxuryCard className="p-6 text-text-muted">No entries yet. Your recent tastings will appear here.</LuxuryCard>
+					<LuxuryCard variant="premium" className="p-6 mt-6">
+						<h3 className="text-text-primary font-semibold mb-4">Filter & Search</h3>
+						<div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+							<input placeholder="Search (cigar or notes)" value={query} onChange={(e) => setQuery(e.target.value)} className="input-luxury w-full" />
+							<select value={wrapperFilter} onChange={(e) => setWrapperFilter(e.target.value)} className="input-luxury w-full">
+								<option value="">Any wrapper</option>
+								<option>Maduro</option>
+								<option>Connecticut</option>
+								<option>Habano</option>
+								<option>Natural</option>
+								<option>Oscuro</option>
+								<option>Candela</option>
+							</select>
+							<div>
+								<label className="block text-sm text-text-muted mb-2">Min Rating</label>
+								<input type="range" min={1} max={5} step={1} value={minRating} onChange={(e) => setMinRating(parseInt(e.target.value, 10))} className="w-full" />
+								<div className="text-sm text-text-muted">{minRating}+</div>
+							</div>
+							<div className="flex items-end">
+								<LuxuryButton variant="secondary" onClick={() => { setQuery(''); setWrapperFilter(''); setMinRating(1); }}>Reset</LuxuryButton>
+							</div>
+						</div>
+					</LuxuryCard>
+
+					<div className="mt-6 space-y-6">
+						{filtered.length === 0 && (
+							<LuxuryCard className="p-6 text-text-muted">No entries match your filters.</LuxuryCard>
 						)}
-						{entries.map(entry => (
+						{filtered.map(entry => (
 							<LuxuryCard key={entry.id} variant="premium" className="p-6">
 								<div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
 									<div>

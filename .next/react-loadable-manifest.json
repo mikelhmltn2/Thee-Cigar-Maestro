@@ -12,6 +12,18 @@
       "static/chunks/476.18b983ad9e436ed4.js"
     ]
   },
+  "app/progress/page.tsx -> ../../../education.json": {
+    "id": 4347,
+    "files": [
+      "static/chunks/347.7f222b6af8de7f02.js"
+    ]
+  },
+  "app/progress/page.tsx -> ../../../pairings.json": {
+    "id": 38,
+    "files": [
+      "static/chunks/38.55a6d137951e0e85.js"
+    ]
+  },
   "app/progress/page.tsx -> @/utils/storage.js": {
     "id": 1476,
     "files": [

@@ -30,6 +30,8 @@ const STORAGE_KEY = 'progress_state_v1'
 export default function ProgressPage() {
 	const [state, setState] = useState<ProgressState>(DEFAULT_STATE)
 	const [isReady, setIsReady] = useState(false)
+	const [trackCount, setTrackCount] = useState(0)
+	const [microcredentialCount, setMicrocredentialCount] = useState(0)
 
 	// Lazy-load storageManager on client only
 	useEffect(() => {
@@ -42,6 +44,29 @@ export default function ProgressPage() {
 				if (isMounted && saved) {
 					setState(saved)
 				}
+				// Load education tracks and CEU lessons to compute total lessons
+				try {
+					const edu = (await import('../../../education.json')).default as any
+					const pair = (await import('../../../pairings.json')).default as any
+					const tracksArr = Array.isArray(edu?.educationTracks?.tracks) ? edu.educationTracks.tracks : []
+					const lessonsFromTracks = tracksArr.reduce((sum: number, t: any) => sum + (Array.isArray(t?.lessons) ? t.lessons.length : 0), 0)
+					const ceuLessons = Array.isArray(pair?.pairingEngineV3?.ceuLessons) ? pair.pairingEngineV3.ceuLessons.length : 0
+					const totalLessons = lessonsFromTracks + ceuLessons
+					if (isMounted) {
+						setTrackCount(tracksArr.length)
+						setMicrocredentialCount(Array.isArray(edu?.educationTracks?.microcredentials) ? edu.educationTracks.microcredentials.length : 0)
+						setState(prev => {
+							const next = {
+								...prev,
+								education: {
+									totalLessons: totalLessons || prev.education.totalLessons,
+									completedLessons: Math.min(prev.education.completedLessons, totalLessons || prev.education.totalLessons)
+								}
+							}
+							return next
+						})
+					}
+				} catch (_ignored) {}
 			} catch (_e) {
 				// no-op: keep defaults
 			} finally {
@@ -57,9 +82,15 @@ export default function ProgressPage() {
 		try {
 			const mod = await import('@/utils/storage.js')
 			await mod.default.setLocal(STORAGE_KEY, next)
+			// Sync to IndexedDB userData for account-ready persistence
+			await mod.default.setIndexedDB('userData', { id: 'progress', data: next, updatedAt: Date.now() })
 		} catch (_e) {
 			// ignore
 		}
+	}
+
+	const syncNow = async () => {
+		await persist(state)
 	}
 
 	const update = (partial: Partial<ProgressState>) => {
@@ -120,12 +151,14 @@ export default function ProgressPage() {
 
 						<LuxuryCard variant="premium" className="p-6">
 							<h3 className="text-text-primary font-semibold mb-2">Education Progress</h3>
-							<p className="text-text-muted mb-4">{state.education.completedLessons} of {state.education.totalLessons} lessons</p>
-							<div className="h-3 w-full bg-background-accent rounded-full overflow-hidden border border-luxury-gold/20">
+							<p className="text-text-muted mb-1">{state.education.completedLessons} of {state.education.totalLessons} lessons</p>
+							<p className="text-xs text-text-muted">Tracks: {trackCount} • Microcredentials: {microcredentialCount}</p>
+							<div className="h-3 w-full bg-background-accent rounded-full overflow-hidden border border-luxury-gold/20 mt-3">
 								<div className="h-full bg-gradient-to-r from-luxury-gold to-luxury-gold-dark" style={{ width: `${educationPct}%` }} />
 							</div>
 							<div className="flex items-center gap-3 mt-4">
 								<LuxuryButton size="sm" onClick={completeLesson}>Mark Lesson Complete</LuxuryButton>
+								<LuxuryButton size="sm" variant="secondary" onClick={syncNow}>Sync Now</LuxuryButton>
 							</div>
 						</LuxuryCard>
 
