@@ -263,7 +263,7 @@ describe('Mobile Menu Toggle Logic', () => {
       mobileMenuBtn.click();
       
       // Wait for animation
-      await new Promise(resolve => setTimeout(resolve, 350));
+      await new Promise((resolve) => { setTimeout(resolve, 350); });
       
       expect(sidePanel.classList.contains('open')).toBe(false);
       expect(document.body.classList.contains('mobile-menu-open')).toBe(false);
@@ -295,7 +295,7 @@ describe('Mobile Menu Toggle Logic', () => {
       backdrop.click();
       
       // Wait for animation
-      await new Promise(resolve => setTimeout(resolve, 350));
+      await new Promise((resolve) => { setTimeout(resolve, 350); });
       
       expect(sidePanel.classList.contains('open')).toBe(false);
     });
@@ -313,7 +313,7 @@ describe('Mobile Menu Toggle Logic', () => {
       document.dispatchEvent(escapeEvent);
       
       // Wait for animation
-      await new Promise(resolve => setTimeout(resolve, 350));
+      await new Promise((resolve) => { setTimeout(resolve, 350); });
       
       expect(sidePanel.classList.contains('open')).toBe(false);
     });
@@ -391,7 +391,7 @@ describe('Mobile Menu Toggle Logic', () => {
       uiManager.closeMobileMenu();
       
       // Wait for cleanup animations
-      await new Promise(resolve => setTimeout(resolve, 350));
+      await new Promise((resolve) => { setTimeout(resolve, 350); });
       
       uiManager.removeMobileMenuBackdrop();
       uiManager.removeEscapeKeyListener();
@@ -465,7 +465,7 @@ describe('Mobile Menu Toggle Logic', () => {
       mobileMenuBtn.click();
       
       // Wait for animation
-      await new Promise(resolve => setTimeout(resolve, 350));
+      await new Promise((resolve) => { setTimeout(resolve, 350); });
       
       expect(document.body.style.overflow).toBe('auto');
       expect(document.body.classList.contains('mobile-menu-open')).toBe(false);
