@@ -22,6 +22,8 @@ const Navigation = () => {
     { name: 'Cigars', href: '/cigars' },
     { name: 'Pairings', href: '/pairings' },
     { name: 'AI Concierge', href: '/ai-concierge' },
+    { name: 'Progress', href: '/progress' },
+    { name: 'Journal', href: '/journal' },
     { name: 'Blog', href: '/blog' },
     { name: 'Shop', href: '/shop' },
     { name: 'Virtual Humidor', href: '/humidor' },

@@ -1,10 +1,14 @@
 {
-  "../node_modules/@react-three/drei/core/VideoTexture.js -> hls.js": {
-    "id": null,
-    "files": []
+  "app/journal/page.tsx -> @/utils/storage.js": {
+    "id": 1476,
+    "files": [
+      "static/chunks/476.18b983ad9e436ed4.js"
+    ]
   },
-  "../node_modules/@react-three/drei/web/FaceLandmarker.js -> @mediapipe/tasks-vision": {
-    "id": null,
-    "files": []
+  "app/progress/page.tsx -> @/utils/storage.js": {
+    "id": 1476,
+    "files": [
+      "static/chunks/476.18b983ad9e436ed4.js"
+    ]
   }
 }

@@ -1,1 +1,1 @@
-self.__REACT_LOADABLE_MANIFEST='{"../node_modules/@react-three/drei/core/VideoTexture.js -> hls.js":{"id":null,"files":[]},"../node_modules/@react-three/drei/web/FaceLandmarker.js -> @mediapipe/tasks-vision":{"id":null,"files":[]}}';
+self.__REACT_LOADABLE_MANIFEST='{"app/journal/page.tsx -> @/utils/storage.js":{"id":1476,"files":["static/chunks/476.18b983ad9e436ed4.js"]},"app/progress/page.tsx -> @/utils/storage.js":{"id":1476,"files":["static/chunks/476.18b983ad9e436ed4.js"]}}';
