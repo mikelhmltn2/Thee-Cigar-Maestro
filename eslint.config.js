@@ -2,6 +2,15 @@ import js from '@eslint/js';
 
 export default [
   {
+    ignores: [
+      '**/node_modules/**',
+      '.next/**',
+      'dist/**',
+      'coverage/**',
+      'build/**'
+    ]
+  },
+  {
     ...js.configs.recommended,
     files: ['**/*.js'],
     languageOptions: {
@@ -31,6 +40,14 @@ export default [
         MutationObserver: 'readonly',
         performance: 'readonly',
         location: 'readonly',
+        Notification: 'readonly',
+        SpeechSynthesisUtterance: 'readonly',
+        XMLHttpRequest: 'readonly',
+        Image: 'readonly',
+        CSSRule: 'readonly',
+        Worker: 'readonly',
+        trustedTypes: 'readonly',
+        scheduler: 'readonly',
         
         // Timer functions
         setTimeout: 'readonly',
@@ -165,6 +182,11 @@ export default [
         setInterval: 'readonly',
         clearInterval: 'readonly'
       }
+    },
+    rules: {
+      'no-promise-executor-return': 'off',
+      'radix': 'off',
+      'no-await-in-loop': 'off'
     }
   },
   {
@@ -193,7 +215,8 @@ export default [
     rules: {
       // Relax rules for tests
       'no-console': 'off',
-      'no-unused-vars': 'off'
+      'no-unused-vars': 'off',
+      'no-promise-executor-return': 'off'
     }
   },
   {

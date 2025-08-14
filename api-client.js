@@ -50,7 +50,7 @@ class APIClient {
       const response = await fetch(url, finalConfig);
 
       if (!response.ok) {
-        return await handleApiError(response, endpoint, {
+        return await _handleApiError(response, endpoint, {
           enableRetry: response.status >= 500,
           retryCallback: () => this.request(endpoint, options)
         });

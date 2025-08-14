@@ -52,7 +52,7 @@ const createMockDataManager = () => ({
       // Simulate loading progress
       for (let i = 0; i <= 100; i += 20) {
         this.loadingProgress = i;
-        await new Promise(resolve => setTimeout(resolve, 10));
+        await new Promise((resolve) => { setTimeout(resolve, 10); });
       }
       
       let data;

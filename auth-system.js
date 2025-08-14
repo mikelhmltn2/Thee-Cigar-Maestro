@@ -38,7 +38,7 @@ class AuthenticationSystem {
       }
       
     } catch (error) {
-      handleError(error, 'Auth System Initialization', {
+      _handleError(error, 'Auth System Initialization', {
         timestamp: new Date().toISOString()
       });
     }

@@ -21,6 +21,14 @@ export default function ServiceWorkerRegistration() {
           })
       })
     }
+
+    // Initialize GA dataLayer without inline script for CSP compliance
+    if (typeof window !== 'undefined' && !(window as any).dataLayer) {
+      (window as any).dataLayer = []
+      ;(window as any).gtag = function () { (window as any).dataLayer.push(arguments) }
+      ;(window as any).gtag('js', new Date())
+      ;(window as any).gtag('config', 'G-ZXVHGWYLKB')
+    }
   }, [])
 
   return null

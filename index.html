@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; media-src 'self' blob:; connect-src 'self' https://theecigarmaestro.vercel.app; worker-src 'self' blob:;" />
   <title>Thee Cigar Maestro — The Art. The Ritual. The Maestro.</title>
   
   <!-- Progressive Web App Meta Tags -->
@@ -2805,45 +2804,8 @@
   <script type="module" src="analytics-integration.js"></script>
   <script type="module" src="ui-enhancements.js"></script>
   
-  <!-- Service Worker Registration -->
-  <script>
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', async () => {
-        try {
-          const registration = await navigator.serviceWorker.register('/service-worker.js');
-          console.log('✅ Service Worker registered successfully:', registration.scope);
-          
-          // Listen for service worker messages
-          navigator.serviceWorker.addEventListener('message', (event) => {
-            const { type, action } = event.data;
-            
-            if (type === 'SYNC_REQUEST') {
-              if (action === 'user-data' && window.storageManager) {
-                // Sync user data when requested
-                window.storageManager.saveData();
-                console.log('📤 User data synced');
-              }
-              
-              if (action === 'analytics' && window.storageManager) {
-                // Sync analytics when requested
-                const analytics = window.storageManager.exportData().analytics;
-                console.log('📊 Analytics synced:', analytics);
-              }
-            }
-          });
-          
-          // Register for background sync
-          if ('sync' in window.ServiceWorkerRegistration.prototype) {
-            registration.sync.register('sync-user-data');
-            registration.sync.register('sync-analytics');
-          }
-          
-        } catch (error) {
-          console.error('❌ Service Worker registration failed:', error);
-        }
-      });
-    }
-
+  <!-- Service Worker Registration handled by Next.js app -->
+  
     // Authentication State Management
     function setupAuthStateManager() {
       // Listen for authentication state changes

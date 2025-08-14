@@ -236,8 +236,10 @@ export class PerformanceOptimizer {
   async convertToWebP() {
     const images = document.querySelectorAll('img[src]');
     
-    images.forEach(img => {
-      if (!img.src.includes('.webp') && await this.supportsWebP()) {
+    const supportsWebP = await this.supportsWebP();
+    
+    for (const img of images) {
+      if (!img.src.includes('.webp') && supportsWebP) {
         const webpSrc = img.src.replace(/\.(jpg|jpeg|png)$/i, '.webp');
         
         // Create a picture element for fallback
@@ -257,12 +259,14 @@ export class PerformanceOptimizer {
         
         img.parentNode.replaceChild(picture, img);
       }
-    });
+    }
   }
 
   async supportsWebP() {
     return new Promise(resolve => {
-      const webP = new Image();
+      const webP = (typeof window !== 'undefined' && typeof window.Image !== 'undefined')
+        ? new window.Image()
+        : document.createElement('img');
       webP.onload = webP.onerror = () => resolve(webP.height === 2);
       webP.src = 'data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAACyAgCdASoCAAIALmk0mk0iIiIiIgBoSygABc6WWgAA/veff/0PP8bA//LwYAAA';
     });
@@ -390,10 +394,9 @@ export class PerformanceOptimizer {
     
     try {
       if (content.startsWith('http')) {
-        // Load external content
-        const response = await fetch(content);
-        const html = await response.text();
-        element.innerHTML = html;
+        // Block external HTML injection for security
+        console.warn('External HTML injection blocked for security:', content);
+        return;
       } else {
         // Load internal content
         const module = await import(content);
@@ -499,7 +502,7 @@ export class PerformanceOptimizer {
       try {
         const rules = Array.from(stylesheet.cssRules || []);
         rules.forEach(rule => {
-          if (rule.type === CSSRule.STYLE_RULE) {
+          if (typeof window !== 'undefined' && typeof window.CSSRule !== 'undefined' && rule.type === window.CSSRule.STYLE_RULE) {
             const selector = rule.selectorText;
             try {
               if (document.querySelector(selector)) {
@@ -556,7 +559,7 @@ export class PerformanceOptimizer {
   async setupServiceWorkerCaching() {
     if ('serviceWorker' in navigator) {
       try {
-        const registration = await navigator.serviceWorker.register('/service-worker.js');
+        const registration = await navigator.serviceWorker.register('/sw.js');
         
         // Update service worker with new caching strategies
         const swMessage = {
@@ -571,11 +574,11 @@ export class PerformanceOptimizer {
           ]
         };
         
-        registration.active?.postMessage(swMessage);
-        
-        console.log('Service Worker registered with advanced caching');
+        if (registration.active) {
+          registration.active.postMessage(swMessage);
+        }
       } catch (error) {
-        console.warn('Service Worker registration failed:', error);
+        console.warn('Service worker registration failed:', error);
       }
     }
   }
@@ -982,7 +985,7 @@ export class PerformanceOptimizer {
     this.breakUpLongTasks();
     
     // Use web workers for heavy computations
-    if ('Worker' in window) {
+    if (typeof window !== 'undefined' && 'Worker' in window) {
       this.setupWebWorkers();
     }
   }
@@ -990,8 +993,8 @@ export class PerformanceOptimizer {
   breakUpLongTasks() {
     // Use scheduler.postTask if available, otherwise use setTimeout
     const scheduleTask = (task) => {
-      if ('scheduler' in window && 'postTask' in scheduler) {
-        scheduler.postTask(task, { priority: 'user-blocking' });
+      if ('scheduler' in window && 'postTask' in (window.scheduler || {})) {
+        window.scheduler.postTask(task, { priority: 'user-blocking' });
       } else {
         setTimeout(task, 0);
       }
@@ -1008,26 +1011,28 @@ export class PerformanceOptimizer {
   }
 
   setupWebWorkers() {
-    // Create web worker for heavy computations
+    if (typeof window === 'undefined' || typeof window.Worker === 'undefined') {
+      return;
+    }
+    
     const workerScript = `
-      self.onmessage = function(e) {
-        const { type, data } = e.data;
-        
-        switch(type) {
-          case 'OPTIMIZE_IMAGES':
-            // Perform image optimization calculations
-            self.postMessage({ type: 'IMAGES_OPTIMIZED', result: data });
+      self.onmessage = async (e) => {
+        const { type, payload } = e.data;
+        switch (type) {
+          case 'heavyComputation': {
+            const result = payload.reduce((acc, num) => acc + num, 0);
+            postMessage({ type: 'result', result });
             break;
-          case 'ANALYZE_PERFORMANCE':
-            // Perform performance analysis
-            self.postMessage({ type: 'ANALYSIS_COMPLETE', result: data });
+          }
+          default:
+            postMessage({ type: 'noop' });
             break;
         }
       };
     `;
 
     const blob = new Blob([workerScript], { type: 'application/javascript' });
-    const worker = new Worker(URL.createObjectURL(blob));
+    const worker = new window.Worker(URL.createObjectURL(blob));
 
     worker.onmessage = (e) => {
       const { type, result } = e.data;
@@ -1095,7 +1100,7 @@ export class PerformanceOptimizer {
     let currentLevel = 0;
     
     headings.forEach(heading => {
-      const level = parseInt(heading.tagName.substring(1));
+      const level = parseInt(heading.tagName.substring(1), 10);
       
       if (level > currentLevel + 1) {
         console.warn(`Heading structure issue: ${heading.tagName} follows h${currentLevel}`);
