@@ -5,6 +5,7 @@ import { Toaster } from 'react-hot-toast'
 import ServiceWorkerRegistration from '@/components/ServiceWorkerRegistration'
 import './globals.css'
 import Script from 'next/script'
+import TopProgressBar from './components/TopProgressBar'
 
 const playfairDisplay = Playfair_Display({
   subsets: ['latin'],
@@ -127,6 +128,8 @@ export default function RootLayout({
         <GoogleAnalytics />
         <ServiceWorkerRegistration />
         <div className="relative min-h-screen">
+          {/* Global top progress bar for data loads */}
+          <TopProgressBar />
           {children}
         </div>
         <Toaster

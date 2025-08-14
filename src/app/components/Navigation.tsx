@@ -82,6 +82,25 @@ const Navigation = () => {
                 0
               </span>
             </Link>
+            {/* Progress badge */}
+            {typeof window !== 'undefined' && (() => {
+              try {
+                // inline read to avoid SSR issues
+                const saved = JSON.parse(localStorage.getItem('progress_state_v1') || 'null')
+                const monthlyCount = saved?.value?.monthlyCount ?? 0
+                const monthlyTarget = saved?.value?.monthlyTarget ?? 10
+                const pct = Math.max(0, Math.min(100, Math.round((monthlyCount / Math.max(1, monthlyTarget)) * 100)))
+                return (
+                  <Link href="/progress" className="hidden xl:flex items-center gap-2 px-3 py-2 rounded-luxury border border-luxury-gold/30 text-text-secondary hover:text-text-primary hover:border-luxury-gold/60 transition-colors">
+                    <span className="text-xs">Goal</span>
+                    <div className="w-20 h-2 bg-background-accent rounded-full overflow-hidden">
+                      <div className="h-full bg-luxury-gold" style={{ width: `${pct}%` }} />
+                    </div>
+                    <span className="text-xs">{monthlyCount}/{monthlyTarget}</span>
+                  </Link>
+                )
+              } catch { return null }
+            })()}
             <Link href="/shop" className="btn-primary">
               Shop Now
             </Link>
