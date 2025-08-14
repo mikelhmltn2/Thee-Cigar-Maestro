@@ -24,12 +24,18 @@ const PORT = process.env.PORT || 3000;
 // Initialize cache
 const cache = new NodeCache({ stdTTL: 600 }); // 10 minutes default TTL
 
+// Security: require JWT secret in environment for non-test environments
+if (!process.env.JWT_SECRET && process.env.NODE_ENV !== 'test') {
+  console.error('JWT_SECRET is required in environment variables');
+  process.exit(1);
+}
+
 // Middleware
 app.use(helmet());
 app.use(compression());
 app.use(morgan('combined'));
 app.use(cors({
-  origin: process.env.FRONTEND_URL || ['http://localhost:5173', 'http://localhost:8000'],
+  origin: process.env.FRONTEND_URL || 'http://localhost:3000',
   credentials: true
 }));
 
@@ -71,14 +77,14 @@ const _cigars = new Map();
 const _reviews = new Map();
 
 // JWT secret
-const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key-change-in-production';
+const JWT_SECRET = process.env.JWT_SECRET;
 
 // Middleware for authentication
 const authenticateToken = (req, res, next) => {
   const authHeader = req.headers['authorization'];
   const token = authHeader && authHeader.split(' ')[1];
 
-  if (token === null) return res.sendStatus(401);
+  if (!token) return res.sendStatus(401);
 
   return jwt.verify(token, JWT_SECRET, (err, user) => {
     if (err) return res.sendStatus(403);

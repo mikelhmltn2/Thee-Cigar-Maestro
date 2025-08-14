@@ -140,7 +140,7 @@ thee-cigar-maestro/
 ## 🔧 Configuration
 
 ### Development Setup
-This project now includes a modern build system with Vite and comprehensive tooling:
+This project uses Next.js as the primary app with a single service worker at `/sw.js`.
 
 ```bash
 # Install dependencies
@@ -163,11 +163,20 @@ prettier --write .
 ```
 
 ### Build System
-- **Vite**: Modern build tool with HMR
-- **PWA Plugin**: Service worker generation and manifest
-- **ESLint 9.x**: Modern linting with flat config
-- **Vitest**: Fast unit testing framework
-- **TypeScript**: Type checking for enhanced development
+- Next.js 14
+- ESLint flat config
+- Vitest for unit tests
+- TypeScript for type checking
+
+### Security and CSP
+- CSP is delivered via Next.js headers only (no meta CSP on pages)
+- No 'unsafe-eval'; inline scripts avoided to reduce 'unsafe-inline' usage
+- GA is loaded via `next/script` and initialized without inline
+
+### PWA
+- Single service worker: `public/sw.js`
+- Offline fallback at `public/offline.html`
+- Manifest icons located under `public/icons/`
 
 ### API Configuration
 Update the GPT API endpoint in `gpt.js`:

@@ -6,9 +6,7 @@ const RUNTIME_CACHE = 'runtime-cache-v1';
 const STATIC_ASSETS = [
   '/',
   '/offline.html',
-  '/manifest.json',
-  '/fonts/playfair-display-v30-latin-regular.woff2',
-  '/fonts/source-serif-pro-v15-latin-regular.woff2',
+  '/manifest.json'
 ];
 
 // Install event - cache static assets

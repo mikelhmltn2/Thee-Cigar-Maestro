@@ -1053,20 +1053,20 @@ class VirtualHumidorSystem {
     const agingProgress = this.calculateAgingProgress(cigar);
     
     return `
-      <div class="cigar-card" data-cigar-id="${cigar.id}">
+      <div class="cigar-card" data-cigar-id="${escapeHTML(cigar.id)}">
         <div class="cigar-header">
           <div>
-            <h4 class="cigar-name">${cigar.name}</h4>
-            <p class="cigar-brand">${cigar.brand}</p>
+            <h4 class="cigar-name">${escapeHTML(cigar.name)}</h4>
+            <p class="cigar-brand">${escapeHTML(cigar.brand)}</p>
           </div>
           <div class="cigar-actions">
-            <button class="cigar-action" onclick="window.virtualHumidor.smokeCigar('${cigar.id}')" title="Smoke">
+            <button class="cigar-action" onclick="window.virtualHumidor.smokeCigar('${escapeHTML(cigar.id)}')" title="Smoke">
               🚬
             </button>
-            <button class="cigar-action" onclick="window.virtualHumidor.editCigar('${cigar.id}')" title="Edit">
+            <button class="cigar-action" onclick="window.virtualHumidor.editCigar('${escapeHTML(cigar.id)}')" title="Edit">
               ✏️
             </button>
-            <button class="cigar-action" onclick="window.virtualHumidor.removeCigar('${cigar.id}')" title="Remove">
+            <button class="cigar-action" onclick="window.virtualHumidor.removeCigar('${escapeHTML(cigar.id)}')" title="Remove">
               🗑️
             </button>
           </div>
@@ -1075,19 +1075,19 @@ class VirtualHumidorSystem {
         <div class="cigar-details">
           <div class="cigar-detail">
             <span class="detail-label">Wrapper</span>
-            <span class="detail-value">${cigar.wrapper}</span>
+            <span class="detail-value">${escapeHTML(cigar.wrapper)}</span>
           </div>
           <div class="cigar-detail">
             <span class="detail-label">Strength</span>
-            <span class="detail-value">${cigar.strength}</span>
+            <span class="detail-value">${escapeHTML(cigar.strength)}</span>
           </div>
           <div class="cigar-detail">
             <span class="detail-label">Size</span>
-            <span class="detail-value">${cigar.size}</span>
+            <span class="detail-value">${escapeHTML(cigar.size)}</span>
           </div>
           <div class="cigar-detail">
             <span class="detail-label">Quantity</span>
-            <span class="detail-value">${cigar.quantity}</span>
+            <span class="detail-value">${escapeHTML(cigar.quantity)}</span>
           </div>
         </div>
         
@@ -1228,11 +1228,11 @@ class VirtualHumidorSystem {
     alertsContainer.innerHTML = activeAlerts.map(alert => `
       <div class="alert-item">
         <div class="alert-info">
-          <h4>${alert.cigarName}</h4>
+          <h4>${escapeHTML(alert.cigarName)}</h4>
           <p class="alert-description">Ready on ${alert.targetDate.toLocaleDateString()}</p>
         </div>
         <div class="alert-actions">
-          <button class="alert-btn" onclick="window.virtualHumidor.dismissAlert('${alert.id}')">
+          <button class="alert-btn" onclick="window.virtualHumidor.dismissAlert('${escapeHTML(alert.id)}')">
             Dismiss
           </button>
         </div>
@@ -1262,12 +1262,12 @@ class VirtualHumidorSystem {
     pairingContainer.innerHTML = pairings.map(pairing => `
       <div class="pairing-item">
         <div class="pairing-header">
-          <span class="pairing-cigar">${pairing.cigarName}</span>
+          <span class="pairing-cigar">${escapeHTML(pairing.cigarName)}</span>
           <span class="pairing-date">${pairing.date.toLocaleDateString()}</span>
         </div>
         <div class="pairing-details">
           <div class="pairing-with">
-            <strong>Paired with:</strong> ${pairing.pairedWith}
+            <strong>Paired with:</strong> ${escapeHTML(pairing.pairedWith)}
           </div>
           <div class="pairing-rating">
             <span>Rating:</span>
@@ -1276,7 +1276,7 @@ class VirtualHumidorSystem {
             </div>
           </div>
         </div>
-        ${pairing.notes ? `<div class="pairing-notes">${pairing.notes}</div>` : ''}
+        ${pairing.notes ? `<div class="pairing-notes">${escapeHTML(pairing.notes)}</div>` : ''}
       </div>
     `).join('');
   }
@@ -1405,6 +1405,13 @@ class VirtualHumidorSystem {
   generateAlertId() {
     return 'alert_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
   }
+}
+
+// Simple HTML escape to prevent XSS when injecting dynamic content
+function escapeHTML(str) {
+  const div = document.createElement('div');
+  div.textContent = String(str ?? '');
+  return div.innerHTML;
 }
 
 // Initialize Virtual Humidor System

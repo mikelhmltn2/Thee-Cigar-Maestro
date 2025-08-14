@@ -4,6 +4,7 @@ import { GoogleAnalytics } from './components/GoogleAnalytics'
 import { Toaster } from 'react-hot-toast'
 import ServiceWorkerRegistration from '@/components/ServiceWorkerRegistration'
 import './globals.css'
+import Script from 'next/script'
 
 const playfairDisplay = Playfair_Display({
   subsets: ['latin'],
@@ -108,17 +109,7 @@ export default function RootLayout({
     >
       <head>
         {/* Google Analytics */}
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZXVHGWYLKB"></script>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', 'G-ZXVHGWYLKB');
-            `,
-          }}
-        />
+        <Script src="https://www.googletagmanager.com/gtag/js?id=G-ZXVHGWYLKB" strategy="afterInteractive" />
         
         {/* Preconnect to external domains */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />

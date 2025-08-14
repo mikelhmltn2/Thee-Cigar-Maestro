@@ -18,7 +18,7 @@ const nextConfig = {
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
     domains: ['cdn.theecigarmaestro.com', 'images.unsplash.com'],
-    dangerouslyAllowSVG: true,
+    dangerouslyAllowSVG: false,
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
 
@@ -56,12 +56,12 @@ const nextConfig = {
             key: 'Content-Security-Policy',
             value: [
               "default-src 'self'",
-              "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://www.googletagmanager.com https://js.stripe.com",
+              "script-src 'self' https://www.googletagmanager.com https://js.stripe.com",
               "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
               "font-src 'self' https://fonts.gstatic.com",
               "img-src 'self' data: https: blob:",
               "media-src 'self' blob:",
-              "connect-src 'self' https://api.stripe.com https://api.openai.com https://www.google-analytics.com",
+              "connect-src 'self' https://api.stripe.com https://api.openai.com https://www.google-analytics.com https://www.googletagmanager.com",
               "frame-src https://js.stripe.com https://hooks.stripe.com",
               "worker-src 'self' blob:"
             ].join('; ')

@@ -390,10 +390,9 @@ export class PerformanceOptimizer {
     
     try {
       if (content.startsWith('http')) {
-        // Load external content
-        const response = await fetch(content);
-        const html = await response.text();
-        element.innerHTML = html;
+        // Block external HTML injection for security
+        console.warn('External HTML injection blocked for security:', content);
+        return;
       } else {
         // Load internal content
         const module = await import(content);
@@ -556,7 +555,7 @@ export class PerformanceOptimizer {
   async setupServiceWorkerCaching() {
     if ('serviceWorker' in navigator) {
       try {
-        const registration = await navigator.serviceWorker.register('/service-worker.js');
+        const registration = await navigator.serviceWorker.register('/sw.js');
         
         // Update service worker with new caching strategies
         const swMessage = {
@@ -571,11 +570,11 @@ export class PerformanceOptimizer {
           ]
         };
         
-        registration.active?.postMessage(swMessage);
-        
-        console.log('Service Worker registered with advanced caching');
+        if (registration.active) {
+          registration.active.postMessage(swMessage);
+        }
       } catch (error) {
-        console.warn('Service Worker registration failed:', error);
+        console.warn('Service worker registration failed:', error);
       }
     }
   }
