@@ -397,6 +397,9 @@ describe('Mobile Menu Toggle Logic', () => {
       uiManager.removeEscapeKeyListener();
       document.body.classList.remove('mobile-menu-open');
       
+      // Give time for backdrop removal animation to complete
+      await new Promise((resolve) => { setTimeout(resolve, 310); });
+      
       // Menu should be properly cleaned up
       expect(document.body.classList.contains('mobile-menu-open')).toBe(false);
       expect(document.querySelector('.mobile-menu-backdrop')).toBeFalsy();

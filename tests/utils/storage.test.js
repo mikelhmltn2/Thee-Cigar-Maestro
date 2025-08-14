@@ -274,17 +274,29 @@ describe('StorageManager', () => {
     });
 
     it('should handle storage detection errors', () => {
-      // Mock storage to throw an error
-      const originalSetItem = Storage.prototype.setItem;
-      Storage.prototype.setItem = vi.fn(() => {
-        throw new Error('Storage not available');
+      // Temporarily replace window.localStorage to throw on setItem
+      const originalWindowLocalStorage = window.localStorage;
+      const throwingLocalStorage = new Proxy(originalWindowLocalStorage, {
+        get(target, prop) {
+          if (prop === 'setItem') {
+            return () => { throw new Error('Storage not available'); };
+          }
+          return Reflect.get(target, prop);
+        }
+      });
+      Object.defineProperty(window, 'localStorage', {
+        configurable: true,
+        get: () => throwingLocalStorage
       });
       
       const available = storageManager.checkStorageAvailability('localStorage');
       expect(available).toBe(false);
       
-      // Restore original method
-      Storage.prototype.setItem = originalSetItem;
+      // Restore original
+      Object.defineProperty(window, 'localStorage', {
+        configurable: true,
+        get: () => originalWindowLocalStorage
+      });
     });
   });
 

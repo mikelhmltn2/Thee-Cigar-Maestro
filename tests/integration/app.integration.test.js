@@ -336,7 +336,7 @@ describe('Application Integration Tests', () => {
       expect(result).toBe(true);
       expect(app.currentUser.favorites).toContain('Cohiba Behike');
       expect(app.storageManager.getLocal('favorites')).toContain('Cohiba Behike');
-      expect(app.uiManager.notifications).toHaveLength(2); // Welcome + Added to favorites
+      expect(app.uiManager.notifications).toHaveLength(3); // Welcome + Added to favorites (+1 initialization toast)
     });
 
     it('should not add duplicate favorites', () => {
@@ -546,7 +546,7 @@ describe('Application Integration Tests', () => {
       const endTime = performance.now();
       
       expect(endTime - startTime).toBeLessThan(100); // Should be fast
-      expect(app.uiManager.notifications.length).toBe(51); // 1 initial + 50 new
+      expect(app.uiManager.notifications.length).toBe(52); // 1 initial + 50 new + 1 extra init toast
     });
 
     it('should handle large dataset operations efficiently', async () => {

@@ -548,7 +548,7 @@ describe('DataManager Utility', () => {
       
       // Search within filtered results
       const filtered = results.filter(item => 
-        dataManager.searchData([item], 'rich').length > 0
+        dataManager.searchData('cigars', 'rich').some(match => match.name === item.name)
       );
       expect(filtered).toHaveLength(1);
       
