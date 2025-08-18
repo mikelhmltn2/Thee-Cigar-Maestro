@@ -5,9 +5,12 @@
  * Tests all JSON data sources and their integration points
  */
 
-const fs = require('fs');
-// Path module temporarily disabled
-// const path = require('path');
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 class IntegrationTestSuite {
   constructor() {
@@ -496,11 +499,11 @@ class IntegrationTestSuite {
 }
 
 // Run tests if called directly
-if (require.main === module) {
+if (import.meta.url === `file://${process.argv[1]}`) {
   const testSuite = new IntegrationTestSuite();
   testSuite.runAllTests().then(success => {
     process.exit(success ? 0 : 1);
   });
 }
 
-module.exports = IntegrationTestSuite;
+export default IntegrationTestSuite;

@@ -89,11 +89,11 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
 
-      - name: 🔨 Make Deploy Script Executable
-        run: chmod +x deploy.sh
+      - name: 📦 Install Dependencies
+        run: npm install --legacy-peer-deps || npm install --force
 
-      - name: 🏗️ Run Production Build
-        run: ./deploy.sh build
+      - name: 🏗️ Build Next.js Application
+        run: npm run build
 
       - name: 📊 Build Summary
         run: |

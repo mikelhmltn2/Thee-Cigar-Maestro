@@ -5,8 +5,12 @@
  * Validates JSON files for proper structure, completeness, and integration readiness
  */
 
-const fs = require('fs');
-const path = require('path');
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 class EnhancedDataValidator {
   constructor() {
@@ -606,10 +610,10 @@ class EnhancedDataValidator {
 }
 
 // Run validation if called directly
-if (require.main === module) {
+if (import.meta.url === `file://${process.argv[1]}`) {
   const validator = new EnhancedDataValidator();
   const success = validator.run();
   process.exit(success ? 0 : 1);
 }
 
-module.exports = EnhancedDataValidator;
+export default EnhancedDataValidator;
