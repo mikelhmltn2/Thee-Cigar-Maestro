@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import { Playfair_Display, Source_Serif_4, Crimson_Text } from 'next/font/google'
-import { GoogleAnalytics } from './components/GoogleAnalytics'
+// import { GoogleAnalytics } from './components/GoogleAnalytics'
 import { Toaster } from 'react-hot-toast'
 import ServiceWorkerRegistration from '@/components/ServiceWorkerRegistration'
 import './globals.css'
@@ -124,7 +124,7 @@ export default function RootLayout({
         <link rel="manifest" href="/manifest.json" />
       </head>
       <body className="luxury-gradient font-body text-text-primary antialiased">
-        <GoogleAnalytics />
+        {/* <GoogleAnalytics /> */}
         <ServiceWorkerRegistration />
         <div className="relative min-h-screen">
           {children}
