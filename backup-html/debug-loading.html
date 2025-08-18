@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debug Loading - Thee Cigar Maestro</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background: #121212;
+            color: #f0e6d2;
+        }
+        .debug-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .debug-section {
+            background: #1c1c1c;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            border: 1px solid #444;
+        }
+        .error { color: #dc3545; }
+        .success { color: #28a745; }
+        .warning { color: #ffc107; }
+        .btn {
+            background: #c69c6d;
+            color: #121212;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        .btn:hover {
+            background: #a67856;
+        }
+        pre {
+            background: #000;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            color: #0f0;
+        }
+    </style>
+</head>
+<body>
+    <div class="debug-container">
+        <h1>🐛 Loading Debug Tool</h1>
+        
+        <div class="debug-section">
+            <h2>Quick Actions</h2>
+            <button class="btn" onclick="openMainApp()">Open Main App</button>
+            <button class="btn" onclick="openMainAppWithDebug()">Open Main App (Debug Mode)</button>
+            <button class="btn" onclick="testDataFiles()">Test Data Files</button>
+            <button class="btn" onclick="forceLoadingDismiss()">Force Dismiss Loading</button>
+        </div>
+
+        <div class="debug-section">
+            <h2>Common Issues & Solutions</h2>
+            <ul>
+                <li><strong>Module Loading Issues:</strong> Check browser console for ES6 module errors</li>
+                <li><strong>Data File Errors:</strong> Verify all JSON files are accessible via HTTP</li>
+                <li><strong>3D Initialization:</strong> Three.js and WebGL must be supported</li>
+                <li><strong>Network Issues:</strong> CDN resources might be blocked</li>
+            </ul>
+        </div>
+
+        <div class="debug-section">
+            <h2>Manual Override</h2>
+            <p>If the main app is stuck on loading, use this JavaScript in the browser console:</p>
+            <pre>
+// Force dismiss loading overlay
+const loadingOverlay = document.getElementById('loadingOverlay');
+if (loadingOverlay) {
+    loadingOverlay.style.display = 'none';
+}
+
+// Or navigate to main sections manually
+if (window.uiManager) {
+    window.uiManager.hideLoading();
+    window.uiManager.navigateToSection('explore');
+}
+            </pre>
+        </div>
+
+        <div class="debug-section">
+            <h2>Test Results</h2>
+            <div id="testResults"></div>
+        </div>
+    </div>
+
+    <script>
+        function openMainApp() {
+            window.open('index.html', '_blank');
+        }
+
+        function openMainAppWithDebug() {
+            window.open('index.html?debug=true', '_blank');
+        }
+
+        function testDataFiles() {
+            const results = document.getElementById('testResults');
+            results.innerHTML = '<p>Testing data files...</p>';
+            
+            const dataFiles = [
+                'flavorverse_nodes.json',
+                'features.json',
+                'education.json',
+                'pairings.json',
+                'flavor-atlas.json',
+                'cigar-specs.json'
+            ];
+
+            dataFiles.forEach(async (file) => {
+                try {
+                    const response = await fetch(file);
+                    if (response.ok) {
+                        results.innerHTML += `<p class="success">✓ ${file} - OK</p>`;
+                    } else {
+                        results.innerHTML += `<p class="error">✗ ${file} - ${response.status}</p>`;
+                    }
+                } catch (error) {
+                    results.innerHTML += `<p class="error">✗ ${file} - ${error.message}</p>`;
+                }
+            });
+        }
+
+        function forceLoadingDismiss() {
+            // Open main app in new window and inject dismiss script
+            const mainWindow = window.open('index.html', '_blank');
+            
+            setTimeout(() => {
+                try {
+                    mainWindow.eval(`
+                        const loadingOverlay = document.getElementById('loadingOverlay');
+                        if (loadingOverlay) {
+                            loadingOverlay.style.display = 'none';
+                            console.log('Loading overlay forcefully dismissed');
+                        }
+                        
+                        // Try to initialize minimal UI
+                        if (window.uiManager) {
+                            window.uiManager.hideLoading();
+                        }
+                    `);
+                } catch (e) {
+                    console.log('Could not inject script into main window (likely cross-origin)');
+                    alert('Please manually run the JavaScript code shown in the "Manual Override" section in the main app\'s console.');
+                }
+            }, 2000);
+        }
+
+        // Auto-test on page load
+        window.addEventListener('DOMContentLoaded', () => {
+            setTimeout(testDataFiles, 1000);
+        });
+    </script>
+</body>
+</html>

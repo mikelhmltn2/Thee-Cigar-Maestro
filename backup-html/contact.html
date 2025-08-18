@@ -1,0 +1,325 @@
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+      <title>Contact & Access - Thee Cigar Maestro</title>
+      <link rel="stylesheet" href="style.css" />
+      <style>
+        .contact-container {
+          max-width: 1200px;
+          margin: 0 auto;
+          padding: var(--spacing-xl);
+        }
+        
+        .contact-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: var(--spacing-xxl);
+          margin-top: var(--spacing-xl);
+        }
+        
+        .contact-form {
+          background: var(--secondary-bg);
+          padding: var(--spacing-xl);
+          border-radius: var(--border-radius);
+          border: 1px solid var(--border-color);
+        }
+        
+        .form-group {
+          margin-bottom: var(--spacing-lg);
+        }
+        
+        .form-group label {
+          display: block;
+          margin-bottom: var(--spacing-sm);
+          color: var(--accent-text);
+          font-weight: bold;
+        }
+        
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+          width: 100%;
+          padding: var(--spacing-md);
+          background: var(--accent-bg);
+          border: 1px solid var(--border-color);
+          border-radius: var(--border-radius);
+          color: var(--primary-text);
+          font-family: var(--font-family);
+          transition: var(--transition);
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+          outline: none;
+          border-color: var(--accent-text);
+          box-shadow: 0 0 0 2px rgba(198, 156, 109, 0.2);
+        }
+        
+        .submit-btn {
+          background: linear-gradient(135deg, var(--accent-text), var(--secondary-text));
+          color: var(--primary-bg);
+          border: none;
+          padding: var(--spacing-md) var(--spacing-xl);
+          border-radius: var(--border-radius);
+          cursor: pointer;
+          font-family: var(--font-family);
+          font-weight: bold;
+          transition: var(--transition);
+          width: 100%;
+        }
+        
+        .submit-btn:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 4px 12px rgba(198, 156, 109, 0.3);
+        }
+        
+        .contact-info {
+          background: var(--secondary-bg);
+          padding: var(--spacing-xl);
+          border-radius: var(--border-radius);
+          border: 1px solid var(--border-color);
+        }
+        
+        .social-links {
+          display: flex;
+          gap: var(--spacing-md);
+          margin-top: var(--spacing-lg);
+        }
+        
+        .social-link {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          width: 48px;
+          height: 48px;
+          background: var(--accent-bg);
+          border-radius: 50%;
+          color: var(--accent-text);
+          text-decoration: none;
+          transition: var(--transition);
+        }
+        
+        .social-link:hover {
+          background: var(--accent-text);
+          color: var(--primary-bg);
+          transform: scale(1.1);
+        }
+        
+        .booking-options {
+          margin-top: var(--spacing-xl);
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+          gap: var(--spacing-lg);
+        }
+        
+        .booking-card {
+          background: var(--accent-bg);
+          padding: var(--spacing-lg);
+          border-radius: var(--border-radius);
+          border: 1px solid var(--border-color);
+          text-align: center;
+          transition: var(--transition);
+          cursor: pointer;
+        }
+        
+        .booking-card:hover {
+          transform: translateY(-4px);
+          box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+          border-color: var(--accent-text);
+        }
+        
+        .booking-card h3 {
+          color: var(--accent-text);
+          margin-bottom: var(--spacing-md);
+        }
+        
+        @media (max-width: 768px) {
+          .contact-grid {
+            grid-template-columns: 1fr;
+            gap: var(--spacing-lg);
+          }
+        }
+      </style>
+    </head>
+    <body>
+      <header>
+        <h1>Get in Touch</h1>
+        <nav>
+          <a href="index.html">Home</a>
+          <a href="specs.html">Specs</a>
+          <a href="pairing.html">Pairing</a>
+          <a href="education.html">Education</a>
+          <a href="legacy.html">Legacy</a>
+          <a href="flavorverse.html">Flavorverse</a>
+          <a href="nft.html">NFT Vault</a>
+          <a href="kiosk.html">Kiosk</a>
+          <a href="contact.html" class="active">Contact</a>
+        </nav>
+      </header>
+
+      <div class="contact-container">
+        <section>
+          <h2>Book Demos, Schedule Lounge Sync, Request Access</h2>
+          <p>Connect with our team of cigar maestros to enhance your tobacco journey. Whether you're seeking expert guidance, booking a personalized session, or exploring our premium services, we're here to help.</p>
+        </section>
+
+        <div class="contact-grid">
+          <div class="contact-form">
+            <h3>Send us a Message</h3>
+            <form id="contactForm">
+              <div class="form-group">
+                <label for="name">Full Name *</label>
+                <input type="text" id="name" name="name" required>
+              </div>
+              
+              <div class="form-group">
+                <label for="email">Email Address *</label>
+                <input type="email" id="email" name="email" required>
+              </div>
+              
+              <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" name="phone">
+              </div>
+              
+              <div class="form-group">
+                <label for="inquiry-type">Inquiry Type *</label>
+                <select id="inquiry-type" name="inquiry-type" required>
+                  <option value="">Select an option</option>
+                  <option value="demo">Product Demo</option>
+                  <option value="lounge">Lounge Consultation</option>
+                  <option value="education">CEU Certification</option>
+                  <option value="partnership">Partnership Inquiry</option>
+                  <option value="support">Technical Support</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+              
+              <div class="form-group">
+                <label for="message">Message *</label>
+                <textarea id="message" name="message" rows="5" required placeholder="Tell us about your cigar interests and how we can help..."></textarea>
+              </div>
+              
+              <button type="submit" class="submit-btn">Send Message</button>
+            </form>
+          </div>
+
+          <div class="contact-info">
+            <h3>Contact Information</h3>
+            <div style="margin-bottom: var(--spacing-lg);">
+              <h4>Email</h4>
+              <p><a href="mailto:info@theecigarmaestro.com" style="color: var(--accent-text); text-decoration: none;">info@theecigarmaestro.com</a></p>
+            </div>
+            
+            <div style="margin-bottom: var(--spacing-lg);">
+              <h4>Business Hours</h4>
+              <p>Monday - Friday: 9:00 AM - 6:00 PM EST<br>
+              Saturday: 10:00 AM - 4:00 PM EST<br>
+              Sunday: By appointment only</p>
+            </div>
+            
+            <div>
+              <h4>Follow Us</h4>
+              <p>Stay connected for the latest in cigar culture and events.</p>
+              <div class="social-links">
+                <a href="https://instagram.com/theecigarmaestro" target="_blank" rel="noopener" class="social-link" title="Instagram">
+                  <span>📷</span>
+                </a>
+                <a href="https://facebook.com/theecigarmaestro" target="_blank" rel="noopener" class="social-link" title="Facebook">
+                  <span>📘</span>
+                </a>
+                <a href="https://twitter.com/cigarmaestro" target="_blank" rel="noopener" class="social-link" title="Twitter">
+                  <span>🐦</span>
+                </a>
+                <a href="https://linkedin.com/company/theecigarmaestro" target="_blank" rel="noopener" class="social-link" title="LinkedIn">
+                  <span>💼</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="booking-options">
+          <div class="booking-card" onclick="selectBookingType('demo')">
+            <h3>🎯 Product Demo</h3>
+            <p>Experience our AI-powered pairing engine and see how technology meets tradition.</p>
+          </div>
+          
+          <div class="booking-card" onclick="selectBookingType('lounge')">
+            <h3>🏛️ Lounge Integration</h3>
+            <p>Discover how our kiosk system can enhance your lounge experience and customer engagement.</p>
+          </div>
+          
+          <div class="booking-card" onclick="selectBookingType('education')">
+            <h3>🎓 CEU Certification</h3>
+            <p>Learn about our continuing education programs and certification pathways.</p>
+          </div>
+          
+          <div class="booking-card" onclick="selectBookingType('partnership')">
+            <h3>🤝 Partnership</h3>
+            <p>Explore collaboration opportunities with Thee Cigar Maestro platform.</p>
+          </div>
+        </div>
+      </div>
+
+      <script>
+        // Form submission handler
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+          e.preventDefault();
+          
+          // Get form data
+          const formData = new FormData(this);
+          const data = Object.fromEntries(formData);
+          
+          // Show success message
+          const submitBtn = this.querySelector('.submit-btn');
+          const originalText = submitBtn.textContent;
+          submitBtn.textContent = 'Message Sent!';
+          submitBtn.style.background = 'var(--success-color)';
+          
+          // Reset form after delay
+          setTimeout(() => {
+            this.reset();
+            submitBtn.textContent = originalText;
+            submitBtn.style.background = '';
+          }, 3000);
+          
+          // In a real implementation, you would send this data to your backend
+          console.log('Contact form submitted:', data);
+        });
+        
+        // Booking card selection
+        function selectBookingType(type) {
+          const inquirySelect = document.getElementById('inquiry-type');
+          const messageTextarea = document.getElementById('message');
+          
+          const typeMap = {
+            demo: 'demo',
+            lounge: 'lounge',
+            education: 'education',
+            partnership: 'partnership'
+          };
+          
+          const messageMap = {
+            demo: 'I\'m interested in seeing a product demonstration of your AI pairing engine and platform capabilities.',
+            lounge: 'I\'d like to learn more about integrating your kiosk system into our lounge environment.',
+            education: 'I\'m interested in your CEU certification programs and educational offerings.',
+            partnership: 'I\'d like to explore partnership opportunities with Thee Cigar Maestro.'
+          };
+          
+          inquirySelect.value = typeMap[type] || '';
+          messageTextarea.value = messageMap[type] || '';
+          
+          // Scroll to form
+          document.querySelector('.contact-form').scrollIntoView({ behavior: 'smooth' });
+        }
+      </script>
+      
+      <script type="module" src="gpt.js"></script>
+    </body>
+    </html>
+    

@@ -1,0 +1,766 @@
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+      <title>Cigar Specifications - Thee Cigar Maestro</title>
+      <link rel="stylesheet" href="style.css" />
+      <style>
+    .specs-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: var(--spacing-xl);
+    }
+    
+    .search-section {
+      background: var(--secondary-bg);
+      padding: var(--spacing-xl);
+      border-radius: var(--border-radius);
+      border: 1px solid var(--border-color);
+      margin-bottom: var(--spacing-xl);
+    }
+    
+    .search-bar {
+      display: flex;
+      gap: var(--spacing-md);
+      margin-bottom: var(--spacing-lg);
+    }
+    
+    .search-input {
+      flex: 1;
+      padding: var(--spacing-md);
+      background: var(--accent-bg);
+      border: 1px solid var(--border-color);
+      border-radius: var(--border-radius);
+      color: var(--primary-text);
+      font-family: var(--font-family);
+      font-size: 1rem;
+    }
+    
+    .search-btn {
+      background: linear-gradient(135deg, var(--accent-text), var(--secondary-text));
+      color: var(--primary-bg);
+      border: none;
+      padding: var(--spacing-md) var(--spacing-xl);
+      border-radius: var(--border-radius);
+      cursor: pointer;
+      font-family: var(--font-family);
+      font-weight: bold;
+      transition: var(--transition);
+      white-space: nowrap;
+    }
+    
+    .search-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(198, 156, 109, 0.3);
+    }
+    
+    .filter-section {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: var(--spacing-lg);
+    }
+    
+    .filter-group {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-sm);
+    }
+    
+    .filter-label {
+      color: var(--accent-text);
+      font-weight: bold;
+      font-size: 0.9rem;
+    }
+    
+    .filter-select {
+      padding: var(--spacing-sm) var(--spacing-md);
+      background: var(--accent-bg);
+      border: 1px solid var(--border-color);
+      border-radius: var(--border-radius);
+      color: var(--primary-text);
+      font-family: var(--font-family);
+    }
+    
+    .specs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: var(--spacing-lg);
+      margin-top: var(--spacing-xl);
+    }
+    
+    .cigar-card {
+      background: var(--secondary-bg);
+      border: 1px solid var(--border-color);
+      border-radius: var(--border-radius);
+      padding: var(--spacing-lg);
+      transition: var(--transition);
+      cursor: pointer;
+    }
+    
+    .cigar-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+      border-color: var(--accent-text);
+    }
+    
+    .cigar-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: var(--spacing-md);
+    }
+    
+    .cigar-name {
+      color: var(--accent-text);
+      font-size: 1.2rem;
+      font-weight: bold;
+      margin: 0;
+    }
+    
+    .cigar-brand {
+      color: var(--secondary-text);
+      font-size: 0.9rem;
+    }
+    
+    .strength-indicator {
+      padding: var(--spacing-xs) var(--spacing-sm);
+      border-radius: 12px;
+      font-size: 0.8rem;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+    
+    .strength-mild {
+      background: #28a745;
+      color: white;
+    }
+    
+    .strength-medium {
+      background: #ffc107;
+      color: black;
+    }
+    
+    .strength-full {
+      background: #dc3545;
+      color: white;
+    }
+    
+    .cigar-details {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--spacing-sm);
+      margin-bottom: var(--spacing-md);
+    }
+    
+    .detail-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: var(--spacing-xs) 0;
+    }
+    
+    .detail-label {
+      color: var(--secondary-text);
+      font-size: 0.9rem;
+    }
+    
+    .detail-value {
+      color: var(--primary-text);
+      font-weight: bold;
+      font-size: 0.9rem;
+    }
+    
+    .flavor-profile {
+      background: var(--accent-bg);
+      padding: var(--spacing-md);
+      border-radius: var(--border-radius);
+      margin-top: var(--spacing-md);
+    }
+    
+    .flavor-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--spacing-xs);
+      margin-top: var(--spacing-sm);
+    }
+    
+    .flavor-tag {
+      background: var(--primary-bg);
+      color: var(--accent-text);
+      padding: var(--spacing-xs) var(--spacing-sm);
+      border-radius: 12px;
+      font-size: 0.8rem;
+      border: 1px solid var(--border-color);
+    }
+    
+    .loading-state {
+      text-align: center;
+      color: var(--secondary-text);
+      padding: var(--spacing-xxl);
+    }
+    
+    .no-results {
+      text-align: center;
+      color: var(--secondary-text);
+      padding: var(--spacing-xxl);
+      background: var(--accent-bg);
+      border-radius: var(--border-radius);
+      border: 1px solid var(--border-color);
+    }
+    
+    .stats-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--accent-bg);
+      padding: var(--spacing-md) var(--spacing-lg);
+      border-radius: var(--border-radius);
+      margin-bottom: var(--spacing-lg);
+    }
+    
+    .results-count {
+      color: var(--accent-text);
+      font-weight: bold;
+    }
+    
+    .sort-controls {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-md);
+    }
+    
+    .sort-label {
+      color: var(--secondary-text);
+      font-size: 0.9rem;
+    }
+    
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .modal-content {
+      background: var(--secondary-bg);
+      padding: var(--spacing-xxl);
+      border-radius: var(--border-radius);
+      border: 1px solid var(--border-color);
+      max-width: 600px;
+      max-height: 80vh;
+      overflow-y: auto;
+      position: relative;
+    }
+    
+    .modal-close {
+      position: absolute;
+      top: var(--spacing-md);
+      right: var(--spacing-md);
+      background: none;
+      border: none;
+      color: var(--accent-text);
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+    
+    @media (max-width: 768px) {
+      .search-bar {
+        flex-direction: column;
+      }
+      
+      .filter-section {
+        grid-template-columns: 1fr;
+      }
+      
+      .specs-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .cigar-details {
+        grid-template-columns: 1fr;
+      }
+      
+      .stats-bar {
+        flex-direction: column;
+        gap: var(--spacing-md);
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Cigar Specifications</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="specs.html" class="active">Specs</a>
+      <a href="pairing.html">Pairing</a>
+      <a href="education.html">Education</a>
+      <a href="legacy.html">Legacy</a>
+      <a href="flavorverse.html">Flavorverse</a>
+      <a href="nft.html">NFT Vault</a>
+      <a href="kiosk.html">Kiosk</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <div class="specs-container">
+    <section>
+      <h2>Official, Verified Data</h2>
+      <p>Browse comprehensive specifications directly from trusted manufacturers across the globe. Search, filter, and discover detailed information about cigars from every major region.</p>
+    </section>
+
+    <div class="search-section">
+      <div class="search-bar">
+        <input type="text" class="search-input" id="searchInput" placeholder="Search by name, brand, wrapper, origin...">
+        <button class="search-btn" onclick="searchCigars()">🔍 Search</button>
+      </div>
+      
+      <div class="filter-section">
+        <div class="filter-group">
+          <label class="filter-label">Brand</label>
+          <select class="filter-select" id="brandFilter">
+            <option value="">All Brands</option>
+          </select>
+        </div>
+        
+        <div class="filter-group">
+          <label class="filter-label">Wrapper</label>
+          <select class="filter-select" id="wrapperFilter">
+            <option value="">All Wrappers</option>
+            <option value="Connecticut">Connecticut</option>
+            <option value="Maduro">Maduro</option>
+            <option value="Habano">Habano</option>
+            <option value="Corojo">Corojo</option>
+            <option value="Candela">Candela</option>
+          </select>
+        </div>
+        
+        <div class="filter-group">
+          <label class="filter-label">Strength</label>
+          <select class="filter-select" id="strengthFilter">
+            <option value="">All Strengths</option>
+            <option value="Mild">Mild</option>
+            <option value="Medium">Medium</option>
+            <option value="Full">Full</option>
+          </select>
+        </div>
+        
+        <div class="filter-group">
+          <label class="filter-label">Origin</label>
+          <select class="filter-select" id="originFilter">
+            <option value="">All Origins</option>
+            <option value="Nicaragua">Nicaragua</option>
+            <option value="Dominican Republic">Dominican Republic</option>
+            <option value="Honduras">Honduras</option>
+            <option value="Cuba">Cuba</option>
+            <option value="Ecuador">Ecuador</option>
+          </select>
+        </div>
+        
+        <div class="filter-group">
+          <label class="filter-label">Size</label>
+          <select class="filter-select" id="sizeFilter">
+            <option value="">All Sizes</option>
+            <option value="Robusto">Robusto</option>
+            <option value="Toro">Toro</option>
+            <option value="Churchill">Churchill</option>
+            <option value="Corona">Corona</option>
+            <option value="Gordo">Gordo</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="stats-bar" id="statsBar">
+      <div class="results-count" id="resultsCount">Loading cigars...</div>
+      <div class="sort-controls">
+        <span class="sort-label">Sort by:</span>
+        <select class="filter-select" id="sortBy" onchange="sortCigars()">
+          <option value="name">Name</option>
+          <option value="brand">Brand</option>
+          <option value="strength">Strength</option>
+          <option value="price">Price</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="specs-grid" id="specsGrid">
+      <div class="loading-state">
+        <p>🌿 Loading cigar database...</p>
+        <p>Please wait while we fetch the latest specifications from our trusted manufacturers.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal for detailed view -->
+  <div class="modal" id="cigarModal">
+    <div class="modal-content">
+      <button class="modal-close" onclick="closeModal()">&times;</button>
+      <div id="modalContent">
+        <!-- Dynamic content will be inserted here -->
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let cigarDatabase = [];
+    let filteredCigars = [];
+    let currentSort = 'name';
+
+    // Sample cigar data - in a real app, this would come from an API
+    const sampleCigars = [
+      {
+        id: 1,
+        name: "Padron 1964 Anniversary",
+        brand: "Padron",
+        wrapper: "Maduro",
+        binder: "Nicaraguan",
+        filler: "Nicaraguan",
+        strength: "Full",
+        origin: "Nicaragua",
+        size: "Churchill",
+        length: "7\"",
+        ringGauge: "50",
+        price: "$22.00",
+        flavorProfile: "Rich chocolate, espresso, leather, earth",
+        flavorTags: ["Chocolate", "Espresso", "Leather", "Earth", "Spice"],
+        description: "A premium offering from Padron, featuring aged Nicaraguan tobacco with complex flavor development.",
+        construction: "Hand-rolled",
+        aging: "4+ years"
+      },
+      {
+        id: 2,
+        name: "Arturo Fuente Hemingway",
+        brand: "Arturo Fuente",
+        wrapper: "Connecticut",
+        binder: "Dominican",
+        filler: "Dominican",
+        strength: "Medium",
+        origin: "Dominican Republic",
+        size: "Corona",
+        length: "5.5\"",
+        ringGauge: "42",
+        price: "$18.50",
+        flavorProfile: "Cream, vanilla, cedar, light spice",
+        flavorTags: ["Cream", "Vanilla", "Cedar", "Nuts", "Light Spice"],
+        description: "A classic Dominican blend with smooth Connecticut wrapper, perfect for any time of day.",
+        construction: "Hand-rolled",
+        aging: "2+ years"
+      },
+      {
+        id: 3,
+        name: "Montecristo No. 2",
+        brand: "Montecristo",
+        wrapper: "Habano",
+        binder: "Cuban",
+        filler: "Cuban",
+        strength: "Medium",
+        origin: "Cuba",
+        size: "Torpedo",
+        length: "6.1\"",
+        ringGauge: "52",
+        price: "$45.00",
+        flavorProfile: "Cedar, nuts, honey, tobacco sweetness",
+        flavorTags: ["Cedar", "Nuts", "Honey", "Tobacco", "Sweetness"],
+        description: "The legendary Cuban torpedo that exemplifies traditional Havana tobacco craftsmanship.",
+        construction: "Hand-rolled",
+        aging: "3+ years"
+      },
+      {
+        id: 4,
+        name: "Oliva Serie V",
+        brand: "Oliva",
+        wrapper: "Habano",
+        binder: "Nicaraguan",
+        filler: "Nicaraguan",
+        strength: "Full",
+        origin: "Nicaragua",
+        size: "Robusto",
+        length: "5\"",
+        ringGauge: "50",
+        price: "$12.00",
+        flavorProfile: "Pepper, dark chocolate, coffee, earth",
+        flavorTags: ["Pepper", "Dark Chocolate", "Coffee", "Earth", "Spice"],
+        description: "A bold Nicaraguan blend with intense flavor and excellent construction quality.",
+        construction: "Hand-rolled",
+        aging: "18+ months"
+      },
+      {
+        id: 5,
+        name: "Romeo y Julieta 1875",
+        brand: "Romeo y Julieta",
+        wrapper: "Connecticut",
+        binder: "Dominican",
+        filler: "Dominican",
+        strength: "Mild",
+        origin: "Dominican Republic",
+        size: "Toro",
+        length: "6\"",
+        ringGauge: "50",
+        price: "$8.50",
+        flavorProfile: "Smooth, creamy, light cedar, vanilla",
+        flavorTags: ["Smooth", "Creamy", "Cedar", "Vanilla", "Mild"],
+        description: "An approachable Dominican cigar perfect for beginners and seasoned smokers alike.",
+        construction: "Hand-rolled",
+        aging: "12+ months"
+      },
+      {
+        id: 6,
+        name: "Cohiba Siglo VI",
+        brand: "Cohiba",
+        wrapper: "Habano",
+        binder: "Cuban",
+        filler: "Cuban",
+        strength: "Medium",
+        origin: "Cuba",
+        size: "Gordo",
+        length: "5.9\"",
+        ringGauge: "52",
+        price: "$65.00",
+        flavorProfile: "Complex earth, leather, cocoa, herbs",
+        flavorTags: ["Earth", "Leather", "Cocoa", "Herbs", "Complex"],
+        description: "The pinnacle of Cuban cigar making, representing the finest tobacco from Vuelta Abajo.",
+        construction: "Hand-rolled",
+        aging: "5+ years"
+      }
+    ];
+
+    // Initialize the application
+    document.addEventListener('DOMContentLoaded', function() {
+      cigarDatabase = [...sampleCigars];
+      filteredCigars = [...cigarDatabase];
+      
+      populateFilterOptions();
+      displayCigars();
+      updateStatsBar();
+      
+      // Add event listeners for filters
+      ['brandFilter', 'wrapperFilter', 'strengthFilter', 'originFilter', 'sizeFilter'].forEach(filterId => {
+        document.getElementById(filterId).addEventListener('change', filterCigars);
+      });
+      
+      // Add enter key listener for search
+      document.getElementById('searchInput').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+          searchCigars();
+        }
+      });
+    });
+
+    function populateFilterOptions() {
+      const brands = [...new Set(cigarDatabase.map(cigar => cigar.brand))].sort();
+      const brandFilter = document.getElementById('brandFilter');
+      
+      brands.forEach(brand => {
+        const option = document.createElement('option');
+        option.value = brand;
+        option.textContent = brand;
+        brandFilter.appendChild(option);
+      });
+    }
+
+    function searchCigars() {
+      const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+      
+      if (!searchTerm) {
+        filteredCigars = [...cigarDatabase];
+      } else {
+        filteredCigars = cigarDatabase.filter(cigar => 
+          cigar.name.toLowerCase().includes(searchTerm) ||
+          cigar.brand.toLowerCase().includes(searchTerm) ||
+          cigar.wrapper.toLowerCase().includes(searchTerm) ||
+          cigar.origin.toLowerCase().includes(searchTerm) ||
+          cigar.flavorTags.some(tag => tag.toLowerCase().includes(searchTerm))
+        );
+      }
+      
+      filterCigars();
+    }
+
+    function filterCigars() {
+      const brandFilter = document.getElementById('brandFilter').value;
+      const wrapperFilter = document.getElementById('wrapperFilter').value;
+      const strengthFilter = document.getElementById('strengthFilter').value;
+      const originFilter = document.getElementById('originFilter').value;
+      const sizeFilter = document.getElementById('sizeFilter').value;
+      
+      let results = [...filteredCigars];
+      
+      if (brandFilter) results = results.filter(cigar => cigar.brand === brandFilter);
+      if (wrapperFilter) results = results.filter(cigar => cigar.wrapper === wrapperFilter);
+      if (strengthFilter) results = results.filter(cigar => cigar.strength === strengthFilter);
+      if (originFilter) results = results.filter(cigar => cigar.origin === originFilter);
+      if (sizeFilter) results = results.filter(cigar => cigar.size === sizeFilter);
+      
+      filteredCigars = results;
+      sortCigars();
+    }
+
+    function sortCigars() {
+      const sortBy = document.getElementById('sortBy').value;
+      
+      filteredCigars.sort((a, b) => {
+        switch (sortBy) {
+          case 'name':
+            return a.name.localeCompare(b.name);
+          case 'brand':
+            return a.brand.localeCompare(b.brand);
+          case 'strength':
+            const strengthOrder = { 'Mild': 1, 'Medium': 2, 'Full': 3 };
+            return strengthOrder[a.strength] - strengthOrder[b.strength];
+          case 'price':
+            return parseFloat(a.price.replace('$', '')) - parseFloat(b.price.replace('$', ''));
+          default:
+            return 0;
+        }
+      });
+      
+      displayCigars();
+      updateStatsBar();
+    }
+
+    function displayCigars() {
+      const specsGrid = document.getElementById('specsGrid');
+      
+      if (filteredCigars.length === 0) {
+        specsGrid.innerHTML = `
+          <div class="no-results">
+            <h3>🔍 No cigars found</h3>
+            <p>Try adjusting your search criteria or filters to find what you're looking for.</p>
+          </div>
+        `;
+        return;
+      }
+      
+      specsGrid.innerHTML = filteredCigars.map(cigar => `
+        <div class="cigar-card" onclick="showCigarDetails(${cigar.id})">
+          <div class="cigar-header">
+            <div>
+              <h3 class="cigar-name">${cigar.name}</h3>
+              <div class="cigar-brand">${cigar.brand}</div>
+            </div>
+            <div class="strength-indicator strength-${cigar.strength.toLowerCase()}">
+              ${cigar.strength}
+            </div>
+          </div>
+          
+          <div class="cigar-details">
+            <div class="detail-row">
+              <span class="detail-label">Wrapper:</span>
+              <span class="detail-value">${cigar.wrapper}</span>
+            </div>
+            <div class="detail-row">
+              <span class="detail-label">Origin:</span>
+              <span class="detail-value">${cigar.origin}</span>
+            </div>
+            <div class="detail-row">
+              <span class="detail-label">Size:</span>
+              <span class="detail-value">${cigar.size}</span>
+            </div>
+            <div class="detail-row">
+              <span class="detail-label">Ring:</span>
+              <span class="detail-value">${cigar.ringGauge}</span>
+            </div>
+            <div class="detail-row">
+              <span class="detail-label">Length:</span>
+              <span class="detail-value">${cigar.length}</span>
+            </div>
+            <div class="detail-row">
+              <span class="detail-label">Price:</span>
+              <span class="detail-value">${cigar.price}</span>
+            </div>
+          </div>
+          
+          <div class="flavor-profile">
+            <strong>Flavor Profile:</strong> ${cigar.flavorProfile}
+            <div class="flavor-tags">
+              ${cigar.flavorTags.map(tag => `<span class="flavor-tag">${tag}</span>`).join('')}
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function updateStatsBar() {
+      const resultsCount = document.getElementById('resultsCount');
+      const count = filteredCigars.length;
+      const total = cigarDatabase.length;
+      
+      resultsCount.textContent = `Showing ${count} of ${total} cigars`;
+    }
+
+    function showCigarDetails(cigarId) {
+      const cigar = cigarDatabase.find(c => c.id === cigarId);
+      if (!cigar) return;
+      
+      const modalContent = document.getElementById('modalContent');
+      modalContent.innerHTML = `
+        <h2>${cigar.name}</h2>
+        <h3 style="color: var(--secondary-text); margin-top: 0;">${cigar.brand}</h3>
+        
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--spacing-lg); margin: var(--spacing-lg) 0;">
+          <div>
+            <h4>Specifications</h4>
+            <p><strong>Wrapper:</strong> ${cigar.wrapper}</p>
+            <p><strong>Binder:</strong> ${cigar.binder}</p>
+            <p><strong>Filler:</strong> ${cigar.filler}</p>
+            <p><strong>Strength:</strong> ${cigar.strength}</p>
+            <p><strong>Origin:</strong> ${cigar.origin}</p>
+          </div>
+          <div>
+            <h4>Dimensions</h4>
+            <p><strong>Size:</strong> ${cigar.size}</p>
+            <p><strong>Length:</strong> ${cigar.length}</p>
+            <p><strong>Ring Gauge:</strong> ${cigar.ringGauge}</p>
+            <p><strong>Construction:</strong> ${cigar.construction}</p>
+            <p><strong>Aging:</strong> ${cigar.aging}</p>
+          </div>
+        </div>
+        
+        <div style="margin: var(--spacing-lg) 0;">
+          <h4>Description</h4>
+          <p>${cigar.description}</p>
+        </div>
+        
+        <div style="margin: var(--spacing-lg) 0;">
+          <h4>Flavor Profile</h4>
+          <p>${cigar.flavorProfile}</p>
+          <div class="flavor-tags" style="margin-top: var(--spacing-md);">
+            ${cigar.flavorTags.map(tag => `<span class="flavor-tag">${tag}</span>`).join('')}
+          </div>
+        </div>
+        
+        <div style="text-align: center; margin-top: var(--spacing-xl);">
+          <div style="font-size: 1.5rem; color: var(--accent-text); font-weight: bold;">${cigar.price}</div>
+          <p style="color: var(--secondary-text); margin: 0;">Estimated retail price</p>
+        </div>
+      `;
+      
+      document.getElementById('cigarModal').style.display = 'flex';
+    }
+
+    function closeModal() {
+      document.getElementById('cigarModal').style.display = 'none';
+    }
+
+    // Close modal when clicking outside
+    document.getElementById('cigarModal').addEventListener('click', function(e) {
+      if (e.target === this) {
+        closeModal();
+      }
+    });
+  </script>
+  
+  <script type="module" src="gpt.js"></script>
+</body>
+</html>
+    

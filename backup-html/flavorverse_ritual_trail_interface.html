@@ -1,0 +1,234 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Thee Cigar Maestro — Ritual Trail Interface</title>
+  <style>
+    body { margin: 0; background-color: #121212; overflow: hidden; color: #f0e6d2; font-family: Georgia, serif; }
+    canvas { display: block; }
+    #info, #filter, #modal {
+      position: absolute;
+      z-index: 2;
+      background: rgba(0, 0, 0, 0.7);
+      border: 1px solid #444;
+      padding: 10px;
+      color: #f0e6d2;
+    }
+    #info { top: 20px; left: 20px; font-size: 16px; }
+    #filter { top: 20px; right: 20px; font-size: 14px; }
+    #modal {
+      display: none;
+      top: 100px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 300px;
+    }
+    #modal h3 { margin-top: 0; }
+    #closeBtn {
+      background: #5c4033;
+      border: none;
+      color: white;
+      padding: 4px 8px;
+      float: right;
+      cursor: pointer;
+    }
+    .error-message {
+      background: rgba(220, 20, 60, 0.8);
+      color: white;
+      padding: 10px;
+      border-radius: 4px;
+      margin: 5px 0;
+    }
+  </style>
+</head>
+<body>
+      <div id="info">🌀 Thee Cigar Maestro — Ritual Trail Viewer</div>
+  <div id="filter">
+    <strong>Filter by Wrapper</strong><br/>
+    <label><input type="checkbox" value="Maduro" checked /> Maduro</label>
+    <label><input type="checkbox" value="Connecticut" checked /> Connecticut</label>
+    <label><input type="checkbox" value="Habano" checked /> Habano</label>
+    <label><input type="checkbox" value="Oscuro" checked /> Oscuro</label>
+    <label><input type="checkbox" value="Natural" checked /> Natural</label>
+  </div>
+  <div id="modal">
+    <button id="closeBtn">X</button>
+    <h3 id="modalTitle">Cigar Name</h3>
+    <p><strong>Wrapper:</strong> <span id="modalWrapper"></span></p>
+    <p><strong>Notes:</strong> <span id="modalNotes"></span></p>
+    <p><em>Legacy Entry: "Coming soon: Audio & Journal memory capsule..."</em></p>
+  </div>
+  <div id="errorContainer"></div>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js" integrity="sha384-gd3xd4QfbP7PiJPPr7dV3s6cXGJ0vy3S8xkW7YnK8eQMjB7c9PwSb0Rx9fF5J8P1" crossorigin="anonymous"></script>
+  <script type="module">
+    import { OrbitControls } from 'https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/controls/OrbitControls.js';
+    window.OrbitControls = OrbitControls;
+  </script>
+  <script>
+    // Utility functions for security
+    function sanitizeText(text) {
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+
+    function showError(message) {
+      const errorContainer = document.getElementById('errorContainer');
+      const errorDiv = document.createElement('div');
+      errorDiv.className = 'error-message';
+      errorDiv.textContent = message;
+      errorContainer.appendChild(errorDiv);
+      setTimeout(() => errorDiv.remove(), 5000);
+    }
+
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color("#121212");
+
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
+    camera.position.z = 40;
+
+    const renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(window.devicePixelRatio);
+    document.body.appendChild(renderer.domElement);
+
+    const controls = new THREE.OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
+    controls.dampingFactor = 0.05;
+
+    const geometry = new THREE.SphereGeometry(1.2, 32, 32);
+    const raycaster = new THREE.Raycaster();
+    const mouse = new THREE.Vector2();
+    const stars = [];
+    const trails = [];
+
+    const info = document.getElementById("info");
+    const modal = document.getElementById("modal");
+    const closeBtn = document.getElementById("closeBtn");
+    closeBtn.onclick = () => modal.style.display = "none";
+
+    async function loadCigars() {
+      try {
+        const res = await fetch("flavorverse_nodes.json");
+        if (!res.ok) {
+          throw new Error(`Failed to load cigar data: ${res.status}`);
+        }
+        const data = await res.json();
+        const wrapperMap = {};
+
+        data.forEach(item => {
+          // Validate data structure
+          if (!item.name || !item.wrapper || !item.color) {
+            console.warn('Invalid cigar data:', item);
+            return;
+          }
+
+          const mat = new THREE.MeshStandardMaterial({ color: item.color });
+          const star = new THREE.Mesh(geometry, mat);
+          star.position.set(
+            Math.random() * 60 - 30,
+            Math.random() * 60 - 30,
+            Math.random() * 60 - 30
+          );
+          star.name = item.name;
+          star.userData = { 
+            wrapper: item.wrapper !== "Unknown" ? item.wrapper : "Not specified", 
+            flavor: item.flavor !== "Undefined" ? item.flavor : "Flavor profile coming soon" 
+          };
+          scene.add(star);
+          stars.push(star);
+
+          // Cluster similar wrappers for trail drawing
+          if (!wrapperMap[item.wrapper]) {wrapperMap[item.wrapper] = [];}
+          wrapperMap[item.wrapper].push(star);
+        });
+
+        // Create ritual trails (glowing lines) for each wrapper cluster
+        Object.values(wrapperMap).forEach(group => {
+          if (group.length > 1) {
+            for (let i = 0; i < group.length - 1; i++) {
+              const material = new THREE.LineBasicMaterial({ color: 0xffd700, opacity: 0.6, transparent: true });
+              const points = [group[i].position, group[i + 1].position];
+              const geometry = new THREE.BufferGeometry().setFromPoints(points);
+              const line = new THREE.Line(geometry, material);
+              scene.add(line);
+              trails.push(line);
+            }
+          }
+        });
+      } catch (error) {
+        console.error('Error loading cigars:', error);
+        showError('Failed to load cigar data. Please refresh the page.');
+      }
+    }
+
+    const light = new THREE.PointLight(0xffffff, 1, 200);
+    light.position.set(10, 10, 10);
+    scene.add(light);
+
+    const ambientLight = new THREE.AmbientLight(0x404040, 0.4);
+    scene.add(ambientLight);
+
+    function onMouseMove(event) {
+      mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+      mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+    }
+
+    function animate() {
+      requestAnimationFrame(animate);
+      controls.update();
+      renderer.render(scene, camera);
+
+      raycaster.setFromCamera(mouse, camera);
+      const visibleStars = stars.filter(s => s.visible);
+      const intersects = raycaster.intersectObjects(visibleStars);
+
+      if (intersects.length > 0) {
+        // Fixed: Use textContent instead of innerHTML to prevent XSS
+        info.textContent = `⭐ ${intersects[0].object.name}`;
+      } else {
+        info.textContent = "🌀 Thee Cigar Maestro — Ritual Trail Viewer";
+      }
+    }
+
+    function updateFilter() {
+      const selected = Array.from(document.querySelectorAll("#filter input:checked")).map(cb => cb.value);
+      stars.forEach(star => {
+        star.visible = selected.includes(star.userData.wrapper);
+      });
+    }
+
+    window.addEventListener("mousemove", onMouseMove);
+    document.querySelectorAll("#filter input").forEach(cb => cb.addEventListener("change", updateFilter));
+    window.addEventListener("click", (e) => {
+      raycaster.setFromCamera(mouse, camera);
+      const intersects = raycaster.intersectObjects(stars.filter(s => s.visible));
+      if (intersects.length > 0) {
+        const obj = intersects[0].object;
+        // Fixed: Use textContent to prevent XSS
+        document.getElementById("modalTitle").textContent = obj.name;
+        document.getElementById("modalWrapper").textContent = obj.userData.wrapper;
+        document.getElementById("modalNotes").textContent = obj.userData.flavor;
+        modal.style.display = "block";
+      }
+    });
+
+    // Handle window resize
+    window.addEventListener('resize', () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+
+    loadCigars().then(() => {
+      updateFilter();
+      animate();
+    }).catch(error => {
+      console.error('Failed to initialize application:', error);
+      showError('Application failed to initialize. Please refresh the page.');
+    });
+  </script>
+</body>
+</html>

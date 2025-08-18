@@ -1,0 +1,50 @@
+# Dependencies
+node_modules/
+
+# Testing
+tests/
+*.test.js
+*.spec.js
+
+# Build outputs (except Next.js)
+dist/
+build/
+
+# IDE
+.vscode/
+.idea/
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Environment variables
+.env.local
+.env.development
+.env.test
+
+# Documentation
+*.md
+!README.md
+
+# Scripts
+scripts/
+deploy.sh
+PUSH_TO_GITHUB.sh
+
+# Development files
+*.html
+!index.html
+test-*.html
+debug-*.html
+quick-fix.html
+
+# Legacy files
+legacy.html
+
+# Local files
+local-storage-manager.js
+offline.html

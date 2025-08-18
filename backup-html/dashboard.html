@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard - Thee Cigar Maestro</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .dashboard-container {
+      max-width: 1600px;
+      margin: 0 auto;
+      padding: var(--spacing-xl);
+    }
+    
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: var(--spacing-lg);
+      margin-top: var(--spacing-xl);
+    }
+    
+    .dashboard-card {
+      background: var(--secondary-bg);
+      border: 1px solid var(--border-color);
+      border-radius: var(--border-radius);
+      padding: var(--spacing-lg);
+      transition: var(--transition);
+    }
+    
+    .dashboard-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+      border-color: var(--accent-text);
+    }
+    
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: var(--spacing-lg);
+      padding-bottom: var(--spacing-md);
+      border-bottom: 1px solid var(--border-color);
+    }
+    
+    .card-title {
+      color: var(--accent-text);
+      font-size: 1.2rem;
+      font-weight: bold;
+      margin: 0;
+    }
+    
+    .card-icon {
+      font-size: 1.5rem;
+    }
+    
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--spacing-md);
+    }
+    
+    .stat-item {
+      text-align: center;
+      padding: var(--spacing-md);
+      background: var(--accent-bg);
+      border-radius: var(--border-radius);
+      border: 1px solid var(--border-color);
+    }
+    
+    .stat-value {
+      font-size: 2rem;
+      font-weight: bold;
+      color: var(--accent-text);
+      display: block;
+    }
+    
+    .stat-label {
+      color: var(--secondary-text);
+      font-size: 0.9rem;
+      margin-top: var(--spacing-xs);
+    }
+    
+    .progress-section {
+      margin: var(--spacing-md) 0;
+    }
+    
+    .progress-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: var(--spacing-md);
+    }
+    
+    .progress-info {
+      flex: 1;
+    }
+    
+    .progress-name {
+      font-weight: bold;
+      color: var(--primary-text);
+    }
+    
+    .progress-desc {
+      font-size: 0.9rem;
+      color: var(--secondary-text);
+    }
+    
+    .progress-bar {
+      width: 100px;
+      height: 8px;
+      background: var(--primary-bg);
+      border-radius: 4px;
+      overflow: hidden;
+      margin-left: var(--spacing-md);
+    }
+    
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent-text), var(--secondary-text));
+      transition: width 0.3s ease;
+    }
+    
+    .chart-container {
+      height: 200px;
+      display: flex;
+      align-items: end;
+      justify-content: space-around;
+      padding: var(--spacing-md);
+      background: var(--accent-bg);
+      border-radius: var(--border-radius);
+      margin: var(--spacing-md) 0;
+    }
+    
+    .chart-bar {
+      width: 30px;
+      background: linear-gradient(180deg, var(--accent-text), var(--secondary-text));
+      border-radius: 4px 4px 0 0;
+      transition: var(--transition);
+      cursor: pointer;
+      position: relative;
+    }
+    
+    .chart-bar:hover {
+      transform: scale(1.1);
+      box-shadow: 0 4px 12px rgba(198, 156, 109, 0.4);
+    }
+    
+    .chart-label {
+      position: absolute;
+      bottom: -25px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.8rem;
+      color: var(--secondary-text);
+      white-space: nowrap;
+    }
+    
+    .recent-activity {
+      max-height: 300px;
+      overflow-y: auto;
+    }
+    
+    .activity-item {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-md);
+      padding: var(--spacing-md);
+      background: var(--accent-bg);
+      border-radius: var(--border-radius);
+      margin-bottom: var(--spacing-sm);
+      transition: var(--transition);
+    }
+    
+    .activity-item:hover {
+      background: var(--primary-bg);
+    }
+    
+    .activity-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--accent-text);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+    
+    .activity-content {
+      flex: 1;
+    }
+    
+    .activity-title {
+      font-weight: bold;
+      color: var(--primary-text);
+      margin-bottom: var(--spacing-xs);
+    }
+    
+    .activity-time {
+      font-size: 0.8rem;
+      color: var(--secondary-text);
+    }
+    
+    .recommendation-card {
+      background: var(--accent-bg);
+      padding: var(--spacing-md);
+      border-radius: var(--border-radius);
+      border: 1px solid var(--border-color);
+      margin-bottom: var(--spacing-md);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    
+    .recommendation-card:hover {
+      background: var(--primary-bg);
+      border-color: var(--accent-text);
+    }
+    
+    .rec-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: var(--spacing-sm);
+    }
+    
+    .rec-title {
+      font-weight: bold;
+      color: var(--primary-text);
+    }
+    
+    .rec-score {
+      background: var(--accent-text);
+      color: var(--primary-bg);
+      padding: var(--spacing-xs) var(--spacing-sm);
+      border-radius: 12px;
+      font-size: 0.8rem;
+      font-weight: bold;
+    }
+    
+    .flavor-profile-chart {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--spacing-sm);
+      margin: var(--spacing-md) 0;
+    }
+    
+    .flavor-segment {
+      text-align: center;
+      padding: var(--spacing-sm);
+      background: var(--accent-bg);
+      border-radius: var(--border-radius);
+      transition: var(--transition);
+    }
+    
+    .flavor-segment:hover {
+      background: var(--accent-text);
+      color: var(--primary-bg);
+      transform: scale(1.05);
+    }
+    
+    .quick-actions {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--spacing-md);
+      margin-top: var(--spacing-lg);
+    }
+    
+    .action-btn {
+      background: linear-gradient(135deg, var(--accent-text), var(--secondary-text));
+      color: var(--primary-bg);
+      border: none;
+      padding: var(--spacing-md);
+      border-radius: var(--border-radius);
+      cursor: pointer;
+      font-family: var(--font-family);
+      font-weight: bold;
+      transition: var(--transition);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--spacing-sm);
+    }
+    
+    .action-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(198, 156, 109, 0.3);
+    }
+    
+    .wide-card {
+      grid-column: span 2;
+    }
+    
+    .full-width {
+      grid-column: 1 / -1;
+    }
+    
+    @media (max-width: 1200px) {
+      .dashboard-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      }
+      
+      .wide-card {
+        grid-column: span 1;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .dashboard-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .quick-actions {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Personal Dashboard</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="specs.html">Specs</a>
+      <a href="pairing.html">Pairing</a>
+      <a href="education.html">Education</a>
+      <a href="legacy.html">Legacy</a>
+      <a href="flavorverse.html">Flavorverse</a>
+      <a href="nft.html">NFT Vault</a>
+      <a href="kiosk.html">Kiosk</a>
+      <a href="dashboard.html" class="active">Dashboard</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <div class="dashboard-container">
+    <section>
+      <h2>Welcome back, Cigar Enthusiast</h2>
+      <p>Track your journey, discover new flavors, and enhance your expertise with personalized insights and recommendations.</p>
+    </section>
+
+    <div class="dashboard-grid">
+      <!-- Overview Stats -->
+      <div class="dashboard-card">
+        <div class="card-header">
+          <h3 class="card-title">📊 Overview</h3>
+          <span class="card-icon">📈</span>
+        </div>
+        <div class="stats-grid">
+          <div class="stat-item">
+            <span class="stat-value">47</span>
+            <span class="stat-label">Cigars Tracked</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-value">23</span>
+            <span class="stat-label">Pairings Created</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-value">7</span>
+            <span class="stat-label">Lessons Completed</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-value">3</span>
+            <span class="stat-label">Certifications</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Learning Progress -->
+      <div class="dashboard-card">
+        <div class="card-header">
+          <h3 class="card-title">🎓 Learning Progress</h3>
+          <span class="card-icon">📚</span>
+        </div>
+        <div class="progress-section">
+          <div class="progress-item">
+            <div class="progress-info">
+              <div class="progress-name">Foundations</div>
+              <div class="progress-desc">Basic cigar knowledge</div>
+            </div>
+            <div class="progress-bar">
+              <div class="progress-fill" style="width: 100%"></div>
+            </div>
+          </div>
+          <div class="progress-item">
+            <div class="progress-info">
+              <div class="progress-name">Pairing Mastery</div>
+              <div class="progress-desc">Spirit & food combinations</div>
+            </div>
+            <div class="progress-bar">
+              <div class="progress-fill" style="width: 75%"></div>
+            </div>
+          </div>
+          <div class="progress-item">
+            <div class="progress-info">
+              <div class="progress-name">Cultural Studies</div>
+              <div class="progress-desc">Global tobacco traditions</div>
+            </div>
+            <div class="progress-bar">
+              <div class="progress-fill" style="width: 25%"></div>
+            </div>
+          </div>
+          <div class="progress-item">
+            <div class="progress-info">
+              <div class="progress-name">Philosophy</div>
+              <div class="progress-desc">Memory & ritual concepts</div>
+            </div>
+            <div class="progress-bar">
+              <div class="progress-fill" style="width: 10%"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Flavor Profile Chart -->
+      <div class="dashboard-card wide-card">
+        <div class="card-header">
+          <h3 class="card-title">🌿 Your Flavor Journey</h3>
+          <span class="card-icon">📊</span>
+        </div>
+        <div class="chart-container">
+          <div class="chart-bar" style="height: 80%" onclick="showFlavorDetails('chocolate')">
+            <div class="chart-label">Chocolate</div>
+          </div>
+          <div class="chart-bar" style="height: 65%" onclick="showFlavorDetails('spice')">
+            <div class="chart-label">Spice</div>
+          </div>
+          <div class="chart-bar" style="height: 90%" onclick="showFlavorDetails('earth')">
+            <div class="chart-label">Earth</div>
+          </div>
+          <div class="chart-bar" style="height: 45%" onclick="showFlavorDetails('cream')">
+            <div class="chart-label">Cream</div>
+          </div>
+          <div class="chart-bar" style="height: 70%" onclick="showFlavorDetails('cedar')">
+            <div class="chart-label">Cedar</div>
+          </div>
+          <div class="chart-bar" style="height: 55%" onclick="showFlavorDetails('pepper')">
+            <div class="chart-label">Pepper</div>
+          </div>
+          <div class="chart-bar" style="height: 35%" onclick="showFlavorDetails('honey')">
+            <div class="chart-label">Honey</div>
+          </div>
+        </div>
+        <p style="text-align: center; color: var(--secondary-text); margin: 0;">Click on bars to explore flavor preferences</p>
+      </div>
+
+      <!-- Recent Activity -->
+      <div class="dashboard-card">
+        <div class="card-header">
+          <h3 class="card-title">🔔 Recent Activity</h3>
+          <span class="card-icon">⏰</span>
+        </div>
+        <div class="recent-activity">
+          <div class="activity-item">
+            <div class="activity-icon">🎓</div>
+            <div class="activity-content">
+              <div class="activity-title">Completed Wrapper Identification</div>
+              <div class="activity-time">2 hours ago</div>
+            </div>
+          </div>
+          <div class="activity-item">
+            <div class="activity-icon">🍷</div>
+            <div class="activity-content">
+              <div class="activity-title">Created Maduro + Mezcal pairing</div>
+              <div class="activity-time">1 day ago</div>
+            </div>
+          </div>
+          <div class="activity-item">
+            <div class="activity-icon">📊</div>
+            <div class="activity-content">
+              <div class="activity-title">Updated flavor preferences</div>
+              <div class="activity-time">2 days ago</div>
+            </div>
+          </div>
+          <div class="activity-item">
+            <div class="activity-icon">🏆</div>
+            <div class="activity-content">
+              <div class="activity-title">Earned Pairing Basics certification</div>
+              <div class="activity-time">3 days ago</div>
+            </div>
+          </div>
+          <div class="activity-item">
+            <div class="activity-icon">🌿</div>
+            <div class="activity-content">
+              <div class="activity-title">Tracked Padron 1964 Anniversary</div>
+              <div class="activity-time">5 days ago</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- AI Recommendations -->
+      <div class="dashboard-card">
+        <div class="card-header">
+          <h3 class="card-title">🤖 AI Recommendations</h3>
+          <span class="card-icon">💡</span>
+        </div>
+        <div class="recommendation-card" onclick="exploreRecommendation('maduro-scotch')">
+          <div class="rec-header">
+            <div class="rec-title">Maduro + Single Malt</div>
+            <div class="rec-score">96%</div>
+          </div>
+          <p style="margin: 0; color: var(--secondary-text); font-size: 0.9rem;">
+            Based on your earth & chocolate preferences
+          </p>
+        </div>
+        <div class="recommendation-card" onclick="exploreRecommendation('connecticut-champagne')">
+          <div class="rec-header">
+            <div class="rec-title">Connecticut + Champagne</div>
+            <div class="rec-score">89%</div>
+          </div>
+          <p style="margin: 0; color: var(--secondary-text); font-size: 0.9rem;">
+            Perfect for celebratory occasions
+          </p>
+        </div>
+        <div class="recommendation-card" onclick="exploreRecommendation('habano-coffee')">
+          <div class="rec-header">
+            <div class="rec-title">Habano + Cuban Coffee</div>
+            <div class="rec-score">92%</div>
+          </div>
+          <p style="margin: 0; color: var(--secondary-text); font-size: 0.9rem;">
+            Morning ritual enhancement
+          </p>
+        </div>
+      </div>
+
+      <!-- Quick Actions -->
+      <div class="dashboard-card full-width">
+        <div class="card-header">
+          <h3 class="card-title">⚡ Quick Actions</h3>
+          <span class="card-icon">🚀</span>
+        </div>
+        <div class="quick-actions">
+          <a href="pairing.html" class="action-btn">
+            <span>🔍</span>
+            <span>Find New Pairings</span>
+          </a>
+          <a href="education.html" class="action-btn">
+            <span>📚</span>
+            <span>Continue Learning</span>
+          </a>
+          <a href="specs.html" class="action-btn">
+            <span>🌿</span>
+            <span>Explore Cigars</span>
+          </a>
+          <a href="legacy.html" class="action-btn">
+            <span>💭</span>
+            <span>Record Memory</span>
+          </a>
+          <a href="nft.html" class="action-btn">
+            <span>🎨</span>
+            <span>Mint NFT</span>
+          </a>
+          <a href="flavorverse.html" class="action-btn">
+            <span>🌌</span>
+            <span>Explore Flavorverse</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function showFlavorDetails(flavorType) {
+      const flavorData = {
+        chocolate: {
+          name: "Chocolate",
+          percentage: 80,
+          description: "Your highest preference! You gravitate toward rich, sweet cocoa notes commonly found in Maduro wrappers.",
+          suggestions: ["Try San Andrés wrappers", "Pair with dark spirits", "Explore aged tobaccos"]
+        },
+        earth: {
+          name: "Earth",
+          percentage: 90,
+          description: "You absolutely love earthy, mineral notes that provide depth and grounding to your smoking experience.",
+          suggestions: ["Nicaraguan origins", "Full-bodied cigars", "Pair with whiskey"]
+        },
+        spice: {
+          name: "Spice",
+          percentage: 65,
+          description: "You enjoy moderate spice levels that add complexity without overwhelming the palate.",
+          suggestions: ["Corojo wrappers", "Medium-full strength", "Try pepper-forward blends"]
+        },
+        cedar: {
+          name: "Cedar",
+          percentage: 70,
+          description: "You appreciate the woody, structural notes that cedar aging brings to premium cigars.",
+          suggestions: ["Well-aged cigars", "Cuban origins", "Traditional pairings"]
+        },
+        cream: {
+          name: "Cream",
+          percentage: 45,
+          description: "You sometimes enjoy smooth, buttery textures, particularly in milder smoking sessions.",
+          suggestions: ["Connecticut wrappers", "Morning smokes", "Light pairings"]
+        },
+        pepper: {
+          name: "Pepper",
+          percentage: 55,
+          description: "You have a moderate tolerance for peppery notes, enjoying them as accent flavors.",
+          suggestions: ["Young Nicaraguan tobacco", "Try ligero leaves", "Balance with sweet drinks"]
+        },
+        honey: {
+          name: "Honey",
+          percentage: 35,
+          description: "You occasionally appreciate natural sweetness, though it's not your primary preference.",
+          suggestions: ["Naturally sweet wrappers", "Aged Connecticut", "Pair with dessert"]
+        }
+      };
+
+      const flavor = flavorData[flavorType];
+      if (flavor) {
+        alert(`🌿 ${flavor.name} (${flavor.percentage}%)\n\n${flavor.description}\n\n💡 Suggestions:\n${flavor.suggestions.map(s => `• ${s}`).join('\n')}`);
+      }
+    }
+
+    function exploreRecommendation(recId) {
+      const recommendations = {
+        'maduro-scotch': {
+          title: "Maduro + Single Malt Scotch",
+          description: "This pairing leverages your love for earthy and chocolate notes. The peated whisky complements the cigar's natural cocoa flavors.",
+          action: "Explore this pairing in our Pairing Engine"
+        },
+        'connecticut-champagne': {
+          title: "Connecticut + Champagne",
+          description: "A sophisticated pairing for special occasions. The bubbles cleanse the palate while the cigar provides creamy, elegant notes.",
+          action: "Perfect for celebrations and special moments"
+        },
+        'habano-coffee': {
+          title: "Habano + Cuban Coffee",
+          description: "Start your day with this complementary pairing. The coffee's roasted notes enhance the cigar's natural cedar characteristics.",
+          action: "Ideal for morning or after-meal enjoyment"
+        }
+      };
+
+      const rec = recommendations[recId];
+      if (rec) {
+        const shouldExplore = confirm(`🤖 AI Recommendation\n\n${rec.title}\n\n${rec.description}\n\n${rec.action}\n\nWould you like to explore this pairing?`);
+        if (shouldExplore) {
+          window.location.href = 'pairing.html';
+        }
+      }
+    }
+
+    // Animate progress bars on load
+    document.addEventListener('DOMContentLoaded', function() {
+      const progressBars = document.querySelectorAll('.progress-fill');
+      progressBars.forEach((bar, index) => {
+        setTimeout(() => {
+          const width = bar.style.width;
+          bar.style.width = '0%';
+          setTimeout(() => {
+            bar.style.width = width;
+          }, 100);
+        }, index * 200);
+      });
+    });
+
+    // Add interactive hover effects
+    document.querySelectorAll('.chart-bar').forEach(bar => {
+      bar.addEventListener('mouseenter', function() {
+        this.style.transform = 'scale(1.1)';
+      });
+      
+      bar.addEventListener('mouseleave', function() {
+        this.style.transform = 'scale(1)';
+      });
+    });
+  </script>
+  
+  <script type="module" src="gpt.js"></script>
+</body>
+</html>
