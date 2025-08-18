@@ -1,38 +1,41 @@
 {
   "pages": {
     "/_not-found/page": [
-      "static/chunks/webpack-d37f38890f7e7cc8.js",
-      "static/chunks/fd9d1056-da63ce0081b73454.js",
-      "static/chunks/117-a4eaa6f1de7cf7cb.js",
-      "static/chunks/main-app-1c9daae6dc3fef31.js",
-      "static/chunks/app/_not-found/page-ef45698ebb9eb7a3.js"
+      "static/chunks/runtime-9d390e933fd8615e.js",
+      "static/chunks/npm.next-2a0c97d2a37aa121.js",
+      "static/chunks/117-864d59831e8a88bf.js",
+      "static/chunks/main-app-8d44840c7bd221fa.js",
+      "static/chunks/app/_not-found/page-edc906ff1f269e80.js"
     ],
     "/layout": [
-      "static/chunks/webpack-d37f38890f7e7cc8.js",
-      "static/chunks/fd9d1056-da63ce0081b73454.js",
-      "static/chunks/117-a4eaa6f1de7cf7cb.js",
-      "static/chunks/main-app-1c9daae6dc3fef31.js",
-      "static/css/dddbeda169985c51.css",
-      "static/chunks/app/layout-168cf4fe3dbd1224.js"
+      "static/chunks/runtime-9d390e933fd8615e.js",
+      "static/chunks/npm.next-2a0c97d2a37aa121.js",
+      "static/chunks/117-864d59831e8a88bf.js",
+      "static/chunks/main-app-8d44840c7bd221fa.js",
+      "static/css/f122e822787af2ac.css",
+      "static/chunks/shared-9dade68ec5967d9e.js",
+      "static/chunks/commons-0f7fdf17790eae51.js",
+      "static/chunks/app/layout-94a57b0204736033.js"
     ],
     "/page": [
-      "static/chunks/webpack-d37f38890f7e7cc8.js",
-      "static/chunks/fd9d1056-da63ce0081b73454.js",
-      "static/chunks/117-a4eaa6f1de7cf7cb.js",
-      "static/chunks/main-app-1c9daae6dc3fef31.js",
-      "static/chunks/b536a0f1-e523db0d148750c0.js",
-      "static/chunks/0f8af13e-e07d742d522f8fdf.js",
-      "static/chunks/839-07bfc7241a7edcda.js",
-      "static/chunks/133-33994716156fc262.js",
-      "static/chunks/app/page-2f6936d3ed549100.js"
+      "static/chunks/runtime-9d390e933fd8615e.js",
+      "static/chunks/npm.next-2a0c97d2a37aa121.js",
+      "static/chunks/117-864d59831e8a88bf.js",
+      "static/chunks/main-app-8d44840c7bd221fa.js",
+      "static/chunks/framework-19da52b870a79f4a.js",
+      "static/chunks/npm.three-534d6c9e6478ca30.js",
+      "static/chunks/npm.troika-three-text-784685d26bde14a0.js",
+      "static/chunks/commons-0f7fdf17790eae51.js",
+      "static/chunks/950-fb0cca88d92e78ea.js",
+      "static/chunks/app/page-599a9566c87697f7.js"
     ],
     "/ai-concierge/page": [
-      "static/chunks/webpack-d37f38890f7e7cc8.js",
-      "static/chunks/fd9d1056-da63ce0081b73454.js",
-      "static/chunks/117-a4eaa6f1de7cf7cb.js",
-      "static/chunks/main-app-1c9daae6dc3fef31.js",
-      "static/chunks/839-07bfc7241a7edcda.js",
-      "static/chunks/app/ai-concierge/page-38ce1ee983714b31.js"
+      "static/chunks/runtime-9d390e933fd8615e.js",
+      "static/chunks/npm.next-2a0c97d2a37aa121.js",
+      "static/chunks/117-864d59831e8a88bf.js",
+      "static/chunks/main-app-8d44840c7bd221fa.js",
+      "static/chunks/commons-0f7fdf17790eae51.js",
+      "static/chunks/app/ai-concierge/page-09ec4b09c42411d0.js"
     ]
   }
 }
