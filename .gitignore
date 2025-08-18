@@ -60,6 +60,8 @@ Thumbs.db
 dist/
 build/
 *.map
+.next/
+out/
 
 # Health check reports
 health-report.json
