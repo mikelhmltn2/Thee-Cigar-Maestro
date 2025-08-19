@@ -1,3 +1,3 @@
 export default function LuxuryModal() {
-  return null
+  return null;
 }

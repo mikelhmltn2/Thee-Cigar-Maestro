@@ -1,1 +1,1 @@
-export const luxuryAnimations = {}
+export const luxuryAnimations = {};

@@ -12,7 +12,7 @@ class CommunityManager {
     this.events = [];
     this.forums = {};
     this.isInitialized = false;
-    
+
     this.init();
   }
 
@@ -22,10 +22,9 @@ class CommunityManager {
       await this.initializeCommunityFeatures();
       this.setupEventListeners();
       this.createCommunityInterface();
-      
+
       this.isInitialized = true;
       console.info('🤝 Community Manager initialized successfully');
-      
     } catch (error) {
       console.error('❌ Community initialization failed:', error);
     }
@@ -55,7 +54,7 @@ class CommunityManager {
       reviews: [],
       socialScore: 0,
       joinDate: new Date().toISOString(),
-      isGuest: true
+      isGuest: true,
     };
   }
 
@@ -78,10 +77,10 @@ class CommunityManager {
         lastSeen: '2 hours ago',
         mutualFriends: 5,
         reviewCount: 127,
-        socialScore: 850
+        socialScore: 850,
       },
       {
-        id: 'user_002', 
+        id: 'user_002',
         username: 'HavanaHunter',
         avatar: '🌟',
         level: 'Advanced',
@@ -89,7 +88,7 @@ class CommunityManager {
         lastSeen: '1 day ago',
         mutualFriends: 3,
         reviewCount: 89,
-        socialScore: 720
+        socialScore: 720,
       },
       {
         id: 'user_003',
@@ -100,8 +99,8 @@ class CommunityManager {
         lastSeen: '30 minutes ago',
         mutualFriends: 8,
         reviewCount: 45,
-        socialScore: 520
-      }
+        socialScore: 520,
+      },
     ];
   }
 
@@ -118,11 +117,11 @@ class CommunityManager {
           text: 'Just finished an incredible Cohiba Behike. The flavor complexity is unmatched - notes of chocolate, coffee, and a hint of spice. Perfect construction and draw. 9.5/10! 🔥',
           cigar: 'Cohiba Behike',
           rating: 9.5,
-          image: '🚬'
+          image: '🚬',
         },
         likes: 23,
         comments: 7,
-        shares: 4
+        shares: 4,
       },
       {
         id: 'post_002',
@@ -134,11 +133,11 @@ class CommunityManager {
         content: {
           text: 'Added some rare vintage Cubans to my humidor today. Check out this beautiful Montecristo collection! 📸',
           image: '📦',
-          collection: ['Montecristo No. 2', 'Montecristo Edmundo', 'Montecristo A']
+          collection: ['Montecristo No. 2', 'Montecristo Edmundo', 'Montecristo A'],
         },
         likes: 18,
         comments: 12,
-        shares: 6
+        shares: 6,
       },
       {
         id: 'post_003',
@@ -148,15 +147,15 @@ class CommunityManager {
         timestamp: new Date(Date.now() - 8 * 60 * 60 * 1000), // 8 hours ago
         type: 'pairing',
         content: {
-          text: 'Perfect evening pairing: Romeo y Julieta Churchill with a glass of Macallan 18. The smoky scotch complements the cigar\'s earthiness beautifully. 🥃',
+          text: "Perfect evening pairing: Romeo y Julieta Churchill with a glass of Macallan 18. The smoky scotch complements the cigar's earthiness beautifully. 🥃",
           cigar: 'Romeo y Julieta Churchill',
           pairing: 'Macallan 18 Scotch',
-          mood: 'evening'
+          mood: 'evening',
         },
         likes: 31,
         comments: 9,
-        shares: 8
-      }
+        shares: 8,
+      },
     ];
   }
 
@@ -165,7 +164,8 @@ class CommunityManager {
       {
         id: 'event_001',
         title: 'Havana Nights Tasting Event',
-        description: 'Join us for an exclusive Cuban cigar tasting featuring rare vintage selections.',
+        description:
+          'Join us for an exclusive Cuban cigar tasting featuring rare vintage selections.',
         date: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000), // 1 week from now
         location: 'Downtown Cigar Lounge',
         attendees: 24,
@@ -173,12 +173,13 @@ class CommunityManager {
         price: '$75',
         host: 'CigarMaster92',
         image: '🌃',
-        tags: ['Cuban', 'Tasting', 'Premium']
+        tags: ['Cuban', 'Tasting', 'Premium'],
       },
       {
         id: 'event_002',
-        title: 'Beginner\'s Cigar Workshop',
-        description: 'Learn the basics of cigar appreciation, cutting, lighting, and flavor identification.',
+        title: "Beginner's Cigar Workshop",
+        description:
+          'Learn the basics of cigar appreciation, cutting, lighting, and flavor identification.',
         date: new Date(Date.now() + 14 * 24 * 60 * 60 * 1000), // 2 weeks from now
         location: 'Community Center',
         attendees: 12,
@@ -186,7 +187,7 @@ class CommunityManager {
         price: 'Free',
         host: 'SmokeRingKing',
         image: '🎓',
-        tags: ['Beginner', 'Workshop', 'Education']
+        tags: ['Beginner', 'Workshop', 'Education'],
       },
       {
         id: 'event_003',
@@ -199,8 +200,8 @@ class CommunityManager {
         price: '$95',
         host: 'HavanaHunter',
         image: '🥃',
-        tags: ['Pairing', 'Whiskey', 'Premium']
-      }
+        tags: ['Pairing', 'Whiskey', 'Premium'],
+      },
     ];
   }
 
@@ -213,7 +214,7 @@ class CommunityManager {
         posts: 1247,
         members: 892,
         lastActivity: '5 minutes ago',
-        moderators: ['CigarMaster92']
+        moderators: ['CigarMaster92'],
       },
       reviews: {
         id: 'reviews',
@@ -222,7 +223,7 @@ class CommunityManager {
         posts: 2156,
         members: 634,
         lastActivity: '12 minutes ago',
-        moderators: ['HavanaHunter']
+        moderators: ['HavanaHunter'],
       },
       beginners: {
         id: 'beginners',
@@ -231,7 +232,7 @@ class CommunityManager {
         posts: 567,
         members: 423,
         lastActivity: '1 hour ago',
-        moderators: ['SmokeRingKing']
+        moderators: ['SmokeRingKing'],
       },
       trading: {
         id: 'trading',
@@ -240,8 +241,8 @@ class CommunityManager {
         posts: 834,
         members: 298,
         lastActivity: '3 hours ago',
-        moderators: ['CigarMaster92', 'HavanaHunter']
-      }
+        moderators: ['CigarMaster92', 'HavanaHunter'],
+      },
     };
   }
 
@@ -351,7 +352,7 @@ class CommunityManager {
   }
 
   setupEventListeners() {
-    document.addEventListener('click', (e) => {
+    document.addEventListener('click', e => {
       // Close community panel
       if (e.target.id === 'close-community-btn') {
         this.hideCommunityPanel();
@@ -383,11 +384,12 @@ class CommunityManager {
     const feedContent = document.getElementById('tab-feed');
     if (!feedContent) return;
 
-    const postsHTML = this.communityPosts.map(post => {
-      const timeAgo = this.getTimeAgo(post.timestamp);
-      const contentHTML = this.renderPostContent(post);
-      
-      return `
+    const postsHTML = this.communityPosts
+      .map(post => {
+        const timeAgo = this.getTimeAgo(post.timestamp);
+        const contentHTML = this.renderPostContent(post);
+
+        return `
         <div class="community-post" style="
           background: rgba(198, 156, 109, 0.1);
           border: 1px solid rgba(198, 156, 109, 0.3);
@@ -463,7 +465,8 @@ class CommunityManager {
           </div>
         </div>
       `;
-    }).join('');
+      })
+      .join('');
 
     feedContent.innerHTML = `
       <div class="post-composer" style="
@@ -563,7 +566,9 @@ class CommunityManager {
     const friendsContent = document.getElementById('tab-friends');
     if (!friendsContent) return;
 
-    const friendsHTML = this.friends.map(friend => `
+    const friendsHTML = this.friends
+      .map(
+        friend => `
       <div class="friend-card" style="
         background: rgba(198, 156, 109, 0.1);
         border: 1px solid rgba(198, 156, 109, 0.3);
@@ -588,14 +593,18 @@ class CommunityManager {
             <div style="color: #888; font-size: 0.9rem;">${friend.level} • ${friend.reviewCount} reviews</div>
             <div style="color: #888; font-size: 0.8rem;">Last seen: ${friend.lastSeen}</div>
             <div style="margin-top: 0.3rem;">
-              ${friend.badges.map(badge => `<span style="
+              ${friend.badges
+                .map(
+                  badge => `<span style="
                 background: rgba(198, 156, 109, 0.2);
                 color: #c69c6d;
                 padding: 0.2rem 0.5rem;
                 border-radius: 10px;
                 font-size: 0.7rem;
                 margin-right: 0.3rem;
-              ">${badge}</span>`).join('')}
+              ">${badge}</span>`
+                )
+                .join('')}
             </div>
           </div>
           
@@ -632,7 +641,9 @@ class CommunityManager {
           ">👤 Profile</button>
         </div>
       </div>
-    `).join('');
+    `
+      )
+      .join('');
 
     friendsContent.innerHTML = `
       <div style="margin-bottom: 1rem;">
@@ -669,16 +680,17 @@ class CommunityManager {
     const eventsContent = document.getElementById('tab-events');
     if (!eventsContent) return;
 
-    const eventsHTML = this.events.map(event => {
-      const dateFormatted = event.date.toLocaleDateString('en-US', {
-        weekday: 'short',
-        month: 'short',
-        day: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit'
-      });
+    const eventsHTML = this.events
+      .map(event => {
+        const dateFormatted = event.date.toLocaleDateString('en-US', {
+          weekday: 'short',
+          month: 'short',
+          day: 'numeric',
+          hour: '2-digit',
+          minute: '2-digit',
+        });
 
-      return `
+        return `
         <div class="event-card" style="
           background: rgba(198, 156, 109, 0.1);
           border: 1px solid rgba(198, 156, 109, 0.3);
@@ -711,14 +723,18 @@ class CommunityManager {
               </div>
               
               <div style="margin-top: 0.8rem;">
-                ${event.tags.map(tag => `<span style="
+                ${event.tags
+                  .map(
+                    tag => `<span style="
                   background: rgba(198, 156, 109, 0.2);
                   color: #c69c6d;
                   padding: 0.2rem 0.5rem;
                   border-radius: 10px;
                   font-size: 0.7rem;
                   margin-right: 0.3rem;
-                ">#${tag}</span>`).join('')}
+                ">#${tag}</span>`
+                  )
+                  .join('')}
               </div>
             </div>
           </div>
@@ -750,7 +766,8 @@ class CommunityManager {
           </div>
         </div>
       `;
-    }).join('');
+      })
+      .join('');
 
     eventsContent.innerHTML = `
       <div style="
@@ -785,7 +802,9 @@ class CommunityManager {
     const forumsContent = document.getElementById('tab-forums');
     if (!forumsContent) return;
 
-    const forumsHTML = Object.values(this.forums).map(forum => `
+    const forumsHTML = Object.values(this.forums)
+      .map(
+        forum => `
       <div class="forum-card" style="
         background: rgba(198, 156, 109, 0.1);
         border: 1px solid rgba(198, 156, 109, 0.3);
@@ -814,7 +833,9 @@ class CommunityManager {
           <div style="color: #c69c6d; font-size: 1.5rem;">💬</div>
         </div>
       </div>
-    `).join('');
+    `
+      )
+      .join('');
 
     forumsContent.innerHTML = `
       <div style="
@@ -871,7 +892,7 @@ class CommunityManager {
         likeBtn.innerHTML = `❤️ ${post.likes}`;
         likeBtn.style.color = '#ff6b6b';
       }
-      
+
       // Track analytics
       if (window.analyticsDashboard) {
         window.analyticsDashboard.trackInteraction('community_like', 'post', { postId });
@@ -885,12 +906,12 @@ class CommunityManager {
       event.attendees += 1;
       const rsvpBtn = document.querySelector(`[data-event-id="${eventId}"]`);
       if (rsvpBtn) {
-        rsvpBtn.innerHTML = '✓ RSVP\'d';
+        rsvpBtn.innerHTML = "✓ RSVP'd";
         rsvpBtn.style.background = '#4CAF50';
         rsvpBtn.style.color = 'white';
         rsvpBtn.disabled = true;
       }
-      
+
       // Track analytics
       if (window.analyticsDashboard) {
         window.analyticsDashboard.trackInteraction('community_rsvp', 'event', { eventId });
@@ -904,7 +925,7 @@ class CommunityManager {
       addBtn.innerHTML = '⏳ Requested';
       addBtn.style.background = '#888';
       addBtn.disabled = true;
-      
+
       // Track analytics
       if (window.analyticsDashboard) {
         window.analyticsDashboard.trackInteraction('community_friend_request', 'user', { userId });
@@ -948,39 +969,36 @@ class CommunityManager {
       content: content,
       likes: 0,
       comments: 0,
-      shares: 0
+      shares: 0,
     };
 
     this.communityPosts.unshift(newPost);
     this.loadFeedContent();
-    
+
     return newPost;
   }
 
   getSocialRecommendations() {
     // Generate recommendations based on community activity
     const _recommendations = [];
-    
+
     // Friend recommendations
-    const potentialFriends = this.friends.filter(friend => 
-      friend.mutualFriends > 2 && friend.socialScore > 500
+    const potentialFriends = this.friends.filter(
+      friend => friend.mutualFriends > 2 && friend.socialScore > 500
     );
-    
+
     // Event recommendations
-    const relevantEvents = this.events.filter(event => 
-      event.attendees < event.maxAttendees && 
-      event.date > new Date()
+    const relevantEvents = this.events.filter(
+      event => event.attendees < event.maxAttendees && event.date > new Date()
     );
-    
+
     // Forum recommendations
-    const activeForums = Object.values(this.forums).filter(forum => 
-      forum.posts > 500
-    );
+    const activeForums = Object.values(this.forums).filter(forum => forum.posts > 500);
 
     return {
       friends: potentialFriends.slice(0, 3),
       events: relevantEvents.slice(0, 2),
-      forums: activeForums.slice(0, 2)
+      forums: activeForums.slice(0, 2),
     };
   }
 
@@ -990,7 +1008,7 @@ class CommunityManager {
       postsCount: this.communityPosts.filter(p => p.userId === this.currentUser.id).length,
       eventsAttended: this.events.filter(e => e.attendees > 0).length,
       forumActivity: Object.values(this.forums).reduce((sum, f) => sum + f.posts, 0),
-      socialScore: this.currentUser.socialScore || 0
+      socialScore: this.currentUser.socialScore || 0,
     };
   }
 }
@@ -998,7 +1016,7 @@ class CommunityManager {
 // Initialize Community Manager
 document.addEventListener('DOMContentLoaded', () => {
   window.communityManager = new CommunityManager();
-  
+
   // Add community button to navigation if not exists
   const navButtons = document.querySelector('.nav-buttons');
   if (navButtons && !document.getElementById('community-nav-btn')) {

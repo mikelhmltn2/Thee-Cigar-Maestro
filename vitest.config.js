@@ -16,28 +16,28 @@ export default defineConfig({
         '*.config.js',
         'dist/',
         'validate-data.js',
-        'integration-test.js'
+        'integration-test.js',
       ],
       thresholds: {
         global: {
           branches: 70,
           functions: 70,
           lines: 70,
-          statements: 70
-        }
-      }
+          statements: 70,
+        },
+      },
     },
     testTimeout: 10000,
     hookTimeout: 10000,
     pool: 'threads',
     poolOptions: {
       threads: {
-        singleThread: true
-      }
-    }
+        singleThread: true,
+      },
+    },
   },
   define: {
     __APP_VERSION__: JSON.stringify('test'),
-    __BUILD_TIME__: JSON.stringify('test')
-  }
+    __BUILD_TIME__: JSON.stringify('test'),
+  },
 });

@@ -18,13 +18,13 @@ class AssetOptimizer {
       originalSize: 0,
       optimizedSize: 0,
       filesProcessed: 0,
-      webpGenerated: 0
+      webpGenerated: 0,
     };
   }
 
   async run() {
     console.info('🖼️  Starting asset optimization...\n');
-    
+
     try {
       await this.ensureDirectories();
       await this.optimizeLogo();
@@ -34,7 +34,7 @@ class AssetOptimizer {
       await this.createOptimizedCSS();
       await this.generateAssetManifest();
       await this.cleanup();
-      
+
       this.printStats();
     } catch (error) {
       console.error('❌ Optimization failed:', error.message);
@@ -54,31 +54,31 @@ class AssetOptimizer {
 
   async optimizeLogo() {
     const logoPath = path.join(this.inputDir, 'logo.png');
-    
+
     try {
       const stats = await fs.stat(logoPath);
       const originalSize = stats.size;
       this.stats.originalSize += originalSize;
-      
+
       console.info(`📸 Optimizing logo.png (${this.formatFileSize(originalSize)})`);
-      
+
       // Create optimized versions
       await this.optimizePNG(logoPath, path.join(this.outputDir, 'logo.png'));
       await this.generateWebP(logoPath, path.join(this.outputDir, 'logo.webp'));
-      
+
       // Create different sizes for PWA
       const sizes = [192, 256, 384, 512];
       for (const size of sizes) {
         const outputPath = path.join(this.outputDir, `logo-${size}.png`);
         const webpPath = path.join(this.outputDir, `logo-${size}.webp`);
-        
+
         await this.resizeImage(logoPath, outputPath, size, size);
         await this.generateWebP(outputPath, webpPath);
       }
-      
+
       // Generate favicon
       await this.generateFavicon(logoPath);
-      
+
       this.stats.filesProcessed++;
       console.info('✅ Logo optimization complete');
     } catch (error) {
@@ -89,22 +89,24 @@ class AssetOptimizer {
   async optimizeImages() {
     const imageExtensions = ['.png', '.jpg', '.jpeg', '.svg'];
     const files = await this.findFiles(this.inputDir, imageExtensions);
-    
+
     for (const file of files) {
-      if (file.includes('logo.png')) {continue;} // Already processed
-      
+      if (file.includes('logo.png')) {
+        continue;
+      } // Already processed
+
       try {
         const stats = await fs.stat(file);
         const originalSize = stats.size;
         this.stats.originalSize += originalSize;
-        
+
         const fileName = path.basename(file);
         const outputPath = path.join(this.outputDir, fileName);
-        
+
         console.info(`📸 Optimizing ${fileName} (${this.formatFileSize(originalSize)})`);
-        
+
         const ext = path.extname(file).toLowerCase();
-        
+
         if (ext === '.png') {
           await this.optimizePNG(file, outputPath);
         } else if (ext === '.jpg' || ext === '.jpeg') {
@@ -112,14 +114,14 @@ class AssetOptimizer {
         } else if (ext === '.svg') {
           await this.optimizeSVG(file, outputPath);
         }
-        
+
         // Generate WebP variant for raster images
         if (['.png', '.jpg', '.jpeg'].includes(ext)) {
           const webpPath = path.join(this.outputDir, fileName.replace(ext, '.webp'));
           await this.generateWebP(file, webpPath);
           this.stats.webpGenerated++;
         }
-        
+
         this.stats.filesProcessed++;
       } catch (error) {
         console.warn(`⚠️  Could not optimize ${file}:`, error.message);
@@ -135,7 +137,7 @@ class AssetOptimizer {
       // Fallback: just copy the file
       await fs.copyFile(inputPath, outputPath);
     }
-    
+
     const stats = await fs.stat(outputPath);
     this.stats.optimizedSize += stats.size;
   }
@@ -143,12 +145,14 @@ class AssetOptimizer {
   async optimizeJPEG(inputPath, outputPath) {
     try {
       // Use jpegoptim for JPEG optimization
-      execSync(`jpegoptim --max=85 --dest="${path.dirname(outputPath)}" "${inputPath}"`, { stdio: 'pipe' });
+      execSync(`jpegoptim --max=85 --dest="${path.dirname(outputPath)}" "${inputPath}"`, {
+        stdio: 'pipe',
+      });
     } catch (_error) {
       // Fallback: just copy the file
       await fs.copyFile(inputPath, outputPath);
     }
-    
+
     const stats = await fs.stat(outputPath);
     this.stats.optimizedSize += stats.size;
   }
@@ -161,7 +165,7 @@ class AssetOptimizer {
       // Fallback: just copy the file
       await fs.copyFile(inputPath, outputPath);
     }
-    
+
     const stats = await fs.stat(outputPath);
     this.stats.optimizedSize += stats.size;
   }
@@ -176,7 +180,9 @@ class AssetOptimizer {
 
   async resizeImage(inputPath, outputPath, width, height) {
     try {
-      execSync(`convert "${inputPath}" -resize ${width}x${height} "${outputPath}"`, { stdio: 'pipe' });
+      execSync(`convert "${inputPath}" -resize ${width}x${height} "${outputPath}"`, {
+        stdio: 'pipe',
+      });
     } catch (_error) {
       // Fallback to just copying if ImageMagick is not available
       await fs.copyFile(inputPath, outputPath);
@@ -185,7 +191,7 @@ class AssetOptimizer {
 
   async generateFavicon(logoPath) {
     const faviconPath = path.join(this.outputDir, 'favicon.ico');
-    
+
     try {
       execSync(`convert "${logoPath}" -resize 32x32 "${faviconPath}"`, { stdio: 'pipe' });
       console.info('✅ Generated favicon.ico');
@@ -196,26 +202,28 @@ class AssetOptimizer {
 
   async compressJSON() {
     const jsonFiles = await this.findFiles(this.inputDir, ['.json']);
-    
+
     for (const file of jsonFiles) {
       try {
         const fileName = path.basename(file);
         const outputPath = path.join(this.outputDir, fileName);
-        
+
         const content = await fs.readFile(file, 'utf8');
         const parsed = JSON.parse(content);
         const minified = JSON.stringify(parsed);
-        
+
         await fs.writeFile(outputPath, minified);
-        
+
         const originalSize = Buffer.byteLength(content);
         const compressedSize = Buffer.byteLength(minified);
-        
+
         this.stats.originalSize += originalSize;
         this.stats.optimizedSize += compressedSize;
         this.stats.filesProcessed++;
-        
-        console.info(`📄 Compressed ${fileName}: ${this.formatFileSize(originalSize)} → ${this.formatFileSize(compressedSize)}`);
+
+        console.info(
+          `📄 Compressed ${fileName}: ${this.formatFileSize(originalSize)} → ${this.formatFileSize(compressedSize)}`
+        );
       } catch (error) {
         console.warn(`⚠️  Could not compress ${file}:`, error.message);
       }
@@ -228,14 +236,14 @@ class AssetOptimizer {
 
   async createOptimizedCSS() {
     const cssFiles = await this.findFiles(this.inputDir, ['.css']);
-    
+
     for (const file of cssFiles) {
       try {
         const fileName = path.basename(file);
         const outputPath = path.join(this.outputDir, fileName);
-        
+
         const content = await fs.readFile(file, 'utf8');
-        
+
         // Basic CSS minification
         const minified = content
           .replace(/\/\*[\s\S]*?\*\//g, '') // Remove comments
@@ -244,17 +252,19 @@ class AssetOptimizer {
           .replace(/\s*{\s*/g, '{') // Remove spaces around braces
           .replace(/;\s*/g, ';') // Remove spaces after semicolons
           .trim();
-        
+
         await fs.writeFile(outputPath, minified);
-        
+
         const originalSize = Buffer.byteLength(content);
         const compressedSize = Buffer.byteLength(minified);
-        
+
         this.stats.originalSize += originalSize;
         this.stats.optimizedSize += compressedSize;
         this.stats.filesProcessed++;
-        
-        console.info(`🎨 Minified ${fileName}: ${this.formatFileSize(originalSize)} → ${this.formatFileSize(compressedSize)}`);
+
+        console.info(
+          `🎨 Minified ${fileName}: ${this.formatFileSize(originalSize)} → ${this.formatFileSize(compressedSize)}`
+        );
       } catch (error) {
         console.warn(`⚠️  Could not optimize ${file}:`, error.message);
       }
@@ -266,31 +276,31 @@ class AssetOptimizer {
       timestamp: new Date().toISOString(),
       version: process.env.npm_package_version || '1.0.0',
       assets: [],
-      optimizationStats: this.stats
+      optimizationStats: this.stats,
     };
 
     try {
       const files = await fs.readdir(this.outputDir);
-      
+
       for (const file of files) {
         const filePath = path.join(this.outputDir, file);
         const stats = await fs.stat(filePath);
-        
+
         if (stats.isFile()) {
           manifest.assets.push({
             name: file,
             size: stats.size,
             type: this.getAssetType(file),
-            hash: await this.generateFileHash(filePath)
+            hash: await this.generateFileHash(filePath),
           });
         }
       }
-      
+
       await fs.writeFile(
         path.join(this.outputDir, 'manifest.json'),
         JSON.stringify(manifest, null, 2)
       );
-      
+
       console.info('✅ Generated asset manifest');
     } catch (error) {
       console.warn('⚠️  Could not generate manifest:', error.message);
@@ -309,7 +319,7 @@ class AssetOptimizer {
 
   getAssetType(fileName) {
     const ext = path.extname(fileName).toLowerCase();
-    
+
     if (['.png', '.jpg', '.jpeg', '.webp', '.svg', '.ico'].includes(ext)) {
       return 'image';
     } else if (['.css'].includes(ext)) {
@@ -325,15 +335,15 @@ class AssetOptimizer {
 
   async findFiles(dir, extensions) {
     const files = [];
-    
+
     try {
       const entries = await fs.readdir(dir, { withFileTypes: true });
-      
+
       for (const entry of entries) {
         const fullPath = path.join(dir, entry.name);
-        
+
         if (entry.isDirectory() && !entry.name.startsWith('.') && entry.name !== 'node_modules') {
-          files.push(...await this.findFiles(fullPath, extensions));
+          files.push(...(await this.findFiles(fullPath, extensions)));
         } else if (entry.isFile()) {
           const ext = path.extname(entry.name).toLowerCase();
           if (extensions.includes(ext)) {
@@ -344,7 +354,7 @@ class AssetOptimizer {
     } catch (error) {
       console.warn(`⚠️  Could not read directory ${dir}:`, error.message);
     }
-    
+
     return files;
   }
 
@@ -361,21 +371,20 @@ class AssetOptimizer {
     const units = ['B', 'KB', 'MB', 'GB'];
     let size = bytes;
     let unitIndex = 0;
-    
+
     while (size >= 1024 && unitIndex < units.length - 1) {
       size /= 1024;
       unitIndex++;
     }
-    
+
     return `${Math.round(size * 100) / 100} ${units[unitIndex]}`;
   }
 
   printStats() {
     const savings = this.stats.originalSize - this.stats.optimizedSize;
-    const percentage = this.stats.originalSize > 0 
-      ? ((savings / this.stats.originalSize) * 100).toFixed(1)
-      : 0;
-    
+    const percentage =
+      this.stats.originalSize > 0 ? ((savings / this.stats.originalSize) * 100).toFixed(1) : 0;
+
     console.info('\n📊 Optimization Summary:');
     console.info('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
     console.info(`📁 Files processed: ${this.stats.filesProcessed}`);

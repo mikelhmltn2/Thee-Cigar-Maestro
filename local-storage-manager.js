@@ -13,14 +13,14 @@ class LocalStorageManager {
         filterPreferences: {
           wrapperTypes: [],
           strengthLevels: [],
-          priceRange: { min: 0, max: 1000 }
+          priceRange: { min: 0, max: 1000 },
         },
         displayOptions: {
           showAnimations: true,
           autoPlay3D: true,
           soundEnabled: true,
-          reduceMotion: false
-        }
+          reduceMotion: false,
+        },
       },
       sessionData: {
         lastVisitedCigar: null,
@@ -28,20 +28,20 @@ class LocalStorageManager {
         favoritesCigars: [],
         completedEducationModules: [],
         pairingHistory: [],
-        voiceRecordings: []
+        voiceRecordings: [],
       },
       analytics: {
         visitCount: 0,
         lastVisit: null,
         timeSpent: 0,
         featuresUsed: {},
-        searchQueries: []
-      }
+        searchQueries: [],
+      },
     };
     this.cache = null;
     this.syncInProgress = false;
     this.eventHandlers = new Map();
-    
+
     this.init();
   }
 
@@ -53,9 +53,9 @@ class LocalStorageManager {
     this.updateAnalytics();
     this.setupPerformanceMonitoring();
     this.setupAutoSave();
-    
+
     // Listen for storage events from other tabs
-    window.addEventListener('storage', (e) => {
+    window.addEventListener('storage', e => {
       if (e.key === this.storageKey) {
         this.handleStorageChange(e);
       }
@@ -82,7 +82,7 @@ class LocalStorageManager {
     } catch (error) {
       console.error('Error loading stored data:', error);
     }
-    
+
     return { ...this.defaults };
   }
 
@@ -91,20 +91,20 @@ class LocalStorageManager {
    */
   mergeWithDefaults(stored) {
     const merged = { ...this.defaults };
-    
+
     // Deep merge preferences
     if (stored.preferences) {
       merged.preferences = { ...merged.preferences, ...stored.preferences };
       if (stored.preferences.filterPreferences) {
         merged.preferences.filterPreferences = {
           ...merged.preferences.filterPreferences,
-          ...stored.preferences.filterPreferences
+          ...stored.preferences.filterPreferences,
         };
       }
       if (stored.preferences.displayOptions) {
         merged.preferences.displayOptions = {
           ...merged.preferences.displayOptions,
-          ...stored.preferences.displayOptions
+          ...stored.preferences.displayOptions,
         };
       }
     }
@@ -126,16 +126,18 @@ class LocalStorageManager {
    * Save data to localStorage
    */
   saveData() {
-    if (this.syncInProgress) {return;}
-    
+    if (this.syncInProgress) {
+      return;
+    }
+
     try {
       this.syncInProgress = true;
       const dataToSave = {
         ...this.cache,
         lastUpdated: new Date().toISOString(),
-        version: '1.0'
+        version: '1.0',
       };
-      
+
       localStorage.setItem(this.storageKey, JSON.stringify(dataToSave));
       this.triggerEvent('dataSaved', dataToSave);
     } catch (error) {
@@ -160,7 +162,7 @@ class LocalStorageManager {
     if (!this.cache.preferences) {
       this.cache.preferences = { ...this.defaults.preferences };
     }
-    
+
     this.cache.preferences[key] = value;
     this.saveData();
     this.triggerEvent('preferenceChanged', { key, value });
@@ -180,12 +182,12 @@ class LocalStorageManager {
     if (!this.cache.sessionData.favoritesCigars) {
       this.cache.sessionData.favoritesCigars = [];
     }
-    
+
     const exists = this.cache.sessionData.favoritesCigars.find(c => c.name === cigar.name);
     if (!exists) {
       this.cache.sessionData.favoritesCigars.push({
         ...cigar,
-        addedAt: new Date().toISOString()
+        addedAt: new Date().toISOString(),
       });
       this.saveData();
       this.triggerEvent('favoriteAdded', cigar);
@@ -197,8 +199,9 @@ class LocalStorageManager {
    */
   removeFromFavorites(cigarName) {
     if (this.cache.sessionData.favoritesCigars) {
-      this.cache.sessionData.favoritesCigars = this.cache.sessionData.favoritesCigars
-        .filter(c => c.name !== cigarName);
+      this.cache.sessionData.favoritesCigars = this.cache.sessionData.favoritesCigars.filter(
+        c => c.name !== cigarName
+      );
       this.saveData();
       this.triggerEvent('favoriteRemoved', cigarName);
     }
@@ -211,20 +214,20 @@ class LocalStorageManager {
     if (!this.cache.sessionData.searchHistory) {
       this.cache.sessionData.searchHistory = [];
     }
-    
+
     const searchEntry = {
       query,
       resultCount: results.length,
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
     };
-    
+
     this.cache.sessionData.searchHistory.unshift(searchEntry);
-    
+
     // Keep only last 50 searches
     if (this.cache.sessionData.searchHistory.length > 50) {
       this.cache.sessionData.searchHistory = this.cache.sessionData.searchHistory.slice(0, 50);
     }
-    
+
     this.saveData();
   }
 
@@ -235,10 +238,10 @@ class LocalStorageManager {
     if (!this.cache.analytics.featuresUsed) {
       this.cache.analytics.featuresUsed = {};
     }
-    
-    this.cache.analytics.featuresUsed[featureName] = 
+
+    this.cache.analytics.featuresUsed[featureName] =
       (this.cache.analytics.featuresUsed[featureName] || 0) + 1;
-    
+
     this.saveData();
   }
 
@@ -267,7 +270,7 @@ class LocalStorageManager {
     return {
       ...this.cache,
       exportedAt: new Date().toISOString(),
-      version: '1.0'
+      version: '1.0',
     };
   }
 
@@ -338,13 +341,12 @@ class LocalStorageManager {
    */
   setupPerformanceMonitoring() {
     const startTime = performance.now();
-    
+
     // Track time spent on page
     setInterval(() => {
       const currentTime = performance.now();
       const sessionTime = Math.round((currentTime - startTime) / 1000); // seconds
-      this.cache.analytics.timeSpent = 
-        (this.cache.analytics.timeSpent || 0) + sessionTime;
+      this.cache.analytics.timeSpent = (this.cache.analytics.timeSpent || 0) + sessionTime;
     }, 30000); // Update every 30 seconds
   }
 
@@ -364,7 +366,7 @@ class LocalStorageManager {
   saveSession() {
     this.cache.sessionData.lastSession = {
       endTime: new Date().toISOString(),
-      currentPage: window.location.pathname
+      currentPage: window.location.pathname,
     };
     this.saveData();
   }
@@ -375,13 +377,13 @@ class LocalStorageManager {
   getStorageInfo() {
     const data = localStorage.getItem(this.storageKey);
     const sizeInBytes = data ? new Blob([data]).size : 0;
-    const sizeInKB = Math.round(sizeInBytes / 1024 * 100) / 100;
-    
+    const sizeInKB = Math.round((sizeInBytes / 1024) * 100) / 100;
+
     return {
       sizeInBytes,
       sizeInKB,
       itemCount: data ? Object.keys(JSON.parse(data)).length : 0,
-      lastUpdated: this.cache.lastUpdated
+      lastUpdated: this.cache.lastUpdated,
     };
   }
 }

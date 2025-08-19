@@ -34,15 +34,17 @@ if (!process.env.JWT_SECRET && process.env.NODE_ENV !== 'test') {
 app.use(helmet());
 app.use(compression());
 app.use(morgan('combined'));
-app.use(cors({
-  origin: process.env.FRONTEND_URL || 'http://localhost:3000',
-  credentials: true
-}));
+app.use(
+  cors({
+    origin: process.env.FRONTEND_URL || 'http://localhost:3000',
+    credentials: true,
+  })
+);
 
 // Rate limiting
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 100 // limit each IP to 100 requests per windowMs
+  max: 100, // limit each IP to 100 requests per windowMs
 });
 app.use(limiter);
 
@@ -111,8 +113,8 @@ app.get('/api/health', (req, res) => {
       auth: '/api/auth',
       cigars: '/api/cigars',
       users: '/api/users',
-      analytics: '/api/analytics'
-    }
+      analytics: '/api/analytics',
+    },
   });
 });
 
@@ -164,7 +166,7 @@ app.post('/api/auth/register', async (req, res) => {
       password: hashedPassword,
       createdAt: new Date().toISOString(),
       preferences: {},
-      favorites: []
+      favorites: [],
     };
 
     users.set(email, user);
@@ -175,7 +177,7 @@ app.post('/api/auth/register', async (req, res) => {
     return res.status(201).json({
       message: 'User registered successfully',
       token,
-      user: { id: userId, email, name }
+      user: { id: userId, email, name },
     });
   } catch (error) {
     console.error('Registration error:', error);
@@ -230,7 +232,7 @@ app.post('/api/auth/login', async (req, res) => {
     return res.json({
       message: 'Login successful',
       token,
-      user: { id: user.id, email: user.email, name: user.name }
+      user: { id: user.id, email: user.email, name: user.name },
     });
   } catch (error) {
     console.error('Login error:', error);
@@ -261,7 +263,7 @@ app.post('/api/auth/login', async (req, res) => {
 app.get('/api/cigars', (req, res) => {
   try {
     const { limit = 50, offset = 0 } = req.query;
-    
+
     // Check cache first
     const cacheKey = `cigars:${limit}:${offset}`;
     const cached = cache.get(cacheKey);
@@ -274,35 +276,35 @@ app.get('/api/cigars', (req, res) => {
     const sampleCigars = [
       {
         id: uuidv4(),
-        name: "Romeo y Julieta Churchill",
-        brand: "Romeo y Julieta",
-        origin: "Cuba",
-        strength: "Medium",
-        size: "Churchill",
+        name: 'Romeo y Julieta Churchill',
+        brand: 'Romeo y Julieta',
+        origin: 'Cuba',
+        strength: 'Medium',
+        size: 'Churchill',
         length: 178,
         ringGauge: 47,
-        wrapper: "Natural",
-        notes: ["Cedar", "Leather", "Coffee"]
+        wrapper: 'Natural',
+        notes: ['Cedar', 'Leather', 'Coffee'],
       },
       {
         id: uuidv4(),
-        name: "Montecristo No. 2",
-        brand: "Montecristo",
-        origin: "Cuba",
-        strength: "Medium to Full",
-        size: "Torpedo",
+        name: 'Montecristo No. 2',
+        brand: 'Montecristo',
+        origin: 'Cuba',
+        strength: 'Medium to Full',
+        size: 'Torpedo',
         length: 156,
         ringGauge: 52,
-        wrapper: "Natural",
-        notes: ["Spice", "Wood", "Vanilla"]
-      }
+        wrapper: 'Natural',
+        notes: ['Spice', 'Wood', 'Vanilla'],
+      },
     ];
 
     const result = {
       cigars: sampleCigars.slice(parseInt(offset, 10), parseInt(offset, 10) + parseInt(limit, 10)),
       total: sampleCigars.length,
       limit: parseInt(limit, 10),
-      offset: parseInt(offset, 10)
+      offset: parseInt(offset, 10),
     };
 
     // Cache the result
@@ -344,19 +346,19 @@ app.post('/api/cigars/search', (req, res) => {
     const searchResults = [
       {
         id: uuidv4(),
-        name: "Cohiba Behike 52",
-        brand: "Cohiba",
-        origin: "Cuba",
-        strength: "Full",
-        relevanceScore: 0.95
-      }
+        name: 'Cohiba Behike 52',
+        brand: 'Cohiba',
+        origin: 'Cuba',
+        strength: 'Full',
+        relevanceScore: 0.95,
+      },
     ];
 
     res.json({
       query,
       filters,
       results: searchResults,
-      total: searchResults.length
+      total: searchResults.length,
     });
   } catch (error) {
     console.error('Search error:', error);
@@ -387,7 +389,7 @@ app.get('/api/user/profile', authenticateToken, (req, res) => {
       email: user.email,
       name: user.name,
       preferences: user.preferences,
-      createdAt: user.createdAt
+      createdAt: user.createdAt,
     });
   } catch (error) {
     console.error('Profile error:', error);
@@ -432,7 +434,7 @@ app.get('/api/user/favorites', authenticateToken, (req, res) => {
     }
 
     res.json({
-      favorites: user.favorites || []
+      favorites: user.favorites || [],
     });
   } catch (error) {
     console.error('Favorites error:', error);
@@ -476,7 +478,7 @@ app.get('/api/user/favorites', authenticateToken, (req, res) => {
 app.post('/api/user/favorites', authenticateToken, (req, res) => {
   try {
     const { cigarName } = req.body;
-    
+
     if (!cigarName || typeof cigarName !== 'string') {
       return res.status(400).json({ error: 'Valid cigar name is required' });
     }
@@ -499,7 +501,7 @@ app.post('/api/user/favorites', authenticateToken, (req, res) => {
 
     res.json({
       message: 'Cigar added to favorites successfully',
-      favorites: user.favorites
+      favorites: user.favorites,
     });
   } catch (error) {
     console.error('Add favorite error:', error);
@@ -538,7 +540,7 @@ app.post('/api/user/favorites', authenticateToken, (req, res) => {
 app.delete('/api/user/favorites/:cigarName', authenticateToken, (req, res) => {
   try {
     const { cigarName } = req.params;
-    
+
     if (!cigarName) {
       return res.status(400).json({ error: 'Cigar name is required' });
     }
@@ -557,7 +559,7 @@ app.delete('/api/user/favorites/:cigarName', authenticateToken, (req, res) => {
 
     res.json({
       message: 'Cigar removed from favorites successfully',
-      favorites: user.favorites
+      favorites: user.favorites,
     });
   } catch (error) {
     console.error('Remove favorite error:', error);
@@ -595,7 +597,7 @@ app.post('/api/analytics/track', (req, res) => {
     res.json({
       message: 'Event tracked successfully',
       event,
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
     });
   } catch (error) {
     console.error('Analytics error:', error);

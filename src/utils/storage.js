@@ -18,9 +18,14 @@ class StorageManager {
   checkStorageAvailability(storageType) {
     try {
       // Check if we're in a browser environment or test environment with globals
-      const storageObj = typeof window !== 'undefined' ? window[storageType] : (typeof globalThis !== 'undefined' ? globalThis[storageType] : undefined);
+      const storageObj =
+        typeof window !== 'undefined'
+          ? window[storageType]
+          : typeof globalThis !== 'undefined'
+            ? globalThis[storageType]
+            : undefined;
       if (!storageObj) return false;
-      
+
       const testKey = '__storage_test__';
       try {
         storageObj.setItem(testKey, 'test');
@@ -37,7 +42,8 @@ class StorageManager {
 
   checkIndexedDBAvailability() {
     // Check if we're in a browser environment or test environment
-    const globalScope = typeof window !== 'undefined' ? window : (typeof globalThis !== 'undefined' ? globalThis : {});
+    const globalScope =
+      typeof window !== 'undefined' ? window : typeof globalThis !== 'undefined' ? globalThis : {};
     return !!(
       globalScope.indexedDB ||
       globalScope.mozIndexedDB ||
@@ -60,7 +66,7 @@ class StorageManager {
         resolve(this.db);
       };
 
-      request.onupgradeneeded = (event) => {
+      request.onupgradeneeded = event => {
         const db = event.target.result;
 
         // Create object stores for different data types
@@ -92,7 +98,7 @@ class StorageManager {
       const item = {
         value,
         timestamp: Date.now(),
-        expiration: expiration ? Date.now() + expiration : null
+        expiration: expiration ? Date.now() + expiration : null,
       };
       localStorage.setItem(key, JSON.stringify(item));
       return true;
@@ -114,12 +120,14 @@ class StorageManager {
 
     try {
       const item = localStorage.getItem(key);
-      if (!item) {return null;}
+      if (!item) {
+        return null;
+      }
 
       const parsed = JSON.parse(item);
-      
+
       // Check expiration with minimal tolerance for timer resolution
-      if (parsed.expiration && Date.now() >= (parsed.expiration - this.expirationToleranceMs)) {
+      if (parsed.expiration && Date.now() >= parsed.expiration - this.expirationToleranceMs) {
         localStorage.removeItem(key);
         return null;
       }
@@ -179,7 +187,9 @@ class StorageManager {
   async setIndexedDB(storeName, data) {
     try {
       await this.initIndexedDB();
-      if (!this.db) {return false;}
+      if (!this.db) {
+        return false;
+      }
 
       const transaction = this.db.transaction([storeName], 'readwrite');
       const store = transaction.objectStore(storeName);
@@ -198,7 +208,9 @@ class StorageManager {
   async getIndexedDB(storeName, id) {
     try {
       await this.initIndexedDB();
-      if (!this.db) {return null;}
+      if (!this.db) {
+        return null;
+      }
 
       const transaction = this.db.transaction([storeName], 'readonly');
       const store = transaction.objectStore(storeName);
@@ -220,16 +232,18 @@ class StorageManager {
     this.memoryStorage.set(key, {
       value,
       timestamp: Date.now(),
-      expiration: expiration ? Date.now() + expiration : null
+      expiration: expiration ? Date.now() + expiration : null,
     });
     return true;
   }
 
   getMemory(key) {
     const item = this.memoryStorage.get(key);
-    if (!item) {return null;}
+    if (!item) {
+      return null;
+    }
 
-    if (item.expiration && Date.now() >= (item.expiration - this.expirationToleranceMs)) {
+    if (item.expiration && Date.now() >= item.expiration - this.expirationToleranceMs) {
       this.memoryStorage.delete(key);
       return null;
     }
@@ -242,12 +256,13 @@ class StorageManager {
   }
 
   // Cache management
-  async cacheData(url, data, expiration = 1000 * 60 * 60) { // 1 hour default
+  async cacheData(url, data, expiration = 1000 * 60 * 60) {
+    // 1 hour default
     const cacheItem = {
       url,
       data,
       timestamp: Date.now(),
-      expiration: Date.now() + expiration
+      expiration: Date.now() + expiration,
     };
 
     // Try IndexedDB first, then localStorage
@@ -260,17 +275,19 @@ class StorageManager {
   async getCachedData(url) {
     // Try IndexedDB first
     let cached = await this.getIndexedDB('cache', url);
-    
+
     // Fallback to localStorage
     if (!cached) {
       cached = this.getLocal(`cache_${url}`);
     }
 
-    if (!cached) {return null;}
+    if (!cached) {
+      return null;
+    }
 
     // When loaded from IndexedDB, cached is the whole object; when from localStorage, it's the stored object we saved
     const expiration = cached.expiration ?? cached?.data?.expiration;
-    const nowExpired = expiration && Date.now() >= (expiration - this.expirationToleranceMs);
+    const nowExpired = expiration && Date.now() >= expiration - this.expirationToleranceMs;
     if (nowExpired) {
       return null;
     }
@@ -328,7 +345,7 @@ class StorageManager {
       localStorage: {},
       preferences: [],
       userData: [],
-      timestamp: Date.now()
+      timestamp: Date.now(),
     };
 
     // Export localStorage
@@ -343,7 +360,7 @@ class StorageManager {
     if (this.db) {
       try {
         const transaction = this.db.transaction(['preferences', 'userData'], 'readonly');
-        
+
         // Get preferences
         const prefStore = transaction.objectStore('preferences');
         data.preferences = await new Promise((resolve, reject) => {

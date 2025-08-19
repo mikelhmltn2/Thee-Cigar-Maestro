@@ -1,17 +1,17 @@
-'use client'
+'use client';
 
-import React, { useRef } from 'react'
-import { motion, useInView } from 'framer-motion'
-import { cn } from '@/utils/cn'
+import React, { useRef } from 'react';
+import { motion, useInView } from 'framer-motion';
+import { cn } from '@/utils/cn';
 
 interface AnimatedRevealProps {
-  children: React.ReactNode
-  className?: string
-  delay?: number
-  duration?: number
-  direction?: 'up' | 'down' | 'left' | 'right' | 'fade'
-  once?: boolean
-  threshold?: number
+  children: React.ReactNode;
+  className?: string;
+  delay?: number;
+  duration?: number;
+  direction?: 'up' | 'down' | 'left' | 'right' | 'fade';
+  once?: boolean;
+  threshold?: number;
 }
 
 const AnimatedReveal: React.FC<AnimatedRevealProps> = ({
@@ -23,8 +23,8 @@ const AnimatedReveal: React.FC<AnimatedRevealProps> = ({
   once = true,
   threshold = 0.1,
 }) => {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once, amount: threshold })
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once, amount: threshold });
 
   const variants = {
     hidden: {
@@ -39,12 +39,12 @@ const AnimatedReveal: React.FC<AnimatedRevealProps> = ({
       y: 0,
       x: 0,
     },
-  }
+  };
 
   return (
     <motion.div
       ref={ref}
-      initial="hidden"
+      initial='hidden'
       animate={isInView ? 'visible' : 'hidden'}
       variants={variants}
       transition={{
@@ -56,7 +56,7 @@ const AnimatedReveal: React.FC<AnimatedRevealProps> = ({
     >
       {children}
     </motion.div>
-  )
-}
+  );
+};
 
-export default AnimatedReveal
+export default AnimatedReveal;

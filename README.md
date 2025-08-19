@@ -23,19 +23,21 @@ A sophisticated web application for cigar enthusiasts featuring interactive 3D v
 ## 🚀 Quick Start
 
 1. **Clone the repository**
+
    ```bash
    git clone https://github.com/username/thee-cigar-maestro.git
    cd thee-cigar-maestro
    ```
 
 2. **Serve locally**
+
    ```bash
    # Using Python
    python -m http.server 8000
-   
+
    # Using Node.js
    npx serve .
-   
+
    # Using any static file server
    ```
 
@@ -71,6 +73,7 @@ thee-cigar-maestro/
 ## 🔒 Security Features
 
 ### Implemented Protections
+
 - **XSS Prevention**: All user inputs sanitized, `innerHTML` replaced with `textContent`
 - **Content Security Policy**: Restricts resource loading to trusted sources
 - **Input Validation**: Length limits and sanitization for all user inputs
@@ -79,20 +82,25 @@ thee-cigar-maestro/
 - **Timeout Protection**: Request timeouts prevent hanging connections
 
 ### Security Headers
+
 ```html
-<meta http-equiv="Content-Security-Policy" content="
+<meta
+  http-equiv="Content-Security-Policy"
+  content="
   default-src 'self'; 
   script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; 
   style-src 'self' 'unsafe-inline'; 
   img-src 'self' data: https:; 
   media-src 'self' blob:; 
   connect-src 'self' https://theecigarmaestro.vercel.app;
-" />
+"
+/>
 ```
 
 ## 🎨 Design System
 
 ### Color Palette
+
 - **Primary Background**: `#121212`
 - **Secondary Background**: `#1c1c1c`
 - **Accent Background**: `#2c2c2c`
@@ -102,6 +110,7 @@ thee-cigar-maestro/
 - **Link Text**: `#dab785`
 
 ### Typography
+
 - **Font Family**: Georgia, serif
 - **Consistent spacing**: CSS custom properties
 - **Responsive scaling**: Viewport-based sizing
@@ -109,10 +118,12 @@ thee-cigar-maestro/
 ## 🛠️ Dependencies
 
 ### External Libraries
+
 - **Three.js v0.160.0**: 3D visualization and WebGL rendering
 - **OrbitControls**: Camera controls for 3D scene navigation
 
 ### Browser APIs
+
 - **WebGL**: 3D graphics rendering
 - **MediaRecorder**: Audio recording functionality
 - **Fetch API**: Network requests with timeout support
@@ -121,6 +132,7 @@ thee-cigar-maestro/
 ## 📊 Data Structure
 
 ### Cigar Data Format
+
 ```json
 {
   "name": "Cigar Name",
@@ -131,6 +143,7 @@ thee-cigar-maestro/
 ```
 
 ### Wrapper Types
+
 - **Maduro**: Dark, sweet wrapper with chocolate notes
 - **Connecticut**: Light, mild wrapper with creamy flavor
 - **Habano**: Medium-bodied with spice and complexity
@@ -140,6 +153,7 @@ thee-cigar-maestro/
 ## 🔧 Configuration
 
 ### Development Setup
+
 This project uses Next.js as the primary app with a single service worker at `/sw.js`.
 
 ```bash
@@ -163,25 +177,30 @@ prettier --write .
 ```
 
 ### Build System
+
 - Next.js 14
 - ESLint flat config
 - Vitest for unit tests
 - TypeScript for type checking
 
 ### Security and CSP
+
 - CSP is delivered via Next.js headers only (no meta CSP on pages)
 - No 'unsafe-eval'; inline scripts avoided to reduce 'unsafe-inline' usage
 - GA is loaded via `next/script` and initialized without inline
 
 ### PWA
+
 - Single service worker: `public/sw.js`
 - Offline fallback at `public/offline.html`
 - Manifest icons located under `public/icons/`
 
 ### API Configuration
+
 Update the GPT API endpoint in `gpt.js`:
+
 ```javascript
-const res = await fetch("https://theecigarmaestro.vercel.app/api/gpt", {
+const res = await fetch('https://theecigarmaestro.vercel.app/api/gpt', {
   // configuration
 });
 ```
@@ -191,12 +210,14 @@ const res = await fetch("https://theecigarmaestro.vercel.app/api/gpt", {
 ## 📱 Browser Support
 
 ### Minimum Requirements
+
 - **Chrome**: 58+
 - **Firefox**: 55+
 - **Safari**: 11+
 - **Edge**: 79+
 
 ### Required Features
+
 - ES6+ JavaScript support
 - WebGL support
 - CSS Grid and Flexbox
@@ -213,6 +234,7 @@ const res = await fetch("https://theecigarmaestro.vercel.app/api/gpt", {
 ## 🔄 Performance Optimization
 
 ### Implemented Optimizations
+
 - **Efficient Rendering**: Damped camera controls reduce unnecessary redraws
 - **Lazy Loading**: Error handling prevents failed resources from blocking UI
 - **CSS Animations**: Hardware-accelerated transitions
@@ -220,6 +242,7 @@ const res = await fetch("https://theecigarmaestro.vercel.app/api/gpt", {
 - **Minified Dependencies**: CDN-hosted, compressed libraries
 
 ### Recommendations
+
 1. Implement image optimization for logo.png
 2. Add service worker for offline functionality
 3. Consider WebP format for better compression
@@ -228,6 +251,7 @@ const res = await fetch("https://theecigarmaestro.vercel.app/api/gpt", {
 ## 🧪 Testing
 
 ### Automated Testing Suite
+
 The application includes comprehensive testing with **107 test cases** achieving **94.4% success rate**:
 
 ```bash
@@ -245,12 +269,14 @@ npm run test:ui
 ```
 
 #### Test Categories:
+
 - **Unit Tests**: 62 tests covering individual components
 - **Integration Tests**: 25 tests for end-to-end workflows
 - **Component Tests**: 19 tests for UI components
 - **Performance Tests**: 8 tests for performance benchmarks
 
 #### Key Testing Features:
+
 - **Error Handler Testing**: Comprehensive error handling scenarios
 - **Storage System Testing**: Local/session storage with quota management
 - **UI Manager Testing**: Toast notifications and modal management
@@ -258,6 +284,7 @@ npm run test:ui
 - **Mobile Menu Testing**: Responsive behavior and touch interactions
 
 ### Manual Testing Checklist
+
 - [x] 3D scene loads and renders correctly
 - [x] All cigar data displays with proper formatting
 - [x] GPT chat interface accepts input and shows responses
@@ -268,6 +295,7 @@ npm run test:ui
 - [x] Mobile menu toggle works under 768px viewport
 
 ### Security Testing
+
 - [x] XSS injection attempts are blocked
 - [x] CSP headers prevent unauthorized resource loading
 - [x] Input validation prevents malformed data
@@ -279,6 +307,7 @@ npm run test:ui
 The application includes structured educational materials for cigar enthusiasts:
 
 ### Learning Objectives
+
 - Wrapper-to-spirit pairing logic
 - Flavor profile identification
 - Construction techniques
@@ -286,7 +315,9 @@ The application includes structured educational materials for cigar enthusiasts:
 - Aging and storage methods
 
 ### CEU Compliance
+
 Educational content is structured for Continuing Education Unit requirements with:
+
 - Clear learning objectives
 - Assessment questions
 - Progress tracking
@@ -295,6 +326,7 @@ Educational content is structured for Continuing Education Unit requirements wit
 ## 🤝 Contributing
 
 ### Development Guidelines
+
 1. **Security First**: All user inputs must be sanitized
 2. **Accessibility**: Follow WCAG 2.1 guidelines
 3. **Performance**: Test on low-end devices
@@ -302,6 +334,7 @@ Educational content is structured for Continuing Education Unit requirements wit
 5. **Data Quality**: Validate all JSON data structures
 
 ### Code Style
+
 - Use semantic HTML5 elements
 - Follow CSS BEM methodology where applicable
 - Prefer `const`/`let` over `var`
@@ -317,12 +350,14 @@ Copyright (c) 2025 Mike Hamilton
 ## 🆘 Support
 
 For technical issues:
+
 1. Check browser console for error messages
 2. Verify WebGL support: visit https://get.webgl.org/
 3. Test with different browsers
 4. Clear cache and hard refresh
 
 For feature requests or bugs, please create an issue with:
+
 - Browser version and OS
 - Steps to reproduce
 - Expected vs actual behavior
@@ -331,6 +366,7 @@ For feature requests or bugs, please create an issue with:
 ## 🗺️ Roadmap
 
 ### Phase 1: Core Stability ✅ COMPLETED
+
 - [x] Security hardening
 - [x] Performance optimization
 - [x] Data quality improvements
@@ -342,6 +378,7 @@ For feature requests or bugs, please create an issue with:
 - [x] Mobile menu implementation
 
 ### Phase 2: Enhanced Features 🚧 IN PROGRESS
+
 - [ ] Backend API development
 - [ ] User authentication system
 - [ ] Personal cigar journals
@@ -350,6 +387,7 @@ For feature requests or bugs, please create an issue with:
 - [ ] AI recommendation improvements
 
 ### Phase 3: Community Features 📋 PLANNED
+
 - [ ] User reviews and ratings
 - [ ] Social sharing capabilities
 - [ ] Retailer integration

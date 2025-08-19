@@ -58,7 +58,7 @@ module.exports = {
           secondary: '#ede7d3',
           accent: '#d4af37',
           muted: '#a67856',
-        }
+        },
       },
       fontFamily: {
         display: ['Playfair Display', 'serif'],
@@ -67,11 +67,11 @@ module.exports = {
         sans: ['Inter', 'sans-serif'],
       },
       fontSize: {
-        'xs': ['0.75rem', { lineHeight: '1rem' }],
-        'sm': ['0.875rem', { lineHeight: '1.25rem' }],
-        'base': ['1rem', { lineHeight: '1.7rem' }],
-        'lg': ['1.125rem', { lineHeight: '1.75rem' }],
-        'xl': ['1.25rem', { lineHeight: '1.75rem' }],
+        xs: ['0.75rem', { lineHeight: '1rem' }],
+        sm: ['0.875rem', { lineHeight: '1.25rem' }],
+        base: ['1rem', { lineHeight: '1.7rem' }],
+        lg: ['1.125rem', { lineHeight: '1.75rem' }],
+        xl: ['1.25rem', { lineHeight: '1.75rem' }],
         '2xl': ['1.5rem', { lineHeight: '2rem' }],
         '3xl': ['1.875rem', { lineHeight: '2.25rem' }],
         '4xl': ['2.25rem', { lineHeight: '2.5rem' }],
@@ -82,20 +82,20 @@ module.exports = {
         '9xl': ['8rem', { lineHeight: '1' }],
       },
       spacing: {
-        '18': '4.5rem',
-        '88': '22rem',
-        '128': '32rem',
-        '144': '36rem',
+        18: '4.5rem',
+        88: '22rem',
+        128: '32rem',
+        144: '36rem',
       },
       borderRadius: {
-        'luxury': '0.75rem',
+        luxury: '0.75rem',
         'luxury-lg': '1.25rem',
         'luxury-xl': '1.5rem',
       },
       boxShadow: {
-        'luxury': '0 8px 32px rgba(0, 0, 0, 0.4)',
+        luxury: '0 8px 32px rgba(0, 0, 0, 0.4)',
         'luxury-lg': '0 16px 64px rgba(0, 0, 0, 0.5)',
-        'gold': '0 4px 20px rgba(212, 175, 55, 0.3)',
+        gold: '0 4px 20px rgba(212, 175, 55, 0.3)',
         'gold-lg': '0 8px 32px rgba(212, 175, 55, 0.4)',
         'inner-luxury': 'inset 0 2px 4px rgba(0, 0, 0, 0.2)',
       },
@@ -104,9 +104,9 @@ module.exports = {
         'slide-up': 'slideUp 0.6s ease-out',
         'slide-down': 'slideDown 0.6s ease-out',
         'scale-in': 'scaleIn 0.4s ease-out',
-        'float': 'float 6s ease-in-out infinite',
-        'glow': 'glow 2s ease-in-out infinite alternate',
-        'shimmer': 'shimmer 2s linear infinite',
+        float: 'float 6s ease-in-out infinite',
+        glow: 'glow 2s ease-in-out infinite alternate',
+        shimmer: 'shimmer 2s linear infinite',
       },
       keyframes: {
         fadeIn: {
@@ -142,16 +142,17 @@ module.exports = {
         'gradient-luxury': 'linear-gradient(135deg, #1a0f0a 0%, #2a1b14 35%, #3c1810 100%)',
         'gradient-gold': 'linear-gradient(135deg, #d4af37 0%, #b8941f 100%)',
         'gradient-leather': 'linear-gradient(45deg, #4a3429 0%, #3c1810 100%)',
-        'hero-pattern': 'radial-gradient(circle at 50% 50%, rgba(212, 175, 55, 0.1) 0%, transparent 50%)',
+        'hero-pattern':
+          'radial-gradient(circle at 50% 50%, rgba(212, 175, 55, 0.1) 0%, transparent 50%)',
       },
       backdropBlur: {
         xs: '2px',
       },
       transitionTimingFunction: {
-        'luxury': 'cubic-bezier(0.23, 1, 0.32, 1)',
+        luxury: 'cubic-bezier(0.23, 1, 0.32, 1)',
       },
       screens: {
-        'xs': '475px',
+        xs: '475px',
         '3xl': '1920px',
       },
     },
@@ -159,7 +160,7 @@ module.exports = {
   plugins: [
     require('@tailwindcss/typography'),
     require('@tailwindcss/forms'),
-    function({ addUtilities }) {
+    function ({ addUtilities }) {
       addUtilities({
         '.text-shadow': {
           textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)',
@@ -181,7 +182,7 @@ module.exports = {
           '-webkit-text-fill-color': 'transparent',
           'background-clip': 'text',
         },
-      })
-    }
+      });
+    },
   ],
-}
+};

@@ -4,24 +4,26 @@
 
 The following versions of Thee Cigar Maestro are currently supported with security updates:
 
-| Version | Supported          | Notes                    |
-| ------- | ------------------ | ------------------------ |
-| 1.2.x   | :white_check_mark: | Current stable release   |
-| 1.1.x   | :white_check_mark: | Previous stable release  |
-| 1.0.x   | :warning:          | Limited support          |
-| < 1.0   | :x:                | No longer supported      |
+| Version | Supported          | Notes                   |
+| ------- | ------------------ | ----------------------- |
+| 1.2.x   | :white_check_mark: | Current stable release  |
+| 1.1.x   | :white_check_mark: | Previous stable release |
+| 1.0.x   | :warning:          | Limited support         |
+| < 1.0   | :x:                | No longer supported     |
 
 ## Reporting a Vulnerability
 
 We take security vulnerabilities seriously. If you discover a security issue, please follow these steps:
 
 ### 🚨 For Critical Security Issues
+
 - **DO NOT** open a public GitHub issue
 - Email us directly at: security@theecigarmaestro.com
 - Include "SECURITY VULNERABILITY" in the subject line
 - Provide detailed information about the vulnerability
 
 ### 📧 Email Template
+
 ```
 Subject: SECURITY VULNERABILITY - [Brief Description]
 
@@ -55,6 +57,7 @@ Suggested Fix: [If you have suggestions]
 ### 🏆 Security Hall of Fame
 
 We recognize security researchers who help us improve:
+
 - Report will be acknowledged in our security documentation
 - Credit given in release notes (with permission)
 - Invitation to join our security advisory team

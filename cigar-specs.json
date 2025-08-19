@@ -6,25 +6,14 @@
     "complianceReady": true,
     "integrationStatus": "ready",
     "lastUpdated": "2025-07-03T22:00:00Z",
-    "coreFunctions": [
-      "specEngine.initialize",
-      "specEngine.sync",
-      "specEngine.renderUI"
-    ],
-    "linkedSystems": [
-      "specEngine",
-      "gptTriggerMatrix",
-      "voiceCommandMatrix"
-    ]
+    "coreFunctions": ["specEngine.initialize", "specEngine.sync", "specEngine.renderUI"],
+    "linkedSystems": ["specEngine", "gptTriggerMatrix", "voiceCommandMatrix"]
   },
   "trustedCigarManufacturers": [
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "El G\u00fceg\u00fcense",
-        "The Wise Man Maduro"
-      ],
+      "knownFlagshipLines": ["El G\u00fceg\u00fcense", "The Wise Man Maduro"],
       "name": "Foundation Cigar Company",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -33,10 +22,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "La Hacienda",
-        "Serie Gran Reserva 1988"
-      ],
+      "knownFlagshipLines": ["La Hacienda", "Serie Gran Reserva 1988"],
       "name": "Warped Cigars",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -45,10 +31,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Dominican Republic",
-      "knownFlagshipLines": [
-        "Four Kicks",
-        "Jericho Hill"
-      ],
+      "knownFlagshipLines": ["Four Kicks", "Jericho Hill"],
       "name": "Crowned Heads",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -57,10 +40,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Honduras",
-      "knownFlagshipLines": [
-        "Aladino",
-        "Aladino Corojo Reserva"
-      ],
+      "knownFlagshipLines": ["Aladino", "Aladino Corojo Reserva"],
       "name": "JRE Tobacco Co.",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -69,10 +49,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "Kudzu",
-        "Jacob\u2019s Ladder"
-      ],
+      "knownFlagshipLines": ["Kudzu", "Jacob\u2019s Ladder"],
       "name": "Southern Draw Cigars",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -81,10 +58,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Dominican Republic",
-      "knownFlagshipLines": [
-        "LFD Double Ligero",
-        "Andalusian Bull"
-      ],
+      "knownFlagshipLines": ["LFD Double Ligero", "Andalusian Bull"],
       "name": "La Flor Dominicana",
       "reputationTier": "Legacy",
       "trustStatus": "Verified",
@@ -93,10 +67,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "Guardian of the Farm",
-        "Signature Selection"
-      ],
+      "knownFlagshipLines": ["Guardian of the Farm", "Signature Selection"],
       "name": "Aganorsa Leaf",
       "reputationTier": "Global",
       "trustStatus": "Verified",
@@ -105,10 +76,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "Alma Fuerte",
-        "Reserva Original"
-      ],
+      "knownFlagshipLines": ["Alma Fuerte", "Reserva Original"],
       "name": "Plasencia Cigars",
       "reputationTier": "Ultra-Premium",
       "trustStatus": "Verified",
@@ -117,10 +85,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Costa Rica",
-      "knownFlagshipLines": [
-        "Daughters of the Wind",
-        "Bespoke Traditional Line"
-      ],
+      "knownFlagshipLines": ["Daughters of the Wind", "Bespoke Traditional Line"],
       "name": "Casdagli Cigars",
       "reputationTier": "Ultra-Premium",
       "trustStatus": "Verified",
@@ -129,10 +94,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Dominican Republic",
-      "knownFlagshipLines": [
-        "Debonaire Maduro",
-        "Indian Motorcycle"
-      ],
+      "knownFlagshipLines": ["Debonaire Maduro", "Indian Motorcycle"],
       "name": "Debonaire House",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -141,10 +103,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "Epernay",
-        "Original Documents"
-      ],
+      "knownFlagshipLines": ["Epernay", "Original Documents"],
       "name": "Illusione Cigars",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -153,10 +112,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Honduras",
-      "knownFlagshipLines": [
-        "Corojo #5",
-        "Blue in Green"
-      ],
+      "knownFlagshipLines": ["Corojo #5", "Blue in Green"],
       "name": "Gran Habano",
       "reputationTier": "Global",
       "trustStatus": "Verified",
@@ -165,10 +121,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Costa Rica",
-      "knownFlagshipLines": [
-        "Emperor Collection",
-        "ALEXANDER III"
-      ],
+      "knownFlagshipLines": ["Emperor Collection", "ALEXANDER III"],
       "name": "El Septimo Geneva",
       "reputationTier": "Ultra-Premium",
       "trustStatus": "Verified",
@@ -177,10 +130,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "Farce",
-        "10th Anniversary"
-      ],
+      "knownFlagshipLines": ["Farce", "10th Anniversary"],
       "name": "Room101 Cigars",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -189,10 +139,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Mexico",
-      "knownFlagshipLines": [
-        "1880 Series",
-        "Serie 1942"
-      ],
+      "knownFlagshipLines": ["1880 Series", "Serie 1942"],
       "name": "Casa Turrent",
       "reputationTier": "Legacy",
       "trustStatus": "Verified",
@@ -201,10 +148,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "San Lotano",
-        "New World"
-      ],
+      "knownFlagshipLines": ["San Lotano", "New World"],
       "name": "A.J. Fernandez Cigars",
       "reputationTier": "Global",
       "trustStatus": "Verified",
@@ -213,10 +157,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "Liga Maestro",
-        "Tierra Volc\u00e1n"
-      ],
+      "knownFlagshipLines": ["Liga Maestro", "Tierra Volc\u00e1n"],
       "name": "Mombacho Cigars SA (Favilli)",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -225,10 +166,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "Hot Cake",
-        "500th Anniversary"
-      ],
+      "knownFlagshipLines": ["Hot Cake", "500th Anniversary"],
       "name": "HVC Cigars",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -237,10 +175,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Dominican Republic",
-      "knownFlagshipLines": [
-        "Preferidos",
-        "107 Series"
-      ],
+      "knownFlagshipLines": ["Preferidos", "107 Series"],
       "name": "La Aurora",
       "reputationTier": "Legacy",
       "trustStatus": "Verified",
@@ -249,10 +184,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Dominican Republic",
-      "knownFlagshipLines": [
-        "AVO Classic",
-        "AVO Syncro Nicaragua"
-      ],
+      "knownFlagshipLines": ["AVO Classic", "AVO Syncro Nicaragua"],
       "name": "AVO Cigars",
       "reputationTier": "Global",
       "trustStatus": "Verified",
@@ -261,10 +193,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "601 Serie",
-        "Laranja Reserva"
-      ],
+      "knownFlagshipLines": ["601 Serie", "Laranja Reserva"],
       "name": "Espinosa Cigars",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -273,10 +202,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Dominican Republic",
-      "knownFlagshipLines": [
-        "Kristoff Maduro",
-        "Kristoff Ligero"
-      ],
+      "knownFlagshipLines": ["Kristoff Maduro", "Kristoff Ligero"],
       "name": "Kristoff Cigars",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -285,10 +211,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "Brown Label",
-        "Monster Series"
-      ],
+      "knownFlagshipLines": ["Brown Label", "Monster Series"],
       "name": "Tatuaje Cigars",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -297,10 +220,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "Anta\u00f1o 1970",
-        "Joya Black"
-      ],
+      "knownFlagshipLines": ["Anta\u00f1o 1970", "Joya Black"],
       "name": "Joya de Nicaragua",
       "reputationTier": "Legacy",
       "trustStatus": "Verified",
@@ -309,10 +229,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Costa Rica",
-      "knownFlagshipLines": [
-        "Byron Reserva",
-        "Byron Serie Siglo XXI"
-      ],
+      "knownFlagshipLines": ["Byron Reserva", "Byron Serie Siglo XXI"],
       "name": "Byron Cigars",
       "reputationTier": "Ultra-Premium",
       "trustStatus": "Verified",
@@ -321,10 +238,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "Last Rites",
-        "Bishops Blend"
-      ],
+      "knownFlagshipLines": ["Last Rites", "Bishops Blend"],
       "name": "Black Label Trading Co.",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -333,10 +247,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "CroMagnon",
-        "Intemperance"
-      ],
+      "knownFlagshipLines": ["CroMagnon", "Intemperance"],
       "name": "RoMa Craft Tobac",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -345,10 +256,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Cuba",
-      "knownFlagshipLines": [
-        "Famosos",
-        "Clasicos"
-      ],
+      "knownFlagshipLines": ["Famosos", "Clasicos"],
       "name": "Vegas Robaina",
       "reputationTier": "Legacy",
       "trustStatus": "Verified",
@@ -357,10 +265,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Dominican Republic",
-      "knownFlagshipLines": [
-        "Primus",
-        "Rubina"
-      ],
+      "knownFlagshipLines": ["Primus", "Rubina"],
       "name": "Davtian Cigars",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -369,10 +274,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Dominican Republic",
-      "knownFlagshipLines": [
-        "Aviator Series",
-        "Martinique"
-      ],
+      "knownFlagshipLines": ["Aviator Series", "Martinique"],
       "name": "Principle Cigars",
       "reputationTier": "Ultra-Premium",
       "trustStatus": "Verified",
@@ -381,10 +283,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "Buenaventura",
-        "Reserva Limitada"
-      ],
+      "knownFlagshipLines": ["Buenaventura", "Reserva Limitada"],
       "name": "Curivari Cigars",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -393,10 +292,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Honduras",
-      "knownFlagshipLines": [
-        "White Series",
-        "Black II"
-      ],
+      "knownFlagshipLines": ["White Series", "Black II"],
       "name": "Cavalier Gen\u00e8ve",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -405,10 +301,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "La Madrina",
-        "El Borracho"
-      ],
+      "knownFlagshipLines": ["La Madrina", "El Borracho"],
       "name": "Dapper Cigar Co.",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -417,10 +310,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "Entered Apprentice",
-        "Veiled Prophet"
-      ],
+      "knownFlagshipLines": ["Entered Apprentice", "Veiled Prophet"],
       "name": "Hiram & Solomon Cigars",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -429,10 +319,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Dominican Republic",
-      "knownFlagshipLines": [
-        "El Diario",
-        "Goldie"
-      ],
+      "knownFlagshipLines": ["El Diario", "Goldie"],
       "name": "La Palina",
       "reputationTier": "Legacy",
       "trustStatus": "Verified",
@@ -441,10 +328,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Honduras",
-      "knownFlagshipLines": [
-        "Leaf by Oscar",
-        "2012 by Oscar"
-      ],
+      "knownFlagshipLines": ["Leaf by Oscar", "2012 by Oscar"],
       "name": "Oscar Valladares Tobacco & Co.",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -453,10 +337,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Dominican Republic",
-      "knownFlagshipLines": [
-        "PG Gourmet Series",
-        "Artisan\u2019s Passion"
-      ],
+      "knownFlagshipLines": ["PG Gourmet Series", "Artisan\u2019s Passion"],
       "name": "Paul Garmirian Cigars",
       "reputationTier": "Ultra-Premium",
       "trustStatus": "Verified",
@@ -465,10 +346,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Dominican Republic",
-      "knownFlagshipLines": [
-        "Reserva Maduro",
-        "Habano"
-      ],
+      "knownFlagshipLines": ["Reserva Maduro", "Habano"],
       "name": "Casa Cuevas Cigars",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -477,10 +355,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Dominican Republic",
-      "knownFlagshipLines": [
-        "Mr. White",
-        "The Last Cowboy"
-      ],
+      "knownFlagshipLines": ["Mr. White", "The Last Cowboy"],
       "name": "Sinistro Cigars",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -489,10 +364,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Dominican Republic",
-      "knownFlagshipLines": [
-        "Aging Room",
-        "La Galera"
-      ],
+      "knownFlagshipLines": ["Aging Room", "La Galera"],
       "name": "Tabacalera Palma",
       "reputationTier": "Legacy",
       "trustStatus": "Verified",
@@ -501,10 +373,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "Daddy Mac",
-        "Venganza"
-      ],
+      "knownFlagshipLines": ["Daddy Mac", "Venganza"],
       "name": "Cornelius & Anthony",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -513,10 +382,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "Micallef Leyenda",
-        "Herencia"
-      ],
+      "knownFlagshipLines": ["Micallef Leyenda", "Herencia"],
       "name": "Micallef Cigars",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -525,10 +391,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Costa Rica",
-      "knownFlagshipLines": [
-        "Don Patron",
-        "Ocean Breeze"
-      ],
+      "knownFlagshipLines": ["Don Patron", "Ocean Breeze"],
       "name": "Lampert Cigars",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -537,10 +400,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "JFR Lunatic",
-        "Casa Fernandez Miami"
-      ],
+      "knownFlagshipLines": ["JFR Lunatic", "Casa Fernandez Miami"],
       "name": "Casa Fernandez (AGANORSA)",
       "reputationTier": "Global",
       "trustStatus": "Verified",
@@ -549,10 +409,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Costa Rica",
-      "knownFlagshipLines": [
-        "Atabey",
-        "Bandolero"
-      ],
+      "knownFlagshipLines": ["Atabey", "Bandolero"],
       "name": "Selected Tobacco",
       "reputationTier": "Ultra-Premium",
       "trustStatus": "Verified",
@@ -561,10 +418,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "EGO",
-        "Ringo"
-      ],
+      "knownFlagshipLines": ["EGO", "Ringo"],
       "name": "Felix Assouline Cigars",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -573,10 +427,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Dominican Republic",
-      "knownFlagshipLines": [
-        "Gran A\u00f1ejo",
-        "Platino"
-      ],
+      "knownFlagshipLines": ["Gran A\u00f1ejo", "Platino"],
       "name": "Patoro Cigars",
       "reputationTier": "Ultra-Premium",
       "trustStatus": "Verified",
@@ -585,10 +436,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "Liga Exclusiva de Familia",
-        "Primo del Rey"
-      ],
+      "knownFlagshipLines": ["Liga Exclusiva de Familia", "Primo del Rey"],
       "name": "Blanco Cigar Company",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -597,10 +445,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Dominican Republic",
-      "knownFlagshipLines": [
-        "VegaFina Classic",
-        "Nicaragua"
-      ],
+      "knownFlagshipLines": ["VegaFina Classic", "Nicaragua"],
       "name": "VegaFina",
       "reputationTier": "Global",
       "trustStatus": "Verified",
@@ -609,10 +454,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "Fratello Classico",
-        "Navetta Inverso"
-      ],
+      "knownFlagshipLines": ["Fratello Classico", "Navetta Inverso"],
       "name": "Fratello Cigars",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -621,10 +463,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Dominican Republic",
-      "knownFlagshipLines": [
-        "Quattro Nicaragua",
-        "M356"
-      ],
+      "knownFlagshipLines": ["Quattro Nicaragua", "M356"],
       "name": "Aging Room Cigars",
       "reputationTier": "Global",
       "trustStatus": "Verified",
@@ -633,10 +472,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "AF Series",
-        "Suave"
-      ],
+      "knownFlagshipLines": ["AF Series", "Suave"],
       "name": "Emilio Cigars",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -645,10 +481,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "Black Label Trading Co.",
-        "BLK WKS Studio"
-      ],
+      "knownFlagshipLines": ["Black Label Trading Co.", "BLK WKS Studio"],
       "name": "Fabrica Oveja Negra",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -657,10 +490,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "The Dreamer",
-        "Fiat Lux"
-      ],
+      "knownFlagshipLines": ["The Dreamer", "Fiat Lux"],
       "name": "A.C.E. Prime / Luciano Cigars",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -669,10 +499,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "Red Knight",
-        "Nugg"
-      ],
+      "knownFlagshipLines": ["Red Knight", "Nugg"],
       "name": "Jas Sum Kral (JSK)",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -681,10 +508,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Dominican Republic",
-      "knownFlagshipLines": [
-        "Salt of the Earth",
-        "El Legado"
-      ],
+      "knownFlagshipLines": ["Salt of the Earth", "El Legado"],
       "name": "Don Doroteo Cigars",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -693,10 +517,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "Grand Apex",
-        "Original Blend"
-      ],
+      "knownFlagshipLines": ["Grand Apex", "Original Blend"],
       "name": "Reinado Cigars",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -705,10 +526,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Dominican Republic",
-      "knownFlagshipLines": [
-        "Buffalo TEN",
-        "Big Papi"
-      ],
+      "knownFlagshipLines": ["Buffalo TEN", "Big Papi"],
       "name": "El Artista Cigars",
       "reputationTier": "Legacy",
       "trustStatus": "Verified",
@@ -717,10 +535,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "Farce Maduro",
-        "Farce Connecticut"
-      ],
+      "knownFlagshipLines": ["Farce Maduro", "Farce Connecticut"],
       "name": "Room101 Farce Collection",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -729,10 +544,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Honduras",
-      "knownFlagshipLines": [
-        "Don Fernando Maduro",
-        "San Andres Toro Bello"
-      ],
+      "knownFlagshipLines": ["Don Fernando Maduro", "San Andres Toro Bello"],
       "name": "Kafie 1901 Cigars",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -741,10 +553,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Dominican Republic",
-      "knownFlagshipLines": [
-        "Purple",
-        "Red"
-      ],
+      "knownFlagshipLines": ["Purple", "Red"],
       "name": "La Barba Cigars",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -753,10 +562,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "Sobremesa",
-        "Mi Querida"
-      ],
+      "knownFlagshipLines": ["Sobremesa", "Mi Querida"],
       "name": "Dunbarton Tobacco & Trust",
       "reputationTier": "Ultra-Premium",
       "trustStatus": "Verified",
@@ -765,10 +571,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "Crook of the Crown",
-        "Call to Arms"
-      ],
+      "knownFlagshipLines": ["Crook of the Crown", "Call to Arms"],
       "name": "Stolen Throne Cigars",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -777,10 +580,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Dominican Republic",
-      "knownFlagshipLines": [
-        "Epic Maduro Reserva",
-        "Epic Corojo"
-      ],
+      "knownFlagshipLines": ["Epic Maduro Reserva", "Epic Corojo"],
       "name": "Epic Cigars",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -789,10 +589,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "Patina Habano",
-        "Patina Maduro"
-      ],
+      "knownFlagshipLines": ["Patina Habano", "Patina Maduro"],
       "name": "Patina Cigars",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -801,10 +598,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "White",
-        "Black"
-      ],
+      "knownFlagshipLines": ["White", "Black"],
       "name": "West Tampa Tobacco Co.",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -813,10 +607,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "USA",
-      "knownFlagshipLines": [
-        "Redemption",
-        "Gran Reserve"
-      ],
+      "knownFlagshipLines": ["Redemption", "Gran Reserve"],
       "name": "El Titan de Bronze",
       "reputationTier": "Legacy",
       "trustStatus": "Verified",
@@ -825,10 +616,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "Serino Royale Maduro",
-        "Wayfarer"
-      ],
+      "knownFlagshipLines": ["Serino Royale Maduro", "Wayfarer"],
       "name": "Serino Cigar Co.",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -837,10 +625,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "Bellas Artes Maduro",
-        "Bellas Artes Habano"
-      ],
+      "knownFlagshipLines": ["Bellas Artes Maduro", "Bellas Artes Habano"],
       "name": "Bellas Artes by AJ Fernandez",
       "reputationTier": "Ultra-Premium",
       "trustStatus": "Verified",
@@ -849,10 +634,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "Perdomo Reserve Champagne",
-        "10th Anniversary Maduro"
-      ],
+      "knownFlagshipLines": ["Perdomo Reserve Champagne", "10th Anniversary Maduro"],
       "name": "Gran Reserva by Perdomo",
       "reputationTier": "Global",
       "trustStatus": "Verified",
@@ -861,10 +643,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "The Post Embargo Series",
-        "Apache"
-      ],
+      "knownFlagshipLines": ["The Post Embargo Series", "Apache"],
       "name": "Casa Caraballo",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -873,10 +652,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "La Negrita",
-        "La Clarita"
-      ],
+      "knownFlagshipLines": ["La Negrita", "La Clarita"],
       "name": "Tres Lindas Cubanas Cigars",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -885,10 +661,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Dominican Republic",
-      "knownFlagshipLines": [
-        "ATL Magic",
-        "ATL Black"
-      ],
+      "knownFlagshipLines": ["ATL Magic", "ATL Black"],
       "name": "ATL Cigar Co.",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -897,10 +670,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Dominican Republic",
-      "knownFlagshipLines": [
-        "Phenom Series",
-        "Proper"
-      ],
+      "knownFlagshipLines": ["Phenom Series", "Proper"],
       "name": "FQ Cigars (Fernandez Quiroga)",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -909,10 +679,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "Defcon",
-        "White Label"
-      ],
+      "knownFlagshipLines": ["Defcon", "White Label"],
       "name": "Arandoza Cigars",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -921,10 +688,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Honduras",
-      "knownFlagshipLines": [
-        "Aged Selection",
-        "Signed Range"
-      ],
+      "knownFlagshipLines": ["Aged Selection", "Signed Range"],
       "name": "Dunhill Cigars (Legacy Brand)",
       "reputationTier": "Legacy",
       "trustStatus": "Verified",
@@ -933,10 +697,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "Don Kiki White Label",
-        "Brown Label"
-      ],
+      "knownFlagshipLines": ["Don Kiki White Label", "Brown Label"],
       "name": "Don Kiki Cigars",
       "reputationTier": "Legacy",
       "trustStatus": "Verified",
@@ -945,10 +706,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "3 Blends",
-        "Veritas Torch"
-      ],
+      "knownFlagshipLines": ["3 Blends", "Veritas Torch"],
       "name": "Veritas Cigars",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -957,10 +715,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "Killer Bee",
-        "Green Hornet"
-      ],
+      "knownFlagshipLines": ["Killer Bee", "Green Hornet"],
       "name": "Black Works Studio",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -969,10 +724,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Dominican Republic",
-      "knownFlagshipLines": [
-        "Classic Natural",
-        "Underground Connecticut"
-      ],
+      "knownFlagshipLines": ["Classic Natural", "Underground Connecticut"],
       "name": "Sosa Cigars",
       "reputationTier": "Legacy",
       "trustStatus": "Verified",
@@ -981,10 +733,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Dominican Republic",
-      "knownFlagshipLines": [
-        "DBL Extra Viejo",
-        "Formula"
-      ],
+      "knownFlagshipLines": ["DBL Extra Viejo", "Formula"],
       "name": "Dominican Big Leaguer (DBL) Cigars",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -993,10 +742,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Dominican Republic",
-      "knownFlagshipLines": [
-        "Don Reynaldo Regalos",
-        "Corona de Luxe"
-      ],
+      "knownFlagshipLines": ["Don Reynaldo Regalos", "Corona de Luxe"],
       "name": "Don Reynaldo by Warped",
       "reputationTier": "Ultra-Premium",
       "trustStatus": "Verified",
@@ -1005,10 +751,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "La Riqueza",
-        "1516 Original Blend"
-      ],
+      "knownFlagshipLines": ["La Riqueza", "1516 Original Blend"],
       "name": "1516 Cigars",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -1017,10 +760,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "Pulse",
-        "Friends and Family"
-      ],
+      "knownFlagshipLines": ["Pulse", "Friends and Family"],
       "name": "Ohana Cigars",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -1029,10 +769,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "Clave Cubana",
-        "Finca Santa Fe"
-      ],
+      "knownFlagshipLines": ["Clave Cubana", "Finca Santa Fe"],
       "name": "Cordoba & Morales Cigars",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -1041,10 +778,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "Reserva Familiar",
-        "Clasico"
-      ],
+      "knownFlagshipLines": ["Reserva Familiar", "Clasico"],
       "name": "Pichardo Cigars",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -1053,10 +787,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "La Sirena Original",
-        "LTZ"
-      ],
+      "knownFlagshipLines": ["La Sirena Original", "LTZ"],
       "name": "La Sirena Cigars",
       "reputationTier": "Global",
       "trustStatus": "Verified",
@@ -1065,10 +796,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Honduras",
-      "knownFlagshipLines": [
-        "Cumpay Robusto",
-        "Cumpay Volcano"
-      ],
+      "knownFlagshipLines": ["Cumpay Robusto", "Cumpay Volcano"],
       "name": "Cumpay by Maya Selva Cigars",
       "reputationTier": "Global",
       "trustStatus": "Verified",
@@ -1077,10 +805,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Honduras",
-      "knownFlagshipLines": [
-        "Robusto Oscuro",
-        "Choix Supreme"
-      ],
+      "knownFlagshipLines": ["Robusto Oscuro", "Choix Supreme"],
       "name": "El Rey del Mundo (Non-Cuban)",
       "reputationTier": "Legacy",
       "trustStatus": "Verified",
@@ -1089,10 +814,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "Gilberto Oliva Blanc",
-        "Gilberto Reserva"
-      ],
+      "knownFlagshipLines": ["Gilberto Oliva Blanc", "Gilberto Reserva"],
       "name": "Gilberto Oliva Reserva",
       "reputationTier": "Legacy",
       "trustStatus": "Verified",
@@ -1101,10 +823,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "Cubao",
-        "La Madrina Shade"
-      ],
+      "knownFlagshipLines": ["Cubao", "La Madrina Shade"],
       "name": "Dapper Cigars",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -1113,10 +832,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Honduras",
-      "knownFlagshipLines": [
-        "Leaf by Oscar Maduro",
-        "Leaf by Oscar Connecticut"
-      ],
+      "knownFlagshipLines": ["Leaf by Oscar Maduro", "Leaf by Oscar Connecticut"],
       "name": "Leaf by Oscar",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -1125,10 +841,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Dominican Republic",
-      "knownFlagshipLines": [
-        "Falto Prominente",
-        "Falto La Pureza"
-      ],
+      "knownFlagshipLines": ["Falto Prominente", "Falto La Pureza"],
       "name": "Falto Cigars",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -1137,10 +850,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "Africa Series",
-        "Don Lino Maduro"
-      ],
+      "knownFlagshipLines": ["Africa Series", "Don Lino Maduro"],
       "name": "Don Lino by Miami Cigar & Co.",
       "reputationTier": "Legacy",
       "trustStatus": "Verified",
@@ -1149,9 +859,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "Yagua"
-      ],
+      "knownFlagshipLines": ["Yagua"],
       "name": "Yagua by J.C. Newman",
       "reputationTier": "Ultra-Premium",
       "trustStatus": "Verified",
@@ -1160,10 +868,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "Puros Huerfanos Robusto",
-        "Toro"
-      ],
+      "knownFlagshipLines": ["Puros Huerfanos Robusto", "Toro"],
       "name": "Puros Huerfanos by Caldwell",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -1172,10 +877,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Dominican Republic",
-      "knownFlagshipLines": [
-        "Pressoir",
-        "Terroir"
-      ],
+      "knownFlagshipLines": ["Pressoir", "Terroir"],
       "name": "Chinnock Cellars Cigars",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -1184,10 +886,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Honduras",
-      "knownFlagshipLines": [
-        "Viejo Mundo",
-        "Premier"
-      ],
+      "knownFlagshipLines": ["Viejo Mundo", "Premier"],
       "name": "Reyes Family Cigars",
       "reputationTier": "Legacy",
       "trustStatus": "Verified",
@@ -1196,10 +895,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "Jazz Series",
-        "Natural Pleasure"
-      ],
+      "knownFlagshipLines": ["Jazz Series", "Natural Pleasure"],
       "name": "Emperors Cut Cigars",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -1208,10 +904,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Honduras",
-      "knownFlagshipLines": [
-        "Flor de Selva",
-        "Villa Zamorano"
-      ],
+      "knownFlagshipLines": ["Flor de Selva", "Villa Zamorano"],
       "name": "Maya Selva Cigars",
       "reputationTier": "Global",
       "trustStatus": "Verified",
@@ -1220,10 +913,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Honduras",
-      "knownFlagshipLines": [
-        "LE2020",
-        "LE2022"
-      ],
+      "knownFlagshipLines": ["LE2020", "LE2022"],
       "name": "Cavalier Gen\u00e8ve Limited Edition",
       "reputationTier": "Ultra-Premium",
       "trustStatus": "Verified",
@@ -1232,10 +922,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "Integrity",
-        "Fellowship"
-      ],
+      "knownFlagshipLines": ["Integrity", "Fellowship"],
       "name": "Table 36 Cigars",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -1244,10 +931,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "Street Tacos",
-        "Bluebonnets"
-      ],
+      "knownFlagshipLines": ["Street Tacos", "Bluebonnets"],
       "name": "Rojas Cigars",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -1256,10 +940,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Dominican Republic",
-      "knownFlagshipLines": [
-        "Weld Wheels",
-        "Time Flies"
-      ],
+      "knownFlagshipLines": ["Weld Wheels", "Time Flies"],
       "name": "Foundry Tobacco Company",
       "reputationTier": "Legacy",
       "trustStatus": "Verified",
@@ -1268,10 +949,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Dominican Republic",
-      "knownFlagshipLines": [
-        "Personal Reserve Leo X",
-        "Nova Platinum"
-      ],
+      "knownFlagshipLines": ["Personal Reserve Leo X", "Nova Platinum"],
       "name": "Nova Cigars (Plasencia Collaboration)",
       "reputationTier": "Ultra-Premium",
       "trustStatus": "Verified",
@@ -1280,10 +958,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "Barreda Connecticut",
-        "Barreda Maduro"
-      ],
+      "knownFlagshipLines": ["Barreda Connecticut", "Barreda Maduro"],
       "name": "Barreda Cigars",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -1292,10 +967,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Dominican Republic",
-      "knownFlagshipLines": [
-        "La Galera Connecticut",
-        "La Galera Maduro"
-      ],
+      "knownFlagshipLines": ["La Galera Connecticut", "La Galera Maduro"],
       "name": "La Galera by Tabacalera Palma",
       "reputationTier": "Global",
       "trustStatus": "Verified",
@@ -1304,10 +976,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "Liga Exclusiva de Familia Maduro",
-        "Habano Rosado"
-      ],
+      "knownFlagshipLines": ["Liga Exclusiva de Familia Maduro", "Habano Rosado"],
       "name": "Blanco Liga Exclusiva",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -1316,10 +985,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Dominican Republic",
-      "knownFlagshipLines": [
-        "Series 2000",
-        "Don Lucas Family Reserve"
-      ],
+      "knownFlagshipLines": ["Series 2000", "Don Lucas Family Reserve"],
       "name": "Don Lucas Cigars",
       "reputationTier": "Legacy",
       "trustStatus": "Verified",
@@ -1328,10 +994,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Dominican Republic",
-      "knownFlagshipLines": [
-        "Principes Corona",
-        "Natural Vanilla"
-      ],
+      "knownFlagshipLines": ["Principes Corona", "Natural Vanilla"],
       "name": "Principes by La Aurora",
       "reputationTier": "Legacy",
       "trustStatus": "Verified",
@@ -1340,10 +1003,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "Operation Gothic Serpent",
-        "Hooten Young 2020"
-      ],
+      "knownFlagshipLines": ["Operation Gothic Serpent", "Hooten Young 2020"],
       "name": "Hooten Young Cigars",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -1352,10 +1012,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Dominican Republic",
-      "knownFlagshipLines": [
-        "Don Pancho",
-        "Trumpet"
-      ],
+      "knownFlagshipLines": ["Don Pancho", "Trumpet"],
       "name": "Casa Trompeta Cigars",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -1364,10 +1021,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "Reserva Limitada",
-        "Micallef Maduro"
-      ],
+      "knownFlagshipLines": ["Reserva Limitada", "Micallef Maduro"],
       "name": "Micallef Reserva",
       "reputationTier": "Ultra-Premium",
       "trustStatus": "Verified",
@@ -1376,10 +1030,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Dominican Republic",
-      "knownFlagshipLines": [
-        "Box Pressed",
-        "Perfeccion"
-      ],
+      "knownFlagshipLines": ["Box Pressed", "Perfeccion"],
       "name": "La Instructora",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -1388,10 +1039,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Dominican Republic",
-      "knownFlagshipLines": [
-        "Saga Short Tales",
-        "Saga Solaz"
-      ],
+      "knownFlagshipLines": ["Saga Short Tales", "Saga Solaz"],
       "name": "De Los Reyes Cigars",
       "reputationTier": "Global",
       "trustStatus": "Verified",
@@ -1400,10 +1048,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Honduras",
-      "knownFlagshipLines": [
-        "White Series Lancero",
-        "White Series Robusto"
-      ],
+      "knownFlagshipLines": ["White Series Lancero", "White Series Robusto"],
       "name": "Cavalier Gen\u00e8ve White Series",
       "reputationTier": "Global",
       "trustStatus": "Verified",
@@ -1412,10 +1057,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Honduras",
-      "knownFlagshipLines": [
-        "Wild Hunter Oscuro",
-        "Wild Hunter Natural"
-      ],
+      "knownFlagshipLines": ["Wild Hunter Oscuro", "Wild Hunter Natural"],
       "name": "Oscar Valladares Wild Hunter",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -1424,10 +1066,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "LJZ Limited Edition",
-        "LJZ Toro"
-      ],
+      "knownFlagshipLines": ["LJZ Limited Edition", "LJZ Toro"],
       "name": "Emilio LJZ Series",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -1436,10 +1075,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Mexico",
-      "knownFlagshipLines": [
-        "Revolution",
-        "Cuchillo Parado"
-      ],
+      "knownFlagshipLines": ["Revolution", "Cuchillo Parado"],
       "name": "Casa 1910 Cigars",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -1448,10 +1084,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Dominican Republic",
-      "knownFlagshipLines": [
-        "Flor y Nata Maduro",
-        "Flor y Nata Connecticut"
-      ],
+      "knownFlagshipLines": ["Flor y Nata Maduro", "Flor y Nata Connecticut"],
       "name": "Flor y Nata Cigars",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -1460,10 +1093,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "Viva La Vida",
-        "El Pulpo"
-      ],
+      "knownFlagshipLines": ["Viva La Vida", "El Pulpo"],
       "name": "Artesano Del Tobacco",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -1472,10 +1102,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "Traveling Man Toro",
-        "Traveling Man Robusto"
-      ],
+      "knownFlagshipLines": ["Traveling Man Toro", "Traveling Man Robusto"],
       "name": "Hiram & Solomon Traveling Man",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -1484,10 +1111,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Dominican Republic",
-      "knownFlagshipLines": [
-        "Lure Maduro",
-        "Lure Habano"
-      ],
+      "knownFlagshipLines": ["Lure Maduro", "Lure Habano"],
       "name": "Lure Cigars",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -1496,10 +1120,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Dominican Republic",
-      "knownFlagshipLines": [
-        "Los Estoico",
-        "Elegancia"
-      ],
+      "knownFlagshipLines": ["Los Estoico", "Elegancia"],
       "name": "Peter James Cigars",
       "reputationTier": "Ultra-Premium",
       "trustStatus": "Verified",
@@ -1508,10 +1129,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "Valacari NeoClassic",
-        "Valacari Revelation"
-      ],
+      "knownFlagshipLines": ["Valacari NeoClassic", "Valacari Revelation"],
       "name": "Valacari Cigars",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -1520,10 +1138,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Honduras",
-      "knownFlagshipLines": [
-        "Aniversario 1965",
-        "HHB Classic"
-      ],
+      "knownFlagshipLines": ["Aniversario 1965", "HHB Classic"],
       "name": "Zander-Greg (Nat Cicco)",
       "reputationTier": "Legacy",
       "trustStatus": "Verified",
@@ -1532,10 +1147,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "Fourth Prime",
-        "Two Things"
-      ],
+      "knownFlagshipLines": ["Fourth Prime", "Two Things"],
       "name": "Fable Cigars",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -1544,10 +1156,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "Los Caidos Blue",
-        "Los Caidos Red"
-      ],
+      "knownFlagshipLines": ["Los Caidos Blue", "Los Caidos Red"],
       "name": "Los Caidos Cigars",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -1556,10 +1165,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Dominican Republic",
-      "knownFlagshipLines": [
-        "Cabinet Selection Connecticut",
-        "Cabinet Selection Maduro"
-      ],
+      "knownFlagshipLines": ["Cabinet Selection Connecticut", "Cabinet Selection Maduro"],
       "name": "Cabinet Selection by La Aurora",
       "reputationTier": "Global",
       "trustStatus": "Verified",
@@ -1568,10 +1174,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "Hot Cake Maduro",
-        "Hot Cake Golden Line"
-      ],
+      "knownFlagshipLines": ["Hot Cake Maduro", "Hot Cake Golden Line"],
       "name": "HVC Hot Cake Series",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -1580,10 +1183,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Dominican Republic",
-      "knownFlagshipLines": [
-        "Boca de Oro Gold",
-        "Boca de Oro Maduro"
-      ],
+      "knownFlagshipLines": ["Boca de Oro Gold", "Boca de Oro Maduro"],
       "name": "Boca de Oro Cigars",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -1592,10 +1192,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "Bosphorus",
-        "Aramas"
-      ],
+      "knownFlagshipLines": ["Bosphorus", "Aramas"],
       "name": "Ozgener Family Cigars",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -1604,10 +1201,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Costa Rica",
-      "knownFlagshipLines": [
-        "Presidential Collection",
-        "Golden Blend"
-      ],
+      "knownFlagshipLines": ["Presidential Collection", "Golden Blend"],
       "name": "D\u2019Crossier Cigars",
       "reputationTier": "Ultra-Premium",
       "trustStatus": "Verified",
@@ -1616,10 +1210,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "Cumpay Volcano",
-        "Cumpay Robusto"
-      ],
+      "knownFlagshipLines": ["Cumpay Volcano", "Cumpay Robusto"],
       "name": "Cumpay by Maya Selva (Nicaragua)",
       "reputationTier": "Global",
       "trustStatus": "Verified",
@@ -1628,10 +1219,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "Espiritu Series No. 1",
-        "Espiritu Series No. 2"
-      ],
+      "knownFlagshipLines": ["Espiritu Series No. 1", "Espiritu Series No. 2"],
       "name": "Trinidad Espiritu by A.J. Fernandez",
       "reputationTier": "Global",
       "trustStatus": "Verified",
@@ -1640,10 +1228,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "Fugitive",
-        "S-307"
-      ],
+      "knownFlagshipLines": ["Fugitive", "S-307"],
       "name": "Nomad Cigar Co.",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -1652,10 +1237,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Costa Rica",
-      "knownFlagshipLines": [
-        "Van Gogh",
-        "Michelangelo"
-      ],
+      "knownFlagshipLines": ["Van Gogh", "Michelangelo"],
       "name": "El Septimo Sacred Arts Collection",
       "reputationTier": "Ultra-Premium",
       "trustStatus": "Verified",
@@ -1664,10 +1246,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Dominican Republic",
-      "knownFlagshipLines": [
-        "Pain Killer",
-        "GTO Corona de GTO"
-      ],
+      "knownFlagshipLines": ["Pain Killer", "GTO Corona de GTO"],
       "name": "GTO Dominican Cigars",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -1676,10 +1255,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Dominican Republic",
-      "knownFlagshipLines": [
-        "Habano Serie 32",
-        "Connecticut Limited"
-      ],
+      "knownFlagshipLines": ["Habano Serie 32", "Connecticut Limited"],
       "name": "Manolo Estate Cigars",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -1688,10 +1264,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Dominican Republic",
-      "knownFlagshipLines": [
-        "Unkind",
-        "Crow"
-      ],
+      "knownFlagshipLines": ["Unkind", "Crow"],
       "name": "Blackbird Cigar Co.",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -1700,10 +1273,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Honduras",
-      "knownFlagshipLines": [
-        "Pura Soul Maduro",
-        "Pura Soul Nicaragua"
-      ],
+      "knownFlagshipLines": ["Pura Soul Maduro", "Pura Soul Nicaragua"],
       "name": "Pura Soul Cigars",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -1712,10 +1282,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "Habano Corojo",
-        "Maduro"
-      ],
+      "knownFlagshipLines": ["Habano Corojo", "Maduro"],
       "name": "Guayacan Cigars",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -1724,10 +1291,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Dominican Republic",
-      "knownFlagshipLines": [
-        "Yaya Maduro",
-        "Yaya Habano"
-      ],
+      "knownFlagshipLines": ["Yaya Maduro", "Yaya Habano"],
       "name": "Yaya Cigars (by CigarZona)",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -1736,10 +1300,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "Siempre Sun Grown",
-        "Siempre Rosado"
-      ],
+      "knownFlagshipLines": ["Siempre Sun Grown", "Siempre Rosado"],
       "name": "Dapper Siempre Series",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -1748,10 +1309,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "Nuggs Habano",
-        "Nuggs Maduro"
-      ],
+      "knownFlagshipLines": ["Nuggs Habano", "Nuggs Maduro"],
       "name": "Jas Sum Kral Nuggs",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -1760,10 +1318,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "Cohiba Nicaragua N54",
-        "Cohiba Black"
-      ],
+      "knownFlagshipLines": ["Cohiba Nicaragua N54", "Cohiba Black"],
       "name": "Cohiba Nicaragua (General Cigar)",
       "reputationTier": "Global",
       "trustStatus": "Verified",
@@ -1772,10 +1327,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "Epicure",
-        "Bull & Bear"
-      ],
+      "knownFlagshipLines": ["Epicure", "Bull & Bear"],
       "name": "Crux Cigars",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -1784,10 +1336,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Dominican Republic",
-      "knownFlagshipLines": [
-        "La Libertad Robusto",
-        "Toro"
-      ],
+      "knownFlagshipLines": ["La Libertad Robusto", "Toro"],
       "name": "La Libertad (Villiger Cigars)",
       "reputationTier": "Global",
       "trustStatus": "Verified",
@@ -1796,10 +1345,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Costa Rica",
-      "knownFlagshipLines": [
-        "Don Benigno Maduro",
-        "Don Benigno Natural"
-      ],
+      "knownFlagshipLines": ["Don Benigno Maduro", "Don Benigno Natural"],
       "name": "Don Benigno Cigars",
       "reputationTier": "Legacy",
       "trustStatus": "Verified",
@@ -1808,10 +1354,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "Casa Torres Nicaragua",
-        "Casa Torres Maduro"
-      ],
+      "knownFlagshipLines": ["Casa Torres Nicaragua", "Casa Torres Maduro"],
       "name": "Casa Torres Cigars",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -1820,10 +1363,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Dominican Republic",
-      "knownFlagshipLines": [
-        "Balmoral Anejo XO",
-        "Balmoral Serie Signaturas"
-      ],
+      "knownFlagshipLines": ["Balmoral Anejo XO", "Balmoral Serie Signaturas"],
       "name": "Balmoral Cigars (Royal Agio)",
       "reputationTier": "Legacy",
       "trustStatus": "Verified",
@@ -1832,10 +1372,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Dominican Republic",
-      "knownFlagshipLines": [
-        "Mr. White Gold Edition",
-        "Mr. White El Presidente"
-      ],
+      "knownFlagshipLines": ["Mr. White Gold Edition", "Mr. White El Presidente"],
       "name": "Sinistro Mr. White Series",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -1844,10 +1381,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Honduras",
-      "knownFlagshipLines": [
-        "Black Series II Robusto",
-        "Limited Edition 2023"
-      ],
+      "knownFlagshipLines": ["Black Series II Robusto", "Limited Edition 2023"],
       "name": "Cavalier Gen\u00e8ve Black Series II",
       "reputationTier": "Ultra-Premium",
       "trustStatus": "Verified",
@@ -1856,10 +1390,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "Elegancia",
-        "Generoso"
-      ],
+      "knownFlagshipLines": ["Elegancia", "Generoso"],
       "name": "Ferio Tego Cigars",
       "reputationTier": "Ultra-Premium",
       "trustStatus": "Verified",
@@ -1868,10 +1399,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Dominican Republic",
-      "knownFlagshipLines": [
-        "Sangre Nueva Habano",
-        "Sangre Nueva Maduro"
-      ],
+      "knownFlagshipLines": ["Sangre Nueva Habano", "Sangre Nueva Maduro"],
       "name": "Casa Cuevas Sangre Nueva",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -1880,10 +1408,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "Tyrannical Buc",
-        "Ristefari 2022"
-      ],
+      "knownFlagshipLines": ["Tyrannical Buc", "Ristefari 2022"],
       "name": "Ristefari Cigars (JSK)",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -1892,10 +1417,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "Grand Apex Maduro",
-        "Grand Apex Robusto"
-      ],
+      "knownFlagshipLines": ["Grand Apex Maduro", "Grand Apex Robusto"],
       "name": "Reinado Grand Apex",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -1904,10 +1426,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "Verocu No. 5",
-        "Verocu Blue"
-      ],
+      "knownFlagshipLines": ["Verocu No. 5", "Verocu Blue"],
       "name": "Tatuaje Havana VI Verocu",
       "reputationTier": "Global",
       "trustStatus": "Verified",
@@ -1916,10 +1435,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Dominican Republic",
-      "knownFlagshipLines": [
-        "Edition Limitada",
-        "Bellatto Habano"
-      ],
+      "knownFlagshipLines": ["Edition Limitada", "Bellatto Habano"],
       "name": "Bellatto Premium Cigars",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -1928,10 +1444,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Dominican Republic",
-      "knownFlagshipLines": [
-        "Maceda Legacy",
-        "Maceda Maduro"
-      ],
+      "knownFlagshipLines": ["Maceda Legacy", "Maceda Maduro"],
       "name": "Maceda Brand Cigars",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -1940,10 +1453,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "The Pulse",
-        "Friends and Family"
-      ],
+      "knownFlagshipLines": ["The Pulse", "Friends and Family"],
       "name": "Ohana Nui Cigars",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -1952,10 +1462,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Dominican Republic",
-      "knownFlagshipLines": [
-        "Nova Sultan",
-        "Nova Mirage"
-      ],
+      "knownFlagshipLines": ["Nova Sultan", "Nova Mirage"],
       "name": "Nova Platinum Cigars",
       "reputationTier": "Ultra-Premium",
       "trustStatus": "Verified",
@@ -1964,10 +1471,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "Ramon Allones Toro",
-        "Robusto"
-      ],
+      "knownFlagshipLines": ["Ramon Allones Toro", "Robusto"],
       "name": "Ramon Allones by AJ Fernandez",
       "reputationTier": "Global",
       "trustStatus": "Verified",
@@ -1976,10 +1480,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "Knuckle Sandwich Maduro",
-        "Habano"
-      ],
+      "knownFlagshipLines": ["Knuckle Sandwich Maduro", "Habano"],
       "name": "Espinosa Knuckle Sandwich",
       "reputationTier": "Global",
       "trustStatus": "Verified",
@@ -1988,10 +1489,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Dominican Republic",
-      "knownFlagshipLines": [
-        "Salt of the Earth",
-        "El Legado"
-      ],
+      "knownFlagshipLines": ["Salt of the Earth", "El Legado"],
       "name": "Don Doroteo Legacy Collection",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -2000,10 +1498,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "Sommelier",
-        "N\u00e9gociant"
-      ],
+      "knownFlagshipLines": ["Sommelier", "N\u00e9gociant"],
       "name": "Somm Cigars",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -2012,11 +1507,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Dominican Republic",
-      "knownFlagshipLines": [
-        "Montecristo",
-        "Romeo y Julieta",
-        "H. Upmann"
-      ],
+      "knownFlagshipLines": ["Montecristo", "Romeo y Julieta", "H. Upmann"],
       "name": "Tabacalera de Garcia (Non-Cuban)",
       "reputationTier": "Legacy",
       "trustStatus": "Verified",
@@ -2025,10 +1516,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "El Pulpo Toro",
-        "El Pulpo Robusto"
-      ],
+      "knownFlagshipLines": ["El Pulpo Toro", "El Pulpo Robusto"],
       "name": "El Pulpo by Artesano Del Tobacco",
       "reputationTier": "Ultra-Premium",
       "trustStatus": "Verified",
@@ -2037,11 +1525,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Dominican Republic",
-      "knownFlagshipLines": [
-        "Serena",
-        "Oscura",
-        "Quadrata"
-      ],
+      "knownFlagshipLines": ["Serena", "Oscura", "Quadrata"],
       "name": "Matilde Cigars",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -2050,10 +1534,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Dominican Republic",
-      "knownFlagshipLines": [
-        "Domenico Double Ligero",
-        "Domenico 10th Anniversary"
-      ],
+      "knownFlagshipLines": ["Domenico Double Ligero", "Domenico 10th Anniversary"],
       "name": "Domenico Cigars",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -2062,10 +1543,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Honduras",
-      "knownFlagshipLines": [
-        "Unhinged",
-        "Deranged"
-      ],
+      "knownFlagshipLines": ["Unhinged", "Deranged"],
       "name": "Wynwood Hills by CLE",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -2074,10 +1552,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Dominican Republic",
-      "knownFlagshipLines": [
-        "Doble Maduro",
-        "Doble Connecticut"
-      ],
+      "knownFlagshipLines": ["Doble Maduro", "Doble Connecticut"],
       "name": "Casa Doble Cigars",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -2086,10 +1561,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "Suave Robusto",
-        "Suave Toro"
-      ],
+      "knownFlagshipLines": ["Suave Robusto", "Suave Toro"],
       "name": "Emilio Suave Series",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -2098,10 +1570,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Italy",
-      "knownFlagshipLines": [
-        "Toscano Classico",
-        "Antico"
-      ],
+      "knownFlagshipLines": ["Toscano Classico", "Antico"],
       "name": "Toscano Cigars",
       "reputationTier": "Legacy",
       "trustStatus": "Verified",
@@ -2110,10 +1579,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "La Sirena Original",
-        "LTZ"
-      ],
+      "knownFlagshipLines": ["La Sirena Original", "LTZ"],
       "name": "La Sirena Original Series",
       "reputationTier": "Global",
       "trustStatus": "Verified",
@@ -2122,10 +1588,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Dominican Republic",
-      "knownFlagshipLines": [
-        "Viento",
-        "Martinique"
-      ],
+      "knownFlagshipLines": ["Viento", "Martinique"],
       "name": "Principle Aviator Series",
       "reputationTier": "Ultra-Premium",
       "trustStatus": "Verified",
@@ -2134,10 +1597,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Honduras",
-      "knownFlagshipLines": [
-        "Eiroa Classic",
-        "Eiroa CBT Maduro"
-      ],
+      "knownFlagshipLines": ["Eiroa Classic", "Eiroa CBT Maduro"],
       "name": "Eiroa Cigars",
       "reputationTier": "Global",
       "trustStatus": "Verified",
@@ -2146,10 +1606,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "BV560",
-        "BV500"
-      ],
+      "knownFlagshipLines": ["BV560", "BV500"],
       "name": "Curivari Buenaventura",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -2158,10 +1615,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Dominican Republic",
-      "knownFlagshipLines": [
-        "Cesar Natural",
-        "Cesar Maduro"
-      ],
+      "knownFlagshipLines": ["Cesar Natural", "Cesar Maduro"],
       "name": "Flor de Cesar Cigars",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -2170,10 +1624,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "Gold Series",
-        "Black Label"
-      ],
+      "knownFlagshipLines": ["Gold Series", "Black Label"],
       "name": "Casa Habano Cigars",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -2182,10 +1633,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Dominican Republic",
-      "knownFlagshipLines": [
-        "Don Rafa Maduro",
-        "Don Rafa Connecticut"
-      ],
+      "knownFlagshipLines": ["Don Rafa Maduro", "Don Rafa Connecticut"],
       "name": "Don Rafa Cigars",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -2194,10 +1642,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Dominican Republic",
-      "knownFlagshipLines": [
-        "Hoja de Flores",
-        "Cabinet Reserva"
-      ],
+      "knownFlagshipLines": ["Hoja de Flores", "Cabinet Reserva"],
       "name": "La Hoja Cigar Co.",
       "reputationTier": "Legacy",
       "trustStatus": "Verified",
@@ -2206,10 +1651,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "USA",
-      "knownFlagshipLines": [
-        "Casa Montecristo Exclusive",
-        "Anniversary Series"
-      ],
+      "knownFlagshipLines": ["Casa Montecristo Exclusive", "Anniversary Series"],
       "name": "Casa Montecristo (Non-Cuban Retail Brand)",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -2218,10 +1660,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "La Vencedora Robusto",
-        "Toro"
-      ],
+      "knownFlagshipLines": ["La Vencedora Robusto", "Toro"],
       "name": "Villiger La Vencedora",
       "reputationTier": "Global",
       "trustStatus": "Verified",
@@ -2230,10 +1669,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "Maria Lucia Toro",
-        "Maria Lucia Robusto"
-      ],
+      "knownFlagshipLines": ["Maria Lucia Toro", "Maria Lucia Robusto"],
       "name": "Maria Lucia by ACE Prime",
       "reputationTier": "Ultra-Premium",
       "trustStatus": "Verified",
@@ -2242,10 +1678,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "Escobar Maduro",
-        "Escobar Natural"
-      ],
+      "knownFlagshipLines": ["Escobar Maduro", "Escobar Natural"],
       "name": "Escobar Cigars by Nas",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -2254,10 +1687,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "Elogio Habano",
-        "Elogio LSV"
-      ],
+      "knownFlagshipLines": ["Elogio Habano", "Elogio LSV"],
       "name": "Elogio Cigars",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -2266,10 +1696,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "Favilli Cosecha",
-        "Favilli Linea Classica"
-      ],
+      "knownFlagshipLines": ["Favilli Cosecha", "Favilli Linea Classica"],
       "name": "Casa Favilli",
       "reputationTier": "Ultra-Premium",
       "trustStatus": "Verified",
@@ -2278,10 +1705,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Dominican Republic",
-      "knownFlagshipLines": [
-        "Tres Reynas Robusto",
-        "Toro"
-      ],
+      "knownFlagshipLines": ["Tres Reynas Robusto", "Toro"],
       "name": "Tres Reynas (Quesada + Garcia Collab)",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -2290,10 +1714,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "Santa Fe Maduro",
-        "Connecticut Reserve"
-      ],
+      "knownFlagshipLines": ["Santa Fe Maduro", "Connecticut Reserve"],
       "name": "Finca Santa Fe Cigars",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -2302,10 +1723,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Dominican Republic",
-      "knownFlagshipLines": [
-        "El Mago Maduro",
-        "El Mago Habano"
-      ],
+      "knownFlagshipLines": ["El Mago Maduro", "El Mago Habano"],
       "name": "El Mago Cigars",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -2314,10 +1732,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Costa Rica",
-      "knownFlagshipLines": [
-        "Spirit of Art",
-        "Via Havana"
-      ],
+      "knownFlagshipLines": ["Spirit of Art", "Via Havana"],
       "name": "Cuba Rica Cigar Co.",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -2326,10 +1741,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "Yunior Gold",
-        "Yunior Black"
-      ],
+      "knownFlagshipLines": ["Yunior Gold", "Yunior Black"],
       "name": "Yunior Cigars",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -2338,10 +1750,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Dominican Republic",
-      "knownFlagshipLines": [
-        "DBL Extra Viejo",
-        "Formula"
-      ],
+      "knownFlagshipLines": ["DBL Extra Viejo", "Formula"],
       "name": "Dominican Big Leaguer (DBL) Extra Viejo",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -2350,10 +1759,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Dominican Republic",
-      "knownFlagshipLines": [
-        "Inception",
-        "Robusto Deluxe"
-      ],
+      "knownFlagshipLines": ["Inception", "Robusto Deluxe"],
       "name": "Casa De Sue\u00f1os",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -2362,10 +1768,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Honduras",
-      "knownFlagshipLines": [
-        "Linga Legacy",
-        "Linga Natural"
-      ],
+      "knownFlagshipLines": ["Linga Legacy", "Linga Natural"],
       "name": "Linga Cigars",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -2374,10 +1777,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "Art of Magic",
-        "Gold Series"
-      ],
+      "knownFlagshipLines": ["Art of Magic", "Gold Series"],
       "name": "Vintage Rock-A-Feller Cigar Group",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -2386,10 +1786,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "Blue Label",
-        "Epiphany"
-      ],
+      "knownFlagshipLines": ["Blue Label", "Epiphany"],
       "name": "El Primer Mundo",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -2398,10 +1795,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "La Jugada",
-        "The Rake"
-      ],
+      "knownFlagshipLines": ["La Jugada", "The Rake"],
       "name": "MoyaRuiz Cigars",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -2410,10 +1804,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Dominican Republic",
-      "knownFlagshipLines": [
-        "Se\u00f1orial",
-        "Saga Short Tales"
-      ],
+      "knownFlagshipLines": ["Se\u00f1orial", "Saga Short Tales"],
       "name": "Las Cumbres Tabaco",
       "reputationTier": "Global",
       "trustStatus": "Verified",
@@ -2422,10 +1813,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Honduras",
-      "knownFlagshipLines": [
-        "Inner Circle Domain",
-        "Inner Circle Limited"
-      ],
+      "knownFlagshipLines": ["Inner Circle Domain", "Inner Circle Limited"],
       "name": "Cavalier Gen\u00e8ve Inner Circle",
       "reputationTier": "Ultra-Premium",
       "trustStatus": "Verified",
@@ -2434,10 +1822,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "Oro de Nicaragua Toro",
-        "Oro de Nicaragua Robusto"
-      ],
+      "knownFlagshipLines": ["Oro de Nicaragua Toro", "Oro de Nicaragua Robusto"],
       "name": "Patina Oro de Nicaragua",
       "reputationTier": "Ultra-Premium",
       "trustStatus": "Verified",
@@ -2446,10 +1831,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Dominican Republic",
-      "knownFlagshipLines": [
-        "Don Fausto Connecticut",
-        "Don Fausto Maduro"
-      ],
+      "knownFlagshipLines": ["Don Fausto Connecticut", "Don Fausto Maduro"],
       "name": "Don Fausto Cigars",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -2458,10 +1840,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Dominican Republic",
-      "knownFlagshipLines": [
-        "Casa Carrillo Rosado",
-        "Casa Carrillo Maduro"
-      ],
+      "knownFlagshipLines": ["Casa Carrillo Rosado", "Casa Carrillo Maduro"],
       "name": "Casa Carrillo",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -2470,10 +1849,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Dominican Republic",
-      "knownFlagshipLines": [
-        "Queen\u2019s Pearls",
-        "King\u2019s Gold"
-      ],
+      "knownFlagshipLines": ["Queen\u2019s Pearls", "King\u2019s Gold"],
       "name": "Adventura The Royal Return",
       "reputationTier": "Ultra-Premium",
       "trustStatus": "Verified",
@@ -2482,10 +1858,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "K Maduro",
-        "K Habano"
-      ],
+      "knownFlagshipLines": ["K Maduro", "K Habano"],
       "name": "K by Karen Berger",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -2494,11 +1867,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Costa Rica",
-      "knownFlagshipLines": [
-        "Alexander",
-        "Napoleon",
-        "Augustus"
-      ],
+      "knownFlagshipLines": ["Alexander", "Napoleon", "Augustus"],
       "name": "El Septimo Emperor Collection",
       "reputationTier": "Ultra-Premium",
       "trustStatus": "Verified",
@@ -2507,10 +1876,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Honduras",
-      "knownFlagshipLines": [
-        "Sabor Cubano Original",
-        "Gran Reserva"
-      ],
+      "knownFlagshipLines": ["Sabor Cubano Original", "Gran Reserva"],
       "name": "Sabor Cubano Cigars",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -2519,10 +1885,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "Cumpay Volcano",
-        "Cumpay Robusto"
-      ],
+      "knownFlagshipLines": ["Cumpay Volcano", "Cumpay Robusto"],
       "name": "Cumpay Nicaragua",
       "reputationTier": "Global",
       "trustStatus": "Verified",
@@ -2531,10 +1894,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Dominican Republic",
-      "knownFlagshipLines": [
-        "1844 Classic",
-        "1844 Heritage"
-      ],
+      "knownFlagshipLines": ["1844 Classic", "1844 Heritage"],
       "name": "Tabacalera 1844",
       "reputationTier": "Global",
       "trustStatus": "Verified",
@@ -2543,10 +1903,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Dominican Republic",
-      "knownFlagshipLines": [
-        "Hermanos Classic",
-        "Hermanos Reserva"
-      ],
+      "knownFlagshipLines": ["Hermanos Classic", "Hermanos Reserva"],
       "name": "Tres Hermanos Cigars",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -2555,10 +1912,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "Habano Especial",
-        "Cubana Maduro"
-      ],
+      "knownFlagshipLines": ["Habano Especial", "Cubana Maduro"],
       "name": "Casa Cubana Cigars",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -2567,10 +1921,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Dominican Republic",
-      "knownFlagshipLines": [
-        "2018 Edition",
-        "2021 Edition"
-      ],
+      "knownFlagshipLines": ["2018 Edition", "2021 Edition"],
       "name": "Davidoff Chef\u2019s Edition",
       "reputationTier": "Ultra-Premium",
       "trustStatus": "Verified",
@@ -2579,10 +1930,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "10th Anniversary Toro",
-        "Selectos"
-      ],
+      "knownFlagshipLines": ["10th Anniversary Toro", "Selectos"],
       "name": "HVC 10th Anniversary",
       "reputationTier": "Ultra-Premium",
       "trustStatus": "Verified",
@@ -2591,10 +1939,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "Esteban Maduro",
-        "Esteban Natural"
-      ],
+      "knownFlagshipLines": ["Esteban Maduro", "Esteban Natural"],
       "name": "Leaf by Esteban",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -2603,10 +1948,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Dominican Republic",
-      "knownFlagshipLines": [
-        "Gran A\u00f1ejo Reserva",
-        "Brazil"
-      ],
+      "knownFlagshipLines": ["Gran A\u00f1ejo Reserva", "Brazil"],
       "name": "Patoro Cigars",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -2615,10 +1957,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "Zino Nicaragua Toro",
-        "Robusto"
-      ],
+      "knownFlagshipLines": ["Zino Nicaragua Toro", "Robusto"],
       "name": "Zino Nicaragua",
       "reputationTier": "Global",
       "trustStatus": "Verified",
@@ -2627,10 +1966,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Italy",
-      "knownFlagshipLines": [
-        "Toscanello Rosso",
-        "Toscanello Vaniglia"
-      ],
+      "knownFlagshipLines": ["Toscanello Rosso", "Toscanello Vaniglia"],
       "name": "Toscanello Cigars",
       "reputationTier": "Legacy",
       "trustStatus": "Verified",
@@ -2639,10 +1975,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "War Witch",
-        "Dark War Witch"
-      ],
+      "knownFlagshipLines": ["War Witch", "Dark War Witch"],
       "name": "Black Star Line Cigars",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -2651,10 +1984,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Dominican Republic",
-      "knownFlagshipLines": [
-        "Cabal Original",
-        "Cabal Black"
-      ],
+      "knownFlagshipLines": ["Cabal Original", "Cabal Black"],
       "name": "Cabal Cigars",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -2663,10 +1993,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "BDX I",
-        "BDX II"
-      ],
+      "knownFlagshipLines": ["BDX I", "BDX II"],
       "name": "Somm BDX Series",
       "reputationTier": "Ultra-Premium",
       "trustStatus": "Verified",
@@ -2675,10 +2002,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "Full Body Cast",
-        "Morning Star"
-      ],
+      "knownFlagshipLines": ["Full Body Cast", "Morning Star"],
       "name": "Boneshaker Cigars",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -2687,10 +2011,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Dominican Republic",
-      "knownFlagshipLines": [
-        "Dos77",
-        "Papa Chog\u00fc\u00ed"
-      ],
+      "knownFlagshipLines": ["Dos77", "Papa Chog\u00fc\u00ed"],
       "name": "Chog\u00fc\u00ed Cigars",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -2699,10 +2020,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "The Sergeant Robusto",
-        "Box Pressed"
-      ],
+      "knownFlagshipLines": ["The Sergeant Robusto", "Box Pressed"],
       "name": "A.C.E. Prime The Sergeant",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -2711,10 +2029,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Honduras",
-      "knownFlagshipLines": [
-        "Flor de Selva No. 20",
-        "Anniversary Robusto"
-      ],
+      "knownFlagshipLines": ["Flor de Selva No. 20", "Anniversary Robusto"],
       "name": "Maya Selva Flor de Selva 25 Aniversario",
       "reputationTier": "Ultra-Premium",
       "trustStatus": "Verified",
@@ -2723,10 +2038,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "Toro",
-        "Robusto"
-      ],
+      "knownFlagshipLines": ["Toro", "Robusto"],
       "name": "Casa Magna Jalapa Claro",
       "reputationTier": "Global",
       "trustStatus": "Verified",
@@ -2735,10 +2047,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Honduras",
-      "knownFlagshipLines": [
-        "Gran Robusto",
-        "Churchill"
-      ],
+      "knownFlagshipLines": ["Gran Robusto", "Churchill"],
       "name": "Gran Habano Blue in Green",
       "reputationTier": "Global",
       "trustStatus": "Verified",
@@ -2747,10 +2056,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Dominican Republic",
-      "knownFlagshipLines": [
-        "The Circus Super Toro",
-        "Lonsdale"
-      ],
+      "knownFlagshipLines": ["The Circus Super Toro", "Lonsdale"],
       "name": "The Circus by Caldwell",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -2759,10 +2065,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Mexico",
-      "knownFlagshipLines": [
-        "San Andres Maduro",
-        "Reserva Especial"
-      ],
+      "knownFlagshipLines": ["San Andres Maduro", "Reserva Especial"],
       "name": "Finca San Andres Cigars",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -2771,10 +2074,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "Robusto",
-        "Toro"
-      ],
+      "knownFlagshipLines": ["Robusto", "Toro"],
       "name": "Villiger 1888 Nicaragua",
       "reputationTier": "Legacy",
       "trustStatus": "Verified",
@@ -2783,10 +2083,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Dominican Republic",
-      "knownFlagshipLines": [
-        "Reserva Especial",
-        "Limited Edition Maduro"
-      ],
+      "knownFlagshipLines": ["Reserva Especial", "Limited Edition Maduro"],
       "name": "Valentino Siesto Cigars",
       "reputationTier": "Ultra-Premium",
       "trustStatus": "Verified",
@@ -2795,10 +2092,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Mexico",
-      "knownFlagshipLines": [
-        "1880 Claro",
-        "1880 Maduro"
-      ],
+      "knownFlagshipLines": ["1880 Claro", "1880 Maduro"],
       "name": "Casa Turrent 1880 Series",
       "reputationTier": "Global",
       "trustStatus": "Verified",
@@ -2807,10 +2101,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Costa Rica",
-      "knownFlagshipLines": [
-        "Alfonso Extra A\u00f1ejo",
-        "Gran Selecci\u00f3n"
-      ],
+      "knownFlagshipLines": ["Alfonso Extra A\u00f1ejo", "Gran Selecci\u00f3n"],
       "name": "Alfonso by Selected Tobacco",
       "reputationTier": "Ultra-Premium",
       "trustStatus": "Verified",
@@ -2819,10 +2110,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Honduras",
-      "knownFlagshipLines": [
-        "Genesis The Project",
-        "Olancho"
-      ],
+      "knownFlagshipLines": ["Genesis The Project", "Olancho"],
       "name": "Ramon Bueso Cigars",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -2831,10 +2119,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "USA",
-      "knownFlagshipLines": [
-        "Laguito No. 2",
-        "Prominente"
-      ],
+      "knownFlagshipLines": ["Laguito No. 2", "Prominente"],
       "name": "La Palina Goldie Series",
       "reputationTier": "Ultra-Premium",
       "trustStatus": "Verified",
@@ -2843,10 +2128,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "The Emperors Gold",
-        "Midnight Blaq"
-      ],
+      "knownFlagshipLines": ["The Emperors Gold", "Midnight Blaq"],
       "name": "Emperor's Collection by Emperors Cut",
       "reputationTier": "Ultra-Premium",
       "trustStatus": "Verified",
@@ -2855,10 +2137,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Honduras",
-      "knownFlagshipLines": [
-        "San Andres Maduro",
-        "Sumatra"
-      ],
+      "knownFlagshipLines": ["San Andres Maduro", "Sumatra"],
       "name": "Kafie 1901 Cigars",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -2867,10 +2146,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Dominican Republic",
-      "knownFlagshipLines": [
-        "SuperEgo",
-        "Agape"
-      ],
+      "knownFlagshipLines": ["SuperEgo", "Agape"],
       "name": "Freud Cigar Co.",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -2879,10 +2155,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Costa Rica",
-      "knownFlagshipLines": [
-        "Da Vinci",
-        "Michelangelo"
-      ],
+      "knownFlagshipLines": ["Da Vinci", "Michelangelo"],
       "name": "El Septimo Sacred Arts Collection",
       "reputationTier": "Ultra-Premium",
       "trustStatus": "Verified",
@@ -2891,10 +2164,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Dominican Republic",
-      "knownFlagshipLines": [
-        "Imperiale",
-        "Royal Return"
-      ],
+      "knownFlagshipLines": ["Imperiale", "Royal Return"],
       "name": "Chateau Diadem Cigars",
       "reputationTier": "Ultra-Premium",
       "trustStatus": "Verified",
@@ -2903,10 +2173,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Dominican Republic",
-      "knownFlagshipLines": [
-        "Viento",
-        "Martinique"
-      ],
+      "knownFlagshipLines": ["Viento", "Martinique"],
       "name": "Principle Cigars Aviator Series",
       "reputationTier": "Ultra-Premium",
       "trustStatus": "Verified",
@@ -2915,10 +2182,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Dominican Republic",
-      "knownFlagshipLines": [
-        "Good Trouble",
-        "ATL Black"
-      ],
+      "knownFlagshipLines": ["Good Trouble", "ATL Black"],
       "name": "ATL Cigar Co.",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -2927,10 +2191,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "Habano",
-        "Broadleaf"
-      ],
+      "knownFlagshipLines": ["Habano", "Broadleaf"],
       "name": "Powstanie Cigars",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -2939,10 +2200,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Dominican Republic",
-      "knownFlagshipLines": [
-        "El Legado",
-        "Salt of the Earth"
-      ],
+      "knownFlagshipLines": ["El Legado", "Salt of the Earth"],
       "name": "Don Doroteo Cigars",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -2951,10 +2209,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "Red Label",
-        "Brown Label"
-      ],
+      "knownFlagshipLines": ["Red Label", "Brown Label"],
       "name": "Don Kiki Cigars",
       "reputationTier": "Legacy",
       "trustStatus": "Verified",
@@ -2963,10 +2218,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Dominican Republic",
-      "knownFlagshipLines": [
-        "Lure Maduro",
-        "Lure Habano"
-      ],
+      "knownFlagshipLines": ["Lure Maduro", "Lure Habano"],
       "name": "Lure Cigars",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -2975,10 +2227,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "Cabaiguan Imperiales",
-        "Guapo"
-      ],
+      "knownFlagshipLines": ["Cabaiguan Imperiales", "Guapo"],
       "name": "Tatuaje Cabaiguan",
       "reputationTier": "Global",
       "trustStatus": "Verified",
@@ -2987,10 +2236,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Dominican Republic",
-      "knownFlagshipLines": [
-        "Buffalo TEN",
-        "Big Papi"
-      ],
+      "knownFlagshipLines": ["Buffalo TEN", "Big Papi"],
       "name": "El Artista Cigars",
       "reputationTier": "Global",
       "trustStatus": "Verified",
@@ -2999,10 +2245,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Dominican Republic",
-      "knownFlagshipLines": [
-        "Gold Series",
-        "J London Original"
-      ],
+      "knownFlagshipLines": ["Gold Series", "J London Original"],
       "name": "J London Cigars",
       "reputationTier": "Ultra-Premium",
       "trustStatus": "Verified",
@@ -3011,10 +2254,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Honduras",
-      "knownFlagshipLines": [
-        "Reserva Robusto",
-        "Reserva Soberano"
-      ],
+      "knownFlagshipLines": ["Reserva Robusto", "Reserva Soberano"],
       "name": "Maya Selva Villa Zamorano Reserva",
       "reputationTier": "Global",
       "trustStatus": "Verified",
@@ -3023,10 +2263,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Honduras",
-      "knownFlagshipLines": [
-        "13th Anniversary Toro",
-        "Anniversary Robusto"
-      ],
+      "knownFlagshipLines": ["13th Anniversary Toro", "Anniversary Robusto"],
       "name": "Room101 13th Anniversary",
       "reputationTier": "Ultra-Premium",
       "trustStatus": "Verified",
@@ -3035,10 +2272,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Dominican Republic",
-      "knownFlagshipLines": [
-        "Purple",
-        "Ricochet"
-      ],
+      "knownFlagshipLines": ["Purple", "Ricochet"],
       "name": "La Barba Cigars",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -3047,10 +2281,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Mexico",
-      "knownFlagshipLines": [
-        "Cuchillo Parado",
-        "Revolution"
-      ],
+      "knownFlagshipLines": ["Cuchillo Parado", "Revolution"],
       "name": "Casa 1910 Cuchillo Parado",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -3059,10 +2290,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "Don Nelo Series",
-        "Caraballo 828"
-      ],
+      "knownFlagshipLines": ["Don Nelo Series", "Caraballo 828"],
       "name": "Casa Caraballo Cigars",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -3071,10 +2299,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "Mad Minnow",
-        "Rivers Series"
-      ],
+      "knownFlagshipLines": ["Mad Minnow", "Rivers Series"],
       "name": "Big Sky Cigars",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -3083,10 +2308,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "Blue Label",
-        "JJ Maduro"
-      ],
+      "knownFlagshipLines": ["Blue Label", "JJ Maduro"],
       "name": "Don Pepin Garcia Original",
       "reputationTier": "Legacy",
       "trustStatus": "Verified",
@@ -3095,10 +2317,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "El Pulpo Robusto",
-        "El Pulpo Toro"
-      ],
+      "knownFlagshipLines": ["El Pulpo Robusto", "El Pulpo Toro"],
       "name": "Artesano Del Tobacco El Pulpo",
       "reputationTier": "Ultra-Premium",
       "trustStatus": "Verified",
@@ -3107,10 +2326,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "Aniversario Maduro",
-        "Connecticut"
-      ],
+      "knownFlagshipLines": ["Aniversario Maduro", "Connecticut"],
       "name": "Aganorsa Leaf Aniversario",
       "reputationTier": "Global",
       "trustStatus": "Verified",
@@ -3119,10 +2335,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Dominican Republic",
-      "knownFlagshipLines": [
-        "La Pureza",
-        "Prominente"
-      ],
+      "knownFlagshipLines": ["La Pureza", "Prominente"],
       "name": "Falto Cigars",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -3131,10 +2344,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Various",
-      "knownFlagshipLines": [
-        "Choshi",
-        "Vulcan"
-      ],
+      "knownFlagshipLines": ["Choshi", "Vulcan"],
       "name": "Luxury Cigar Club Privada",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -3143,10 +2353,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "Habano",
-        "San Andr\u00e9s"
-      ],
+      "knownFlagshipLines": ["Habano", "San Andr\u00e9s"],
       "name": "Pichardo Reserva Familiar",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -3155,10 +2362,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "Serino Royale",
-        "Taino Heritage"
-      ],
+      "knownFlagshipLines": ["Serino Royale", "Taino Heritage"],
       "name": "Serino Cigar Co.",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -3167,10 +2371,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Honduras",
-      "knownFlagshipLines": [
-        "Maduro",
-        "Natural"
-      ],
+      "knownFlagshipLines": ["Maduro", "Natural"],
       "name": "Gran Habano Persian King",
       "reputationTier": "Global",
       "trustStatus": "Verified",
@@ -3179,10 +2380,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Dominican Republic",
-      "knownFlagshipLines": [
-        "Herbert Spencer",
-        "Gourmet Collection"
-      ],
+      "knownFlagshipLines": ["Herbert Spencer", "Gourmet Collection"],
       "name": "Jake Wyatt Cigar Co.",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -3191,10 +2389,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "USA",
-      "knownFlagshipLines": [
-        "The American Toro",
-        "Double Robusto"
-      ],
+      "knownFlagshipLines": ["The American Toro", "Double Robusto"],
       "name": "The American by J.C. Newman",
       "reputationTier": "Ultra-Premium",
       "trustStatus": "Verified",
@@ -3203,10 +2398,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "Unstolen Valor",
-        "The Bewitched"
-      ],
+      "knownFlagshipLines": ["Unstolen Valor", "The Bewitched"],
       "name": "Muestra de Saka",
       "reputationTier": "Ultra-Premium",
       "trustStatus": "Verified",
@@ -3215,10 +2407,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Honduras",
-      "knownFlagshipLines": [
-        "Fine & Rare HOF/506",
-        "Fine & Rare BC-(13)4EV"
-      ],
+      "knownFlagshipLines": ["Fine & Rare HOF/506", "Fine & Rare BC-(13)4EV"],
       "name": "Alec Bradley Fine & Rare",
       "reputationTier": "Ultra-Premium",
       "trustStatus": "Verified",
@@ -3227,10 +2416,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "Friends and Family",
-        "The Pulse"
-      ],
+      "knownFlagshipLines": ["Friends and Family", "The Pulse"],
       "name": "Ohana Nui Cigars",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -3239,10 +2425,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "Habano",
-        "Maduro"
-      ],
+      "knownFlagshipLines": ["Habano", "Maduro"],
       "name": "Patina Cigars",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -3251,10 +2434,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Dominican Republic",
-      "knownFlagshipLines": [
-        "Prequel",
-        "Sojourn"
-      ],
+      "knownFlagshipLines": ["Prequel", "Sojourn"],
       "name": "E.P. Carrillo Pledge",
       "reputationTier": "Ultra-Premium",
       "trustStatus": "Verified",
@@ -3263,10 +2443,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Dominican Republic",
-      "knownFlagshipLines": [
-        "Hors d\u2019Age 2017",
-        "Hors d\u2019Age 2020"
-      ],
+      "knownFlagshipLines": ["Hors d\u2019Age 2017", "Hors d\u2019Age 2020"],
       "name": "La Aurora Hors d\u2019Age",
       "reputationTier": "Ultra-Premium",
       "trustStatus": "Verified",
@@ -3275,10 +2452,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "Sherry Cask",
-        "PX Sherry Cask"
-      ],
+      "knownFlagshipLines": ["Sherry Cask", "PX Sherry Cask"],
       "name": "Diesel Whiskey Row",
       "reputationTier": "Global",
       "trustStatus": "Verified",
@@ -3287,10 +2461,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "NBK",
-        "Killer Bee"
-      ],
+      "knownFlagshipLines": ["NBK", "Killer Bee"],
       "name": "Black Works Studio",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -3299,10 +2470,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "Nuggs Maduro",
-        "Nuggs Habano"
-      ],
+      "knownFlagshipLines": ["Nuggs Maduro", "Nuggs Habano"],
       "name": "Jas Sum Kral Nuggs",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -3311,10 +2479,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Dominican Republic",
-      "knownFlagshipLines": [
-        "Classic",
-        "Serie 5"
-      ],
+      "knownFlagshipLines": ["Classic", "Serie 5"],
       "name": "Don Lucas Cigars",
       "reputationTier": "Legacy",
       "trustStatus": "Verified",
@@ -3323,10 +2488,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Dominican Republic",
-      "knownFlagshipLines": [
-        "Farce Maduro",
-        "Farce Connecticut"
-      ],
+      "knownFlagshipLines": ["Farce Maduro", "Farce Connecticut"],
       "name": "Room101 Farce Series",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -3335,10 +2497,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "Broadleaf",
-        "Adobe"
-      ],
+      "knownFlagshipLines": ["Broadleaf", "Adobe"],
       "name": "Drew Estate Nica Rustica",
       "reputationTier": "Global",
       "trustStatus": "Verified",
@@ -3347,10 +2506,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Honduras",
-      "knownFlagshipLines": [
-        "Maduro",
-        "Habano"
-      ],
+      "knownFlagshipLines": ["Maduro", "Habano"],
       "name": "Zaya y Paola Cigars",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -3359,10 +2515,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "Crook of the Crown",
-        "Call to Arms"
-      ],
+      "knownFlagshipLines": ["Crook of the Crown", "Call to Arms"],
       "name": "Stolen Throne Cigars",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -3371,10 +2524,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Honduras",
-      "knownFlagshipLines": [
-        "Sencillo Black Robusto",
-        "Double Robusto"
-      ],
+      "knownFlagshipLines": ["Sencillo Black Robusto", "Double Robusto"],
       "name": "Sencillo Black by God of Fire",
       "reputationTier": "Ultra-Premium",
       "trustStatus": "Verified",
@@ -3383,10 +2533,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Dominican Republic",
-      "knownFlagshipLines": [
-        "Don Reynaldo Regalos",
-        "Coronas de Luxe"
-      ],
+      "knownFlagshipLines": ["Don Reynaldo Regalos", "Coronas de Luxe"],
       "name": "Don Reynaldo by Warped",
       "reputationTier": "Ultra-Premium",
       "trustStatus": "Verified",
@@ -3395,10 +2542,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Honduras",
-      "knownFlagshipLines": [
-        "White Series Toro",
-        "Diplomate"
-      ],
+      "knownFlagshipLines": ["White Series Toro", "Diplomate"],
       "name": "Cavalier Gen\u00e8ve White Series",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -3407,10 +2551,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "OneOff Corona",
-        "OneOff Robusto"
-      ],
+      "knownFlagshipLines": ["OneOff Corona", "OneOff Robusto"],
       "name": "Illusione OneOff",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -3419,10 +2560,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Dominican Republic",
-      "knownFlagshipLines": [
-        "Timeless Prestige",
-        "Timeless Supreme"
-      ],
+      "knownFlagshipLines": ["Timeless Prestige", "Timeless Supreme"],
       "name": "Ferio Tego Timeless",
       "reputationTier": "Global",
       "trustStatus": "Verified",
@@ -3431,9 +2569,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Dominican Republic",
-      "knownFlagshipLines": [
-        "Andalusian Bull"
-      ],
+      "knownFlagshipLines": ["Andalusian Bull"],
       "name": "La Flor Dominicana Andalusian Bull",
       "reputationTier": "Ultra-Premium",
       "trustStatus": "Verified",
@@ -3442,10 +2578,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Honduras",
-      "knownFlagshipLines": [
-        "Corojo #5 Gran Robusto",
-        "Imperiales"
-      ],
+      "knownFlagshipLines": ["Corojo #5 Gran Robusto", "Imperiales"],
       "name": "Gran Habano Corojo #5",
       "reputationTier": "Global",
       "trustStatus": "Verified",
@@ -3454,10 +2587,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Dominican Republic",
-      "knownFlagshipLines": [
-        "Mr. Red Robusto",
-        "Mr. Red Maduro"
-      ],
+      "knownFlagshipLines": ["Mr. Red Robusto", "Mr. Red Maduro"],
       "name": "Sinistro Mr. Red",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -3466,10 +2596,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Dominican Republic",
-      "knownFlagshipLines": [
-        "Chinchalle Habano",
-        "Chinchalle Maduro"
-      ],
+      "knownFlagshipLines": ["Chinchalle Habano", "Chinchalle Maduro"],
       "name": "Chinchalle Cigars",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -3478,10 +2605,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Dominican Republic",
-      "knownFlagshipLines": [
-        "Montosa Maduro",
-        "Montosa Natural"
-      ],
+      "knownFlagshipLines": ["Montosa Maduro", "Montosa Natural"],
       "name": "Montosa Cigars",
       "reputationTier": "Global",
       "trustStatus": "Verified",
@@ -3490,10 +2614,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "Reserva Especial",
-        "Do\u00f1a Nieves Sentimiento"
-      ],
+      "knownFlagshipLines": ["Reserva Especial", "Do\u00f1a Nieves Sentimiento"],
       "name": "El Galan Cigars",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -3502,10 +2623,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "La Sirena Original",
-        "LTZ"
-      ],
+      "knownFlagshipLines": ["La Sirena Original", "LTZ"],
       "name": "La Sirena Original Series",
       "reputationTier": "Global",
       "trustStatus": "Verified",
@@ -3514,10 +2632,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Dominican Republic",
-      "knownFlagshipLines": [
-        "Master Mason",
-        "Veiled Prophet"
-      ],
+      "knownFlagshipLines": ["Master Mason", "Veiled Prophet"],
       "name": "Hiram & Solomon Cigars",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -3526,10 +2641,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "Defcon",
-        "White Label"
-      ],
+      "knownFlagshipLines": ["Defcon", "White Label"],
       "name": "Arandoza Cigars",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -3538,10 +2650,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Honduras",
-      "knownFlagshipLines": [
-        "Habano",
-        "Connecticut"
-      ],
+      "knownFlagshipLines": ["Habano", "Connecticut"],
       "name": "La Estrella Cubana",
       "reputationTier": "Global",
       "trustStatus": "Verified",
@@ -3550,10 +2659,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Dominican Republic",
-      "knownFlagshipLines": [
-        "A. Flores Serie Privada",
-        "PDR 1878"
-      ],
+      "knownFlagshipLines": ["A. Flores Serie Privada", "PDR 1878"],
       "name": "PDR Cigars",
       "reputationTier": "Global",
       "trustStatus": "Verified",
@@ -3562,10 +2668,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Dominican Republic",
-      "knownFlagshipLines": [
-        "Cabinet Selection No. 1",
-        "No. 4"
-      ],
+      "knownFlagshipLines": ["Cabinet Selection No. 1", "No. 4"],
       "name": "Cabinet Selection by Casdagli",
       "reputationTier": "Ultra-Premium",
       "trustStatus": "Verified",
@@ -3574,10 +2677,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Dominican Republic",
-      "knownFlagshipLines": [
-        "Perfection Line",
-        "Box Pressed Toro"
-      ],
+      "knownFlagshipLines": ["Perfection Line", "Box Pressed Toro"],
       "name": "La Instructora Cigars",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -3586,10 +2686,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Costa Rica",
-      "knownFlagshipLines": [
-        "MBombay Classic",
-        "Gaaja"
-      ],
+      "knownFlagshipLines": ["MBombay Classic", "Gaaja"],
       "name": "M Bombay Tobak",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",
@@ -3598,10 +2695,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Dominican Republic",
-      "knownFlagshipLines": [
-        "Gold Shadow",
-        "Gold Exorcist"
-      ],
+      "knownFlagshipLines": ["Gold Shadow", "Gold Exorcist"],
       "name": "Gurkha Ghost Gold",
       "reputationTier": "Global",
       "trustStatus": "Verified",
@@ -3610,10 +2704,7 @@
     {
       "privacyCompliant": true,
       "countryOfOrigin": "Nicaragua",
-      "knownFlagshipLines": [
-        "AC Cigar Co.",
-        "Original Blend"
-      ],
+      "knownFlagshipLines": ["AC Cigar Co.", "Original Blend"],
       "name": "The American Caribbean Cigars",
       "reputationTier": "Boutique",
       "trustStatus": "Verified",

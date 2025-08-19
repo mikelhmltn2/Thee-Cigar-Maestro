@@ -16,7 +16,7 @@ class MockUIManager {
     this.sidePanel.id = 'sidePanel';
     this.sidePanel.className = 'side-panel';
     document.body.appendChild(this.sidePanel);
-    
+
     this.escapeKeyHandler = null;
     this.setupMobileMenu();
   }
@@ -30,13 +30,13 @@ class MockUIManager {
     document.body.appendChild(mobileMenuBtn);
 
     // Add event listeners
-    mobileMenuBtn.addEventListener('click', (e) => {
+    mobileMenuBtn.addEventListener('click', e => {
       e.preventDefault();
       e.stopPropagation();
       this.toggleMobileMenu();
     });
 
-    mobileMenuBtn.addEventListener('keydown', (e) => {
+    mobileMenuBtn.addEventListener('keydown', e => {
       if (e.key === 'Enter' || e.key === ' ') {
         e.preventDefault();
         this.toggleMobileMenu();
@@ -57,7 +57,7 @@ class MockUIManager {
 
     const isOpen = this.sidePanel.classList.contains('open');
     const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-    
+
     if (isOpen) {
       this.closeMobileMenu();
     } else {
@@ -68,7 +68,10 @@ class MockUIManager {
     if (mobileMenuBtn) {
       mobileMenuBtn.setAttribute('aria-expanded', (!isOpen).toString());
       mobileMenuBtn.innerHTML = isOpen ? '☰' : '✕';
-      mobileMenuBtn.setAttribute('aria-label', isOpen ? 'Open navigation menu' : 'Close navigation menu');
+      mobileMenuBtn.setAttribute(
+        'aria-label',
+        isOpen ? 'Open navigation menu' : 'Close navigation menu'
+      );
     }
   }
 
@@ -85,7 +88,7 @@ class MockUIManager {
 
     this.sidePanel.classList.add('opening');
     this.sidePanel.classList.add('open');
-    
+
     document.body.style.overflow = 'hidden';
     document.body.classList.add('mobile-menu-open');
 
@@ -102,7 +105,7 @@ class MockUIManager {
     if (!this.sidePanel) return;
 
     this.sidePanel.classList.add('closing');
-    
+
     setTimeout(() => {
       this.sidePanel.classList.remove('open', 'closing');
       document.body.style.overflow = 'auto';
@@ -123,7 +126,7 @@ class MockUIManager {
     if (this.sidePanel) {
       this.sidePanel.classList.remove('open');
       document.body.style.overflow = 'auto';
-      
+
       if (this.isMobile) {
         this.closeMobileMenu();
       }
@@ -150,7 +153,7 @@ class MockUIManager {
   }
 
   addEscapeKeyListener() {
-    this.escapeKeyHandler = (e) => {
+    this.escapeKeyHandler = e => {
       if (e.key === 'Escape' && this.isMobile && this.sidePanel.classList.contains('open')) {
         this.closeMobileMenu();
       }
@@ -180,11 +183,11 @@ class MockUIManager {
     const mobileMenuBtn = document.getElementById('mobileMenuBtn');
     const sidePanel = document.getElementById('sidePanel');
     const backdrop = document.querySelector('.mobile-menu-backdrop');
-    
+
     if (mobileMenuBtn) mobileMenuBtn.remove();
     if (sidePanel) sidePanel.remove();
     if (backdrop) backdrop.remove();
-    
+
     this.removeEscapeKeyListener();
     document.body.style.overflow = 'auto';
     document.body.classList.remove('mobile-menu-open');
@@ -197,7 +200,7 @@ describe('Mobile Menu Toggle Logic', () => {
   beforeEach(() => {
     // Reset DOM
     document.body.innerHTML = '';
-    
+
     // Reset window properties
     Object.defineProperty(window, 'innerWidth', {
       writable: true,
@@ -225,7 +228,7 @@ describe('Mobile Menu Toggle Logic', () => {
 
     it('should initialize mobile menu button with correct attributes', () => {
       const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-      
+
       expect(mobileMenuBtn).toBeTruthy();
       expect(mobileMenuBtn.getAttribute('aria-label')).toBe('Toggle navigation menu');
       expect(mobileMenuBtn.getAttribute('aria-expanded')).toBe('false');
@@ -240,10 +243,10 @@ describe('Mobile Menu Toggle Logic', () => {
     it('should open mobile menu when clicking menu button', () => {
       const mobileMenuBtn = document.getElementById('mobileMenuBtn');
       const sidePanel = document.getElementById('sidePanel');
-      
+
       // Click to open
       mobileMenuBtn.click();
-      
+
       expect(sidePanel.classList.contains('open')).toBe(true);
       expect(document.body.classList.contains('mobile-menu-open')).toBe(true);
       expect(document.body.style.overflow).toBe('hidden');
@@ -254,17 +257,19 @@ describe('Mobile Menu Toggle Logic', () => {
     it('should close mobile menu when clicking menu button again', async () => {
       const mobileMenuBtn = document.getElementById('mobileMenuBtn');
       const sidePanel = document.getElementById('sidePanel');
-      
+
       // Open menu first
       mobileMenuBtn.click();
       expect(sidePanel.classList.contains('open')).toBe(true);
-      
+
       // Click to close
       mobileMenuBtn.click();
-      
+
       // Wait for animation
-      await new Promise((resolve) => { setTimeout(resolve, 350); });
-      
+      await new Promise(resolve => {
+        setTimeout(resolve, 350);
+      });
+
       expect(sidePanel.classList.contains('open')).toBe(false);
       expect(document.body.classList.contains('mobile-menu-open')).toBe(false);
       expect(document.body.style.overflow).toBe('auto');
@@ -274,9 +279,9 @@ describe('Mobile Menu Toggle Logic', () => {
 
     it('should create backdrop when mobile menu opens', () => {
       const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-      
+
       mobileMenuBtn.click();
-      
+
       const backdrop = document.querySelector('.mobile-menu-backdrop');
       expect(backdrop).toBeTruthy();
       expect(backdrop.classList.contains('mobile-menu-backdrop')).toBe(true);
@@ -285,58 +290,62 @@ describe('Mobile Menu Toggle Logic', () => {
     it('should close menu when clicking backdrop', async () => {
       const mobileMenuBtn = document.getElementById('mobileMenuBtn');
       const sidePanel = document.getElementById('sidePanel');
-      
+
       // Open menu
       mobileMenuBtn.click();
       expect(sidePanel.classList.contains('open')).toBe(true);
-      
+
       // Click backdrop
       const backdrop = document.querySelector('.mobile-menu-backdrop');
       backdrop.click();
-      
+
       // Wait for animation
-      await new Promise((resolve) => { setTimeout(resolve, 350); });
-      
+      await new Promise(resolve => {
+        setTimeout(resolve, 350);
+      });
+
       expect(sidePanel.classList.contains('open')).toBe(false);
     });
 
     it('should close menu when pressing Escape key', async () => {
       const mobileMenuBtn = document.getElementById('mobileMenuBtn');
       const sidePanel = document.getElementById('sidePanel');
-      
+
       // Open menu
       mobileMenuBtn.click();
       expect(sidePanel.classList.contains('open')).toBe(true);
-      
+
       // Press Escape
       const escapeEvent = new KeyboardEvent('keydown', { key: 'Escape' });
       document.dispatchEvent(escapeEvent);
-      
+
       // Wait for animation
-      await new Promise((resolve) => { setTimeout(resolve, 350); });
-      
+      await new Promise(resolve => {
+        setTimeout(resolve, 350);
+      });
+
       expect(sidePanel.classList.contains('open')).toBe(false);
     });
 
     it('should handle keyboard activation (Enter key)', () => {
       const mobileMenuBtn = document.getElementById('mobileMenuBtn');
       const sidePanel = document.getElementById('sidePanel');
-      
+
       // Press Enter to open
       const enterEvent = new KeyboardEvent('keydown', { key: 'Enter' });
       mobileMenuBtn.dispatchEvent(enterEvent);
-      
+
       expect(sidePanel.classList.contains('open')).toBe(true);
     });
 
     it('should handle keyboard activation (Space key)', () => {
       const mobileMenuBtn = document.getElementById('mobileMenuBtn');
       const sidePanel = document.getElementById('sidePanel');
-      
+
       // Press Space to open
       const spaceEvent = new KeyboardEvent('keydown', { key: ' ' });
       mobileMenuBtn.dispatchEvent(spaceEvent);
-      
+
       expect(sidePanel.classList.contains('open')).toBe(true);
     });
   });
@@ -359,10 +368,10 @@ describe('Mobile Menu Toggle Logic', () => {
     it('should use regular side panel behavior on desktop', () => {
       const mobileMenuBtn = document.getElementById('mobileMenuBtn');
       const sidePanel = document.getElementById('sidePanel');
-      
+
       // Click menu button on desktop
       mobileMenuBtn.click();
-      
+
       // Should use regular side panel behavior, not mobile menu
       expect(sidePanel.classList.contains('open')).toBe(true);
       expect(document.body.classList.contains('mobile-menu-open')).toBe(false);
@@ -380,26 +389,30 @@ describe('Mobile Menu Toggle Logic', () => {
       uiManager.setViewportWidth(375);
       const mobileMenuBtn = document.getElementById('mobileMenuBtn');
       const sidePanel = document.getElementById('sidePanel');
-      
+
       // Open mobile menu
       mobileMenuBtn.click();
       expect(sidePanel.classList.contains('open')).toBe(true);
       expect(document.body.classList.contains('mobile-menu-open')).toBe(true);
-      
+
       // Simulate resize to desktop
       uiManager.setViewportWidth(1024);
       uiManager.closeMobileMenu();
-      
+
       // Wait for cleanup animations
-      await new Promise((resolve) => { setTimeout(resolve, 350); });
-      
+      await new Promise(resolve => {
+        setTimeout(resolve, 350);
+      });
+
       uiManager.removeMobileMenuBackdrop();
       uiManager.removeEscapeKeyListener();
       document.body.classList.remove('mobile-menu-open');
-      
+
       // Give time for backdrop removal animation to complete
-      await new Promise((resolve) => { setTimeout(resolve, 310); });
-      
+      await new Promise(resolve => {
+        setTimeout(resolve, 310);
+      });
+
       // Menu should be properly cleaned up
       expect(document.body.classList.contains('mobile-menu-open')).toBe(false);
       expect(document.querySelector('.mobile-menu-backdrop')).toBeFalsy();
@@ -408,10 +421,10 @@ describe('Mobile Menu Toggle Logic', () => {
     it('should properly handle viewport changes from desktop to mobile', () => {
       // Start in desktop
       uiManager.setViewportWidth(1024);
-      
+
       // Switch to mobile
       uiManager.setViewportWidth(375);
-      
+
       expect(uiManager.isMobile).toBe(true);
     });
   });
@@ -424,26 +437,26 @@ describe('Mobile Menu Toggle Logic', () => {
 
     it('should complete mobile menu toggle in under 100ms', () => {
       const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-      
+
       const start = performance.now();
       mobileMenuBtn.click();
       const end = performance.now();
-      
+
       expect(end - start).toBeLessThan(100);
     });
 
     it('should maintain ARIA attributes correctly throughout toggle cycle', () => {
       const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-      
+
       // Initial state
       expect(mobileMenuBtn.getAttribute('aria-expanded')).toBe('false');
       expect(mobileMenuBtn.getAttribute('aria-label')).toBe('Toggle navigation menu');
-      
+
       // Open state
       mobileMenuBtn.click();
       expect(mobileMenuBtn.getAttribute('aria-expanded')).toBe('true');
       expect(mobileMenuBtn.getAttribute('aria-label')).toBe('Close navigation menu');
-      
+
       // Close state
       mobileMenuBtn.click();
       expect(mobileMenuBtn.getAttribute('aria-expanded')).toBe('false');
@@ -452,24 +465,26 @@ describe('Mobile Menu Toggle Logic', () => {
 
     it('should prevent body scroll when mobile menu is open', () => {
       const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-      
+
       // Open menu
       mobileMenuBtn.click();
-      
+
       expect(document.body.style.overflow).toBe('hidden');
       expect(document.body.classList.contains('mobile-menu-open')).toBe(true);
     });
 
     it('should restore body scroll when mobile menu is closed', async () => {
       const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-      
+
       // Open and close menu
       mobileMenuBtn.click();
       mobileMenuBtn.click();
-      
+
       // Wait for animation
-      await new Promise((resolve) => { setTimeout(resolve, 350); });
-      
+      await new Promise(resolve => {
+        setTimeout(resolve, 350);
+      });
+
       expect(document.body.style.overflow).toBe('auto');
       expect(document.body.classList.contains('mobile-menu-open')).toBe(false);
     });

@@ -1,4 +1,3 @@
-
 /* global self, caches, clients */
 
 // Enhanced Service Worker Features
@@ -7,11 +6,11 @@
 // Register background sync
 self.addEventListener('sync', event => {
   console.info('Background sync triggered:', event.tag);
-  
+
   if (event.tag === 'background-sync-cigar-data') {
     event.waitUntil(doBackgroundSync());
   }
-  
+
   if (event.tag === 'background-sync-analytics') {
     event.waitUntil(syncAnalytics());
   }
@@ -20,7 +19,7 @@ self.addEventListener('sync', event => {
 // Handle push notifications
 self.addEventListener('push', event => {
   console.info('Push notification received:', event);
-  
+
   const options = {
     body: event.data ? event.data.text() : 'New cigar recommendations available!',
     icon: 'assets/logos/logo-96.png',
@@ -28,44 +27,38 @@ self.addEventListener('push', event => {
     vibrate: [100, 50, 100],
     data: {
       dateOfArrival: Date.now(),
-      primaryKey: '2'
+      primaryKey: '2',
     },
     actions: [
       {
         action: 'explore',
         title: 'Explore Now',
-        icon: 'assets/logos/logo-96.png'
+        icon: 'assets/logos/logo-96.png',
       },
       {
         action: 'close',
         title: 'Close',
-        icon: 'assets/logos/logo-96.png'
-      }
-    ]
+        icon: 'assets/logos/logo-96.png',
+      },
+    ],
   };
-  
-  event.waitUntil(
-    self.registration.showNotification('Thee Cigar Maestro', options)
-  );
+
+  event.waitUntil(self.registration.showNotification('Thee Cigar Maestro', options));
 });
 
 // Handle notification clicks
 self.addEventListener('notificationclick', event => {
   console.info('Notification click received:', event);
-  
+
   event.notification.close();
-  
+
   if (event.action === 'explore') {
-    event.waitUntil(
-      clients.openWindow('/')
-    );
+    event.waitUntil(clients.openWindow('/'));
   } else if (event.action === 'close') {
     // Just close the notification
   } else {
     // Default action - open the app
-    event.waitUntil(
-      clients.openWindow('/')
-    );
+    event.waitUntil(clients.openWindow('/'));
   }
 });
 
@@ -73,36 +66,35 @@ self.addEventListener('notificationclick', event => {
 async function doBackgroundSync() {
   try {
     console.info('Performing background sync for cigar data...');
-    
+
     // Sync pending cigar ratings
     const pendingRatings = await getPendingRatings();
     if (pendingRatings.length > 0) {
       await syncRatings(pendingRatings);
     }
-    
+
     // Sync user preferences
     const pendingPreferences = await getPendingPreferences();
     if (pendingPreferences.length > 0) {
       await syncPreferences(pendingPreferences);
     }
-    
+
     console.info('Background sync completed successfully');
-    
+
     // Show success notification
     await self.registration.showNotification('Sync Complete', {
       body: 'Your cigar data has been synchronized',
       icon: 'assets/logos/logo-96.png',
-      tag: 'sync-complete'
+      tag: 'sync-complete',
     });
-    
   } catch (error) {
     console.error('Background sync failed:', error);
-    
+
     // Show error notification
     await self.registration.showNotification('Sync Failed', {
       body: 'Unable to sync data. Will retry when online.',
       icon: 'assets/logos/logo-96.png',
-      tag: 'sync-failed'
+      tag: 'sync-failed',
     });
   }
 }
@@ -111,12 +103,12 @@ async function doBackgroundSync() {
 async function syncAnalytics() {
   try {
     console.info('Syncing analytics data...');
-    
+
     const pendingEvents = await getPendingAnalytics();
     if (pendingEvents.length > 0) {
       await sendAnalytics(pendingEvents);
     }
-    
+
     console.info('Analytics sync completed');
   } catch (error) {
     console.error('Analytics sync failed:', error);
@@ -147,9 +139,9 @@ async function syncRatings(ratings) {
   const response = await fetch('/api/sync-ratings', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(ratings)
+    body: JSON.stringify(ratings),
   });
-  
+
   if (response.ok) {
     // Clear pending ratings
     const cache = await caches.open('pending-data');
@@ -162,9 +154,9 @@ async function syncPreferences(preferences) {
   const response = await fetch('/api/sync-preferences', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(preferences)
+    body: JSON.stringify(preferences),
   });
-  
+
   if (response.ok) {
     // Clear pending preferences
     const cache = await caches.open('pending-data');
@@ -177,9 +169,9 @@ async function sendAnalytics(events) {
   const response = await fetch('/api/analytics', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(events)
+    body: JSON.stringify(events),
   });
-  
+
   if (response.ok) {
     // Clear pending analytics
     const cache = await caches.open('pending-data');
@@ -208,23 +200,26 @@ async function handleApiRequest(request) {
     if (request.method === 'POST') {
       await queueForBackgroundSync(request);
     }
-    
+
     // Return cached response or offline fallback
     const cache = await caches.open('api-cache');
     const cachedResponse = await cache.match(request);
-    
+
     if (cachedResponse) {
       return cachedResponse;
     }
-    
+
     // Return offline response
-    return new Response(JSON.stringify({
-      error: 'Offline',
-      message: 'Request queued for when online'
-    }), {
-      status: 202,
-      headers: { 'Content-Type': 'application/json' }
-    });
+    return new Response(
+      JSON.stringify({
+        error: 'Offline',
+        message: 'Request queued for when online',
+      }),
+      {
+        status: 202,
+        headers: { 'Content-Type': 'application/json' },
+      }
+    );
   }
 }
 
@@ -235,14 +230,14 @@ async function queueForBackgroundSync(request) {
     method: request.method,
     headers: Object.fromEntries(request.headers),
     body,
-    timestamp: Date.now()
+    timestamp: Date.now(),
   };
-  
+
   // Store in pending queue
   const cache = await caches.open('pending-data');
-  const pendingKey = `/pending-${  Date.now()}`;
+  const pendingKey = `/pending-${Date.now()}`;
   await cache.put(pendingKey, new Response(JSON.stringify(queueItem)));
-  
+
   // Register for background sync
   await self.registration.sync.register('background-sync-cigar-data');
 }

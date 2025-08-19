@@ -10,15 +10,15 @@ class AIConciergeSystem {
     this.userProfile = null;
     this.currentContext = null;
     this.recommendations = [];
-    
+
     // AI Personality and Knowledge Base
     this.personality = {
       tone: 'sophisticated',
       expertise: 'master-sommelier',
       style: 'luxury-concierge',
-      language: 'refined-professional'
+      language: 'refined-professional',
     };
-    
+
     // Service Categories
     this.services = {
       RECOMMENDATIONS: 'recommendations',
@@ -27,9 +27,9 @@ class AIConciergeSystem {
       PURCHASE_ADVICE: 'purchase',
       COLLECTION_MANAGEMENT: 'collection',
       EVENT_PLANNING: 'events',
-      CUSTOMER_SUPPORT: 'support'
+      CUSTOMER_SUPPORT: 'support',
     };
-    
+
     this.init();
   }
 
@@ -41,15 +41,14 @@ class AIConciergeSystem {
       await this.loadUserProfile();
       await this.initializeKnowledgeBase();
       await this.setupConversationInterface();
-      
+
       this.isInitialized = true;
       console.info('🎩 AI Concierge System initialized');
-      
+
       // Welcome message for new users
       if (!this.userProfile || this.userProfile.visits === 1) {
         this.showWelcomeExperience();
       }
-      
     } catch (error) {
       console.error('❌ AI Concierge initialization failed:', error);
     }
@@ -70,10 +69,10 @@ class AIConciergeSystem {
           preferredStrength: userData.preferredStrength || 'medium',
           budgetRange: userData.budgetRange || 'moderate',
           occasionPreferences: userData.occasionPreferences || [],
-          visits: userData.visits || 1
+          visits: userData.visits || 1,
         };
       }
-      
+
       console.info('✅ User profile loaded for AI Concierge');
     } catch (error) {
       console.error('Error loading user profile:', error);
@@ -93,9 +92,9 @@ class AIConciergeSystem {
         regions: await this.loadRegionDatabase(),
         occasions: await this.loadOccasionDatabase(),
         etiquette: await this.loadEtiquetteGuide(),
-        terminology: await this.loadTerminologyGuide()
+        terminology: await this.loadTerminologyGuide(),
       };
-      
+
       console.info('✅ Knowledge base initialized');
     } catch (error) {
       console.error('Error initializing knowledge base:', error);
@@ -173,7 +172,7 @@ class AIConciergeSystem {
 
     // Inject into DOM
     document.body.insertAdjacentHTML('beforeend', conciergeHTML);
-    
+
     // Add luxury styling
     this.addConciergeStyles();
   }
@@ -465,7 +464,7 @@ class AIConciergeSystem {
       setTimeout(() => {
         modal.classList.add('show');
       }, 10);
-      
+
       // Focus on input
       setTimeout(() => {
         document.getElementById('conciergeInput')?.focus();
@@ -491,15 +490,19 @@ class AIConciergeSystem {
    */
   startService(serviceType) {
     this.currentContext = serviceType;
-    
+
     const serviceMessages = {
-      recommendations: "I'd be delighted to provide personalized cigar recommendations. Tell me about your preferences, the occasion, or let me suggest something based on your previous tastings.",
-      pairings: "Excellent choice! Pairing cigars with spirits, coffee, or food can elevate your experience tremendously. What would you like to pair with your cigar today?",
-      education: "Knowledge is the foundation of appreciation. What aspect of cigar culture would you like to explore? Origins, construction, tasting techniques, or perhaps the history of renowned makers?",
-      collection: "Managing a cigar collection is an art in itself. Would you like guidance on storage, aging, inventory management, or building a well-rounded collection?"
+      recommendations:
+        "I'd be delighted to provide personalized cigar recommendations. Tell me about your preferences, the occasion, or let me suggest something based on your previous tastings.",
+      pairings:
+        'Excellent choice! Pairing cigars with spirits, coffee, or food can elevate your experience tremendously. What would you like to pair with your cigar today?',
+      education:
+        'Knowledge is the foundation of appreciation. What aspect of cigar culture would you like to explore? Origins, construction, tasting techniques, or perhaps the history of renowned makers?',
+      collection:
+        'Managing a cigar collection is an art in itself. Would you like guidance on storage, aging, inventory management, or building a well-rounded collection?',
     };
 
-    this.addMessage(serviceMessages[serviceType] || "How may I assist you today?", 'concierge');
+    this.addMessage(serviceMessages[serviceType] || 'How may I assist you today?', 'concierge');
   }
 
   /**
@@ -508,30 +511,32 @@ class AIConciergeSystem {
   async sendMessage() {
     const input = document.getElementById('conciergeInput');
     const userMessage = input.value.trim();
-    
+
     if (!userMessage) return;
-    
+
     // Add user message
     this.addMessage(userMessage, 'user');
     input.value = '';
-    
+
     // Show typing indicator
     this.showTypingIndicator();
-    
+
     try {
       // Process message and get AI response
       const response = await this.processMessage(userMessage);
-      
+
       // Remove typing indicator and add response
       this.hideTypingIndicator();
       this.addMessage(response, 'concierge');
-      
+
       // Save conversation
       this.saveConversation();
-      
     } catch (error) {
       this.hideTypingIndicator();
-      this.addMessage("I apologize, but I'm experiencing some difficulty at the moment. Please try again.", 'concierge');
+      this.addMessage(
+        "I apologize, but I'm experiencing some difficulty at the moment. Please try again.",
+        'concierge'
+      );
       console.error('Error processing message:', error);
     }
   }
@@ -545,15 +550,15 @@ class AIConciergeSystem {
       type: 'user',
       message: userMessage,
       timestamp: new Date(),
-      context: this.currentContext
+      context: this.currentContext,
     });
 
     // Analyze user intent
     const intent = await this.analyzeIntent(userMessage);
-    
+
     // Generate contextual response
     const response = await this.generateResponse(userMessage, intent);
-    
+
     return response;
   }
 
@@ -562,7 +567,7 @@ class AIConciergeSystem {
    */
   async analyzeIntent(message) {
     const lowerMessage = message.toLowerCase();
-    
+
     // Intent patterns
     const intents = {
       recommendation: ['recommend', 'suggest', 'what should', 'help me choose', 'looking for'],
@@ -570,7 +575,7 @@ class AIConciergeSystem {
       education: ['learn', 'teach', 'explain', 'what is', 'how to', 'tell me about'],
       purchase: ['buy', 'purchase', 'price', 'cost', 'where can i get'],
       collection: ['humidor', 'store', 'age', 'collection', 'organize'],
-      occasion: ['special occasion', 'celebration', 'anniversary', 'wedding', 'business']
+      occasion: ['special occasion', 'celebration', 'anniversary', 'wedding', 'business'],
     };
 
     for (const [intent, patterns] of Object.entries(intents)) {
@@ -618,7 +623,7 @@ class AIConciergeSystem {
       message: aiResponse,
       timestamp: new Date(),
       context: this.currentContext,
-      intent: intent
+      intent: intent,
     });
 
     return aiResponse;
@@ -632,27 +637,29 @@ class AIConciergeSystem {
     if (window.aiRecommendationEngine && window.aiRecommendationEngine.isInitialized) {
       try {
         const recommendations = await window.aiRecommendationEngine.getPersonalizedRecommendations(
-          this.userProfile, 
+          this.userProfile,
           3
         );
-        
+
         if (recommendations.length > 0) {
-          let response = "Based on your preferences and profile, I recommend these exceptional cigars:\n\n";
-          
+          let response =
+            'Based on your preferences and profile, I recommend these exceptional cigars:\n\n';
+
           recommendations.forEach((rec, index) => {
             response += `${index + 1}. **${rec.name}** (${rec.wrapper} wrapper)\n`;
             response += `   Strength: ${rec.strength} | Flavor Profile: ${rec.flavorProfile}\n`;
             response += `   ${rec.description}\n\n`;
           });
-          
-          response += "Would you like more details about any of these, or shall I suggest pairings?";
+
+          response +=
+            'Would you like more details about any of these, or shall I suggest pairings?';
           return response;
         }
       } catch (error) {
         console.error('Error getting recommendations:', error);
       }
     }
-    
+
     // Fallback response
     return "I'd be delighted to provide personalized recommendations. To better serve you, could you tell me about your preferred strength (mild, medium, full), any favorite flavor notes, or the occasion for smoking?";
   }
@@ -662,14 +669,14 @@ class AIConciergeSystem {
    */
   async generatePairingResponse(message) {
     const pairingAdvice = [
-      "For a classic pairing, try a medium-bodied Connecticut wrapper with aged rum or single malt scotch.",
-      "Maduro wrappers pair beautifully with coffee, particularly espresso or dark roast blends.",
-      "For evening relaxation, consider a full-bodied Habano with aged cognac or port wine.",
-      "Lighter cigars complement champagne or white wine for celebratory occasions."
+      'For a classic pairing, try a medium-bodied Connecticut wrapper with aged rum or single malt scotch.',
+      'Maduro wrappers pair beautifully with coffee, particularly espresso or dark roast blends.',
+      'For evening relaxation, consider a full-bodied Habano with aged cognac or port wine.',
+      'Lighter cigars complement champagne or white wine for celebratory occasions.',
     ];
-    
+
     const randomPairing = pairingAdvice[Math.floor(Math.random() * pairingAdvice.length)];
-    
+
     return `Pairing cigars enhances both experiences tremendously. ${randomPairing}\n\nWhat specific cigar or beverage are you looking to pair? I can provide more targeted recommendations.`;
   }
 
@@ -691,7 +698,7 @@ class AIConciergeSystem {
    * Generate collection response
    */
   async generateCollectionResponse(message) {
-    return "Building and maintaining a cigar collection is both art and science. I can help with:\n\n• **Storage**: Optimal humidity and temperature control\n• **Organization**: Cataloging and rotation systems\n• **Aging**: Which cigars benefit from extended aging\n• **Variety**: Building a well-rounded collection\n• **Insurance**: Protecting valuable investments\n\nWhat aspect of collection management interests you most?";
+    return 'Building and maintaining a cigar collection is both art and science. I can help with:\n\n• **Storage**: Optimal humidity and temperature control\n• **Organization**: Cataloging and rotation systems\n• **Aging**: Which cigars benefit from extended aging\n• **Variety**: Building a well-rounded collection\n• **Insurance**: Protecting valuable investments\n\nWhat aspect of collection management interests you most?';
   }
 
   /**
@@ -707,10 +714,10 @@ class AIConciergeSystem {
   async generateGeneralResponse(message) {
     const generalResponses = [
       "I'm here to enhance your cigar journey in every way possible. Whether you seek recommendations, education, or collection guidance, I'm at your service.",
-      "The world of premium cigars offers endless discovery. How may I assist you in exploring this refined pleasure?",
-      "Every cigar tells a story of craftsmanship, tradition, and terroir. What story would you like to explore today?"
+      'The world of premium cigars offers endless discovery. How may I assist you in exploring this refined pleasure?',
+      'Every cigar tells a story of craftsmanship, tradition, and terroir. What story would you like to explore today?',
     ];
-    
+
     return generalResponses[Math.floor(Math.random() * generalResponses.length)];
   }
 
@@ -723,17 +730,17 @@ class AIConciergeSystem {
 
     const messageDiv = document.createElement('div');
     messageDiv.className = `message ${sender}-message`;
-    
+
     const contentDiv = document.createElement('div');
     contentDiv.className = 'message-content';
-    
+
     // Format message content (support for markdown-like formatting)
     const formattedContent = this.formatMessageContent(content);
     contentDiv.innerHTML = formattedContent;
-    
+
     messageDiv.appendChild(contentDiv);
     chat.appendChild(messageDiv);
-    
+
     // Scroll to bottom
     chat.scrollTop = chat.scrollHeight;
   }
@@ -766,7 +773,7 @@ class AIConciergeSystem {
         <div class="typing-dot"></div>
       </div>
     `;
-    
+
     chat.appendChild(typingDiv);
     chat.scrollTop = chat.scrollHeight;
   }
@@ -788,10 +795,16 @@ class AIConciergeSystem {
     setTimeout(() => {
       this.show();
       setTimeout(() => {
-        this.addMessage("Welcome to the world's most sophisticated cigar platform. I'm delighted to be your personal concierge on this journey of discovery and refinement.", 'concierge');
-        
+        this.addMessage(
+          "Welcome to the world's most sophisticated cigar platform. I'm delighted to be your personal concierge on this journey of discovery and refinement.",
+          'concierge'
+        );
+
         setTimeout(() => {
-          this.addMessage("I'm here to provide personalized recommendations, expert pairing advice, and guide you through the rich traditions of cigar appreciation. Shall we begin with understanding your preferences?", 'concierge');
+          this.addMessage(
+            "I'm here to provide personalized recommendations, expert pairing advice, and guide you through the rich traditions of cigar appreciation. Shall we begin with understanding your preferences?",
+            'concierge'
+          );
         }, 2000);
       }, 1000);
     }, 2000);
@@ -804,7 +817,7 @@ class AIConciergeSystem {
     if (window.storageManager) {
       const history = window.storageManager.getSessionData().conciergeHistory || [];
       this.conversationHistory = history;
-      
+
       // Restore recent messages
       const recentMessages = history.slice(-6); // Last 6 messages
       recentMessages.forEach(msg => {
@@ -821,7 +834,7 @@ class AIConciergeSystem {
   saveConversation() {
     if (window.storageManager) {
       window.storageManager.saveSessionData({
-        conciergeHistory: this.conversationHistory
+        conciergeHistory: this.conversationHistory,
       });
     }
   }
@@ -831,7 +844,7 @@ class AIConciergeSystem {
    */
   attachEventHandlers() {
     // Enter key to send message
-    document.addEventListener('keydown', (e) => {
+    document.addEventListener('keydown', e => {
       if (e.key === 'Enter' && e.target.id === 'conciergeInput') {
         if (e.shiftKey) {
           // Allow line break with Shift+Enter
@@ -843,8 +856,11 @@ class AIConciergeSystem {
     });
 
     // Close on escape key
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && document.getElementById('aiConciergeModal').classList.contains('show')) {
+    document.addEventListener('keydown', e => {
+      if (
+        e.key === 'Escape' &&
+        document.getElementById('aiConciergeModal').classList.contains('show')
+      ) {
         this.hide();
       }
     });
@@ -862,7 +878,7 @@ class AIConciergeSystem {
       preferredStrength: 'medium',
       budgetRange: 'moderate',
       occasionPreferences: [],
-      visits: 1
+      visits: 1,
     };
   }
 
@@ -894,7 +910,7 @@ class AIConciergeSystem {
       cuba: { characteristics: 'Rich, earthy, complex' },
       dominican: { characteristics: 'Smooth, balanced, accessible' },
       nicaragua: { characteristics: 'Bold, spicy, full-bodied' },
-      honduras: { characteristics: 'Medium to full, earthy undertones' }
+      honduras: { characteristics: 'Medium to full, earthy undertones' },
     };
   }
 
@@ -903,7 +919,7 @@ class AIConciergeSystem {
       morning: { recommendations: ['mild Connecticut wrappers', 'light breakfast blends'] },
       afternoon: { recommendations: ['medium-bodied cigars', 'natural wrappers'] },
       evening: { recommendations: ['full-bodied maduro', 'aged reserves'] },
-      celebration: { recommendations: ['premium reserves', 'limited editions'] }
+      celebration: { recommendations: ['premium reserves', 'limited editions'] },
     };
   }
 
@@ -911,7 +927,7 @@ class AIConciergeSystem {
     return {
       cutting: 'Use sharp, clean cuts to preserve the cap structure',
       lighting: 'Toast the foot evenly before drawing',
-      smoking: 'Allow natural ash buildup, smoke slowly and deliberately'
+      smoking: 'Allow natural ash buildup, smoke slowly and deliberately',
     };
   }
 
@@ -919,7 +935,7 @@ class AIConciergeSystem {
     return {
       wrapper: 'The outermost leaf that defines appearance and initial flavor',
       binder: 'Holds the filler together and contributes to burn characteristics',
-      filler: 'The heart of the cigar, providing core flavors and strength'
+      filler: 'The heart of the cigar, providing core flavors and strength',
     };
   }
 }

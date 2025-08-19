@@ -12,11 +12,11 @@ class AdvancedControlsPanel {
       wrapper: new Set(['all']),
       strength: new Set(['all']),
       origin: new Set(['all']),
-      price: { min: 0, max: 1000 }
+      price: { min: 0, max: 1000 },
     };
     this.searchQuery = '';
     this.visualizationMode = 'default';
-    
+
     this.init();
   }
 
@@ -28,8 +28,9 @@ class AdvancedControlsPanel {
   }
 
   createControlsHTML() {
-    const controlsContainer = document.querySelector('.floating-controls') || this.createControlsContainer();
-    
+    const controlsContainer =
+      document.querySelector('.floating-controls') || this.createControlsContainer();
+
     const advancedControls = document.createElement('div');
     advancedControls.className = 'control-group advanced-controls';
     advancedControls.innerHTML = `
@@ -388,7 +389,7 @@ class AdvancedControlsPanel {
     const _searchSuggestions = document.getElementById('searchSuggestions');
 
     if (searchInput) {
-      searchInput.addEventListener('input', (e) => {
+      searchInput.addEventListener('input', e => {
         this.handleSearchInput(e.target.value);
       });
 
@@ -415,7 +416,7 @@ class AdvancedControlsPanel {
     // Visualization mode
     const vizMode = document.getElementById('visualizationMode');
     if (vizMode) {
-      vizMode.addEventListener('change', (e) => {
+      vizMode.addEventListener('change', e => {
         this.changeVisualizationMode(e.target.value);
       });
     }
@@ -436,7 +437,7 @@ class AdvancedControlsPanel {
   setupFilterListeners() {
     // Wrapper type filters
     document.querySelectorAll('.filter-options input[type="checkbox"]').forEach(checkbox => {
-      checkbox.addEventListener('change', (e) => {
+      checkbox.addEventListener('change', e => {
         this.handleFilterChange(e.target);
       });
     });
@@ -480,25 +481,25 @@ class AdvancedControlsPanel {
     const enableSounds = document.getElementById('enableSounds');
 
     if (showLabels) {
-      showLabels.addEventListener('change', (e) => {
+      showLabels.addEventListener('change', e => {
         this.toggleLabels(e.target.checked);
       });
     }
 
     if (showConnections) {
-      showConnections.addEventListener('change', (e) => {
+      showConnections.addEventListener('change', e => {
         this.toggleFlavorConnections(e.target.checked);
       });
     }
 
     if (enableAnimations) {
-      enableAnimations.addEventListener('change', (e) => {
+      enableAnimations.addEventListener('change', e => {
         this.toggleAnimations(e.target.checked);
       });
     }
 
     if (enableSounds) {
-      enableSounds.addEventListener('change', (e) => {
+      enableSounds.addEventListener('change', e => {
         this.toggleSounds(e.target.checked);
       });
     }
@@ -509,11 +510,11 @@ class AdvancedControlsPanel {
     const maxPrice = document.getElementById('maxPrice');
 
     if (minPrice && maxPrice) {
-      minPrice.addEventListener('input', (e) => {
+      minPrice.addEventListener('input', e => {
         this.updatePriceRange('min', e.target.value);
       });
 
-      maxPrice.addEventListener('input', (e) => {
+      maxPrice.addEventListener('input', e => {
         this.updatePriceRange('max', e.target.value);
       });
     }
@@ -522,7 +523,7 @@ class AdvancedControlsPanel {
   // Search functionality
   handleSearchInput(query) {
     this.searchQuery = query.toLowerCase();
-    
+
     if (query.length >= 2) {
       this.generateSearchSuggestions(query);
       this.showSearchSuggestions();
@@ -546,7 +547,7 @@ class AdvancedControlsPanel {
         suggestions.push({
           type: 'cigar',
           text: cigar.name,
-          subtitle: `${cigar.wrapper || 'Unknown'} wrapper`
+          subtitle: `${cigar.wrapper || 'Unknown'} wrapper`,
         });
       }
     });
@@ -557,7 +558,7 @@ class AdvancedControlsPanel {
         suggestions.push({
           type: 'flavor',
           text: cigar.name,
-          subtitle: `Flavor: ${cigar.flavor.substring(0, 50)}...`
+          subtitle: `Flavor: ${cigar.flavor.substring(0, 50)}...`,
         });
       }
     });
@@ -642,34 +643,34 @@ class AdvancedControlsPanel {
   // Visualization controls
   changeVisualizationMode(mode) {
     this.visualizationMode = mode;
-    
+
     const cigars = this.dataManager.data.cigars || [];
     let colorMap = {};
 
     switch (mode) {
       case 'wrapper':
         colorMap = {
-          'Maduro': 0x8B4513,
-          'Connecticut': 0xF5DEB3,
-          'Habano': 0xCD853F,
-          'Natural': 0xDEB887,
-          'Oscuro': 0x2F1B14
+          Maduro: 0x8b4513,
+          Connecticut: 0xf5deb3,
+          Habano: 0xcd853f,
+          Natural: 0xdeb887,
+          Oscuro: 0x2f1b14,
         };
         break;
       case 'strength':
         colorMap = {
-          'Mild': 0x90EE90,
-          'Medium': 0xFFD700,
-          'Full': 0xFF6347
+          Mild: 0x90ee90,
+          Medium: 0xffd700,
+          Full: 0xff6347,
         };
         break;
       case 'origin':
         // Add origin-based coloring
         colorMap = {
-          'Cuban': 0xFF4500,
-          'Dominican': 0x32CD32,
-          'Nicaraguan': 0x4169E1,
-          'Honduran': 0x8A2BE2
+          Cuban: 0xff4500,
+          Dominican: 0x32cd32,
+          Nicaraguan: 0x4169e1,
+          Honduran: 0x8a2be2,
         };
         break;
       case 'price':
@@ -690,7 +691,7 @@ class AdvancedControlsPanel {
     const prices = cigars.map(c => c.price || 0).filter(p => p > 0);
     const minPrice = Math.min(...prices);
     const maxPrice = Math.max(...prices);
-    
+
     return { min: minPrice, max: maxPrice };
   }
 
@@ -698,15 +699,15 @@ class AdvancedControlsPanel {
     if (!window.cigarsInScene) return;
 
     window.cigarsInScene.forEach(cigar => {
-      let color = 0xFFFFFF; // Default white
+      let color = 0xffffff; // Default white
 
       if (mode === 'price') {
         const price = cigar.userData.price || 0;
         const ratio = (price - colorMap.min) / (colorMap.max - colorMap.min);
-        color = this.interpolateColor(0x00FF00, 0xFF0000, ratio); // Green to red
+        color = this.interpolateColor(0x00ff00, 0xff0000, ratio); // Green to red
       } else {
         const key = cigar.userData[mode] || 'Unknown';
-        color = colorMap[key] || 0xFFFFFF;
+        color = colorMap[key] || 0xffffff;
       }
 
       if (cigar.material) {
@@ -716,18 +717,18 @@ class AdvancedControlsPanel {
   }
 
   interpolateColor(color1, color2, ratio) {
-    const r1 = (color1 >> 16) & 0xFF;
-    const g1 = (color1 >> 8) & 0xFF;
-    const b1 = color1 & 0xFF;
-    
-    const r2 = (color2 >> 16) & 0xFF;
-    const g2 = (color2 >> 8) & 0xFF;
-    const b2 = color2 & 0xFF;
-    
+    const r1 = (color1 >> 16) & 0xff;
+    const g1 = (color1 >> 8) & 0xff;
+    const b1 = color1 & 0xff;
+
+    const r2 = (color2 >> 16) & 0xff;
+    const g2 = (color2 >> 8) & 0xff;
+    const b2 = color2 & 0xff;
+
     const r = Math.round(r1 + (r2 - r1) * ratio);
     const g = Math.round(g1 + (g2 - g1) * ratio);
     const b = Math.round(b1 + (b2 - b1) * ratio);
-    
+
     return (r << 16) | (g << 8) | b;
   }
 
@@ -762,7 +763,7 @@ class AdvancedControlsPanel {
 
     window.cigarsInScene.forEach(cigar => {
       if (cigar.material) {
-        cigar.material.color.setHex(cigar.userData.originalColor || 0xFFFFFF);
+        cigar.material.color.setHex(cigar.userData.originalColor || 0xffffff);
       }
     });
 
@@ -774,17 +775,23 @@ class AdvancedControlsPanel {
 
   // Filter functionality
   handleFilterChange(checkbox) {
-    const filterType = checkbox.closest('.filter-group').querySelector('label').textContent.replace(':', '').toLowerCase();
-    const {value} = checkbox;
+    const filterType = checkbox
+      .closest('.filter-group')
+      .querySelector('label')
+      .textContent.replace(':', '')
+      .toLowerCase();
+    const { value } = checkbox;
     const isChecked = checkbox.checked;
 
     if (value === 'all') {
       // Handle "All" checkbox
-      const otherCheckboxes = checkbox.closest('.filter-options').querySelectorAll('input[type="checkbox"]:not([value="all"])');
+      const otherCheckboxes = checkbox
+        .closest('.filter-options')
+        .querySelectorAll('input[type="checkbox"]:not([value="all"])');
       otherCheckboxes.forEach(cb => {
         cb.checked = isChecked;
       });
-      
+
       if (isChecked) {
         this.activeFilters[filterType] = new Set(['all']);
       } else {
@@ -793,14 +800,14 @@ class AdvancedControlsPanel {
     } else {
       // Handle individual filter
       const allCheckbox = checkbox.closest('.filter-options').querySelector('input[value="all"]');
-      
+
       if (isChecked) {
         this.activeFilters[filterType].add(value);
         allCheckbox.checked = false;
         this.activeFilters[filterType].delete('all');
       } else {
         this.activeFilters[filterType].delete(value);
-        
+
         // If no filters selected, check "All"
         if (this.activeFilters[filterType].size === 0) {
           allCheckbox.checked = true;
@@ -830,8 +837,9 @@ class AdvancedControlsPanel {
 
       // Check price range
       if (cigar.userData.price) {
-        const {price} = cigar.userData;
-        visible = visible && (price >= this.activeFilters.price.min && price <= this.activeFilters.price.max);
+        const { price } = cigar.userData;
+        visible =
+          visible && price >= this.activeFilters.price.min && price <= this.activeFilters.price.max;
       }
 
       cigar.visible = visible;
@@ -842,7 +850,7 @@ class AdvancedControlsPanel {
 
   updatePriceRange(type, value) {
     this.activeFilters.price[type] = parseInt(value, 10);
-    
+
     const display = document.getElementById(`${type}PriceDisplay`);
     if (display) {
       display.textContent = value;
@@ -874,7 +882,7 @@ class AdvancedControlsPanel {
       window.camera.position.set(50, 50, 50);
       window.controls.target.set(0, 0, 0);
       window.controls.update();
-      
+
       this.uiManager.showToast('Camera view reset', 'success');
     }
   }
@@ -889,7 +897,7 @@ class AdvancedControlsPanel {
     }
 
     const randomCigar = visibleCigars[Math.floor(Math.random() * visibleCigars.length)];
-    
+
     // Animate camera to cigar
     if (window.camera && window.controls) {
       window.controls.target.copy(randomCigar.position);
@@ -905,14 +913,16 @@ class AdvancedControlsPanel {
     this.highlightCigar(randomCigar);
 
     // Dispatch event for cigar selection
-    window.dispatchEvent(new CustomEvent('cigarSelected', {
-      detail: { cigar: randomCigar }
-    }));
+    window.dispatchEvent(
+      new CustomEvent('cigarSelected', {
+        detail: { cigar: randomCigar },
+      })
+    );
   }
 
   highlightCigar(cigar) {
     const originalColor = cigar.material.color.getHex();
-    cigar.material.color.setHex(0xFFFF00); // Yellow highlight
+    cigar.material.color.setHex(0xffff00); // Yellow highlight
 
     setTimeout(() => {
       cigar.material.color.setHex(originalColor);
@@ -921,7 +931,7 @@ class AdvancedControlsPanel {
 
   startVirtualTour() {
     this.uiManager.showToast('Starting virtual tour...', 'info');
-    
+
     // This would integrate with the OnboardingTour component
     if (window.onboardingTour) {
       window.onboardingTour.startCustomTour('3d-exploration');
@@ -945,7 +955,10 @@ class AdvancedControlsPanel {
   }
 
   toggleAnimations(enable) {
-    document.body.style.setProperty('--transition', enable ? 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)' : 'none');
+    document.body.style.setProperty(
+      '--transition',
+      enable ? 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)' : 'none'
+    );
     console.info(`Animations ${enable ? 'enabled' : 'disabled'}`);
   }
 
@@ -970,7 +983,7 @@ class AdvancedControlsPanel {
 
     const totalCount = window.cigarsInScene.length;
     const visibleCount = window.cigarsInScene.filter(c => c.visible).length;
-    
+
     const totalCountEl = document.getElementById('totalCount');
     const visibleCountEl = document.getElementById('visibleCount');
     const avgRatingEl = document.getElementById('avgRating');

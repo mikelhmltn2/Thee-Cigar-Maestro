@@ -7,7 +7,7 @@ global.THREE = {
   WebGLRenderer: vi.fn(() => ({
     setSize: vi.fn(),
     setPixelRatio: vi.fn(),
-    domElement: document.createElement('canvas')
+    domElement: document.createElement('canvas'),
   })),
   SphereGeometry: vi.fn(),
   MeshBasicMaterial: vi.fn(),
@@ -15,7 +15,7 @@ global.THREE = {
   Color: vi.fn(),
   Vector2: vi.fn(),
   Raycaster: vi.fn(),
-  OrbitControls: vi.fn()
+  OrbitControls: vi.fn(),
 };
 
 // Mock fetch for API calls
@@ -26,28 +26,30 @@ global.MediaRecorder = vi.fn(() => ({
   start: vi.fn(),
   stop: vi.fn(),
   ondataavailable: null,
-  onstop: null
+  onstop: null,
 }));
 
 // Mock navigator APIs
 Object.defineProperty(navigator, 'mediaDevices', {
   value: {
-    getUserMedia: vi.fn(() => Promise.resolve({
-      getTracks: vi.fn(() => [{ stop: vi.fn() }])
-    }))
+    getUserMedia: vi.fn(() =>
+      Promise.resolve({
+        getTracks: vi.fn(() => [{ stop: vi.fn() }]),
+      })
+    ),
   },
-  writable: true
+  writable: true,
 });
 
 // Mock localStorage with actual storage functionality
 const createStorageMock = () => {
   const storage = new Map();
   return {
-    getItem: vi.fn((key) => storage.get(key) || null),
+    getItem: vi.fn(key => storage.get(key) || null),
     setItem: vi.fn((key, value) => {
       storage.set(key, value);
     }),
-    removeItem: vi.fn((key) => {
+    removeItem: vi.fn(key => {
       storage.delete(key);
     }),
     clear: vi.fn(() => {
@@ -56,10 +58,10 @@ const createStorageMock = () => {
     get length() {
       return storage.size;
     },
-    key: vi.fn((index) => {
+    key: vi.fn(index => {
       const keys = Array.from(storage.keys());
       return keys[index] || null;
-    })
+    }),
   };
 };
 
@@ -83,8 +85,8 @@ global.window = {
     port: '3000',
     pathname: '/',
     search: '',
-    hash: ''
-  }
+    hash: '',
+  },
 };
 
 // Mock IndexedDB
@@ -93,9 +95,9 @@ global.indexedDB = {
     onsuccess: null,
     onerror: null,
     onupgradeneeded: null,
-    result: null
+    result: null,
   })),
-  deleteDatabase: vi.fn()
+  deleteDatabase: vi.fn(),
 };
 
 // Mock URL.createObjectURL
@@ -106,14 +108,14 @@ global.URL.revokeObjectURL = vi.fn();
 global.ResizeObserver = vi.fn(() => ({
   observe: vi.fn(),
   unobserve: vi.fn(),
-  disconnect: vi.fn()
+  disconnect: vi.fn(),
 }));
 
 // Mock IntersectionObserver
 global.IntersectionObserver = vi.fn(() => ({
   observe: vi.fn(),
   unobserve: vi.fn(),
-  disconnect: vi.fn()
+  disconnect: vi.fn(),
 }));
 
 // Setup DOM environment is now handled above with global.window
@@ -122,7 +124,7 @@ global.IntersectionObserver = vi.fn(() => ({
 global.performance = {
   now: vi.fn(() => Date.now()),
   mark: vi.fn(),
-  measure: vi.fn()
+  measure: vi.fn(),
 };
 
 // Mock DOM Events for testing

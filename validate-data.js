@@ -20,9 +20,9 @@ class EnhancedDataValidator {
     try {
       const content = fs.readFileSync(filePath, 'utf8');
       const data = JSON.parse(content);
-      
+
       console.info(`✓ Validating ${filePath}...`);
-      
+
       switch (path.basename(filePath)) {
         case 'flavorverse_nodes.json':
           this.validateFlavorverseNodes(data);
@@ -57,7 +57,6 @@ class EnhancedDataValidator {
         default:
           this.validateGenericJSON(data);
       }
-      
     } catch (_error) {
       this.errors.push(`${filePath}: JSON parsing error - ${_error.message}`);
     }
@@ -73,12 +72,12 @@ class EnhancedDataValidator {
     const wrapperStats = {};
     const flavorKeywords = ['chocolate', 'spice', 'cedar', 'coffee', 'vanilla', 'pepper', 'cream'];
     const flavorCoverage = {};
-    
+
     data.forEach((item, index) => {
       if (!item.name || typeof item.name !== 'string') {
         this.errors.push(`flavorverse_nodes.json[${index}]: Missing or invalid 'name' field`);
       }
-      
+
       if (!item.flavor || typeof item.flavor !== 'string') {
         this.errors.push(`flavorverse_nodes.json[${index}]: Missing or invalid 'flavor' field`);
       } else if (item.flavor === 'Undefined') {
@@ -91,19 +90,21 @@ class EnhancedDataValidator {
           }
         });
       }
-      
+
       if (!item.wrapper || typeof item.wrapper !== 'string') {
         this.errors.push(`flavorverse_nodes.json[${index}]: Missing or invalid 'wrapper' field`);
       } else if (!validWrappers.includes(item.wrapper)) {
         if (item.wrapper === 'Unknown') {
           this.warnings.push(`flavorverse_nodes.json[${index}]: Wrapper is 'Unknown'`);
         } else {
-          this.warnings.push(`flavorverse_nodes.json[${index}]: Unusual wrapper type '${item.wrapper}'`);
+          this.warnings.push(
+            `flavorverse_nodes.json[${index}]: Unusual wrapper type '${item.wrapper}'`
+          );
         }
       } else {
         wrapperStats[item.wrapper] = (wrapperStats[item.wrapper] || 0) + 1;
       }
-      
+
       if (typeof item.color !== 'number') {
         this.errors.push(`flavorverse_nodes.json[${index}]: Missing or invalid 'color' field`);
       }
@@ -112,13 +113,13 @@ class EnhancedDataValidator {
     console.info(`  - Validated ${data.length} cigar entries`);
     console.info(`  - Wrapper distribution:`, wrapperStats);
     console.info(`  - Flavor keyword coverage:`, flavorCoverage);
-    
+
     this.integrationReport.push({
       file: 'flavorverse_nodes.json',
       status: 'ready',
       entries: data.length,
       wrapperTypes: Object.keys(wrapperStats).length,
-      integration: 'Main 3D visualization, pairing engine, educational content'
+      integration: 'Main 3D visualization, pairing engine, educational content',
     });
   }
 
@@ -163,7 +164,7 @@ class EnhancedDataValidator {
       status: specEngineReady ? 'ready' : 'partial',
       manufacturers: manufacturerCount,
       specEngine: specEngineReady,
-      integration: 'Advanced cigar database, manufacturer verification, spec lookup'
+      integration: 'Advanced cigar database, manufacturer verification, spec lookup',
     });
   }
 
@@ -179,7 +180,7 @@ class EnhancedDataValidator {
 
     if (data.pairingEngineV3) {
       pairingEngineReady = true;
-      
+
       // Validate CEU lessons
       if (data.pairingEngineV3.ceuLessons && Array.isArray(data.pairingEngineV3.ceuLessons)) {
         data.pairingEngineV3.ceuLessons.forEach((lesson, index) => {
@@ -198,13 +199,13 @@ class EnhancedDataValidator {
     }
 
     console.info(`  - Validated ${lessonCount} pairing lessons with ${quizCount} quiz questions`);
-    
+
     this.integrationReport.push({
       file: 'pairings.json',
       status: pairingEngineReady ? 'ready' : 'needs_work',
       lessons: lessonCount,
       quizzes: quizCount,
-      integration: 'Pairing recommendations, educational content, quiz system'
+      integration: 'Pairing recommendations, educational content, quiz system',
     });
   }
 
@@ -220,24 +221,27 @@ class EnhancedDataValidator {
 
     if (data.educationTracks) {
       educationReady = true;
-      
+
       if (data.educationTracks.tracks && Array.isArray(data.educationTracks.tracks)) {
         trackCount = data.educationTracks.tracks.length;
       }
-      
-      if (data.educationTracks.microcredentials && Array.isArray(data.educationTracks.microcredentials)) {
+
+      if (
+        data.educationTracks.microcredentials &&
+        Array.isArray(data.educationTracks.microcredentials)
+      ) {
         microcredentialCount = data.educationTracks.microcredentials.length;
       }
     }
 
     console.info(`  - Education tracks: ${trackCount}, Microcredentials: ${microcredentialCount}`);
-    
+
     this.integrationReport.push({
       file: 'education.json',
       status: educationReady ? 'ready' : 'needs_work',
       tracks: trackCount,
       microcredentials: microcredentialCount,
-      integration: 'CEU system, certification paths, learning modules'
+      integration: 'CEU system, certification paths, learning modules',
     });
   }
 
@@ -263,13 +267,13 @@ class EnhancedDataValidator {
     }
 
     console.info(`  - Features: ${implementedCount}/${totalFeatures} implemented`);
-    
+
     this.integrationReport.push({
       file: 'features.json',
       status: implementedCount > 0 ? 'ready' : 'needs_work',
       implemented: implementedCount,
       total: totalFeatures,
-      integration: 'Feature flags, UI components, functionality switches'
+      integration: 'Feature flags, UI components, functionality switches',
     });
   }
 
@@ -291,13 +295,13 @@ class EnhancedDataValidator {
     }
 
     console.info(`  - Voice commands: ${voiceCommandsCount}, UI components: ${uiComponentsCount}`);
-    
+
     this.integrationReport.push({
       file: 'interface.json',
       status: voiceCommandsCount > 0 ? 'ready' : 'partial',
       voiceCommands: voiceCommandsCount,
       uiComponents: uiComponentsCount,
-      integration: 'Voice interface, UI/UX configuration, interaction patterns'
+      integration: 'Voice interface, UI/UX configuration, interaction patterns',
     });
   }
 
@@ -315,14 +319,16 @@ class EnhancedDataValidator {
       auditReady = !!data.metaPrompts.expertAuditPrompt;
     }
 
-    console.info(`  - Meta prompts: ${promptCount}, Audit system: ${auditReady ? 'ready' : 'not ready'}`);
-    
+    console.info(
+      `  - Meta prompts: ${promptCount}, Audit system: ${auditReady ? 'ready' : 'not ready'}`
+    );
+
     this.integrationReport.push({
       file: 'meta.json',
       status: auditReady ? 'ready' : 'partial',
       prompts: promptCount,
       auditSystem: auditReady,
-      integration: 'AI prompts, audit system, quality control'
+      integration: 'AI prompts, audit system, quality control',
     });
   }
 
@@ -343,14 +349,16 @@ class EnhancedDataValidator {
       emotionalTriggersCount = data.emotionalMemorySystem.emotionalFlavorTriggers.length;
     }
 
-    console.info(`  - Ritual flows: ${ritualFlowsCount}, Emotional triggers: ${emotionalTriggersCount}`);
-    
+    console.info(
+      `  - Ritual flows: ${ritualFlowsCount}, Emotional triggers: ${emotionalTriggersCount}`
+    );
+
     this.integrationReport.push({
       file: 'emotional.json',
       status: ritualFlowsCount > 0 ? 'ready' : 'needs_work',
       ritualFlows: ritualFlowsCount,
       emotionalTriggers: emotionalTriggersCount,
-      integration: 'Ritual guidance, emotional context, memory system'
+      integration: 'Ritual guidance, emotional context, memory system',
     });
   }
 
@@ -371,14 +379,16 @@ class EnhancedDataValidator {
       conciergeReady = true;
     }
 
-    console.info(`  - Lounge tools: ${loungeToolsReady ? 'active' : 'inactive'}, Concierge: ${conciergeReady ? 'active' : 'inactive'}`);
-    
+    console.info(
+      `  - Lounge tools: ${loungeToolsReady ? 'active' : 'inactive'}, Concierge: ${conciergeReady ? 'active' : 'inactive'}`
+    );
+
     this.integrationReport.push({
       file: 'lounge.json',
       status: loungeToolsReady && conciergeReady ? 'ready' : 'partial',
       loungeTools: loungeToolsReady,
       concierge: conciergeReady,
-      integration: 'Lounge experience, concierge services, premium features'
+      integration: 'Lounge experience, concierge services, premium features',
     });
   }
 
@@ -389,11 +399,11 @@ class EnhancedDataValidator {
     }
 
     console.info('  - Flavor atlas structure validated');
-    
+
     this.integrationReport.push({
       file: 'flavor-atlas.json',
       status: 'ready',
-      integration: 'Flavor mapping, taste profiles, sensory data'
+      integration: 'Flavor mapping, taste profiles, sensory data',
     });
   }
 
@@ -406,16 +416,23 @@ class EnhancedDataValidator {
 
   generateIntegrationReport() {
     console.info('\n📊 Integration Status Report:');
-    console.info('=' .repeat(60));
-    
+    console.info('='.repeat(60));
+
     this.integrationReport.forEach(report => {
-      const statusIcon = report.status === 'ready' ? '✅' : report.status === 'partial' ? '⚠️' : '❌';
+      const statusIcon =
+        report.status === 'ready' ? '✅' : report.status === 'partial' ? '⚠️' : '❌';
       console.info(`${statusIcon} ${report.file}`);
       console.info(`   Status: ${report.status}`);
       console.info(`   Integration: ${report.integration}`);
-      if (report.entries) {console.info(`   Entries: ${report.entries}`);}
-      if (report.lessons) {console.info(`   Lessons: ${report.lessons}`);}
-      if (report.implemented) {console.info(`   Features: ${report.implemented}/${report.total}`);}
+      if (report.entries) {
+        console.info(`   Entries: ${report.entries}`);
+      }
+      if (report.lessons) {
+        console.info(`   Lessons: ${report.lessons}`);
+      }
+      if (report.implemented) {
+        console.info(`   Features: ${report.implemented}/${report.total}`);
+      }
       console.info('');
     });
 
@@ -423,9 +440,11 @@ class EnhancedDataValidator {
     const readyCount = this.integrationReport.filter(r => r.status === 'ready').length;
     const totalCount = this.integrationReport.length;
     const readiness = Math.round((readyCount / totalCount) * 100);
-    
-    console.info(`📈 Overall Integration Readiness: ${readiness}% (${readyCount}/${totalCount} files ready)`);
-    
+
+    console.info(
+      `📈 Overall Integration Readiness: ${readiness}% (${readyCount}/${totalCount} files ready)`
+    );
+
     if (readiness >= 80) {
       console.info('🎉 System is ready for full integration!');
     } else if (readiness >= 60) {
@@ -437,21 +456,17 @@ class EnhancedDataValidator {
 
   validateSecurity() {
     console.info('\n🔒 Security Validation...');
-    
+
     // Check for potential XSS patterns in JSON data
     const checkXSS = (obj, path = '') => {
       if (typeof obj === 'string') {
-        const xssPatterns = [
-          /<script/i,
-          /javascript:/i,
-          /on\w+\s*=/i,
-          /<iframe/i,
-          /eval\s*\(/i
-        ];
-        
+        const xssPatterns = [/<script/i, /javascript:/i, /on\w+\s*=/i, /<iframe/i, /eval\s*\(/i];
+
         xssPatterns.forEach(pattern => {
           if (pattern.test(obj)) {
-            this.warnings.push(`Potential XSS pattern found at ${path}: ${obj.substring(0, 50)}...`);
+            this.warnings.push(
+              `Potential XSS pattern found at ${path}: ${obj.substring(0, 50)}...`
+            );
           }
         });
       } else if (typeof obj === 'object' && obj !== null) {
@@ -471,7 +486,7 @@ class EnhancedDataValidator {
       'meta.json',
       'emotional.json',
       'lounge.json',
-      'flavor-atlas.json'
+      'flavor-atlas.json',
     ];
 
     jsonFiles.forEach(file => {
@@ -488,14 +503,16 @@ class EnhancedDataValidator {
 
   validatePerformance() {
     console.info('\n⚡ Performance Validation...');
-    
+
     const checkFileSize = (filePath, maxSize) => {
       if (fs.existsSync(filePath)) {
         const stats = fs.statSync(filePath);
         const sizeKB = Math.round(stats.size / 1024);
-        
+
         if (stats.size > maxSize) {
-          this.warnings.push(`${filePath} is ${sizeKB}KB (recommended: <${Math.round(maxSize/1024)}KB)`);
+          this.warnings.push(
+            `${filePath} is ${sizeKB}KB (recommended: <${Math.round(maxSize / 1024)}KB)`
+          );
         } else {
           console.info(`  ✓ ${filePath}: ${sizeKB}KB`);
         }
@@ -506,7 +523,7 @@ class EnhancedDataValidator {
     checkFileSize('logo.png', 200 * 1024); // 200KB limit
     checkFileSize('cigar-specs.json', 500 * 1024); // 500KB limit
     checkFileSize('flavorverse_nodes.json', 100 * 1024); // 100KB limit
-    
+
     // Check for potential performance issues
     this.integrationReport.forEach(report => {
       if (report.entries && report.entries > 1000) {
@@ -517,33 +534,37 @@ class EnhancedDataValidator {
 
   generateOptimizationRecommendations() {
     console.info('\n🚀 Optimization Recommendations:');
-    console.info('=' .repeat(60));
-    
+    console.info('='.repeat(60));
+
     const recommendations = [];
-    
+
     // Check each integration report for optimization opportunities
     this.integrationReport.forEach(report => {
       if (report.status === 'needs_work') {
-        recommendations.push(`📌 ${report.file}: Complete implementation for ${report.integration}`);
+        recommendations.push(
+          `📌 ${report.file}: Complete implementation for ${report.integration}`
+        );
       }
-      
+
       if (report.status === 'partial') {
         recommendations.push(`⚡ ${report.file}: Enhance integration for ${report.integration}`);
       }
-      
+
       if (report.implemented && report.total && report.implemented < report.total) {
         const percentage = Math.round((report.implemented / report.total) * 100);
-        recommendations.push(`📈 ${report.file}: Activate remaining features (${percentage}% complete)`);
+        recommendations.push(
+          `📈 ${report.file}: Activate remaining features (${percentage}% complete)`
+        );
       }
     });
-    
+
     // General optimization recommendations
     recommendations.push('🔄 Add real-time data synchronization between JSON sources');
     recommendations.push('💾 Implement local storage for user preferences and session data');
     recommendations.push('🎯 Add advanced filtering and search across all data sources');
     recommendations.push('📱 Optimize mobile experience for all integrated features');
     recommendations.push('🧠 Enhance AI responses with cross-reference data from all JSON files');
-    
+
     if (recommendations.length > 0) {
       recommendations.forEach((rec, index) => {
         console.info(`${index + 1}. ${rec}`);
@@ -566,7 +587,7 @@ class EnhancedDataValidator {
       'meta.json',
       'lounge.json',
       'emotional.json',
-      'flavor-atlas.json'
+      'flavor-atlas.json',
     ];
 
     jsonFiles.forEach(file => {

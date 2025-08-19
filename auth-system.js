@@ -3,7 +3,12 @@
  * Frontend authentication with JWT, social login, 2FA, and session management
  */
 
-import { safeAsync, handleError as _handleError, handleApiError as _handleApiError, handleNetworkError as _handleNetworkError } from './src/utils/errorHandler.js';
+import {
+  safeAsync,
+  handleError as _handleError,
+  handleApiError as _handleApiError,
+  handleNetworkError as _handleNetworkError,
+} from './src/utils/errorHandler.js';
 
 class AuthenticationSystem {
   constructor() {
@@ -16,7 +21,7 @@ class AuthenticationSystem {
     this.authListeners = new Set();
     this.socialProviders = ['google', 'facebook'];
     this.isInitialized = false;
-    
+
     this.init();
   }
 
@@ -29,17 +34,16 @@ class AuthenticationSystem {
       this.setupAuthUI();
       this.setupEventListeners();
       this.setupTokenRefresh();
-      
+
       this.isInitialized = true;
       console.info('🔐 Authentication System initialized');
-      
+
       if (this.authToken) {
         await this.validateToken();
       }
-      
     } catch (error) {
       _handleError(error, 'Auth System Initialization', {
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
       });
     }
   }
@@ -48,41 +52,51 @@ class AuthenticationSystem {
    * Load stored authentication data
    */
   async loadStoredAuth() {
-    return await safeAsync(async () => {
-      const stored = localStorage.getItem(this.storageKeys.auth);
-      if (stored) {
-        const authData = JSON.parse(stored);
-        
-        if (authData.token && !this.isTokenExpired(authData.token)) {
-          this.currentUser = authData.user;
-          this.token = authData.token;
-          this.isLoggedIn = true;
-        } else {
-          // Token expired, clear stored data
-          this.clearStoredAuth();
+    return await safeAsync(
+      async () => {
+        const stored = localStorage.getItem(this.storageKeys.auth);
+        if (stored) {
+          const authData = JSON.parse(stored);
+
+          if (authData.token && !this.isTokenExpired(authData.token)) {
+            this.currentUser = authData.user;
+            this.token = authData.token;
+            this.isLoggedIn = true;
+          } else {
+            // Token expired, clear stored data
+            this.clearStoredAuth();
+          }
         }
+      },
+      'Auth Data Loading',
+      null,
+      {
+        userMessage: 'Failed to load your saved login. You may need to log in again.',
       }
-    }, 'Auth Data Loading', null, {
-      userMessage: 'Failed to load your saved login. You may need to log in again.'
-    });
+    );
   }
 
   /**
    * Save authentication data to storage
    */
   async saveAuthData(user, token) {
-    return await safeAsync(async () => {
-      const authData = {
-        user,
-        token,
-        timestamp: Date.now()
-      };
-      
-      localStorage.setItem(this.storageKeys.auth, JSON.stringify(authData));
-      localStorage.setItem(this.storageKeys.preferences, JSON.stringify(user.preferences || {}));
-    }, 'Auth Data Saving', null, {
-      userMessage: 'Failed to save your login information.'
-    });
+    return await safeAsync(
+      async () => {
+        const authData = {
+          user,
+          token,
+          timestamp: Date.now(),
+        };
+
+        localStorage.setItem(this.storageKeys.auth, JSON.stringify(authData));
+        localStorage.setItem(this.storageKeys.preferences, JSON.stringify(user.preferences || {}));
+      },
+      'Auth Data Saving',
+      null,
+      {
+        userMessage: 'Failed to save your login information.',
+      }
+    );
   }
 
   /**
@@ -594,7 +608,7 @@ class AuthenticationSystem {
     if (!document.getElementById('authModal')) {
       document.body.insertAdjacentHTML('beforeend', authModalHTML);
     }
-    
+
     if (!document.getElementById('auth-styles')) {
       document.head.insertAdjacentHTML('beforeend', authStyles);
     }
@@ -609,7 +623,7 @@ class AuthenticationSystem {
 
     // Setup verification input handling
     this.setupVerificationInputs();
-    
+
     // Setup password strength checker
     this.setupPasswordStrength();
   }
@@ -619,14 +633,14 @@ class AuthenticationSystem {
    */
   setupEventListeners() {
     // Listen for auth state changes
-    this.onAuthStateChange((user) => {
+    this.onAuthStateChange(user => {
       this.updateAuthUI(user);
-      
+
       // Track authentication events
       if (window.analyticsManager) {
         window.analyticsManager.trackEvent('auth_state_change', {
           user_id: user?.id,
-          is_authenticated: !!user
+          is_authenticated: !!user,
         });
       }
     });
@@ -656,7 +670,7 @@ class AuthenticationSystem {
           const expiryTime = tokenData.exp * 1000;
           const now = Date.now();
           const fiveMinutes = 5 * 60 * 1000;
-          
+
           if (expiryTime - now < fiveMinutes) {
             await this.refreshAuthToken();
           }
@@ -675,11 +689,13 @@ class AuthenticationSystem {
     if (modal) {
       modal.style.display = 'flex';
       this.switchAuthTab(tab);
-      
+
       // Focus first input
       setTimeout(() => {
         const firstInput = modal.querySelector('.auth-form.active input');
-        if (firstInput) {firstInput.focus();}
+        if (firstInput) {
+          firstInput.focus();
+        }
       }, 100);
     }
   }
@@ -720,7 +736,7 @@ class AuthenticationSystem {
    */
   async handleLogin(event) {
     event.preventDefault();
-    
+
     if (window.uiManager) {
       window.uiManager.showLoading('loginForm', 'dots');
     }
@@ -735,8 +751,8 @@ class AuthenticationSystem {
         body: JSON.stringify({
           email,
           password,
-          rememberMe
-        })
+          rememberMe,
+        }),
       });
 
       if (response.requiresTwoFactor) {
@@ -746,7 +762,6 @@ class AuthenticationSystem {
       } else {
         await this.handleAuthSuccess(response);
       }
-
     } catch (error) {
       console.error('Login error:', error);
       window.uiManager?.showToast(error.message || 'Login failed', 'error');
@@ -762,7 +777,7 @@ class AuthenticationSystem {
    */
   async handleRegister(event) {
     event.preventDefault();
-    
+
     if (window.uiManager) {
       window.uiManager.showLoading('registerForm', 'dots');
     }
@@ -792,13 +807,15 @@ class AuthenticationSystem {
           firstName,
           lastName,
           email,
-          password
-        })
+          password,
+        }),
       });
 
-      window.uiManager?.showToast('Account created successfully! Please check your email to verify your account.', 'success');
+      window.uiManager?.showToast(
+        'Account created successfully! Please check your email to verify your account.',
+        'success'
+      );
       this.switchAuthTab('login');
-
     } catch (error) {
       console.error('Registration error:', error);
       window.uiManager?.showToast(error.message || 'Registration failed', 'error');
@@ -814,7 +831,7 @@ class AuthenticationSystem {
    */
   async handleTwoFactor(event) {
     event.preventDefault();
-    
+
     try {
       const code = Array.from(document.querySelectorAll('.verification-digit'))
         .map(input => input.value)
@@ -828,12 +845,11 @@ class AuthenticationSystem {
         method: 'POST',
         body: JSON.stringify({
           email: this.pendingAuth.email,
-          code
-        })
+          code,
+        }),
       });
 
       await this.handleAuthSuccess(response);
-
     } catch (error) {
       console.error('2FA error:', error);
       window.uiManager?.showToast(error.message || '2FA verification failed', 'error');
@@ -845,18 +861,17 @@ class AuthenticationSystem {
    */
   async handleForgotPassword(event) {
     event.preventDefault();
-    
+
     try {
       const email = document.getElementById('forgotEmail').value;
 
       await this.apiRequest('/api/auth/forgot-password', {
         method: 'POST',
-        body: JSON.stringify({ email })
+        body: JSON.stringify({ email }),
       });
 
       window.uiManager?.showToast('Password reset link sent to your email', 'success');
       this.switchAuthTab('login');
-
     } catch (error) {
       console.error('Forgot password error:', error);
       window.uiManager?.showToast(error.message || 'Failed to send reset email', 'error');
@@ -886,7 +901,6 @@ class AuthenticationSystem {
           this.checkSocialLoginResult();
         }
       }, 1000);
-
     } catch (error) {
       console.error('Social login error:', error);
       window.uiManager?.showToast('Social login failed', 'error');
@@ -900,17 +914,17 @@ class AuthenticationSystem {
     this.authToken = response.token;
     this.refreshToken = response.refreshToken;
     this.currentUser = response.user;
-    
+
     this.saveAuthData();
     this.closeAuthModal();
     this.notifyAuthStateChange(this.currentUser);
-    
+
     window.uiManager?.showToast(`Welcome back, ${this.currentUser.firstName}!`, 'success');
-    
+
     if (window.analyticsManager) {
       window.analyticsManager.trackEvent('user_login', {
         user_id: this.currentUser.id,
-        login_method: response.method || 'email'
+        login_method: response.method || 'email',
       });
     }
   }
@@ -922,7 +936,7 @@ class AuthenticationSystem {
     try {
       if (this.authToken) {
         await this.apiRequest('/api/auth/logout', {
-          method: 'POST'
+          method: 'POST',
         });
       }
     } catch (error) {
@@ -933,9 +947,9 @@ class AuthenticationSystem {
       this.currentUser = null;
       this.saveAuthData();
       this.notifyAuthStateChange(null);
-      
+
       window.uiManager?.showToast('Logged out successfully', 'info');
-      
+
       if (window.analyticsManager) {
         window.analyticsManager.trackEvent('user_logout');
       }
@@ -950,13 +964,13 @@ class AuthenticationSystem {
       const response = await this.apiRequest('/api/auth/refresh', {
         method: 'POST',
         body: JSON.stringify({
-          refreshToken: this.refreshToken
-        })
+          refreshToken: this.refreshToken,
+        }),
       });
 
       this.authToken = response.token;
       this.saveAuthData();
-      
+
       return response.token;
     } catch (error) {
       console.error('Token refresh failed:', error);
@@ -994,7 +1008,7 @@ class AuthenticationSystem {
     const url = `${this.apiBaseUrl}${endpoint}`;
     const headers = {
       'Content-Type': 'application/json',
-      ...options.headers
+      ...options.headers,
     };
 
     if (this.authToken) {
@@ -1005,31 +1019,31 @@ class AuthenticationSystem {
       const response = await fetch(url, {
         ...options,
         headers,
-        timeout: 5000 // 5 second timeout
+        timeout: 5000, // 5 second timeout
       });
 
-    if (response.status === 401 && this.refreshToken) {
-      // Try to refresh token
-      try {
-        await this.refreshAuthToken();
-        headers.Authorization = `Bearer ${this.authToken}`;
-        
-        // Retry original request
-        const retryResponse = await fetch(url, {
-          ...options,
-          headers
-        });
-        
-        if (!retryResponse.ok) {
-          throw new Error(`HTTP ${retryResponse.status}: ${retryResponse.statusText}`);
+      if (response.status === 401 && this.refreshToken) {
+        // Try to refresh token
+        try {
+          await this.refreshAuthToken();
+          headers.Authorization = `Bearer ${this.authToken}`;
+
+          // Retry original request
+          const retryResponse = await fetch(url, {
+            ...options,
+            headers,
+          });
+
+          if (!retryResponse.ok) {
+            throw new Error(`HTTP ${retryResponse.status}: ${retryResponse.statusText}`);
+          }
+
+          return await retryResponse.json();
+        } catch (_refreshError) {
+          await this.logout();
+          throw new Error('Session expired. Please log in again.');
         }
-        
-        return await retryResponse.json();
-      } catch (_refreshError) {
-        await this.logout();
-        throw new Error('Session expired. Please log in again.');
       }
-    }
 
       if (!response.ok) {
         const errorData = await response.json().catch(() => ({}));
@@ -1037,18 +1051,17 @@ class AuthenticationSystem {
       }
 
       return response.json();
-      
     } catch (error) {
       console.error('🔐 Auth API request failed:', error);
-      
+
       // Mark as offline and use fallback
       this.offlineMode = true;
-      
+
       if (error.name === 'TypeError' && error.message.includes('fetch')) {
         console.warn('🔐 Network error - switching to offline mode');
         return this.generateMockResponse(endpoint, options);
       }
-      
+
       throw error;
     }
   }
@@ -1058,16 +1071,20 @@ class AuthenticationSystem {
    */
   generateMockResponse(endpoint, _options) {
     console.info('🔐 Generating mock response for:', endpoint);
-    
+
     // Basic mock responses for common endpoints
     const mockResponses = {
-      '/auth/login': { success: true, token: 'mock-token', user: { id: 'local-user', name: 'Local User' } },
+      '/auth/login': {
+        success: true,
+        token: 'mock-token',
+        user: { id: 'local-user', name: 'Local User' },
+      },
       '/auth/refresh': { success: true, token: 'mock-token-refreshed' },
       '/auth/logout': { success: true },
       '/auth/register': { success: true, message: 'Registration successful' },
-      '/user/profile': { id: 'local-user', name: 'Local User', email: 'local@example.com' }
+      '/user/profile': { id: 'local-user', name: 'Local User', email: 'local@example.com' },
     };
-    
+
     return mockResponses[endpoint] || { success: true, message: 'Mock response' };
   }
 
@@ -1076,9 +1093,9 @@ class AuthenticationSystem {
    */
   setupVerificationInputs() {
     document.querySelectorAll('.verification-digit').forEach((input, index) => {
-      input.addEventListener('input', (e) => {
-        const {value} = e.target;
-        
+      input.addEventListener('input', e => {
+        const { value } = e.target;
+
         // Only allow numbers
         if (!/^\d*$/.test(value)) {
           e.target.value = '';
@@ -1087,16 +1104,24 @@ class AuthenticationSystem {
 
         // Move to next input if current is filled
         if (value && index < 5) {
-          const nextInput = document.querySelector(`.verification-digit[data-index="${index + 1}"]`);
-          if (nextInput) {nextInput.focus();}
+          const nextInput = document.querySelector(
+            `.verification-digit[data-index="${index + 1}"]`
+          );
+          if (nextInput) {
+            nextInput.focus();
+          }
         }
       });
 
-      input.addEventListener('keydown', (e) => {
+      input.addEventListener('keydown', e => {
         // Move to previous input on backspace
         if (e.key === 'Backspace' && !e.target.value && index > 0) {
-          const prevInput = document.querySelector(`.verification-digit[data-index="${index - 1}"]`);
-          if (prevInput) {prevInput.focus();}
+          const prevInput = document.querySelector(
+            `.verification-digit[data-index="${index - 1}"]`
+          );
+          if (prevInput) {
+            prevInput.focus();
+          }
         }
       });
     });
@@ -1108,7 +1133,7 @@ class AuthenticationSystem {
   setupPasswordStrength() {
     const passwordInput = document.getElementById('registerPassword');
     if (passwordInput) {
-      passwordInput.addEventListener('input', (e) => {
+      passwordInput.addEventListener('input', e => {
         const strength = this.calculatePasswordStrength(e.target.value);
         this.updatePasswordStrengthUI(strength);
       });
@@ -1125,7 +1150,7 @@ class AuthenticationSystem {
       lowercase: /[a-z]/.test(password),
       uppercase: /[A-Z]/.test(password),
       numbers: /\d/.test(password),
-      symbols: /[^A-Za-z0-9]/.test(password)
+      symbols: /[^A-Za-z0-9]/.test(password),
     };
 
     score = Object.values(checks).filter(Boolean).length;
@@ -1138,7 +1163,7 @@ class AuthenticationSystem {
       percentage: (score / 5) * 100,
       color: colors[score - 1] || colors[0],
       label: labels[score - 1] || labels[0],
-      checks
+      checks,
     };
   }
 
@@ -1163,7 +1188,7 @@ class AuthenticationSystem {
   togglePassword(inputId) {
     const input = document.getElementById(inputId);
     const button = input.nextElementSibling;
-    
+
     if (input.type === 'password') {
       input.type = 'text';
       button.textContent = '🙈';
@@ -1180,7 +1205,7 @@ class AuthenticationSystem {
     document.querySelectorAll('.auth-form input').forEach(input => {
       input.value = '';
     });
-    
+
     document.querySelectorAll('.auth-form input[type="checkbox"]').forEach(checkbox => {
       checkbox.checked = false;
     });
@@ -1193,10 +1218,15 @@ class AuthenticationSystem {
     try {
       const base64Url = token.split('.')[1];
       const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-      const jsonPayload = decodeURIComponent(atob(base64).split('').map((c) => {
-        return `%${(`00${c.charCodeAt(0).toString(16)}`).slice(-2)}`;
-      }).join(''));
-      
+      const jsonPayload = decodeURIComponent(
+        atob(base64)
+          .split('')
+          .map(c => {
+            return `%${`00${c.charCodeAt(0).toString(16)}`.slice(-2)}`;
+          })
+          .join('')
+      );
+
       return JSON.parse(jsonPayload);
     } catch (error) {
       console.error('Error parsing JWT:', error);
@@ -1236,17 +1266,27 @@ class AuthenticationSystem {
 
     if (user) {
       // User is logged in
-      if (loginBtn) {loginBtn.style.display = 'none';}
-      if (logoutBtn) {logoutBtn.style.display = 'block';}
+      if (loginBtn) {
+        loginBtn.style.display = 'none';
+      }
+      if (logoutBtn) {
+        logoutBtn.style.display = 'block';
+      }
       if (userProfile) {
         userProfile.style.display = 'block';
         userProfile.textContent = `Welcome, ${user.firstName}`;
       }
     } else {
       // User is logged out
-      if (loginBtn) {loginBtn.style.display = 'block';}
-      if (logoutBtn) {logoutBtn.style.display = 'none';}
-      if (userProfile) {userProfile.style.display = 'none';}
+      if (loginBtn) {
+        loginBtn.style.display = 'block';
+      }
+      if (logoutBtn) {
+        logoutBtn.style.display = 'none';
+      }
+      if (userProfile) {
+        userProfile.style.display = 'none';
+      }
     }
   }
 
@@ -1293,8 +1333,8 @@ class AuthenticationSystem {
       await this.apiRequest('/api/auth/resend-2fa', {
         method: 'POST',
         body: JSON.stringify({
-          email: this.pendingAuth.email
-        })
+          email: this.pendingAuth.email,
+        }),
       });
 
       window.uiManager?.showToast('Verification code resent', 'success');

@@ -3,15 +3,21 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   experimental: {
-    optimizePackageImports: ['lucide-react', '@headlessui/react', 'framer-motion', '@react-three/fiber', '@react-three/drei'],
+    optimizePackageImports: [
+      'lucide-react',
+      '@headlessui/react',
+      'framer-motion',
+      '@react-three/fiber',
+      '@react-three/drei',
+    ],
     optimizeCss: true,
   },
-  
+
   // Compiler optimizations
   compiler: {
     removeConsole: process.env.NODE_ENV === 'production',
   },
-  
+
   // Performance optimizations
   images: {
     formats: ['image/webp', 'image/avif'],
@@ -30,27 +36,27 @@ const nextConfig = {
         headers: [
           {
             key: 'X-DNS-Prefetch-Control',
-            value: 'on'
+            value: 'on',
           },
           {
             key: 'Strict-Transport-Security',
-            value: 'max-age=63072000; includeSubDomains; preload'
+            value: 'max-age=63072000; includeSubDomains; preload',
           },
           {
             key: 'X-XSS-Protection',
-            value: '1; mode=block'
+            value: '1; mode=block',
           },
           {
             key: 'X-Frame-Options',
-            value: 'DENY'
+            value: 'DENY',
           },
           {
             key: 'X-Content-Type-Options',
-            value: 'nosniff'
+            value: 'nosniff',
           },
           {
             key: 'Referrer-Policy',
-            value: 'origin-when-cross-origin'
+            value: 'origin-when-cross-origin',
           },
           {
             key: 'Content-Security-Policy',
@@ -62,10 +68,10 @@ const nextConfig = {
               "img-src 'self' data: https: blob:",
               "media-src 'self' blob:",
               "connect-src 'self' https://api.stripe.com https://api.openai.com https://www.google-analytics.com https://www.googletagmanager.com",
-              "frame-src https://js.stripe.com https://hooks.stripe.com",
-              "worker-src 'self' blob:"
-            ].join('; ')
-          }
+              'frame-src https://js.stripe.com https://hooks.stripe.com',
+              "worker-src 'self' blob:",
+            ].join('; '),
+          },
         ],
       },
       {
@@ -73,29 +79,29 @@ const nextConfig = {
         headers: [
           {
             key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable'
-          }
-        ]
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
       },
       {
         source: '/_next/static/:path*',
         headers: [
           {
             key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable'
-          }
-        ]
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
       },
       {
         source: '/images/:path*',
         headers: [
           {
             key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable'
-          }
-        ]
-      }
-    ]
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+    ];
   },
 
   // Webpack configuration for Three.js and performance
@@ -104,10 +110,10 @@ const nextConfig = {
     if (isServer) {
       config.externals.push({
         'utf-8-validate': 'commonjs utf-8-validate',
-        'bufferutil': 'commonjs bufferutil'
-      })
+        bufferutil: 'commonjs bufferutil',
+      });
     }
-    
+
     // Optimize bundle splitting for production
     if (!dev && !isServer) {
       config.optimization = {
@@ -129,8 +135,7 @@ const nextConfig = {
             },
             lib: {
               test(module) {
-                return module.size() > 160000 &&
-                  /node_modules[/\\]/.test(module.identifier());
+                return module.size() > 160000 && /node_modules[/\\]/.test(module.identifier());
               },
               name(module) {
                 const packageName = module.context.match(/[\\/]node_modules[\\/](.*?)([\\/]|$)/)[1];
@@ -158,12 +163,12 @@ const nextConfig = {
       };
     }
 
-    return config
+    return config;
   },
 
   // PWA support
   async generateBuildId() {
-    return `build-${Date.now()}`
+    return `build-${Date.now()}`;
   },
 
   // Enable compression
@@ -171,6 +176,6 @@ const nextConfig = {
 
   // Trailing slash configuration
   trailingSlash: false,
-}
+};
 
-export default nextConfig
+export default nextConfig;

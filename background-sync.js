@@ -1,4 +1,3 @@
-
 /**
  * Background Sync Manager for Thee Cigar Maestro
  * Handles offline data synchronization and queue management
@@ -24,7 +23,7 @@ class BackgroundSyncManager {
 
   async queueData(type, data) {
     const queueKey = `${type}-${Date.now()}`;
-    
+
     try {
       // Store in localStorage for persistence
       const existingQueue = JSON.parse(localStorage.getItem('pendingSync') || '{}');
@@ -32,11 +31,11 @@ class BackgroundSyncManager {
         type,
         data,
         timestamp: Date.now(),
-        retryCount: 0
+        retryCount: 0,
       };
-      
+
       localStorage.setItem('pendingSync', JSON.stringify(existingQueue));
-      
+
       // If online, try to sync immediately
       if (this.isOnline) {
         await this.processPendingSync();
@@ -47,9 +46,8 @@ class BackgroundSyncManager {
           await registration.sync.register('background-sync-cigar-data');
         }
       }
-      
+
       console.info(`Queued ${type} data for sync:`, queueKey);
-      
     } catch (queueError) {
       console.error('Failed to queue data for sync:', queueError);
     }
@@ -59,27 +57,26 @@ class BackgroundSyncManager {
     try {
       const pendingQueue = JSON.parse(localStorage.getItem('pendingSync') || '{}');
       const entries = Object.entries(pendingQueue);
-      
+
       if (entries.length === 0) {
         return;
       }
-      
+
       console.info(`Processing ${entries.length} pending sync items...`);
-      
+
       // Process items in parallel to avoid await-in-loop
       const syncPromises = entries.map(async ([key, item]) => {
         try {
           await this.syncItem(item);
-          
+
           // Remove from queue on success
           delete pendingQueue[key];
-          
         } catch (error) {
           console.error(`Failed to sync item ${key}:`, error);
-          
+
           // Increment retry count
           item.retryCount = (item.retryCount || 0) + 1;
-          
+
           // Remove if too many retries
           if (item.retryCount > 3) {
             console.warn(`Removing item ${key} after 3 failed attempts`);
@@ -87,13 +84,12 @@ class BackgroundSyncManager {
           }
         }
       });
-      
+
       // Wait for all sync operations to complete
       await Promise.allSettled(syncPromises);
-      
+
       // Update localStorage
       localStorage.setItem('pendingSync', JSON.stringify(pendingQueue));
-      
     } catch (error) {
       console.error('Error processing pending sync:', error);
     }
@@ -101,7 +97,7 @@ class BackgroundSyncManager {
 
   async syncItem(item) {
     const { type, data } = item;
-    
+
     switch (type) {
       case 'cigar-rating':
         return await this.syncCigarRating(data);
@@ -120,13 +116,13 @@ class BackgroundSyncManager {
     const response = await fetch('/api/ratings', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data)
+      body: JSON.stringify(data),
     });
-    
+
     if (!response.ok) {
       throw new Error(`Failed to sync rating: ${response.status}`);
     }
-    
+
     console.info('Synced cigar rating:', data);
   }
 
@@ -134,13 +130,13 @@ class BackgroundSyncManager {
     const response = await fetch('/api/preferences', {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data)
+      body: JSON.stringify(data),
     });
-    
+
     if (!response.ok) {
       throw new Error(`Failed to sync preference: ${response.status}`);
     }
-    
+
     console.info('Synced user preference:', data);
   }
 
@@ -148,13 +144,13 @@ class BackgroundSyncManager {
     const response = await fetch('/api/analytics', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data)
+      body: JSON.stringify(data),
     });
-    
+
     if (!response.ok) {
       throw new Error(`Failed to sync analytics: ${response.status}`);
     }
-    
+
     console.info('Synced analytics event:', data);
   }
 
@@ -162,13 +158,13 @@ class BackgroundSyncManager {
     const response = await fetch('/api/favorites', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data)
+      body: JSON.stringify(data),
     });
-    
+
     if (!response.ok) {
       throw new Error(`Failed to sync favorite: ${response.status}`);
     }
-    
+
     console.info('Synced favorite cigar:', data);
   }
 

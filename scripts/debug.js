@@ -23,29 +23,28 @@ class DebugAutomation {
    */
   async run() {
     console.log('🔧 Starting Debug Automation...');
-    
+
     try {
       // Collect system information
       await this.collectSystemInfo();
-      
+
       // Run health checks
       await this.runHealthChecks();
-      
+
       // Check build status
       await this.checkBuildStatus();
-      
+
       // Analyze code quality
       await this.analyzeCodeQuality();
-      
+
       // Check dependencies
       await this.checkDependencies();
-      
+
       // Generate updated debug log
       await this.generateDebugLog();
-      
+
       // Generate summary report
       this.generateSummaryReport();
-      
     } catch (error) {
       this.errors.push(`Automation failed: ${error.message}`);
       console.error('❌ Debug automation failed:', error.message);
@@ -57,17 +56,17 @@ class DebugAutomation {
    */
   async collectSystemInfo() {
     console.log('📊 Collecting system information...');
-    
+
     try {
       const nodeVersion = process.version;
       const npmVersion = execSync('npm --version', { encoding: 'utf8' }).trim();
       const platform = process.platform;
       const arch = process.arch;
-      
+
       this.info.push(`Node.js: ${nodeVersion}`);
       this.info.push(`NPM: ${npmVersion}`);
       this.info.push(`Platform: ${platform}-${arch}`);
-      
+
       // Check if in git repository
       try {
         const gitBranch = execSync('git branch --show-current', { encoding: 'utf8' }).trim();
@@ -77,7 +76,6 @@ class DebugAutomation {
       } catch (e) {
         this.warnings.push('Not in a git repository or git not available');
       }
-      
     } catch (error) {
       this.errors.push(`System info collection failed: ${error.message}`);
     }
@@ -88,7 +86,7 @@ class DebugAutomation {
    */
   async runHealthChecks() {
     console.log('🏥 Running health checks...');
-    
+
     // Check if package.json exists and is valid
     try {
       const packagePath = path.join(process.cwd(), 'package.json');
@@ -103,12 +101,7 @@ class DebugAutomation {
     }
 
     // Check critical files
-    const criticalFiles = [
-      'index.html',
-      'style.css',
-      'vite.config.js',
-      'eslint.config.js'
-    ];
+    const criticalFiles = ['index.html', 'style.css', 'vite.config.js', 'eslint.config.js'];
 
     criticalFiles.forEach(file => {
       if (fs.existsSync(file)) {
@@ -131,22 +124,21 @@ class DebugAutomation {
    */
   async checkBuildStatus() {
     console.log('🏗️ Checking build status...');
-    
+
     try {
       // Test build command
-      const buildOutput = execSync('npm run build', { 
+      const buildOutput = execSync('npm run build', {
         encoding: 'utf8',
-        timeout: 30000 // 30 second timeout
+        timeout: 30000, // 30 second timeout
       });
-      
+
       this.info.push('✅ Build successful');
-      
+
       // Check if dist directory was created
       if (fs.existsSync('dist')) {
         const distFiles = fs.readdirSync('dist');
         this.info.push(`Build output: ${distFiles.length} files generated`);
       }
-      
     } catch (error) {
       this.errors.push(`Build failed: ${error.message}`);
     }
@@ -157,12 +149,12 @@ class DebugAutomation {
    */
   async analyzeCodeQuality() {
     console.log('🧹 Analyzing code quality...');
-    
+
     try {
       // Run linting
-      const lintOutput = execSync('npm run lint', { 
+      const lintOutput = execSync('npm run lint', {
         encoding: 'utf8',
-        timeout: 20000
+        timeout: 20000,
       });
       this.info.push('✅ Linting passed');
     } catch (error) {
@@ -171,9 +163,9 @@ class DebugAutomation {
 
     try {
       // Run tests
-      const testOutput = execSync('npm run test -- --run', { 
+      const testOutput = execSync('npm run test -- --run', {
         encoding: 'utf8',
-        timeout: 30000
+        timeout: 30000,
       });
       this.info.push('✅ Tests passed');
     } catch (error) {
@@ -186,12 +178,12 @@ class DebugAutomation {
    */
   async checkDependencies() {
     console.log('📦 Checking dependencies...');
-    
+
     try {
       // Check for security vulnerabilities
-      const auditOutput = execSync('npm audit --audit-level=high', { 
+      const auditOutput = execSync('npm audit --audit-level=high', {
         encoding: 'utf8',
-        timeout: 15000
+        timeout: 15000,
       });
       this.info.push('✅ No high-severity vulnerabilities found');
     } catch (error) {
@@ -200,9 +192,9 @@ class DebugAutomation {
 
     try {
       // Check for outdated packages
-      const outdatedOutput = execSync('npm outdated --depth=0', { 
+      const outdatedOutput = execSync('npm outdated --depth=0', {
         encoding: 'utf8',
-        timeout: 15000
+        timeout: 15000,
       });
       if (outdatedOutput.trim()) {
         this.warnings.push('Some packages are outdated');
@@ -220,9 +212,9 @@ class DebugAutomation {
    */
   async generateDebugLog() {
     console.log('📝 Generating debug log...');
-    
+
     const logContent = this.createDebugLogContent();
-    
+
     try {
       // If debug log exists, append to it, otherwise create new
       if (fs.existsSync(this.debugLogPath)) {
@@ -245,7 +237,7 @@ class DebugAutomation {
   createDebugLogContent() {
     const date = new Date().toISOString().split('T')[0];
     const time = new Date().toLocaleTimeString();
-    
+
     return `# Automated Debug Report - ${date} ${time}
 
 ## System Information
@@ -275,31 +267,31 @@ ${this.generateRecommendations()}
    */
   generateRecommendations() {
     const recommendations = [];
-    
+
     if (this.errors.length > 0) {
       recommendations.push('🔴 **CRITICAL**: Fix all errors before proceeding');
     }
-    
+
     if (this.warnings.length > 0) {
       recommendations.push('🟡 **WARNING**: Review and address warnings when possible');
     }
-    
+
     if (this.warnings.some(w => w.includes('outdated'))) {
       recommendations.push('📦 Consider updating outdated packages: `npm update`');
     }
-    
+
     if (this.warnings.some(w => w.includes('vulnerabilities'))) {
       recommendations.push('🔒 Review security vulnerabilities: `npm audit fix`');
     }
-    
+
     if (this.errors.some(e => e.includes('Build failed'))) {
       recommendations.push('🏗️ Fix build configuration before deployment');
     }
-    
+
     if (recommendations.length === 0) {
       recommendations.push('🎉 **ALL GOOD**: System is healthy and ready for development');
     }
-    
+
     return recommendations.map(rec => `- ${rec}`).join('\n');
   }
 
@@ -312,7 +304,7 @@ ${this.generateRecommendations()}
     console.log(`   Errors: ${this.errors.length}`);
     console.log(`   Warnings: ${this.warnings.length}`);
     console.log(`   Info: ${this.info.length}`);
-    
+
     if (this.errors.length === 0) {
       console.log('✅ System is healthy!');
     } else {

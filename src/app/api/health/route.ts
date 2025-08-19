@@ -1,4 +1,4 @@
-import { NextResponse } from 'next/server'
+import { NextResponse } from 'next/server';
 
 export async function GET() {
   const healthStatus = {
@@ -10,9 +10,9 @@ export async function GET() {
       server: 'operational',
       database: 'not_configured', // Will be updated when DB is configured
       cache: 'operational',
-      assets: 'operational'
-    }
-  }
+      assets: 'operational',
+    },
+  };
 
-  return NextResponse.json(healthStatus, { status: 200 })
+  return NextResponse.json(healthStatus, { status: 200 });
 }

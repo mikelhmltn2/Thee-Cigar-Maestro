@@ -26,7 +26,7 @@ class PWAValidator {
       viewport: false,
       themeColor: false,
       startUrl: false,
-      display: false
+      display: false,
     };
     this.issues = [];
     this.recommendations = [];
@@ -40,16 +40,16 @@ class PWAValidator {
 
     // Validate manifest
     await this.validateManifest();
-    
+
     // Validate service worker
     await this.validateServiceWorker();
-    
+
     // Validate HTML requirements
     await this.validateHTMLRequirements();
-    
+
     // Check build output
     await this.validateBuildOutput();
-    
+
     // Generate validation report
     this.generateValidationReport();
   }
@@ -59,7 +59,7 @@ class PWAValidator {
    */
   async validateManifest() {
     console.info('📱 Validating PWA Manifest...');
-    
+
     if (!fs.existsSync(this.manifestPath)) {
       this.issues.push('❌ manifest.json not found');
       return;
@@ -68,7 +68,7 @@ class PWAValidator {
     try {
       const manifestContent = fs.readFileSync(this.manifestPath, 'utf8');
       const manifest = JSON.parse(manifestContent);
-      
+
       // Check required fields
       if (manifest.name) {
         console.info(`   ✅ App name: "${manifest.name}"`);
@@ -93,7 +93,9 @@ class PWAValidator {
         console.info(`   ✅ Display mode: "${manifest.display}"`);
         this.checks.display = true;
         if (!['standalone', 'fullscreen', 'minimal-ui'].includes(manifest.display)) {
-          this.recommendations.push('💡 Consider using "standalone" display mode for better app-like experience');
+          this.recommendations.push(
+            '💡 Consider using "standalone" display mode for better app-like experience'
+          );
         }
       } else {
         this.issues.push('❌ Missing required field: display');
@@ -116,14 +118,14 @@ class PWAValidator {
       if (manifest.icons && manifest.icons.length > 0) {
         console.info(`   ✅ Icons: ${manifest.icons.length} variants`);
         this.checks.icons = true;
-        
+
         // Check for required icon sizes
         const iconSizes = manifest.icons.map(icon => icon.sizes);
         const requiredSizes = ['192x192', '512x512'];
-        const missingSizes = requiredSizes.filter(size => 
-          !iconSizes.some(iconSize => iconSize && iconSize.includes(size))
+        const missingSizes = requiredSizes.filter(
+          size => !iconSizes.some(iconSize => iconSize && iconSize.includes(size))
         );
-        
+
         if (missingSizes.length > 0) {
           this.issues.push(`❌ Missing required icon sizes: ${missingSizes.join(', ')}`);
         } else {
@@ -144,7 +146,6 @@ class PWAValidator {
       }
 
       this.checks.manifest = true;
-      
     } catch (error) {
       this.issues.push(`❌ Manifest parsing error: ${error.message}`);
     }
@@ -157,15 +158,15 @@ class PWAValidator {
    */
   async validateServiceWorker() {
     console.info('⚙️  Validating Service Worker...');
-    
+
     // Check for service worker in dist
     const swPath = path.join(this.distDir, 'sw.js');
     if (fs.existsSync(swPath)) {
       console.info('   ✅ Service worker found in build output');
       this.checks.serviceWorker = true;
-      
+
       const swContent = fs.readFileSync(swPath, 'utf8');
-      
+
       // Check for common PWA features
       if (swContent.includes('fetch')) {
         console.info('   ✅ Fetch event handling implemented');
@@ -185,15 +186,15 @@ class PWAValidator {
       } else {
         this.recommendations.push('💡 Implement caching strategy for offline support');
       }
-      
     } else {
       this.issues.push('❌ Service worker not found in build output');
     }
 
     // Check for Workbox
-    const workboxFiles = fs.existsSync(this.distDir) ? 
-      fs.readdirSync(this.distDir).filter(file => file.includes('workbox')) : [];
-    
+    const workboxFiles = fs.existsSync(this.distDir)
+      ? fs.readdirSync(this.distDir).filter(file => file.includes('workbox'))
+      : [];
+
     if (workboxFiles.length > 0) {
       console.info(`   ✅ Workbox runtime detected: ${workboxFiles[0]}`);
     }
@@ -206,15 +207,15 @@ class PWAValidator {
    */
   async validateHTMLRequirements() {
     console.info('🌐 Validating HTML Requirements...');
-    
+
     const htmlFiles = ['index.html'];
-    
+
     for (const htmlFile of htmlFiles) {
       const htmlPath = path.join(rootDir, htmlFile);
       if (!fs.existsSync(htmlPath)) continue;
-      
+
       const htmlContent = fs.readFileSync(htmlPath, 'utf8');
-      
+
       // Check viewport meta tag
       if (htmlContent.includes('name="viewport"')) {
         console.info(`   ✅ Viewport meta tag found in ${htmlFile}`);
@@ -260,7 +261,7 @@ class PWAValidator {
    */
   async validateBuildOutput() {
     console.info('🏗️  Validating Build Output...');
-    
+
     if (!fs.existsSync(this.distDir)) {
       this.issues.push('❌ Build directory not found - run npm run build');
       return;
@@ -291,36 +292,36 @@ class PWAValidator {
   generateValidationReport() {
     console.info('📋 PWA Validation Report');
     console.info('═'.repeat(50));
-    
+
     // Calculate compliance score
     const totalChecks = Object.keys(this.checks).length;
     const passedChecks = Object.values(this.checks).filter(Boolean).length;
     const complianceScore = Math.round((passedChecks / totalChecks) * 100);
-    
+
     console.info('\n🎯 PWA Compliance Checklist:');
     for (const [check, passed] of Object.entries(this.checks)) {
       const status = passed ? '✅' : '❌';
       const checkName = check.replace(/([A-Z])/g, ' $1').toLowerCase();
       console.info(`   ${status} ${checkName}`);
     }
-    
+
     console.info(`\n📊 Overall Compliance: ${complianceScore}% (${passedChecks}/${totalChecks})`);
-    
+
     // Issues
     if (this.issues.length > 0) {
       console.info('\n❌ Critical Issues:');
       this.issues.forEach(issue => console.info(`   ${issue}`));
     }
-    
+
     // Recommendations
     if (this.recommendations.length > 0) {
       console.info('\n💡 Recommendations:');
       this.recommendations.forEach(rec => console.info(`   ${rec}`));
     }
-    
+
     // PWA Readiness Assessment
     console.info('\n🚀 PWA Readiness Assessment:');
-    
+
     if (complianceScore >= 90) {
       console.info('   ✅ Excellent! Your app meets PWA standards');
       console.info('   🎉 Ready for app store submission and installation');

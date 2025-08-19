@@ -11,12 +11,14 @@
 **Status:** Requires manual review/refactoring
 
 **Details:**
+
 - 33/35 error handler tests failing with "Cannot read properties of undefined"
 - Root cause: Destructured methods from singleton lose `this` context
 - Affects: `handleError`, `processError`, and other methods when called standalone
 - Impact: Test failures only, core functionality works in application
 
 **Recommended Fix:**
+
 ```javascript
 // Option 1: Bind methods in constructor
 this.handleError = this.handleError.bind(this);
@@ -27,7 +29,7 @@ handleError = (error, context = 'Unknown', metadata = {}, options = {}) => {
 };
 
 // Option 3: Call methods on instance in tests
-errorHandler.handleError(error) // instead of handleError(error)
+errorHandler.handleError(error); // instead of handleError(error)
 ```
 
 ### 🟡 Minor Test Issues

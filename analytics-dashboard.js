@@ -19,11 +19,11 @@ class AnalyticsDashboard {
         totalSessions: 0,
         averageSessionTime: 0,
         bounceRate: 0,
-        returnUsers: 0
+        returnUsers: 0,
       },
-      sessionData: {}
+      sessionData: {},
     };
-    
+
     this.init();
   }
 
@@ -279,17 +279,19 @@ class AnalyticsDashboard {
   setupEventListeners() {
     // Close dashboard
     document.getElementById('close-analytics-btn').addEventListener('click', () => this.hide());
-    
+
     // Refresh data
-    document.getElementById('refresh-analytics-btn').addEventListener('click', () => this.refreshData());
+    document
+      .getElementById('refresh-analytics-btn')
+      .addEventListener('click', () => this.refreshData());
 
     // Close on overlay click
-    this.dashboard.addEventListener('click', (e) => {
+    this.dashboard.addEventListener('click', e => {
       if (e.target === this.dashboard) this.hide();
     });
 
     // ESC key to close
-    document.addEventListener('keydown', (e) => {
+    document.addEventListener('keydown', e => {
       if (e.key === 'Escape' && this.isVisible) {
         this.hide();
       }
@@ -299,13 +301,13 @@ class AnalyticsDashboard {
   startDataCollection() {
     // Track page load time
     this.trackPerformance();
-    
+
     // Start session tracking
     this.startSession();
-    
+
     // Listen for user interactions
     this.setupInteractionTracking();
-    
+
     // Add some demo data for demonstration
     this.initializeDemoData();
   }
@@ -317,38 +319,38 @@ class AnalyticsDashboard {
       'Montecristo No. 2',
       'Romeo y Julieta Churchill',
       'Arturo Fuente Opus X',
-      'Padron 1964 Anniversary'
+      'Padron 1964 Anniversary',
     ];
-    
+
     demoCigars.forEach((cigar, _index) => {
       // Simulate different popularity levels
       const views = Math.floor(Math.random() * 50) + 10;
       const _ratings = [];
       const ratingCount = Math.floor(Math.random() * 10) + 3;
-      
+
       for (let i = 0; i < views; i++) {
         this.trackCigarView(cigar);
       }
-      
+
       for (let i = 0; i < ratingCount; i++) {
         const rating = Math.floor(Math.random() * 3) + 3; // 3-5 stars
         this.trackCigarRating(cigar, rating);
       }
     });
-    
+
     // Add demo search queries
     const demoSearches = [
       'medium strength',
       'Cuban cigars',
       'morning smoke',
       'full bodied',
-      'beginner friendly'
+      'beginner friendly',
     ];
-    
+
     demoSearches.forEach(search => {
       this.trackSearch(search);
     });
-    
+
     // Simulate some user interactions
     this.trackPageView('/');
     this.trackPageView('/flavorverse');
@@ -359,7 +361,7 @@ class AnalyticsDashboard {
     // Measure page load time
     const loadTime = performance.timing.loadEventEnd - performance.timing.navigationStart;
     this.analytics.sessionData.loadTime = loadTime;
-    
+
     // Test API response time
     this.testAPIPerformance();
   }
@@ -369,9 +371,9 @@ class AnalyticsDashboard {
       const startTime = performance.now();
       await this.apiClient.checkHealth();
       const endTime = performance.now();
-      
+
       this.analytics.sessionData.apiResponseTime = Math.round(endTime - startTime);
-            } catch (_error) {
+    } catch (_error) {
       this.analytics.sessionData.apiResponseTime = 'Failed';
     }
   }
@@ -384,10 +386,10 @@ class AnalyticsDashboard {
 
   setupInteractionTracking() {
     // Track clicks
-    document.addEventListener('click', (e) => {
+    document.addEventListener('click', e => {
       this.trackInteraction('click', e.target.tagName, {
         className: e.target.className,
-        id: e.target.id
+        id: e.target.id,
       });
     });
 
@@ -399,12 +401,12 @@ class AnalyticsDashboard {
 
   trackInteraction(action, target, properties = {}) {
     this.analytics.sessionData.interactions++;
-    
+
     const interaction = {
       action,
       target,
       properties,
-      timestamp: Date.now()
+      timestamp: Date.now(),
     };
 
     if (!this.analytics.userInteractions[action]) {
@@ -423,7 +425,7 @@ class AnalyticsDashboard {
 
   trackPageView(page) {
     this.analytics.sessionData.pageViews++;
-    
+
     if (!this.analytics.pageViews[page]) {
       this.analytics.pageViews[page] = 0;
     }
@@ -448,7 +450,7 @@ class AnalyticsDashboard {
       border-radius: 0 5px 5px 0;
       color: #D2B48C;
     `;
-    
+
     const timeStr = new Date(interaction.timestamp).toLocaleTimeString();
     activityItem.innerHTML = `
       <div style="font-size: 0.8rem; color: #CD853F;">${timeStr}</div>
@@ -456,7 +458,10 @@ class AnalyticsDashboard {
     `;
 
     // Clear "no activity" message
-    if (activityFeed.children.length === 1 && activityFeed.children[0].textContent.includes('No recent activity')) {
+    if (
+      activityFeed.children.length === 1 &&
+      activityFeed.children[0].textContent.includes('No recent activity')
+    ) {
       activityFeed.innerHTML = '';
     }
 
@@ -479,10 +484,17 @@ class AnalyticsDashboard {
   }
 
   updateMetrics() {
-    const totalPageViews = Object.values(this.analytics.pageViews).reduce((sum, views) => sum + views, 0);
-    const totalInteractions = Object.values(this.analytics.userInteractions).reduce((sum, interactions) => sum + interactions.length, 0);
-    const sessionDuration = this.analytics.sessionData.startTime ? 
-      Math.round((Date.now() - this.analytics.sessionData.startTime) / 1000) : 0;
+    const totalPageViews = Object.values(this.analytics.pageViews).reduce(
+      (sum, views) => sum + views,
+      0
+    );
+    const totalInteractions = Object.values(this.analytics.userInteractions).reduce(
+      (sum, interactions) => sum + interactions.length,
+      0
+    );
+    const sessionDuration = this.analytics.sessionData.startTime
+      ? Math.round((Date.now() - this.analytics.sessionData.startTime) / 1000)
+      : 0;
 
     document.getElementById('total-page-views').textContent = totalPageViews;
     document.getElementById('total-interactions').textContent = totalInteractions;
@@ -495,20 +507,25 @@ class AnalyticsDashboard {
     if (!popularPages) return;
 
     const sortedPages = Object.entries(this.analytics.pageViews)
-      .sort(([,a], [,b]) => b - a)
+      .sort(([, a], [, b]) => b - a)
       .slice(0, 5);
 
     if (sortedPages.length === 0) {
-      popularPages.innerHTML = '<div style="color: #D2B48C; font-style: italic;">No data available</div>';
+      popularPages.innerHTML =
+        '<div style="color: #D2B48C; font-style: italic;">No data available</div>';
       return;
     }
 
-    popularPages.innerHTML = sortedPages.map(([page, views]) => `
+    popularPages.innerHTML = sortedPages
+      .map(
+        ([page, views]) => `
       <div style="display: flex; justify-content: space-between; padding: 0.3rem 0;">
         <span style="color: #D2B48C;">${page || 'Home'}</span>
         <span style="color: #CD853F; font-weight: bold;">${views} views</span>
       </div>
-    `).join('');
+    `
+      )
+      .join('');
   }
 
   updateUserBehavior() {
@@ -516,8 +533,9 @@ class AnalyticsDashboard {
     if (!userBehavior) return;
 
     const clickCount = this.analytics.userInteractions.click?.length || 0;
-    const avgSessionTime = this.analytics.sessionData.startTime ? 
-      Math.round((Date.now() - this.analytics.sessionData.startTime) / 60000) : 0;
+    const avgSessionTime = this.analytics.sessionData.startTime
+      ? Math.round((Date.now() - this.analytics.sessionData.startTime) / 60000)
+      : 0;
 
     userBehavior.innerHTML = `
       <div style="display: flex; justify-content: space-between; padding: 0.3rem 0;">
@@ -540,29 +558,37 @@ class AnalyticsDashboard {
     if (!searchAnalytics) return;
 
     const recentSearches = this.analytics.searchQueries.slice(-5);
-    
+
     if (recentSearches.length === 0) {
-      searchAnalytics.innerHTML = '<div style="color: #D2B48C; font-style: italic;">No searches yet</div>';
+      searchAnalytics.innerHTML =
+        '<div style="color: #D2B48C; font-style: italic;">No searches yet</div>';
       return;
     }
 
-    searchAnalytics.innerHTML = recentSearches.map(query => `
+    searchAnalytics.innerHTML = recentSearches
+      .map(
+        query => `
       <div style="padding: 0.3rem 0; color: #D2B48C;">
         "${query}"
       </div>
-    `).join('');
+    `
+      )
+      .join('');
   }
 
   updatePerformanceMetrics() {
-    document.getElementById('load-time').textContent = 
-      this.analytics.sessionData.loadTime ? `${Math.round(this.analytics.sessionData.loadTime)}ms` : '-';
-    
-    document.getElementById('api-response-time').textContent = 
-      this.analytics.sessionData.apiResponseTime ? `${this.analytics.sessionData.apiResponseTime}ms` : '-';
-    
+    document.getElementById('load-time').textContent = this.analytics.sessionData.loadTime
+      ? `${Math.round(this.analytics.sessionData.loadTime)}ms`
+      : '-';
+
+    document.getElementById('api-response-time').textContent = this.analytics.sessionData
+      .apiResponseTime
+      ? `${this.analytics.sessionData.apiResponseTime}ms`
+      : '-';
+
     // Measure data load performance
     const dataLoadTime = this.analytics.sessionData.dataLoadTime || '-';
-    document.getElementById('data-load-time').textContent = 
+    document.getElementById('data-load-time').textContent =
       typeof dataLoadTime === 'number' ? `${Math.round(dataLoadTime)}ms` : dataLoadTime;
   }
 
@@ -573,15 +599,15 @@ class AnalyticsDashboard {
       this.analytics.sessionData.dataLoadTime = loadTime;
     } else {
       // Average with previous measurements
-      this.analytics.sessionData.dataLoadTime = 
+      this.analytics.sessionData.dataLoadTime =
         (this.analytics.sessionData.dataLoadTime + loadTime) / 2;
     }
-    
+
     // Send to API if authenticated
     if (this.apiClient.isUserAuthenticated()) {
-      this.apiClient.trackEvent('data_load_performance', { 
-        dataType, 
-        loadTime: Math.round(loadTime) 
+      this.apiClient.trackEvent('data_load_performance', {
+        dataType,
+        loadTime: Math.round(loadTime),
       });
     }
   }
@@ -590,7 +616,7 @@ class AnalyticsDashboard {
     this.isVisible = true;
     this.dashboard.style.display = 'flex';
     this.refreshData();
-    
+
     // Start auto-refresh
     this.refreshInterval = setInterval(() => {
       this.refreshData();
@@ -600,7 +626,7 @@ class AnalyticsDashboard {
   hide() {
     this.isVisible = false;
     this.dashboard.style.display = 'none';
-    
+
     // Stop auto-refresh
     if (this.refreshInterval) {
       clearInterval(this.refreshInterval);
@@ -611,7 +637,7 @@ class AnalyticsDashboard {
   // Public method to track search queries
   trackSearch(query) {
     this.analytics.searchQueries.push(query);
-    
+
     // Send to API if authenticated
     if (this.apiClient.isUserAuthenticated()) {
       this.apiClient.trackEvent('search_query', { query });
@@ -624,7 +650,7 @@ class AnalyticsDashboard {
       this.analytics.cigarViews[cigarName] = 0;
     }
     this.analytics.cigarViews[cigarName]++;
-    
+
     // Send to API if authenticated
     if (this.apiClient.isUserAuthenticated()) {
       this.apiClient.trackEvent('cigar_view', { cigar: cigarName });
@@ -637,7 +663,7 @@ class AnalyticsDashboard {
       this.analytics.cigarRatings[cigarName] = [];
     }
     this.analytics.cigarRatings[cigarName].push(rating);
-    
+
     // Send to API if authenticated
     if (this.apiClient.isUserAuthenticated()) {
       this.apiClient.trackEvent('cigar_rating', { cigar: cigarName, rating });
@@ -651,12 +677,12 @@ class AnalyticsDashboard {
 
     // Combine views and ratings to determine popularity
     const cigarPopularity = {};
-    
+
     // Add weight from views
     Object.entries(this.analytics.cigarViews).forEach(([cigar, views]) => {
       cigarPopularity[cigar] = (cigarPopularity[cigar] || 0) + views;
     });
-    
+
     // Add weight from ratings (higher rated cigars get bonus points)
     Object.entries(this.analytics.cigarRatings).forEach(([cigar, ratings]) => {
       const avgRating = ratings.reduce((sum, rating) => sum + rating, 0) / ratings.length;
@@ -665,21 +691,25 @@ class AnalyticsDashboard {
     });
 
     const sortedCigars = Object.entries(cigarPopularity)
-      .sort(([,a], [,b]) => b - a)
+      .sort(([, a], [, b]) => b - a)
       .slice(0, 5);
 
     if (sortedCigars.length === 0) {
-      popularCigars.innerHTML = '<div style="color: #D2B48C; font-style: italic;">No data available</div>';
+      popularCigars.innerHTML =
+        '<div style="color: #D2B48C; font-style: italic;">No data available</div>';
       return;
     }
 
-    popularCigars.innerHTML = sortedCigars.map(([cigar, score]) => {
-      const views = this.analytics.cigarViews[cigar] || 0;
-      const ratings = this.analytics.cigarRatings[cigar] || [];
-      const avgRating = ratings.length > 0 ? 
-        (ratings.reduce((sum, rating) => sum + rating, 0) / ratings.length).toFixed(1) : 'N/A';
-      
-      return `
+    popularCigars.innerHTML = sortedCigars
+      .map(([cigar, score]) => {
+        const views = this.analytics.cigarViews[cigar] || 0;
+        const ratings = this.analytics.cigarRatings[cigar] || [];
+        const avgRating =
+          ratings.length > 0
+            ? (ratings.reduce((sum, rating) => sum + rating, 0) / ratings.length).toFixed(1)
+            : 'N/A';
+
+        return `
         <div style="padding: 0.5rem 0; border-bottom: 1px solid rgba(205, 133, 63, 0.2);">
           <div style="display: flex; justify-content: space-between; align-items: center;">
             <span style="color: #D2B48C; font-weight: bold;">${cigar}</span>
@@ -691,23 +721,25 @@ class AnalyticsDashboard {
           </div>
         </div>
       `;
-    }).join('');
+      })
+      .join('');
   }
 
   // Update user engagement metrics
   updateUserEngagement() {
     const totalSessions = this.analytics.userEngagement.totalSessions + 1;
-    const sessionDuration = this.analytics.sessionData.startTime ? 
-      Math.round((Date.now() - this.analytics.sessionData.startTime) / 60000) : 0;
-    
+    const sessionDuration = this.analytics.sessionData.startTime
+      ? Math.round((Date.now() - this.analytics.sessionData.startTime) / 60000)
+      : 0;
+
     // Calculate average session time
     const avgSessionTime = Math.round(sessionDuration);
-    
+
     // Calculate bounce rate (sessions with less than 30 seconds and 1 page view)
     const isBouncedSession = sessionDuration < 0.5 && this.analytics.sessionData.pageViews <= 1;
-    const bounceRate = isBouncedSession ? 
-      Math.round((1 / totalSessions) * 100) : 
-      Math.round((0 / totalSessions) * 100);
+    const bounceRate = isBouncedSession
+      ? Math.round((1 / totalSessions) * 100)
+      : Math.round((0 / totalSessions) * 100);
 
     // Update engagement metrics
     this.analytics.userEngagement.totalSessions = totalSessions;

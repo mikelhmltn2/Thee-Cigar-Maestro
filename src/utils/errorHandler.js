@@ -10,12 +10,27 @@ class ErrorHandler {
     this.retryAttempts = new Map();
     this.maxRetries = 3;
     this.handlersBound = false;
-    
+
     // Setup global error handlers (will noop if global window not available yet)
     this.setupGlobalHandlers();
     // Also attempt binding after current tick so tests that assign window later still pass
-    try { setTimeout(() => { this.setupGlobalHandlers(); }, 0); } catch (_e) {}
-    try { queueMicrotask(() => { this.setupGlobalHandlers(); }); } catch (_e) {}
+    try {
+      setTimeout(() => {
+        this.setupGlobalHandlers();
+      }, 0);
+    } catch (_e) {}
+    try {
+      if (typeof queueMicrotask !== 'undefined') {
+        // eslint-disable-next-line no-undef
+        queueMicrotask(() => {
+          this.setupGlobalHandlers();
+        });
+      } else {
+        Promise.resolve().then(() => {
+          this.setupGlobalHandlers();
+        });
+      }
+    } catch (_e) {}
   }
 
   /**
@@ -24,15 +39,15 @@ class ErrorHandler {
   setupGlobalHandlers() {
     const w = typeof globalThis !== 'undefined' ? globalThis.window : undefined;
     if (w && !this.handlersBound) {
-      w.addEventListener('error', (event) => {
+      w.addEventListener('error', event => {
         this.handleError(event.error, 'Global Error Handler', {
           filename: event.filename,
           lineno: event.lineno,
-          colno: event.colno
+          colno: event.colno,
         });
       });
 
-      w.addEventListener('unhandledrejection', (event) => {
+      w.addEventListener('unhandledrejection', event => {
         this.handleError(event.reason, 'Unhandled Promise Rejection');
       });
 
@@ -54,26 +69,26 @@ class ErrorHandler {
     this.setupGlobalHandlers();
 
     const errorInfo = this.processError(error, context, metadata);
-    
+
     // Log error
     this.logError(errorInfo);
-    
+
     // Store error for analytics
     this.storeError(errorInfo);
-    
+
     // Send to analytics if available
     this.sendToAnalytics(errorInfo);
-    
+
     // Show user notification if enabled
     if (options.showUserNotification !== false) {
       this.showUserFriendlyError(errorInfo, options.userMessage);
     }
-    
+
     // Show user feedback if not in production
     if (!this.isProduction) {
       console.error('🚨 Error Handler:', errorInfo);
     }
-    
+
     return errorInfo;
   }
 
@@ -86,27 +101,27 @@ class ErrorHandler {
    */
   processError(error, context, metadata) {
     const timestamp = new Date().toISOString();
-    
+
     // Normalize error object
     let errorObj;
     if (error instanceof Error) {
       errorObj = {
         name: error.name,
         message: error.message,
-        stack: error.stack
+        stack: error.stack,
       };
     } else if (typeof error === 'string') {
       errorObj = {
         name: 'CustomError',
         message: error,
-        stack: new Error().stack
+        stack: new Error().stack,
       };
     } else {
       errorObj = {
         name: 'UnknownError',
         message: 'An unknown error occurred',
         stack: new Error().stack,
-        originalError: error
+        originalError: error,
       };
     }
 
@@ -123,8 +138,8 @@ class ErrorHandler {
         userAgent: nav?.userAgent || 'Unknown',
         url: w?.location?.href || 'Unknown',
         online: typeof nav?.onLine === 'boolean' ? nav.onLine : true,
-        ...metadata
-      }
+        ...metadata,
+      },
     };
   }
 
@@ -136,25 +151,27 @@ class ErrorHandler {
    */
   determineSeverity(errorObj, context) {
     // Critical errors that break core functionality
-    if (context.includes('Auth') || 
-        context.includes('Database') || 
-        errorObj.name === 'SecurityError' ||
-        context.includes('Payment')) {
+    if (
+      context.includes('Auth') ||
+      context.includes('Database') ||
+      errorObj.name === 'SecurityError' ||
+      context.includes('Payment')
+    ) {
       return 'critical';
     }
 
     // High priority errors that affect user experience
-    if (context.includes('API') || 
-        context.includes('Network') || 
-        errorObj.name === 'TypeError' ||
-        context.includes('Service Worker')) {
+    if (
+      context.includes('API') ||
+      context.includes('Network') ||
+      errorObj.name === 'TypeError' ||
+      context.includes('Service Worker')
+    ) {
       return 'high';
     }
 
     // Medium priority errors
-    if (context.includes('UI') || 
-        context.includes('Animation') || 
-        context.includes('Storage')) {
+    if (context.includes('UI') || context.includes('Animation') || context.includes('Storage')) {
       return 'medium';
     }
 
@@ -172,14 +189,15 @@ class ErrorHandler {
     if (!w) return;
 
     let userMessage = customMessage;
-    
+
     if (!userMessage) {
       userMessage = this.getUserFriendlyMessage(errorInfo);
     }
 
     // Try to use the app's UI manager if available
     if (w.uiManager && typeof w.uiManager.showToast === 'function') {
-      const toastType = (errorInfo.severity === 'critical' || errorInfo.severity === 'high') ? 'error' : 'warning';
+      const toastType =
+        errorInfo.severity === 'critical' || errorInfo.severity === 'high' ? 'error' : 'warning';
       w.uiManager.showToast(userMessage, toastType);
     } else if (errorInfo.severity === 'critical' && !this.isProduction) {
       // Only show alerts for critical errors in development
@@ -235,7 +253,7 @@ class ErrorHandler {
    */
   logError(errorInfo) {
     const logLevel = this.getLogLevel(errorInfo.severity);
-    
+
     if (this.isProduction) {
       // In production, only log critical and high severity errors
       if (errorInfo.severity === 'critical' || errorInfo.severity === 'high') {
@@ -249,9 +267,9 @@ class ErrorHandler {
         context: errorInfo.context,
         message: errorInfo.error.message,
         timestamp: errorInfo.timestamp,
-        metadata: errorInfo.metadata
+        metadata: errorInfo.metadata,
       });
-      
+
       if (errorInfo.error.stack && errorInfo.severity !== 'low') {
         console.error('📍 Stack Trace:', errorInfo.error.stack);
       }
@@ -265,11 +283,16 @@ class ErrorHandler {
    */
   getLogLevel(severity) {
     switch (severity) {
-      case 'critical': return 'error';
-      case 'high': return 'error';
-      case 'medium': return 'warn';
-      case 'low': return 'info';
-      default: return 'log';
+      case 'critical':
+        return 'error';
+      case 'high':
+        return 'error';
+      case 'medium':
+        return 'warn';
+      case 'low':
+        return 'info';
+      default:
+        return 'log';
     }
   }
 
@@ -280,20 +303,21 @@ class ErrorHandler {
   storeError(errorInfo) {
     // Add to error queue
     this.errorQueue.push(errorInfo);
-    
+
     // Maintain queue size
     if (this.errorQueue.length > this.maxErrors) {
       this.errorQueue.shift();
     }
-    
+
     // Store in localStorage for debugging (development only)
     const w = typeof globalThis !== 'undefined' ? globalThis.window : undefined;
-    const hasLocalStorage = typeof globalThis !== 'undefined' && typeof globalThis.localStorage !== 'undefined';
+    const hasLocalStorage =
+      typeof globalThis !== 'undefined' && typeof globalThis.localStorage !== 'undefined';
     if (!this.isProduction && w && hasLocalStorage) {
       try {
         const existingErrors = JSON.parse(globalThis.localStorage.getItem('errorLog') || '[]');
         existingErrors.push(errorInfo);
-        
+
         // Keep only last 50 errors
         const recentErrors = existingErrors.slice(-50);
         globalThis.localStorage.setItem('errorLog', JSON.stringify(recentErrors));
@@ -316,8 +340,8 @@ class ErrorHandler {
           fatal: errorInfo.severity === 'critical',
           custom_map: {
             severity: errorInfo.severity,
-            context: errorInfo.context
-          }
+            context: errorInfo.context,
+          },
         });
       }
 
@@ -348,11 +372,12 @@ class ErrorHandler {
    */
   async handleApiError(response, endpoint, options = {}) {
     let errorMessage = `API Error: ${response.status} ${response.statusText}`;
-    
+
     try {
       const errorData = await response.json();
       // Always prefix with "API Error:" to match expectations
-      errorMessage = errorData && errorData.message ? `API Error: ${errorData.message}` : errorMessage;
+      errorMessage =
+        errorData && errorData.message ? `API Error: ${errorData.message}` : errorMessage;
     } catch (parseError) {
       // Response body is not JSON, use status text
       console.warn('Could not parse API error response');
@@ -361,7 +386,7 @@ class ErrorHandler {
     const errorInfo = this.handleError(new Error(errorMessage), 'API Request', {
       endpoint,
       status: response.status,
-      statusText: response.statusText
+      statusText: response.statusText,
     });
 
     // Handle retry logic for certain status codes
@@ -371,7 +396,7 @@ class ErrorHandler {
         return retryInfo;
       }
     }
-    
+
     return errorInfo;
   }
 
@@ -385,7 +410,7 @@ class ErrorHandler {
     // Retry on server errors and rate limiting
     const retryableStatuses = [500, 502, 503, 504, 429];
     const currentRetries = this.retryAttempts.get(endpoint) || 0;
-    
+
     return retryableStatuses.includes(status) && currentRetries < this.maxRetries;
   }
 
@@ -405,8 +430,12 @@ class ErrorHandler {
       // Exponential backoff (capped at 10s). Skip delay on final attempt.
       if (currentRetries < this.maxRetries - 1) {
         const delay = Math.min(1000 * Math.pow(2, currentRetries), 10000);
-        console.warn(`⏳ Retrying ${endpoint} (attempt ${attemptNumber}/${this.maxRetries}) after ${delay}ms`);
-        await new Promise(resolve => setTimeout(resolve, delay));
+        console.warn(
+          `⏳ Retrying ${endpoint} (attempt ${attemptNumber}/${this.maxRetries}) after ${delay}ms`
+        );
+        await new Promise(resolve => {
+          setTimeout(resolve, delay);
+        });
       }
 
       try {
@@ -446,7 +475,7 @@ class ErrorHandler {
     const nav = typeof globalThis !== 'undefined' ? globalThis.navigator : undefined;
     return this.handleError(networkError, context, {
       type: 'network',
-      online: typeof nav?.onLine === 'boolean' ? nav.onLine : true
+      online: typeof nav?.onLine === 'boolean' ? nav.onLine : true,
     });
   }
 
@@ -458,11 +487,11 @@ class ErrorHandler {
    * @returns {Object} Error information
    */
   handleValidationError(field, message, value = null) {
-    return this.handleError(
-      new Error(`Validation Error: ${message}`),
-      'Data Validation',
-      { field, value, type: 'validation' }
-    );
+    return this.handleError(new Error(`Validation Error: ${message}`), 'Data Validation', {
+      field,
+      value,
+      type: 'validation',
+    });
   }
 
   /**
@@ -483,18 +512,18 @@ class ErrorHandler {
       total: this.errorQueue.length,
       bySeverity: { critical: 0, high: 0, medium: 0, low: 0 },
       byContext: {},
-      last24Hours: 0
+      last24Hours: 0,
     };
 
-    const last24Hours = Date.now() - (24 * 60 * 60 * 1000);
+    const last24Hours = Date.now() - 24 * 60 * 60 * 1000;
 
     this.errorQueue.forEach(error => {
       // Count by severity
       stats.bySeverity[error.severity]++;
-      
+
       // Count by context
       stats.byContext[error.context] = (stats.byContext[error.context] || 0) + 1;
-      
+
       // Count recent errors
       if (new Date(error.timestamp).getTime() > last24Hours) {
         stats.last24Hours++;
@@ -510,11 +539,12 @@ class ErrorHandler {
   clearErrors() {
     this.errorQueue = [];
     this.retryAttempts.clear();
-    
+
     // Re-bind global handlers if environment is now available
     this.setupGlobalHandlers();
-    
-    const hasLocalStorage = typeof globalThis !== 'undefined' && typeof globalThis.localStorage !== 'undefined';
+
+    const hasLocalStorage =
+      typeof globalThis !== 'undefined' && typeof globalThis.localStorage !== 'undefined';
     if (!this.isProduction && hasLocalStorage) {
       globalThis.localStorage.removeItem('errorLog');
     }
@@ -533,11 +563,16 @@ class ErrorHandler {
       try {
         return await operation();
       } catch (error) {
-        this.handleError(error, context, {}, {
-          showUserNotification: options.showUserNotification,
-          userMessage: options.userMessage
-        });
-        
+        this.handleError(
+          error,
+          context,
+          {},
+          {
+            showUserNotification: options.showUserNotification,
+            userMessage: options.userMessage,
+          }
+        );
+
         // Retry logic for async operations
         if (options.enableRetry && this.shouldRetryOperation(context)) {
           const retryResult = await this.handleRetry(context, operation);
@@ -545,7 +580,7 @@ class ErrorHandler {
             return retryResult.result;
           }
         }
-        
+
         return fallbackValue;
       }
     })();
@@ -559,7 +594,7 @@ class ErrorHandler {
   shouldRetryOperation(context) {
     const retryableContexts = ['Network', 'API', 'Storage', 'Database'];
     const currentRetries = this.retryAttempts.get(context) || 0;
-    
+
     return retryableContexts.some(ctx => context.includes(ctx)) && currentRetries < this.maxRetries;
   }
 
@@ -575,10 +610,15 @@ class ErrorHandler {
     try {
       return operation();
     } catch (error) {
-      this.handleError(error, context, {}, {
-        showUserNotification: options.showUserNotification,
-        userMessage: options.userMessage
-      });
+      this.handleError(
+        error,
+        context,
+        {},
+        {
+          showUserNotification: options.showUserNotification,
+          userMessage: options.userMessage,
+        }
+      );
       return fallbackValue;
     }
   }

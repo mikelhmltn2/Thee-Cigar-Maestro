@@ -1,3 +1,3 @@
 export default function GlassMorphism() {
-  return null
+  return null;
 }

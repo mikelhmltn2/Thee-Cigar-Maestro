@@ -28,44 +28,44 @@ const CONFIG = {
       description: 'Run comprehensive code quality and security analysis',
       command: 'npm run automation:code',
       icon: '🔍',
-      category: 'Quality'
+      category: 'Quality',
     },
     'performance-test': {
       name: 'Performance Testing',
       description: 'Run Lighthouse audits and load testing',
       command: 'npm run automation:performance',
       icon: '⚡',
-      category: 'Performance'
+      category: 'Performance',
     },
     'health-check': {
       name: 'Health Check',
       description: 'Check application health and dependencies',
       command: 'npm run automation:health',
       icon: '🏥',
-      category: 'Monitoring'
+      category: 'Monitoring',
     },
     'auto-fix': {
       name: 'Auto Fix',
       description: 'Automatically fix code quality issues',
       command: 'npm run automation:fix',
       icon: '🔧',
-      category: 'Quality'
+      category: 'Quality',
     },
-    'deployment': {
+    deployment: {
       name: 'Deployment',
       description: 'Build and deploy application',
       command: 'npm run automation:deploy',
       icon: '🚀',
-      category: 'Deployment'
+      category: 'Deployment',
     },
-    'maintenance': {
+    maintenance: {
       name: 'Maintenance',
       description: 'Update dependencies and perform maintenance',
       command: 'npm run automation:maintenance',
       icon: '🛠️',
-      category: 'Maintenance'
-    }
-  }
+      category: 'Maintenance',
+    },
+  },
 };
 
 // Dashboard state
@@ -78,14 +78,14 @@ let dashboardState = {
     uptime: 0,
     memory: {},
     disk: {},
-    processes: []
+    processes: [],
   },
   automationStatus: {
     monitoring: false,
     lastHealthCheck: null,
     lastPerformanceTest: null,
-    lastCodeAnalysis: null
-  }
+    lastCodeAnalysis: null,
+  },
 };
 
 /**
@@ -95,29 +95,29 @@ function getSystemStatus() {
   try {
     const memoryInfo = process.memoryUsage();
     const uptime = process.uptime();
-    
+
     return {
       uptime,
       memory: {
         heapUsed: Math.round(memoryInfo.heapUsed / 1024 / 1024),
         heapTotal: Math.round(memoryInfo.heapTotal / 1024 / 1024),
         external: Math.round(memoryInfo.external / 1024 / 1024),
-        rss: Math.round(memoryInfo.rss / 1024 / 1024)
+        rss: Math.round(memoryInfo.rss / 1024 / 1024),
       },
       disk: {
         // Simplified disk info
         free: 0,
         total: 0,
-        used: 0
+        used: 0,
       },
       processes: [
         {
           name: 'Node.js',
           pid: process.pid,
           memory: Math.round(memoryInfo.rss / 1024 / 1024),
-          cpu: 0
-        }
-      ]
+          cpu: 0,
+        },
+      ],
     };
   } catch (error) {
     console.error(`❌ Failed to get system status: ${error.message}`);
@@ -133,43 +133,42 @@ function getAutomationStatus() {
     monitoring: false,
     lastHealthCheck: null,
     lastPerformanceTest: null,
-    lastCodeAnalysis: null
+    lastCodeAnalysis: null,
   };
-  
+
   try {
     // Check if monitoring is running
     const monitoringLog = path.join(rootDir, 'monitoring.log');
     if (fs.existsSync(monitoringLog)) {
       const stats = fs.statSync(monitoringLog);
       const lastModified = new Date(stats.mtime);
-      status.monitoring = (Date.now() - lastModified.getTime()) < 300000; // 5 minutes
+      status.monitoring = Date.now() - lastModified.getTime() < 300000; // 5 minutes
     }
-    
+
     // Check last health check
     const healthReport = path.join(rootDir, 'health-check-report.json');
     if (fs.existsSync(healthReport)) {
       const report = JSON.parse(fs.readFileSync(healthReport, 'utf8'));
       status.lastHealthCheck = report.timestamp;
     }
-    
+
     // Check last performance test
     const perfReport = path.join(rootDir, 'performance-report.json');
     if (fs.existsSync(perfReport)) {
       const report = JSON.parse(fs.readFileSync(perfReport, 'utf8'));
       status.lastPerformanceTest = report.timestamp;
     }
-    
+
     // Check last code analysis
     const codeReport = path.join(rootDir, 'code-analysis-report.json');
     if (fs.existsSync(codeReport)) {
       const report = JSON.parse(fs.readFileSync(codeReport, 'utf8'));
       status.lastCodeAnalysis = report.timestamp;
     }
-    
   } catch (error) {
     console.error(`❌ Failed to get automation status: ${error.message}`);
   }
-  
+
   return status;
 }
 
@@ -181,57 +180,56 @@ async function executeTask(taskId) {
   if (!task) {
     throw new Error(`Unknown task: ${taskId}`);
   }
-  
+
   if (dashboardState.runningTasks.has(taskId)) {
     throw new Error(`Task ${taskId} is already running`);
   }
-  
+
   console.info(`🚀 Starting task: ${task.name}`);
-  
+
   dashboardState.runningTasks.add(taskId);
-  
+
   const taskStart = new Date();
   const taskRecord = {
     id: taskId,
     name: task.name,
     startTime: taskStart.toISOString(),
     status: 'running',
-    command: task.command
+    command: task.command,
   };
-  
+
   dashboardState.taskHistory.unshift(taskRecord);
-  
+
   // Keep only last 50 tasks
   if (dashboardState.taskHistory.length > 50) {
     dashboardState.taskHistory = dashboardState.taskHistory.slice(0, 50);
   }
-  
+
   try {
-    const result = execSync(task.command, { 
-      encoding: 'utf8', 
+    const result = execSync(task.command, {
+      encoding: 'utf8',
       cwd: rootDir,
-      timeout: 300000 // 5 minutes
+      timeout: 300000, // 5 minutes
     });
-    
+
     taskRecord.status = 'completed';
     taskRecord.endTime = new Date().toISOString();
     taskRecord.duration = Date.now() - taskStart.getTime();
     taskRecord.output = result;
-    
+
     console.info(`✅ Task completed: ${task.name}`);
-    
   } catch (error) {
     taskRecord.status = 'failed';
     taskRecord.endTime = new Date().toISOString();
     taskRecord.duration = Date.now() - taskStart.getTime();
     taskRecord.error = error.message;
     taskRecord.output = error.stdout || '';
-    
+
     console.error(`❌ Task failed: ${task.name} - ${error.message}`);
   } finally {
     dashboardState.runningTasks.delete(taskId);
   }
-  
+
   return taskRecord;
 }
 
@@ -240,21 +238,17 @@ async function executeTask(taskId) {
  */
 function getRecentLogs() {
   const logs = [];
-  
+
   try {
     // Check various log files
-    const logFiles = [
-      'monitoring.log',
-      'npm-debug.log',
-      'yarn-error.log'
-    ];
-    
+    const logFiles = ['monitoring.log', 'npm-debug.log', 'yarn-error.log'];
+
     logFiles.forEach(logFile => {
       const logPath = path.join(rootDir, logFile);
       if (fs.existsSync(logPath)) {
         const content = fs.readFileSync(logPath, 'utf8');
         const lines = content.split('\n').filter(Boolean);
-        
+
         // Get last 100 lines
         const recentLines = lines.slice(-100);
         recentLines.forEach(line => {
@@ -264,7 +258,7 @@ function getRecentLogs() {
               file: logFile,
               timestamp: logEntry.timestamp,
               message: logEntry.message,
-              data: logEntry.data
+              data: logEntry.data,
             });
           } catch {
             // Not JSON, treat as plain text
@@ -272,18 +266,17 @@ function getRecentLogs() {
               file: logFile,
               timestamp: new Date().toISOString(),
               message: line,
-              data: null
+              data: null,
             });
           }
         });
       }
     });
-    
+
     // Sort by timestamp and return recent logs
     return logs
       .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp))
       .slice(0, CONFIG.maxLogLines);
-    
   } catch (error) {
     console.error(`❌ Failed to get logs: ${error.message}`);
     return [];
@@ -299,7 +292,7 @@ function generateDashboardHTML() {
   const runningTasks = Array.from(dashboardState.runningTasks);
   const recentTasks = dashboardState.taskHistory.slice(0, 10);
   const recentLogs = getRecentLogs().slice(0, 20);
-  
+
   const tasksByCategory = {};
   Object.entries(CONFIG.automationTasks).forEach(([id, task]) => {
     if (!tasksByCategory[task.category]) {
@@ -307,7 +300,7 @@ function generateDashboardHTML() {
     }
     tasksByCategory[task.category].push({ id, ...task });
   });
-  
+
   return `
 <!DOCTYPE html>
 <html lang="en">
@@ -587,10 +580,14 @@ function generateDashboardHTML() {
             <div class="card">
                 <h2>🔧 Automation Tasks</h2>
                 <div class="task-grid">
-                    ${Object.entries(tasksByCategory).map(([category, tasks]) => `
+                    ${Object.entries(tasksByCategory)
+                      .map(
+                        ([category, tasks]) => `
                         <div>
                             <h3 style="color: #4a5568; margin-bottom: 15px; font-size: 1.1rem;">${category}</h3>
-                            ${tasks.map(task => `
+                            ${tasks
+                              .map(
+                                task => `
                                 <div class="task-card ${runningTasks.includes(task.id) ? 'running' : ''}">
                                     <div class="task-header">
                                         <span class="task-icon">${task.icon}</span>
@@ -603,15 +600,23 @@ function generateDashboardHTML() {
                                         </button>
                                     </div>
                                 </div>
-                            `).join('')}
+                            `
+                              )
+                              .join('')}
                         </div>
-                    `).join('')}
+                    `
+                      )
+                      .join('')}
                 </div>
             </div>
             
             <div class="card">
                 <h2>📋 Recent Tasks</h2>
-                ${recentTasks.length > 0 ? recentTasks.map(task => `
+                ${
+                  recentTasks.length > 0
+                    ? recentTasks
+                        .map(
+                          task => `
                     <div class="log-entry">
                         <div class="log-timestamp">${new Date(task.startTime).toLocaleString()}</div>
                         <div class="log-message">
@@ -619,17 +624,29 @@ function generateDashboardHTML() {
                             ${task.duration ? ` (${Math.round(task.duration / 1000)}s)` : ''}
                         </div>
                     </div>
-                `).join('') : '<p style="color: #718096;">No recent tasks</p>'}
+                `
+                        )
+                        .join('')
+                    : '<p style="color: #718096;">No recent tasks</p>'
+                }
             </div>
             
             <div class="card">
                 <h2>📝 Recent Logs</h2>
-                ${recentLogs.length > 0 ? recentLogs.map(log => `
+                ${
+                  recentLogs.length > 0
+                    ? recentLogs
+                        .map(
+                          log => `
                     <div class="log-entry">
                         <div class="log-timestamp">${new Date(log.timestamp).toLocaleString()} [${log.file}]</div>
                         <div class="log-message">${log.message}</div>
                     </div>
-                `).join('') : '<p style="color: #718096;">No recent logs</p>'}
+                `
+                        )
+                        .join('')
+                    : '<p style="color: #718096;">No recent logs</p>'
+                }
             </div>
         </div>
         
@@ -678,18 +695,18 @@ function createServer() {
   const server = http.createServer((req, res) => {
     const parsedUrl = url.parse(req.url, true);
     const pathname = parsedUrl.pathname;
-    
+
     res.setHeader('Content-Type', 'text/html');
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-    
+
     if (req.method === 'OPTIONS') {
       res.writeHead(200);
       res.end();
       return;
     }
-    
+
     if (pathname === '/') {
       res.writeHead(200);
       res.end(generateDashboardHTML());
@@ -698,12 +715,12 @@ function createServer() {
       req.on('data', chunk => {
         body += chunk.toString();
       });
-      
+
       req.on('end', async () => {
         try {
           const { taskId } = JSON.parse(body);
           const result = await executeTask(taskId);
-          
+
           res.writeHead(200, { 'Content-Type': 'application/json' });
           res.end(JSON.stringify(result));
         } catch (error) {
@@ -713,18 +730,20 @@ function createServer() {
       });
     } else if (pathname === '/api/status') {
       res.writeHead(200, { 'Content-Type': 'application/json' });
-      res.end(JSON.stringify({
-        systemStatus: dashboardState.systemStatus,
-        automationStatus: dashboardState.automationStatus,
-        runningTasks: Array.from(dashboardState.runningTasks),
-        recentTasks: dashboardState.taskHistory.slice(0, 10)
-      }));
+      res.end(
+        JSON.stringify({
+          systemStatus: dashboardState.systemStatus,
+          automationStatus: dashboardState.automationStatus,
+          runningTasks: Array.from(dashboardState.runningTasks),
+          recentTasks: dashboardState.taskHistory.slice(0, 10),
+        })
+      );
     } else {
       res.writeHead(404);
       res.end('Not Found');
     }
   });
-  
+
   return server;
 }
 
@@ -734,23 +753,23 @@ function createServer() {
 async function runDashboard() {
   console.info('🚀 Starting Automation Dashboard...');
   console.info(`🌐 Dashboard URL: http://${CONFIG.host}:${CONFIG.port}`);
-  
+
   dashboardState.isRunning = true;
-  
+
   // Update status periodically
   setInterval(() => {
     dashboardState.systemStatus = getSystemStatus();
     dashboardState.automationStatus = getAutomationStatus();
     dashboardState.lastUpdate = new Date().toISOString();
   }, 10000); // Every 10 seconds
-  
+
   // Create and start server
   const server = createServer();
-  
+
   server.listen(CONFIG.port, CONFIG.host, () => {
     console.info(`✅ Dashboard server running on http://${CONFIG.host}:${CONFIG.port}`);
   });
-  
+
   // Graceful shutdown
   process.on('SIGINT', () => {
     console.info('\n🛑 Stopping dashboard...');

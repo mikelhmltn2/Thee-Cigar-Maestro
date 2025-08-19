@@ -12,12 +12,7 @@
             "privacyCompliant": true,
             "answer": "Mezcal",
             "explanation": "The smoky, earthy notes of mezcal echo the dark cocoa and spice of San Andr\u00e9s wrappers.",
-            "options": [
-              "Scotch",
-              "Gin",
-              "Mezcal",
-              "Vodka"
-            ],
+            "options": ["Scotch", "Gin", "Mezcal", "Vodka"],
             "question": "Which spirit best complements a San Andr\u00e9s wrapper?"
           }
         ]
@@ -37,11 +32,7 @@
         "inputValue": "Espresso",
         "intent": "pairing.request",
         "outputMode": "tiered",
-        "returnFields": [
-          "cigar",
-          "reasoning",
-          "flavorNotes"
-        ]
+        "returnFields": ["cigar", "reasoning", "flavorNotes"]
       }
     ],
     "inventorySyncOptions": [
@@ -85,18 +76,10 @@
           }
         ],
         "outputMode": "pairedMenu",
-        "preferredDrinks": [
-          "Rum",
-          "Coffee",
-          "Port"
-        ]
+        "preferredDrinks": ["Rum", "Coffee", "Port"]
       }
     ],
-    "outputModes": [
-      "casual",
-      "classic",
-      "connoisseur"
-    ],
+    "outputModes": ["casual", "classic", "connoisseur"],
     "reversePairingModels": [
       {
         "privacyCompliant": true,
@@ -131,48 +114,25 @@
       "example": "Cocoa in cigar links to dark chocolate in port",
       "type": "Flavor Synergy Explanation"
     },
-    "contrastPairings": [
-      "Bright Bourbon vs. Earthy Maduro"
-    ],
-    "emotionalPairingTags": [
-      "celebratory",
-      "meditative",
-      "romantic"
-    ],
+    "contrastPairings": ["Bright Bourbon vs. Earthy Maduro"],
+    "emotionalPairingTags": ["celebratory", "meditative", "romantic"],
     "enhancedSensoryFlags": {
       "privacyCompliant": true,
       "creamBridgeHint": true,
       "spiceRyeBridge": true,
       "tanninClashWarning": true
     },
-    "flavorBridgeIngredients": [
-      "cocoa",
-      "leather",
-      "cinnamon"
-    ],
-    "recommendedSpirits": [
-      "rum",
-      "mezcal",
-      "sherry"
-    ]
+    "flavorBridgeIngredients": ["cocoa", "leather", "cinnamon"],
+    "recommendedSpirits": ["rum", "mezcal", "sherry"]
   },
   "pairingConductorEngine": {
     "engineVersion": "v3.0",
     "flavorMatrixLinked": true,
     "multisensoryMode": true,
     "emotionalAdaptation": true,
-    "inputParameters": [
-      "wrapperType",
-      "fillerOrigin",
-      "bodyStrength",
-      "userMood"
-    ],
+    "inputParameters": ["wrapperType", "fillerOrigin", "bodyStrength", "userMood"],
     "output": {
-      "recommendedPairings": [
-        "bourbon",
-        "espresso",
-        "leather armchair"
-      ],
+      "recommendedPairings": ["bourbon", "espresso", "leather armchair"],
       "flavorTrajectory": "earthy -> sweet -> pepper",
       "confidenceScore": 0.93
     }
@@ -279,48 +239,16 @@
     }
   ],
   "faithFlavorResonance": {
-    "Christian": [
-      "bread",
-      "wine",
-      "cedar"
-    ],
-    "Jewish": [
-      "fig",
-      "myrrh",
-      "pomegranate"
-    ],
-    "Hindu": [
-      "clove",
-      "cardamom",
-      "ghee"
-    ],
-    "Muslim": [
-      "dates",
-      "honey",
-      "rose"
-    ],
-    "Buddhist": [
-      "tea",
-      "sandalwood",
-      "earth"
-    ]
+    "Christian": ["bread", "wine", "cedar"],
+    "Jewish": ["fig", "myrrh", "pomegranate"],
+    "Hindu": ["clove", "cardamom", "ghee"],
+    "Muslim": ["dates", "honey", "rose"],
+    "Buddhist": ["tea", "sandalwood", "earth"]
   },
   "zodiacFlavorChart": {
-    "Aries": [
-      "spice",
-      "cedar",
-      "Habano"
-    ],
-    "Cancer": [
-      "cream",
-      "vanilla",
-      "Connecticut"
-    ],
-    "Capricorn": [
-      "earth",
-      "oak",
-      "Broadleaf"
-    ]
+    "Aries": ["spice", "cedar", "Habano"],
+    "Cancer": ["cream", "vanilla", "Connecticut"],
+    "Capricorn": ["earth", "oak", "Broadleaf"]
   },
   "ritualsByMoonPhase": [
     {

@@ -8,7 +8,7 @@ class AuthUI {
     this.apiClient = window.CigarMaestroAPI;
     this.isVisible = false;
     this.currentMode = 'login'; // 'login' or 'register'
-    
+
     this.init();
   }
 
@@ -196,12 +196,12 @@ class AuthUI {
   setupEventListeners() {
     // Close modal events
     document.getElementById('auth-modal-close').addEventListener('click', () => this.hide());
-    this.modal.addEventListener('click', (e) => {
+    this.modal.addEventListener('click', e => {
       if (e.target === this.modal) this.hide();
     });
 
     // Form submission
-    document.getElementById('auth-form').addEventListener('submit', (e) => {
+    document.getElementById('auth-form').addEventListener('submit', e => {
       e.preventDefault();
       this.handleFormSubmit();
     });
@@ -213,7 +213,7 @@ class AuthUI {
     });
 
     // ESC key to close
-    document.addEventListener('keydown', (e) => {
+    document.addEventListener('keydown', e => {
       if (e.key === 'Escape' && this.isVisible) {
         this.hide();
       }
@@ -254,7 +254,7 @@ class AuthUI {
 
     try {
       let response;
-      
+
       if (this.currentMode === 'login') {
         response = await this.apiClient.login({ email, password });
       } else {
@@ -268,14 +268,15 @@ class AuthUI {
       this.apiClient.setCurrentUser(response.user);
 
       // Show success and hide modal
-      this.showSuccess(`${this.currentMode === 'login' ? 'Signed in' : 'Account created'} successfully!`);
-      
+      this.showSuccess(
+        `${this.currentMode === 'login' ? 'Signed in' : 'Account created'} successfully!`
+      );
+
       setTimeout(() => {
         this.hide();
         this.updateAuthState();
         window.location.reload(); // Refresh to update UI
       }, 1500);
-
     } catch (error) {
       this.showError(error.message);
     } finally {
@@ -286,7 +287,7 @@ class AuthUI {
   setLoading(isLoading) {
     const submitBtn = document.getElementById('auth-submit-btn');
     const form = document.getElementById('auth-form');
-    
+
     if (isLoading) {
       submitBtn.textContent = 'Please wait...';
       submitBtn.disabled = true;
@@ -326,7 +327,7 @@ class AuthUI {
     this.updateUI();
     this.modal.style.display = 'flex';
     this.isVisible = true;
-    
+
     // Focus on email field
     setTimeout(() => {
       document.getElementById('auth-email').focus();
@@ -337,7 +338,7 @@ class AuthUI {
     this.modal.style.display = 'none';
     this.isVisible = false;
     this.clearError();
-    
+
     // Clear form
     document.getElementById('auth-form').reset();
   }
@@ -352,11 +353,13 @@ class AuthUI {
   updateAuthState() {
     // Update navigation or user interface based on auth state
     const user = this.apiClient.getCurrentUser();
-    
+
     // Dispatch custom event for other components to listen to
-    window.dispatchEvent(new CustomEvent('authStateChange', {
-      detail: { user, isAuthenticated: !!user }
-    }));
+    window.dispatchEvent(
+      new CustomEvent('authStateChange', {
+        detail: { user, isAuthenticated: !!user },
+      })
+    );
   }
 
   logout() {

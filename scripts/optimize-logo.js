@@ -19,7 +19,7 @@ class LogoOptimizer {
     this.inputLogo = path.join(rootDir, 'Logo.png');
     this.outputDir = path.join(rootDir, 'assets', 'logos');
     this.manifests = [];
-    
+
     // Create output directory if it doesn't exist
     if (!fs.existsSync(this.outputDir)) {
       fs.mkdirSync(this.outputDir, { recursive: true });
@@ -53,7 +53,7 @@ class LogoOptimizer {
       { size: 192, name: 'logo-192.webp', format: 'webp' },
       { size: 512, name: 'logo-512.webp', format: 'webp' },
       { size: null, name: 'logo-optimized.png', format: 'png', quality: 90 },
-      { size: null, name: 'logo-optimized.webp', format: 'webp', quality: 85 }
+      { size: null, name: 'logo-optimized.webp', format: 'webp', quality: 85 },
     ];
 
     let totalSavings = 0;
@@ -67,21 +67,21 @@ class LogoOptimizer {
         if (variant.size) {
           processor = processor.resize(variant.size, variant.size, {
             fit: 'inside',
-            withoutEnlargement: true
+            withoutEnlargement: true,
           });
         }
 
         // Apply format-specific optimizations
         if (variant.format === 'webp') {
-          processor = processor.webp({ 
+          processor = processor.webp({
             quality: variant.quality || 85,
-            effort: 6
+            effort: 6,
           });
         } else if (variant.format === 'png') {
-          processor = processor.png({ 
+          processor = processor.png({
             quality: variant.quality || 90,
             compressionLevel: 9,
-            progressive: true
+            progressive: true,
           });
         }
 
@@ -94,14 +94,16 @@ class LogoOptimizer {
         const savings = variant.size ? 0 : originalSizeKB - newSizeKB;
         totalSavings += savings;
 
-        console.info(`✅ Generated ${variant.name}: ${newSizeKB}KB${savings > 0 ? ` (saved ${savings}KB)` : ''}`);
+        console.info(
+          `✅ Generated ${variant.name}: ${newSizeKB}KB${savings > 0 ? ` (saved ${savings}KB)` : ''}`
+        );
 
         // Add to manifest for PWA
         if (variant.format === 'png' && variant.size) {
           this.manifests.push({
             src: `assets/logos/${variant.name}`,
             sizes: `${variant.size}x${variant.size}`,
-            type: 'image/png'
+            type: 'image/png',
           });
         }
       } catch (error) {
@@ -114,7 +116,7 @@ class LogoOptimizer {
 
     // Update the main logo with the optimized version
     await this.updateMainLogo();
-    
+
     // Generate manifest suggestions
     this.generateManifestSuggestions();
   }
@@ -134,12 +136,12 @@ class LogoOptimizer {
 
         // Replace main logo
         fs.copyFileSync(optimizedPath, this.inputLogo);
-        
+
         const newStats = fs.statSync(this.inputLogo);
         const newSizeKB = Math.round(newStats.size / 1024);
-        
+
         console.info(`\n🔄 Updated main Logo.png: ${newSizeKB}KB`);
-        
+
         if (newSizeKB <= 200) {
           console.info(`✅ Logo now meets the <200KB requirement!`);
         }

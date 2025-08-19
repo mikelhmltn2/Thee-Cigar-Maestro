@@ -2,13 +2,7 @@ import js from '@eslint/js';
 
 export default [
   {
-    ignores: [
-      '**/node_modules/**',
-      '.next/**',
-      'dist/**',
-      'coverage/**',
-      'build/**'
-    ]
+    ignores: ['**/node_modules/**', '.next/**', 'dist/**', 'coverage/**', 'build/**'],
   },
   {
     ...js.configs.recommended,
@@ -28,7 +22,7 @@ export default [
         FormData: 'readonly',
         FileReader: 'readonly',
         Blob: 'readonly',
-        
+
         // Web APIs
         localStorage: 'readonly',
         sessionStorage: 'readonly',
@@ -48,7 +42,7 @@ export default [
         Worker: 'readonly',
         trustedTypes: 'readonly',
         scheduler: 'readonly',
-        
+
         // Timer functions
         setTimeout: 'readonly',
         clearTimeout: 'readonly',
@@ -56,39 +50,39 @@ export default [
         clearInterval: 'readonly',
         requestAnimationFrame: 'readonly',
         cancelAnimationFrame: 'readonly',
-        
+
         // Network/Fetch APIs
         Request: 'readonly',
         Response: 'readonly',
         Headers: 'readonly',
         AbortController: 'readonly',
         AbortSignal: 'readonly',
-        
+
         // Event APIs
         Event: 'readonly',
         CustomEvent: 'readonly',
         FetchEvent: 'readonly',
-        
+
         // Data/encoding
         atob: 'readonly',
         btoa: 'readonly',
-        
+
         // Misc browser APIs
         alert: 'readonly',
         confirm: 'readonly',
         prompt: 'readonly',
-        
+
         // Three.js globals
         THREE: 'readonly',
-        
+
         // Analytics globals
         gtag: 'readonly',
         dataLayer: 'readonly',
-        
+
         // Storage APIs
         Storage: 'readonly',
         DOMException: 'readonly',
-        
+
         // Node.js globals (for backend and scripts)
         process: 'readonly',
         Buffer: 'readonly',
@@ -97,32 +91,41 @@ export default [
         global: 'readonly',
         module: 'readonly',
         require: 'readonly',
-        exports: 'readonly'
-      }
+        exports: 'readonly',
+      },
     },
     rules: {
       // Relax some strict rules for development
-      'no-console': ['warn', { 
-        allow: ['warn', 'error', 'info'] 
-      }],
-      'no-unused-vars': ['warn', { 
-        argsIgnorePattern: '^_',
-        varsIgnorePattern: '^_',
-        caughtErrorsIgnorePattern: '^_'
-      }],
+      'no-console': [
+        'warn',
+        {
+          allow: ['warn', 'error', 'info'],
+        },
+      ],
+      'no-unused-vars': [
+        'warn',
+        {
+          argsIgnorePattern: '^_',
+          varsIgnorePattern: '^_',
+          caughtErrorsIgnorePattern: '^_',
+        },
+      ],
       'consistent-return': 'warn',
-      'eqeqeq': ['error', 'always'],
-      'radix': 'error',
+      eqeqeq: ['error', 'always'],
+      radix: 'error',
       'require-atomic-updates': 'warn',
       'no-await-in-loop': 'warn',
       'no-promise-executor-return': 'error',
       'no-shadow': 'warn',
-      
+
       // Allow undefined error variables in catch blocks
-      'no-undef': ['error', { 
-        typeof: false 
-      }]
-    }
+      'no-undef': [
+        'error',
+        {
+          typeof: false,
+        },
+      ],
+    },
   },
   {
     // Service Worker specific configuration
@@ -136,7 +139,7 @@ export default [
         importScripts: 'readonly',
         registration: 'readonly',
         skipWaiting: 'readonly',
-        
+
         // Web APIs in SW context
         Request: 'readonly',
         Response: 'readonly',
@@ -151,15 +154,15 @@ export default [
         clearTimeout: 'readonly',
         setInterval: 'readonly',
         clearInterval: 'readonly',
-        
+
         // Build tool globals
         define: 'readonly',
-        _: 'readonly'
-      }
+        _: 'readonly',
+      },
     },
     rules: {
-      'no-console': 'off'
-    }
+      'no-console': 'off',
+    },
   },
   {
     // Backend-specific configuration
@@ -175,19 +178,19 @@ export default [
         module: 'readonly',
         require: 'readonly',
         exports: 'readonly',
-        
+
         // Node.js timer functions
         setTimeout: 'readonly',
         clearTimeout: 'readonly',
         setInterval: 'readonly',
-        clearInterval: 'readonly'
-      }
+        clearInterval: 'readonly',
+      },
     },
     rules: {
       'no-promise-executor-return': 'off',
-      'radix': 'off',
-      'no-await-in-loop': 'off'
-    }
+      radix: 'off',
+      'no-await-in-loop': 'off',
+    },
   },
   {
     // Test-specific configuration
@@ -204,20 +207,20 @@ export default [
         beforeAll: 'readonly',
         afterAll: 'readonly',
         vi: 'readonly',
-        
+
         // Test environment globals
         Storage: 'readonly',
         DOMException: 'readonly',
         setTimeout: 'readonly',
-        clearTimeout: 'readonly'
-      }
+        clearTimeout: 'readonly',
+      },
     },
     rules: {
       // Relax rules for tests
       'no-console': 'off',
       'no-unused-vars': 'off',
-      'no-promise-executor-return': 'off'
-    }
+      'no-promise-executor-return': 'off',
+    },
   },
   {
     // Build output files (ignore ESLint for these)
@@ -226,16 +229,16 @@ export default [
       // Disable all rules for build output
       'no-undef': 'off',
       'no-unused-vars': 'off',
-      'eqeqeq': 'off',
+      eqeqeq: 'off',
       'no-promise-executor-return': 'off',
-      'radix': 'off'
-    }
+      radix: 'off',
+    },
   },
   {
     // Configuration files
     files: ['*.config.js', 'vite.config.js', 'vitest.config.js'],
     rules: {
-      'no-console': 'off'
-    }
-  }
+      'no-console': 'off',
+    },
+  },
 ];
