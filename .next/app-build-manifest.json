@@ -1,3 +1,97 @@
 {
-  "pages": {}
+  "pages": {
+    "/_not-found/page": [
+      "static/chunks/runtime-9d390e933fd8615e.js",
+      "static/chunks/npm.next-2a0c97d2a37aa121.js",
+      "static/chunks/117-864d59831e8a88bf.js",
+      "static/chunks/main-app-8d44840c7bd221fa.js",
+      "static/chunks/app/_not-found/page-edc906ff1f269e80.js"
+    ],
+    "/layout": [
+      "static/chunks/runtime-9d390e933fd8615e.js",
+      "static/chunks/npm.next-2a0c97d2a37aa121.js",
+      "static/chunks/117-864d59831e8a88bf.js",
+      "static/chunks/main-app-8d44840c7bd221fa.js",
+      "static/css/ed15e301de927dae.css",
+      "static/chunks/shared-cbe9c032f879fb5f.js",
+      "static/chunks/commons-113fa1f2e212c4e7.js",
+      "static/chunks/app/layout-870a6d75cb30963e.js"
+    ],
+    "/about/page": [
+      "static/chunks/runtime-9d390e933fd8615e.js",
+      "static/chunks/npm.next-2a0c97d2a37aa121.js",
+      "static/chunks/117-864d59831e8a88bf.js",
+      "static/chunks/main-app-8d44840c7bd221fa.js",
+      "static/chunks/commons-113fa1f2e212c4e7.js",
+      "static/chunks/app/about/page-6c73e0f8e6bbd6e8.js"
+    ],
+    "/cart/page": [
+      "static/chunks/runtime-9d390e933fd8615e.js",
+      "static/chunks/npm.next-2a0c97d2a37aa121.js",
+      "static/chunks/117-864d59831e8a88bf.js",
+      "static/chunks/main-app-8d44840c7bd221fa.js",
+      "static/chunks/commons-113fa1f2e212c4e7.js",
+      "static/chunks/app/cart/page-0b40d8275d3cf47f.js"
+    ],
+    "/dashboard/page": [
+      "static/chunks/runtime-9d390e933fd8615e.js",
+      "static/chunks/npm.next-2a0c97d2a37aa121.js",
+      "static/chunks/117-864d59831e8a88bf.js",
+      "static/chunks/main-app-8d44840c7bd221fa.js",
+      "static/chunks/commons-113fa1f2e212c4e7.js",
+      "static/chunks/app/dashboard/page-87b372c31c88c764.js"
+    ],
+    "/contact/page": [
+      "static/chunks/runtime-9d390e933fd8615e.js",
+      "static/chunks/npm.next-2a0c97d2a37aa121.js",
+      "static/chunks/117-864d59831e8a88bf.js",
+      "static/chunks/main-app-8d44840c7bd221fa.js",
+      "static/chunks/commons-113fa1f2e212c4e7.js",
+      "static/chunks/app/contact/page-5669e710d62853ae.js"
+    ],
+    "/login/page": [
+      "static/chunks/runtime-9d390e933fd8615e.js",
+      "static/chunks/npm.next-2a0c97d2a37aa121.js",
+      "static/chunks/117-864d59831e8a88bf.js",
+      "static/chunks/main-app-8d44840c7bd221fa.js",
+      "static/chunks/commons-113fa1f2e212c4e7.js",
+      "static/chunks/app/login/page-170001b80f4e1513.js"
+    ],
+    "/page": [
+      "static/chunks/runtime-9d390e933fd8615e.js",
+      "static/chunks/npm.next-2a0c97d2a37aa121.js",
+      "static/chunks/117-864d59831e8a88bf.js",
+      "static/chunks/main-app-8d44840c7bd221fa.js",
+      "static/chunks/framework-19da52b870a79f4a.js",
+      "static/chunks/npm.three-534d6c9e6478ca30.js",
+      "static/chunks/npm.troika-three-text-784685d26bde14a0.js",
+      "static/chunks/commons-113fa1f2e212c4e7.js",
+      "static/chunks/484-01cf520c85361c17.js",
+      "static/chunks/app/page-e03f4ef9f0560d65.js"
+    ],
+    "/products/page": [
+      "static/chunks/runtime-9d390e933fd8615e.js",
+      "static/chunks/npm.next-2a0c97d2a37aa121.js",
+      "static/chunks/117-864d59831e8a88bf.js",
+      "static/chunks/main-app-8d44840c7bd221fa.js",
+      "static/chunks/commons-113fa1f2e212c4e7.js",
+      "static/chunks/app/products/page-c12d3984ab342330.js"
+    ],
+    "/register/page": [
+      "static/chunks/runtime-9d390e933fd8615e.js",
+      "static/chunks/npm.next-2a0c97d2a37aa121.js",
+      "static/chunks/117-864d59831e8a88bf.js",
+      "static/chunks/main-app-8d44840c7bd221fa.js",
+      "static/chunks/commons-113fa1f2e212c4e7.js",
+      "static/chunks/app/register/page-917429aed26e5916.js"
+    ],
+    "/ai-concierge/page": [
+      "static/chunks/runtime-9d390e933fd8615e.js",
+      "static/chunks/npm.next-2a0c97d2a37aa121.js",
+      "static/chunks/117-864d59831e8a88bf.js",
+      "static/chunks/main-app-8d44840c7bd221fa.js",
+      "static/chunks/commons-113fa1f2e212c4e7.js",
+      "static/chunks/app/ai-concierge/page-ba15bbd455887950.js"
+    ]
+  }
 }

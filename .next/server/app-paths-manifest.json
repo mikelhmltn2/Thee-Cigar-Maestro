@@ -1,1 +1,13 @@
-{}
+{
+  "/_not-found/page": "app/_not-found/page.js",
+  "/about/page": "app/about/page.js",
+  "/api/health/route": "app/api/health/route.js",
+  "/cart/page": "app/cart/page.js",
+  "/dashboard/page": "app/dashboard/page.js",
+  "/contact/page": "app/contact/page.js",
+  "/login/page": "app/login/page.js",
+  "/page": "app/page.js",
+  "/products/page": "app/products/page.js",
+  "/register/page": "app/register/page.js",
+  "/ai-concierge/page": "app/ai-concierge/page.js"
+}
