@@ -1,1 +1,1 @@
-export const luxuryUtils = {}
+export const luxuryUtils = {};

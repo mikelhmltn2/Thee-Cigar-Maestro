@@ -14,7 +14,7 @@ class EnhancedCigarModal {
     this.tastingNotes = '';
     this.isRecording = false;
     this.recordingData = null;
-    
+
     this.init();
   }
 
@@ -25,7 +25,7 @@ class EnhancedCigarModal {
 
   setupEventListeners() {
     // Listen for cigar selection events
-    window.addEventListener('cigarSelected', (event) => {
+    window.addEventListener('cigarSelected', event => {
       this.showCigarDetails(event.detail.cigar);
     });
   }
@@ -33,13 +33,13 @@ class EnhancedCigarModal {
   showCigarDetails(cigar) {
     this.currentCigar = cigar;
     const cigarData = cigar.userData;
-    
+
     // Get additional data
     const pairings = this.dataManager.getCigarPairings(cigarData.name);
     const emotionalContext = this.dataManager.getEmotionalContext(cigarData.wrapper);
-    
+
     const modalContent = this.generateModalContent(cigarData, pairings, emotionalContext);
-    
+
     this.uiManager.showModal(`🚬 ${cigarData.name}`, modalContent, 'large');
     this.addModalStyles();
     this.setupModalEventListeners();
@@ -976,14 +976,14 @@ class EnhancedCigarModal {
   setupModalEventListeners() {
     // Tab switching
     document.querySelectorAll('.tab-header').forEach(header => {
-      header.addEventListener('click', (e) => {
+      header.addEventListener('click', e => {
         this.switchTab(e.target.dataset.tab);
       });
     });
 
     // Star rating interaction
     document.querySelectorAll('.star-rating.clickable').forEach(rating => {
-      rating.addEventListener('click', (e) => {
+      rating.addEventListener('click', e => {
         this.handleRatingClick(e.target);
       });
     });
@@ -1016,11 +1016,11 @@ class EnhancedCigarModal {
 
   getWrapperColor(wrapper) {
     const colors = {
-      'Maduro': '#8B4513',
-      'Connecticut': '#F5DEB3',
-      'Habano': '#CD853F',
-      'Natural': '#DEB887',
-      'Oscuro': '#2F1B14'
+      Maduro: '#8B4513',
+      Connecticut: '#F5DEB3',
+      Habano: '#CD853F',
+      Natural: '#DEB887',
+      Oscuro: '#2F1B14',
     };
     return colors[wrapper] || '#CD853F';
   }
@@ -1030,20 +1030,30 @@ class EnhancedCigarModal {
     const hasHalfStar = rating % 1 >= 0.5;
     const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
 
-    return '★'.repeat(fullStars) + 
-           (hasHalfStar ? '☆' : '') + 
-           '☆'.repeat(emptyStars);
+    return '★'.repeat(fullStars) + (hasHalfStar ? '☆' : '') + '☆'.repeat(emptyStars);
   }
 
   generateFlavorWheel(flavorText) {
-    if (!flavorText) return '<div class="flavor-tag">Rich</div><div class="flavor-tag">Complex</div>';
+    if (!flavorText)
+      return '<div class="flavor-tag">Rich</div><div class="flavor-tag">Complex</div>';
 
     const flavors = this.extractFlavors(flavorText);
     return flavors.map(flavor => `<div class="flavor-tag">${flavor}</div>`).join('');
   }
 
   extractFlavors(text) {
-    const commonFlavors = ['woody', 'spicy', 'sweet', 'earthy', 'nutty', 'chocolate', 'coffee', 'cedar', 'pepper', 'vanilla'];
+    const commonFlavors = [
+      'woody',
+      'spicy',
+      'sweet',
+      'earthy',
+      'nutty',
+      'chocolate',
+      'coffee',
+      'cedar',
+      'pepper',
+      'vanilla',
+    ];
     const foundFlavors = [];
 
     commonFlavors.forEach(flavor => {
@@ -1058,16 +1068,19 @@ class EnhancedCigarModal {
   generatePairingItems(items, type) {
     const icons = {
       spirit: '🥃',
-      wine: '🍷', 
+      wine: '🍷',
       beverage: '☕',
-      food: '🍫'
+      food: '🍫',
     };
 
-    return items.map(item => 
-      `<div class="pairing-item">
+    return items
+      .map(
+        item =>
+          `<div class="pairing-item">
         <span>${icons[type]} ${item}</span>
       </div>`
-    ).join('');
+      )
+      .join('');
   }
 
   generateEmotionalContext(emotional) {
@@ -1090,10 +1103,12 @@ class EnhancedCigarModal {
       { stars: 4, count: 38, percentage: 30 },
       { stars: 3, count: 15, percentage: 12 },
       { stars: 2, count: 5, percentage: 4 },
-      { stars: 1, count: 2, percentage: 1 }
+      { stars: 1, count: 2, percentage: 1 },
     ];
 
-    return ratings.map(rating => `
+    return ratings
+      .map(
+        rating => `
       <div class="rating-bar">
         <span class="rating-bar-label">${rating.stars}★</span>
         <div class="rating-bar-fill">
@@ -1101,32 +1116,36 @@ class EnhancedCigarModal {
         </div>
         <span class="rating-bar-count">${rating.count}</span>
       </div>
-    `).join('');
+    `
+      )
+      .join('');
   }
 
   generateReviews() {
     const reviews = [
       {
-        name: "CigarMaster92",
-        date: "2 days ago",
+        name: 'CigarMaster92',
+        date: '2 days ago',
         rating: 5,
-        text: "Exceptional cigar with perfect construction. The flavor profile is complex and evolving throughout the smoke."
+        text: 'Exceptional cigar with perfect construction. The flavor profile is complex and evolving throughout the smoke.',
       },
       {
-        name: "SmokeEnthusiast",
-        date: "1 week ago", 
+        name: 'SmokeEnthusiast',
+        date: '1 week ago',
         rating: 4,
-        text: "Great smoke for the price point. Pairs wonderfully with a good whisky. Would definitely purchase again."
+        text: 'Great smoke for the price point. Pairs wonderfully with a good whisky. Would definitely purchase again.',
       },
       {
-        name: "TobaccoConnoisseur",
-        date: "2 weeks ago",
+        name: 'TobaccoConnoisseur',
+        date: '2 weeks ago',
         rating: 5,
-        text: "This is what premium cigars should be. Flawless burn, rich flavors, and an excellent finish."
-      }
+        text: 'This is what premium cigars should be. Flawless burn, rich flavors, and an excellent finish.',
+      },
     ];
 
-    return reviews.map(review => `
+    return reviews
+      .map(
+        review => `
       <div class="review-item">
         <div class="review-header">
           <span class="reviewer-name">${review.name}</span>
@@ -1135,32 +1154,44 @@ class EnhancedCigarModal {
         <div class="review-rating">${this.generateStarRating(review.rating)}</div>
         <p class="review-text">${review.text}</p>
       </div>
-    `).join('');
+    `
+      )
+      .join('');
   }
 
   generatePreviousSessions(cigarName) {
     const sessions = this.getStoredSessions(cigarName);
-    
+
     if (sessions.length === 0) {
       return '<p class="no-sessions">No previous sessions recorded.</p>';
     }
 
-    return sessions.map(session => `
+    return sessions
+      .map(
+        session => `
       <div class="session-item">
         <span class="session-date">${session.date}</span>
         <span class="session-duration">${session.duration}</span>
       </div>
-    `).join('');
+    `
+      )
+      .join('');
   }
 
   generateOriginStory(cigar) {
     const stories = {
-      'Maduro': 'This Maduro wrapper has been aged to perfection, developing its characteristic dark color and sweet, complex flavors through careful fermentation and aging processes.',
-      'Connecticut': 'Grown in the Connecticut River Valley, this wrapper is prized for its smooth, creamy characteristics and golden color, cultivated under shade cloth for optimal texture.',
-      'Habano': 'Cuban-seed tobacco grown in premium regions, this Habano wrapper brings spice and complexity, honoring traditional Cuban cigar-making techniques.'
+      Maduro:
+        'This Maduro wrapper has been aged to perfection, developing its characteristic dark color and sweet, complex flavors through careful fermentation and aging processes.',
+      Connecticut:
+        'Grown in the Connecticut River Valley, this wrapper is prized for its smooth, creamy characteristics and golden color, cultivated under shade cloth for optimal texture.',
+      Habano:
+        'Cuban-seed tobacco grown in premium regions, this Habano wrapper brings spice and complexity, honoring traditional Cuban cigar-making techniques.',
     };
 
-    return stories[cigar.wrapper] || 'This premium cigar represents the pinnacle of tobacco craftsmanship, blending traditional techniques with modern quality standards.';
+    return (
+      stories[cigar.wrapper] ||
+      'This premium cigar represents the pinnacle of tobacco craftsmanship, blending traditional techniques with modern quality standards.'
+    );
   }
 
   generateTechnicalChart(_cigar) {
@@ -1170,10 +1201,12 @@ class EnhancedCigarModal {
       { label: 'Construction', value: 95 },
       { label: 'Draw Quality', value: 88 },
       { label: 'Burn Quality', value: 92 },
-      { label: 'Value', value: 85 }
+      { label: 'Value', value: 85 },
     ];
 
-    return technicalData.map(item => `
+    return technicalData
+      .map(
+        item => `
       <div class="chart-item">
         <span class="chart-label">${item.label}</span>
         <div class="chart-bar">
@@ -1181,7 +1214,9 @@ class EnhancedCigarModal {
         </div>
         <span class="chart-value">${item.value}</span>
       </div>
-    `).join('');
+    `
+      )
+      .join('');
   }
 
   // User interaction methods
@@ -1210,10 +1245,10 @@ class EnhancedCigarModal {
   // Action methods
   addToWishlist() {
     if (!this.currentCigar) return;
-    
+
     const wishlist = JSON.parse(localStorage.getItem('wishlist') || '[]');
     const cigarName = this.currentCigar.userData.name;
-    
+
     if (!wishlist.includes(cigarName)) {
       wishlist.push(cigarName);
       localStorage.setItem('wishlist', JSON.stringify(wishlist));
@@ -1225,14 +1260,14 @@ class EnhancedCigarModal {
 
   shareCigar() {
     if (!this.currentCigar) return;
-    
+
     const cigarName = this.currentCigar.userData.name;
-    
+
     if (navigator.share) {
       navigator.share({
         title: `${cigarName} - Thee Cigar Maestro`,
         text: `Check out this amazing cigar: ${cigarName}`,
-        url: window.location.href
+        url: window.location.href,
       });
     } else {
       // Fallback: copy to clipboard
@@ -1243,12 +1278,15 @@ class EnhancedCigarModal {
 
   startTastingSession() {
     if (!this.currentCigar) return;
-    
+
     this.uiManager.closeModal();
     this.switchTab('notes');
-    this.uiManager.showModal(`🎭 Tasting Session: ${this.currentCigar.userData.name}`, 
-      this.generateModalContent(this.currentCigar.userData, [], null), 'large');
-    
+    this.uiManager.showModal(
+      `🎭 Tasting Session: ${this.currentCigar.userData.name}`,
+      this.generateModalContent(this.currentCigar.userData, [], null),
+      'large'
+    );
+
     // Auto-switch to notes tab
     setTimeout(() => {
       this.switchTab('notes');
@@ -1257,10 +1295,10 @@ class EnhancedCigarModal {
 
   saveNotes() {
     if (!this.currentCigar) return;
-    
+
     const notes = document.getElementById('tastingNotes').value;
     const cigarName = this.currentCigar.userData.name;
-    
+
     this.saveTastingNotes(cigarName, notes);
     this.uiManager.showToast('Tasting notes saved', 'success');
   }
@@ -1276,7 +1314,8 @@ class EnhancedCigarModal {
       return;
     }
 
-    navigator.mediaDevices.getUserMedia({ audio: true })
+    navigator.mediaDevices
+      .getUserMedia({ audio: true })
       .then(stream => {
         this.mediaRecorder = new MediaRecorder(stream);
         this.audioChunks = [];
@@ -1292,7 +1331,7 @@ class EnhancedCigarModal {
 
         this.mediaRecorder.start();
         this.isRecording = true;
-        
+
         const status = document.getElementById('recordingStatus');
         if (status) {
           status.textContent = '🔴 Recording... (Click to stop)';
@@ -1307,7 +1346,7 @@ class EnhancedCigarModal {
     if (this.mediaRecorder && this.isRecording) {
       this.mediaRecorder.stop();
       this.isRecording = false;
-      
+
       const status = document.getElementById('recordingStatus');
       if (status) {
         status.textContent = 'Record Audio';
@@ -1318,13 +1357,13 @@ class EnhancedCigarModal {
   saveAudioRecording(audioBlob) {
     const cigarName = this.currentCigar.userData.name;
     const recordings = JSON.parse(localStorage.getItem(`recordings_${cigarName}`) || '[]');
-    
+
     // Convert blob to base64 for storage (in a real app, you'd upload to a server)
     const reader = new FileReader();
     reader.onload = () => {
       recordings.push({
         date: new Date().toISOString(),
-        audio: reader.result
+        audio: reader.result,
       });
       localStorage.setItem(`recordings_${cigarName}`, JSON.stringify(recordings));
       this.uiManager.showToast('Voice recording saved', 'success');
@@ -1335,7 +1374,7 @@ class EnhancedCigarModal {
   toggleSessionTimer() {
     const toggle = document.getElementById('sessionToggle');
     const timer = document.getElementById('sessionTimer');
-    
+
     if (!this.sessionStartTime) {
       // Start timer
       this.sessionStartTime = Date.now();
@@ -1345,17 +1384,17 @@ class EnhancedCigarModal {
         const seconds = Math.floor((elapsed % 60000) / 1000);
         timer.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
       }, 1000);
-      
+
       toggle.textContent = '⏸️ Pause';
     } else {
       // Stop timer
       if (this.sessionInterval) {
         clearInterval(this.sessionInterval);
       }
-      
+
       const duration = Math.floor((Date.now() - this.sessionStartTime) / 60000);
       this.saveSession(duration);
-      
+
       this.sessionStartTime = null;
       toggle.textContent = '▶️ Start';
       timer.textContent = '00:00';
@@ -1364,16 +1403,16 @@ class EnhancedCigarModal {
 
   saveSession(duration) {
     if (!this.currentCigar) return;
-    
+
     const cigarName = this.currentCigar.userData.name;
     const sessions = this.getStoredSessions(cigarName);
-    
+
     sessions.push({
       date: new Date().toLocaleDateString(),
       duration: `${duration} min`,
-      timestamp: Date.now()
+      timestamp: Date.now(),
     });
-    
+
     localStorage.setItem(`sessions_${cigarName}`, JSON.stringify(sessions));
     this.uiManager.showToast(`Session saved: ${duration} minutes`, 'success');
   }

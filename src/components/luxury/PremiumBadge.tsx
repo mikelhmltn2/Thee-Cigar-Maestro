@@ -1,3 +1,3 @@
 export default function PremiumBadge() {
-  return null
+  return null;
 }

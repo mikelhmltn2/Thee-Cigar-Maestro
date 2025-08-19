@@ -9,48 +9,48 @@ export class PerformanceOptimizer {
     this.metrics = new Map();
     this.optimizations = new Map();
     this.observers = new Map();
-    
+
     this.config = {
       targetLoadTime: 2500, // 2.5 seconds
       imageLazyLoadThreshold: 0.1,
       preloadCriticalResources: true,
       enableCodeSplitting: true,
       cacheStrategy: 'aggressive',
-      compressionLevel: 'high'
+      compressionLevel: 'high',
     };
-    
+
     this.init();
   }
 
   async init() {
     if (this.isInitialized) return;
-    
+
     console.log('⚡ Initializing Performance Optimizer...');
-    
+
     // Critical performance optimizations
     await this.optimizeCriticalRenderingPath();
-    
+
     // Image optimization
     await this.initializeImageOptimization();
-    
+
     // Lazy loading implementation
     await this.setupLazyLoading();
-    
+
     // Code splitting and bundling
     await this.optimizeCodeDelivery();
-    
+
     // Caching strategies
     await this.implementAdvancedCaching();
-    
+
     // Mobile performance
     await this.optimizeMobilePerformance();
-    
+
     // SEO enhancements
     await this.enhanceSEO();
-    
+
     // Performance monitoring
     await this.setupPerformanceMonitoring();
-    
+
     this.isInitialized = true;
     console.log('✅ Performance Optimizer initialized');
   }
@@ -58,13 +58,13 @@ export class PerformanceOptimizer {
   async optimizeCriticalRenderingPath() {
     // Inline critical CSS
     await this.inlineCriticalCSS();
-    
+
     // Preload critical resources
     await this.preloadCriticalResources();
-    
+
     // Optimize font loading
     await this.optimizeFontLoading();
-    
+
     // Minimize render-blocking resources
     await this.minimizeRenderBlocking();
   }
@@ -161,9 +161,12 @@ export class PerformanceOptimizer {
 
   async preloadCriticalResources() {
     const criticalResources = [
-      { href: 'https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Source+Serif+Pro:wght@300;400;600&display=swap', as: 'style' },
+      {
+        href: 'https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Source+Serif+Pro:wght@300;400;600&display=swap',
+        as: 'style',
+      },
       { href: '/assets/logos/logo-192.png', as: 'image' },
-      { href: '/manifest.json', as: 'manifest' }
+      { href: '/manifest.json', as: 'manifest' },
     ];
 
     criticalResources.forEach(resource => {
@@ -172,7 +175,9 @@ export class PerformanceOptimizer {
       link.href = resource.href;
       link.as = resource.as;
       if (resource.as === 'style') {
-        link.onload = function() { this.rel = 'stylesheet'; };
+        link.onload = function () {
+          this.rel = 'stylesheet';
+        };
       }
       document.head.appendChild(link);
     });
@@ -195,7 +200,7 @@ export class PerformanceOptimizer {
         }
       </style>
     `;
-    
+
     document.head.insertAdjacentHTML('beforeend', fontCSS);
   }
 
@@ -214,7 +219,9 @@ export class PerformanceOptimizer {
       if (!link.href.includes('critical')) {
         link.rel = 'preload';
         link.as = 'style';
-        link.onload = function() { this.rel = 'stylesheet'; };
+        link.onload = function () {
+          this.rel = 'stylesheet';
+        };
       }
     });
   }
@@ -222,41 +229,41 @@ export class PerformanceOptimizer {
   async initializeImageOptimization() {
     // Convert images to WebP format
     await this.convertToWebP();
-    
+
     // Implement responsive images
     await this.implementResponsiveImages();
-    
+
     // Optimize image compression
     await this.optimizeImageCompression();
-    
+
     // Add image placeholders
     await this.addImagePlaceholders();
   }
 
   async convertToWebP() {
     const images = document.querySelectorAll('img[src]');
-    
+
     const supportsWebP = await this.supportsWebP();
-    
+
     for (const img of images) {
       if (!img.src.includes('.webp') && supportsWebP) {
         const webpSrc = img.src.replace(/\.(jpg|jpeg|png)$/i, '.webp');
-        
+
         // Create a picture element for fallback
         const picture = document.createElement('picture');
-        
+
         const webpSource = document.createElement('source');
         webpSource.srcset = webpSrc;
         webpSource.type = 'image/webp';
-        
+
         const fallbackSource = document.createElement('source');
         fallbackSource.srcset = img.src;
         fallbackSource.type = img.src.match(/\.(jpg|jpeg)$/i) ? 'image/jpeg' : 'image/png';
-        
+
         picture.appendChild(webpSource);
         picture.appendChild(fallbackSource);
         picture.appendChild(img.cloneNode(true));
-        
+
         img.parentNode.replaceChild(picture, img);
       }
     }
@@ -264,17 +271,19 @@ export class PerformanceOptimizer {
 
   async supportsWebP() {
     return new Promise(resolve => {
-      const webP = (typeof window !== 'undefined' && typeof window.Image !== 'undefined')
-        ? new window.Image()
-        : document.createElement('img');
+      const webP =
+        typeof window !== 'undefined' && typeof window.Image !== 'undefined'
+          ? new window.Image()
+          : document.createElement('img');
       webP.onload = webP.onerror = () => resolve(webP.height === 2);
-      webP.src = 'data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAACyAgCdASoCAAIALmk0mk0iIiIiIgBoSygABc6WWgAA/veff/0PP8bA//LwYAAA';
+      webP.src =
+        'data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAACyAgCdASoCAAIALmk0mk0iIiIiIgBoSygABc6WWgAA/veff/0PP8bA//LwYAAA';
     });
   }
 
   async implementResponsiveImages() {
     const images = document.querySelectorAll('img:not([srcset])');
-    
+
     images.forEach(img => {
       const src = img.src;
       if (src && !src.includes('data:')) {
@@ -283,11 +292,12 @@ export class PerformanceOptimizer {
           `${src.replace(/\.(jpg|jpeg|png|webp)$/i, '_480w.$1')} 480w`,
           `${src.replace(/\.(jpg|jpeg|png|webp)$/i, '_768w.$1')} 768w`,
           `${src.replace(/\.(jpg|jpeg|png|webp)$/i, '_1024w.$1')} 1024w`,
-          `${src} 1200w`
+          `${src} 1200w`,
         ].join(', ');
-        
+
         img.srcset = srcset;
-        img.sizes = '(max-width: 480px) 480px, (max-width: 768px) 768px, (max-width: 1024px) 1024px, 1200px';
+        img.sizes =
+          '(max-width: 480px) 480px, (max-width: 768px) 768px, (max-width: 1024px) 1024px, 1200px';
       }
     });
   }
@@ -295,13 +305,13 @@ export class PerformanceOptimizer {
   async optimizeImageCompression() {
     // This would integrate with a service like Cloudinary or ImageKit
     // For now, we'll add optimization headers and quality settings
-    
+
     const images = document.querySelectorAll('img');
     images.forEach(img => {
       // Add loading optimization attributes
       img.loading = 'lazy';
       img.decoding = 'async';
-      
+
       // Add quality hints for supported formats
       if (img.src.includes('.jpg') || img.src.includes('.jpeg')) {
         img.dataset.quality = '85';
@@ -313,21 +323,21 @@ export class PerformanceOptimizer {
 
   async addImagePlaceholders() {
     const images = document.querySelectorAll('img[loading="lazy"]');
-    
+
     images.forEach(img => {
       // Create a low-quality placeholder
       const placeholder = this.createImagePlaceholder(img.width || 400, img.height || 300);
-      
+
       // Set placeholder as initial src
       const originalSrc = img.src;
       img.src = placeholder;
       img.dataset.src = originalSrc;
-      
+
       // Add fade-in effect
       img.style.opacity = '0.7';
       img.style.filter = 'blur(2px)';
       img.style.transition = 'opacity 0.3s ease, filter 0.3s ease';
-      
+
       // Replace with actual image when loaded
       img.addEventListener('load', () => {
         if (img.src !== placeholder) {
@@ -342,31 +352,34 @@ export class PerformanceOptimizer {
     const canvas = document.createElement('canvas');
     canvas.width = width;
     canvas.height = height;
-    
+
     const ctx = canvas.getContext('2d');
     const gradient = ctx.createLinearGradient(0, 0, width, height);
     gradient.addColorStop(0, '#1a0f0a');
     gradient.addColorStop(1, '#2a1b14');
-    
+
     ctx.fillStyle = gradient;
     ctx.fillRect(0, 0, width, height);
-    
+
     return canvas.toDataURL('image/png', 0.1);
   }
 
   async setupLazyLoading() {
     // Intersection Observer for lazy loading
-    const lazyLoadObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          this.loadLazyElement(entry.target);
-          lazyLoadObserver.unobserve(entry.target);
-        }
-      });
-    }, {
-      threshold: this.config.imageLazyLoadThreshold,
-      rootMargin: '50px 0px'
-    });
+    const lazyLoadObserver = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            this.loadLazyElement(entry.target);
+            lazyLoadObserver.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        threshold: this.config.imageLazyLoadThreshold,
+        rootMargin: '50px 0px',
+      }
+    );
 
     // Observe images
     const lazyImages = document.querySelectorAll('img[data-src]');
@@ -391,7 +404,7 @@ export class PerformanceOptimizer {
 
   async loadLazyContent(element) {
     const content = element.dataset.lazy;
-    
+
     try {
       if (content.startsWith('http')) {
         // Block external HTML injection for security
@@ -404,10 +417,9 @@ export class PerformanceOptimizer {
           module.default(element);
         }
       }
-      
+
       element.removeAttribute('data-lazy');
       element.classList.add('lazy-loaded');
-      
     } catch (error) {
       console.warn('Failed to load lazy content:', error);
     }
@@ -416,13 +428,13 @@ export class PerformanceOptimizer {
   async optimizeCodeDelivery() {
     // Dynamic imports for code splitting
     await this.implementDynamicImports();
-    
+
     // Bundle optimization
     await this.optimizeBundles();
-    
+
     // Tree shaking simulation
     await this.removeUnusedCode();
-    
+
     // Module preloading
     await this.preloadModules();
   }
@@ -433,7 +445,7 @@ export class PerformanceOptimizer {
       { selector: '.virtual-humidor', module: './virtual-humidor.js' },
       { selector: '.ai-concierge', module: './ai-concierge-enhanced.js' },
       { selector: '.analytics-dashboard', module: './analytics-dashboard.js' },
-      { selector: '.community-features', module: './community-features.js' }
+      { selector: '.community-features', module: './community-features.js' },
     ];
 
     featureModules.forEach(({ selector, module }) => {
@@ -446,8 +458,8 @@ export class PerformanceOptimizer {
   }
 
   async loadModuleWhenNeeded(selector, modulePath) {
-    const observer = new IntersectionObserver(async (entries) => {
-      entries.forEach(async (entry) => {
+    const observer = new IntersectionObserver(async entries => {
+      entries.forEach(async entry => {
         if (entry.isIntersecting) {
           try {
             const module = await import(modulePath);
@@ -473,7 +485,7 @@ export class PerformanceOptimizer {
     const criticalModules = [
       'luxury-enhancements.js',
       'performance-optimizer.js',
-      'autonomy-engine.js'
+      'autonomy-engine.js',
     ];
 
     // Preload critical modules
@@ -488,7 +500,7 @@ export class PerformanceOptimizer {
   async removeUnusedCode() {
     // Remove unused CSS classes and JavaScript functions
     // This is a simplified version - real implementation would use tools like PurgeCSS
-    
+
     const unusedSelectors = this.detectUnusedCSS();
     this.removeUnusedCSS(unusedSelectors);
   }
@@ -502,7 +514,11 @@ export class PerformanceOptimizer {
       try {
         const rules = Array.from(stylesheet.cssRules || []);
         rules.forEach(rule => {
-          if (typeof window !== 'undefined' && typeof window.CSSRule !== 'undefined' && rule.type === window.CSSRule.STYLE_RULE) {
+          if (
+            typeof window !== 'undefined' &&
+            typeof window.CSSRule !== 'undefined' &&
+            rule.type === window.CSSRule.STYLE_RULE
+          ) {
             const selector = rule.selectorText;
             try {
               if (document.querySelector(selector)) {
@@ -526,7 +542,7 @@ export class PerformanceOptimizer {
   removeUnusedCSS(unusedSelectors) {
     // In a real implementation, this would modify the stylesheets
     console.log('Detected unused CSS selectors:', unusedSelectors.length);
-    
+
     // Mark for removal in build process
     this.optimizations.set('unusedCSS', unusedSelectors);
   }
@@ -534,7 +550,7 @@ export class PerformanceOptimizer {
   async preloadModules() {
     const importantModules = [
       './src/autonomy/autonomy-engine.js',
-      './src/components/luxury-enhancements.js'
+      './src/components/luxury-enhancements.js',
     ];
 
     importantModules.forEach(module => {
@@ -548,10 +564,10 @@ export class PerformanceOptimizer {
   async implementAdvancedCaching() {
     // Service Worker caching strategy
     await this.setupServiceWorkerCaching();
-    
+
     // Browser caching optimization
     await this.optimizeBrowserCaching();
-    
+
     // Memory caching for frequently accessed data
     await this.setupMemoryCaching();
   }
@@ -560,7 +576,7 @@ export class PerformanceOptimizer {
     if ('serviceWorker' in navigator) {
       try {
         const registration = await navigator.serviceWorker.register('/sw.js');
-        
+
         // Update service worker with new caching strategies
         const swMessage = {
           type: 'CACHE_STRATEGY',
@@ -570,10 +586,10 @@ export class PerformanceOptimizer {
             '/src/components/',
             '/src/autonomy/',
             'https://fonts.googleapis.com/',
-            'https://fonts.gstatic.com/'
-          ]
+            'https://fonts.gstatic.com/',
+          ],
         };
-        
+
         if (registration.active) {
           registration.active.postMessage(swMessage);
         }
@@ -589,7 +605,7 @@ export class PerformanceOptimizer {
       ['image', 'max-age=31536000, immutable'], // 1 year for images
       ['font', 'max-age=31536000, immutable'], // 1 year for fonts
       ['script', 'max-age=86400'], // 1 day for scripts
-      ['style', 'max-age=86400'] // 1 day for styles
+      ['style', 'max-age=86400'], // 1 day for styles
     ]);
 
     // This would typically be handled by the server
@@ -605,7 +621,7 @@ export class PerformanceOptimizer {
     // Cache configuration
     const cacheConfig = {
       maxSize: 50, // Maximum number of items
-      ttl: 300000 // 5 minutes TTL
+      ttl: 300000, // 5 minutes TTL
     };
 
     this.memoryCache.config = cacheConfig;
@@ -616,7 +632,7 @@ export class PerformanceOptimizer {
       value,
       timestamp: Date.now(),
       accessed: Date.now(),
-      hits: 0
+      hits: 0,
     };
 
     // Check cache size limit
@@ -629,7 +645,7 @@ export class PerformanceOptimizer {
 
   cacheGet(key) {
     const item = this.memoryCache.get(key);
-    
+
     if (!item) return null;
 
     // Check TTL
@@ -651,10 +667,10 @@ export class PerformanceOptimizer {
 
     for (const [key, item] of this.memoryCache) {
       if (key === 'config') continue;
-      
+
       // Score based on hits and recency
       const score = item.hits / (Date.now() - item.accessed);
-      
+
       if (score < leastScore) {
         leastScore = score;
         leastUsed = key;
@@ -669,13 +685,13 @@ export class PerformanceOptimizer {
   async optimizeMobilePerformance() {
     // Touch optimization
     await this.optimizeTouchInteractions();
-    
+
     // Viewport optimization
     await this.optimizeViewport();
-    
+
     // Battery and CPU optimization
     await this.optimizeForMobile();
-    
+
     // Network optimization
     await this.optimizeNetworkUsage();
   }
@@ -683,11 +699,11 @@ export class PerformanceOptimizer {
   async optimizeTouchInteractions() {
     // Add touch-action optimization
     const touchElements = document.querySelectorAll('button, a, .clickable, .interactive');
-    
+
     touchElements.forEach(element => {
       element.style.touchAction = 'manipulation';
       element.style.userSelect = 'none';
-      
+
       // Prevent 300ms click delay
       element.addEventListener('touchstart', () => {}, { passive: true });
     });
@@ -708,8 +724,9 @@ export class PerformanceOptimizer {
       viewport.name = 'viewport';
       document.head.appendChild(viewport);
     }
-    
-    viewport.content = 'width=device-width, initial-scale=1.0, shrink-to-fit=no, viewport-fit=cover';
+
+    viewport.content =
+      'width=device-width, initial-scale=1.0, shrink-to-fit=no, viewport-fit=cover';
 
     // Add safe area insets for notched devices
     const safeAreaCSS = `
@@ -726,7 +743,7 @@ export class PerformanceOptimizer {
         }
       </style>
     `;
-    
+
     document.head.insertAdjacentHTML('beforeend', safeAreaCSS);
   }
 
@@ -761,7 +778,7 @@ export class PerformanceOptimizer {
           }
         </style>
       `;
-      
+
       document.head.insertAdjacentHTML('beforeend', animationCSS);
     }
 
@@ -772,7 +789,9 @@ export class PerformanceOptimizer {
   }
 
   isMobileDevice() {
-    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+      navigator.userAgent
+    );
   }
 
   isLowEndDevice() {
@@ -780,28 +799,27 @@ export class PerformanceOptimizer {
     const memory = navigator.deviceMemory || 4;
     const cores = navigator.hardwareConcurrency || 4;
     const connection = navigator.connection;
-    
-    const isLowEnd = (
+
+    const isLowEnd =
       memory <= 2 ||
       cores <= 2 ||
       (connection && connection.effectiveType === 'slow-2g') ||
-      (connection && connection.effectiveType === '2g')
-    );
-    
+      (connection && connection.effectiveType === '2g');
+
     return isLowEnd;
   }
 
   enableLowPowerMode() {
     console.log('Enabling low power mode for performance');
-    
+
     // Disable non-essential features
     this.optimizations.set('lowPowerMode', {
       disableParticles: true,
       reduceAnimations: true,
       lowerImageQuality: true,
-      disableAutoplay: true
+      disableAutoplay: true,
     });
-    
+
     // Apply low power optimizations
     const lowPowerCSS = `
       <style id="low-power-mode">
@@ -822,7 +840,7 @@ export class PerformanceOptimizer {
         }
       </style>
     `;
-    
+
     document.head.insertAdjacentHTML('beforeend', lowPowerCSS);
   }
 
@@ -830,11 +848,11 @@ export class PerformanceOptimizer {
     // Implement adaptive loading based on connection
     if ('connection' in navigator) {
       const connection = navigator.connection;
-      
+
       if (connection.effectiveType === 'slow-2g' || connection.effectiveType === '2g') {
         this.enableDataSaverMode();
       }
-      
+
       // Monitor connection changes
       connection.addEventListener('change', () => {
         this.adaptToConnectionChange();
@@ -844,7 +862,7 @@ export class PerformanceOptimizer {
 
   enableDataSaverMode() {
     console.log('Enabling data saver mode');
-    
+
     // Reduce image quality
     const images = document.querySelectorAll('img');
     images.forEach(img => {
@@ -852,70 +870,71 @@ export class PerformanceOptimizer {
         img.src = img.dataset.lowQuality;
       }
     });
-    
+
     // Disable autoplay
     const videos = document.querySelectorAll('video[autoplay]');
     videos.forEach(video => {
       video.removeAttribute('autoplay');
       video.preload = 'none';
     });
-    
+
     this.optimizations.set('dataSaverMode', true);
   }
 
   adaptToConnectionChange() {
     const connection = navigator.connection;
-    
+
     if (connection.effectiveType === '4g' && this.optimizations.get('dataSaverMode')) {
       // Re-enable high quality when connection improves
       this.disableDataSaverMode();
-    } else if ((connection.effectiveType === 'slow-2g' || connection.effectiveType === '2g') && !this.optimizations.get('dataSaverMode')) {
+    } else if (
+      (connection.effectiveType === 'slow-2g' || connection.effectiveType === '2g') &&
+      !this.optimizations.get('dataSaverMode')
+    ) {
       this.enableDataSaverMode();
     }
   }
 
   disableDataSaverMode() {
     console.log('Disabling data saver mode');
-    
+
     // Restore high quality images
     const images = document.querySelectorAll('img[data-high-quality]');
     images.forEach(img => {
       img.src = img.dataset.highQuality;
     });
-    
+
     this.optimizations.set('dataSaverMode', false);
   }
 
   async enhanceSEO() {
     // Structured data optimization
     await this.addStructuredData();
-    
+
     // Meta tags optimization
     await this.optimizeMetaTags();
-    
+
     // Core Web Vitals optimization
     await this.optimizeCoreWebVitals();
-    
+
     // Accessibility improvements
     await this.enhanceAccessibility();
   }
 
   async addStructuredData() {
     const structuredData = {
-      "@context": "https://schema.org",
-      "@type": "WebSite",
-      "name": "Thee Cigar Maestro",
-      "description": "Premium AI-driven cigar experience platform with luxury e-commerce and personalization",
-      "url": "https://theecigarmaestro.com",
-      "potentialAction": {
-        "@type": "SearchAction",
-        "target": "https://theecigarmaestro.com/search?q={search_term_string}",
-        "query-input": "required name=search_term_string"
+      '@context': 'https://schema.org',
+      '@type': 'WebSite',
+      name: 'Thee Cigar Maestro',
+      description:
+        'Premium AI-driven cigar experience platform with luxury e-commerce and personalization',
+      url: 'https://theecigarmaestro.com',
+      potentialAction: {
+        '@type': 'SearchAction',
+        target: 'https://theecigarmaestro.com/search?q={search_term_string}',
+        'query-input': 'required name=search_term_string',
       },
-      "sameAs": [
-        "https://www.instagram.com/theecigarmaestro",
-        "https://twitter.com/cigarmaestro"
-      ]
+      sameAs: ['https://www.instagram.com/theecigarmaestro', 'https://twitter.com/cigarmaestro'],
     };
 
     const script = document.createElement('script');
@@ -926,24 +945,48 @@ export class PerformanceOptimizer {
 
   async optimizeMetaTags() {
     const metaTags = [
-      { name: 'description', content: 'Premium AI-driven cigar experience platform with luxury e-commerce, personalized recommendations, and sophisticated pairing advice.' },
-      { name: 'keywords', content: 'cigars, luxury cigars, AI recommendations, cigar pairings, premium tobacco, cigar education' },
+      {
+        name: 'description',
+        content:
+          'Premium AI-driven cigar experience platform with luxury e-commerce, personalized recommendations, and sophisticated pairing advice.',
+      },
+      {
+        name: 'keywords',
+        content:
+          'cigars, luxury cigars, AI recommendations, cigar pairings, premium tobacco, cigar education',
+      },
       { name: 'author', content: 'Thee Cigar Maestro' },
-      { name: 'robots', content: 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1' },
+      {
+        name: 'robots',
+        content: 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1',
+      },
       { property: 'og:title', content: 'Thee Cigar Maestro — The Art. The Ritual. The Maestro.' },
-      { property: 'og:description', content: 'Experience the world\'s most sophisticated AI-driven cigar platform with personalized recommendations and luxury experiences.' },
+      {
+        property: 'og:description',
+        content:
+          "Experience the world's most sophisticated AI-driven cigar platform with personalized recommendations and luxury experiences.",
+      },
       { property: 'og:type', content: 'website' },
       { property: 'og:url', content: 'https://theecigarmaestro.com' },
       { property: 'og:image', content: 'https://theecigarmaestro.com/assets/logos/logo-og.png' },
       { name: 'twitter:card', content: 'summary_large_image' },
       { name: 'twitter:site', content: '@cigarmaestro' },
       { name: 'twitter:title', content: 'Thee Cigar Maestro — Premium AI Cigar Experience' },
-      { name: 'twitter:description', content: 'Discover your perfect cigar with AI-powered recommendations and luxury experiences.' },
-      { name: 'twitter:image', content: 'https://theecigarmaestro.com/assets/logos/logo-twitter.png' }
+      {
+        name: 'twitter:description',
+        content:
+          'Discover your perfect cigar with AI-powered recommendations and luxury experiences.',
+      },
+      {
+        name: 'twitter:image',
+        content: 'https://theecigarmaestro.com/assets/logos/logo-twitter.png',
+      },
     ];
 
     metaTags.forEach(tag => {
-      let element = document.querySelector(`meta[name="${tag.name}"], meta[property="${tag.property}"]`);
+      let element = document.querySelector(
+        `meta[name="${tag.name}"], meta[property="${tag.property}"]`
+      );
       if (!element) {
         element = document.createElement('meta');
         if (tag.name) element.name = tag.name;
@@ -957,10 +1000,10 @@ export class PerformanceOptimizer {
   async optimizeCoreWebVitals() {
     // Optimize Largest Contentful Paint (LCP)
     await this.optimizeLCP();
-    
+
     // Optimize First Input Delay (FID)
     await this.optimizeFID();
-    
+
     // Optimize Cumulative Layout Shift (CLS)
     await this.optimizeCLS();
   }
@@ -983,7 +1026,7 @@ export class PerformanceOptimizer {
   async optimizeFID() {
     // Break up long tasks
     this.breakUpLongTasks();
-    
+
     // Use web workers for heavy computations
     if (typeof window !== 'undefined' && 'Worker' in window) {
       this.setupWebWorkers();
@@ -992,7 +1035,7 @@ export class PerformanceOptimizer {
 
   breakUpLongTasks() {
     // Use scheduler.postTask if available, otherwise use setTimeout
-    const scheduleTask = (task) => {
+    const scheduleTask = task => {
       if ('scheduler' in window && 'postTask' in (window.scheduler || {})) {
         window.scheduler.postTask(task, { priority: 'user-blocking' });
       } else {
@@ -1004,7 +1047,7 @@ export class PerformanceOptimizer {
     const initTasks = [
       () => this.initializeImageOptimization(),
       () => this.setupLazyLoading(),
-      () => this.optimizeCodeDelivery()
+      () => this.optimizeCodeDelivery(),
     ];
 
     initTasks.forEach(task => scheduleTask(task));
@@ -1014,7 +1057,7 @@ export class PerformanceOptimizer {
     if (typeof window === 'undefined' || typeof window.Worker === 'undefined') {
       return;
     }
-    
+
     const workerScript = `
       self.onmessage = async (e) => {
         const { type, payload } = e.data;
@@ -1034,7 +1077,7 @@ export class PerformanceOptimizer {
     const blob = new Blob([workerScript], { type: 'application/javascript' });
     const worker = new window.Worker(URL.createObjectURL(blob));
 
-    worker.onmessage = (e) => {
+    worker.onmessage = e => {
       const { type, result } = e.data;
       this.handleWorkerMessage(type, result);
     };
@@ -1043,7 +1086,7 @@ export class PerformanceOptimizer {
   }
 
   handleWorkerMessage(type, result) {
-    switch(type) {
+    switch (type) {
       case 'IMAGES_OPTIMIZED':
         console.log('Images optimized by web worker');
         break;
@@ -1078,7 +1121,9 @@ export class PerformanceOptimizer {
 
   async enhanceAccessibility() {
     // Add ARIA labels where missing
-    const interactiveElements = document.querySelectorAll('button:not([aria-label]), a:not([aria-label])');
+    const interactiveElements = document.querySelectorAll(
+      'button:not([aria-label]), a:not([aria-label])'
+    );
     interactiveElements.forEach(element => {
       if (!element.textContent.trim()) {
         element.setAttribute('aria-label', 'Interactive element');
@@ -1087,10 +1132,10 @@ export class PerformanceOptimizer {
 
     // Ensure proper heading structure
     this.validateHeadingStructure();
-    
+
     // Add skip links
     this.addSkipLinks();
-    
+
     // Enhance keyboard navigation
     this.enhanceKeyboardNavigation();
   }
@@ -1098,14 +1143,14 @@ export class PerformanceOptimizer {
   validateHeadingStructure() {
     const headings = document.querySelectorAll('h1, h2, h3, h4, h5, h6');
     let currentLevel = 0;
-    
+
     headings.forEach(heading => {
       const level = parseInt(heading.tagName.substring(1), 10);
-      
+
       if (level > currentLevel + 1) {
         console.warn(`Heading structure issue: ${heading.tagName} follows h${currentLevel}`);
       }
-      
+
       currentLevel = level;
     });
   }
@@ -1116,7 +1161,7 @@ export class PerformanceOptimizer {
       skipLink.href = '#main-content';
       skipLink.className = 'skip-link sr-only';
       skipLink.textContent = 'Skip to main content';
-      
+
       const skipLinkCSS = `
         <style id="skip-link-styles">
           .skip-link {
@@ -1137,7 +1182,7 @@ export class PerformanceOptimizer {
           }
         </style>
       `;
-      
+
       document.head.insertAdjacentHTML('beforeend', skipLinkCSS);
       document.body.insertBefore(skipLink, document.body.firstChild);
     }
@@ -1158,13 +1203,17 @@ export class PerformanceOptimizer {
         }
       </style>
     `;
-    
+
     document.head.insertAdjacentHTML('beforeend', focusCSS);
 
     // Ensure all interactive elements are focusable
     const interactiveElements = document.querySelectorAll('.clickable, .interactive');
     interactiveElements.forEach(element => {
-      if (!element.hasAttribute('tabindex') && element.tagName !== 'A' && element.tagName !== 'BUTTON') {
+      if (
+        !element.hasAttribute('tabindex') &&
+        element.tagName !== 'A' &&
+        element.tagName !== 'BUTTON'
+      ) {
         element.setAttribute('tabindex', '0');
       }
     });
@@ -1175,19 +1224,19 @@ export class PerformanceOptimizer {
     if ('PerformanceObserver' in window) {
       this.setupWebVitalsMonitoring();
     }
-    
+
     // Resource timing monitoring
     this.setupResourceTimingMonitoring();
-    
+
     // Custom performance metrics
     this.setupCustomMetrics();
-    
+
     // Real user monitoring
     this.setupRealUserMonitoring();
   }
 
   setupWebVitalsMonitoring() {
-    const webVitalsObserver = new PerformanceObserver((entryList) => {
+    const webVitalsObserver = new PerformanceObserver(entryList => {
       entryList.getEntries().forEach(entry => {
         switch (entry.entryType) {
           case 'largest-contentful-paint':
@@ -1204,7 +1253,9 @@ export class PerformanceOptimizer {
     });
 
     try {
-      webVitalsObserver.observe({ entryTypes: ['largest-contentful-paint', 'first-input', 'layout-shift'] });
+      webVitalsObserver.observe({
+        entryTypes: ['largest-contentful-paint', 'first-input', 'layout-shift'],
+      });
     } catch (e) {
       console.warn('Web Vitals monitoring not supported');
     }
@@ -1217,7 +1268,7 @@ export class PerformanceOptimizer {
 
   setupResourceTimingMonitoring() {
     if ('PerformanceObserver' in window) {
-      const resourceObserver = new PerformanceObserver((entryList) => {
+      const resourceObserver = new PerformanceObserver(entryList => {
         entryList.getEntries().forEach(entry => {
           this.analyzeResourceTiming(entry);
         });
@@ -1229,16 +1280,16 @@ export class PerformanceOptimizer {
 
   analyzeResourceTiming(entry) {
     const slowThreshold = 1000; // 1 second
-    
+
     if (entry.duration > slowThreshold) {
       console.warn(`Slow resource detected: ${entry.name} took ${entry.duration}ms`);
-      
+
       // Track slow resources
       const slowResources = this.metrics.get('slowResources') || [];
       slowResources.push({
         name: entry.name,
         duration: entry.duration,
-        timestamp: Date.now()
+        timestamp: Date.now(),
       });
       this.metrics.set('slowResources', slowResources);
     }
@@ -1247,22 +1298,22 @@ export class PerformanceOptimizer {
   setupCustomMetrics() {
     // Track time to interactive
     this.trackTimeToInteractive();
-    
+
     // Track user engagement metrics
     this.trackUserEngagement();
-    
+
     // Track error rates
     this.trackErrorRates();
   }
 
   trackTimeToInteractive() {
     const startTime = performance.now();
-    
+
     const checkInteractive = () => {
       if (document.readyState === 'complete') {
         const tti = performance.now() - startTime;
         this.metrics.set('TTI', tti);
-        
+
         // Report if TTI exceeds target
         if (tti > this.config.targetLoadTime) {
           console.warn(`TTI (${tti}ms) exceeds target (${this.config.targetLoadTime}ms)`);
@@ -1271,46 +1322,50 @@ export class PerformanceOptimizer {
         setTimeout(checkInteractive, 100);
       }
     };
-    
+
     checkInteractive();
   }
 
   trackUserEngagement() {
     let engagementScore = 0;
     let interactionCount = 0;
-    
+
     ['click', 'scroll', 'keydown'].forEach(eventType => {
-      document.addEventListener(eventType, () => {
-        interactionCount++;
-        engagementScore += 1;
-        
-        this.metrics.set('userEngagement', {
-          score: engagementScore,
-          interactions: interactionCount,
-          timestamp: Date.now()
-        });
-      }, { passive: true });
+      document.addEventListener(
+        eventType,
+        () => {
+          interactionCount++;
+          engagementScore += 1;
+
+          this.metrics.set('userEngagement', {
+            score: engagementScore,
+            interactions: interactionCount,
+            timestamp: Date.now(),
+          });
+        },
+        { passive: true }
+      );
     });
   }
 
   trackErrorRates() {
-    window.addEventListener('error', (event) => {
+    window.addEventListener('error', event => {
       const errors = this.metrics.get('errors') || [];
       errors.push({
         message: event.message,
         filename: event.filename,
         lineno: event.lineno,
         colno: event.colno,
-        timestamp: Date.now()
+        timestamp: Date.now(),
       });
       this.metrics.set('errors', errors);
     });
 
-    window.addEventListener('unhandledrejection', (event) => {
+    window.addEventListener('unhandledrejection', event => {
       const rejections = this.metrics.get('rejections') || [];
       rejections.push({
         reason: event.reason,
-        timestamp: Date.now()
+        timestamp: Date.now(),
       });
       this.metrics.set('rejections', rejections);
     });
@@ -1334,12 +1389,12 @@ export class PerformanceOptimizer {
       errors: this.metrics.get('errors'),
       timestamp: Date.now(),
       userAgent: navigator.userAgent,
-      connection: navigator.connection?.effectiveType
+      connection: navigator.connection?.effectiveType,
     };
 
     // Send to analytics service (would be actual endpoint in production)
     console.log('Performance metrics:', metrics);
-    
+
     // Store locally for debugging
     localStorage.setItem('performanceMetrics', JSON.stringify(metrics));
   }
@@ -1355,11 +1410,11 @@ export class PerformanceOptimizer {
 
   async forceOptimization() {
     console.log('🚀 Force optimizing performance...');
-    
+
     await this.optimizeCriticalRenderingPath();
     await this.setupLazyLoading();
     await this.optimizeCodeDelivery();
-    
+
     console.log('✅ Force optimization complete');
   }
 
@@ -1367,16 +1422,16 @@ export class PerformanceOptimizer {
   destroy() {
     // Disconnect observers
     this.observers.forEach(observer => observer.disconnect());
-    
+
     // Terminate web worker
     if (this.webWorker) {
       this.webWorker.terminate();
     }
-    
+
     // Clear metrics and optimizations
     this.metrics.clear();
     this.optimizations.clear();
-    
+
     this.isInitialized = false;
     console.log('🔄 Performance Optimizer destroyed');
   }

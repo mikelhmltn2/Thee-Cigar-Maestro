@@ -8,7 +8,7 @@
         "flavors": ["soil", "mushroom", "forest", "mineral", "stone"]
       },
       "woodyNotes": {
-        "description": "Wood-derived flavor profiles", 
+        "description": "Wood-derived flavor profiles",
         "flavors": ["cedar", "oak", "pine", "mahogany", "sandalwood"]
       },
       "spicyNotes": {
@@ -30,7 +30,7 @@
     },
     "intensityLevels": {
       "mild": "Subtle, gentle flavor presence",
-      "medium": "Balanced, noticeable flavor presence", 
+      "medium": "Balanced, noticeable flavor presence",
       "full": "Bold, dominant flavor presence"
     },
     "pairingMatrix": {

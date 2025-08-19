@@ -156,11 +156,7 @@
         "privacyCompliant": true,
         "mintable": true,
         "title": "Omega Flame Seal",
-        "traits": [
-          "Final Reflection",
-          "Legacy Bound",
-          "Emotion-Coded"
-        ]
+        "traits": ["Final Reflection", "Legacy Bound", "Emotion-Coded"]
       }
     },
     "deploymentReady": true,

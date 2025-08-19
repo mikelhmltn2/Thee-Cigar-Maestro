@@ -1,24 +1,24 @@
-import type { Metadata } from 'next'
-import { Playfair_Display, Source_Serif_4, Crimson_Text } from 'next/font/google'
+import type { Metadata } from 'next';
+import { Playfair_Display, Source_Serif_4, Crimson_Text } from 'next/font/google';
 // import { GoogleAnalytics } from './components/GoogleAnalytics'
-import { Toaster } from 'react-hot-toast'
-import ServiceWorkerRegistration from '@/components/ServiceWorkerRegistration'
-import './globals.css'
-import Script from 'next/script'
+import { Toaster } from 'react-hot-toast';
+import ServiceWorkerRegistration from '@/components/ServiceWorkerRegistration';
+import './globals.css';
+import Script from 'next/script';
 
 const playfairDisplay = Playfair_Display({
   subsets: ['latin'],
   variable: '--font-display',
   weight: ['400', '500', '600', '700'],
   display: 'swap',
-})
+});
 
 const sourceSerif4 = Source_Serif_4({
   subsets: ['latin'],
   variable: '--font-body',
   weight: ['300', '400', '600'],
   display: 'swap',
-})
+});
 
 const crimsonText = Crimson_Text({
   subsets: ['latin'],
@@ -26,14 +26,15 @@ const crimsonText = Crimson_Text({
   weight: ['400', '600'],
   style: ['normal', 'italic'],
   display: 'swap',
-})
+});
 
 export const metadata: Metadata = {
   title: {
     default: 'Thee Cigar Maestro — The Art. The Ritual. The Maestro.',
-    template: '%s | Thee Cigar Maestro'
+    template: '%s | Thee Cigar Maestro',
   },
-  description: 'Experience the pinnacle of cigar culture with AI-driven recommendations, luxury curation, and immersive digital experiences. From novice to connoisseur, discover your perfect cigar journey.',
+  description:
+    'Experience the pinnacle of cigar culture with AI-driven recommendations, luxury curation, and immersive digital experiences. From novice to connoisseur, discover your perfect cigar journey.',
   keywords: [
     'premium cigars',
     'cigar recommendations',
@@ -44,7 +45,7 @@ export const metadata: Metadata = {
     'cigar accessories',
     'cigar humidor',
     'tobacco culture',
-    'cigar sommelier'
+    'cigar sommelier',
   ],
   authors: [{ name: 'Mike Hamilton' }],
   creator: 'Mike Hamilton',
@@ -63,7 +64,8 @@ export const metadata: Metadata = {
     locale: 'en_US',
     url: 'https://theecigarmaestro.com',
     title: 'Thee Cigar Maestro — The Art. The Ritual. The Maestro.',
-    description: 'Experience the pinnacle of cigar culture with AI-driven recommendations and luxury curation.',
+    description:
+      'Experience the pinnacle of cigar culture with AI-driven recommendations and luxury curation.',
     siteName: 'Thee Cigar Maestro',
     images: [
       {
@@ -77,7 +79,8 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Thee Cigar Maestro — The Art. The Ritual. The Maestro.',
-    description: 'Experience the pinnacle of cigar culture with AI-driven recommendations and luxury curation.',
+    description:
+      'Experience the pinnacle of cigar culture with AI-driven recommendations and luxury curation.',
     images: ['/og-image.jpg'],
     creator: '@theecigarmaestro',
   },
@@ -95,42 +98,39 @@ export const metadata: Metadata = {
   verification: {
     google: 'your-google-verification-code',
   },
-}
+};
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html 
-      lang="en" 
+    <html
+      lang='en'
       className={`${playfairDisplay.variable} ${sourceSerif4.variable} ${crimsonText.variable}`}
     >
       <head>
         {/* Google Analytics */}
-        <Script src="https://www.googletagmanager.com/gtag/js?id=G-ZXVHGWYLKB" strategy="afterInteractive" />
-        
+        <Script
+          src='https://www.googletagmanager.com/gtag/js?id=G-ZXVHGWYLKB'
+          strategy='afterInteractive'
+        />
+
         {/* Preconnect to external domains */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        
+        <link rel='preconnect' href='https://fonts.googleapis.com' />
+        <link rel='preconnect' href='https://fonts.gstatic.com' crossOrigin='anonymous' />
+
         {/* Theme and PWA */}
-        <meta name="theme-color" content="#1a0f0a" />
-        <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-        <link rel="icon" href="/favicon.ico" />
-        <link rel="manifest" href="/manifest.json" />
+        <meta name='theme-color' content='#1a0f0a' />
+        <meta name='apple-mobile-web-app-capable' content='yes' />
+        <meta name='apple-mobile-web-app-status-bar-style' content='black-translucent' />
+        <link rel='apple-touch-icon' href='/apple-touch-icon.png' />
+        <link rel='icon' href='/favicon.ico' />
+        <link rel='manifest' href='/manifest.json' />
       </head>
-      <body className="luxury-gradient font-body text-text-primary antialiased">
+      <body className='luxury-gradient font-body text-text-primary antialiased'>
         {/* <GoogleAnalytics /> */}
         <ServiceWorkerRegistration />
-        <div className="relative min-h-screen">
-          {children}
-        </div>
+        <div className='relative min-h-screen'>{children}</div>
         <Toaster
-          position="top-right"
+          position='top-right'
           toastOptions={{
             duration: 4000,
             style: {
@@ -150,5 +150,5 @@ export default function RootLayout({
         />
       </body>
     </html>
-  )
+  );
 }

@@ -10,7 +10,7 @@ class UIEnhancementManager {
     this.gestureHandlers = new Map();
     this.touchStartTime = 0;
     this.touchStartPos = { x: 0, y: 0 };
-    
+
     this.init();
   }
 
@@ -24,7 +24,7 @@ class UIEnhancementManager {
     this.setupAccessibilityFeatures();
     this.setupKeyboardNavigation();
     this.createToastSystem();
-    
+
     console.info('✨ UI Enhancement Manager initialized');
   }
 
@@ -147,7 +147,7 @@ class UIEnhancementManager {
         }
       </style>
     `;
-    
+
     if (!document.getElementById('loading-styles')) {
       document.head.insertAdjacentHTML('beforeend', loadingStyles);
     }
@@ -289,7 +289,7 @@ class UIEnhancementManager {
         }
       </style>
     `;
-    
+
     if (!document.getElementById('error-styles')) {
       document.head.insertAdjacentHTML('beforeend', errorStyles);
     }
@@ -300,10 +300,12 @@ class UIEnhancementManager {
    */
   showLoading(elementId, type = 'spinner') {
     const element = document.getElementById(elementId);
-    if (!element) {return;}
+    if (!element) {
+      return;
+    }
 
     this.loadingStates.set(elementId, true);
-    
+
     // Store original content
     if (!element.dataset.originalContent) {
       element.dataset.originalContent = element.innerHTML;
@@ -347,10 +349,12 @@ class UIEnhancementManager {
    */
   hideLoading(elementId) {
     const element = document.getElementById(elementId);
-    if (!element) {return;}
+    if (!element) {
+      return;
+    }
 
     this.loadingStates.delete(elementId);
-    
+
     // Remove overlay if it exists
     const overlay = document.querySelector('.loading-overlay');
     if (overlay) {
@@ -362,7 +366,7 @@ class UIEnhancementManager {
       element.innerHTML = element.dataset.originalContent;
       element.classList.remove('loading');
       element.classList.add('fade-in');
-      
+
       // Remove fade-in class after animation
       setTimeout(() => {
         element.classList.remove('fade-in');
@@ -376,7 +380,7 @@ class UIEnhancementManager {
   createSkeletonLoader(element) {
     const rect = element.getBoundingClientRect();
     const height = rect.height || 200;
-    
+
     if (height < 50) {
       return '<div class="loading-skeleton skeleton-text"></div>';
     } else if (height < 100) {
@@ -399,10 +403,12 @@ class UIEnhancementManager {
    */
   showError(elementId, error) {
     const element = document.getElementById(elementId);
-    if (!element) {return;}
+    if (!element) {
+      return;
+    }
 
     this.errorStates.set(elementId, error);
-    
+
     const errorHTML = `
       <div class="error-container">
         <div class="error-title">
@@ -415,11 +421,15 @@ class UIEnhancementManager {
           <button class="error-btn" onclick="uiManager.retryAction('${elementId}')">
             Try Again
           </button>
-          ${error.showDetails ? `
+          ${
+            error.showDetails
+              ? `
             <button class="error-btn secondary" onclick="uiManager.showErrorDetails('${elementId}')">
               Show Details
             </button>
-          ` : ''}
+          `
+              : ''
+          }
         </div>
       </div>
     `;
@@ -433,7 +443,9 @@ class UIEnhancementManager {
    */
   clearError(elementId) {
     const element = document.getElementById(elementId);
-    if (!element) {return;}
+    if (!element) {
+      return;
+    }
 
     this.errorStates.delete(elementId);
     element.classList.remove('error-state');
@@ -444,57 +456,69 @@ class UIEnhancementManager {
    */
   setupMobileGestures() {
     // Swipe detection
-    document.addEventListener('touchstart', (e) => {
-      this.touchStartTime = Date.now();
-      this.touchStartPos = {
-        x: e.touches[0].clientX,
-        y: e.touches[0].clientY
-      };
-    }, { passive: true });
+    document.addEventListener(
+      'touchstart',
+      e => {
+        this.touchStartTime = Date.now();
+        this.touchStartPos = {
+          x: e.touches[0].clientX,
+          y: e.touches[0].clientY,
+        };
+      },
+      { passive: true }
+    );
 
-    document.addEventListener('touchend', (e) => {
-      const touchEndTime = Date.now();
-      const touchEndPos = {
-        x: e.changedTouches[0].clientX,
-        y: e.changedTouches[0].clientY
-      };
+    document.addEventListener(
+      'touchend',
+      e => {
+        const touchEndTime = Date.now();
+        const touchEndPos = {
+          x: e.changedTouches[0].clientX,
+          y: e.changedTouches[0].clientY,
+        };
 
-      const timeDiff = touchEndTime - this.touchStartTime;
-      const distanceX = touchEndPos.x - this.touchStartPos.x;
-      const distanceY = touchEndPos.y - this.touchStartPos.y;
+        const timeDiff = touchEndTime - this.touchStartTime;
+        const distanceX = touchEndPos.x - this.touchStartPos.x;
+        const distanceY = touchEndPos.y - this.touchStartPos.y;
 
-      // Swipe detection (minimum 100px distance, maximum 300ms duration)
-      if (timeDiff < 300 && Math.abs(distanceX) > 100) {
-        const direction = distanceX > 0 ? 'right' : 'left';
-        this.handleSwipe(direction, e.target);
-      }
+        // Swipe detection (minimum 100px distance, maximum 300ms duration)
+        if (timeDiff < 300 && Math.abs(distanceX) > 100) {
+          const direction = distanceX > 0 ? 'right' : 'left';
+          this.handleSwipe(direction, e.target);
+        }
 
-      // Pull to refresh detection
-      if (distanceY > 100 && window.scrollY === 0 && timeDiff < 500) {
-        this.handlePullToRefresh();
-      }
-    }, { passive: true });
+        // Pull to refresh detection
+        if (distanceY > 100 && window.scrollY === 0 && timeDiff < 500) {
+          this.handlePullToRefresh();
+        }
+      },
+      { passive: true }
+    );
 
     // Enhanced tap handling for better mobile experience
     let tapCount = 0;
     let tapTimer = null;
 
-    document.addEventListener('touchend', (e) => {
-      tapCount++;
-      
-      if (tapCount === 1) {
-        tapTimer = setTimeout(() => {
-          // Single tap
-          this.handleTap(e.target);
+    document.addEventListener(
+      'touchend',
+      e => {
+        tapCount++;
+
+        if (tapCount === 1) {
+          tapTimer = setTimeout(() => {
+            // Single tap
+            this.handleTap(e.target);
+            tapCount = 0;
+          }, 250);
+        } else if (tapCount === 2) {
+          // Double tap
+          clearTimeout(tapTimer);
+          this.handleDoubleTap(e.target);
           tapCount = 0;
-        }, 250);
-      } else if (tapCount === 2) {
-        // Double tap
-        clearTimeout(tapTimer);
-        this.handleDoubleTap(e.target);
-        tapCount = 0;
-      }
-    }, { passive: true });
+        }
+      },
+      { passive: true }
+    );
 
     console.info('✅ Mobile gesture handlers initialized');
   }
@@ -505,7 +529,7 @@ class UIEnhancementManager {
   handleSwipe(direction, target) {
     // Check if we're in a modal or panel
     const modal = target.closest('#modal, #educationPanel, #pairingPanel, #loungePanel');
-    
+
     if (modal) {
       if (direction === 'left') {
         // Close modal/panel on left swipe
@@ -525,7 +549,7 @@ class UIEnhancementManager {
       window.analyticsManager.trackEvent('mobile_gesture', {
         type: 'swipe',
         direction,
-        element: target.tagName
+        element: target.tagName,
       });
     }
   }
@@ -535,7 +559,7 @@ class UIEnhancementManager {
    */
   handlePullToRefresh() {
     this.showToast('Refreshing...', 'info');
-    
+
     // Simulate refresh
     setTimeout(() => {
       window.location.reload();
@@ -543,7 +567,7 @@ class UIEnhancementManager {
 
     if (window.analyticsManager) {
       window.analyticsManager.trackEvent('mobile_gesture', {
-        type: 'pull_to_refresh'
+        type: 'pull_to_refresh',
       });
     }
   }
@@ -569,7 +593,7 @@ class UIEnhancementManager {
     if (window.analyticsManager) {
       window.analyticsManager.trackEvent('mobile_gesture', {
         type: 'double_tap',
-        element: target.tagName
+        element: target.tagName,
       });
     }
   }
@@ -631,7 +655,7 @@ class UIEnhancementManager {
     // Reduced motion detection
     if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       document.body.classList.add('reduced-motion');
-      
+
       // Disable animations for users who prefer reduced motion
       const style = document.createElement('style');
       style.textContent = `
@@ -645,7 +669,7 @@ class UIEnhancementManager {
     }
 
     // Focus management for keyboard navigation
-    document.addEventListener('keydown', (e) => {
+    document.addEventListener('keydown', e => {
       if (e.key === 'Tab') {
         document.body.classList.add('keyboard-navigation');
       }
@@ -662,10 +686,12 @@ class UIEnhancementManager {
    * Setup keyboard navigation
    */
   setupKeyboardNavigation() {
-    document.addEventListener('keydown', (e) => {
+    document.addEventListener('keydown', e => {
       // Escape key to close modals
       if (e.key === 'Escape') {
-        const openModal = document.querySelector('#modal[style*="block"], #educationPanel[style*="block"], #pairingPanel[style*="block"]');
+        const openModal = document.querySelector(
+          '#modal[style*="block"], #educationPanel[style*="block"], #pairingPanel[style*="block"]'
+        );
         if (openModal) {
           openModal.style.display = 'none';
           e.preventDefault();
@@ -713,7 +739,7 @@ class UIEnhancementManager {
   showToast(message, type = 'info', duration = 3000) {
     const toast = document.createElement('div');
     toast.className = `toast ${type}`;
-    
+
     const toastId = `toast_${Date.now()}`;
     toast.innerHTML = `
       <div class="toast-header">
@@ -722,15 +748,15 @@ class UIEnhancementManager {
       </div>
       <div class="toast-message">${message}</div>
     `;
-    
+
     toast.id = toastId;
     document.getElementById('toast-container').appendChild(toast);
-    
+
     // Trigger show animation
     setTimeout(() => {
       toast.classList.add('show');
     }, 10);
-    
+
     // Auto remove toast
     setTimeout(() => {
       this.closeToast(toastId);
@@ -760,7 +786,7 @@ class UIEnhancementManager {
       success: '✅',
       error: '❌',
       warning: '⚠️',
-      info: 'ℹ️'
+      info: 'ℹ️',
     };
     return icons[type] || 'ℹ️';
   }
@@ -773,7 +799,7 @@ class UIEnhancementManager {
       success: 'Success',
       error: 'Error',
       warning: 'Warning',
-      info: 'Info'
+      info: 'Info',
     };
     return titles[type] || 'Notification';
   }
@@ -814,7 +840,7 @@ class UIEnhancementManager {
     // This would integrate with the 3D scene controls
     if (window.analyticsManager) {
       window.analyticsManager.trackEvent('keyboard_navigation', {
-        key
+        key,
       });
     }
   }

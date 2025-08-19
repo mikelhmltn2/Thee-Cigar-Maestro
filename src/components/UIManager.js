@@ -12,22 +12,22 @@ class UIManager {
     this.modalOverlay = null;
     this.loadingOverlay = null;
     this.toastContainer = null;
-    
+
     this.mobileBreakpoint = 768;
     this.isMobile = window.innerWidth <= this.mobileBreakpoint;
-    
+
     this.navigationState = {
       history: ['explore'],
-      currentIndex: 0
+      currentIndex: 0,
     };
-    
+
     this.userPreferences = {
       theme: 'dark',
       animations: true,
       autoSave: true,
-      notifications: true
+      notifications: true,
     };
-    
+
     this.init();
   }
 
@@ -41,7 +41,7 @@ class UIManager {
     this.setupKeyboardNavigation();
     this.setupGestureHandling();
     this.initializeTooltips();
-    
+
     console.info('🎨 UI Manager initialized');
   }
 
@@ -65,8 +65,9 @@ class UIManager {
   setupEventListeners() {
     // Navigation buttons
     document.querySelectorAll('.nav-button, .mobile-nav-item').forEach(button => {
-      button.addEventListener('click', (e) => {
-        const section = e.target.dataset.section || e.target.closest('[data-section]')?.dataset.section;
+      button.addEventListener('click', e => {
+        const section =
+          e.target.dataset.section || e.target.closest('[data-section]')?.dataset.section;
         if (section) {
           this.navigateToSection(section);
         }
@@ -76,14 +77,14 @@ class UIManager {
     // Mobile menu with enhanced toggle logic
     const mobileMenuBtn = document.getElementById('mobileMenuBtn');
     if (mobileMenuBtn) {
-      mobileMenuBtn.addEventListener('click', (e) => {
+      mobileMenuBtn.addEventListener('click', e => {
         e.preventDefault();
         e.stopPropagation();
         this.toggleMobileMenu();
       });
 
       // Add keyboard accessibility
-      mobileMenuBtn.addEventListener('keydown', (e) => {
+      mobileMenuBtn.addEventListener('keydown', e => {
         if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
           this.toggleMobileMenu();
@@ -160,7 +161,7 @@ class UIManager {
   setupFilterControls() {
     const filterInputs = document.querySelectorAll('#wrapperFilters input[type="checkbox"]');
     filterInputs.forEach(input => {
-      input.addEventListener('change', (e) => {
+      input.addEventListener('change', e => {
         this.handleFilterChange(e.target.value, e.target.checked);
       });
     });
@@ -172,10 +173,10 @@ class UIManager {
   handleFilterChange(wrapper, checked) {
     // Emit custom event for the main application to handle
     const event = new CustomEvent('filterChange', {
-      detail: { wrapper, checked }
+      detail: { wrapper, checked },
     });
     document.dispatchEvent(event);
-    
+
     this.showToast(`${wrapper} cigars ${checked ? 'shown' : 'hidden'}`, 'success');
   }
 
@@ -228,7 +229,7 @@ class UIManager {
       element: this.panelContent,
       message: `Loading ${section} content...`,
       showSkeleton: true,
-      skeletonType: 'default'
+      skeletonType: 'default',
     });
 
     // Simulate content loading
@@ -399,7 +400,7 @@ class UIManager {
             </div>
           </div>
         </div>
-      `
+      `,
     };
 
     return contentMap[section] || '<p>Content coming soon...</p>';
@@ -416,7 +417,7 @@ class UIManager {
       pairings: '🍷 Pairings',
       journal: '📝 Journal',
       search: '🔍 Search',
-      humidor: '🏛️ Humidor'
+      humidor: '🏛️ Humidor',
     };
 
     if (panelTitle) {
@@ -424,7 +425,10 @@ class UIManager {
     }
 
     // Auto-open panel on mobile for certain sections
-    if (this.isMobile && ['education', 'pairings', 'journal', 'search', 'humidor'].includes(section)) {
+    if (
+      this.isMobile &&
+      ['education', 'pairings', 'journal', 'search', 'humidor'].includes(section)
+    ) {
       this.openSidePanel();
     }
   }
@@ -434,12 +438,14 @@ class UIManager {
    */
   updateInfoDisplay(section) {
     const infoMap = {
-      explore: 'Click on any cigar in the 3D space to learn more about its flavor profile, wrapper, and perfect pairings.',
+      explore:
+        'Click on any cigar in the 3D space to learn more about its flavor profile, wrapper, and perfect pairings.',
       education: 'Explore our educational content to deepen your cigar knowledge and expertise.',
       pairings: 'Discover perfect beverage and food pairings to enhance your cigar experience.',
       journal: 'Document your cigar journey with detailed tasting notes and personal reviews.',
-      search: 'Use advanced search to find exactly the cigar you\'re looking for.',
-      humidor: 'Manage your personal cigar collection with smart tracking, aging insights, and environmental monitoring.'
+      search: "Use advanced search to find exactly the cigar you're looking for.",
+      humidor:
+        'Manage your personal cigar collection with smart tracking, aging insights, and environmental monitoring.',
     };
 
     if (this.dynamicInfo) {
@@ -460,7 +466,7 @@ class UIManager {
     // Enhanced mobile menu logic
     const isOpen = this.sidePanel.classList.contains('open');
     const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-    
+
     if (isOpen) {
       this.closeMobileMenu();
     } else {
@@ -471,15 +477,18 @@ class UIManager {
     if (mobileMenuBtn) {
       mobileMenuBtn.setAttribute('aria-expanded', (!isOpen).toString());
       mobileMenuBtn.innerHTML = isOpen ? '☰' : '✕';
-      mobileMenuBtn.setAttribute('aria-label', isOpen ? 'Open navigation menu' : 'Close navigation menu');
+      mobileMenuBtn.setAttribute(
+        'aria-label',
+        isOpen ? 'Open navigation menu' : 'Close navigation menu'
+      );
     }
 
     // Track mobile menu usage
     if (window.gtag) {
       window.gtag('event', 'mobile_menu_toggle', {
-        'event_category': 'user_interface',
-        'event_label': isOpen ? 'close' : 'open',
-        'value': 1
+        event_category: 'user_interface',
+        event_label: isOpen ? 'close' : 'open',
+        value: 1,
       });
     }
   }
@@ -504,7 +513,7 @@ class UIManager {
     // Add opening class for animation
     this.sidePanel.classList.add('opening');
     this.sidePanel.classList.add('open');
-    
+
     // Prevent body scroll
     document.body.style.overflow = 'hidden';
     document.body.classList.add('mobile-menu-open');
@@ -515,7 +524,9 @@ class UIManager {
     // Focus management for accessibility
     setTimeout(() => {
       this.sidePanel.classList.remove('opening');
-      const firstFocusable = this.sidePanel.querySelector('button, a, [tabindex]:not([tabindex="-1"])');
+      const firstFocusable = this.sidePanel.querySelector(
+        'button, a, [tabindex]:not([tabindex="-1"])'
+      );
       if (firstFocusable) {
         firstFocusable.focus();
       }
@@ -533,14 +544,14 @@ class UIManager {
 
     // Add closing animation class
     this.sidePanel.classList.add('closing');
-    
+
     setTimeout(() => {
       this.sidePanel.classList.remove('open', 'closing');
       document.body.style.overflow = 'auto';
       document.body.classList.remove('mobile-menu-open');
       this.removeMobileMenuBackdrop();
       this.removeEscapeKeyListener();
-      
+
       // Return focus to menu button
       const mobileMenuBtn = document.getElementById('mobileMenuBtn');
       if (mobileMenuBtn) {
@@ -566,7 +577,7 @@ class UIManager {
     if (this.sidePanel) {
       this.sidePanel.classList.remove('open');
       document.body.style.overflow = 'auto';
-      
+
       // Also close mobile menu if it's open
       if (this.isMobile) {
         this.closeMobileMenu();
@@ -604,7 +615,7 @@ class UIManager {
    * Add escape key listener for mobile menu
    */
   addEscapeKeyListener() {
-    this.escapeKeyHandler = (e) => {
+    this.escapeKeyHandler = e => {
       if (e.key === 'Escape' && this.isMobile && this.sidePanel.classList.contains('open')) {
         this.closeMobileMenu();
       }
@@ -717,7 +728,7 @@ class UIManager {
       this.removeMobileMenuBackdrop();
       this.removeEscapeKeyListener();
       document.body.classList.remove('mobile-menu-open');
-      
+
       // Reset mobile menu button
       const mobileMenuBtn = document.getElementById('mobileMenuBtn');
       if (mobileMenuBtn) {
@@ -740,7 +751,7 @@ class UIManager {
    * Setup click outside handlers
    */
   setupClickOutsideHandlers() {
-    document.addEventListener('click', (e) => {
+    document.addEventListener('click', e => {
       // Close side panel when clicking outside on mobile
       if (this.isMobile && this.sidePanel && this.sidePanel.classList.contains('open')) {
         if (!this.sidePanel.contains(e.target) && !e.target.closest('.mobile-menu-btn')) {
@@ -761,7 +772,7 @@ class UIManager {
    * Setup keyboard navigation
    */
   setupKeyboardNavigation() {
-    document.addEventListener('keydown', (e) => {
+    document.addEventListener('keydown', e => {
       // ESC key handling
       if (e.key === 'Escape') {
         if (this.modalOverlay && this.modalOverlay.style.display === 'flex') {
@@ -801,12 +812,12 @@ class UIManager {
     let startX = 0;
     let startY = 0;
 
-    document.addEventListener('touchstart', (e) => {
+    document.addEventListener('touchstart', e => {
       startX = e.touches[0].clientX;
       startY = e.touches[0].clientY;
     });
 
-    document.addEventListener('touchend', (e) => {
+    document.addEventListener('touchend', e => {
       if (!startX || !startY) return;
 
       const endX = e.changedTouches[0].clientX;
@@ -867,7 +878,7 @@ class UIManager {
 
     document.body.appendChild(tooltip);
 
-    element.addEventListener('mouseenter', (e) => {
+    element.addEventListener('mouseenter', e => {
       tooltip.style.opacity = '1';
       this.positionTooltip(tooltip, e.target);
     });
@@ -876,7 +887,7 @@ class UIManager {
       tooltip.style.opacity = '0';
     });
 
-    element.addEventListener('mousemove', (e) => {
+    element.addEventListener('mousemove', e => {
       this.positionTooltip(tooltip, e.target);
     });
 
@@ -900,13 +911,13 @@ class UIManager {
     const focusableElements = element.querySelectorAll(
       'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
     );
-    
+
     if (focusableElements.length === 0) return;
 
     const firstElement = focusableElements[0];
     const lastElement = focusableElements[focusableElements.length - 1];
 
-    element.addEventListener('keydown', (e) => {
+    element.addEventListener('keydown', e => {
       if (e.key === 'Tab') {
         if (e.shiftKey) {
           if (document.activeElement === firstElement) {
@@ -954,7 +965,9 @@ class UIManager {
    * Quick action methods
    */
   openAIChat() {
-    this.showModal('🤖 AI Assistant', `
+    this.showModal(
+      '🤖 AI Assistant',
+      `
       <div class="ai-chat-interface">
         <div class="chat-messages" id="chatMessages">
           <div class="message assistant">
@@ -966,7 +979,8 @@ class UIManager {
           <button onclick="uiManager.sendChatMessage()">Send</button>
         </div>
       </div>
-    `);
+    `
+    );
   }
 
   startRecording() {
@@ -975,7 +989,9 @@ class UIManager {
   }
 
   showHelp() {
-    this.showModal('❓ Help & Tour', `
+    this.showModal(
+      '❓ Help & Tour',
+      `
       <div class="help-content">
         <h4>Welcome to Thee Cigar Maestro!</h4>
         
@@ -1031,7 +1047,8 @@ class UIManager {
           </ul>
         </div>
       </div>
-    `);
+    `
+    );
   }
 
   restartTour() {
@@ -1064,7 +1081,9 @@ class UIManager {
    * Humidor functionality methods
    */
   addToHumidor() {
-    this.showModal('➕ Add Cigar to Humidor', `
+    this.showModal(
+      '➕ Add Cigar to Humidor',
+      `
       <div class="add-cigar-form">
         <div class="form-group">
           <label for="cigarName">Cigar Name</label>
@@ -1106,11 +1125,14 @@ class UIManager {
           </button>
         </div>
       </div>
-    `);
+    `
+    );
   }
 
   scanQRCode() {
-    this.showModal('📷 Scan QR Code', `
+    this.showModal(
+      '📷 Scan QR Code',
+      `
       <div class="qr-scanner">
         <div class="scanner-placeholder">
           <div class="camera-icon">📷</div>
@@ -1126,11 +1148,14 @@ class UIManager {
           </button>
         </div>
       </div>
-    `);
+    `
+    );
   }
 
   viewInventory() {
-    this.showModal('📦 Humidor Inventory', `
+    this.showModal(
+      '📦 Humidor Inventory',
+      `
       <div class="inventory-view">
         <div class="inventory-filters">
           <select id="sortBy" class="search-input" style="margin-bottom: 1rem;">
@@ -1176,11 +1201,14 @@ class UIManager {
           </div>
         </div>
       </div>
-    `);
+    `
+    );
   }
 
   agingReport() {
-    this.showModal('📈 Aging Report & Analytics', `
+    this.showModal(
+      '📈 Aging Report & Analytics',
+      `
       <div class="aging-report">
         <div class="report-summary">
           <h5>📊 Collection Overview</h5>
@@ -1222,11 +1250,14 @@ class UIManager {
           </div>
         </div>
       </div>
-    `);
+    `
+    );
   }
 
   humidorSettings() {
-    this.showModal('⚙️ Humidor Settings', `
+    this.showModal(
+      '⚙️ Humidor Settings',
+      `
       <div class="humidor-settings">
         <div class="settings-section">
           <h5>🌡️ Environmental Controls</h5>
@@ -1294,18 +1325,19 @@ class UIManager {
           </button>
         </div>
       </div>
-    `);
+    `
+    );
   }
 
   saveCigarToHumidor() {
     const name = document.getElementById('cigarName')?.value;
     const brand = document.getElementById('cigarBrand')?.value;
-    
+
     if (!name || !brand) {
       this.showToast('Please fill in the required fields', 'error');
       return;
     }
-    
+
     this.showToast(`Added ${name} to your humidor!`, 'success');
     this.closeModal();
     // Update humidor stats
@@ -1345,12 +1377,12 @@ class UIManager {
     // Update the stats in the humidor section
     const totalCigars = document.getElementById('totalCigars');
     const readyToSmoke = document.getElementById('readyToSmoke');
-    
+
     if (totalCigars) {
       const current = parseInt(totalCigars.textContent, 10) || 47;
       totalCigars.textContent = current + 1;
     }
-    
+
     if (readyToSmoke) {
       const current = parseInt(readyToSmoke.textContent, 10) || 12;
       readyToSmoke.textContent = current + 1;

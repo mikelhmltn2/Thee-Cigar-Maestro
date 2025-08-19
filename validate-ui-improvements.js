@@ -16,7 +16,7 @@ const results = {
   passed: 0,
   failed: 0,
   warnings: 0,
-  details: []
+  details: [],
 };
 
 function test(name, condition, message = '') {
@@ -50,34 +50,30 @@ if (document.readyState === 'loading') {
 
 function runValidation() {
   info('Running validation tests...\n');
-  
+
   // Test 1: Header Navigation Structure
   test(
     'Header Navigation',
     document.querySelector('.main-header') !== null,
     'Main header element exists'
   );
-  
+
   test(
     'Navigation Buttons',
     document.querySelectorAll('.nav-button').length >= 5,
     `Found ${document.querySelectorAll('.nav-button').length} navigation buttons`
   );
-  
+
   // Test 2: Mobile Menu
   test(
     'Mobile Menu Button',
     document.querySelector('.mobile-menu-btn') !== null,
     'Mobile menu button exists'
   );
-  
+
   // Test 3: Side Panel
-  test(
-    'Side Panel',
-    document.querySelector('.side-panel') !== null,
-    'Side panel container exists'
-  );
-  
+  test('Side Panel', document.querySelector('.side-panel') !== null, 'Side panel container exists');
+
   // Test 4: Quick Actions
   const quickActions = document.querySelectorAll('.quick-actions .action-button');
   test(
@@ -85,28 +81,24 @@ function runValidation() {
     quickActions.length >= 3,
     `Found ${quickActions.length} quick action buttons`
   );
-  
+
   // Test 5: Modal System
-  test(
-    'Modal Overlay',
-    document.querySelector('.modal-overlay') !== null,
-    'Modal overlay exists'
-  );
-  
+  test('Modal Overlay', document.querySelector('.modal-overlay') !== null, 'Modal overlay exists');
+
   // Test 6: Loading System
   test(
     'Loading Overlay',
     document.querySelector('.loading-overlay') !== null,
     'Loading overlay exists'
   );
-  
+
   // Test 7: Toast Container
   test(
     'Toast Notifications',
     document.querySelector('.toast-container') !== null,
     'Toast container exists'
   );
-  
+
   // Test 8: Filter Controls
   const filterInputs = document.querySelectorAll('#wrapperFilters input[type="checkbox"]');
   test(
@@ -114,21 +106,21 @@ function runValidation() {
     filterInputs.length >= 5,
     `Found ${filterInputs.length} filter checkboxes`
   );
-  
+
   // Test 9: Canvas Container
   test(
     '3D Canvas Container',
     document.querySelector('.canvas-container') !== null,
     'Canvas container exists'
   );
-  
+
   // Test 10: Info Display
   test(
     'Info Display Panel',
     document.querySelector('.info-display') !== null,
     'Info display panel exists'
   );
-  
+
   // Test 11: CSS Custom Properties
   const rootStyles = window.getComputedStyle(document.documentElement);
   test(
@@ -136,21 +128,21 @@ function runValidation() {
     rootStyles.getPropertyValue('--accent-text').trim() !== '',
     'CSS custom properties are defined'
   );
-  
+
   // Test 12: Responsive Design
   test(
     'Responsive Meta Tag',
     document.querySelector('meta[name="viewport"]') !== null,
     'Viewport meta tag exists'
   );
-  
+
   // Test 13: Module Script
   test(
     'Module Script Loading',
     document.querySelector('script[type="module"]') !== null,
     'Module script tag exists'
   );
-  
+
   // Test 14: Accessibility Features
   const focusableElements = document.querySelectorAll(
     'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
@@ -160,7 +152,7 @@ function runValidation() {
     focusableElements.length > 0,
     `Found ${focusableElements.length} focusable elements`
   );
-  
+
   // Test 15: Touch-Friendly Sizing
   const buttons = document.querySelectorAll('button');
   let touchFriendlyCount = 0;
@@ -170,13 +162,13 @@ function runValidation() {
       touchFriendlyCount++;
     }
   });
-  
+
   test(
     'Touch-Friendly Button Sizes',
     touchFriendlyCount > buttons.length * 0.8,
     `${touchFriendlyCount}/${buttons.length} buttons are touch-friendly (≥44px)`
   );
-  
+
   // Test 16: JavaScript Module Loading
   setTimeout(() => {
     test(
@@ -184,19 +176,19 @@ function runValidation() {
       typeof window.uiManager !== 'undefined',
       'UIManager is globally accessible'
     );
-    
+
     test(
       'Onboarding Tour Initialization',
       typeof window.onboardingTour !== 'undefined',
       'OnboardingTour is globally accessible'
     );
-    
+
     test(
       'Data Manager Initialization',
       typeof window.dataManager !== 'undefined',
       'DataManager is globally accessible'
     );
-    
+
     // Final report
     setTimeout(generateReport, 100);
   }, 1000);
@@ -204,26 +196,24 @@ function runValidation() {
 
 function generateReport() {
   console.info('\n📊 VALIDATION REPORT');
-  console.info('=' .repeat(50));
+  console.info('='.repeat(50));
   console.info(`✅ Tests Passed: ${results.passed}`);
   console.error(`❌ Tests Failed: ${results.failed}`);
   console.warn(`⚠️  Warnings: ${results.warnings}`);
-  console.error(`📈 Success Rate: ${((results.passed / (results.passed + results.failed)) * 100).toFixed(1)}%`);
-  
+  console.error(
+    `📈 Success Rate: ${((results.passed / (results.passed + results.failed)) * 100).toFixed(1)}%`
+  );
+
   if (results.failed > 0) {
     console.info('\n🔍 FAILED TESTS:');
-    results.details
-      .filter(detail => detail.includes('❌'))
-      .forEach(detail => console.info(detail));
+    results.details.filter(detail => detail.includes('❌')).forEach(detail => console.info(detail));
   }
-  
+
   if (results.warnings > 0) {
     console.info('\n⚠️  WARNINGS:');
-    results.details
-      .filter(detail => detail.includes('⚠️'))
-      .forEach(detail => console.info(detail));
+    results.details.filter(detail => detail.includes('⚠️')).forEach(detail => console.info(detail));
   }
-  
+
   console.info('\n🎯 UI IMPROVEMENT FEATURES VALIDATED:');
   console.info('• Modern header navigation with section-based organization');
   console.info('• Mobile-responsive design with touch-friendly controls');
@@ -232,14 +222,14 @@ function generateReport() {
   console.info('• Accessibility enhancements and keyboard navigation');
   console.info('• Interactive onboarding tour system');
   console.info('• Professional design system with consistent styling');
-  
+
   if (results.failed === 0) {
     console.info('\n🎉 ALL UI IMPROVEMENTS SUCCESSFULLY IMPLEMENTED!');
     console.info('The interface is now significantly more user-friendly.');
   } else {
     console.error('\n🔧 Some components need attention. Check failed tests above.');
   }
-  
+
   // Store results for potential use
   window.uiValidationResults = results;
 }

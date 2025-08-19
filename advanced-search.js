@@ -15,12 +15,12 @@ class AdvancedSearchEngine {
       ratings: { min: 0, max: 5 },
       availability: 'all', // 'available', 'discontinued', 'all'
       origin: [],
-      size: []
+      size: [],
     };
     this.searchHistory = [];
     this.suggestions = [];
     this.isReady = false;
-    
+
     this.init();
   }
 
@@ -49,7 +49,7 @@ class AdvancedSearchEngine {
       pairings: [],
       education: [],
       specifications: [],
-      flavors: []
+      flavors: [],
     };
 
     try {
@@ -73,7 +73,6 @@ class AdvancedSearchEngine {
       // Load flavor atlas
       const flavorResponse = await fetch('./flavor-atlas.json');
       this.dataManager.flavors = await flavorResponse.json();
-
     } catch (error) {
       console.error('Error loading search data:', error);
     }
@@ -93,7 +92,7 @@ class AdvancedSearchEngine {
         cigar.flavor,
         cigar.strength,
         cigar.origin,
-        cigar.size
+        cigar.size,
       ]);
     });
 
@@ -103,7 +102,7 @@ class AdvancedSearchEngine {
         manufacturer.name,
         manufacturer.country,
         manufacturer.established,
-        manufacturer.specialty
+        manufacturer.specialty,
       ]);
     });
 
@@ -114,7 +113,7 @@ class AdvancedSearchEngine {
           lesson.focus,
           lesson.title,
           lesson.description,
-          ...lesson.keyPairings?.map(p => p.spirit) || []
+          ...(lesson.keyPairings?.map(p => p.spirit) || []),
         ]);
       });
     }
@@ -137,7 +136,7 @@ class AdvancedSearchEngine {
       item,
       index,
       searchText,
-      tokens: this.tokenize(searchText)
+      tokens: this.tokenize(searchText),
     });
   }
 
@@ -161,7 +160,7 @@ class AdvancedSearchEngine {
         results: [],
         suggestions: [],
         total: 0,
-        executionTime: 0
+        executionTime: 0,
       };
     }
 
@@ -172,19 +171,18 @@ class AdvancedSearchEngine {
     // Search through index
     for (const [key, indexEntry] of this.searchIndex.entries()) {
       const score = this.calculateRelevanceScore(queryTokens, indexEntry);
-      
+
       if (score > 0) {
         results.set(key, {
           ...indexEntry,
           score,
-          relevance: this.calculateRelevance(score, indexEntry.type)
+          relevance: this.calculateRelevance(score, indexEntry.type),
         });
       }
     }
 
     // Convert to array and sort by relevance
-    let searchResults = Array.from(results.values())
-      .sort((a, b) => b.relevance - a.relevance);
+    let searchResults = Array.from(results.values()).sort((a, b) => b.relevance - a.relevance);
 
     // Apply filters
     searchResults = this.applyFilters(searchResults);
@@ -203,7 +201,7 @@ class AdvancedSearchEngine {
       results: searchResults,
       suggestions: this.generateSuggestions(query, searchResults),
       total: searchResults.length,
-      executionTime: Math.round(executionTime * 100) / 100
+      executionTime: Math.round(executionTime * 100) / 100,
     };
   }
 
@@ -245,8 +243,12 @@ class AdvancedSearchEngine {
    * Calculate similarity between two strings (Jaro-Winkler distance)
    */
   calculateSimilarity(s1, s2) {
-    if (s1 === s2) {return 1;}
-    if (s1.length === 0 || s2.length === 0) {return 0;}
+    if (s1 === s2) {
+      return 1;
+    }
+    if (s1.length === 0 || s2.length === 0) {
+      return 0;
+    }
 
     const maxDistance = Math.floor(Math.max(s1.length, s2.length) / 2) - 1;
     const s1Matches = new Array(s1.length).fill(false);
@@ -260,35 +262,48 @@ class AdvancedSearchEngine {
       const end = Math.min(i + maxDistance + 1, s2.length);
 
       for (let j = start; j < end; j++) {
-        if (s2Matches[j] || s1[i] !== s2[j]) {continue;}
+        if (s2Matches[j] || s1[i] !== s2[j]) {
+          continue;
+        }
         s1Matches[i] = s2Matches[j] = true;
         matches++;
         break;
       }
     }
 
-    if (matches === 0) {return 0;}
+    if (matches === 0) {
+      return 0;
+    }
 
     // Find transpositions
     let k = 0;
     for (let i = 0; i < s1.length; i++) {
-      if (!s1Matches[i]) {continue;}
-      while (!s2Matches[k]) {k++;}
-      if (s1[i] !== s2[k]) {transpositions++;}
+      if (!s1Matches[i]) {
+        continue;
+      }
+      while (!s2Matches[k]) {
+        k++;
+      }
+      if (s1[i] !== s2[k]) {
+        transpositions++;
+      }
       k++;
     }
 
-    const jaro = (matches / s1.length + matches / s2.length + 
-                  (matches - transpositions / 2) / matches) / 3;
+    const jaro =
+      (matches / s1.length + matches / s2.length + (matches - transpositions / 2) / matches) / 3;
 
     // Jaro-Winkler prefix bonus
     let prefix = 0;
     for (let i = 0; i < Math.min(s1.length, s2.length, 4); i++) {
-      if (s1[i] === s2[i]) {prefix++;}
-      else {break;}
+      if (s1[i] === s2[i]) {
+        prefix++;
+      } else {
+        break;
+      }
     }
 
-    return jaro + (0.1 * prefix * (1 - jaro));
+    return jaro + 0.1 * prefix * (1 - jaro);
   }
 
   /**
@@ -299,7 +314,7 @@ class AdvancedSearchEngine {
       cigar: 1.0,
       manufacturer: 0.8,
       pairing: 0.7,
-      education: 0.6
+      education: 0.6,
     };
 
     return score * (typeWeights[type] || 0.5);
@@ -314,21 +329,25 @@ class AdvancedSearchEngine {
         const cigar = result.item;
 
         // Wrapper type filter
-        if (this.filterState.wrapperTypes.length > 0 && 
-            !this.filterState.wrapperTypes.includes(cigar.wrapper)) {
+        if (
+          this.filterState.wrapperTypes.length > 0 &&
+          !this.filterState.wrapperTypes.includes(cigar.wrapper)
+        ) {
           return false;
         }
 
         // Strength level filter
-        if (this.filterState.strengthLevels.length > 0 && 
-            !this.filterState.strengthLevels.includes(cigar.strength)) {
+        if (
+          this.filterState.strengthLevels.length > 0 &&
+          !this.filterState.strengthLevels.includes(cigar.strength)
+        ) {
           return false;
         }
 
         // Flavor tags filter
         if (this.filterState.flavorTags.length > 0) {
           const cigarFlavors = this.extractFlavorTags(cigar.flavor);
-          const hasMatchingFlavor = this.filterState.flavorTags.some(tag => 
+          const hasMatchingFlavor = this.filterState.flavorTags.some(tag =>
             cigarFlavors.includes(tag.toLowerCase())
           );
           if (!hasMatchingFlavor) {
@@ -337,8 +356,11 @@ class AdvancedSearchEngine {
         }
 
         // Price range filter (if price data available)
-        if (cigar.price && (cigar.price < this.filterState.priceRange.min || 
-                           cigar.price > this.filterState.priceRange.max)) {
+        if (
+          cigar.price &&
+          (cigar.price < this.filterState.priceRange.min ||
+            cigar.price > this.filterState.priceRange.max)
+        ) {
           return false;
         }
       }
@@ -351,11 +373,26 @@ class AdvancedSearchEngine {
    * Extract flavor tags from flavor description
    */
   extractFlavorTags(flavorText) {
-    if (!flavorText) {return [];}
-    
+    if (!flavorText) {
+      return [];
+    }
+
     const commonFlavors = [
-      'chocolate', 'vanilla', 'coffee', 'cedar', 'leather', 'spice', 'pepper',
-      'cream', 'honey', 'tobacco', 'earth', 'wood', 'nuts', 'caramel', 'cocoa'
+      'chocolate',
+      'vanilla',
+      'coffee',
+      'cedar',
+      'leather',
+      'spice',
+      'pepper',
+      'cream',
+      'honey',
+      'tobacco',
+      'earth',
+      'wood',
+      'nuts',
+      'caramel',
+      'cocoa',
     ];
 
     const text = flavorText.toLowerCase();
@@ -384,7 +421,7 @@ class AdvancedSearchEngine {
       ratings: { min: 0, max: 5 },
       availability: 'all',
       origin: [],
-      size: []
+      size: [],
     };
     this.saveFilterPreferences();
   }
@@ -403,7 +440,7 @@ class AdvancedSearchEngine {
         .map(entry => entry.query)
         .filter(q => q.toLowerCase().includes(queryLower) && q !== query)
         .slice(0, 3);
-      
+
       suggestions.push(...popularQueries.map(q => ({ type: 'history', text: q })));
     }
 
@@ -433,7 +470,7 @@ class AdvancedSearchEngine {
     this.searchHistory.unshift({
       query,
       resultCount: results.length,
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
     });
 
     // Keep only last 100 searches
@@ -475,7 +512,7 @@ class AdvancedSearchEngine {
   setupEventListeners() {
     // Listen for storage changes
     if (window.storageManager) {
-      window.storageManager.on('preferenceChanged', (data) => {
+      window.storageManager.on('preferenceChanged', data => {
         if (data.key === 'filterPreferences') {
           this.filterState = { ...this.filterState, ...data.value };
         }
@@ -488,21 +525,21 @@ class AdvancedSearchEngine {
    */
   getSearchStats() {
     const recentSearches = this.searchHistory.slice(0, 10);
-    const topQueries = this.searchHistory
-      .reduce((acc, search) => {
-        acc[search.query] = (acc[search.query] || 0) + 1;
-        return acc;
-      }, {});
+    const topQueries = this.searchHistory.reduce((acc, search) => {
+      acc[search.query] = (acc[search.query] || 0) + 1;
+      return acc;
+    }, {});
 
     return {
       totalSearches: this.searchHistory.length,
       recentSearches,
       topQueries: Object.entries(topQueries)
-        .sort(([,a], [,b]) => b - a)
+        .sort(([, a], [, b]) => b - a)
         .slice(0, 5)
         .map(([query, count]) => ({ query, count })),
-      averageResultCount: this.searchHistory.reduce((sum, search) => 
-        sum + search.resultCount, 0) / this.searchHistory.length || 0
+      averageResultCount:
+        this.searchHistory.reduce((sum, search) => sum + search.resultCount, 0) /
+          this.searchHistory.length || 0,
     };
   }
 
@@ -514,7 +551,7 @@ class AdvancedSearchEngine {
       searchHistory: this.searchHistory,
       filterState: this.filterState,
       stats: this.getSearchStats(),
-      exportedAt: new Date().toISOString()
+      exportedAt: new Date().toISOString(),
     };
   }
 }

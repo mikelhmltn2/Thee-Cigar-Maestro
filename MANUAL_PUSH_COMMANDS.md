@@ -9,6 +9,7 @@ If you prefer to push manually or the automated script doesn't work, follow thes
 ## **METHOD 1: Using GitHub Web Interface (Recommended)**
 
 ### Step 1: Create Repository on GitHub
+
 1. Go to: **https://github.com/new**
 2. **Repository name:** `thee-cigar-maestro`
 3. **Description:** `Premium cigar experience with AI-powered recommendations and immersive 3D Flavorverse`
@@ -17,6 +18,7 @@ If you prefer to push manually or the automated script doesn't work, follow thes
 6. Click **"Create repository"**
 
 ### Step 2: Push Your Code
+
 ```bash
 # Replace yourusername with your actual GitHub username
 git remote add origin https://github.com/yourusername/thee-cigar-maestro.git
@@ -25,6 +27,7 @@ git push -u origin main
 ```
 
 ### Step 3: Configure Repository Settings
+
 1. **Enable GitHub Pages:**
    - Go to: `https://github.com/yourusername/thee-cigar-maestro/settings/pages`
    - **Source:** Deploy from a branch
@@ -41,6 +44,7 @@ git push -u origin main
 ## **METHOD 2: Using GitHub CLI (If Installed)**
 
 ### Step 1: Install GitHub CLI (if not installed)
+
 ```bash
 # macOS
 brew install gh
@@ -53,11 +57,13 @@ sudo apt install gh
 ```
 
 ### Step 2: Login to GitHub
+
 ```bash
 gh auth login
 ```
 
 ### Step 3: Create and Push Repository
+
 ```bash
 gh repo create thee-cigar-maestro --public --description "Premium cigar experience with AI-powered recommendations and immersive 3D Flavorverse" --source=. --push
 ```
@@ -87,6 +93,7 @@ git push -u origin main
 ## **🔧 Troubleshooting Common Issues**
 
 ### Issue: "fatal: remote origin already exists"
+
 ```bash
 # Remove existing remote and add new one
 git remote remove origin
@@ -94,12 +101,14 @@ git remote add origin https://github.com/yourusername/thee-cigar-maestro.git
 ```
 
 ### Issue: Authentication Required
+
 ```bash
 # If you have 2FA enabled, use a personal access token instead of password
 # Or set up SSH keys: https://docs.github.com/en/authentication/connecting-to-github-with-ssh
 ```
 
 ### Issue: "src refspec main does not exist"
+
 ```bash
 # Create and switch to main branch
 git checkout -b main
@@ -107,6 +116,7 @@ git push -u origin main
 ```
 
 ### Issue: "Updates were rejected"
+
 ```bash
 # Force push (use carefully!)
 git push -u origin main --force
@@ -152,6 +162,7 @@ After successful push, your repository will have:
 ## **📞 Need Help?**
 
 If you encounter any issues:
+
 1. Check the automated script: `./PUSH_TO_GITHUB.sh`
 2. Review GitHub's documentation: https://docs.github.com
 3. Check your git configuration: `git config --list`

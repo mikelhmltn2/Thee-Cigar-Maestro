@@ -6,7 +6,7 @@ export default defineConfig({
     VitePWA({
       registerType: 'autoUpdate',
       workbox: {
-        globPatterns: ['**/*.{js,css,html,ico,png,svg,json}']
+        globPatterns: ['**/*.{js,css,html,ico,png,svg,json}'],
       },
       includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'logo.png'],
       manifest: {
@@ -24,12 +24,12 @@ export default defineConfig({
             src: 'logo.png',
             sizes: '512x512',
             type: 'image/png',
-            purpose: 'any maskable'
-          }
+            purpose: 'any maskable',
+          },
         ],
-        categories: ['lifestyle', 'education', 'entertainment']
-      }
-    })
+        categories: ['lifestyle', 'education', 'entertainment'],
+      },
+    }),
   ],
   build: {
     target: 'es2015',
@@ -39,18 +39,18 @@ export default defineConfig({
     terserOptions: {
       compress: {
         drop_console: true,
-        drop_debugger: true
-      }
+        drop_debugger: true,
+      },
     },
     rollupOptions: {
       input: {
         main: 'index.html',
         dashboard: 'dashboard.html',
-        ritual: 'flavorverse_ritual_trail_interface.html'
-      }
+        ritual: 'flavorverse_ritual_trail_interface.html',
+      },
     },
     chunkSizeWarningLimit: 1000,
-    reportCompressedSize: false
+    reportCompressedSize: false,
   },
   server: {
     port: 3000,
@@ -58,18 +58,18 @@ export default defineConfig({
     cors: true,
     headers: {
       'Cross-Origin-Embedder-Policy': 'cross-origin',
-      'Cross-Origin-Opener-Policy': 'same-origin'
-    }
+      'Cross-Origin-Opener-Policy': 'same-origin',
+    },
   },
   preview: {
     port: 3001,
-    cors: true
+    cors: true,
   },
   optimizeDeps: {
-    include: ['three', 'three/examples/jsm/controls/OrbitControls.js']
+    include: ['three', 'three/examples/jsm/controls/OrbitControls.js'],
   },
   define: {
     __APP_VERSION__: JSON.stringify(process.env.npm_package_version),
-    __BUILD_TIME__: JSON.stringify(new Date().toISOString())
-  }
+    __BUILD_TIME__: JSON.stringify(new Date().toISOString()),
+  },
 });

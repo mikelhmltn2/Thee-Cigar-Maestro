@@ -5,11 +5,7 @@
     "interactiveFlavorStory": {
       "privacyCompliant": true,
       "enabled": true,
-      "modules": [
-        "originStory",
-        "flavorMemory",
-        "blendJourney"
-      ]
+      "modules": ["originStory", "flavorMemory", "blendJourney"]
     },
     "lessonNarration": true,
     "longFormArticles": true,
@@ -21,15 +17,8 @@
       {
         "id": "ceu_level1",
         "title": "Foundations of Cigar Knowledge",
-        "objectives": [
-          "Understand cigar anatomy",
-          "Identify major tobacco regions"
-        ],
-        "lessons": [
-          "Wrapper Identification",
-          "Filler Functions",
-          "Binder Role"
-        ],
+        "objectives": ["Understand cigar anatomy", "Identify major tobacco regions"],
+        "lessons": ["Wrapper Identification", "Filler Functions", "Binder Role"],
         "certificationReady": true
       }
     ],
@@ -50,23 +39,14 @@
         "Consciously curate flavor rituals",
         "Create legacy forks and shareable memories"
       ],
-      "lessons": [
-        "Remixing Rituals",
-        "Gifting a Smoke Across Time"
-      ],
+      "lessons": ["Remixing Rituals", "Gifting a Smoke Across Time"],
       "certificationReady": true
     },
     "tracks[+5]": {
       "id": "memory_sovereignty_and_philosophy",
       "title": "Memory Sovereignty & Ritual Philosophy",
-      "objectives": [
-        "Define your sensory legacy",
-        "Explore the philosophy of ritual permanence"
-      ],
-      "lessons": [
-        "The Final Mirror Concept",
-        "Heirloom and Afterlife Rituals"
-      ],
+      "objectives": ["Define your sensory legacy", "Explore the philosophy of ritual permanence"],
+      "lessons": ["The Final Mirror Concept", "Heirloom and Afterlife Rituals"],
       "certificationReady": true
     },
     "tracks[+6]": {
@@ -76,10 +56,7 @@
         "Compare traditional and AI-led guidance",
         "Simulate decision trees and emotional coaching"
       ],
-      "lessons": [
-        "The Soul of a Tobacconist",
-        "GPT Pairing Mastery"
-      ],
+      "lessons": ["The Soul of a Tobacconist", "GPT Pairing Mastery"],
       "certificationReady": true
     },
     "tracks[+7]": {
@@ -89,10 +66,7 @@
         "Understand global cultural rituals",
         "Honor tradition while guiding evolution"
       ],
-      "lessons": [
-        "Storylines from the Island Nations",
-        "Language as a Flavor Memory Anchor"
-      ],
+      "lessons": ["Storylines from the Island Nations", "Language as a Flavor Memory Anchor"],
       "certificationReady": true
     },
     "tracks[+8]": {
@@ -102,10 +76,7 @@
         "Explore spiritual uses of tobacco",
         "Learn sacred rituals from global faiths"
       ],
-      "lessons": [
-        "The Pipe of Peace",
-        "Sanctification and Smoke in Scripture"
-      ],
+      "lessons": ["The Pipe of Peace", "Sanctification and Smoke in Scripture"],
       "certificationReady": true
     },
     "tracks[+9]": {
@@ -115,10 +86,7 @@
         "Relate flavor memory to cosmic archetypes",
         "Preserve ritual as interstellar story"
       ],
-      "lessons": [
-        "The Star-Linked Smoker",
-        "Tobacco & Time Through Mythology"
-      ],
+      "lessons": ["The Star-Linked Smoker", "Tobacco & Time Through Mythology"],
       "certificationReady": true
     },
     "tracks[+10]": {
@@ -128,10 +96,7 @@
         "Understand time-loop flavor preservation",
         "Explore ancestral resonance via ritual smoke"
       ],
-      "lessons": [
-        "Dimensional Pairing Theory",
-        "Voice, Fire, and Legacy"
-      ],
+      "lessons": ["Dimensional Pairing Theory", "Voice, Fire, and Legacy"],
       "certificationReady": true
     }
   },
@@ -142,16 +107,8 @@
     "complianceReady": true,
     "integrationStatus": "ready",
     "lastUpdated": "2025-07-03T22:00:00Z",
-    "coreFunctions": [
-      "ceuSystem.initialize",
-      "ceuSystem.sync",
-      "ceuSystem.renderUI"
-    ],
-    "linkedSystems": [
-      "specEngine",
-      "gptTriggerMatrix",
-      "voiceCommandMatrix"
-    ]
+    "coreFunctions": ["ceuSystem.initialize", "ceuSystem.sync", "ceuSystem.renderUI"],
+    "linkedSystems": ["specEngine", "gptTriggerMatrix", "voiceCommandMatrix"]
   },
   "lessonModule": {
     "privacyCompliant": true,
@@ -160,24 +117,12 @@
     "ceuRubric": {
       "privacyCompliant": true,
       "instructorReviewEnabled": true,
-      "rubricCriteria": [
-        "Knowledge",
-        "Application",
-        "Engagement",
-        "Accuracy"
-      ],
+      "rubricCriteria": ["Knowledge", "Application", "Engagement", "Accuracy"],
       "scoringScale": "1-5"
     },
-    "learningOutcomes": [
-      "Identify wrapper types",
-      "Understand fermentation impact"
-    ],
+    "learningOutcomes": ["Identify wrapper types", "Understand fermentation impact"],
     "lessonId": "CEU101",
-    "rubricCriteria": [
-      "Accuracy",
-      "Terminology",
-      "Completion"
-    ],
+    "rubricCriteria": ["Accuracy", "Terminology", "Completion"],
     "title": "Wrapper Varietals 101",
     "trackId": "track_tobacconist_core"
   },

@@ -9,7 +9,7 @@ class PersonalDashboard {
     this.dataManager = dataManager;
     this.userStats = this.loadUserStats();
     this.isVisible = false;
-    
+
     this.init();
   }
 
@@ -707,7 +707,7 @@ class PersonalDashboard {
     // Close on overlay click
     const overlay = document.querySelector('.dashboard-overlay');
     if (overlay) {
-      overlay.addEventListener('click', (e) => {
+      overlay.addEventListener('click', e => {
         if (e.target === overlay) {
           this.hide();
         }
@@ -728,13 +728,13 @@ class PersonalDashboard {
       monthlyCount: 0,
       newWrapperThisMonth: false,
       wrapperDistribution: {
-        'Maduro': 0,
-        'Connecticut': 0,
-        'Habano': 0,
-        'Natural': 0,
-        'Oscuro': 0
+        Maduro: 0,
+        Connecticut: 0,
+        Habano: 0,
+        Natural: 0,
+        Oscuro: 0,
       },
-      recentActivity: []
+      recentActivity: [],
     };
 
     const saved = localStorage.getItem('userStats');
@@ -748,12 +748,14 @@ class PersonalDashboard {
   // Generation methods
   generateFavoritesList() {
     const favorites = this.getFavorites();
-    
+
     if (favorites.length === 0) {
       return '<p class="no-data">No favorite cigars yet. Rate some cigars to see them here!</p>';
     }
 
-    return favorites.map(cigar => `
+    return favorites
+      .map(
+        cigar => `
       <div class="favorite-item" onclick="personalDashboard.focusOnCigar('${cigar.name}')">
         <div class="favorite-info">
           <span class="favorite-name">${cigar.name}</span>
@@ -761,17 +763,21 @@ class PersonalDashboard {
         </div>
         <div class="favorite-rating">${this.generateStarRating(cigar.rating)}</div>
       </div>
-    `).join('');
+    `
+      )
+      .join('');
   }
 
   generateActivityTimeline() {
     const activities = this.userStats.recentActivity.slice(0, 5);
-    
+
     if (activities.length === 0) {
       return '<p class="no-data">No recent activity. Start exploring cigars to see your journey!</p>';
     }
 
-    return activities.map(activity => `
+    return activities
+      .map(
+        activity => `
       <div class="activity-item">
         <div class="activity-icon">${this.getActivityIcon(activity.type)}</div>
         <div class="activity-details">
@@ -779,19 +785,22 @@ class PersonalDashboard {
           <div class="activity-time">${this.formatRelativeTime(activity.timestamp)}</div>
         </div>
       </div>
-    `).join('');
+    `
+      )
+      .join('');
   }
 
   generateWrapperChart() {
     const total = Object.values(this.userStats.wrapperDistribution).reduce((a, b) => a + b, 0);
-    
+
     if (total === 0) {
       return '<p class="no-data">Try some cigars to see your wrapper preferences!</p>';
     }
 
-    return Object.entries(this.userStats.wrapperDistribution).map(([wrapper, count]) => {
-      const percentage = Math.round((count / total) * 100);
-      return `
+    return Object.entries(this.userStats.wrapperDistribution)
+      .map(([wrapper, count]) => {
+        const percentage = Math.round((count / total) * 100);
+        return `
         <div class="wrapper-item">
           <span class="wrapper-label">${wrapper}</span>
           <div class="wrapper-bar">
@@ -800,24 +809,31 @@ class PersonalDashboard {
           <span class="wrapper-percentage">${percentage}%</span>
         </div>
       `;
-    }).join('');
+      })
+      .join('');
   }
 
   generateInsights() {
     const insights = this.calculateInsights();
-    
-    return insights.map(insight => `
+
+    return insights
+      .map(
+        insight => `
       <div class="insight-item">
         <div class="insight-title">${insight.title}</div>
         <div class="insight-description">${insight.description}</div>
       </div>
-    `).join('');
+    `
+      )
+      .join('');
   }
 
   generatePersonalizedRecommendations(type) {
     const recommendations = this.getRecommendations(type);
-    
-    return recommendations.map(rec => `
+
+    return recommendations
+      .map(
+        rec => `
       <div class="rec-item" onclick="personalDashboard.focusOnCigar('${rec.name}')">
         <div class="rec-info">
           <div class="rec-name">${rec.name}</div>
@@ -825,7 +841,9 @@ class PersonalDashboard {
         </div>
         <div class="rec-score">${rec.score}%</div>
       </div>
-    `).join('');
+    `
+      )
+      .join('');
   }
 
   generateStarRating(rating) {
@@ -833,27 +851,25 @@ class PersonalDashboard {
     const hasHalfStar = rating % 1 >= 0.5;
     const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
 
-    return '★'.repeat(fullStars) + 
-           (hasHalfStar ? '☆' : '') + 
-           '☆'.repeat(emptyStars);
+    return '★'.repeat(fullStars) + (hasHalfStar ? '☆' : '') + '☆'.repeat(emptyStars);
   }
 
   // Helper methods
   getFavorites() {
     const favorites = [];
     const cigars = this.dataManager.data.cigars || [];
-    
+
     cigars.forEach(cigar => {
       const rating = this.getUserRating(cigar.name);
       if (rating >= 4) {
         favorites.push({
           name: cigar.name,
           wrapper: cigar.wrapper || 'Unknown',
-          rating
+          rating,
         });
       }
     });
-    
+
     return favorites.sort((a, b) => b.rating - a.rating).slice(0, 5);
   }
 
@@ -864,11 +880,11 @@ class PersonalDashboard {
 
   getActivityIcon(type) {
     const icons = {
-      'rated': '⭐',
-      'noted': '📝',
-      'session': '🎭',
-      'wishlist': '❤️',
-      'shared': '📤'
+      rated: '⭐',
+      noted: '📝',
+      session: '🎭',
+      wishlist: '❤️',
+      shared: '📤',
     };
     return icons[type] || '📊';
   }
@@ -878,7 +894,7 @@ class PersonalDashboard {
     const diff = now - timestamp;
     const hours = Math.floor(diff / (1000 * 60 * 60));
     const days = Math.floor(hours / 24);
-    
+
     if (days > 0) {
       return `${days} day${days > 1 ? 's' : ''} ago`;
     } else if (hours > 0) {
@@ -892,36 +908,43 @@ class PersonalDashboard {
     const insights = [];
     const _favorites = this.getFavorites();
     const distribution = this.userStats.wrapperDistribution;
-    
+
     // Wrapper preference insight
-    const preferredWrapper = Object.entries(distribution).reduce((a, b) => distribution[a[0]] > distribution[b[0]] ? a : b);
+    const preferredWrapper = Object.entries(distribution).reduce((a, b) =>
+      distribution[a[0]] > distribution[b[0]] ? a : b
+    );
     if (preferredWrapper[1] > 0) {
       insights.push({
         title: `${preferredWrapper[0]} Enthusiast`,
-        description: `You've shown a strong preference for ${preferredWrapper[0]} wrappers, representing ${Math.round((preferredWrapper[1] / Object.values(distribution).reduce((a, b) => a + b, 0)) * 100)}% of your selections.`
+        description: `You've shown a strong preference for ${preferredWrapper[0]} wrappers, representing ${Math.round((preferredWrapper[1] / Object.values(distribution).reduce((a, b) => a + b, 0)) * 100)}% of your selections.`,
       });
     }
-    
+
     // Rating insight
     if (this.userStats.averageRating > 4) {
       insights.push({
         title: 'Discerning Palate',
-        description: `Your average rating of ${this.userStats.averageRating.toFixed(1)} stars shows you have high standards and appreciate quality cigars.`
+        description: `Your average rating of ${this.userStats.averageRating.toFixed(1)} stars shows you have high standards and appreciate quality cigars.`,
       });
     }
-    
+
     // Time insight
     if (this.userStats.totalTime > 20) {
       insights.push({
         title: 'Dedicated Aficionado',
-        description: `You've spent ${this.userStats.totalTime} hours enjoying cigars, showing true dedication to the craft.`
+        description: `You've spent ${this.userStats.totalTime} hours enjoying cigars, showing true dedication to the craft.`,
       });
     }
 
-    return insights.length > 0 ? insights : [{
-      title: 'Start Your Journey',
-      description: 'Rate more cigars and track your sessions to unlock personalized insights!'
-    }];
+    return insights.length > 0
+      ? insights
+      : [
+          {
+            title: 'Start Your Journey',
+            description:
+              'Rate more cigars and track your sessions to unlock personalized insights!',
+          },
+        ];
   }
 
   getRecommendations(type) {
@@ -933,50 +956,52 @@ class PersonalDashboard {
       case 'favorites':
         // Recommend similar cigars to favorites
         favorites.forEach(fav => {
-          const similar = cigars.filter(c => 
-            c.wrapper === fav.wrapper && 
-            c.name !== fav.name
-          ).slice(0, 2);
-          
+          const similar = cigars
+            .filter(c => c.wrapper === fav.wrapper && c.name !== fav.name)
+            .slice(0, 2);
+
           similar.forEach(cigar => {
             recommendations.push({
               name: cigar.name,
               reason: `Similar to your favorite ${fav.name}`,
-              score: 85 + Math.floor(Math.random() * 15)
+              score: 85 + Math.floor(Math.random() * 15),
             });
           });
         });
         break;
-        
+
       case 'exploration': {
         // Recommend different wrapper types
-        const triedWrappers = Object.keys(this.userStats.wrapperDistribution)
-          .filter(w => this.userStats.wrapperDistribution[w] > 0);
-        const untriedWrappers = ['Maduro', 'Connecticut', 'Habano', 'Natural', 'Oscuro']
-          .filter(w => !triedWrappers.includes(w));
-        
+        const triedWrappers = Object.keys(this.userStats.wrapperDistribution).filter(
+          w => this.userStats.wrapperDistribution[w] > 0
+        );
+        const untriedWrappers = ['Maduro', 'Connecticut', 'Habano', 'Natural', 'Oscuro'].filter(
+          w => !triedWrappers.includes(w)
+        );
+
         untriedWrappers.forEach(wrapper => {
           const cigar = cigars.find(c => c.wrapper === wrapper);
           if (cigar) {
             recommendations.push({
               name: cigar.name,
               reason: `Try a ${wrapper} wrapper`,
-              score: 75 + Math.floor(Math.random() * 20)
+              score: 75 + Math.floor(Math.random() * 20),
             });
           }
         });
         break;
       }
-        
+
       case 'value': {
         // Recommend highly rated, reasonably priced cigars
-        cigars.filter(c => c.price && c.price < 15)
+        cigars
+          .filter(c => c.price && c.price < 15)
           .slice(0, 3)
           .forEach(cigar => {
             recommendations.push({
               name: cigar.name,
               reason: `Great value at $${cigar.price}`,
-              score: 80 + Math.floor(Math.random() * 15)
+              score: 80 + Math.floor(Math.random() * 15),
             });
           });
         break;
@@ -1019,13 +1044,13 @@ class PersonalDashboard {
   updateStats() {
     // Recalculate stats from stored data
     this.userStats = this.loadUserStats();
-    
+
     // Update DOM elements
     const elements = {
-      'totalCigarsSmoked': this.userStats.totalSmoked,
-      'averageRating': this.userStats.averageRating.toFixed(1),
-      'totalSmokeTime': this.userStats.totalTime,
-      'totalValue': this.userStats.totalValue
+      totalCigarsSmoked: this.userStats.totalSmoked,
+      averageRating: this.userStats.averageRating.toFixed(1),
+      totalSmokeTime: this.userStats.totalTime,
+      totalValue: this.userStats.totalValue,
     };
 
     Object.entries(elements).forEach(([id, value]) => {
@@ -1078,7 +1103,10 @@ class PersonalDashboard {
       if (wishlist.length === 0) {
         window.uiManager.showToast('Your wishlist is empty. Add some cigars!', 'info');
       } else {
-        window.uiManager.showToast(`You have ${wishlist.length} cigars in your wishlist`, 'success');
+        window.uiManager.showToast(
+          `You have ${wishlist.length} cigars in your wishlist`,
+          'success'
+        );
       }
     }
   }
@@ -1089,12 +1117,12 @@ class PersonalDashboard {
       ratings: this.getAllRatings(),
       notes: this.getAllNotes(),
       sessions: this.getAllSessions(),
-      wishlist: JSON.parse(localStorage.getItem('wishlist') || '[]')
+      wishlist: JSON.parse(localStorage.getItem('wishlist') || '[]'),
     };
 
     const dataStr = JSON.stringify(userData, null, 2);
     const dataBlob = new Blob([dataStr], { type: 'application/json' });
-    
+
     const link = document.createElement('a');
     link.href = URL.createObjectURL(dataBlob);
     link.download = `cigar-maestro-data-${new Date().toISOString().split('T')[0]}.json`;
@@ -1107,7 +1135,7 @@ class PersonalDashboard {
 
   focusOnCigar(cigarName) {
     this.hide();
-    
+
     // Focus on the cigar in the 3D scene
     if (window.cigarsInScene) {
       const cigar = window.cigarsInScene.find(c => c.userData.name === cigarName);
@@ -1124,9 +1152,11 @@ class PersonalDashboard {
         }
 
         // Show cigar details
-        window.dispatchEvent(new CustomEvent('cigarSelected', {
-          detail: { cigar }
-        }));
+        window.dispatchEvent(
+          new CustomEvent('cigarSelected', {
+            detail: { cigar },
+          })
+        );
       }
     }
   }
@@ -1172,7 +1202,7 @@ class PersonalDashboard {
     this.userStats.recentActivity.unshift({
       type,
       text,
-      timestamp: Date.now()
+      timestamp: Date.now(),
     });
 
     // Keep only recent 50 activities
@@ -1183,22 +1213,22 @@ class PersonalDashboard {
   incrementCigarCount(wrapper) {
     this.userStats.totalSmoked++;
     this.userStats.monthlyCount++;
-    
+
     if (this.userStats.wrapperDistribution[wrapper] !== undefined) {
       this.userStats.wrapperDistribution[wrapper]++;
     }
-    
+
     this.saveUserStats();
   }
 
   updateAverageRating() {
     const ratings = this.getAllRatings();
     const values = Object.values(ratings).filter(r => r > 0);
-    
+
     if (values.length > 0) {
       this.userStats.averageRating = values.reduce((a, b) => a + b, 0) / values.length;
     }
-    
+
     this.saveUserStats();
   }
 }

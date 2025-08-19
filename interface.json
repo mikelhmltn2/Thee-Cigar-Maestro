@@ -2,11 +2,7 @@
   "voiceCommandMatrix": {
     "privacyCompliant": true,
     "fallback": "mainMenu.prompt",
-    "intentLevels": [
-      "beginner",
-      "intermediate",
-      "expert"
-    ],
+    "intentLevels": ["beginner", "intermediate", "expert"],
     "triggers": {
       "privacyCompliant": true,
       "continue CEU": "ceuSystem.resumePath",
@@ -50,11 +46,7 @@
     "ecoDevNote": "This module is optimized for economic reuse and minimal cost overhead.",
     "edgeDeploymentReady": true,
     "greenHostingCompatible": true,
-    "interactionModes": [
-      "voice",
-      "touch",
-      "type"
-    ],
+    "interactionModes": ["voice", "touch", "type"],
     "kioskModeUi": {
       "privacyCompliant": true,
       "aLaCarteAddOns": true,
@@ -98,27 +90,14 @@
     "edgeDeploymentReady": true,
     "firstSmokeJourney": true,
     "greenHostingCompatible": true,
-    "journeyMode": [
-      "firstTime",
-      "returning",
-      "powerUser"
-    ],
+    "journeyMode": ["firstTime", "returning", "powerUser"],
     "lazyLoad": true,
     "modularization": "DRY_compliant",
     "personaOnboarding": {
       "privacyCompliant": true,
-      "GM": [
-        "dashboardOverview",
-        "VIPControl"
-      ],
-      "guest": [
-        "pairingIntro",
-        "journalAccess"
-      ],
-      "staff": [
-        "floorTools",
-        "inventory"
-      ]
+      "GM": ["dashboardOverview", "VIPControl"],
+      "guest": ["pairingIntro", "journalAccess"],
+      "staff": ["floorTools", "inventory"]
     },
     "scalingProfile": "costOptimized",
     "steps": [
@@ -190,80 +169,39 @@
   },
   "timelineForkUI": {
     "enabled": true,
-    "actions": [
-      "create fork",
-      "label memory",
-      "gift ritual"
-    ],
-    "voiceCommands": [
-      "Fork this ritual",
-      "Send memory to my son",
-      "Remix this timeline"
-    ]
+    "actions": ["create fork", "label memory", "gift ritual"],
+    "voiceCommands": ["Fork this ritual", "Send memory to my son", "Remix this timeline"]
   },
   "finalMirrorUI": {
     "enabled": true,
-    "overlayOptions": [
-      "dimmed reflection",
-      "photo + flavor playback",
-      "audio journal"
-    ]
+    "overlayOptions": ["dimmed reflection", "photo + flavor playback", "audio journal"]
   },
   "aiConciergeUI": {
     "enabled": true,
-    "features": [
-      "bundle building",
-      "flavor education",
-      "emotion-aware upsell"
-    ]
+    "features": ["bundle building", "flavor education", "emotion-aware upsell"]
   },
   "translationMatrix": {
     "enabled": true,
-    "languagesSupported": [
-      "es",
-      "fr",
-      "zh",
-      "ja",
-      "ar",
-      "sw",
-      "ht",
-      "he",
-      "pt"
-    ],
+    "languagesSupported": ["es", "fr", "zh", "ja", "ar", "sw", "ht", "he", "pt"],
     "ritualVoiceSync": true
   },
   "globalGreetingOverlay": {
     "enabled": true,
-    "localizationTriggers": [
-      "region",
-      "userPreference"
-    ],
+    "localizationTriggers": ["region", "userPreference"],
     "example": "Shalom, Maestro. Ready for your evening draw?"
   },
   "spiritualOverlayUI": {
     "enabled": true,
-    "modes": [
-      "quiet reflection",
-      "interfaith wisdom prompt",
-      "meditative soundscape"
-    ]
+    "modes": ["quiet reflection", "interfaith wisdom prompt", "meditative soundscape"]
   },
   "stellarOverlayUI": {
     "enabled": true,
     "timelineThreading": true,
     "promptExample": "Record this in the cosmos",
-    "navigationModes": [
-      "archetype",
-      "constellation",
-      "flavor starline"
-    ]
+    "navigationModes": ["archetype", "constellation", "flavor starline"]
   },
   "multisensoryFlavorPlayback": {
     "enabled": true,
-    "channels": [
-      "scent",
-      "tone",
-      "memory overlay"
-    ]
+    "channels": ["scent", "tone", "memory overlay"]
   }
 }

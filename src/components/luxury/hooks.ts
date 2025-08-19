@@ -1,1 +1,1 @@
-export const useLuxury = () => {}
+export const useLuxury = () => {};

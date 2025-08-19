@@ -25,10 +25,7 @@ async function generateFavicon() {
   `;
 
   try {
-    await sharp(Buffer.from(svg))
-      .resize(32, 32)
-      .png()
-      .toFile(path.join(publicDir, 'favicon.png'));
+    await sharp(Buffer.from(svg)).resize(32, 32).png().toFile(path.join(publicDir, 'favicon.png'));
 
     await sharp(Buffer.from(svg))
       .resize(16, 16)
@@ -47,8 +44,8 @@ async function generateAppleTouchIcon() {
   const svg = `
     <svg width="${size}" height="${size}" xmlns="http://www.w3.org/2000/svg">
       <rect width="${size}" height="${size}" fill="#1a0f0a"/>
-      <circle cx="${size/2}" cy="${size/2}" r="${size/3}" fill="none" stroke="#d4af37" stroke-width="4"/>
-      <text x="50%" y="50%" font-family="serif" font-size="${size/3}" fill="#d4af37" text-anchor="middle" dominant-baseline="middle">CM</text>
+      <circle cx="${size / 2}" cy="${size / 2}" r="${size / 3}" fill="none" stroke="#d4af37" stroke-width="4"/>
+      <text x="50%" y="50%" font-family="serif" font-size="${size / 3}" fill="#d4af37" text-anchor="middle" dominant-baseline="middle">CM</text>
     </svg>
   `;
 

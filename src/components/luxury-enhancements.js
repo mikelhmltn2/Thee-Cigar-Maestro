@@ -16,18 +16,18 @@ export class LuxuryEnhancements {
         subtle: '0 2px 8px rgba(0, 0, 0, 0.1)',
         medium: '0 4px 16px rgba(0, 0, 0, 0.2)',
         strong: '0 8px 32px rgba(0, 0, 0, 0.4)',
-        gold: '0 4px 20px rgba(212, 175, 55, 0.3)'
-      }
+        gold: '0 4px 20px rgba(212, 175, 55, 0.3)',
+      },
     };
-    
+
     this.init();
   }
 
   async init() {
     if (this.isInitialized) return;
-    
+
     console.log('✨ Initializing Luxury Enhancements...');
-    
+
     // Wait for DOM to be ready
     if (document.readyState === 'loading') {
       document.addEventListener('DOMContentLoaded', () => this.initializeLuxury());
@@ -40,25 +40,24 @@ export class LuxuryEnhancements {
     try {
       // Add luxury CSS classes and animations
       await this.injectLuxuryStyles();
-      
+
       // Enhance typography
       await this.enhanceTypography();
-      
+
       // Add sophisticated animations
       await this.addLuxuryAnimations();
-      
+
       // Implement interactive enhancements
       await this.addInteractiveElements();
-      
+
       // Add loading states and transitions
       await this.addLoadingEnhancements();
-      
+
       // Initialize particle effects
       await this.initializeParticleEffects();
-      
+
       this.isInitialized = true;
       console.log('✅ Luxury Enhancements initialized');
-      
     } catch (error) {
       console.error('❌ Failed to initialize luxury enhancements:', error);
     }
@@ -267,7 +266,7 @@ export class LuxuryEnhancements {
     const headings = document.querySelectorAll('h1, h2, h3, h4, h5, h6');
     headings.forEach((heading, index) => {
       heading.classList.add('luxury-text');
-      
+
       // Add staggered animation
       setTimeout(() => {
         heading.classList.add('luxury-fade-in');
@@ -276,7 +275,7 @@ export class LuxuryEnhancements {
 
     // Enhance important text elements
     const importantText = document.querySelectorAll('.brand-tagline, .hero-title, .section-title');
-    importantText.forEach((element) => {
+    importantText.forEach(element => {
       element.classList.add('luxury-text', 'luxury-glow');
     });
   }
@@ -285,11 +284,11 @@ export class LuxuryEnhancements {
     // Add intersection observer for scroll animations
     const observerOptions = {
       threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px'
+      rootMargin: '0px 0px -50px 0px',
     };
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('luxury-fade-in');
         }
@@ -298,7 +297,7 @@ export class LuxuryEnhancements {
 
     // Observe sections and cards
     const animatedElements = document.querySelectorAll('.section, .card, .feature-item');
-    animatedElements.forEach((element) => {
+    animatedElements.forEach(element => {
       observer.observe(element);
     });
 
@@ -309,7 +308,7 @@ export class LuxuryEnhancements {
   async addInteractiveElements() {
     // Convert existing buttons to luxury buttons
     const buttons = document.querySelectorAll('button, .btn, .button');
-    buttons.forEach((button) => {
+    buttons.forEach(button => {
       if (!button.classList.contains('luxury-button')) {
         button.classList.add('luxury-button');
       }
@@ -317,13 +316,13 @@ export class LuxuryEnhancements {
 
     // Convert input fields to luxury inputs
     const inputs = document.querySelectorAll('input[type="text"], input[type="email"], textarea');
-    inputs.forEach((input) => {
+    inputs.forEach(input => {
       input.classList.add('luxury-input');
     });
 
     // Add hover effects to cards
     const cards = document.querySelectorAll('.card, .cigar-card, .feature-card');
-    cards.forEach((card) => {
+    cards.forEach(card => {
       card.classList.add('luxury-card');
     });
 
@@ -386,13 +385,13 @@ export class LuxuryEnhancements {
     for (let i = 0; i < count; i++) {
       const particle = document.createElement('div');
       particle.className = 'luxury-particle';
-      
+
       // Random positioning and animation delay
       particle.style.left = Math.random() * 100 + '%';
       particle.style.top = Math.random() * 100 + '%';
       particle.style.animationDelay = Math.random() * 6 + 's';
-      particle.style.animationDuration = (Math.random() * 4 + 4) + 's';
-      
+      particle.style.animationDuration = Math.random() * 4 + 4 + 's';
+
       container.appendChild(particle);
     }
   }
@@ -422,11 +421,11 @@ export class LuxuryEnhancements {
 
   enhanceImageLoading() {
     const images = document.querySelectorAll('img');
-    images.forEach((img) => {
+    images.forEach(img => {
       if (!img.complete) {
         img.style.opacity = '0';
         img.style.transition = 'opacity 0.5s ease';
-        
+
         img.addEventListener('load', () => {
           img.style.opacity = '1';
         });
@@ -468,7 +467,7 @@ export class LuxuryEnhancements {
       backdrop-filter: blur(10px);
       animation: luxurySlideIn 0.5s ease forwards;
     `;
-    
+
     toast.textContent = message;
     document.body.appendChild(toast);
 
@@ -498,11 +497,11 @@ export class LuxuryEnhancements {
   destroy() {
     // Remove event listeners and cleanup
     window.removeEventListener('scroll', this.scrollHandler);
-    
+
     // Remove luxury elements
     document.querySelectorAll('.luxury-particle').forEach(p => p.remove());
     document.querySelector('.luxury-scroll-indicator')?.remove();
-    
+
     this.isInitialized = false;
   }
 }

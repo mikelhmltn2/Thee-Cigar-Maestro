@@ -3,16 +3,12 @@ const CACHE_NAME = 'cigar-maestro-v1';
 const RUNTIME_CACHE = 'runtime-cache-v1';
 
 // Assets to cache on install
-const STATIC_ASSETS = [
-  '/',
-  '/offline.html',
-  '/manifest.json'
-];
+const STATIC_ASSETS = ['/', '/offline.html', '/manifest.json'];
 
 // Install event - cache static assets
-self.addEventListener('install', (event) => {
+self.addEventListener('install', event => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => {
+    caches.open(CACHE_NAME).then(cache => {
       return cache.addAll(STATIC_ASSETS);
     })
   );
@@ -20,15 +16,15 @@ self.addEventListener('install', (event) => {
 });
 
 // Activate event - clean up old caches
-self.addEventListener('activate', (event) => {
+self.addEventListener('activate', event => {
   event.waitUntil(
-    caches.keys().then((cacheNames) => {
+    caches.keys().then(cacheNames => {
       return Promise.all(
         cacheNames
-          .filter((cacheName) => {
+          .filter(cacheName => {
             return cacheName !== CACHE_NAME && cacheName !== RUNTIME_CACHE;
           })
-          .map((cacheName) => {
+          .map(cacheName => {
             return caches.delete(cacheName);
           })
       );
@@ -38,7 +34,7 @@ self.addEventListener('activate', (event) => {
 });
 
 // Fetch event - implement caching strategies
-self.addEventListener('fetch', (event) => {
+self.addEventListener('fetch', event => {
   const { request } = event;
   const url = new URL(request.url);
 
@@ -51,10 +47,10 @@ self.addEventListener('fetch', (event) => {
   if (url.pathname.startsWith('/api/')) {
     event.respondWith(
       fetch(request)
-        .then((response) => {
+        .then(response => {
           // Clone the response before caching
           const responseToCache = response.clone();
-          caches.open(RUNTIME_CACHE).then((cache) => {
+          caches.open(RUNTIME_CACHE).then(cache => {
             cache.put(request, responseToCache);
           });
           return response;
@@ -69,16 +65,16 @@ self.addEventListener('fetch', (event) => {
   // Handle images - Cache First with Network Fallback
   if (request.destination === 'image') {
     event.respondWith(
-      caches.match(request).then((cachedResponse) => {
+      caches.match(request).then(cachedResponse => {
         if (cachedResponse) {
           return cachedResponse;
         }
-        return fetch(request).then((response) => {
+        return fetch(request).then(response => {
           if (!response || response.status !== 200) {
             return response;
           }
           const responseToCache = response.clone();
-          caches.open(RUNTIME_CACHE).then((cache) => {
+          caches.open(RUNTIME_CACHE).then(cache => {
             cache.put(request, responseToCache);
           });
           return response;
@@ -95,16 +91,16 @@ self.addEventListener('fetch', (event) => {
     url.pathname.endsWith('.woff2')
   ) {
     event.respondWith(
-      caches.match(request).then((cachedResponse) => {
+      caches.match(request).then(cachedResponse => {
         if (cachedResponse) {
           return cachedResponse;
         }
-        return fetch(request).then((response) => {
+        return fetch(request).then(response => {
           if (!response || response.status !== 200) {
             return response;
           }
           const responseToCache = response.clone();
-          caches.open(CACHE_NAME).then((cache) => {
+          caches.open(CACHE_NAME).then(cache => {
             cache.put(request, responseToCache);
           });
           return response;
@@ -117,18 +113,18 @@ self.addEventListener('fetch', (event) => {
   // Default - Network First with Offline Fallback
   event.respondWith(
     fetch(request)
-      .then((response) => {
+      .then(response => {
         if (!response || response.status !== 200) {
           return response;
         }
         const responseToCache = response.clone();
-        caches.open(RUNTIME_CACHE).then((cache) => {
+        caches.open(RUNTIME_CACHE).then(cache => {
           cache.put(request, responseToCache);
         });
         return response;
       })
       .catch(() => {
-        return caches.match(request).then((cachedResponse) => {
+        return caches.match(request).then(cachedResponse => {
           if (cachedResponse) {
             return cachedResponse;
           }
@@ -142,7 +138,7 @@ self.addEventListener('fetch', (event) => {
 });
 
 // Background sync for offline actions
-self.addEventListener('sync', (event) => {
+self.addEventListener('sync', event => {
   if (event.tag === 'sync-favorites') {
     event.waitUntil(syncFavorites());
   }
@@ -153,7 +149,7 @@ async function syncFavorites() {
   try {
     const cache = await caches.open('offline-data');
     const requests = await cache.keys();
-    
+
     for (const request of requests) {
       if (request.url.includes('/api/favorites')) {
         try {

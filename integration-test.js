@@ -16,17 +16,17 @@ class IntegrationTestSuite {
       passed: 0,
       failed: 0,
       warnings: 0,
-      details: []
+      details: [],
     };
     this.data = {};
   }
 
   async runAllTests() {
     console.info('🧪 Starting Comprehensive Integration Test Suite...\n');
-    
+
     // Load all data sources
     await this.loadDataSources();
-    
+
     // Core functionality tests
     this.testDataLoading();
     this.testDataStructures();
@@ -38,16 +38,16 @@ class IntegrationTestSuite {
     this.testFeatureFlags();
     this.testSecurityMeasures();
     this.testPerformance();
-    
+
     // Generate report
     this.generateReport();
-    
+
     return this.results.failed === 0;
   }
 
   async loadDataSources() {
     console.info('📂 Loading all data sources...');
-    
+
     const dataFiles = [
       'flavorverse_nodes.json',
       'cigar-specs.json',
@@ -58,7 +58,7 @@ class IntegrationTestSuite {
       'meta.json',
       'emotional.json',
       'lounge.json',
-      'flavor-atlas.json'
+      'flavor-atlas.json',
     ];
 
     for (const file of dataFiles) {
@@ -75,16 +75,16 @@ class IntegrationTestSuite {
         this.addResult('FAIL', `Data Loading`, `Error loading ${file}: ${loadError.message}`);
       }
     }
-    
+
     console.info('');
   }
 
   testDataLoading() {
     console.info('🔍 Testing Data Loading & Accessibility...');
-    
+
     // Test that essential data sources are loaded
     const essentialSources = ['flavorverse_nodes', 'features', 'pairings', 'education'];
-    
+
     essentialSources.forEach(source => {
       if (this.data[source]) {
         this.addResult('PASS', 'Data Loading', `${source} loaded successfully`);
@@ -106,56 +106,73 @@ class IntegrationTestSuite {
 
   testDataStructures() {
     console.info('🏗️  Testing Data Structure Integrity...');
-    
+
     // Test cigar data structure
     if (this.data.flavorverse_nodes) {
       const requiredFields = ['name', 'flavor', 'wrapper', 'color'];
       const firstCigar = this.data.flavorverse_nodes[0];
-      
+
       if (firstCigar) {
         const missingFields = requiredFields.filter(field => !firstCigar[field]);
         if (missingFields.length === 0) {
           this.addResult('PASS', 'Data Structure', 'Cigar data structure is valid');
         } else {
-          this.addResult('FAIL', 'Data Structure', `Missing fields in cigar data: ${missingFields.join(', ')}`);
+          this.addResult(
+            'FAIL',
+            'Data Structure',
+            `Missing fields in cigar data: ${missingFields.join(', ')}`
+          );
         }
       }
     }
 
     // Test features structure
     if (this.data.features && this.data.features.features) {
-      const implementedFeatures = Object.values(this.data.features.features)
-        .filter(f => f.status === 'Implemented').length;
-      
+      const implementedFeatures = Object.values(this.data.features.features).filter(
+        f => f.status === 'Implemented'
+      ).length;
+
       this.addResult('PASS', 'Data Structure', `${implementedFeatures} features implemented`);
     }
 
     // Test educational structure
     if (this.data.education && this.data.education.educationTracks) {
-      const {tracks} = this.data.education.educationTracks;
+      const { tracks } = this.data.education.educationTracks;
       if (tracks && tracks.length > 0) {
-        this.addResult('PASS', 'Data Structure', `Educational tracks structure valid (${tracks.length} tracks)`);
+        this.addResult(
+          'PASS',
+          'Data Structure',
+          `Educational tracks structure valid (${tracks.length} tracks)`
+        );
       }
     }
   }
 
   testCrossReferences() {
     console.info('🔗 Testing Cross-Reference Integration...');
-    
+
     // Test wrapper consistency across data sources
     if (this.data.flavorverse_nodes && this.data.pairings) {
       const wrapperTypes = [...new Set(this.data.flavorverse_nodes.map(c => c.wrapper))];
-      
+
       // Check if pairings reference known wrapper types
       if (this.data.pairings.pairingEngineV3 && this.data.pairings.pairingEngineV3.ceuLessons) {
         const pairingWrappers = this.data.pairings.pairingEngineV3.ceuLessons
           .map(lesson => lesson.focus)
           .filter(focus => focus && wrapperTypes.some(w => focus.includes(w)));
-        
+
         if (pairingWrappers.length > 0) {
-          this.addResult('PASS', 'Cross-Reference', 'Pairing lessons reference valid wrapper types');
+          this.addResult(
+            'PASS',
+            'Cross-Reference',
+            'Pairing lessons reference valid wrapper types'
+          );
         } else {
-          this.addResult('WARN', 'Cross-Reference', 'Limited wrapper cross-references in pairing data');
+          this.addResult(
+            'WARN',
+            'Cross-Reference',
+            'Limited wrapper cross-references in pairing data'
+          );
         }
       }
     }
@@ -163,12 +180,14 @@ class IntegrationTestSuite {
     // Test emotional context integration
     if (this.data.flavorverse_nodes && this.data.emotional) {
       const wrapperTypes = [...new Set(this.data.flavorverse_nodes.map(c => c.wrapper))];
-      
+
       if (this.data.emotional.ritualFlows) {
-        const ritualReferences = Object.values(this.data.emotional.ritualFlows)
-          .filter(ritual => ritual.pairing && wrapperTypes.some(w => 
-            ritual.pairing.toLowerCase().includes(w.toLowerCase())));
-        
+        const ritualReferences = Object.values(this.data.emotional.ritualFlows).filter(
+          ritual =>
+            ritual.pairing &&
+            wrapperTypes.some(w => ritual.pairing.toLowerCase().includes(w.toLowerCase()))
+        );
+
         if (ritualReferences.length > 0) {
           this.addResult('PASS', 'Cross-Reference', 'Ritual flows reference cigar wrapper types');
         } else {
@@ -180,12 +199,16 @@ class IntegrationTestSuite {
 
   testSearchFunctionality() {
     console.info('🔎 Testing Search & Filter Functionality...');
-    
+
     // Simulate global search functionality
     if (this.data.flavorverse_nodes) {
       const searchResults = this.simulateSearch('maduro');
       if (searchResults.length > 0) {
-        this.addResult('PASS', 'Search Functionality', `Search returned ${searchResults.length} results for 'maduro'`);
+        this.addResult(
+          'PASS',
+          'Search Functionality',
+          `Search returned ${searchResults.length} results for 'maduro'`
+        );
       } else {
         this.addResult('FAIL', 'Search Functionality', 'Search functionality not working properly');
       }
@@ -195,21 +218,29 @@ class IntegrationTestSuite {
     if (this.data.flavorverse_nodes) {
       const maduroCigars = this.data.flavorverse_nodes.filter(c => c.wrapper === 'Maduro');
       if (maduroCigars.length > 0) {
-        this.addResult('PASS', 'Filter Functionality', `Wrapper filtering works (${maduroCigars.length} Maduro cigars)`);
+        this.addResult(
+          'PASS',
+          'Filter Functionality',
+          `Wrapper filtering works (${maduroCigars.length} Maduro cigars)`
+        );
       }
     }
   }
 
   testPairingEngine() {
     console.info('🍷 Testing Pairing Engine Integration...');
-    
+
     if (this.data.pairings && this.data.pairings.pairingEngineV3) {
       const engine = this.data.pairings.pairingEngineV3;
-      
+
       // Test CEU lessons
       if (engine.ceuLessons && engine.ceuLessons.length > 0) {
-        this.addResult('PASS', 'Pairing Engine', `${engine.ceuLessons.length} CEU lessons available`);
-        
+        this.addResult(
+          'PASS',
+          'Pairing Engine',
+          `${engine.ceuLessons.length} CEU lessons available`
+        );
+
         // Test lesson structure
         const firstLesson = engine.ceuLessons[0];
         if (firstLesson.lessonTitle && firstLesson.learningObjective) {
@@ -223,7 +254,11 @@ class IntegrationTestSuite {
       if (this.data.flavorverse_nodes) {
         const pairingSuggestions = this.simulatePairing('coffee');
         if (pairingSuggestions.length > 0) {
-          this.addResult('PASS', 'Pairing Engine', `Pairing logic works (${pairingSuggestions.length} coffee pairings)`);
+          this.addResult(
+            'PASS',
+            'Pairing Engine',
+            `Pairing logic works (${pairingSuggestions.length} coffee pairings)`
+          );
         }
       }
     }
@@ -231,39 +266,47 @@ class IntegrationTestSuite {
 
   testEducationalSystem() {
     console.info('📚 Testing Educational System Integration...');
-    
+
     if (this.data.education && this.data.education.educationTracks) {
-      const {tracks} = this.data.education.educationTracks;
-      
+      const { tracks } = this.data.education.educationTracks;
+
       if (tracks && tracks.length > 0) {
         this.addResult('PASS', 'Educational System', `${tracks.length} education tracks available`);
-        
+
         // Test track completeness
         const completeTrack = tracks.find(t => t.title && t.objectives && t.lessons);
         if (completeTrack) {
-          this.addResult('PASS', 'Educational System', 'Educational tracks have complete structure');
+          this.addResult(
+            'PASS',
+            'Educational System',
+            'Educational tracks have complete structure'
+          );
         } else {
           this.addResult('WARN', 'Educational System', 'Some education tracks incomplete');
         }
       }
 
       // Test microcredentials
-      const {microcredentials} = this.data.education.educationTracks;
+      const { microcredentials } = this.data.education.educationTracks;
       if (microcredentials && microcredentials.length > 0) {
-        this.addResult('PASS', 'Educational System', `${microcredentials.length} microcredentials available`);
+        this.addResult(
+          'PASS',
+          'Educational System',
+          `${microcredentials.length} microcredentials available`
+        );
       }
     }
   }
 
   testEmotionalSystem() {
     console.info('🎭 Testing Emotional & Ritual System...');
-    
+
     if (this.data.emotional) {
       // Test ritual flows
       if (this.data.emotional.ritualFlows) {
         const flowCount = Object.keys(this.data.emotional.ritualFlows).length;
         this.addResult('PASS', 'Emotional System', `${flowCount} ritual flows available`);
-        
+
         // Test flow structure
         const firstFlow = Object.values(this.data.emotional.ritualFlows)[0];
         if (firstFlow && firstFlow.mood && firstFlow.music) {
@@ -275,7 +318,11 @@ class IntegrationTestSuite {
       if (this.data.emotional.emotionalMemorySystem) {
         const triggers = this.data.emotional.emotionalMemorySystem.emotionalFlavorTriggers;
         if (triggers && triggers.length > 0) {
-          this.addResult('PASS', 'Emotional System', `${triggers.length} emotional triggers configured`);
+          this.addResult(
+            'PASS',
+            'Emotional System',
+            `${triggers.length} emotional triggers configured`
+          );
         }
       }
     }
@@ -283,18 +330,22 @@ class IntegrationTestSuite {
 
   testFeatureFlags() {
     console.info('⚙️ Testing Feature Flag System...');
-    
+
     if (this.data.features && this.data.features.features) {
-      const {features} = this.data.features;
+      const { features } = this.data.features;
       const totalFeatures = Object.keys(features).length;
-      const implementedFeatures = Object.values(features)
-        .filter(f => f.status === 'Implemented').length;
-      
+      const implementedFeatures = Object.values(features).filter(
+        f => f.status === 'Implemented'
+      ).length;
+
       const implementationRate = Math.round((implementedFeatures / totalFeatures) * 100);
-      
-      this.addResult('PASS', 'Feature Flags', 
-        `${implementedFeatures}/${totalFeatures} features implemented (${implementationRate}%)`);
-      
+
+      this.addResult(
+        'PASS',
+        'Feature Flags',
+        `${implementedFeatures}/${totalFeatures} features implemented (${implementationRate}%)`
+      );
+
       if (implementationRate >= 80) {
         this.addResult('PASS', 'Feature Flags', 'High feature implementation rate');
       } else if (implementationRate >= 50) {
@@ -307,11 +358,11 @@ class IntegrationTestSuite {
 
   testSecurityMeasures() {
     console.info('🔒 Testing Security Integration...');
-    
+
     // Test for XSS vulnerabilities in data
     const dataValues = this.getAllDataValues();
     const xssPatterns = [/<script/i, /javascript:/i, /on\w+\s*=/i];
-    
+
     let securityIssues = 0;
     dataValues.forEach((value, _index) => {
       if (typeof value === 'string') {
@@ -335,15 +386,29 @@ class IntegrationTestSuite {
 
   testPerformance() {
     console.info('⚡ Testing Performance Characteristics...');
-    
+
     // Test data size
     const dataSize = this.calculateTotalDataSize();
-    if (dataSize < 1024 * 1024) { // Less than 1MB
-      this.addResult('PASS', 'Performance', `Total data size: ${Math.round(dataSize/1024)}KB (optimal)`);
-    } else if (dataSize < 5 * 1024 * 1024) { // Less than 5MB
-      this.addResult('WARN', 'Performance', `Total data size: ${Math.round(dataSize/1024/1024)}MB (acceptable)`);
+    if (dataSize < 1024 * 1024) {
+      // Less than 1MB
+      this.addResult(
+        'PASS',
+        'Performance',
+        `Total data size: ${Math.round(dataSize / 1024)}KB (optimal)`
+      );
+    } else if (dataSize < 5 * 1024 * 1024) {
+      // Less than 5MB
+      this.addResult(
+        'WARN',
+        'Performance',
+        `Total data size: ${Math.round(dataSize / 1024 / 1024)}MB (acceptable)`
+      );
     } else {
-      this.addResult('FAIL', 'Performance', `Total data size: ${Math.round(dataSize/1024/1024)}MB (too large)`);
+      this.addResult(
+        'FAIL',
+        'Performance',
+        `Total data size: ${Math.round(dataSize / 1024 / 1024)}MB (too large)`
+      );
     }
 
     // Test search performance simulation
@@ -352,11 +417,19 @@ class IntegrationTestSuite {
       this.simulateSearch('test');
     }
     const searchTime = Date.now() - startTime;
-    
+
     if (searchTime < 100) {
-      this.addResult('PASS', 'Performance', `Search performance: ${searchTime}ms for 100 searches (excellent)`);
+      this.addResult(
+        'PASS',
+        'Performance',
+        `Search performance: ${searchTime}ms for 100 searches (excellent)`
+      );
     } else {
-      this.addResult('WARN', 'Performance', `Search performance: ${searchTime}ms for 100 searches (monitor)`);
+      this.addResult(
+        'WARN',
+        'Performance',
+        `Search performance: ${searchTime}ms for 100 searches (monitor)`
+      );
     }
   }
 
@@ -364,48 +437,52 @@ class IntegrationTestSuite {
   simulateSearch(query) {
     const results = [];
     const searchTerm = query.toLowerCase();
-    
+
     // Search cigars
     if (this.data.flavorverse_nodes) {
       this.data.flavorverse_nodes.forEach(cigar => {
-        if (cigar.name.toLowerCase().includes(searchTerm) ||
-            cigar.flavor.toLowerCase().includes(searchTerm) ||
-            cigar.wrapper.toLowerCase().includes(searchTerm)) {
+        if (
+          cigar.name.toLowerCase().includes(searchTerm) ||
+          cigar.flavor.toLowerCase().includes(searchTerm) ||
+          cigar.wrapper.toLowerCase().includes(searchTerm)
+        ) {
           results.push({ type: 'cigar', data: cigar });
         }
       });
     }
-    
+
     return results;
   }
 
   simulatePairing(beverage) {
     const pairings = [];
-    
+
     if (this.data.flavorverse_nodes) {
       this.data.flavorverse_nodes.forEach(cigar => {
         // Simple pairing logic
-        if (beverage.toLowerCase() === 'coffee' && 
-            (cigar.wrapper === 'Maduro' || cigar.flavor.toLowerCase().includes('chocolate'))) {
+        if (
+          beverage.toLowerCase() === 'coffee' &&
+          (cigar.wrapper === 'Maduro' || cigar.flavor.toLowerCase().includes('chocolate'))
+        ) {
           pairings.push(cigar);
         }
       });
     }
-    
+
     return pairings;
   }
 
   getAllDataValues() {
     const values = [];
-    
-    const extractValues = (obj) => {
+
+    const extractValues = obj => {
       if (typeof obj === 'string') {
         values.push(obj);
       } else if (typeof obj === 'object' && obj !== null) {
         Object.values(obj).forEach(value => extractValues(value));
       }
     };
-    
+
     Object.values(this.data).forEach(dataSource => extractValues(dataSource));
     return values;
   }
@@ -418,7 +495,7 @@ class IntegrationTestSuite {
 
   addResult(status, category, message) {
     this.results.details.push({ status, category, message });
-    
+
     switch (status) {
       case 'PASS':
         this.results.passed++;
@@ -438,23 +515,22 @@ class IntegrationTestSuite {
     console.info(`✅ Passed: ${this.results.passed}`);
     console.error(`❌ Failed: ${this.results.failed}`);
     console.warn(`⚠️  Warnings: ${this.results.warnings}`);
-    
+
     const total = this.results.passed + this.results.failed + this.results.warnings;
     const successRate = Math.round((this.results.passed / total) * 100);
-    
+
     console.info(`\n📈 Success Rate: ${successRate}%`);
-    
+
     // Detailed results by category
     const categories = [...new Set(this.results.details.map(r => r.category))];
-    
+
     console.info('\n📋 Detailed Results by Category:');
     categories.forEach(category => {
       console.info(`\n${category}:`);
       const categoryResults = this.results.details.filter(r => r.category === category);
-      
+
       categoryResults.forEach(result => {
-        const icon = result.status === 'PASS' ? '✅' : 
-                    result.status === 'FAIL' ? '❌' : '⚠️';
+        const icon = result.status === 'PASS' ? '✅' : result.status === 'FAIL' ? '❌' : '⚠️';
         console.info(`  ${icon} ${result.message}`);
       });
     });
@@ -476,19 +552,19 @@ class IntegrationTestSuite {
     // Recommendations
     console.info('\n💡 Integration Recommendations:');
     const recommendations = [];
-    
+
     if (this.results.failed > 0) {
       recommendations.push('🔧 Resolve all failed tests before proceeding to production');
     }
-    
+
     if (this.results.warnings > 5) {
       recommendations.push('⚠️ Address warning items to improve system reliability');
     }
-    
+
     recommendations.push('🔄 Run integration tests regularly during development');
     recommendations.push('📊 Monitor performance metrics in production environment');
     recommendations.push('🔒 Conduct security audits on data content regularly');
-    
+
     recommendations.forEach((rec, index) => {
       console.info(`${index + 1}. ${rec}`);
     });

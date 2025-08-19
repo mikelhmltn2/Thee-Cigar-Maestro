@@ -229,19 +229,10 @@
     "categories": [
       {
         "privacyCompliant": true,
-        "improvements": [
-          "Add voice tone-based filtering"
-        ],
+        "improvements": ["Add voice tone-based filtering"],
         "name": "Cigar Spec Lookup",
-        "uiActivations": [
-          "Cigar search bar",
-          "Cigar detail card tap"
-        ],
-        "voiceCommands": [
-          "Cigar spec",
-          "Get specs",
-          "Show profile"
-        ]
+        "uiActivations": ["Cigar search bar", "Cigar detail card tap"],
+        "voiceCommands": ["Cigar spec", "Get specs", "Show profile"]
       },
       {
         "privacyCompliant": true,
@@ -251,111 +242,54 @@
           "Food terroir integration"
         ],
         "name": "Pairing Engine",
-        "uiActivations": [
-          "Pair Now button",
-          "Smart pairing filter"
-        ],
-        "voiceCommands": [
-          "Pair with whiskey",
-          "What matches this cigar?"
-        ]
+        "uiActivations": ["Pair Now button", "Smart pairing filter"],
+        "voiceCommands": ["Pair with whiskey", "What matches this cigar?"]
       },
       {
         "privacyCompliant": true,
-        "improvements": [
-          "Gamified badges",
-          "Multilingual real-time feedback"
-        ],
+        "improvements": ["Gamified badges", "Multilingual real-time feedback"],
         "name": "Education + CEU Learning",
-        "uiActivations": [
-          "Education tab",
-          "Course tiers"
-        ],
-        "voiceCommands": [
-          "Start my cigar education",
-          "Teach me about wrappers"
-        ]
+        "uiActivations": ["Education tab", "Course tiers"],
+        "voiceCommands": ["Start my cigar education", "Teach me about wrappers"]
       },
       {
         "privacyCompliant": true,
-        "improvements": [
-          "Timeline view",
-          "CEU lesson linking"
-        ],
+        "improvements": ["Timeline view", "CEU lesson linking"],
         "name": "Emotional Pairing Engine",
-        "uiActivations": [
-          "Mood selector UI"
-        ],
-        "voiceCommands": [
-          "I\u2019m feeling nostalgic",
-          "Give me a comfort smoke"
-        ]
+        "uiActivations": ["Mood selector UI"],
+        "voiceCommands": ["I\u2019m feeling nostalgic", "Give me a comfort smoke"]
       },
       {
         "privacyCompliant": true,
-        "improvements": [
-          "NFC tag logging",
-          "Auto-aging predictor"
-        ],
+        "improvements": ["NFC tag logging", "Auto-aging predictor"],
         "name": "Smart Humidor",
-        "uiActivations": [
-          "Humidor dashboard",
-          "QR scan of boxes"
-        ]
+        "uiActivations": ["Humidor dashboard", "QR scan of boxes"]
       },
       {
         "privacyCompliant": true,
-        "improvements": [
-          "Interactive museum mode",
-          "Anniversary alerts"
-        ],
+        "improvements": ["Interactive museum mode", "Anniversary alerts"],
         "name": "Cigar History",
-        "uiActivations": [
-          "Legacy Map",
-          "Story Timeline",
-          "Founder Bios"
-        ]
+        "uiActivations": ["Legacy Map", "Story Timeline", "Founder Bios"]
       },
       {
         "privacyCompliant": true,
-        "improvements": [
-          "Suggest Similar by AI"
-        ],
+        "improvements": ["Suggest Similar by AI"],
         "name": "Spec Comparison Engine",
-        "uiActivations": [
-          "Dual card comparison"
-        ],
-        "voiceCommands": [
-          "Compare Padron and Oliva"
-        ]
+        "uiActivations": ["Dual card comparison"],
+        "voiceCommands": ["Compare Padron and Oliva"]
       },
       {
         "privacyCompliant": true,
-        "improvements": [
-          "Leaderboard filters",
-          "Surprise box animation"
-        ],
+        "improvements": ["Leaderboard filters", "Surprise box animation"],
         "name": "Gamification & Journey",
-        "uiActivations": [
-          "Flavor Journey Tracker",
-          "Challenge Decks"
-        ]
+        "uiActivations": ["Flavor Journey Tracker", "Challenge Decks"]
       },
       {
         "privacyCompliant": true,
-        "improvements": [
-          "Video micro-lessons",
-          "Scenario simulations"
-        ],
+        "improvements": ["Video micro-lessons", "Scenario simulations"],
         "name": "Hospitality Mode",
-        "uiActivations": [
-          "Lounge tab",
-          "Staff login"
-        ],
-        "voiceCommands": [
-          "First smoke tutorial",
-          "Train staff"
-        ]
+        "uiActivations": ["Lounge tab", "Staff login"],
+        "voiceCommands": ["First smoke tutorial", "Train staff"]
       },
       {
         "privacyCompliant": true,
@@ -365,70 +299,38 @@
           "White-labeled pairing sheets"
         ],
         "name": "Retail & Lounge Tools",
-        "uiActivations": [
-          "Lounge Hub",
-          "Event Toolkit"
-        ]
+        "uiActivations": ["Lounge Hub", "Event Toolkit"]
       },
       {
         "privacyCompliant": true,
-        "improvements": [
-          "Conversational memory awareness"
-        ],
+        "improvements": ["Conversational memory awareness"],
         "name": "AI Assistant",
-        "uiActivations": [
-          "Floating GPT panel"
-        ],
-        "voiceCommands": [
-          "Ask the Maestro",
-          "Suggest a pairing for tonight"
-        ]
+        "uiActivations": ["Floating GPT panel"],
+        "voiceCommands": ["Ask the Maestro", "Suggest a pairing for tonight"]
       },
       {
         "privacyCompliant": true,
-        "improvements": [
-          "Trust score display",
-          "Scan-to-Pair-to-Save"
-        ],
+        "improvements": ["Trust score display", "Scan-to-Pair-to-Save"],
         "name": "Scan & Authenticate",
-        "uiActivations": [
-          "Scan Band",
-          "Enter Code"
-        ]
+        "uiActivations": ["Scan Band", "Enter Code"]
       },
       {
         "privacyCompliant": true,
-        "improvements": [
-          "Sauce index",
-          "Chef overlays"
-        ],
+        "improvements": ["Sauce index", "Chef overlays"],
         "name": "Culinary Pairing",
-        "uiActivations": [
-          "Pairing Decks",
-          "Regional Flavor Maps"
-        ]
+        "uiActivations": ["Pairing Decks", "Regional Flavor Maps"]
       },
       {
         "privacyCompliant": true,
-        "improvements": [
-          "Locker behavior analytics",
-          "Real-time staff feedback"
-        ],
+        "improvements": ["Locker behavior analytics", "Real-time staff feedback"],
         "name": "Lounge Analytics",
-        "uiActivations": [
-          "Lounge dashboard"
-        ]
+        "uiActivations": ["Lounge dashboard"]
       },
       {
         "privacyCompliant": true,
-        "improvements": [
-          "Proactive nudging by journey stage"
-        ],
+        "improvements": ["Proactive nudging by journey stage"],
         "name": "GPT Intent Switching",
-        "voiceCommands": [
-          "Switch to learning mode",
-          "What\u2019s my last favorite?"
-        ]
+        "voiceCommands": ["Switch to learning mode", "What\u2019s my last favorite?"]
       }
     ],
     "deduplication": true,

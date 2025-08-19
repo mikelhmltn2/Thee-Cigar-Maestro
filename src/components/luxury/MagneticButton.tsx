@@ -1,3 +1,3 @@
 export default function MagneticButton() {
-  return null
+  return null;
 }

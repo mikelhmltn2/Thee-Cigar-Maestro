@@ -11,14 +11,16 @@ class LoadingSystem {
     this.skeletonTemplates = new Map();
     this.progressTrackers = new Map();
     this.loadingCallbacks = new Map();
-    
+
     this.initializeSkeletonTemplates();
     this.setupIntersectionObserver();
   }
 
   initializeSkeletonTemplates() {
     // Define skeleton templates for different content types
-    this.skeletonTemplates.set('cigar-card', `
+    this.skeletonTemplates.set(
+      'cigar-card',
+      `
       <div class="skeleton-card">
         <div class="skeleton-header"></div>
         <div class="skeleton-content">
@@ -27,15 +29,21 @@ class LoadingSystem {
           <div class="skeleton-line medium"></div>
         </div>
       </div>
-    `);
+    `
+    );
 
-    this.skeletonTemplates.set('cigar-list', `
+    this.skeletonTemplates.set(
+      'cigar-list',
+      `
       <div class="skeleton-list">
         ${Array(6).fill('<div class="skeleton-item"><div class="skeleton-circle"></div><div class="skeleton-text"><div class="skeleton-line"></div><div class="skeleton-line short"></div></div></div>').join('')}
       </div>
-    `);
+    `
+    );
 
-    this.skeletonTemplates.set('dashboard-widget', `
+    this.skeletonTemplates.set(
+      'dashboard-widget',
+      `
       <div class="skeleton-widget">
         <div class="skeleton-title"></div>
         <div class="skeleton-chart"></div>
@@ -45,34 +53,41 @@ class LoadingSystem {
           <div class="skeleton-stat"></div>
         </div>
       </div>
-    `);
+    `
+    );
 
-    this.skeletonTemplates.set('3d-scene', `
+    this.skeletonTemplates.set(
+      '3d-scene',
+      `
       <div class="skeleton-3d">
         <div class="skeleton-canvas">
           <div class="skeleton-loading-spinner"></div>
           <div class="skeleton-loading-text">Initializing 3D Scene...</div>
         </div>
       </div>
-    `);
+    `
+    );
   }
 
   setupIntersectionObserver() {
     // Lazy loading support
-    this.lazyLoadObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const element = entry.target;
-          const {loadingId} = element.dataset;
-          
-          if (loadingId) {
-            this.triggerLazyLoad(loadingId, element);
+    this.lazyLoadObserver = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const element = entry.target;
+            const { loadingId } = element.dataset;
+
+            if (loadingId) {
+              this.triggerLazyLoad(loadingId, element);
+            }
           }
-        }
-      });
-    }, {
-      rootMargin: '50px'
-    });
+        });
+      },
+      {
+        rootMargin: '50px',
+      }
+    );
   }
 
   // Main loading state management
@@ -83,7 +98,7 @@ class LoadingSystem {
       message = 'Loading...',
       showProgress = false,
       showSkeleton = false,
-      skeletonType = 'default'
+      skeletonType = 'default',
     } = options;
 
     const loadingState = {
@@ -96,7 +111,7 @@ class LoadingSystem {
       skeletonType,
       startTime: Date.now(),
       progress: 0,
-      isComplete: false
+      isComplete: false,
     };
 
     this.loadingStates.set(id, loadingState);
@@ -153,11 +168,14 @@ class LoadingSystem {
     this.showCompletionMessage(loadingState);
 
     // Clean up after delay
-    setTimeout(() => {
-      this.hideLoadingUI(loadingState);
-      this.loadingStates.delete(id);
-      this.progressTrackers.delete(id);
-    }, success ? 800 : 2000);
+    setTimeout(
+      () => {
+        this.hideLoadingUI(loadingState);
+        this.loadingStates.delete(id);
+        this.progressTrackers.delete(id);
+      },
+      success ? 800 : 2000
+    );
 
     // Trigger completion callbacks
     const callbacks = this.loadingCallbacks.get(id);
@@ -173,8 +191,10 @@ class LoadingSystem {
 
   renderLoadingUI(loadingState) {
     const { element, showSkeleton, skeletonType, showProgress, message } = loadingState;
-    
-    if (!element) {return;}
+
+    if (!element) {
+      return;
+    }
 
     // Store original content
     if (!element.dataset.originalContent) {
@@ -192,7 +212,7 @@ class LoadingSystem {
 
   renderSkeleton(element, skeletonType) {
     const template = this.skeletonTemplates.get(skeletonType) || this.getDefaultSkeleton();
-    
+
     element.innerHTML = `
       <div class="skeleton-container" data-skeleton-type="${skeletonType}">
         ${template}
@@ -204,14 +224,16 @@ class LoadingSystem {
   }
 
   renderSpinner(element, message, showProgress) {
-    const progressHTML = showProgress ? `
+    const progressHTML = showProgress
+      ? `
       <div class="loading-progress">
         <div class="loading-progress-bar">
           <div class="loading-progress-fill" style="width: 0%"></div>
         </div>
         <div class="loading-progress-text">0%</div>
       </div>
-    ` : '';
+    `
+      : '';
 
     element.innerHTML = `
       <div class="loading-container">
@@ -230,8 +252,10 @@ class LoadingSystem {
 
   updateLoadingUI(loadingState) {
     const { element, progress, message, showProgress } = loadingState;
-    
-    if (!element) {return;}
+
+    if (!element) {
+      return;
+    }
 
     const messageEl = element.querySelector('.loading-message');
     if (messageEl) {
@@ -241,11 +265,11 @@ class LoadingSystem {
     if (showProgress) {
       const progressFill = element.querySelector('.loading-progress-fill');
       const progressText = element.querySelector('.loading-progress-text');
-      
+
       if (progressFill) {
         progressFill.style.width = `${progress}%`;
       }
-      
+
       if (progressText) {
         progressText.textContent = `${Math.round(progress)}%`;
       }
@@ -254,12 +278,14 @@ class LoadingSystem {
 
   showCompletionMessage(loadingState) {
     const { element, success, message } = loadingState;
-    
-    if (!element) {return;}
+
+    if (!element) {
+      return;
+    }
 
     const completionMessage = message || (success ? 'Loaded successfully!' : 'Loading failed');
     const iconClass = success ? 'success-icon' : 'error-icon';
-    
+
     element.innerHTML = `
       <div class="loading-completion ${success ? 'success' : 'error'}">
         <div class="${iconClass}">
@@ -272,11 +298,13 @@ class LoadingSystem {
 
   hideLoadingUI(loadingState) {
     const { element } = loadingState;
-    
-    if (!element) {return;}
+
+    if (!element) {
+      return;
+    }
 
     // Restore original content
-    const {originalContent} = element.dataset;
+    const { originalContent } = element.dataset;
     if (originalContent) {
       element.innerHTML = originalContent;
       delete element.dataset.originalContent;
@@ -290,13 +318,15 @@ class LoadingSystem {
     this.progressTrackers.set(id, {
       total: 0,
       completed: 0,
-      items: new Map()
+      items: new Map(),
     });
   }
 
   addProgressItem(loadingId, itemId, weight = 1) {
     const tracker = this.progressTrackers.get(loadingId);
-    if (!tracker) {return;}
+    if (!tracker) {
+      return;
+    }
 
     tracker.items.set(itemId, { weight, completed: false });
     tracker.total += weight;
@@ -304,10 +334,14 @@ class LoadingSystem {
 
   completeProgressItem(loadingId, itemId) {
     const tracker = this.progressTrackers.get(loadingId);
-    if (!tracker) {return;}
+    if (!tracker) {
+      return;
+    }
 
     const item = tracker.items.get(itemId);
-    if (!item || item.completed) {return;}
+    if (!item || item.completed) {
+      return;
+    }
 
     item.completed = true;
     tracker.completed += item.weight;
@@ -320,11 +354,11 @@ class LoadingSystem {
   enableLazyLoading(element, loadingId, loadFunction) {
     element.dataset.loadingId = loadingId;
     element.dataset.lazyLoad = 'true';
-    
+
     this.loadingCallbacks.set(loadingId, {
-      onLoad: loadFunction
+      onLoad: loadFunction,
     });
-    
+
     this.lazyLoadObserver.observe(element);
   }
 
@@ -335,18 +369,19 @@ class LoadingSystem {
         element,
         message: 'Loading content...',
         showSkeleton: true,
-        skeletonType: element.dataset.skeletonType || 'default'
+        skeletonType: element.dataset.skeletonType || 'default',
       });
 
-      callbacks.onLoad(element)
+      callbacks
+        .onLoad(element)
         .then(() => {
           this.finishLoading(loadingId, true);
         })
-        .catch((error) => {
+        .catch(error => {
           errorHandler.handleError({
             type: 'lazy_load',
             message: `Failed to lazy load content: ${error.message}`,
-            error
+            error,
           });
           this.finishLoading(loadingId, false, 'Failed to load content');
         });
@@ -362,17 +397,17 @@ class LoadingSystem {
       concurrent = 3,
       showProgress = true,
       onItemComplete = null,
-      onBatchComplete = null
+      onBatchComplete = null,
     } = options;
 
     this.startLoading(id, {
       element,
       showProgress,
-      message: `Loading ${items.length} items...`
+      message: `Loading ${items.length} items...`,
     });
 
     this.initializeProgressTracker(id);
-    
+
     // Add all items to progress tracker
     items.forEach((item, index) => {
       this.addProgressItem(id, `item_${index}`, 1);
@@ -382,23 +417,23 @@ class LoadingSystem {
     const semaphore = new Semaphore(concurrent);
 
     items.forEach((item, index) => {
-      const loadPromise = semaphore.acquire().then(async (release) => {
+      const loadPromise = semaphore.acquire().then(async release => {
         try {
           const result = await item.loadFunction();
-          
+
           if (onItemComplete) {
             onItemComplete(item, result, index);
           }
-          
+
           this.completeProgressItem(id, `item_${index}`);
           return { success: true, result, item, index };
         } catch (_error) {
           errorHandler.handleError({
             type: 'batch_load_item',
             message: `Failed to load batch item ${index}: ${_error.message}`,
-            error: _error
+            error: _error,
           });
-          
+
           this.completeProgressItem(id, `item_${index}`);
           return { success: false, error: _error, item, index };
         } finally {
@@ -409,22 +444,21 @@ class LoadingSystem {
       loadPromises.push(loadPromise);
     });
 
-    Promise.allSettled(loadPromises)
-      .then((results) => {
-        const successful = results.filter(r => r.value?.success).length;
-        const failed = results.length - successful;
-        
-        const success = failed === 0;
-        const message = success 
-          ? `Successfully loaded ${successful} items`
-          : `Loaded ${successful} items, ${failed} failed`;
+    Promise.allSettled(loadPromises).then(results => {
+      const successful = results.filter(r => r.value?.success).length;
+      const failed = results.length - successful;
 
-        this.finishLoading(id, success, message);
+      const success = failed === 0;
+      const message = success
+        ? `Successfully loaded ${successful} items`
+        : `Loaded ${successful} items, ${failed} failed`;
 
-        if (onBatchComplete) {
-          onBatchComplete(results);
-        }
-      });
+      this.finishLoading(id, success, message);
+
+      if (onBatchComplete) {
+        onBatchComplete(results);
+      }
+    });
 
     return loadPromises;
   }
@@ -454,7 +488,9 @@ class LoadingSystem {
   }
 
   ensureSkeletonCSS() {
-    if (document.getElementById('skeleton-styles')) {return;}
+    if (document.getElementById('skeleton-styles')) {
+      return;
+    }
 
     const style = document.createElement('style');
     style.id = 'skeleton-styles';
@@ -544,12 +580,14 @@ class LoadingSystem {
         50% { opacity: 0.7; }
       }
     `;
-    
+
     document.head.appendChild(style);
   }
 
   ensureLoadingCSS() {
-    if (document.getElementById('loading-styles')) {return;}
+    if (document.getElementById('loading-styles')) {
+      return;
+    }
 
     const style = document.createElement('style');
     style.id = 'loading-styles';
@@ -646,7 +684,7 @@ class LoadingSystem {
         100% { transform: rotate(360deg); }
       }
     `;
-    
+
     document.head.appendChild(style);
   }
 }
@@ -660,7 +698,7 @@ class Semaphore {
   }
 
   async acquire() {
-    return new Promise((resolve) => {
+    return new Promise(resolve => {
       const release = () => {
         this.current--;
         if (this.queue.length > 0) {

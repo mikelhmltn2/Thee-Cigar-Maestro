@@ -26,7 +26,7 @@ const CONFIG = {
     '.next/**',
     'coverage/**',
     '*.min.js',
-    '*.bundle.js'
+    '*.bundle.js',
   ],
   securityRules: {
     maxDependencies: 100,
@@ -34,8 +34,8 @@ const CONFIG = {
     maxFileSize: 1024 * 1024, // 1MB
     maxLineLength: 120,
     maxFunctionLength: 50,
-    maxComplexity: 10
-  }
+    maxComplexity: 10,
+  },
 };
 
 // Analysis results
@@ -47,28 +47,28 @@ const results = {
     issues: 0,
     securityIssues: 0,
     qualityIssues: 0,
-    performanceIssues: 0
+    performanceIssues: 0,
   },
   security: {
     vulnerabilities: [],
     outdatedPackages: [],
     licenseIssues: [],
-    suspiciousPatterns: []
+    suspiciousPatterns: [],
   },
   quality: {
     lintingIssues: [],
     formattingIssues: [],
     complexityIssues: [],
-    duplicationIssues: []
+    duplicationIssues: [],
   },
   dependencies: {
     outdated: [],
     unused: [],
     duplicate: [],
-    security: []
+    security: [],
   },
   recommendations: [],
-  fixes: []
+  fixes: [],
 };
 
 /**
@@ -86,43 +86,42 @@ function shouldIgnoreFile(filePath) {
  */
 async function analyzeDependencies() {
   console.info('📦 Analyzing dependencies...');
-  
+
   try {
     // Check for outdated packages
     const outdatedOutput = execSync('npm outdated --json', { encoding: 'utf8', stdio: 'pipe' });
     const outdated = JSON.parse(outdatedOutput);
-    
+
     results.dependencies.outdated = Object.keys(outdated).map(pkg => ({
       package: pkg,
       current: outdated[pkg].current,
       latest: outdated[pkg].latest,
-      type: outdated[pkg].type
+      type: outdated[pkg].type,
     }));
-    
+
     // Check for security vulnerabilities
     const auditOutput = execSync('npm audit --json', { encoding: 'utf8', stdio: 'pipe' });
     const audit = JSON.parse(auditOutput);
-    
+
     if (audit.vulnerabilities) {
       results.dependencies.security = Object.keys(audit.vulnerabilities).map(pkg => ({
         package: pkg,
         severity: audit.vulnerabilities[pkg].severity,
         title: audit.vulnerabilities[pkg].title,
-        recommendation: audit.vulnerabilities[pkg].recommendation
+        recommendation: audit.vulnerabilities[pkg].recommendation,
       }));
     }
-    
+
     // Check for unused dependencies
     try {
       const depcheckOutput = execSync('npx depcheck --json', { encoding: 'utf8', stdio: 'pipe' });
       const depcheck = JSON.parse(depcheckOutput);
-      
+
       results.dependencies.unused = depcheck.dependencies || [];
       results.dependencies.duplicate = depcheck.duplicates || [];
     } catch (error) {
       console.warn('⚠️ Depcheck not available, skipping unused dependency analysis');
     }
-    
   } catch (error) {
     console.error(`❌ Dependency analysis failed: ${error.message}`);
   }
@@ -133,44 +132,44 @@ async function analyzeDependencies() {
  */
 async function analyzeSecurity() {
   console.info('🛡️ Running security analysis...');
-  
+
   const securityPatterns = [
     {
       pattern: /(api_key|apiKey|secret|password|token)\s*[:=]\s*['"`][^'"`]+['"`]/gi,
       severity: 'high',
-      description: 'Hardcoded credentials detected'
+      description: 'Hardcoded credentials detected',
     },
     {
       pattern: /console\.(log|warn|error|info)\(/gi,
       severity: 'medium',
-      description: 'Console statements in production code'
+      description: 'Console statements in production code',
     },
     {
       pattern: /eval\(/gi,
       severity: 'high',
-      description: 'Use of eval() function'
+      description: 'Use of eval() function',
     },
     {
       pattern: /innerHTML\s*=/gi,
       severity: 'medium',
-      description: 'Potential XSS vulnerability with innerHTML'
+      description: 'Potential XSS vulnerability with innerHTML',
     },
     {
       pattern: /document\.write\(/gi,
       severity: 'high',
-      description: 'Use of document.write()'
-    }
+      description: 'Use of document.write()',
+    },
   ];
-  
+
   const files = getAllFiles(rootDir);
-  
+
   for (const file of files) {
     if (shouldIgnoreFile(file) || !isTextFile(file)) continue;
-    
+
     try {
       const content = fs.readFileSync(file, 'utf8');
       const relativePath = path.relative(rootDir, file);
-      
+
       securityPatterns.forEach(({ pattern, severity, description }) => {
         const matches = content.match(pattern);
         if (matches) {
@@ -179,11 +178,10 @@ async function analyzeSecurity() {
             pattern: description,
             severity,
             count: matches.length,
-            lines: getLineNumbers(content, pattern)
+            lines: getLineNumbers(content, pattern),
           });
         }
       });
-      
     } catch (error) {
       console.warn(`⚠️ Could not read file ${file}: ${error.message}`);
     }
@@ -195,13 +193,16 @@ async function analyzeSecurity() {
  */
 async function analyzeCodeQuality() {
   console.info('🔍 Running code quality analysis...');
-  
+
   try {
     // Run ESLint
     try {
-      const eslintOutput = execSync('npm run lint -- --format json', { encoding: 'utf8', stdio: 'pipe' });
+      const eslintOutput = execSync('npm run lint -- --format json', {
+        encoding: 'utf8',
+        stdio: 'pipe',
+      });
       const eslintResults = JSON.parse(eslintOutput);
-      
+
       eslintResults.forEach(result => {
         result.messages.forEach(message => {
           results.quality.lintingIssues.push({
@@ -210,33 +211,35 @@ async function analyzeCodeQuality() {
             column: message.column,
             severity: message.severity,
             message: message.message,
-            rule: message.ruleId
+            rule: message.ruleId,
           });
         });
       });
     } catch (error) {
       console.warn('⚠️ ESLint analysis failed, continuing...');
     }
-    
+
     // Run Prettier check
     try {
-      const prettierOutput = execSync('npx prettier --check --list-different "**/*.{js,jsx,ts,tsx,json,css,md}"', { encoding: 'utf8', stdio: 'pipe' });
+      const prettierOutput = execSync(
+        'npx prettier --check --list-different "**/*.{js,jsx,ts,tsx,json,css,md}"',
+        { encoding: 'utf8', stdio: 'pipe' }
+      );
       const files = prettierOutput.trim().split('\n').filter(Boolean);
-      
+
       files.forEach(file => {
         results.quality.formattingIssues.push({
           file,
-          issue: 'Code formatting does not match Prettier standards'
+          issue: 'Code formatting does not match Prettier standards',
         });
       });
     } catch (error) {
       // Prettier check failed, which means files are not formatted
       console.warn('⚠️ Prettier check failed, files need formatting');
     }
-    
+
     // Analyze code complexity
     analyzeComplexity();
-    
   } catch (error) {
     console.error(`❌ Code quality analysis failed: ${error.message}`);
   }
@@ -246,18 +249,19 @@ async function analyzeCodeQuality() {
  * Analyze code complexity
  */
 function analyzeComplexity() {
-  const files = getAllFiles(rootDir).filter(file => 
-    file.endsWith('.js') || file.endsWith('.jsx') || file.endsWith('.ts') || file.endsWith('.tsx')
+  const files = getAllFiles(rootDir).filter(
+    file =>
+      file.endsWith('.js') || file.endsWith('.jsx') || file.endsWith('.ts') || file.endsWith('.tsx')
   );
-  
+
   for (const file of files) {
     if (shouldIgnoreFile(file)) continue;
-    
+
     try {
       const content = fs.readFileSync(file, 'utf8');
       const lines = content.split('\n');
       const relativePath = path.relative(rootDir, file);
-      
+
       // Check line length
       lines.forEach((line, index) => {
         if (line.length > CONFIG.securityRules.maxLineLength) {
@@ -265,11 +269,11 @@ function analyzeComplexity() {
             file: relativePath,
             line: index + 1,
             issue: `Line length (${line.length}) exceeds maximum (${CONFIG.securityRules.maxLineLength})`,
-            severity: 'medium'
+            severity: 'medium',
           });
         }
       });
-      
+
       // Check function length (simple heuristic)
       const functionMatches = content.match(/function\s+\w+\s*\([^)]*\)\s*\{/g);
       if (functionMatches) {
@@ -277,10 +281,9 @@ function analyzeComplexity() {
         results.quality.complexityIssues.push({
           file: relativePath,
           issue: `Found ${functionMatches.length} functions - consider breaking down large functions`,
-          severity: 'low'
+          severity: 'low',
         });
       }
-      
     } catch (error) {
       console.warn(`⚠️ Could not analyze complexity for ${file}: ${error.message}`);
     }
@@ -292,61 +295,61 @@ function analyzeComplexity() {
  */
 function generateRecommendations() {
   const recommendations = [];
-  
+
   // Security recommendations
   if (results.dependencies.security.length > 0) {
     recommendations.push({
       category: 'Security',
       priority: 'high',
-      message: `Found ${results.dependencies.security.length} security vulnerabilities in dependencies. Run 'npm audit fix' to resolve.`
+      message: `Found ${results.dependencies.security.length} security vulnerabilities in dependencies. Run 'npm audit fix' to resolve.`,
     });
   }
-  
+
   if (results.security.suspiciousPatterns.length > 0) {
     const highSeverity = results.security.suspiciousPatterns.filter(p => p.severity === 'high');
     if (highSeverity.length > 0) {
       recommendations.push({
         category: 'Security',
         priority: 'high',
-        message: `Found ${highSeverity.length} high-severity security issues. Review and fix immediately.`
+        message: `Found ${highSeverity.length} high-severity security issues. Review and fix immediately.`,
       });
     }
   }
-  
+
   // Quality recommendations
   if (results.quality.lintingIssues.length > 0) {
     recommendations.push({
       category: 'Code Quality',
       priority: 'medium',
-      message: `Found ${results.quality.lintingIssues.length} linting issues. Run 'npm run lint --fix' to auto-fix.`
+      message: `Found ${results.quality.lintingIssues.length} linting issues. Run 'npm run lint --fix' to auto-fix.`,
     });
   }
-  
+
   if (results.quality.formattingIssues.length > 0) {
     recommendations.push({
       category: 'Code Quality',
       priority: 'low',
-      message: `Found ${results.quality.formattingIssues.length} formatting issues. Run 'npx prettier --write' to fix.`
+      message: `Found ${results.quality.formattingIssues.length} formatting issues. Run 'npx prettier --write' to fix.`,
     });
   }
-  
+
   // Dependency recommendations
   if (results.dependencies.outdated.length > 0) {
     recommendations.push({
       category: 'Dependencies',
       priority: 'medium',
-      message: `Found ${results.dependencies.outdated.length} outdated packages. Consider updating for security and features.`
+      message: `Found ${results.dependencies.outdated.length} outdated packages. Consider updating for security and features.`,
     });
   }
-  
+
   if (results.dependencies.unused.length > 0) {
     recommendations.push({
       category: 'Dependencies',
       priority: 'low',
-      message: `Found ${results.dependencies.unused.length} unused dependencies. Consider removing to reduce bundle size.`
+      message: `Found ${results.dependencies.unused.length} unused dependencies. Consider removing to reduce bundle size.`,
     });
   }
-  
+
   results.recommendations = recommendations;
 }
 
@@ -358,9 +361,9 @@ async function applyFixes() {
     console.info('🔧 Auto-fix disabled. Run with AUTO_FIX=true to apply fixes automatically.');
     return;
   }
-  
+
   console.info('🔧 Applying automated fixes...');
-  
+
   try {
     // Fix linting issues
     if (results.quality.lintingIssues.length > 0) {
@@ -368,21 +371,20 @@ async function applyFixes() {
       execSync('npm run lint -- --fix', { stdio: 'inherit' });
       results.fixes.push('Linting issues auto-fixed');
     }
-    
+
     // Fix formatting issues
     if (results.quality.formattingIssues.length > 0) {
       console.info('🔧 Fixing formatting issues...');
       execSync('npx prettier --write "**/*.{js,jsx,ts,tsx,json,css,md}"', { stdio: 'inherit' });
       results.fixes.push('Formatting issues auto-fixed');
     }
-    
+
     // Fix security vulnerabilities
     if (results.dependencies.security.length > 0) {
       console.info('🔧 Fixing security vulnerabilities...');
       execSync('npm audit fix', { stdio: 'inherit' });
       results.fixes.push('Security vulnerabilities auto-fixed');
     }
-    
   } catch (error) {
     console.error(`❌ Auto-fix failed: ${error.message}`);
   }
@@ -395,22 +397,21 @@ function generateReport() {
   // Calculate summary
   results.summary.totalFiles = getAllFiles(rootDir).length;
   results.summary.analyzedFiles = getAllFiles(rootDir).filter(f => !shouldIgnoreFile(f)).length;
-  results.summary.issues = 
+  results.summary.issues =
     results.quality.lintingIssues.length +
     results.quality.formattingIssues.length +
     results.quality.complexityIssues.length +
     results.security.suspiciousPatterns.length +
     results.dependencies.security.length;
-  
-  results.summary.securityIssues = 
-    results.security.suspiciousPatterns.length +
-    results.dependencies.security.length;
-  
-  results.summary.qualityIssues = 
+
+  results.summary.securityIssues =
+    results.security.suspiciousPatterns.length + results.dependencies.security.length;
+
+  results.summary.qualityIssues =
     results.quality.lintingIssues.length +
     results.quality.formattingIssues.length +
     results.quality.complexityIssues.length;
-  
+
   const report = {
     timestamp: results.timestamp,
     config: CONFIG,
@@ -419,14 +420,14 @@ function generateReport() {
     quality: results.quality,
     dependencies: results.dependencies,
     recommendations: results.recommendations,
-    fixes: results.fixes
+    fixes: results.fixes,
   };
-  
+
   const reportPath = path.join(rootDir, 'code-analysis-report.json');
   fs.writeFileSync(reportPath, JSON.stringify(report, null, 2));
-  
+
   console.info(`📊 Code analysis report saved to: ${reportPath}`);
-  
+
   // Print summary
   console.info('\n📋 Code Analysis Summary:');
   console.info('═'.repeat(50));
@@ -435,14 +436,14 @@ function generateReport() {
   console.info(`Security Issues: ${results.summary.securityIssues}`);
   console.info(`Quality Issues: ${results.summary.qualityIssues}`);
   console.info('');
-  
+
   if (results.recommendations.length > 0) {
     console.info('🎯 Recommendations:');
     results.recommendations.forEach((rec, index) => {
       console.info(`${index + 1}. [${rec.priority.toUpperCase()}] ${rec.category}: ${rec.message}`);
     });
   }
-  
+
   if (results.fixes.length > 0) {
     console.info('\n🔧 Applied Fixes:');
     results.fixes.forEach((fix, index) => {
@@ -457,7 +458,7 @@ function generateReport() {
 function getAllFiles(dirPath, arrayOfFiles = []) {
   try {
     const files = fs.readdirSync(dirPath);
-    
+
     files.forEach(file => {
       const fullPath = path.join(dirPath, file);
       if (fs.statSync(fullPath).isDirectory()) {
@@ -469,7 +470,7 @@ function getAllFiles(dirPath, arrayOfFiles = []) {
   } catch (error) {
     // Directory doesn't exist or can't be read
   }
-  
+
   return arrayOfFiles;
 }
 
@@ -481,13 +482,13 @@ function isTextFile(filePath) {
 function getLineNumbers(content, pattern) {
   const lines = content.split('\n');
   const lineNumbers = [];
-  
+
   lines.forEach((line, index) => {
     if (pattern.test(line)) {
       lineNumbers.push(index + 1);
     }
   });
-  
+
   return lineNumbers;
 }
 
@@ -496,26 +497,25 @@ function getLineNumbers(content, pattern) {
  */
 async function runCodeAnalysis() {
   console.info('🚀 Starting Automated Code Analysis...');
-  
+
   try {
     // Run all analyses
     await analyzeDependencies();
     await analyzeSecurity();
     await analyzeCodeQuality();
-    
+
     // Generate recommendations
     generateRecommendations();
-    
+
     // Apply fixes if enabled
     await applyFixes();
-    
+
     // Generate report
     generateReport();
-    
+
     // Exit with appropriate code
     const hasCriticalIssues = results.recommendations.some(r => r.priority === 'high');
     process.exit(hasCriticalIssues ? 1 : 0);
-    
   } catch (error) {
     console.error(`❌ Code analysis failed: ${error.message}`);
     process.exit(1);

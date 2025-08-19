@@ -3,7 +3,12 @@
  * Integrates with centralized error handling system
  */
 
-import { safeAsync, handleError as _handleError, handleApiError as _handleApiError, handleNetworkError as _handleNetworkError } from './src/utils/errorHandler.js';
+import {
+  safeAsync,
+  handleError as _handleError,
+  handleApiError as _handleApiError,
+  handleNetworkError as _handleNetworkError,
+} from './src/utils/errorHandler.js';
 
 class APIClient {
   constructor(baseURL = 'https://api.theecigarmaestro.com') {
@@ -11,7 +16,7 @@ class APIClient {
     this.defaultHeaders = {
       'Content-Type': 'application/json',
     };
-    
+
     // Setup response interceptors for error handling
     this.setupInterceptors();
   }
@@ -21,12 +26,12 @@ class APIClient {
    */
   setupInterceptors() {
     // Add auth token to requests if available
-    this.requestInterceptor = (config) => {
+    this.requestInterceptor = config => {
       const token = localStorage.getItem('auth_token');
       if (token) {
         config.headers = {
           ...config.headers,
-          'Authorization': `Bearer ${token}`
+          Authorization: `Bearer ${token}`,
         };
       }
       return config;
@@ -37,30 +42,35 @@ class APIClient {
    * Make HTTP request with enhanced error handling
    */
   async request(endpoint, options = {}) {
-    return await safeAsync(async () => {
-      const url = `${this.baseURL}${endpoint}`;
-      const config = {
-        headers: { ...this.defaultHeaders, ...options.headers },
-        ...options
-      };
+    return await safeAsync(
+      async () => {
+        const url = `${this.baseURL}${endpoint}`;
+        const config = {
+          headers: { ...this.defaultHeaders, ...options.headers },
+          ...options,
+        };
 
-      // Apply request interceptor
-      const finalConfig = this.requestInterceptor(config);
+        // Apply request interceptor
+        const finalConfig = this.requestInterceptor(config);
 
-      const response = await fetch(url, finalConfig);
+        const response = await fetch(url, finalConfig);
 
-      if (!response.ok) {
-        return await _handleApiError(response, endpoint, {
-          enableRetry: response.status >= 500,
-          retryCallback: () => this.request(endpoint, options)
-        });
+        if (!response.ok) {
+          return await _handleApiError(response, endpoint, {
+            enableRetry: response.status >= 500,
+            retryCallback: () => this.request(endpoint, options),
+          });
+        }
+
+        return await response.json();
+      },
+      'API Request',
+      null,
+      {
+        userMessage: `Failed to ${options.method || 'GET'} data from server`,
+        showUserNotification: true,
       }
-
-      return await response.json();
-    }, 'API Request', null, {
-      userMessage: `Failed to ${options.method || 'GET'} data from server`,
-      showUserNotification: true
-    });
+    );
   }
 
   /**
@@ -77,7 +87,7 @@ class APIClient {
     return this.request(endpoint, {
       ...options,
       method: 'POST',
-      body: JSON.stringify(data)
+      body: JSON.stringify(data),
     });
   }
 
@@ -88,7 +98,7 @@ class APIClient {
     return this.request(endpoint, {
       ...options,
       method: 'PUT',
-      body: JSON.stringify(data)
+      body: JSON.stringify(data),
     });
   }
 
@@ -103,38 +113,48 @@ class APIClient {
    * User registration with enhanced error handling
    */
   async register(userData) {
-    return await safeAsync(async () => {
-      const response = await this.post('/auth/register', userData);
-      
-      if (response && response.token) {
-        localStorage.setItem('auth_token', response.token);
-        localStorage.setItem('user_data', JSON.stringify(response.user));
+    return await safeAsync(
+      async () => {
+        const response = await this.post('/auth/register', userData);
+
+        if (response && response.token) {
+          localStorage.setItem('auth_token', response.token);
+          localStorage.setItem('user_data', JSON.stringify(response.user));
+        }
+
+        return response;
+      },
+      'User Registration',
+      null,
+      {
+        userMessage: 'Failed to create your account. Please try again.',
+        showUserNotification: true,
       }
-      
-      return response;
-    }, 'User Registration', null, {
-      userMessage: 'Failed to create your account. Please try again.',
-      showUserNotification: true
-    });
+    );
   }
 
   /**
    * User login with enhanced error handling
    */
   async login(credentials) {
-    return await safeAsync(async () => {
-      const response = await this.post('/auth/login', credentials);
-      
-      if (response && response.token) {
-        localStorage.setItem('auth_token', response.token);
-        localStorage.setItem('user_data', JSON.stringify(response.user));
+    return await safeAsync(
+      async () => {
+        const response = await this.post('/auth/login', credentials);
+
+        if (response && response.token) {
+          localStorage.setItem('auth_token', response.token);
+          localStorage.setItem('user_data', JSON.stringify(response.user));
+        }
+
+        return response;
+      },
+      'User Login',
+      null,
+      {
+        userMessage: 'Failed to log in. Please check your credentials.',
+        showUserNotification: true,
       }
-      
-      return response;
-    }, 'User Login', null, {
-      userMessage: 'Failed to log in. Please check your credentials.',
-      showUserNotification: true
-    });
+    );
   }
 
   /**
@@ -143,7 +163,7 @@ class APIClient {
   async getCigars(filters = {}) {
     const queryParams = new URLSearchParams(filters).toString();
     const endpoint = `/cigars${queryParams ? `?${queryParams}` : ''}`;
-    
+
     return this.get(endpoint);
   }
 
@@ -172,11 +192,16 @@ class APIClient {
    * Track analytics event
    */
   async trackEvent(eventData) {
-    return await safeAsync(async () => {
-      return this.post('/analytics/track', eventData);
-    }, 'Analytics Tracking', null, {
-      showUserNotification: false // Don't show errors for analytics failures
-    });
+    return await safeAsync(
+      async () => {
+        return this.post('/analytics/track', eventData);
+      },
+      'Analytics Tracking',
+      null,
+      {
+        showUserNotification: false, // Don't show errors for analytics failures
+      }
+    );
   }
 }
 

@@ -25,7 +25,7 @@ class PerformanceTester {
       htmlAssets: 0,
       largestAsset: null,
       totalSize: 0,
-      compressionSavings: 0
+      compressionSavings: 0,
     };
   }
 
@@ -43,13 +43,13 @@ class PerformanceTester {
 
     // Analyze build output
     await this.analyzeBuildOutput();
-    
+
     // Check asset optimization
     await this.checkAssetOptimization();
-    
+
     // Validate PWA requirements
     await this.validatePWA();
-    
+
     // Generate performance report
     this.generatePerformanceReport();
   }
@@ -59,7 +59,7 @@ class PerformanceTester {
    */
   async analyzeBuildOutput() {
     console.info('📊 Analyzing Build Output...');
-    
+
     const files = this.getAllFiles(this.distDir);
     let totalSize = 0;
     let largestFile = { name: '', size: 0 };
@@ -69,16 +69,16 @@ class PerformanceTester {
       const sizeKB = Math.round(stats.size / 1024);
       const relativePath = path.relative(this.distDir, file);
       const ext = path.extname(file).toLowerCase();
-      
+
       totalSize += sizeKB;
-      
+
       if (stats.size > largestFile.size) {
         largestFile = { name: relativePath, size: sizeKB };
       }
 
       // Categorize assets
       this.metrics.assetCount++;
-      
+
       if (['.png', '.jpg', '.jpeg', '.gif', '.webp', '.svg'].includes(ext)) {
         this.metrics.imageAssets++;
       } else if (ext === '.js') {
@@ -98,7 +98,7 @@ class PerformanceTester {
 
     this.metrics.totalSize = totalSize;
     this.metrics.largestAsset = largestFile;
-    
+
     console.info(`   Total assets: ${this.metrics.assetCount}`);
     console.info(`   Total size: ${totalSize}KB`);
     console.info(`   Largest asset: ${largestFile.name} (${largestFile.size}KB)\n`);
@@ -109,13 +109,13 @@ class PerformanceTester {
    */
   async checkAssetOptimization() {
     console.info('🖼️  Asset Optimization Check...');
-    
+
     // Check if optimized logos exist
     const logoDir = path.join(rootDir, 'assets', 'logos');
     if (fs.existsSync(logoDir)) {
       const logoFiles = fs.readdirSync(logoDir);
       console.info(`   ✅ ${logoFiles.length} optimized logo variants found`);
-      
+
       let totalLogoSize = 0;
       logoFiles.forEach(file => {
         const filePath = path.join(logoDir, file);
@@ -147,12 +147,12 @@ class PerformanceTester {
    */
   async validatePWA() {
     console.info('📱 PWA Validation...');
-    
+
     // Check manifest
     const manifestPath = path.join(this.distDir, 'manifest.webmanifest');
     if (fs.existsSync(manifestPath)) {
       console.info('   ✅ PWA manifest generated');
-      
+
       try {
         const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
         console.info(`   📱 App name: ${manifest.name}`);
@@ -175,9 +175,9 @@ class PerformanceTester {
     }
 
     // Check workbox
-    const workboxFiles = fs.readdirSync(this.distDir).filter(file => 
-      file.includes('workbox') && file.endsWith('.js')
-    );
+    const workboxFiles = fs
+      .readdirSync(this.distDir)
+      .filter(file => file.includes('workbox') && file.endsWith('.js'));
     if (workboxFiles.length > 0) {
       console.info(`   ✅ Workbox runtime: ${workboxFiles[0]}`);
     }
@@ -191,18 +191,18 @@ class PerformanceTester {
   getAllFiles(dir) {
     const files = [];
     const items = fs.readdirSync(dir);
-    
+
     for (const item of items) {
       const fullPath = path.join(dir, item);
       const stat = fs.statSync(fullPath);
-      
+
       if (stat.isDirectory()) {
         files.push(...this.getAllFiles(fullPath));
       } else {
         files.push(fullPath);
       }
     }
-    
+
     return files;
   }
 
@@ -212,7 +212,7 @@ class PerformanceTester {
   generatePerformanceReport() {
     console.info('📋 Performance Report');
     console.info('═'.repeat(50));
-    
+
     // Bundle Analysis
     console.info('\n📦 Bundle Analysis:');
     console.info(`   Total files: ${this.metrics.assetCount}`);
@@ -221,43 +221,43 @@ class PerformanceTester {
     console.info(`   HTML files: ${this.metrics.htmlAssets}`);
     console.info(`   Image files: ${this.metrics.imageAssets}`);
     console.info(`   Total bundle size: ${this.metrics.totalSize}KB`);
-    
+
     // Performance Scores
     console.info('\n🎯 Performance Metrics:');
-    
+
     // Bundle size scoring
     let bundleScore = 100;
     if (this.metrics.totalSize > 500) bundleScore -= 30;
     else if (this.metrics.totalSize > 300) bundleScore -= 15;
     else if (this.metrics.totalSize > 200) bundleScore -= 5;
-    
+
     // Asset count scoring
     let assetScore = 100;
     if (this.metrics.assetCount > 20) assetScore -= 20;
     else if (this.metrics.assetCount > 15) assetScore -= 10;
-    
+
     // Calculate overall score
     const overallScore = Math.round((bundleScore + assetScore) / 2);
-    
+
     console.info(`   Bundle Size Score: ${bundleScore}/100`);
     console.info(`   Asset Count Score: ${assetScore}/100`);
     console.info(`   Overall Score: ${overallScore}/100`);
-    
+
     // Recommendations
     console.info('\n💡 Recommendations:');
-    
+
     if (this.metrics.totalSize > 300) {
       console.info('   ⚠️  Consider implementing code splitting for large bundles');
     }
-    
+
     if (this.metrics.assetCount > 15) {
       console.info('   ⚠️  High asset count may impact loading performance');
     }
-    
+
     if (this.metrics.largestAsset.size > 100) {
       console.info(`   ⚠️  Large asset detected: ${this.metrics.largestAsset.name}`);
     }
-    
+
     if (overallScore >= 90) {
       console.info('   ✅ Excellent performance optimization!');
     } else if (overallScore >= 80) {

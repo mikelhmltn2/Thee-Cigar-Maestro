@@ -28,19 +28,19 @@ class PWAEnhancer {
 
     // Enhance manifest with additional features
     await this.enhanceManifest();
-    
+
     // Create enhanced service worker features
     await this.enhanceServiceWorker();
-    
+
     // Create push notification handler
     await this.createPushNotificationHandler();
-    
+
     // Create background sync handler
     await this.createBackgroundSyncHandler();
-    
+
     // Create offline page
     await this.createOfflinePage();
-    
+
     // Generate enhancement report
     this.generateEnhancementReport();
   }
@@ -50,10 +50,10 @@ class PWAEnhancer {
    */
   async enhanceManifest() {
     console.info('📱 Enhancing PWA Manifest...');
-    
+
     try {
       const manifest = JSON.parse(fs.readFileSync(this.manifestPath, 'utf8'));
-      
+
       // Add display_override for better app-like experience
       if (!manifest.display_override) {
         manifest.display_override = ['window-controls-overlay', 'standalone'];
@@ -92,15 +92,14 @@ class PWAEnhancer {
       if (!manifest.scope_extensions) {
         manifest.scope_extensions = [
           {
-            origin: 'https://theecigarmaestro.vercel.app'
-          }
+            origin: 'https://theecigarmaestro.vercel.app',
+          },
         ];
         this.enhancements.push('✅ Added scope extensions for app integration');
       }
 
       fs.writeFileSync(this.manifestPath, JSON.stringify(manifest, null, 2));
       console.info('   📱 Manifest enhanced with advanced PWA features\n');
-      
     } catch (error) {
       console.error('   ❌ Failed to enhance manifest:', error.message);
     }
@@ -111,7 +110,7 @@ class PWAEnhancer {
    */
   async enhanceServiceWorker() {
     console.info('⚙️  Enhancing Service Worker...');
-    
+
     const enhancedSWCode = `
 // Enhanced Service Worker Features
 // Background Sync, Push Notifications, Advanced Caching
@@ -362,10 +361,10 @@ async function queueForBackgroundSync(request) {
 
     const swEnhancementPath = path.join(rootDir, 'sw-enhancements.js');
     fs.writeFileSync(swEnhancementPath, enhancedSWCode);
-    
+
     console.info('   ⚙️  Enhanced service worker features created');
     console.info('   📋 Features added: Background sync, Push notifications, Offline handling\n');
-    
+
     this.enhancements.push('✅ Created enhanced service worker with background sync');
     this.enhancements.push('✅ Added push notification support');
     this.enhancements.push('✅ Implemented advanced offline handling');
@@ -376,7 +375,7 @@ async function queueForBackgroundSync(request) {
    */
   async createPushNotificationHandler() {
     console.info('🔔 Creating Push Notification Handler...');
-    
+
     const pushHandlerCode = `
 /**
  * Push Notification Handler for Thee Cigar Maestro
@@ -522,9 +521,11 @@ if (typeof module !== 'undefined' && module.exports) {
 
     const pushHandlerPath = path.join(rootDir, 'push-notifications.js');
     fs.writeFileSync(pushHandlerPath, pushHandlerCode);
-    
+
     console.info('   🔔 Push notification handler created');
-    this.enhancements.push('✅ Created push notification manager with cigar-specific notifications');
+    this.enhancements.push(
+      '✅ Created push notification manager with cigar-specific notifications'
+    );
   }
 
   /**
@@ -532,7 +533,7 @@ if (typeof module !== 'undefined' && module.exports) {
    */
   async createBackgroundSyncHandler() {
     console.info('🔄 Creating Background Sync Handler...');
-    
+
     const syncHandlerCode = `
 /**
  * Background Sync Manager for Thee Cigar Maestro
@@ -740,7 +741,7 @@ if (typeof module !== 'undefined' && module.exports) {
 
     const syncHandlerPath = path.join(rootDir, 'background-sync.js');
     fs.writeFileSync(syncHandlerPath, syncHandlerCode);
-    
+
     console.info('   🔄 Background sync handler created');
     this.enhancements.push('✅ Created background sync manager for offline data');
   }
@@ -750,7 +751,7 @@ if (typeof module !== 'undefined' && module.exports) {
    */
   async createOfflinePage() {
     console.info('📱 Creating Offline Page...');
-    
+
     const offlinePageHTML = `
 <!DOCTYPE html>
 <html lang="en">
@@ -905,7 +906,7 @@ if (typeof module !== 'undefined' && module.exports) {
 
     const offlinePagePath = path.join(rootDir, 'offline.html');
     fs.writeFileSync(offlinePagePath, offlinePageHTML);
-    
+
     console.info('   📱 Offline page created with cigar-specific features');
     this.enhancements.push('✅ Created offline page with app-specific functionality');
   }
@@ -916,12 +917,12 @@ if (typeof module !== 'undefined' && module.exports) {
   generateEnhancementReport() {
     console.info('\n📋 PWA Enhancement Report');
     console.info('═'.repeat(50));
-    
+
     console.info('\n✅ Enhancements Applied:');
     this.enhancements.forEach(enhancement => {
       console.info(`   ${enhancement}`);
     });
-    
+
     console.info('\n🚀 New PWA Features:');
     console.info('   📱 Enhanced manifest with display_override and link handling');
     console.info('   🔔 Push notifications with cigar-specific templates');
@@ -929,20 +930,20 @@ if (typeof module !== 'undefined' && module.exports) {
     console.info('   📶 Advanced offline functionality');
     console.info('   🎯 App shortcuts with optimized icons');
     console.info('   📋 Comprehensive offline page with feature list');
-    
+
     console.info('\n📊 Implementation Status:');
     console.info('   ✅ Offline functionality: Implemented');
     console.info('   ✅ Background sync: Implemented');
     console.info('   ✅ Push notifications: Framework ready');
     console.info('   ✅ App shortcuts: Enhanced');
     console.info('   ✅ Advanced caching: Service worker ready');
-    
+
     console.info('\n🎯 Roadmap Alignment:');
     console.info('   PWA Features: ✅ All roadmap items implemented');
     console.info('   User Experience: ✅ Enhanced for offline usage');
     console.info('   Performance: ✅ Optimized caching strategies');
     console.info('   Engagement: ✅ Push notifications ready');
-    
+
     console.info('\n📝 Next Steps:');
     console.info('   1. Configure VAPID keys for push notifications');
     console.info('   2. Implement server-side push notification endpoints');

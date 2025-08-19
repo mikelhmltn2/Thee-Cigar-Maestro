@@ -23,23 +23,9 @@
     }
   },
   "emotionalMemorySystem": {
-    "emotionalFlavorTriggers": [
-      "Nostalgia",
-      "Celebration",
-      "Relaxation",
-      "Reflection"
-    ],
-    "legacyMilestoneMarkers": [
-      "First Smoke",
-      "Wedding Night",
-      "Promotion",
-      "Anniversary"
-    ],
-    "ritualMemoryTags": [
-      "Nightcap",
-      "Solo Moment",
-      "Group Gathering"
-    ]
+    "emotionalFlavorTriggers": ["Nostalgia", "Celebration", "Relaxation", "Reflection"],
+    "legacyMilestoneMarkers": ["First Smoke", "Wedding Night", "Promotion", "Anniversary"],
+    "ritualMemoryTags": ["Nightcap", "Solo Moment", "Group Gathering"]
   },
   "ritualTracking": {
     "ritualID": "rt001",
@@ -55,17 +41,8 @@
   },
   "consciousCurationAI": {
     "enabled": true,
-    "modes": [
-      "reflective",
-      "gifting",
-      "archival"
-    ],
-    "curationTags": [
-      "mentor",
-      "romantic",
-      "solo journey",
-      "ritual remix"
-    ],
+    "modes": ["reflective", "gifting", "archival"],
+    "curationTags": ["mentor", "romantic", "solo journey", "ritual remix"],
     "interactivePrompts": [
       "What moment would you relive forever?",
       "Who deserves to share this memory with you?"
@@ -73,11 +50,7 @@
   },
   "alternateMemoryForks": {
     "enabled": true,
-    "useCases": [
-      "timeline remix",
-      "story gifting",
-      "alternate outcome pairing"
-    ],
+    "useCases": ["timeline remix", "story gifting", "alternate outcome pairing"],
     "examples": [
       {
         "original": "Graduation night with Habano + Cognac",
@@ -87,17 +60,10 @@
   },
   "afterlifeCapsules": {
     "enabled": true,
-    "preservationModes": [
-      "timeline mirror",
-      "flavor echo",
-      "mentor echo"
-    ],
+    "preservationModes": ["timeline mirror", "flavor echo", "mentor echo"],
     "sampleCapsule": {
       "title": "Final Toast with Arturo Fuente",
-      "flavorMap": [
-        "spice",
-        "sweet cream"
-      ],
+      "flavorMap": ["spice", "sweet cream"],
       "audioOverlay": "Classical guitar"
     }
   },
@@ -121,11 +87,7 @@
         "tone": "bold, urban, flavor-first, rebel energy"
       }
     ],
-    "responseModes": [
-      "educational",
-      "emotional",
-      "prestige-focused"
-    ]
+    "responseModes": ["educational", "emotional", "prestige-focused"]
   },
   "culturalRitualArcs": {
     "enabled": true,
@@ -147,86 +109,32 @@
   "languageEmotionTags": {
     "enabled": true,
     "map": {
-      "es": [
-        "recuerdo",
-        "alegr\u00eda",
-        "sabidur\u00eda"
-      ],
-      "fr": [
-        "m\u00e9moire",
-        "plaisir",
-        "rituel"
-      ],
-      "zh": [
-        "\u8bb0\u5fc6",
-        "\u9999\u6c14",
-        "\u4f20\u627f"
-      ]
+      "es": ["recuerdo", "alegr\u00eda", "sabidur\u00eda"],
+      "fr": ["m\u00e9moire", "plaisir", "rituel"],
+      "zh": ["\u8bb0\u5fc6", "\u9999\u6c14", "\u4f20\u627f"]
     }
   },
   "interfaithEmotionMap": {
     "enabled": true,
     "tags": {
-      "Christian": [
-        "grace",
-        "communion",
-        "light"
-      ],
-      "Muslim": [
-        "submission",
-        "peace",
-        "reverence"
-      ],
-      "Jewish": [
-        "remembrance",
-        "blessing",
-        "covenant"
-      ],
-      "Hindu": [
-        "offering",
-        "fire",
-        "awakening"
-      ],
-      "Buddhist": [
-        "stillness",
-        "breath",
-        "release"
-      ]
+      "Christian": ["grace", "communion", "light"],
+      "Muslim": ["submission", "peace", "reverence"],
+      "Jewish": ["remembrance", "blessing", "covenant"],
+      "Hindu": ["offering", "fire", "awakening"],
+      "Buddhist": ["stillness", "breath", "release"]
     }
   },
   "ritualSanctificationTags": {
     "enabled": true,
-    "exampleTags": [
-      "sacred fire",
-      "holy silence",
-      "legacy prayer"
-    ]
+    "exampleTags": ["sacred fire", "holy silence", "legacy prayer"]
   },
   "archetypalEmotionMatrix": {
     "enabled": true,
-    "categories": [
-      "warrior",
-      "sage",
-      "lover",
-      "guardian",
-      "seeker"
-    ],
+    "categories": ["warrior", "sage", "lover", "guardian", "seeker"],
     "linkedFlavors": {
-      "sage": [
-        "earth",
-        "cedar",
-        "pepper"
-      ],
-      "lover": [
-        "chocolate",
-        "cream",
-        "fig"
-      ],
-      "guardian": [
-        "oak",
-        "smoke",
-        "dark roast"
-      ]
+      "sage": ["earth", "cedar", "pepper"],
+      "lover": ["chocolate", "cream", "fig"],
+      "guardian": ["oak", "smoke", "dark roast"]
     }
   },
   "celestialNarrativeAnchors": {
@@ -249,11 +157,7 @@
       {
         "title": "Final Smoke with Grandfather",
         "voice": "archived",
-        "flavors": [
-          "cedar",
-          "pepper",
-          "espresso"
-        ]
+        "flavors": ["cedar", "pepper", "espresso"]
       }
     ]
   },

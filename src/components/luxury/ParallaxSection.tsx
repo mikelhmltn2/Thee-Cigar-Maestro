@@ -1,3 +1,3 @@
 export default function ParallaxSection() {
-  return null
+  return null;
 }

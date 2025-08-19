@@ -9,15 +9,15 @@ class AIRecommendationEngine {
       collaborative: null,
       contentBased: null,
       hybrid: null,
-      realtime: null
+      realtime: null,
     };
-    
+
     this.userProfiles = new Map();
     this.cigarEmbeddings = new Map();
     this.interactionMatrix = null;
     this.isTraining = false;
     this.isInitialized = false;
-    
+
     // Recommendation algorithms
     this.algorithms = {
       COLLABORATIVE_FILTERING: 'collaborative',
@@ -25,18 +25,18 @@ class AIRecommendationEngine {
       HYBRID: 'hybrid',
       DEEP_LEARNING: 'deep',
       MATRIX_FACTORIZATION: 'matrix',
-      CLUSTERING: 'clustering'
+      CLUSTERING: 'clustering',
     };
-    
+
     // Feature weights for hybrid model
     this.featureWeights = {
       flavor: 0.3,
       wrapper: 0.25,
       strength: 0.2,
       origin: 0.15,
-      price: 0.1
+      price: 0.1,
     };
-    
+
     this.init();
   }
 
@@ -49,13 +49,12 @@ class AIRecommendationEngine {
       await this.buildFeatureVectors();
       await this.initializeModels();
       await this.loadUserProfiles();
-      
+
       this.isInitialized = true;
       console.info('🤖 AI Recommendation Engine initialized');
-      
+
       // Start background training
       this.scheduleModelTraining();
-      
     } catch (error) {
       console.error('❌ Recommendation engine initialization failed:', error);
     }
@@ -70,7 +69,7 @@ class AIRecommendationEngine {
       this.cigarData = await this.fetchData('./flavorverse_nodes.json');
       this.manufacturerData = await this.fetchData('./cigar-specs.json');
       this.pairingData = await this.fetchData('./pairings.json');
-      
+
       // Load user interaction data from storage
       if (window.storageManager) {
         const sessionData = window.storageManager.getSessionData();
@@ -78,7 +77,7 @@ class AIRecommendationEngine {
         this.userRatings = sessionData.userRatings || {};
         this.userFavorites = sessionData.favoritesCigars || [];
       }
-      
+
       console.info('✅ Data loaded for recommendation engine');
     } catch (error) {
       console.error('Error loading data:', error);
@@ -111,22 +110,22 @@ class AIRecommendationEngine {
       const wrapperTypes = [...new Set(this.cigarData.map(c => c.wrapper))];
       const origins = [...new Set(this.cigarData.map(c => c.origin).filter(Boolean))];
       const strengths = [...new Set(this.cigarData.map(c => c.strength).filter(Boolean))];
-      
+
       // Build flavor vocabulary
       const flavorVocabulary = this.buildFlavorVocabulary();
-      
+
       // Create feature vectors for each cigar
       this.cigarData.forEach(cigar => {
         const features = this.extractCigarFeatures(cigar, {
           wrapperTypes,
           origins,
           strengths,
-          flavorVocabulary
+          flavorVocabulary,
         });
-        
+
         this.cigarEmbeddings.set(cigar.name, features);
       });
-      
+
       console.info(`✅ Built feature vectors for ${this.cigarData.length} cigars`);
     } catch (error) {
       console.error('Error building feature vectors:', error);
@@ -138,29 +137,57 @@ class AIRecommendationEngine {
    */
   buildFlavorVocabulary() {
     const flavorTerms = new Set();
-    
+
     // Common flavor descriptors
     const commonFlavors = [
-      'chocolate', 'vanilla', 'coffee', 'cedar', 'leather', 'spice', 'pepper',
-      'cream', 'honey', 'tobacco', 'earth', 'wood', 'nuts', 'caramel', 'cocoa',
-      'fruit', 'citrus', 'berry', 'cherry', 'apple', 'floral', 'herb', 'mint',
-      'sweet', 'bitter', 'salty', 'umami', 'smoky', 'ash', 'barnyard', 'hay'
+      'chocolate',
+      'vanilla',
+      'coffee',
+      'cedar',
+      'leather',
+      'spice',
+      'pepper',
+      'cream',
+      'honey',
+      'tobacco',
+      'earth',
+      'wood',
+      'nuts',
+      'caramel',
+      'cocoa',
+      'fruit',
+      'citrus',
+      'berry',
+      'cherry',
+      'apple',
+      'floral',
+      'herb',
+      'mint',
+      'sweet',
+      'bitter',
+      'salty',
+      'umami',
+      'smoky',
+      'ash',
+      'barnyard',
+      'hay',
     ];
-    
+
     commonFlavors.forEach(flavor => flavorTerms.add(flavor));
-    
+
     // Extract additional terms from flavor descriptions
     this.cigarData.forEach(cigar => {
       if (cigar.flavor) {
-        const words = cigar.flavor.toLowerCase()
+        const words = cigar.flavor
+          .toLowerCase()
           .replace(/[^\w\s]/g, ' ')
           .split(/\s+/)
           .filter(word => word.length > 3);
-        
+
         words.forEach(word => flavorTerms.add(word));
       }
     });
-    
+
     return Array.from(flavorTerms);
   }
 
@@ -169,30 +196,30 @@ class AIRecommendationEngine {
    */
   extractCigarFeatures(cigar, vocabularies) {
     const features = [];
-    
+
     // Wrapper one-hot encoding
     vocabularies.wrapperTypes.forEach(wrapper => {
       features.push(cigar.wrapper === wrapper ? 1 : 0);
     });
-    
+
     // Origin one-hot encoding
     vocabularies.origins.forEach(origin => {
       features.push(cigar.origin === origin ? 1 : 0);
     });
-    
+
     // Strength one-hot encoding
     vocabularies.strengths.forEach(strength => {
       features.push(cigar.strength === strength ? 1 : 0);
     });
-    
+
     // Flavor TF-IDF vector
     const flavorVector = this.computeFlavorTFIDF(cigar.flavor, vocabularies.flavorVocabulary);
     features.push(...flavorVector);
-    
+
     // Numerical features (normalized)
     features.push(this.normalizePrice(cigar.price || 0));
     features.push(this.normalizeSize(cigar.size || 'Medium'));
-    
+
     return features;
   }
 
@@ -200,19 +227,21 @@ class AIRecommendationEngine {
    * Compute TF-IDF for flavor description
    */
   computeFlavorTFIDF(flavorText, vocabulary) {
-    if (!flavorText) {return new Array(vocabulary.length).fill(0);}
-    
+    if (!flavorText) {
+      return new Array(vocabulary.length).fill(0);
+    }
+
     const text = flavorText.toLowerCase();
     const words = text.replace(/[^\w\s]/g, ' ').split(/\s+/);
     const wordCounts = {};
-    
+
     // Count word frequencies
     words.forEach(word => {
       if (vocabulary.includes(word)) {
         wordCounts[word] = (wordCounts[word] || 0) + 1;
       }
     });
-    
+
     // Compute TF-IDF
     return vocabulary.map(term => {
       const tf = (wordCounts[term] || 0) / words.length;
@@ -225,9 +254,8 @@ class AIRecommendationEngine {
    * Count documents containing a term
    */
   countDocumentsWithTerm(term) {
-    return this.cigarData.filter(cigar => 
-      cigar.flavor && cigar.flavor.toLowerCase().includes(term)
-    ).length;
+    return this.cigarData.filter(cigar => cigar.flavor && cigar.flavor.toLowerCase().includes(term))
+      .length;
   }
 
   /**
@@ -244,11 +272,11 @@ class AIRecommendationEngine {
    */
   normalizeSize(size) {
     const sizeMap = {
-      'Petit': 0.2,
-      'Small': 0.4,
-      'Medium': 0.6,
-      'Large': 0.8,
-      'Extra Large': 1.0
+      Petit: 0.2,
+      Small: 0.4,
+      Medium: 0.6,
+      Large: 0.8,
+      'Extra Large': 1.0,
     };
     return sizeMap[size] || 0.6;
   }
@@ -260,16 +288,16 @@ class AIRecommendationEngine {
     try {
       // Initialize collaborative filtering model
       this.models.collaborative = new CollaborativeFilteringModel(this.cigarData.length);
-      
+
       // Initialize content-based model
       this.models.contentBased = new ContentBasedModel(this.cigarEmbeddings);
-      
+
       // Initialize hybrid model
       this.models.hybrid = new HybridModel(this.models.collaborative, this.models.contentBased);
-      
+
       // Initialize real-time model
       this.models.realtime = new RealtimeModel();
-      
+
       console.info('✅ ML models initialized');
     } catch (error) {
       console.error('Error initializing models:', error);
@@ -286,7 +314,7 @@ class AIRecommendationEngine {
         const profile = await this.buildUserProfile(user.id);
         this.userProfiles.set(user.id, profile);
       }
-      
+
       // Load anonymous user profile from storage
       if (window.storageManager) {
         const sessionData = window.storageManager.getSessionData();
@@ -294,7 +322,7 @@ class AIRecommendationEngine {
           this.userProfiles.set('anonymous', sessionData.anonymousProfile);
         }
       }
-      
+
       console.info('✅ User profiles loaded');
     } catch (error) {
       console.error('Error loading user profiles:', error);
@@ -311,40 +339,40 @@ class AIRecommendationEngine {
         flavors: {},
         strengths: {},
         origins: {},
-        priceRange: { min: 0, max: 1000 }
+        priceRange: { min: 0, max: 1000 },
       },
       interactions: [],
       clusters: [],
-      embedding: null
+      embedding: null,
     };
 
     // Analyze user interactions
     const userInteractions = this.userInteractions.filter(i => i.userId === userId);
-    
+
     userInteractions.forEach(interaction => {
       const cigar = this.cigarData.find(c => c.name === interaction.cigarName);
       if (cigar) {
         // Update preferences based on interaction weight
         const weight = this.getInteractionWeight(interaction.type);
-        
-        profile.preferences.wrappers[cigar.wrapper] = 
+
+        profile.preferences.wrappers[cigar.wrapper] =
           (profile.preferences.wrappers[cigar.wrapper] || 0) + weight;
-        
+
         if (cigar.strength) {
-          profile.preferences.strengths[cigar.strength] = 
+          profile.preferences.strengths[cigar.strength] =
             (profile.preferences.strengths[cigar.strength] || 0) + weight;
         }
-        
+
         if (cigar.origin) {
-          profile.preferences.origins[cigar.origin] = 
+          profile.preferences.origins[cigar.origin] =
             (profile.preferences.origins[cigar.origin] || 0) + weight;
         }
-        
+
         // Extract flavor preferences
         if (cigar.flavor) {
           const flavors = this.extractFlavorKeywords(cigar.flavor);
           flavors.forEach(flavor => {
-            profile.preferences.flavors[flavor] = 
+            profile.preferences.flavors[flavor] =
               (profile.preferences.flavors[flavor] || 0) + weight;
           });
         }
@@ -353,7 +381,7 @@ class AIRecommendationEngine {
 
     // Compute user embedding
     profile.embedding = this.computeUserEmbedding(profile.preferences);
-    
+
     return profile;
   }
 
@@ -362,13 +390,13 @@ class AIRecommendationEngine {
    */
   getInteractionWeight(interactionType) {
     const weights = {
-      'view': 1,
-      'click': 2,
-      'favorite': 5,
-      'rate_positive': 4,
-      'rate_negative': -2,
-      'purchase': 8,
-      'share': 3
+      view: 1,
+      click: 2,
+      favorite: 5,
+      rate_positive: 4,
+      rate_negative: -2,
+      purchase: 8,
+      share: 3,
     };
     return weights[interactionType] || 1;
   }
@@ -378,10 +406,22 @@ class AIRecommendationEngine {
    */
   extractFlavorKeywords(flavorText) {
     const commonFlavors = [
-      'chocolate', 'vanilla', 'coffee', 'cedar', 'leather', 'spice', 'pepper',
-      'cream', 'honey', 'tobacco', 'earth', 'wood', 'nuts', 'caramel'
+      'chocolate',
+      'vanilla',
+      'coffee',
+      'cedar',
+      'leather',
+      'spice',
+      'pepper',
+      'cream',
+      'honey',
+      'tobacco',
+      'earth',
+      'wood',
+      'nuts',
+      'caramel',
     ];
-    
+
     const text = flavorText.toLowerCase();
     return commonFlavors.filter(flavor => text.includes(flavor));
   }
@@ -394,37 +434,46 @@ class AIRecommendationEngine {
     if (!flavorText) return { keywords: [], sentiment: 0, complexity: 0, categories: [] };
 
     const text = flavorText.toLowerCase();
-    
+
     // Advanced flavor categories with weights
     const flavorCategories = {
       sweet: {
-        keywords: ['chocolate', 'vanilla', 'honey', 'caramel', 'cream', 'sugar', 'molasses', 'candy'],
-        weight: 1.2
+        keywords: [
+          'chocolate',
+          'vanilla',
+          'honey',
+          'caramel',
+          'cream',
+          'sugar',
+          'molasses',
+          'candy',
+        ],
+        weight: 1.2,
       },
       spicy: {
         keywords: ['pepper', 'spice', 'hot', 'burn', 'tingle', 'heat', 'kick', 'zesty'],
-        weight: 1.1
+        weight: 1.1,
       },
       earthy: {
         keywords: ['earth', 'soil', 'barn', 'hay', 'mushroom', 'leather', 'tobacco', 'wood'],
-        weight: 1.0
+        weight: 1.0,
       },
       woody: {
         keywords: ['cedar', 'oak', 'pine', 'birch', 'wood', 'timber', 'bark', 'forest'],
-        weight: 1.0
+        weight: 1.0,
       },
       nutty: {
         keywords: ['nuts', 'almond', 'walnut', 'pecan', 'hazelnut', 'peanut', 'cashew'],
-        weight: 0.9
+        weight: 0.9,
       },
       fruity: {
         keywords: ['fruit', 'apple', 'cherry', 'berry', 'citrus', 'orange', 'lemon', 'grape'],
-        weight: 0.8
+        weight: 0.8,
       },
       floral: {
         keywords: ['floral', 'flower', 'rose', 'lavender', 'jasmine', 'perfume', 'bouquet'],
-        weight: 0.7
-      }
+        weight: 0.7,
+      },
     };
 
     // Extract and categorize flavors
@@ -439,7 +488,7 @@ class AIRecommendationEngine {
           category,
           matches,
           weight: data.weight,
-          confidence: matches.length / data.keywords.length
+          confidence: matches.length / data.keywords.length,
         });
         keywords.push(...matches);
         totalWeight += data.weight * matches.length;
@@ -450,9 +499,18 @@ class AIRecommendationEngine {
     const complexity = Math.min(detectedCategories.length * 0.2 + keywords.length * 0.1, 1.0);
 
     // Simple sentiment analysis based on positive/negative words
-    const positiveWords = ['smooth', 'creamy', 'rich', 'complex', 'excellent', 'premium', 'quality', 'balanced'];
+    const positiveWords = [
+      'smooth',
+      'creamy',
+      'rich',
+      'complex',
+      'excellent',
+      'premium',
+      'quality',
+      'balanced',
+    ];
     const negativeWords = ['harsh', 'bitter', 'acidic', 'weak', 'flat', 'bland', 'poor', 'cheap'];
-    
+
     const positiveCount = positiveWords.filter(word => text.includes(word)).length;
     const negativeCount = negativeWords.filter(word => text.includes(word)).length;
     const sentiment = (positiveCount - negativeCount) / Math.max(positiveCount + negativeCount, 1);
@@ -464,9 +522,9 @@ class AIRecommendationEngine {
       categories: detectedCategories.map(cat => ({
         name: cat.category,
         confidence: cat.confidence,
-        weight: cat.weight
+        weight: cat.weight,
       })),
-      totalWeight
+      totalWeight,
     };
   }
 
@@ -481,7 +539,7 @@ class AIRecommendationEngine {
 
       // Get flavor profile using enhanced NLP
       const flavorProfile = this.processFlavorDescriptionNLP(cigar.flavor || '');
-      
+
       // Load pairing rules and preferences
       const _pairingRules = this.getPairingRules();
       const _userPreferences = context.userPreferences || {};
@@ -493,12 +551,32 @@ class AIRecommendationEngine {
 
       // Beverage pairings
       const beverages = [
-        { name: 'Single Malt Whisky', categories: ['woody', 'smoky'], strength: 'strong', score: 0 },
+        {
+          name: 'Single Malt Whisky',
+          categories: ['woody', 'smoky'],
+          strength: 'strong',
+          score: 0,
+        },
         { name: 'Aged Rum', categories: ['sweet', 'spicy'], strength: 'medium', score: 0 },
-        { name: 'Red Wine (Cabernet)', categories: ['earthy', 'fruity'], strength: 'medium', score: 0 },
+        {
+          name: 'Red Wine (Cabernet)',
+          categories: ['earthy', 'fruity'],
+          strength: 'medium',
+          score: 0,
+        },
         { name: 'Port Wine', categories: ['sweet', 'fruity'], strength: 'strong', score: 0 },
-        { name: 'Coffee (Espresso)', categories: ['bitter', 'earthy'], strength: 'strong', score: 0 },
-        { name: 'Dark Beer (Stout)', categories: ['roasted', 'bitter'], strength: 'medium', score: 0 }
+        {
+          name: 'Coffee (Espresso)',
+          categories: ['bitter', 'earthy'],
+          strength: 'strong',
+          score: 0,
+        },
+        {
+          name: 'Dark Beer (Stout)',
+          categories: ['roasted', 'bitter'],
+          strength: 'medium',
+          score: 0,
+        },
       ];
 
       // Food pairings
@@ -507,13 +585,13 @@ class AIRecommendationEngine {
         { name: 'Aged Cheese', categories: ['savory', 'creamy'], intensity: 'medium', score: 0 },
         { name: 'Nuts (Almonds)', categories: ['nutty', 'earthy'], intensity: 'low', score: 0 },
         { name: 'Grilled Steak', categories: ['savory', 'smoky'], intensity: 'high', score: 0 },
-        { name: 'Vanilla Ice Cream', categories: ['sweet', 'creamy'], intensity: 'low', score: 0 }
+        { name: 'Vanilla Ice Cream', categories: ['sweet', 'creamy'], intensity: 'low', score: 0 },
       ];
 
       // Calculate beverage pairing scores
       beverages.forEach(beverage => {
         let score = 0;
-        
+
         // Category matching
         flavorProfile.categories.forEach(category => {
           if (beverage.categories.includes(category.name)) {
@@ -525,14 +603,22 @@ class AIRecommendationEngine {
         const cigarStrength = this.getCigarStrength(cigar);
         if (beverage.strength === cigarStrength) {
           score += 5;
-        } else if (Math.abs(['light', 'medium', 'strong'].indexOf(beverage.strength) - 
-                           ['light', 'medium', 'strong'].indexOf(cigarStrength)) === 1) {
+        } else if (
+          Math.abs(
+            ['light', 'medium', 'strong'].indexOf(beverage.strength) -
+              ['light', 'medium', 'strong'].indexOf(cigarStrength)
+          ) === 1
+        ) {
           score += 2;
         }
 
         // Time of day adjustment
         if (timeOfDay === 'morning' && beverage.name.includes('Coffee')) score += 3;
-        if (timeOfDay === 'evening' && (beverage.name.includes('Whisky') || beverage.name.includes('Wine'))) score += 2;
+        if (
+          timeOfDay === 'evening' &&
+          (beverage.name.includes('Whisky') || beverage.name.includes('Wine'))
+        )
+          score += 2;
 
         beverage.score = Math.max(0, Math.min(100, score));
       });
@@ -540,7 +626,7 @@ class AIRecommendationEngine {
       // Calculate food pairing scores
       foods.forEach(food => {
         let score = 0;
-        
+
         // Category matching
         flavorProfile.categories.forEach(category => {
           if (food.categories.includes(category.name)) {
@@ -571,10 +657,9 @@ class AIRecommendationEngine {
         flavorProfile,
         recommendations: [
           ...topBeverages.map(b => ({ type: 'beverage', ...b })),
-          ...topFoods.map(f => ({ type: 'food', ...f }))
-        ].sort((a, b) => b.score - a.score)
+          ...topFoods.map(f => ({ type: 'food', ...f })),
+        ].sort((a, b) => b.score - a.score),
       };
-
     } catch (error) {
       console.error('Error optimizing pairings:', error);
       return [];
@@ -590,18 +675,18 @@ class AIRecommendationEngine {
         sweet: ['bitter', 'salty'],
         spicy: ['sweet', 'creamy'],
         earthy: ['woody', 'fruity'],
-        woody: ['vanilla', 'caramel']
+        woody: ['vanilla', 'caramel'],
       },
       contrasting: {
         light: ['strong'],
         smooth: ['textured'],
-        cold: ['warm']
+        cold: ['warm'],
       },
       enhancing: {
         tobacco: ['leather', 'wood'],
         chocolate: ['coffee', 'nuts'],
-        spice: ['fruit', 'sweet']
-      }
+        spice: ['fruit', 'sweet'],
+      },
     };
   }
 
@@ -610,7 +695,7 @@ class AIRecommendationEngine {
    */
   getCigarStrength(cigar) {
     if (cigar.strength) return cigar.strength.toLowerCase();
-    
+
     // Infer from wrapper or other attributes
     const wrapper = (cigar.wrapper || '').toLowerCase();
     if (wrapper.includes('maduro') || wrapper.includes('oscuro')) return 'strong';
@@ -624,7 +709,7 @@ class AIRecommendationEngine {
   getCigarIntensity(cigar) {
     const strength = this.getCigarStrength(cigar);
     const flavorProfile = this.processFlavorDescriptionNLP(cigar.flavor || '');
-    
+
     if (strength === 'strong' || flavorProfile.complexity > 0.7) return 'high';
     if (strength === 'light' || flavorProfile.complexity < 0.3) return 'low';
     return 'medium';
@@ -635,28 +720,28 @@ class AIRecommendationEngine {
    */
   computeUserEmbedding(preferences) {
     const embedding = [];
-    
+
     // Wrapper preferences
     const wrapperTypes = ['Maduro', 'Connecticut', 'Habano', 'Natural', 'Oscuro'];
     wrapperTypes.forEach(wrapper => {
       embedding.push(preferences.wrappers[wrapper] || 0);
     });
-    
+
     // Strength preferences
     const strengths = ['Mild', 'Medium', 'Full'];
     strengths.forEach(strength => {
       embedding.push(preferences.strengths[strength] || 0);
     });
-    
+
     // Top flavor preferences
     const flavorEntries = Object.entries(preferences.flavors || {})
-      .sort(([,a], [,b]) => b - a)
+      .sort(([, a], [, b]) => b - a)
       .slice(0, 10);
-    
+
     for (let i = 0; i < 10; i++) {
       embedding.push(flavorEntries[i] ? flavorEntries[i][1] : 0);
     }
-    
+
     return this.normalizeVector(embedding);
   }
 
@@ -681,9 +766,9 @@ class AIRecommendationEngine {
         algorithm = this.algorithms.HYBRID,
         count: requestedCount = 10,
         filters = {},
-        contextualFactors = {}
+        contextualFactors = {},
       } = options;
-      
+
       const count = requestedCount;
 
       let recommendations = [];
@@ -692,34 +777,34 @@ class AIRecommendationEngine {
         case this.algorithms.COLLABORATIVE_FILTERING:
           recommendations = await this.getCollaborativeRecommendations(userId, count);
           break;
-          
+
         case this.algorithms.CONTENT_BASED:
           recommendations = await this.getContentBasedRecommendations(userId, count);
           break;
-          
+
         case this.algorithms.HYBRID:
           recommendations = await this.getHybridRecommendations(userId, count);
           break;
-          
+
         case this.algorithms.MATRIX_FACTORIZATION:
           recommendations = await this.getMatrixFactorizationRecommendations(userId, count);
           break;
-          
+
         default:
           recommendations = await this.getHybridRecommendations(userId, count);
       }
 
       // Apply filters
       recommendations = this.applyFilters(recommendations, filters);
-      
+
       // Apply contextual factors
       recommendations = this.applyContextualFactors(recommendations, contextualFactors);
-      
+
       // Add explanation and confidence scores
       recommendations = recommendations.map(rec => ({
         ...rec,
         explanation: this.generateExplanation(rec, userId),
-        confidence: this.calculateConfidence(rec, userId)
+        confidence: this.calculateConfidence(rec, userId),
       }));
 
       // Track recommendation event
@@ -728,12 +813,11 @@ class AIRecommendationEngine {
           user_id: userId,
           algorithm,
           count: recommendations.length,
-          filters: Object.keys(filters)
+          filters: Object.keys(filters),
         });
       }
 
       return recommendations.slice(0, count);
-      
     } catch (error) {
       console.error('Error generating recommendations:', error);
       return this.getFallbackRecommendations(10);
@@ -751,17 +835,17 @@ class AIRecommendationEngine {
     // Get user profile for potential future use
     // const userProfile = this.userProfiles.get(_userId);
     const similarUsers = await this.findSimilarUsers(_userId);
-    
+
     const recommendations = new Map();
-    
+
     similarUsers.forEach(({ userId: similarUserId, similarity }) => {
       const similarUserInteractions = this.userInteractions.filter(i => i.userId === similarUserId);
-      
+
       similarUserInteractions.forEach(interaction => {
         const cigar = this.cigarData.find(c => c.name === interaction.cigarName);
         if (cigar && !this.hasUserInteracted(_userId, cigar.name)) {
           const score = similarity * this.getInteractionWeight(interaction.type);
-          
+
           if (recommendations.has(cigar.name)) {
             recommendations.set(cigar.name, recommendations.get(cigar.name) + score);
           } else {
@@ -772,12 +856,12 @@ class AIRecommendationEngine {
     });
 
     return Array.from(recommendations.entries())
-      .sort(([,a], [,b]) => b - a)
+      .sort(([, a], [, b]) => b - a)
       .slice(0, count)
       .map(([cigarName, score]) => ({
         cigar: this.cigarData.find(c => c.name === cigarName),
         score,
-        algorithm: 'collaborative'
+        algorithm: 'collaborative',
       }));
   }
 
@@ -791,13 +875,13 @@ class AIRecommendationEngine {
 
     const userProfile = this.userProfiles.get(userId);
     const userEmbedding = userProfile.embedding;
-    
+
     if (!userEmbedding) {
       return this.getDiverseRecommendations(count);
     }
 
     const recommendations = [];
-    
+
     this.cigarData.forEach(cigar => {
       if (!this.hasUserInteracted(userId, cigar.name)) {
         const cigarEmbedding = this.cigarEmbeddings.get(cigar.name);
@@ -806,15 +890,13 @@ class AIRecommendationEngine {
           recommendations.push({
             cigar,
             score: similarity,
-            algorithm: 'content'
+            algorithm: 'content',
           });
         }
       }
     });
 
-    return recommendations
-      .sort((a, b) => b.score - a.score)
-      .slice(0, count);
+    return recommendations.sort((a, b) => b.score - a.score).slice(0, count);
   }
 
   /**
@@ -823,20 +905,20 @@ class AIRecommendationEngine {
   async getHybridRecommendations(userId, count) {
     const collaborativeRecs = await this.getCollaborativeRecommendations(userId, count * 2);
     const contentRecs = await this.getContentBasedRecommendations(userId, count * 2);
-    
+
     // Combine and weight recommendations
     const combinedRecs = new Map();
-    
+
     collaborativeRecs.forEach(rec => {
       const key = rec.cigar.name;
       combinedRecs.set(key, {
         cigar: rec.cigar,
         collaborativeScore: rec.score,
         contentScore: 0,
-        algorithm: 'hybrid'
+        algorithm: 'hybrid',
       });
     });
-    
+
     contentRecs.forEach(rec => {
       const key = rec.cigar.name;
       if (combinedRecs.has(key)) {
@@ -846,16 +928,16 @@ class AIRecommendationEngine {
           cigar: rec.cigar,
           collaborativeScore: 0,
           contentScore: rec.score,
-          algorithm: 'hybrid'
+          algorithm: 'hybrid',
         });
       }
     });
-    
+
     // Calculate hybrid score
     return Array.from(combinedRecs.values())
       .map(rec => ({
         ...rec,
-        score: (0.6 * rec.collaborativeScore) + (0.4 * rec.contentScore)
+        score: 0.6 * rec.collaborativeScore + 0.4 * rec.contentScore,
       }))
       .sort((a, b) => b.score - a.score)
       .slice(0, count);
@@ -866,29 +948,32 @@ class AIRecommendationEngine {
    */
   async findSimilarUsers(userId, maxUsers = 50) {
     const userProfile = this.userProfiles.get(userId);
-    if (!userProfile) {return [];}
+    if (!userProfile) {
+      return [];
+    }
 
     const similarities = [];
-    
+
     this.userProfiles.forEach((profile, otherUserId) => {
       if (otherUserId !== userId) {
         const similarity = this.computeUserSimilarity(userProfile, profile);
-        if (similarity > 0.1) { // Minimum similarity threshold
+        if (similarity > 0.1) {
+          // Minimum similarity threshold
           similarities.push({ userId: otherUserId, similarity });
         }
       }
     });
 
-    return similarities
-      .sort((a, b) => b.similarity - a.similarity)
-      .slice(0, maxUsers);
+    return similarities.sort((a, b) => b.similarity - a.similarity).slice(0, maxUsers);
   }
 
   /**
    * Compute similarity between two users
    */
   computeUserSimilarity(profile1, profile2) {
-    if (!profile1.embedding || !profile2.embedding) {return 0;}
+    if (!profile1.embedding || !profile2.embedding) {
+      return 0;
+    }
     return this.computeCosineSimilarity(profile1.embedding, profile2.embedding);
   }
 
@@ -896,18 +981,20 @@ class AIRecommendationEngine {
    * Compute cosine similarity between two vectors
    */
   computeCosineSimilarity(vec1, vec2) {
-    if (vec1.length !== vec2.length) {return 0;}
-    
+    if (vec1.length !== vec2.length) {
+      return 0;
+    }
+
     let dotProduct = 0;
     let norm1 = 0;
     let norm2 = 0;
-    
+
     for (let i = 0; i < vec1.length; i++) {
       dotProduct += vec1[i] * vec2[i];
       norm1 += vec1[i] * vec1[i];
       norm2 += vec2[i] * vec2[i];
     }
-    
+
     const magnitude = Math.sqrt(norm1) * Math.sqrt(norm2);
     return magnitude > 0 ? dotProduct / magnitude : 0;
   }
@@ -916,9 +1003,7 @@ class AIRecommendationEngine {
    * Check if user has interacted with a cigar
    */
   hasUserInteracted(userId, cigarName) {
-    return this.userInteractions.some(i => 
-      i.userId === userId && i.cigarName === cigarName
-    );
+    return this.userInteractions.some(i => i.userId === userId && i.cigarName === cigarName);
   }
 
   /**
@@ -926,18 +1011,22 @@ class AIRecommendationEngine {
    */
   applyFilters(recommendations, filters) {
     return recommendations.filter(rec => {
-      const {cigar} = rec;
-      
+      const { cigar } = rec;
+
       // Wrapper filter
       if (filters.wrappers && filters.wrappers.length > 0) {
-        if (!filters.wrappers.includes(cigar.wrapper)) {return false;}
+        if (!filters.wrappers.includes(cigar.wrapper)) {
+          return false;
+        }
       }
-      
+
       // Strength filter
       if (filters.strengths && filters.strengths.length > 0) {
-        if (!filters.strengths.includes(cigar.strength)) {return false;}
+        if (!filters.strengths.includes(cigar.strength)) {
+          return false;
+        }
       }
-      
+
       // Price range filter
       if (filters.priceRange) {
         const price = cigar.price || 0;
@@ -945,12 +1034,14 @@ class AIRecommendationEngine {
           return false;
         }
       }
-      
+
       // Origin filter
       if (filters.origins && filters.origins.length > 0) {
-        if (!filters.origins.includes(cigar.origin)) {return false;}
+        if (!filters.origins.includes(cigar.origin)) {
+          return false;
+        }
       }
-      
+
       return true;
     });
   }
@@ -963,29 +1054,31 @@ class AIRecommendationEngine {
       return recommendations;
     }
 
-    return recommendations.map(rec => {
-      let adjustedScore = rec.score;
-      
-      // Time of day factor
-      if (factors.timeOfDay) {
-        const timeBonus = this.getTimeOfDayBonus(rec.cigar, factors.timeOfDay);
-        adjustedScore *= (1 + timeBonus);
-      }
-      
-      // Weather factor
-      if (factors.weather) {
-        const weatherBonus = this.getWeatherBonus(rec.cigar, factors.weather);
-        adjustedScore *= (1 + weatherBonus);
-      }
-      
-      // Mood factor
-      if (factors.mood) {
-        const moodBonus = this.getMoodBonus(rec.cigar, factors.mood);
-        adjustedScore *= (1 + moodBonus);
-      }
-      
-      return { ...rec, score: adjustedScore };
-    }).sort((a, b) => b.score - a.score);
+    return recommendations
+      .map(rec => {
+        let adjustedScore = rec.score;
+
+        // Time of day factor
+        if (factors.timeOfDay) {
+          const timeBonus = this.getTimeOfDayBonus(rec.cigar, factors.timeOfDay);
+          adjustedScore *= 1 + timeBonus;
+        }
+
+        // Weather factor
+        if (factors.weather) {
+          const weatherBonus = this.getWeatherBonus(rec.cigar, factors.weather);
+          adjustedScore *= 1 + weatherBonus;
+        }
+
+        // Mood factor
+        if (factors.mood) {
+          const moodBonus = this.getMoodBonus(rec.cigar, factors.mood);
+          adjustedScore *= 1 + moodBonus;
+        }
+
+        return { ...rec, score: adjustedScore };
+      })
+      .sort((a, b) => b.score - a.score);
   }
 
   /**
@@ -996,17 +1089,19 @@ class AIRecommendationEngine {
       morning: { Connecticut: 0.2, mild: 0.15 },
       afternoon: { Habano: 0.15, medium: 0.1 },
       evening: { Maduro: 0.25, full: 0.2 },
-      night: { Oscuro: 0.3, full: 0.25 }
+      night: { Oscuro: 0.3, full: 0.25 },
     };
-    
+
     const timeBonuses = bonuses[timeOfDay] || {};
     let bonus = 0;
-    
-    if (timeBonuses[cigar.wrapper]) {bonus += timeBonuses[cigar.wrapper];}
+
+    if (timeBonuses[cigar.wrapper]) {
+      bonus += timeBonuses[cigar.wrapper];
+    }
     if (timeBonuses[cigar.strength?.toLowerCase()]) {
       bonus += timeBonuses[cigar.strength.toLowerCase()];
     }
-    
+
     return bonus;
   }
 
@@ -1018,17 +1113,19 @@ class AIRecommendationEngine {
       sunny: { Connecticut: 0.15, mild: 0.1 },
       cloudy: { Habano: 0.1, medium: 0.1 },
       rainy: { Maduro: 0.2, full: 0.15 },
-      cold: { Oscuro: 0.25, full: 0.2 }
+      cold: { Oscuro: 0.25, full: 0.2 },
     };
-    
+
     const weatherBonuses = bonuses[weather] || {};
     let bonus = 0;
-    
-    if (weatherBonuses[cigar.wrapper]) {bonus += weatherBonuses[cigar.wrapper];}
+
+    if (weatherBonuses[cigar.wrapper]) {
+      bonus += weatherBonuses[cigar.wrapper];
+    }
     if (weatherBonuses[cigar.strength?.toLowerCase()]) {
       bonus += weatherBonuses[cigar.strength.toLowerCase()];
     }
-    
+
     return bonus;
   }
 
@@ -1040,22 +1137,26 @@ class AIRecommendationEngine {
       relaxed: { Connecticut: 0.2, cream: 0.15 },
       energetic: { Habano: 0.15, spice: 0.1 },
       contemplative: { Maduro: 0.25, chocolate: 0.2 },
-      celebratory: { premium: 0.3, complex: 0.25 }
+      celebratory: { premium: 0.3, complex: 0.25 },
     };
-    
+
     const moodBonuses = bonuses[mood] || {};
     let bonus = 0;
-    
-    if (moodBonuses[cigar.wrapper]) {bonus += moodBonuses[cigar.wrapper];}
-    
+
+    if (moodBonuses[cigar.wrapper]) {
+      bonus += moodBonuses[cigar.wrapper];
+    }
+
     // Check flavor bonuses
     if (cigar.flavor) {
       const flavorText = cigar.flavor.toLowerCase();
       Object.entries(moodBonuses).forEach(([flavor, bonusValue]) => {
-        if (flavorText.includes(flavor)) {bonus += bonusValue;}
+        if (flavorText.includes(flavor)) {
+          bonus += bonusValue;
+        }
       });
     }
-    
+
     return bonus;
   }
 
@@ -1063,16 +1164,16 @@ class AIRecommendationEngine {
    * Generate explanation for recommendation
    */
   generateExplanation(recommendation, _userId) {
-    const {cigar} = recommendation;
-    const {algorithm} = recommendation;
-    
+    const { cigar } = recommendation;
+    const { algorithm } = recommendation;
+
     let explanation = '';
-    
+
     switch (algorithm) {
       case 'collaborative':
         explanation = `Recommended because users with similar tastes enjoyed ${cigar.wrapper} cigars`;
         break;
-        
+
       case 'content':
         explanation = `Matches your preference for ${cigar.wrapper} wrapper`;
         if (cigar.flavor) {
@@ -1082,15 +1183,15 @@ class AIRecommendationEngine {
           }
         }
         break;
-        
+
       case 'hybrid':
         explanation = `Great match based on your taste profile and similar users' preferences`;
         break;
-        
+
       default:
         explanation = `Popular choice among cigar enthusiasts`;
     }
-    
+
     return explanation;
   }
 
@@ -1099,13 +1200,13 @@ class AIRecommendationEngine {
    */
   calculateConfidence(recommendation, userId) {
     let confidence = Math.min(recommendation.score / 10, 1); // Normalize to 0-1
-    
+
     // Adjust based on data availability
     if (userId && this.userProfiles.has(userId)) {
-              // Get user profile for potential future use
-        // const profile = this.userProfiles.get(userId);
+      // Get user profile for potential future use
+      // const profile = this.userProfiles.get(userId);
       const interactionCount = this.userInteractions.filter(i => i.userId === userId).length;
-      
+
       // More interactions = higher confidence
       const interactionBonus = Math.min(interactionCount / 20, 0.3);
       confidence += interactionBonus;
@@ -1113,7 +1214,7 @@ class AIRecommendationEngine {
       // Lower confidence for anonymous users
       confidence *= 0.7;
     }
-    
+
     return Math.min(confidence, 1);
   }
 
@@ -1123,19 +1224,19 @@ class AIRecommendationEngine {
   getPopularRecommendations(count) {
     // Simple popularity based on interaction frequency
     const popularity = {};
-    
+
     this.userInteractions.forEach(interaction => {
       const weight = this.getInteractionWeight(interaction.type);
       popularity[interaction.cigarName] = (popularity[interaction.cigarName] || 0) + weight;
     });
-    
+
     return Object.entries(popularity)
-      .sort(([,a], [,b]) => b - a)
+      .sort(([, a], [, b]) => b - a)
       .slice(0, count)
       .map(([cigarName, score]) => ({
         cigar: this.cigarData.find(c => c.name === cigarName),
         score,
-        algorithm: 'popularity'
+        algorithm: 'popularity',
       }))
       .filter(rec => rec.cigar);
   }
@@ -1146,7 +1247,7 @@ class AIRecommendationEngine {
   getDiverseRecommendations(count) {
     const wrapperTypes = ['Maduro', 'Connecticut', 'Habano', 'Natural', 'Oscuro'];
     const recommendations = [];
-    
+
     wrapperTypes.forEach(wrapper => {
       const cigarsOfType = this.cigarData.filter(c => c.wrapper === wrapper);
       if (cigarsOfType.length > 0) {
@@ -1154,11 +1255,11 @@ class AIRecommendationEngine {
         recommendations.push({
           cigar: randomCigar,
           score: Math.random() * 0.5 + 0.5, // Random score between 0.5-1
-          algorithm: 'diverse'
+          algorithm: 'diverse',
         });
       }
     });
-    
+
     return recommendations.slice(0, count);
   }
 
@@ -1166,15 +1267,13 @@ class AIRecommendationEngine {
    * Get fallback recommendations
    */
   getFallbackRecommendations(count) {
-    return this.cigarData
-      .slice(0, count)
-      .map(cigar => ({
-        cigar,
-        score: 0.5,
-        algorithm: 'fallback',
-        explanation: 'Featured cigar selection',
-        confidence: 0.3
-      }));
+    return this.cigarData.slice(0, count).map(cigar => ({
+      cigar,
+      score: 0.5,
+      algorithm: 'fallback',
+      explanation: 'Featured cigar selection',
+      confidence: 0.3,
+    }));
   }
 
   /**
@@ -1186,30 +1285,30 @@ class AIRecommendationEngine {
       cigarName,
       type: interactionType,
       timestamp: new Date().toISOString(),
-      metadata
+      metadata,
     };
-    
+
     this.userInteractions.push(interaction);
-    
+
     // Update user profile
     if (userId) {
       this.updateUserProfile(userId, interaction);
     }
-    
+
     // Save to storage
     if (window.storageManager) {
       const sessionData = window.storageManager.getSessionData();
       sessionData.userInteractions = this.userInteractions;
       window.storageManager.saveData();
     }
-    
+
     // Track analytics
     if (window.analyticsManager) {
       window.analyticsManager.trackEvent('recommendation_interaction', {
         user_id: userId,
         cigar_name: cigarName,
         interaction_type: interactionType,
-        ...metadata
+        ...metadata,
       });
     }
   }
@@ -1221,23 +1320,23 @@ class AIRecommendationEngine {
     if (!this.userProfiles.has(userId)) {
       this.userProfiles.set(userId, await this.buildUserProfile(userId));
     }
-    
+
     const profile = this.userProfiles.get(userId);
     const cigar = this.cigarData.find(c => c.name === interaction.cigarName);
-    
+
     if (cigar) {
       const weight = this.getInteractionWeight(interaction.type);
-      
+
       // Update wrapper preferences
-      profile.preferences.wrappers[cigar.wrapper] = 
+      profile.preferences.wrappers[cigar.wrapper] =
         (profile.preferences.wrappers[cigar.wrapper] || 0) + weight;
-      
+
       // Update other preferences similarly
       if (cigar.strength) {
-        profile.preferences.strengths[cigar.strength] = 
+        profile.preferences.strengths[cigar.strength] =
           (profile.preferences.strengths[cigar.strength] || 0) + weight;
       }
-      
+
       // Recompute user embedding
       profile.embedding = this.computeUserEmbedding(profile.preferences);
     }
@@ -1248,43 +1347,50 @@ class AIRecommendationEngine {
    */
   scheduleModelTraining() {
     // Train models every hour
-    setInterval(() => {
-      this.trainModels();
-    }, 60 * 60 * 1000);
-    
+    setInterval(
+      () => {
+        this.trainModels();
+      },
+      60 * 60 * 1000
+    );
+
     // Initial training after 5 minutes
-    setTimeout(() => {
-      this.trainModels();
-    }, 5 * 60 * 1000);
+    setTimeout(
+      () => {
+        this.trainModels();
+      },
+      5 * 60 * 1000
+    );
   }
 
   /**
    * Train machine learning models
    */
   async trainModels() {
-    if (this.isTraining) {return;}
-    
+    if (this.isTraining) {
+      return;
+    }
+
     try {
       this.isTraining = true;
       console.info('🔄 Training recommendation models...');
-      
+
       // Update user profiles
       for (const userId of this.userProfiles.keys()) {
         this.userProfiles.set(userId, await this.buildUserProfile(userId));
       }
-      
+
       // Train collaborative filtering model
       if (this.models.collaborative) {
         await this.models.collaborative.train(this.userInteractions);
       }
-      
+
       // Train content-based model
       if (this.models.contentBased) {
         await this.models.contentBased.train(this.cigarEmbeddings);
       }
-      
+
       console.info('✅ Model training completed');
-      
     } catch (error) {
       console.error('❌ Model training failed:', error);
     } finally {
@@ -1300,16 +1406,15 @@ class AIRecommendationEngine {
       const baseRecommendations = await this.getRecommendations(userId, {
         count: 5,
         algorithm: this.algorithms.HYBRID,
-        contextualFactors: currentContext
+        contextualFactors: currentContext,
       });
-      
+
       // Apply real-time adjustments
       return baseRecommendations.map(rec => ({
         ...rec,
         realtime: true,
-        freshness: Date.now()
+        freshness: Date.now(),
       }));
-      
     } catch (error) {
       console.error('Error getting real-time recommendations:', error);
       return [];
@@ -1326,46 +1431,56 @@ class AIRecommendationEngine {
         includeReason = true,
         includePairings = true,
         context = {},
-        algorithm = this.algorithms.HYBRID
+        algorithm = this.algorithms.HYBRID,
       } = options;
 
       // Get base recommendations
       let recommendations = await this.getRecommendations(userId, { count: count * 2, algorithm });
 
       // Enhance each recommendation with AI insights
-      const enhancedRecs = await Promise.all(recommendations.map(async (rec) => {
-        const enhanced = { ...rec };
-        
-        // Add NLP flavor analysis
-        enhanced.flavorAnalysis = this.processFlavorDescriptionNLP(rec.cigar.flavor || '');
-        
-        // Add pairing suggestions if requested
-        if (includePairings) {
-          enhanced.pairingSuggestions = await this.optimizePairings(rec.cigar.id || rec.cigar.name, context);
-        }
-        
-        // Add recommendation reasoning if requested
-        if (includeReason) {
-          const userProfile = this.userProfiles.get(userId) || {};
-          const reasonScore = this.calculateReasonScore(rec.cigar, userProfile, enhanced.flavorAnalysis);
-          enhanced.recommendationReason = this.generateRecommendationReason({
-            cigar: rec.cigar,
-            flavorProfile: enhanced.flavorAnalysis,
-            reasonScore
-          });
-        }
-        
-        // Calculate enhanced score combining multiple factors
-        enhanced.enhancedScore = this.calculateEnhancedScore(rec, enhanced.flavorAnalysis, context);
-        
-        return enhanced;
-      }));
+      const enhancedRecs = await Promise.all(
+        recommendations.map(async rec => {
+          const enhanced = { ...rec };
+
+          // Add NLP flavor analysis
+          enhanced.flavorAnalysis = this.processFlavorDescriptionNLP(rec.cigar.flavor || '');
+
+          // Add pairing suggestions if requested
+          if (includePairings) {
+            enhanced.pairingSuggestions = await this.optimizePairings(
+              rec.cigar.id || rec.cigar.name,
+              context
+            );
+          }
+
+          // Add recommendation reasoning if requested
+          if (includeReason) {
+            const userProfile = this.userProfiles.get(userId) || {};
+            const reasonScore = this.calculateReasonScore(
+              rec.cigar,
+              userProfile,
+              enhanced.flavorAnalysis
+            );
+            enhanced.recommendationReason = this.generateRecommendationReason({
+              cigar: rec.cigar,
+              flavorProfile: enhanced.flavorAnalysis,
+              reasonScore,
+            });
+          }
+
+          // Calculate enhanced score combining multiple factors
+          enhanced.enhancedScore = this.calculateEnhancedScore(
+            rec,
+            enhanced.flavorAnalysis,
+            context
+          );
+
+          return enhanced;
+        })
+      );
 
       // Sort by enhanced score and return top results
-      return enhancedRecs
-        .sort((a, b) => b.enhancedScore - a.enhancedScore)
-        .slice(0, count);
-        
+      return enhancedRecs.sort((a, b) => b.enhancedScore - a.enhancedScore).slice(0, count);
     } catch (error) {
       console.error('Enhanced recommendation error:', error);
       return [];
@@ -1377,26 +1492,32 @@ class AIRecommendationEngine {
    */
   calculateEnhancedScore(recommendation, flavorProfile, context) {
     let score = recommendation.score || 0;
-    
+
     // Boost for positive sentiment
     if (flavorProfile.sentiment > 0) {
-      score *= (1 + flavorProfile.sentiment * 0.1);
+      score *= 1 + flavorProfile.sentiment * 0.1;
     }
-    
+
     // Boost for complexity if user appreciates complex cigars
     if (context.preferComplexity && flavorProfile.complexity > 0.5) {
-      score *= (1 + flavorProfile.complexity * 0.15);
+      score *= 1 + flavorProfile.complexity * 0.15;
     }
-    
+
     // Context-based adjustments
-    if (context.timeOfDay === 'morning' && flavorProfile.categories.some(cat => cat.name === 'sweet')) {
+    if (
+      context.timeOfDay === 'morning' &&
+      flavorProfile.categories.some(cat => cat.name === 'sweet')
+    ) {
       score *= 1.1;
     }
-    
-    if (context.occasion === 'celebration' && flavorProfile.categories.some(cat => cat.name === 'premium')) {
+
+    if (
+      context.occasion === 'celebration' &&
+      flavorProfile.categories.some(cat => cat.name === 'premium')
+    ) {
       score *= 1.2;
     }
-    
+
     return score;
   }
 
@@ -1408,7 +1529,7 @@ class AIRecommendationEngine {
       userProfiles: Array.from(this.userProfiles.entries()),
       userInteractions: this.userInteractions,
       modelPerformance: this.getModelPerformance(),
-      exportedAt: new Date().toISOString()
+      exportedAt: new Date().toISOString(),
     };
   }
 
@@ -1420,8 +1541,9 @@ class AIRecommendationEngine {
       totalUsers: this.userProfiles.size,
       totalInteractions: this.userInteractions.length,
       totalCigars: this.cigarData.length,
-      averageInteractionsPerUser: this.userInteractions.length / Math.max(this.userProfiles.size, 1),
-      modelTrainingStatus: this.isTraining ? 'training' : 'ready'
+      averageInteractionsPerUser:
+        this.userInteractions.length / Math.max(this.userProfiles.size, 1),
+      modelTrainingStatus: this.isTraining ? 'training' : 'ready',
     };
   }
 }
@@ -1436,28 +1558,26 @@ class CollaborativeFilteringModel {
   async train(interactions) {
     // Build user-item interaction matrix
     this.userItemMatrix.clear();
-    
+
     interactions.forEach(interaction => {
       if (!this.userItemMatrix.has(interaction.userId)) {
         this.userItemMatrix.set(interaction.userId, new Map());
       }
-      
+
       const userMatrix = this.userItemMatrix.get(interaction.userId);
       const weight = this.getWeight(interaction.type);
-      
-      userMatrix.set(interaction.cigarName, 
-        (userMatrix.get(interaction.cigarName) || 0) + weight
-      );
+
+      userMatrix.set(interaction.cigarName, (userMatrix.get(interaction.cigarName) || 0) + weight);
     });
   }
 
   getWeight(interactionType) {
     const weights = {
-      'view': 1,
-      'click': 2,
-      'favorite': 5,
-      'rate_positive': 4,
-      'rate_negative': -2
+      view: 1,
+      click: 2,
+      favorite: 5,
+      rate_positive: 4,
+      rate_negative: -2,
     };
     return weights[interactionType] || 1;
   }

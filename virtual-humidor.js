@@ -13,9 +13,9 @@ class VirtualHumidorSystem {
       temperature: 70, // Fahrenheit
       humidity: 70, // Percentage
       capacity: 250, // Number of cigars
-      zones: ['Premium Reserve', 'Daily Selection', 'Aging Vault', 'Limited Editions']
+      zones: ['Premium Reserve', 'Daily Selection', 'Aging Vault', 'Limited Editions'],
     };
-    
+
     // Humidor analytics
     this.analytics = {
       totalCigars: 0,
@@ -23,9 +23,9 @@ class VirtualHumidorSystem {
       averageAge: 0,
       mostPopularBrand: '',
       agingProgress: [],
-      smokingHistory: []
+      smokingHistory: [],
     };
-    
+
     this.init();
   }
 
@@ -39,14 +39,13 @@ class VirtualHumidorSystem {
       await this.loadAgingAlerts();
       await this.loadPairingMemory();
       await this.setupHumidorInterface();
-      
+
       this.isInitialized = true;
       console.info('🏛️ Virtual Humidor System initialized');
-      
+
       // Start monitoring
       this.startAgingMonitoring();
       this.updateAnalytics();
-      
     } catch (error) {
       console.error('❌ Virtual Humidor initialization failed:', error);
     }
@@ -62,7 +61,7 @@ class VirtualHumidorSystem {
         this.inventory = new Map(Object.entries(humidorData.inventory || {}));
         this.analytics = { ...this.analytics, ...humidorData.analytics };
       }
-      
+
       console.info('✅ Humidor inventory loaded');
     } catch (error) {
       console.error('Error loading inventory:', error);
@@ -254,7 +253,7 @@ class VirtualHumidorSystem {
 
     // Inject into DOM
     document.body.insertAdjacentHTML('beforeend', humidorHTML);
-    
+
     // Add luxury styling
     this.addHumidorStyles();
   }
@@ -803,7 +802,7 @@ class VirtualHumidorSystem {
       setTimeout(() => {
         modal.classList.add('show');
       }, 10);
-      
+
       // Load current section data
       this.populateInventory();
       this.updateStats();
@@ -841,13 +840,13 @@ class VirtualHumidorSystem {
       agingTarget: cigarData.agingTarget || null,
       quantity: cigarData.quantity || 1,
       notes: cigarData.notes || '',
-      smokingHistory: []
+      smokingHistory: [],
     };
-    
+
     this.inventory.set(cigarId, cigar);
     this.saveInventory();
     this.updateAnalytics();
-    
+
     console.info(`✅ Added ${cigar.name} to humidor`);
     return cigarId;
   }
@@ -871,28 +870,28 @@ class VirtualHumidorSystem {
     const cigar = this.inventory.get(cigarId);
     if (cigar && cigar.quantity > 0) {
       cigar.quantity -= 1;
-      
+
       // Record smoking session
       const session = {
         date: new Date(),
         pairing: pairingData,
-        enjoyment: pairingData?.rating || null
+        enjoyment: pairingData?.rating || null,
       };
       cigar.smokingHistory.push(session);
-      
+
       // If quantity reaches 0, remove from inventory
       if (cigar.quantity === 0) {
         this.inventory.delete(cigarId);
       }
-      
+
       // Record pairing if provided
       if (pairingData) {
         this.recordPairingExperience(cigarId, pairingData);
       }
-      
+
       this.saveInventory();
       this.updateAnalytics();
-      
+
       console.info(`🚬 Smoked ${cigar.name}`);
     }
   }
@@ -910,15 +909,15 @@ class VirtualHumidorSystem {
         targetDate: new Date(targetDate),
         alertType: alertType,
         isActive: true,
-        created: new Date()
+        created: new Date(),
       };
-      
+
       this.agingAlerts.push(alert);
       cigar.agingTarget = new Date(targetDate);
-      
+
       this.saveAgingAlerts();
       this.saveInventory();
-      
+
       console.info(`⏰ Set aging alert for ${cigar.name}`);
     }
   }
@@ -937,12 +936,12 @@ class VirtualHumidorSystem {
         rating: pairingData.rating,
         notes: pairingData.notes || '',
         date: new Date(),
-        occasion: pairingData.occasion || ''
+        occasion: pairingData.occasion || '',
       };
-      
+
       this.pairingMemory.set(pairingKey, experience);
       this.savePairingMemory();
-      
+
       console.info(`📝 Recorded pairing: ${cigar.name} with ${pairingData.pairedWith}`);
     }
   }
@@ -955,7 +954,7 @@ class VirtualHumidorSystem {
     setInterval(() => {
       this.checkAgingAlerts();
     }, 86400000); // 24 hours
-    
+
     // Initial check
     this.checkAgingAlerts();
   }
@@ -965,7 +964,7 @@ class VirtualHumidorSystem {
    */
   checkAgingAlerts() {
     const now = new Date();
-    
+
     this.agingAlerts.forEach(alert => {
       if (alert.isActive && alert.targetDate <= now) {
         this.triggerAgingAlert(alert);
@@ -981,14 +980,14 @@ class VirtualHumidorSystem {
     if ('Notification' in window && Notification.permission === 'granted') {
       new Notification('Aging Alert - Thee Cigar Maestro', {
         body: `${alert.cigarName} is ready for enjoying!`,
-        icon: '/assets/logos/logo-192.png'
+        icon: '/assets/logos/logo-192.png',
       });
     }
-    
+
     // Mark alert as triggered
     alert.isActive = false;
     this.saveAgingAlerts();
-    
+
     console.info(`🔔 Aging alert triggered for ${alert.cigarName}`);
   }
 
@@ -997,27 +996,32 @@ class VirtualHumidorSystem {
    */
   updateAnalytics() {
     const cigars = Array.from(this.inventory.values());
-    
+
     this.analytics.totalCigars = cigars.reduce((sum, cigar) => sum + cigar.quantity, 0);
-    this.analytics.totalValue = cigars.reduce((sum, cigar) => sum + (cigar.price * cigar.quantity), 0);
-    
+    this.analytics.totalValue = cigars.reduce(
+      (sum, cigar) => sum + cigar.price * cigar.quantity,
+      0
+    );
+
     // Calculate average age in days
     const now = new Date();
     const totalAgeDays = cigars.reduce((sum, cigar) => {
       const ageDays = Math.floor((now - cigar.purchaseDate) / (1000 * 60 * 60 * 24));
-      return sum + (ageDays * cigar.quantity);
+      return sum + ageDays * cigar.quantity;
     }, 0);
-    this.analytics.averageAge = this.analytics.totalCigars > 0 ? 
-      Math.floor(totalAgeDays / this.analytics.totalCigars) : 0;
-    
+    this.analytics.averageAge =
+      this.analytics.totalCigars > 0 ? Math.floor(totalAgeDays / this.analytics.totalCigars) : 0;
+
     // Most popular brand
     const brandCounts = {};
     cigars.forEach(cigar => {
       brandCounts[cigar.brand] = (brandCounts[cigar.brand] || 0) + cigar.quantity;
     });
-    this.analytics.mostPopularBrand = Object.keys(brandCounts).reduce((a, b) => 
-      brandCounts[a] > brandCounts[b] ? a : b, '');
-    
+    this.analytics.mostPopularBrand = Object.keys(brandCounts).reduce(
+      (a, b) => (brandCounts[a] > brandCounts[b] ? a : b),
+      ''
+    );
+
     this.saveAnalytics();
   }
 
@@ -1027,9 +1031,9 @@ class VirtualHumidorSystem {
   populateInventory() {
     const inventoryGrid = document.getElementById('inventoryGrid');
     if (!inventoryGrid) return;
-    
+
     const cigars = Array.from(this.inventory.values());
-    
+
     if (cigars.length === 0) {
       inventoryGrid.innerHTML = `
         <div class="empty-state">
@@ -1042,7 +1046,7 @@ class VirtualHumidorSystem {
       `;
       return;
     }
-    
+
     inventoryGrid.innerHTML = cigars.map(cigar => this.createCigarCard(cigar)).join('');
   }
 
@@ -1051,7 +1055,7 @@ class VirtualHumidorSystem {
    */
   createCigarCard(cigar) {
     const agingProgress = this.calculateAgingProgress(cigar);
-    
+
     return `
       <div class="cigar-card" data-cigar-id="${escapeHTML(cigar.id)}">
         <div class="cigar-header">
@@ -1091,7 +1095,9 @@ class VirtualHumidorSystem {
           </div>
         </div>
         
-        ${cigar.agingTarget ? `
+        ${
+          cigar.agingTarget
+            ? `
           <div class="aging-progress">
             <div class="progress-bar">
               <div class="progress-fill" style="width: ${agingProgress.percentage}%"></div>
@@ -1101,7 +1107,9 @@ class VirtualHumidorSystem {
               <span>${agingProgress.daysRemaining} days remaining</span>
             </div>
           </div>
-        ` : ''}
+        `
+            : ''
+        }
       </div>
     `;
   }
@@ -1113,17 +1121,20 @@ class VirtualHumidorSystem {
     if (!cigar.agingTarget) {
       return { percentage: 0, daysRemaining: 0 };
     }
-    
+
     const now = new Date();
     const purchaseDate = new Date(cigar.purchaseDate);
     const targetDate = new Date(cigar.agingTarget);
-    
+
     const totalAgeTime = targetDate.getTime() - purchaseDate.getTime();
     const currentAgeTime = now.getTime() - purchaseDate.getTime();
-    
+
     const percentage = Math.min((currentAgeTime / totalAgeTime) * 100, 100);
-    const daysRemaining = Math.max(Math.ceil((targetDate.getTime() - now.getTime()) / (1000 * 60 * 60 * 24)), 0);
-    
+    const daysRemaining = Math.max(
+      Math.ceil((targetDate.getTime() - now.getTime()) / (1000 * 60 * 60 * 24)),
+      0
+    );
+
     return { percentage, daysRemaining };
   }
 
@@ -1149,21 +1160,21 @@ class VirtualHumidorSystem {
    */
   attachEventHandlers() {
     // Section navigation
-    document.addEventListener('click', (e) => {
+    document.addEventListener('click', e => {
       if (e.target.classList.contains('control-btn')) {
         this.switchSection(e.target.dataset.section);
       }
     });
 
     // Zone filtering
-    document.addEventListener('click', (e) => {
+    document.addEventListener('click', e => {
       if (e.target.classList.contains('zone-tab')) {
         this.filterByZone(e.target.dataset.zone);
       }
     });
 
     // View controls
-    document.addEventListener('click', (e) => {
+    document.addEventListener('click', e => {
       if (e.target.classList.contains('view-btn')) {
         this.switchView(e.target.dataset.view);
       }
@@ -1179,13 +1190,13 @@ class VirtualHumidorSystem {
       btn.classList.remove('active');
     });
     document.querySelector(`[data-section="${section}"]`).classList.add('active');
-    
+
     // Show relevant section
     document.querySelectorAll('.humidor-section').forEach(sec => {
       sec.classList.remove('active');
     });
     document.getElementById(`${section}Section`).classList.add('active');
-    
+
     // Load section data
     switch (section) {
       case 'inventory':
@@ -1212,9 +1223,9 @@ class VirtualHumidorSystem {
   populateAgingAlerts() {
     const alertsContainer = document.getElementById('agingAlerts');
     if (!alertsContainer) return;
-    
+
     const activeAlerts = this.agingAlerts.filter(alert => alert.isActive);
-    
+
     if (activeAlerts.length === 0) {
       alertsContainer.innerHTML = `
         <div class="empty-state">
@@ -1224,8 +1235,10 @@ class VirtualHumidorSystem {
       `;
       return;
     }
-    
-    alertsContainer.innerHTML = activeAlerts.map(alert => `
+
+    alertsContainer.innerHTML = activeAlerts
+      .map(
+        alert => `
       <div class="alert-item">
         <div class="alert-info">
           <h4>${escapeHTML(alert.cigarName)}</h4>
@@ -1237,7 +1250,9 @@ class VirtualHumidorSystem {
           </button>
         </div>
       </div>
-    `).join('');
+    `
+      )
+      .join('');
   }
 
   /**
@@ -1246,9 +1261,9 @@ class VirtualHumidorSystem {
   populatePairingMemory() {
     const pairingContainer = document.getElementById('pairingMemory');
     if (!pairingContainer) return;
-    
+
     const pairings = Array.from(this.pairingMemory.values());
-    
+
     if (pairings.length === 0) {
       pairingContainer.innerHTML = `
         <div class="empty-state">
@@ -1258,8 +1273,10 @@ class VirtualHumidorSystem {
       `;
       return;
     }
-    
-    pairingContainer.innerHTML = pairings.map(pairing => `
+
+    pairingContainer.innerHTML = pairings
+      .map(
+        pairing => `
       <div class="pairing-item">
         <div class="pairing-header">
           <span class="pairing-cigar">${escapeHTML(pairing.cigarName)}</span>
@@ -1278,7 +1295,9 @@ class VirtualHumidorSystem {
         </div>
         ${pairing.notes ? `<div class="pairing-notes">${escapeHTML(pairing.notes)}</div>` : ''}
       </div>
-    `).join('');
+    `
+      )
+      .join('');
   }
 
   /**
@@ -1298,7 +1317,7 @@ class VirtualHumidorSystem {
   populateAnalytics() {
     const analyticsContainer = document.getElementById('analyticsDashboard');
     if (!analyticsContainer) return;
-    
+
     analyticsContainer.innerHTML = `
       <div class="analytics-grid">
         <div class="analytics-card">
@@ -1336,7 +1355,7 @@ class VirtualHumidorSystem {
   populateSettings() {
     const settingsContainer = document.getElementById('humidorSettings');
     if (!settingsContainer) return;
-    
+
     settingsContainer.innerHTML = `
       <div class="settings-group">
         <h4>Environmental Controls</h4>
@@ -1373,7 +1392,7 @@ class VirtualHumidorSystem {
       const inventoryData = Object.fromEntries(this.inventory);
       window.storageManager.saveHumidorData({
         inventory: inventoryData,
-        analytics: this.analytics
+        analytics: this.analytics,
       });
     }
   }

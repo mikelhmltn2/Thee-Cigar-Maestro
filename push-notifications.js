@@ -1,4 +1,3 @@
-
 /* global Notification */
 
 /**
@@ -23,7 +22,7 @@ class PushNotificationManager {
 
   async requestPermission() {
     const permission = await Notification.requestPermission();
-    
+
     if (permission === 'granted') {
       console.info('Notification permission granted');
       return true;
@@ -36,17 +35,16 @@ class PushNotificationManager {
   async subscribeUser() {
     try {
       const registration = await navigator.serviceWorker.ready;
-      
+
       this.subscription = await registration.pushManager.subscribe({
         userVisibleOnly: true,
-        applicationServerKey: this.urlBase64ToUint8Array(this.vapidPublicKey)
+        applicationServerKey: this.urlBase64ToUint8Array(this.vapidPublicKey),
       });
-      
+
       console.info('User subscribed to push notifications:', this.subscription);
-      
+
       // Send subscription to server
       await this.sendSubscriptionToServer(this.subscription);
-      
     } catch (error) {
       console.error('Failed to subscribe user:', error);
     }
@@ -57,11 +55,11 @@ class PushNotificationManager {
       const response = await fetch('/api/push-subscription', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
         },
-        body: JSON.stringify(subscription)
+        body: JSON.stringify(subscription),
       });
-      
+
       if (response.ok) {
         console.info('Subscription sent to server successfully');
       } else {
@@ -73,10 +71,8 @@ class PushNotificationManager {
   }
 
   urlBase64ToUint8Array(base64String) {
-    const padding = '='.repeat((4 - base64String.length % 4) % 4);
-    const base64 = (base64String + padding)
-      .replace(/-/g, '+')
-      .replace(/_/g, '/');
+    const padding = '='.repeat((4 - (base64String.length % 4)) % 4);
+    const base64 = (base64String + padding).replace(/-/g, '+').replace(/_/g, '/');
 
     const rawData = window.atob(base64);
     const outputArray = new Uint8Array(rawData.length);
@@ -92,9 +88,9 @@ class PushNotificationManager {
       const notification = new Notification(title, {
         icon: 'assets/logos/logo-96.png',
         badge: 'assets/logos/logo-96.png',
-        ...options
+        ...options,
       });
-      
+
       notification.onclick = () => {
         window.focus();
         notification.close();
@@ -109,8 +105,8 @@ class PushNotificationManager {
       tag: 'recommendation',
       actions: [
         { action: 'view', title: 'View Details' },
-        { action: 'dismiss', title: 'Dismiss' }
-      ]
+        { action: 'dismiss', title: 'Dismiss' },
+      ],
     });
   }
 
@@ -118,7 +114,7 @@ class PushNotificationManager {
     await this.showLocalNotification('Perfect Pairing Found', {
       body: `${cigar} pairs excellently with ${pairing}`,
       tag: 'pairing',
-      vibrate: [100, 50, 100]
+      vibrate: [100, 50, 100],
     });
   }
 
@@ -126,7 +122,7 @@ class PushNotificationManager {
     await this.showLocalNotification('New Educational Content', {
       body: `Learn about: ${title}`,
       tag: 'education',
-      icon: 'assets/logos/logo-96.png'
+      icon: 'assets/logos/logo-96.png',
     });
   }
 }
