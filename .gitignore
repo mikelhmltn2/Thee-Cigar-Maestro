@@ -67,4 +67,4 @@ health-report-*.json
 
 # Temporary files
 tmp/
-temp/
+temp/.next/

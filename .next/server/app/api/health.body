@@ -1,0 +1,1 @@
+{"status":"healthy","timestamp":"2025-08-19T00:16:20.971Z","service":"Thee Cigar Maestro API","version":"2.0.0","checks":{"server":"operational","database":"not_configured","cache":"operational","assets":"operational"}}
